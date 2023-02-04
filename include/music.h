@@ -1,21 +1,21 @@
 #include <fftw3.h>
 #include <vector>
 
-#define SAMP_N 128      // record length (number of individual samples)
-#define SAMP_F 8000     // sampling frequency
-#define FREQ_BAND 2     // frequency band used to measure volume
+#define SAMPLE_SIZE 128      // record length (number of individual samples)
+#define SAMPLING_FREQ 8000     // sampling frequency
+#define FREQ_BAND 2     // frequency band used to evaluate volume (low value for bass / high value for treble)
 
-#define PHRASE_LEN 128   // number of volume samples in 1 phrase
+#define VOL_BUFF_SIZE 128   // size of the volume buffer
 
 // MCP3008
-#define ADC_MAX 1023
-#define ADC_MIN 0
+#define MCP3008_MAX 1023
+#define MCP3008_MIN 0
 #define MCP_CHAN 5
 
 // thresholds
-#define THD_toBK 45
-#define THD_BTtoBS 3
-#define THD_BStoBT 5
+#define THD_toBK 45     // Volume Threshold to go from state X to BREAK  mode
+#define THD_BTtoBS 3    // Threshold to go from BEAT TRACKING to BAD SIGNAL mode
+#define THD_BStoBT 5    // Threshold to go from  BAD SIGNAL to BEAT TRACKING mode
 
 // FFTW
 #define REAL 0
@@ -23,26 +23,32 @@
 #define FREQ 0
 #define AMPL 1
 
+enum states{
+    BEAT_TRACKING   = 1,    // volume is high and beat is clear
+    BREAK           = 2,    // volume is low (indicates a break)
+    BAD_SIGNAL      = 3     // volume is high but the beat is not perceptible
+};
+
 class SoundAnalyzer{
             
     // record storage
-    // private :   double record_real[SAMP_N];
-    // private :   double record_imag[SAMP_N];
+    // private :   double record_real[SAMPLE_SIZE];
+    // private :   double record_imag[SAMPLE_SIZE];
     // FFTW structures
     public : fftw_complex *signal;
     private : fftw_complex *fft_out;
     private : fftw_plan my_plan;
 
     // FFT results storage structure
-    public  : float spectrum[SAMP_N][2];    // stores AMPL x FREQ array;
+    public  : float spectrum[SAMPLE_SIZE][2];    // stores AMPL x FREQ array;
 
     public :    bool clip; // true if record() detects ADC saturation
     public :    int volume;
     // FFT library
     // private :   arduinoFFT FFT = arduinoFFT();
     // phrase storage
-        //private :   int v_memory[PHRASE_LEN];
-        //private :   int v_memory_sorted[PHRASE_LEN];
+        //private :   int v_memory[VOL_BUFF_SIZE];
+        //private :   int v_memory_sorted[VOL_BUFF_SIZE];
     std::vector<int> v_memory;
     std::vector<int> v_memory_sorted;
 
@@ -54,34 +60,34 @@ class SoundAnalyzer{
     public :    float ratio_95_q1, ratio_95_q2, ratio_95_q3;
 
     // Beat tracking variables
-    public :    float beat_thresh = 60;
-    public :    bool beat=false, new_beat=false, filtered_beat=false;
-    public :    unsigned long last_beat = 0;         // Stores timestamp of the last beat=true event
+    public :    float beat_threshold = 60;
+    public :    bool raw_beat=false, new_beat=false, filtered_beat=false;
+    public :    unsigned long last_beat = 0;         // Stores timestamp of the last raw_beat=true event
     public :    unsigned long last_new_beat = 0;
     public :    unsigned long beat_tracking_start = 0;
 
     // state machine variables
     private :   int BS_cpt = 0, BT_cpt = 0;
-    public :    int system_state = 1, old_sys_state = 1;
-    public :    bool state_change = false;    
+    public :    states state = BEAT_TRACKING, old_sys_state = BEAT_TRACKING;
+    public :    bool state_changed = false;    
 
-    // Main functions
+    // Main functions (entry points)
     public :    void init();
+    public :    void update();
     public :    void record();          
     public :    void process_record();
 
-    // hidden functions
-    private :   void copy_memory();
-    private :   void compute_stats();
-    private :   void update_beat_threshold();
-    private :   void update_state();
-    private :   void DCRemoval();
-    private :   void ComputeFFT();
-    private :   void sort_memory();
+    // hidden functions (called by the main functions)
+    private :   void _copy_memory();
+    private :   void _compute_stats();
+    private :   void _update_beat_threshold();
+    private :   void _update_state();
+    private :   void _remove_DC_value();
+    private :   void _compute_FFT();
+    private :   void _sort_memory();
 
-    // fake analysis (for animation developpement purpose)
+    // fake analysis function (for animation developpement purpose)
     public :    void fake_analysis(); 
-
 
     // debug intermediary variables
     public :    int deb_max, deb_min;

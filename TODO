@@ -3,7 +3,10 @@ CLEAN and STRUCTURE the code using as much good practices as possible:
 
     - give explicit & long name to all variables
 
-    - construct classe whenever possible --> NO FUNCTIONS should be outside a class
+    - construct classes whenever possible 
+        --> NO FUNCTIONS should be outside a class
+        --> NO group of related Variables
+
 
     - use WiringPi to deal with the arduino shit (delay(), millis(), etc.)
 
@@ -13,6 +16,7 @@ CLEAN and STRUCTURE the code using as much good practices as possible:
 
     - create a class that stores (& computes) the LEDcontroler stuff (channel intensity...)
 
+    - add #ifndef hprotection to headers.
 
 ADD A CONFIGURATION CAPABILITY based on the following principles :
     Read a csv containing the config (define a format & write a parser function)

@@ -14,13 +14,15 @@
 				"${workspaceFolder}/src/music.cpp",
 				"${workspaceFolder}/src/MCP3008.cpp",
 				"-I${workspaceFolder}/include",
+                "-I/usr/include",
 				"-o",
 				"${workspaceFolder}/bin/${fileBasenameNoExtension}",
 				"-llgpio",
 				"-lPCA9685",
 				"-lfftw3",
 				"-lola",
-				"-lolacommon"
+				"-lolacommon",
+                "-lwiringPi"
 			],
 			"options": {
 				"cwd": "${fileDirname}"

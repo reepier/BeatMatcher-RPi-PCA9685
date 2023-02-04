@@ -21,24 +21,30 @@
 #include "constant.h"
 #include "sysfcn.h"
 #include <MCP3008/MCP3008.h>
-
+#include <wiringPi.h>
 
 SoundAnalyzer sampler;
-extern bool beat;
+extern bool raw_beat;
 
 MCP3008Lib::MCP3008 adc;
+
+void SoundAnalyzer::update(){
+    this->record();
+    this->process_record();
+
+}
 
 void SoundAnalyzer::record(){
     unsigned long next = micros();
     clip = false;
 
-    deb_max=ADC_MIN, deb_min=ADC_MAX;
+    deb_max=MCP3008_MIN, deb_min=MCP3008_MAX;
      
-    for (int i=0; i<SAMP_N; i++){
-      next = next + 1000000.0/SAMP_F;
+    for (int i=0; i<SAMPLE_SIZE; i++){
+      next = next + 1000000.0/SAMPLING_FREQ;
       signal[i][REAL] = adc.read(MCP_CHAN);
       signal[i][IMAG] = 0;
-      if (signal[i][REAL] > (ADC_MAX-10) || signal[i][REAL] < (ADC_MIN+10))
+      if (signal[i][REAL] > (MCP3008_MAX-10) || signal[i][REAL] < (MCP3008_MIN+10))
         clip = true;
       if (signal[i][REAL] > deb_max)
         deb_max = signal[i][REAL];
@@ -51,13 +57,13 @@ void SoundAnalyzer::record(){
 
 // rewrite using FFTW instead of ArduinoFFT
 void SoundAnalyzer::process_record(){
-    DCRemoval();
+    this->_remove_DC_value();
     //FFT.Windowing(value_r, samples, FFT_WIN_TYP_HAMMING, FFT_FORWARD);
-    ComputeFFT();
-    //FFT.ComplexToMagnitude(record_real, record_imag, SAMP_N);  --> incuded into computeFFT
+    this->_compute_FFT();
+    //FFT.ComplexToMagnitude(record_real, record_imag, SAMPLE_SIZE);  --> incuded into computeFFT
       
     // extract current volume (measure in FFT frequency band "FREQ_BAND")
-    volume = spectrum[FREQ_BAND][AMPL]*2/SAMP_N;
+    volume = spectrum[FREQ_BAND][AMPL]*2/SAMPLE_SIZE;
     
     // save the current volume sample in moving memory
     // when the memory is full, overwrite the first records.
@@ -65,17 +71,17 @@ void SoundAnalyzer::process_record(){
     // new version
     v_memory.push_back(volume);
     i_record ++;
-    if(v_memory.size() > PHRASE_LEN){
+    if(v_memory.size() > VOL_BUFF_SIZE){
         if (!tab_is_full){
             tab_is_full = true;
         } 
         v_memory.erase(v_memory.begin());
     } // new version
 
-    // check for beat 
+    // check for raw_beat 
     // Compare current level to threshold and control LED 
-    if (volume >= beat_thresh){
-    if (!beat){
+    if (volume >= beat_threshold){
+    if (!raw_beat){
         new_beat = true;
         last_new_beat = millis();
     }
@@ -83,50 +89,53 @@ void SoundAnalyzer::process_record(){
         new_beat = false;
     }
     
-    beat = true;
+    raw_beat = true;
     last_beat = millis();
     }
     else{
-    beat = false;
+    raw_beat = false;
     filtered_beat = false;
     new_beat = false;
     }
 
-    // activate phrase analyis enable flag every 32 samples (PHRASE_LEN/4) 
-    if (tab_is_full && (i_record%(PHRASE_LEN/4) == 0))
+    // activate phrase analyis enable flag every 32 samples (VOL_BUFF_SIZE/4) 
+    if (tab_is_full && (i_record%(VOL_BUFF_SIZE/4) == 0))
         enable_analysis = true;
     else
         enable_analysis = false;
 
     // if phrase analysis enable flag is TRUE, analyze & compute statistics
     if (enable_analysis){
-        sort_memory();
+        this->_sort_memory();
         
-        //copy_memory();      // copy v_memory
-        //KickSort<int>::quickSort(v_memory_sorted, PHRASE_LEN);  // sort volume record by value (ascending) for statistical analysis
+        //_copy_memory();      // copy v_memory
+        //KickSort<int>::quickSort(v_memory_sorted, VOL_BUFF_SIZE);  // sort volume record by value (ascending) for statistical analysis
         
-        compute_stats();    // compute the statistics
+        this->_compute_stats();    // compute the statistics
       }
 
     // in any case, update system state
-    update_state();
-    update_beat_threshold();
+    this->_update_state();
+    this->_update_beat_threshold();
 }
 
-void SoundAnalyzer::update_state(){
+void SoundAnalyzer::_update_state(){
     // update system state 
-    switch (system_state){     
+    switch (state){     
         // If Beat Tracking
-        case 1:
+        case BEAT_TRACKING:
             if (enable_analysis){
-                // If volume drops below threshold
+                
+                // If volume drops below threshold, go to BREAK
                 if (v_95 < THD_toBK){
-                system_state = 2; // go to BREAK
+                state = BREAK;
                 }
+
+                // If beat signal is weak 
                 else if (ratio_95_q1 < THD_BTtoBS){
                 BS_cpt += 1;
                 if (BS_cpt == 4){
-                    system_state = 3;
+                    state = BAD_SIGNAL;
                     BS_cpt = 0;
                 }
                 }
@@ -134,59 +143,61 @@ void SoundAnalyzer::update_state(){
             }
             break;
 
-            // If Break
-            case 2:
-                if(beat){
-                    system_state = 1;
-                }
-            break;
+        // If Break
+        case BREAK:
+            if(raw_beat){
+                state = BEAT_TRACKING;
+            }
+        break;
 
-            // If Beat Lost
-            case 3:
-                if (enable_analysis){
-                    if (v_95 < THD_toBK){
-                        system_state = 2;
-                    }
+        // If Beat Lost
+        case BAD_SIGNAL:
+            if (enable_analysis){
+                if (v_95 < THD_toBK){
+                    state = BREAK;
                 }
+            }
+        break;
+
         default:
-            break;
+        break;
         }
 
         // update state change flag
-        if (system_state != old_sys_state){
-            state_change = true;
-            old_sys_state = system_state;
+        if (state != old_sys_state){
+            state_changed = true;
+            old_sys_state = state;
         }
         else{
-            state_change = false;
+            state_changed = false;
         }
 }
 
-void SoundAnalyzer::update_beat_threshold(){
-    if (enable_analysis == 1 && system_state != 2){
-          beat_thresh = v_XX*(float)1/10 + beat_thresh*(float)9/10;
+void SoundAnalyzer::_update_beat_threshold(){
+    if (enable_analysis == 1 && state != 2){
+          beat_threshold = v_XX*(float)1/10 + beat_threshold*(float)9/10;
         }
 }
 
-void SoundAnalyzer::copy_memory(){
-    for (int i=0;i<PHRASE_LEN;i++)
+void SoundAnalyzer::_copy_memory(){
+    for (int i=0;i<VOL_BUFF_SIZE;i++)
         v_memory_sorted[i] = v_memory[i];
 }
 
-void SoundAnalyzer::compute_stats(){
+void SoundAnalyzer::_compute_stats(){
   unsigned long sum=0;
-  for (int i=0; i<PHRASE_LEN; i++){
+  for (int i=0; i<VOL_BUFF_SIZE; i++){
     sum = sum + v_memory_sorted[i];
   }
-  v_mean = sum/PHRASE_LEN;
+  v_mean = sum/VOL_BUFF_SIZE;
   
-  v_max = v_memory_sorted[PHRASE_LEN-1];
-  v_quarter[0] = v_memory_sorted[PHRASE_LEN/4];
-  v_quarter[1] = v_memory_sorted[PHRASE_LEN/2];
-  v_quarter[2] = v_memory_sorted[3*PHRASE_LEN/4];
-  v_95 = v_memory_sorted[95*PHRASE_LEN/100];
+  v_max = v_memory_sorted[VOL_BUFF_SIZE-1];
+  v_quarter[0] = v_memory_sorted[VOL_BUFF_SIZE/4];
+  v_quarter[1] = v_memory_sorted[VOL_BUFF_SIZE/2];
+  v_quarter[2] = v_memory_sorted[3*VOL_BUFF_SIZE/4];
+  v_95 = v_memory_sorted[95*VOL_BUFF_SIZE/100];
   
-  v_XX = v_memory_sorted[90*PHRASE_LEN/100];
+  v_XX = v_memory_sorted[90*VOL_BUFF_SIZE/100];
   
   if (v_quarter[0]>0){ratio_95_q1 = (float)v_95/v_quarter[0];}
   else {ratio_95_q1 = 1;}
@@ -199,25 +210,25 @@ void SoundAnalyzer::compute_stats(){
 
 }
 
-void SoundAnalyzer::DCRemoval(){
+void SoundAnalyzer::_remove_DC_value(){
     double sum = 0.0;
-    for (int i=0; i<SAMP_N; i++){
+    for (int i=0; i<SAMPLE_SIZE; i++){
         sum += signal[i][REAL];
     }
-    double mean = sum/SAMP_N;
-    for (int i=0; i<SAMP_N; i++){
+    double mean = sum/SAMPLE_SIZE;
+    for (int i=0; i<SAMPLE_SIZE; i++){
         signal[i][REAL] -= mean;
     }
 }
 
-void SoundAnalyzer::ComputeFFT(){
+void SoundAnalyzer::_compute_FFT(){
   // Compute FFT
-  my_plan = fftw_plan_dft_1d(SAMP_N, signal, fft_out, FFTW_FORWARD, FFTW_ESTIMATE);
+  my_plan = fftw_plan_dft_1d(SAMPLE_SIZE, signal, fft_out, FFTW_FORWARD, FFTW_ESTIMATE);
   fftw_execute(my_plan);
 
   // Reshape results 
-  for (int i=0; i<SAMP_N; i++){
-      spectrum[i][FREQ] = i * SAMP_F/SAMP_N;
+  for (int i=0; i<SAMPLE_SIZE; i++){
+      spectrum[i][FREQ] = i * SAMPLING_FREQ/SAMPLE_SIZE;
       spectrum[i][AMPL] = (pow(fft_out[i][REAL], 2) + pow(fft_out[i][IMAG],2)) * 7E-5; // compute magnitude + normalize (empirical)
   }  
 }
@@ -227,11 +238,11 @@ void SoundAnalyzer::init(){
   adc.connect();
 
   // allocate memory fot the signal & fft out storage structures (arrays of doubles)
-  signal = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*SAMP_N);
-  fft_out = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*SAMP_N);
+  signal = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*SAMPLE_SIZE);
+  fft_out = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*SAMPLE_SIZE);
 }
 
-void SoundAnalyzer::sort_memory(){
+void SoundAnalyzer::_sort_memory(){
   v_memory_sorted.assign(v_memory.begin(), v_memory.end());
   std::sort(v_memory_sorted.begin(), v_memory_sorted.end());
 }
@@ -252,35 +263,35 @@ void SoundAnalyzer::fake_analysis(){
   unsigned long fake_t = millis();
   
   // update fake state
-  switch (system_state)
+  switch (state)
   {
   case 1:
     if (fake_t > n_break){
-      state_change = true;
-      system_state = 2; 
+      state_changed = true;
+      state = 2; 
       n_drop = n_break + break_T_ms;
     }
     else{
-      state_change = false;
+      state_changed = false;
     }
     break;
   case 2:
     if (fake_t > n_drop){
-      state_change = true;
-      system_state = 1;
+      state_changed = true;
+      state = 1;
       n_break = n_drop + drop_T_ms;
     }
     else{
-      state_change = false;
+      state_changed = false;
     }
     break;
   default:
     break;
   }
 
-  // generate fake beat
+  // generate fake raw_beat
     if (fake_t>n_beat){
-      beat = true;
+      raw_beat = true;
       new_beat = true;
       last_beat = fake_t;
       last_new_beat = fake_t;
@@ -288,7 +299,7 @@ void SoundAnalyzer::fake_analysis(){
       n_beat += beat_T_ms;
     }
     else{
-      beat = false;
+      raw_beat = false;
       new_beat = false;
     }
 
