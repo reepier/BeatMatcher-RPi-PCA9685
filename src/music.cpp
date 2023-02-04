@@ -1,3 +1,18 @@
+/**
+ * This Module contains all the code required to :
+ * - Record a music sample using MCP3008 ADC chip and the I2C bus
+ * - Process the sample (FFT & custom phrase analysis)
+ * - Update outputs ()
+ * 
+*/
+
+
+/** TODO :
+ * - put the MCP3008 object inside the SoundANalyzer class
+ * - enumerate everything that can support it (states, variables, etc.)
+ * 
+*/
+
 #include <algorithm>
 #include <cmath>
 
@@ -56,19 +71,6 @@ void SoundAnalyzer::process_record(){
       } 
       v_memory.erase(v_memory.begin());
     } // new version
-
-    /* //old version  --> DELETE!
-    v_memory[i_mem] = volume;
-
-    i_mem++;
-    if (i_mem == PHRASE_LEN){   // wrap i_mem within [0;128[
-        i_mem = 0;
-        // toggle tab_is_full when memory is full (this will only happen once, at loop's 128th run)
-        if (!tab_is_full){     
-            tab_is_full = true;
-        }
-    }
-    */ //old version
 
     // check for beat 
     // Compare current level to threshold and control LED 

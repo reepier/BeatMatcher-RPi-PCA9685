@@ -37,7 +37,6 @@ void LED_init(){
   reset_period();
 }
 
-
 void set_color(int rgb[], int c0, int c1, int c2, int c3, int c4, int c5){
   rgb[0]=c0;
   rgb[1]=c1;
@@ -54,6 +53,8 @@ void set_color(int rgb[], int c0, int c1, int c2, int c3, int c4, int c5){
 * b : 12 bits red intensity value (0-4095)
 */
 void rgb_color(int r, int g, int b){
+
+
 
   // Send frame to the PCA9685 module  
   setOffVals[LEDRed] = r;

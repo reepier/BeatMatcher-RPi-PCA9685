@@ -1,0 +1,29 @@
+CLEAN and STRUCTURE the code using as much good practices as possible:
+    - enumerate everything that can be enumerated (variables, states, etc.)
+
+    - give explicit & long name to all variables
+
+    - construct classe whenever possible --> NO FUNCTIONS should be outside a classes
+
+    - use WiringPi to deal with the arduino shit (delay(), millis(), etc.)
+
+    - identify & isolate every paramter (threshold values, settings, etc.) in a dedicated module
+
+    - isolate & wrap all the animation related stufff (animation count, choice, setting, etc.) in a dedicated class
+
+
+ADD A CONFIGURATION CAPABILITY based on the following principles :
+    Read a csv containing the config (define a format & write a parser function)
+    Extract the values
+    Extract animations
+    Run them
+
+
+
+
+
+
+
+
+
+
