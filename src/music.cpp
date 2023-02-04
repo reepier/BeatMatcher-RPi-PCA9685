@@ -23,7 +23,7 @@
 #include <MCP3008/MCP3008.h>
 
 
-SoundAnalyzer beat_analyzer;
+SoundAnalyzer sampler;
 extern bool beat;
 
 MCP3008Lib::MCP3008 adc;
@@ -66,31 +66,31 @@ void SoundAnalyzer::process_record(){
     v_memory.push_back(volume);
     i_record ++;
     if(v_memory.size() > PHRASE_LEN){
-      if (!tab_is_full){
-        tab_is_full = true;
-      } 
-      v_memory.erase(v_memory.begin());
+        if (!tab_is_full){
+            tab_is_full = true;
+        } 
+        v_memory.erase(v_memory.begin());
     } // new version
 
     // check for beat 
     // Compare current level to threshold and control LED 
-      if (volume >= beat_thresh){
-        if (!beat){
-          new_beat = true;
-          last_new_beat = millis();
-        }
-        else{
-          new_beat = false;
-        }
-        
-        beat = true;
-        last_beat = millis();
-      }
-      else{
-        beat = false;
-        filtered_beat = false;
+    if (volume >= beat_thresh){
+    if (!beat){
+        new_beat = true;
+        last_new_beat = millis();
+    }
+    else{
         new_beat = false;
-      }
+    }
+    
+    beat = true;
+    last_beat = millis();
+    }
+    else{
+    beat = false;
+    filtered_beat = false;
+    new_beat = false;
+    }
 
     // activate phrase analyis enable flag every 32 samples (PHRASE_LEN/4) 
     if (tab_is_full && (i_record%(PHRASE_LEN/4) == 0))

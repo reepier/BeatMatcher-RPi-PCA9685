@@ -88,4 +88,4 @@ class SoundAnalyzer{
 
 };
 
-extern SoundAnalyzer beat_analyzer;
+extern SoundAnalyzer sampler;

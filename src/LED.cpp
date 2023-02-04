@@ -9,6 +9,7 @@
 
 #include <PCA9685.h>
 
+// @todo: move to an animator class/module
 // color storage
 int color1[3];
 int color2[6];
@@ -16,6 +17,7 @@ int color3[3];
 int back_color[3];
 float coef = 0;
 
+// @todo: move to an animator class/module
 // background sinewave periods parameters
 unsigned long period[6];
 #define MAX_T 30
@@ -28,8 +30,7 @@ unsigned int setOnVals[_PCA9685_CHANS] =
     { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
   unsigned int setOffVals[_PCA9685_CHANS] =
     { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-
-
+    
 void LED_init(){
   fd = PCA9685_openI2C(1, addr);
   PCA9685_initPWM(fd, addr, _PCA9685_MAXFREQ);
