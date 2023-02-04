@@ -1,0 +1,34 @@
+FFT_beat_phrase_detector.cpp
+--> rename to main.cpp
+--> change as little thing as possible
+
+
+dmxrx.cpp
+--> remove ?
+
+led.cpp
+--> rename dmxtx.cpp
+--> remove any reference to PCA9685 library
+--> include ola library
+--> instantiate mandatory obects (Client)
+--> initialize objects
+--> delete DMXrx function
+--> Write a DMX wrapper
+    input : DMX data
+
+--> BASICALLY REWRITE the entire module...
+
+
+music.cpp
+--> remove any reference to ArduinoFFT & KickSort
+--> include MCP3008 & FFTW lib
+--> rewrite Record() & Process_record()
+
+
+debug.h / debug.cpp
+--> rewrite debug() towards console rather thant Serial port
+
+TO ADD :
+--> convenient wrapper for getimeofday() library --> output in decimal seconds or milliseconds rather than a "timeval" struct.
+--> design a nice output formatting (groundork for the final project)
+

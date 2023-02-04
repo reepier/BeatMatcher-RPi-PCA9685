@@ -1,0 +1,8 @@
+compile test
+
+g++ src/test.cpp src/sysfcn.cpp -I include -o test.a
+./test.a
+
+
+compile prog
+g++ src/main.cpp src/sysfcn.cpp src/dmxtx.cpp src/music.cpp -I include -o prog.a
