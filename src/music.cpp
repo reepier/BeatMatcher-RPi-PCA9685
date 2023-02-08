@@ -20,13 +20,9 @@
 #include "music.h"
 #include "constant.h"
 #include "sysfcn.h"
-#include <MCP3008/MCP3008.h>
 #include <wiringPi.h>
 
 SoundAnalyzer sampler;
-extern bool raw_beat;
-
-MCP3008Lib::MCP3008 adc;
 
 void SoundAnalyzer::update(){
     this->record();

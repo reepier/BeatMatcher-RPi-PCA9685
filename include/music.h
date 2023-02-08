@@ -1,6 +1,8 @@
 #include <fftw3.h>
 #include <vector>
 
+#include <MCP3008/MCP3008.h>
+
 #define SAMPLE_SIZE 128      // record length (number of individual samples)
 #define SAMPLING_FREQ 8000     // sampling frequency
 #define FREQ_BAND 2     // frequency band used to evaluate volume (low value for bass / high value for treble)
@@ -30,7 +32,8 @@ enum states{
 };
 
 class SoundAnalyzer{
-            
+
+    MCP3008Lib::MCP3008 adc;    // MCP3008 object
     // record storage
     // private :   double record_real[SAMPLE_SIZE];
     // private :   double record_imag[SAMPLE_SIZE];

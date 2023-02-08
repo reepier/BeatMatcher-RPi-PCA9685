@@ -18,6 +18,9 @@ CLEAN and STRUCTURE the code using as much good practices as possible:
 
     - add #ifndef hprotection to headers.
 
+    - use chrono::duration rather than ints for timestamps
+    - use a t_ d_ naming convention for timestamp vs duration
+
 ADD A CONFIGURATION CAPABILITY based on the following principles :
     Read a csv containing the config (define a format & write a parser function)
     Extract the values

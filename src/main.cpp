@@ -1,23 +1,25 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
-#include "debug.h"
+// #include "debug.h"
 #include "constant.h"
 #include "LED.h"
 #include "music.h"
+#include "animator.h"
 #include "sysfcn.h"
 #include <wiringPi.h>
 
 using namespace std;
 
+
+
+// int mainloop_duration_ms = 30;
+
 //TODO move to animator class/mosule
 int animation_i = 2;    // indice of the animation to run 
-
 //TODO move to animator class/mosule
 // Timer variables
 unsigned long last_animation_change_ms = millis();
-int mainloop_duration_ms = 30;
-
 //TODO move to animator class/mosule
 // Flags
 bool flash = true;
@@ -32,76 +34,77 @@ void initialize() {
     LED_init();         // initialize OLA & shit
 }
 
+
+class LoopControler{
+    public :
+    unsigned long cpt = 0;
+    bool first_loop = true;
+    unsigned long t_previous_ms = 0;
+    unsigned long t_current_ms = 0;
+    unsigned long t_next_ms = 0;
+    unsigned long loop_duration_ms = 0;
+
+    void increment(){
+        t_previous_ms = t_current_ms;
+        t_current_ms = millis();
+        t_next_ms = t_current_ms + 1000/FRATE;
+
+        loop_duration_ms = t_current_ms - t_previous_ms;
+    }
+    void wait_for_next(){
+        while(micros() < 1000*t_next_ms) {delayMicroseconds(100); } // wait for the next frame
+        if (first_loop) first_loop = false;
+        cpt++;
+    }
+
+    
+};
+
+LoopControler frame;
+
+void debug();   // declaration of the display fucntion, definition at the end of thi smodule 
+
+
 int main(){
+
 
     initialize();
 
     //TODO Move to a LoopControl class 
-    int t_previous_frame_ms = 0, t_current_frame_ms = millis(), t_next_frame_ms = 0;    //Timestamp in milliseconds
+    //int t_previous_frame_ms = 0, t_current_frame_ms = millis(), t_next_frame_ms = 0;    //Timestamp in milliseconds
 
     while (true){
-        //TODO Move to a LoopControl class 
-        static bool first_loop = true;
-        static int cpt = 0;
 
-        //TODO Move to a LoopControl class
-        // update frame timers
-        t_previous_frame_ms = t_current_frame_ms;
-        t_current_frame_ms = millis();                  //TODO : use millis() only once and pass t_current_frame_ms as argument to every function
-        t_next_frame_ms = t_current_frame_ms + 1000 / FRATE;
-        mainloop_duration_ms = t_current_frame_ms - t_previous_frame_ms;
-
+        frame.increment();
+        
         // Use internal Beat Detector Program (default)
-            
-            // MUSIC RECORDING            
-            #ifndef FAKEMUSIC
-            sampler.record();
-
-            // SAMPLE PROCESSING
-            sampler.process_record();
-            #else
-            sampler.fake_analysis();
-            #endif // !FAKEMUSIC
+        
+        // Music SAMPLING          
+        #ifndef FAKEMUSIC
+        sampler.update();
+        #else
+        sampler.fake_analysis();
+        #endif // !FAKEMUSIC
 
 
-            // TODO move all this code to an animator class/module
-            // --------------------------------------------------------------------------------------------------------
-            // --------------------------------------------------------------------------------------------------------
-            // ANIMATOR
-            // --------------------------------------------------------------------------------------------------------
-            // Animation selector
-            /* updates the current animation index (animation_i) whenever <state_changed> is TRUE.
-            * Animation_i is of type int, it has 255 possible values (excessive)
-            */
-            int n_animation = 10;
-            
-            if (sampler.state_changed & (millis()-last_animation_change_ms > TEMPO_ANIM_CHANGE)){
-                change_animation = true;
-                last_animation_change_ms = millis();
-                animation_i = (animation_i+1) % n_animation;
-                reset_period();
+        // TODO move all this code to an animator class/module
+        // --------------------------------------------------------------------------------------------------------
+        // --------------------------------------------------------------------------------------------------------
+        // ANIMATOR
+        // --------------------------------------------------------------------------------------------------------
+        // Animation selector
+        /* updates the current animation index (animation_i) whenever <state_changed> is TRUE.
+        * Animation_i is of type int, it has 255 possible values (excessive)
+        */
+        int n_animation = 10;
+        
+        if (sampler.state_changed & (millis()-last_animation_change_ms > TEMPO_ANIM_CHANGE)){
+            change_animation = true;
+            last_animation_change_ms = millis();
+            animation_i = (animation_i+1) % n_animation;
+            reset_period();
 
-                // INSERT_ANIM_SWITCH
-            }
-            else{
-                change_animation=false;
-            }
-            
-            if (sampler.state_changed){
-                if (sampler.state == 1){
-                flash = true;
-                sampler.beat_tracking_start = millis();
-                }
-                else{
-                flash = false; //flash only if raw_beat tracking is OK
-                }
-            }
-            
-            if (sampler.state == BEAT_TRACKING && (millis()-sampler.beat_tracking_start) > MAX_CONT_FLASH){ // --> do not flash for more than 120s (eye confort)
-                flash = false;
-            }
-            // TODO : This block shall be relocated to the place marked with INSERT_ANIM_SWITCH
-            switch (animation_i){
+        switch (animation_i){
             case 0:
                 // Warm Flashes
                 set_color(color1, 255<<4, 150<<4, 80<<4);   // flash RGBor
@@ -169,20 +172,39 @@ int main(){
             break;
             }
 
-           
-            if (sampler.state == BAD_SIGNAL){
-                set_color(color1, 255<<4,0<<4,0<<4);
-                flash_master_BS(sampler.volume);
-            }else{
-                flash_master(sampler.new_beat, sampler.last_new_beat, flash, 60);
+        }
+        else{
+            change_animation=false;
+        }
+        
+        if (sampler.state_changed){
+            if (sampler.state == 1){
+            flash = true;
+            sampler.beat_tracking_start = millis();
             }
+            else{
+            flash = false; //flash only if raw_beat tracking is OK
+            }
+        }
+        
+        if (sampler.state == BEAT_TRACKING && (millis()-sampler.beat_tracking_start) > MAX_CONT_FLASH){ // --> do not flash for more than 120s (eye confort)
+            flash = false;
+        }
+        
 
-            debug();
+        
+        if (sampler.state == BAD_SIGNAL){
+            set_color(color1, 255<<4,0<<4,0<<4);
+            flash_master_BS(sampler.volume);
+        }else{
+            flash_master(sampler.new_beat, sampler.last_new_beat, flash, 60);
+        }
 
-        //TODO : move this block to a LoopControl class
-        if (first_loop) first_loop = false;
-        cpt++;
-        while(micros() < 1000*t_next_frame_ms){delayMicroseconds(100);} // wait for the next frame
+        debug();
+
+        frame.wait_for_next();
+        
+    
 
     }
 
@@ -222,7 +244,7 @@ int main(){
     cout << "//// DMX CHANNELS /////" << '\n';// << endl;
     
 
-    cout << "fps : " << 1.0/mainloop_duration_ms*1000 << "Hz\n";
+    cout << "fps : " << 1.0/frame.loop_duration_ms*1000 << "Hz\n";
     cout << "Elapsed time : " << setprecision(2) << millis()/1000.0 << "s" << endl;
    /*
     for (int i=0; i<SAMPLE_SIZE; i++){

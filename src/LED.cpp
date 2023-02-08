@@ -43,7 +43,7 @@ void LED_init(){
     reset_period();
 }
 
-
+//TODO move to animator class/module
 void set_color(int rgb[], int c0, int c1, int c2, int c3, int c4, int c5){
   rgb[0]=c0;
   rgb[1]=c1;
@@ -72,6 +72,8 @@ void rgb_color(int r, int g, int b){
 }
 
 
+
+//TODO move to animator class/module
 //TODO : raw_beat argument is useless --> remove it...  the beat_t timer is enough to compute the exponential decay
 void flash_master(bool raw_beat, unsigned long beat_t, bool flash, int fade_rate){
     unsigned long t = millis();
@@ -123,7 +125,7 @@ void reset_period(){
 }
 
 
-
+//TODO move to animator class/module
 void animator(int i){
         switch (i){
           case 0:
