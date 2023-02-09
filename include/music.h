@@ -1,3 +1,7 @@
+#ifndef MUSIC_H
+#define MUSIC_H
+
+
 #include <fftw3.h>
 #include <vector>
 
@@ -60,14 +64,14 @@ class SoundAnalyzer{
     private :   bool tab_is_full=false;
     public :    bool enable_analysis;
     public :    float v_max, v_mean, v_quarter[3], v_95, v_XX;
-    public :    float ratio_95_q1, ratio_95_q2, ratio_95_q3;
+    public :    float ratio_95_q1, ratio_95_q2, ratio_95_q3;    // TODO replace each of these var with a fcn that comptes them
 
     // Beat tracking variables
     public :    float beat_threshold = 60;
     public :    bool raw_beat=false, new_beat=false, filtered_beat=false;
-    public :    unsigned long last_beat = 0;         // Stores timestamp of the last raw_beat=true event
-    public :    unsigned long last_new_beat = 0;
-    public :    unsigned long beat_tracking_start = 0;
+    public :    unsigned long t_last_beat = 0;         // Stores timestamp of the last raw_beat=true event
+    public :    unsigned long t_last_new_beat = 0;
+    public :    unsigned long t_beat_tracking_start = 0;
 
     // state machine variables
     private :   int BS_cpt = 0, BT_cpt = 0;
@@ -98,3 +102,5 @@ class SoundAnalyzer{
 };
 
 extern SoundAnalyzer sampler;
+
+#endif // !MUSIC_H

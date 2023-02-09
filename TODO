@@ -16,10 +16,10 @@ CLEAN and STRUCTURE the code using as much good practices as possible:
 
     - create a class that stores (& computes) the LEDcontroler stuff (channel intensity...)
 
-    - add #ifndef hprotection to headers.
-
     - use chrono::duration rather than ints for timestamps
     - use a t_ d_ naming convention for timestamp vs duration
+    - remove object extern declaration from headers .
+        --> reference extern object only where necessary (main)
 
 ADD A CONFIGURATION CAPABILITY based on the following principles :
     Read a csv containing the config (define a format & write a parser function)

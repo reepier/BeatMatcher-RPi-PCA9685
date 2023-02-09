@@ -79,14 +79,14 @@ void SoundAnalyzer::process_record(){
     if (volume >= beat_threshold){
     if (!raw_beat){
         new_beat = true;
-        last_new_beat = millis();
+        t_last_new_beat = millis();
     }
     else{
         new_beat = false;
     }
     
     raw_beat = true;
-    last_beat = millis();
+    t_last_beat = millis();
     }
     else{
     raw_beat = false;
@@ -289,8 +289,8 @@ void SoundAnalyzer::fake_analysis(){
     if (fake_t>n_beat){
       raw_beat = true;
       new_beat = true;
-      last_beat = fake_t;
-      last_new_beat = fake_t;
+      t_last_beat = fake_t;
+      t_last_new_beat = fake_t;
 
       n_beat += beat_T_ms;
     }

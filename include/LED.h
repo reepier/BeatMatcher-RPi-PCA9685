@@ -1,3 +1,7 @@
+#ifndef LED_H
+#define LED_H
+
+
 #define LyreCh0         31
 
 #define LyrePan         1
@@ -32,3 +36,5 @@ void flash_master(bool, unsigned long, bool, int fade_rate = 80);
 void flash_master_BS(int);
 
 void reset_period();
+
+#endif // !LED_H

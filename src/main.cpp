@@ -11,8 +11,6 @@
 
 using namespace std;
 
-
-
 // int mainloop_duration_ms = 30;
 
 //TODO move to animator class/mosule
@@ -69,7 +67,7 @@ int main(){
 
 
     initialize();
-
+    
     //TODO Move to a LoopControl class 
     //int t_previous_frame_ms = 0, t_current_frame_ms = millis(), t_next_frame_ms = 0;    //Timestamp in milliseconds
 
@@ -96,7 +94,9 @@ int main(){
         /* updates the current animation index (animation_i) whenever <state_changed> is TRUE.
         * Animation_i is of type int, it has 255 possible values (excessive)
         */
-        int n_animation = 10;
+        animator.update(frame.t_current_ms, sampler);
+
+        // int n_animation = 10;
         
         if (sampler.state_changed & (millis()-last_animation_change_ms > TEMPO_ANIM_CHANGE)){
             change_animation = true;
@@ -180,6 +180,8 @@ int main(){
         if (sampler.state_changed){
             if (sampler.state == 1){
             flash = true;
+
+            // TODO : Move to music module --> DECOUPLING between module is key
             sampler.beat_tracking_start = millis();
             }
             else{
@@ -191,8 +193,6 @@ int main(){
             flash = false;
         }
         
-
-        
         if (sampler.state == BAD_SIGNAL){
             set_color(color1, 255<<4,0<<4,0<<4);
             flash_master_BS(sampler.volume);
@@ -203,8 +203,6 @@ int main(){
         debug();
 
         frame.wait_for_next();
-        
-    
 
     }
 
