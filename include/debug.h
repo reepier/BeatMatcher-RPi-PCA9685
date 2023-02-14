@@ -7,7 +7,7 @@
     Serial plotter activated). Comment out the following line to reverse to
     "NORMAL MODE" (DMX Rx activated, Serial plotter unavailabe)
 */
-// #define FAKEMUSIC
+#define FAKEMUSIC
 
 /** TODO
  * - Delete this module if it really is as useless as it looks

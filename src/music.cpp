@@ -119,12 +119,12 @@ void SoundAnalyzer::_update_state(){
     // update system state 
     switch (state){     
         // If Beat Tracking
-        case BEAT_TRACKING:
+        case BEAT:
             if (enable_analysis){
                 
                 // If volume drops below threshold, go to BREAK
                 if (v_95 < THD_toBK){
-                state = BREAK;
+                  state = BREAK;
                 }
 
                 // If beat signal is weak 
@@ -142,7 +142,8 @@ void SoundAnalyzer::_update_state(){
         // If Break
         case BREAK:
             if(raw_beat){
-                state = BEAT_TRACKING;
+                state = BEAT;
+                t_beat_tracking_start = millis();
             }
         break;
 
@@ -160,9 +161,9 @@ void SoundAnalyzer::_update_state(){
         }
 
         // update state change flag
-        if (state != old_sys_state){
+        if (state != previous_state){
             state_changed = true;
-            old_sys_state = state;
+            previous_state = state;
         }
         else{
             state_changed = false;
@@ -245,61 +246,71 @@ void SoundAnalyzer::_sort_memory(){
 
 #ifdef FAKEMUSIC
 
-#define BPM 140          // BPM
-#define BREAKDuration 16  // beats
-#define DROPDuration  32 // beats
+#define BPM 130          // BPM
+#define BREAKDuration 8  // beats
+#define DROPDuration  16 // beats
 
-const int beat_T_ms = 60000/BPM;
-const int break_T_ms = BREAKDuration * beat_T_ms;
-const int drop_T_ms = DROPDuration * beat_T_ms;
+const int beat_duration_ms = 60000/BPM;
+const int break_duration_ms = BREAKDuration * beat_duration_ms;
+const int drop_duration_ms = DROPDuration * beat_duration_ms;
 
-unsigned long t = 0;
-unsigned long n_break = t + drop_T_ms, n_drop, n_beat = 0;
-void SoundAnalyzer::fake_analysis(){
-  unsigned long fake_t = millis();
-  
-  // update fake state
-  switch (state)
-  {
-  case 1:
-    if (fake_t > n_break){
-      state_changed = true;
-      state = 2; 
-      n_drop = n_break + break_T_ms;
+
+void SoundAnalyzer::fake_analysis(unsigned long t){
+    // initialize
+    static bool init = true;
+    if (init){
+        t_beat_tracking_start = t;
+        t_next_drop_ms = t  + drop_duration_ms + break_duration_ms;
+        t_next_beat_ms = t;
+        t_next_break_ms = t + drop_duration_ms;
+        init = false;
+    }
+    
+    // update state machine
+    switch (state){
+        case BEAT:
+            if (t >= t_next_break_ms){
+                t_next_break_ms += (break_duration_ms + drop_duration_ms);
+                previous_state = state;
+                state = BREAK; 
+                state_changed = true;
+            }
+            else{
+                state_changed = false;
+            }
+            break;
+        case BREAK:
+            if (t >= t_next_drop_ms){
+                t_next_drop_ms += (drop_duration_ms + break_duration_ms);
+
+                state_changed = true;
+                previous_state = state;
+                state = BEAT;
+                t_beat_tracking_start = t;
+            }
+            else{
+                state_changed = false;
+            }
+            break;
+        default:
+            break;
+    }
+
+    // generate fake raw_beat
+    if (t >= t_next_beat_ms){
+        raw_beat = true;
+        new_beat = true;
+        t_last_beat = t;
+        t_last_new_beat = t;
+
+        t_next_beat_ms += beat_duration_ms;
     }
     else{
-      state_changed = false;
-    }
-    break;
-  case 2:
-    if (fake_t > n_drop){
-      state_changed = true;
-      state = 1;
-      n_break = n_drop + drop_T_ms;
-    }
-    else{
-      state_changed = false;
-    }
-    break;
-  default:
-    break;
-  }
-
-  // generate fake raw_beat
-    if (fake_t>n_beat){
-      raw_beat = true;
-      new_beat = true;
-      t_last_beat = fake_t;
-      t_last_new_beat = fake_t;
-
-      n_beat += beat_T_ms;
-    }
-    else{
-      raw_beat = false;
-      new_beat = false;
+        raw_beat = false;
+        new_beat = false;
     }
 
-  delay(30);
+    // delay(30);
 
 }
 

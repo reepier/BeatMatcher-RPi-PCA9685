@@ -5,6 +5,7 @@
 #include <fftw3.h>
 #include <vector>
 
+#include "debug.h"
 #include <MCP3008/MCP3008.h>
 
 #define SAMPLE_SIZE 128      // record length (number of individual samples)
@@ -30,7 +31,7 @@
 #define AMPL 1
 
 enum states{
-    BEAT_TRACKING   = 1,    // volume is high and beat is clear
+    BEAT   = 1,    // volume is high and beat is clear
     BREAK           = 2,    // volume is low (indicates a break)
     BAD_SIGNAL      = 3     // volume is high but the beat is not perceptible
 };
@@ -75,7 +76,7 @@ class SoundAnalyzer{
 
     // state machine variables
     private :   int BS_cpt = 0, BT_cpt = 0;
-    public :    states state = BEAT_TRACKING, old_sys_state = BEAT_TRACKING;
+    public :    states state = BEAT, previous_state = BEAT;
     public :    bool state_changed = false;    
 
     // Main functions (entry points)
@@ -94,11 +95,16 @@ class SoundAnalyzer{
     private :   void _sort_memory();
 
     // fake analysis function (for animation developpement purpose)
-    public :    void fake_analysis(); 
+    public :    void fake_analysis(unsigned long); 
 
     // debug intermediary variables
     public :    int deb_max, deb_min;
-
+    
+    #ifdef FAKEMUSIC
+    //fake beat
+    unsigned long t_next_break_ms, t_next_drop_ms, t_next_beat_ms;
+    #endif // DEBUG
+    
 };
 
 extern SoundAnalyzer sampler;

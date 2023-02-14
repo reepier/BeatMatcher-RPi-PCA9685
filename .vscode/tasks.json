@@ -13,6 +13,7 @@
 				"${workspaceFolder}/src/sysfcn.cpp",
 				"${workspaceFolder}/src/music.cpp",
 				"${workspaceFolder}/src/MCP3008.cpp",
+				"${workspaceFolder}/src/animator.cpp",
 				"-I${workspaceFolder}/include",
                 "-I/usr/include",
 				"-o",

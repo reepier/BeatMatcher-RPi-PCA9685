@@ -1,7 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
-// #include "debug.h"
+#include "debug.h"
 #include "constant.h"
 #include "LED.h"
 #include "music.h"
@@ -14,14 +14,14 @@ using namespace std;
 // int mainloop_duration_ms = 30;
 
 //TODO move to animator class/mosule
-int animation_i = 2;    // indice of the animation to run 
+// int animation_i = 2;    // indice of the animation to run 
 //TODO move to animator class/mosule
 // Timer variables
-unsigned long last_animation_change_ms = millis();
+// unsigned long last_animation_change_ms = millis();
 //TODO move to animator class/mosule
 // Flags
-bool flash = true;
-bool change_animation = true;
+// bool flash = true;
+// bool change_animation = true;
  
 void initialize() {
     
@@ -38,7 +38,7 @@ class LoopControler{
     unsigned long cpt = 0;
     bool first_loop = true;
     unsigned long t_previous_ms = 0;
-    unsigned long t_current_ms = 0;
+    unsigned long t_current_ms = millis();
     unsigned long t_next_ms = 0;
     unsigned long loop_duration_ms = 0;
 
@@ -81,7 +81,7 @@ int main(){
         #ifndef FAKEMUSIC
         sampler.update();
         #else
-        sampler.fake_analysis();
+        sampler.fake_analysis(frame.t_current_ms);
         #endif // !FAKEMUSIC
 
 
@@ -95,110 +95,6 @@ int main(){
         * Animation_i is of type int, it has 255 possible values (excessive)
         */
         animator.update(frame.t_current_ms, sampler);
-
-        // int n_animation = 10;
-        
-        if (sampler.state_changed & (millis()-last_animation_change_ms > TEMPO_ANIM_CHANGE)){
-            change_animation = true;
-            last_animation_change_ms = millis();
-            animation_i = (animation_i+1) % n_animation;
-            reset_period();
-
-        switch (animation_i){
-            case 0:
-                // Warm Flashes
-                set_color(color1, 255<<4, 150<<4, 80<<4);   // flash RGBor
-                set_color(color2, 30<<4,100<<4, 1<<4,7<<4, 0<<4,0<<4);  // back color wave settings (Rmax, Rmin, Gmax,...)
-            break;
-            case 1:
-                // Sodium Flashes
-                set_color(color1, 255<<4, 50<<4, 10<<4);
-                set_color(color2, 15<<4,50<<4, 0<<4,5<<4, 0<<4,0<<4);      
-            break;
-            case 2:
-            // Very Warm
-                set_color(color1, 255<<4, 150<<4, 80<<4);
-                set_color(color2, 30<<4,100<<4, 1<<4,7<<4, 0<<4,0<<4);      
-            break;
-            case 3:
-                //BLACK BACKGROUND RED flashes
-                set_color(color1, 255<<4, 0<<4, 0<<4);
-                set_color(color2, 0<<4,0<<4, 0<<4,0<<4, 0<<4,0<<4);
-            break;
-            case 4:
-                // Slide to pink palette introducing blue
-                set_color(color1, 255<<4, 150<<4, 80<<4);
-                set_color(color2, 30<<4,100<<4, 0<<4, 0<<4, 0<<4,10<<4);
-            break;
-            case 5:
-                //BLACK BACKGROUND PINK flashes
-                set_color(color1, 0<<4, 0<<4, 255<<4);
-                set_color(color2, 0<<4,0<<4, 0<<4,0<<4, 0<<4,0<<4); 
-            break;
-            case 6:
-                // reduce red, increase blue
-                set_color(color1, 255<<4, 100<<4, 80<<4);
-                set_color(color2, 0<<4,80<<4, 0<<4,0<<4, 0<<4,20<<4);
-            break;
-            case 7:
-                // reduce red, increase blue
-                set_color(color1, 255<<4, 100<<4, 80<<4);
-                set_color(color2, 0<<4,50<<4, 0<<4,0<<4, 0<<4,80<<4);     
-            break;
-            case 8:
-                // Mostly blue
-                set_color(color1, 255<<4, 100<<4, 80<<4);
-                set_color(color2, 0<<4,20<<4, 0<<4, 0<<4, 0<<4,100<<4);      
-            break;
-            case 9:
-                //BLACK BACKGROUND BLUE flashes
-                set_color(color1, 0<<4, 0<<4, 255<<4);
-                set_color(color2, 0<<4,0<<4, 0<<4,0<<4, 0<<4,0<<4);
-            break;
-            case 10:
-            // Introduce green to slide towards cyan - yellow palette
-                set_color(color1, 255<<4, 100<<4, 80<<4);
-                set_color(color2, 0<<4,10<<4, 0<<4,10<<4, 0<<4,100<<4);  
-            break;
-            case 11:
-                // Sodium Flashes
-                set_color(color1, 255<<4, 30<<4, 0<<4);
-                set_color(color2, 15<<4,50<<4, 0<<4,5<<4, 0<<4,0<<4);
-            break;
-            case 12:
-                //BLACK BACKGROUND with WHITE FLASHES
-                set_color(color1, 255<<4, 100<<4, 80<<4);
-                set_color(color2, 0<<4,0<<4, 0<<4,0<<4, 0<<4,0<<4);
-            break;
-            }
-
-        }
-        else{
-            change_animation=false;
-        }
-        
-        if (sampler.state_changed){
-            if (sampler.state == 1){
-            flash = true;
-
-            // TODO : Move to music module --> DECOUPLING between module is key
-            sampler.beat_tracking_start = millis();
-            }
-            else{
-            flash = false; //flash only if raw_beat tracking is OK
-            }
-        }
-        
-        if (sampler.state == BEAT_TRACKING && (millis()-sampler.beat_tracking_start) > MAX_CONT_FLASH){ // --> do not flash for more than 120s (eye confort)
-            flash = false;
-        }
-        
-        if (sampler.state == BAD_SIGNAL){
-            set_color(color1, 255<<4,0<<4,0<<4);
-            flash_master_BS(sampler.volume);
-        }else{
-            flash_master(sampler.new_beat, sampler.last_new_beat, flash, 60);
-        }
 
         debug();
 
@@ -224,26 +120,27 @@ int main(){
     cout << "sample Max/Min : " << sampler.deb_max << "/" << sampler.deb_min << '\n';
     cout << "Clip : " << sampler.clip << '\n';
     cout << "Beat : " << string(sampler.raw_beat, '!')  << '\n';
-    cout << '\n';
-    cout << "//// ANIMATOR /////" << '\n';
-    cout << "State Machine : ";
-    switch(sampler.state){
-        case 1:
-            cout << "BEAT TRACKING" << '\n';
-        break;
-        case 2:
-            cout << "BREAK" << '\n';
-        break;
-        case 3:
-            cout << "BAD SIGNAL" << '\n';
-        break;
-    }
-    cout << '\n';
-    cout << "//// DMX CHANNELS /////" << '\n';// << endl;
-    
+    cout << "State: " << sampler.state  << '\n';
 
-    cout << "fps : " << 1.0/frame.loop_duration_ms*1000 << "Hz\n";
-    cout << "Elapsed time : " << setprecision(2) << millis()/1000.0 << "s" << endl;
+    #ifdef FAKEMUSIC
+    cout << "Next beat : " << (sampler.t_next_beat_ms - millis())/1000.0  << "s\n";
+    cout << "Next break : " << (sampler.t_next_break_ms - millis())/1000.0  << "s\n";
+    cout << "Next drop : " << (sampler.t_next_drop_ms - millis())/1000.0  << "s\n";
+    #endif 
+    
+    
+    cout << '\n' << "//// ANIMATOR /////" << '\n';
+    cout << "Animation : " << animator.animation_i <<'\n';
+    cout << "Flash : " << animator.flash << '\n';
+    cout << "Last change " << (frame.t_current_ms - animator.t_last_change_ms)/1000 << "s\n";
+
+    cout << "\n//// DMX CHANNELS /////" << '\n';
+
+    cout << "\n//// GENERAL /////" << '\n';
+    cout << "FPS : " << 1.0/frame.loop_duration_ms*1000.0 << "Hz\n";
+    cout << "Elapsed time : " << millis()/1000.0 << " s\n";
+
+    cout << "R/G/B : " << animator.rval << " / " << animator.gval << " / " << animator.bval << endl;
    /*
     for (int i=0; i<SAMPLE_SIZE; i++){
       int def_width = cout.width(4);
