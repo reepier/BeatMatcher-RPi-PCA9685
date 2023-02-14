@@ -18,6 +18,7 @@
 #define MCP3008_MAX 1023
 #define MCP3008_MIN 0
 #define MCP_CHAN 5
+#define CLIP_MARGIN 80
 
 // thresholds
 #define THD_toBK 45     // Volume Threshold to go from state X to BREAK  mode
@@ -31,41 +32,33 @@
 #define AMPL 1
 
 enum states{
-    BEAT   = 1,    // volume is high and beat is clear
-    BREAK           = 2,    // volume is low (indicates a break)
-    BAD_SIGNAL      = 3     // volume is high but the beat is not perceptible
+    BEAT        = 1,    // volume is high and beat is clear
+    BREAK       = 2,    // volume is low (indicates a break)
+    BAD_SIGNAL  = 3     // volume is high but the beat is not perceptible
 };
 
 class SoundAnalyzer{
 
     MCP3008Lib::MCP3008 adc;    // MCP3008 object
-    // record storage
-    // private :   double record_real[SAMPLE_SIZE];
-    // private :   double record_imag[SAMPLE_SIZE];
-    // FFTW structures
-    public : fftw_complex *signal;
+
+    // FFTW lib structures
+    public : fftw_complex *fft_signal;
     private : fftw_complex *fft_out;
-    private : fftw_plan my_plan;
+    private : fftw_plan fft_plan;
 
     // FFT results storage structure
-    public  : float spectrum[SAMPLE_SIZE][2];    // stores AMPL x FREQ array;
+    public  : float sample_spectrum[SAMPLE_SIZE][2];    // stores AMPL x FREQ array;
 
-    public :    bool clip; // true if record() detects ADC saturation
+    public :    bool clipping; // true if record() detects ADC saturation
     public :    int volume;
-    // FFT library
-    // private :   arduinoFFT FFT = arduinoFFT();
-    // phrase storage
-        //private :   int v_memory[VOL_BUFF_SIZE];
-        //private :   int v_memory_sorted[VOL_BUFF_SIZE];
-    std::vector<int> v_memory;
-    std::vector<int> v_memory_sorted;
+    
+    public :    std::vector<int> v_memory;          // time serie of the measured volume
+    public :    std::vector<int> v_memory_sorted;   // sorted serie of the measured volume
 
     // phrase analysis variables
-    private :   int i_record = 0;                   // number of volume samples recorded
-    private :   bool tab_is_full=false;
-    public :    bool enable_analysis;
-    public :    float v_max, v_mean, v_quarter[3], v_95, v_XX;
-    public :    float ratio_95_q1, ratio_95_q2, ratio_95_q3;    // TODO replace each of these var with a fcn that comptes them
+    private :   int cpt = 0;                        // number of samples recorded
+    // public :    float v_max, v_mean, v_quarter[3], v_95, v_XX;
+    // public :    float ratio_95_q1, ratio_95_q2, ratio_95_q3;    // TODO replace each of these var with a fcn that comptes them
 
     // Beat tracking variables
     public :    float beat_threshold = 60;
@@ -75,7 +68,7 @@ class SoundAnalyzer{
     public :    unsigned long t_beat_tracking_start = 0;
 
     // state machine variables
-    private :   int BS_cpt = 0, BT_cpt = 0;
+    private :   int BS_buff = 0, BT_buff = 0;     // counters used to filter out transents in states estimation
     public :    states state = BEAT, previous_state = BEAT;
     public :    bool state_changed = false;    
 
@@ -85,14 +78,23 @@ class SoundAnalyzer{
     public :    void record();          
     public :    void process_record();
 
+    // statistical results
+    public :    float volume_percentile(int);
+    public :    float volume_ratio(int, int);
+
     // hidden functions (called by the main functions)
-    private :   void _copy_memory();
-    private :   void _compute_stats();
+    // private :   void _copy_memory();
+    // private :   void _compute_stats();
     private :   void _update_beat_threshold();
     private :   void _update_state();
     private :   void _remove_DC_value();
     private :   void _compute_FFT();
     private :   void _sort_memory();
+    private :   bool _memory_overflow();
+    private :   bool _memory_full();
+    private :   bool _condition_for_analyis();
+
+    private :   void _switch_to_state(states);
 
     // fake analysis function (for animation developpement purpose)
     public :    void fake_analysis(unsigned long); 

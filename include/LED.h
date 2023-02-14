@@ -24,7 +24,7 @@
 #define LEDGreen  14
 #define LEDBlue   13
 
-// extern int color1[3];
+// extern int flash_color[3];
 // extern int color2[6];
 // extern int color3[3];
 

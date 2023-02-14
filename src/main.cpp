@@ -10,18 +10,6 @@
 #include <wiringPi.h>
 
 using namespace std;
-
-// int mainloop_duration_ms = 30;
-
-//TODO move to animator class/mosule
-// int animation_i = 2;    // indice of the animation to run 
-//TODO move to animator class/mosule
-// Timer variables
-// unsigned long last_animation_change_ms = millis();
-//TODO move to animator class/mosule
-// Flags
-// bool flash = true;
-// bool change_animation = true;
  
 void initialize() {
     
@@ -68,9 +56,6 @@ int main(){
 
     initialize();
     
-    //TODO Move to a LoopControl class 
-    //int t_previous_frame_ms = 0, t_current_frame_ms = millis(), t_next_frame_ms = 0;    //Timestamp in milliseconds
-
     while (true){
 
         frame.increment();
@@ -84,16 +69,6 @@ int main(){
         sampler.fake_analysis(frame.t_current_ms);
         #endif // !FAKEMUSIC
 
-
-        // TODO move all this code to an animator class/module
-        // --------------------------------------------------------------------------------------------------------
-        // --------------------------------------------------------------------------------------------------------
-        // ANIMATOR
-        // --------------------------------------------------------------------------------------------------------
-        // Animation selector
-        /* updates the current animation index (animation_i) whenever <state_changed> is TRUE.
-        * Animation_i is of type int, it has 255 possible values (excessive)
-        */
         animator.update(frame.t_current_ms, sampler);
 
         debug();
@@ -118,7 +93,7 @@ int main(){
     cout << "Threshold : " << sampler.beat_threshold << '\n';
     cout << "ratio V/T : " << (float)sampler.volume/sampler.beat_threshold << '\n';
     cout << "sample Max/Min : " << sampler.deb_max << "/" << sampler.deb_min << '\n';
-    cout << "Clip : " << sampler.clip << '\n';
+    cout << "Clip : " << sampler.clipping << '\n';
     cout << "Beat : " << string(sampler.raw_beat, '!')  << '\n';
     cout << "State: " << sampler.state  << '\n';
 
@@ -140,24 +115,5 @@ int main(){
     cout << "FPS : " << 1.0/frame.loop_duration_ms*1000.0 << "Hz\n";
     cout << "Elapsed time : " << millis()/1000.0 << " s\n";
 
-    cout << "R/G/B : " << animator.rval << " / " << animator.gval << " / " << animator.bval << endl;
-   /*
-    for (int i=0; i<SAMPLE_SIZE; i++){
-      int def_width = cout.width(4);
-      cout << (int)sampler.signal[i][REAL] << " ";
-    }
-    cout << endl;
-    */
-      
-     //cout << flush;
-
-
+    cout << "R/G/B : " << animator.rval << " / " << animator.Gval << " / " << animator.Bval << endl;
 }
-
-
-
-
-/* TODO BETTER
-  - Figure out how Pi GPIO works (library, wiring, etc.) to rewrite state_display().
-    OR debug() via console (more appropriate for now) 
-*/

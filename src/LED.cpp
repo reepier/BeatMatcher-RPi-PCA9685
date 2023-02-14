@@ -31,8 +31,6 @@ void LED_init(){
     animator.reset_period();
 }
 
-
-
 /** 
 * This function takes R G B values in and sends them to the LED controler via I2C
 * r : 12 bits red intensity value (0-4095)
@@ -41,8 +39,8 @@ void LED_init(){
 */
 void rgb_color(int r, int g, int b){
   animator.rval = r;
-  animator.gval = g;
-  animator.bval = b;
+  animator.Gval = g;
+  animator.Bval = b;
   // Send frame to the PCA9685 module  
   setOffVals[LEDRed] = r;
   setOffVals[LEDGreen] = g;
