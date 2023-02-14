@@ -161,38 +161,6 @@ void SoundAnalyzer::_update_beat_threshold(){
         }
 }
 
-// void SoundAnalyzer::_copy_memory(){
-//     // for (int i=0;i<VOL_BUFF_SIZE;i++)
-//     //     v_memory_sorted[i] = v_memory[i];
-//     v_memory_sorted = v_memory;
-// }
-
-// void SoundAnalyzer::_compute_stats(){
-//   unsigned long sum=0;
-//   for (int i=0; i<VOL_BUFF_SIZE; i++){
-//     sum = sum + v_memory_sorted[i];
-//   }
-//   v_mean = sum/VOL_BUFF_SIZE;
-  
-//   v_max = v_memory_sorted[VOL_BUFF_SIZE-1];
-//   v_quarter[0] = v_memory_sorted[VOL_BUFF_SIZE/4];
-//   v_quarter[1] = v_memory_sorted[VOL_BUFF_SIZE/2];
-//   v_quarter[2] = v_memory_sorted[3*VOL_BUFF_SIZE/4];
-//   v_95 = v_memory_sorted[95*VOL_BUFF_SIZE/100];
-  
-//   v_XX = v_memory_sorted[90*VOL_BUFF_SIZE/100];
-  
-//   if (v_quarter[0]>0) {ratio_95_q1 = (float)v_95/v_quarter[0];}
-//   else {ratio_95_q1 = 1;}
-  
-//   if (v_quarter[1]>0){ratio_95_q2 = (float)v_95/v_quarter[1];}
-//   else {ratio_95_q2 = 1;}
-  
-//   if (v_quarter[2]>0){ratio_95_q3 = (float)v_95/v_quarter[2];}
-//   else {ratio_95_q3 = 1;}
-
-// }
-
 /**Function that returns the volume value for the given percentile
  * @param percentile : integer from 0-100 (%)
  * @return 
@@ -286,7 +254,7 @@ void SoundAnalyzer::_switch_to_state(states s){
 
 #ifdef FAKEMUSIC
 
-#define BPM 130          // BPM
+#define BPM 110          // BPM
 #define BREAKDuration 8  // beats
 #define DROPDuration  16 // beats
 
