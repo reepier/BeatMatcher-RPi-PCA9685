@@ -1,5 +1,4 @@
-#ifndef LED_H
-#define LED_H
+#pragma once
 
 #include <PCA9685.h>
 #include <string>
@@ -73,5 +72,3 @@ class LEDFixture{
 };
 
 extern LEDFixture led;
-
-#endif // !LED_H

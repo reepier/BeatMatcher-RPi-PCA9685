@@ -1,5 +1,6 @@
-#ifndef ANIMATOR_H
-#define ANIMATOR_H
+#pragma once
+
+#include <wiringPi.h>
 
 #include "music.h"
 #include "LED.h"
@@ -34,23 +35,12 @@ class AnimationManager{
     // float coef = 0;
     // unsigned long periods[6];    // // random frequencis (periods) for color sine wave: {0 Rf1, 1 Rf2, 2 Gf1, 3 Gf2, 4 Bf1, 5 Bf2}
 
-    const int n_animation = 10;     //total number of animations available
     int animation_i = 0;            //index for the  animation being displayed currently
 
-    unsigned long t_last_change_ms;   //timestamp of last switch between aniamtions
+    unsigned long t_last_change_ms = millis();   //timestamp of last switch between aniamtions
 
 
     void update(unsigned int t_current, const SoundAnalyzer &music);
-
-
-    // void reset_period();    // todo move to LEDanimtion::init()
-    void set_color(int rgb[], int c0=0, int c1=0, int c2=0, int c3=0, int c4=0, int c5=0);  //todo move to LEDFixture::ainmation data structure
-    void reser_period();
-    void flash_master(unsigned long, unsigned long, bool, int);
-    void flash_master_BS(int);
-
 };
 
 extern AnimationManager animator;
-
-#endif // !ANIMATOR_H

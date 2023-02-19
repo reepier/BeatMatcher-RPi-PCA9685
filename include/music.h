@@ -1,9 +1,9 @@
-#ifndef MUSIC_H
-#define MUSIC_H
+#pragma once
 
 
 #include <fftw3.h>
 #include <vector>
+#include <wiringPi.h>
 
 #include "debug.h"
 #include <MCP3008/MCP3008.h>
@@ -65,7 +65,7 @@ class SoundAnalyzer{
     public :    bool raw_beat=false, new_beat=false, filtered_beat=false;
     public :    unsigned long t_last_beat = 0;         // Stores timestamp of the last raw_beat=true event
     public :    unsigned long t_last_new_beat = 0;
-    public :    unsigned long t_beat_tracking_start = 0;
+    public :    unsigned long t_beat_tracking_start = millis();
 
     // state machine variables
     private :   int BS_buff = 0, BT_buff = 0;     // counters used to filter out transents in states estimation
@@ -110,5 +110,3 @@ class SoundAnalyzer{
 };
 
 extern SoundAnalyzer sampler;
-
-#endif // !MUSIC_H

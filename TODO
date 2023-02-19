@@ -3,24 +3,22 @@ CLEAN and STRUCTURE the code using as much good practices as possible:
 
     - OK give explicit & long name to all variables
 
-    - construct classes whenever possible 
+    - OK construct classes whenever possible 
         --> NO FUNCTIONS should be outside a class
         --> NO group of related Variables
 
 
-    - use WiringPi to deal with the arduino shit (delay(), millis(), etc.)
+    - OK use WiringPi to deal with the arduino shit (delay(), millis(), etc.)
 
     - identify & isolate every paramter (threshold values, settings, etc.) in a dedicated module
 
-    - isolate & wrap all the animation related stuff (animation count, choice, setting, etc.) in a dedicated class & module
-
-    - create a class that stores (& computes) the LEDcontroler stuff (channel intensity...)
+    - OK isolate & wrap all the animation related stuff (animation count, choice, setting, etc.) in a dedicated class & module
+    
+    - OK create a class that stores (& computes) the LEDcontroler stuff (channel intensity...)
 
     - use chrono::duration rather than ints for timestamps
     - use a t_ d_ naming convention for timestamp vs duration
-    - remove object extern declaration from headers .
-        --> reference extern object only where necessary (main)
-    - replace include guards with pragma once
+    - OK replace include guards with pragma once
 
 ADD A CONFIGURATION CAPABILITY based on the following principles :
     Read a csv containing the config (define a format & write a parser function)

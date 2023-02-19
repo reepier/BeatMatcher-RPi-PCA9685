@@ -99,7 +99,7 @@ int main(){
     
     
     cout << '\n' << "//// ANIMATOR /////" << '\n';
-    cout << "Animation : " << animator.animation_i <<'\n';
+    cout << "Animation : " << animator.animation_i << " -> " << led.active_animation->description << '\n';
     cout << "Flash : " << animator.flash << '\n';
     cout << "Last change " << (frame.t_current_ms - animator.t_last_change_ms)/1000 << "s\n";
 

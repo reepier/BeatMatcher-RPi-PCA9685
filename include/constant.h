@@ -1,5 +1,4 @@
-#ifndef CONSTANT_H
-#define CONSTANT_H
+#pragma once
 
 
 
@@ -11,8 +10,3 @@
 #define     MAX_CONT_FLASH      100000          // 120000
 #define     TEMPO_ANIM_CHANGE   10000          // 240000
 #define     MASTERDIMMER        1.0             //fraction --> must be decimal (literal float) !!!
-
-
-// HEADER-HEADER-HEADER-HEADER-HEADER-HEADER-HEADER-HEADER-HEADER-HEADER-
-
-#endif // !CONSTANT_H
