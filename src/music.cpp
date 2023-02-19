@@ -27,7 +27,6 @@ SoundAnalyzer sampler;
 void SoundAnalyzer::update(){
     this->record();
     this->process_record();
-
 }
 
 void SoundAnalyzer::record(){
@@ -317,9 +316,6 @@ void SoundAnalyzer::fake_analysis(unsigned long t){
         raw_beat = false;
         new_beat = false;
     }
-
-    // delay(30);
-
 }
 
 #endif // FAKEMUSIC

@@ -1,13 +1,14 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <wiringPi.h>
+
 #include "debug.h"
 #include "constant.h"
 #include "LED.h"
 #include "music.h"
 #include "animator.h"
 #include "sysfcn.h"
-#include <wiringPi.h>
 
 using namespace std;
  
@@ -17,7 +18,7 @@ void initialize() {
 
     sampler.init();    // THEN initialize Music lib
     
-    LED_init();         // initialize OLA & shit
+    led.LED_init();         // initialize OLA & shit
 }
 
 
@@ -30,7 +31,7 @@ class LoopControler{
     unsigned long t_next_ms = 0;
     unsigned long loop_duration_ms = 0;
 
-    void increment(){
+    void start_new_frame(){
         t_previous_ms = t_current_ms;
         t_current_ms = millis();
         t_next_ms = t_current_ms + 1000/FRATE;
@@ -42,14 +43,11 @@ class LoopControler{
         if (first_loop) first_loop = false;
         cpt++;
     }
-
-    
 };
 
 LoopControler frame;
 
 void debug();   // declaration of the display fucntion, definition at the end of thi smodule 
-
 
 int main(){
 
@@ -57,27 +55,23 @@ int main(){
     initialize();
     
     while (true){
-
-        frame.increment();
+        // Update general counters and timers
+        frame.start_new_frame();
         
-        // Use internal Beat Detector Program (default)
-        
-        // Music SAMPLING          
+        // Record and process music sample         
         #ifndef FAKEMUSIC
         sampler.update();
         #else
         sampler.fake_analysis(frame.t_current_ms);
         #endif // !FAKEMUSIC
 
+        
         animator.update(frame.t_current_ms, sampler);
 
         debug();
 
         frame.wait_for_next();
-
     }
-
-  
 }
 
 // ---------------------------------------------------
@@ -109,11 +103,11 @@ int main(){
     cout << "Flash : " << animator.flash << '\n';
     cout << "Last change " << (frame.t_current_ms - animator.t_last_change_ms)/1000 << "s\n";
 
-    cout << "\n//// DMX CHANNELS /////" << '\n';
+    cout << "\n//// OUTPUT /////" << '\n';
+    cout << "R/G/B : " << led.RGB[R] << " / " << led.RGB[G] << " / " << led.RGB[B] << endl;
 
     cout << "\n//// GENERAL /////" << '\n';
     cout << "FPS : " << 1.0/frame.loop_duration_ms*1000.0 << "Hz\n";
     cout << "Elapsed time : " << millis()/1000.0 << " s\n";
 
-    cout << "R/G/B : " << animator.rval << " / " << animator.Gval << " / " << animator.Bval << endl;
 }
