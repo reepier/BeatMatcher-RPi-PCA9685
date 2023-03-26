@@ -49,13 +49,10 @@ void SoundAnalyzer::record(){
     }
 }
 
-
 // TODO functionalize the content of this function ! There shoumd only remain function calls 
 void SoundAnalyzer::process_record(){
     _remove_DC_value();
-    //FFT.Windowing(value_r, samples, FFT_WIN_TYP_HAMMING, FFT_FORWARD);
     _compute_FFT();
-    //FFT.ComplexToMagnitude(record_real, record_imag, SAMPLE_SIZE);  --> incuded into computeFFT
       
     // extract current volume (measure in FFT frequency band "FREQ_BAND")
     volume = sample_spectrum[FREQ_BAND][AMPL]*2/SAMPLE_SIZE;
@@ -176,6 +173,22 @@ float SoundAnalyzer::volume_percentile(int percentile){
 /**Function that computes the ratio between 2 volume samples chosen from their percentile*/
 float SoundAnalyzer::volume_ratio(int num_percentile, int denom_percentile){
     return volume_percentile(num_percentile) / volume_percentile(denom_percentile);
+}
+/**Funciton that extract the maximum volume reached within the last <period> ms*/
+int SoundAnalyzer::recent_maximum(int period){
+    static const float max = VOL_BUFF_SIZE*1000.0/FRATE;    // memory is finit in size
+    static const float min = 0;                             // cannot accept negative duration
+    if (period > max ) period = max;                        
+    else if (period < min) period = min;
+
+    int i_min = v_memory.size() - period / FRATE * 1000;    
+    if (i_min < 0) i_min = 0;                                           // cannot hav negative indexes
+    else if (i_min > (v_memory.size()-1)) i_min = v_memory.size()-1;    // cannot read past the last vector element
+
+    int vmax = 0;
+    for (int i=v_memory.size()-1; i>= i_min; i--){
+        if (v_memory[i] > vmax) vmax = v_memory[i];
+    }
 }
 
 void SoundAnalyzer::_remove_DC_value(){

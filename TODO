@@ -1,14 +1,5 @@
 CLEAN and STRUCTURE the code using as much good practices as possible:
-    - OK enumerate everything that can be enumerated (variables, states, etc.)
 
-    - OK give explicit & long name to all variables
-
-    - OK construct classes whenever possible 
-        --> NO FUNCTIONS should be outside a class
-        --> NO group of related Variables
-
-
-    - OK use WiringPi to deal with the arduino shit (delay(), millis(), etc.)
 
     - identify & isolate every paramter (threshold values, settings, etc.) in a dedicated module
 
@@ -16,9 +7,13 @@ CLEAN and STRUCTURE the code using as much good practices as possible:
     
     - OK create a class that stores (& computes) the LEDcontroler stuff (channel intensity...)
 
-    - use chrono::duration rather than ints for timestamps
+    - use chrono::duration rather than unsigned long for timestamps & time management
     - use a t_ d_ naming convention for timestamp vs duration
+
     - OK replace include guards with pragma once
+
+    - !!! Ncurses for console output !!!!
+
 
 ADD A CONFIGURATION CAPABILITY based on the following principles :
     Read a csv containing the config (define a format & write a parser function)

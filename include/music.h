@@ -57,9 +57,7 @@ class SoundAnalyzer{
 
     // phrase analysis variables
     private :   int cpt = 0;                        // number of samples recorded
-    // public :    float v_max, v_mean, v_quarter[3], v_95, v_XX;
-    // public :    float ratio_95_q1, ratio_95_q2, ratio_95_q3;    // TODO replace each of these var with a fcn that comptes them
-
+    
     // Beat tracking variables
     public :    float beat_threshold = 60;
     public :    bool raw_beat=false, new_beat=false, filtered_beat=false;
@@ -81,6 +79,7 @@ class SoundAnalyzer{
     // statistical results
     public :    float volume_percentile(int);
     public :    float volume_ratio(int, int);
+    public :    int recent_maximum(int);
 
     // hidden functions (called by the main functions)
     // private :   void _copy_memory();

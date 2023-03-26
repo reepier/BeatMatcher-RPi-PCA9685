@@ -8,12 +8,13 @@
 			"args": [
 				"-fdiagnostics-color=always",
 				"-g",
-				"${file}",
+				"${workspaceFolder}/src/main.cpp",
 				"${workspaceFolder}/src/LED.cpp",
 				"${workspaceFolder}/src/sysfcn.cpp",
 				"${workspaceFolder}/src/music.cpp",
 				"${workspaceFolder}/src/MCP3008.cpp",
 				"${workspaceFolder}/src/animator.cpp",
+                "${workspaceFolder}/src/debug.cpp",
 				"-I${workspaceFolder}/include",
                 "-I/usr/include",
 				"-o",
@@ -23,7 +24,8 @@
 				"-lfftw3",
 				"-lola",
 				"-lolacommon",
-                "-lwiringPi"
+                "-lwiringPi",
+                "-lcurses"
 			],
 			"options": {
 				"cwd": "${fileDirname}"

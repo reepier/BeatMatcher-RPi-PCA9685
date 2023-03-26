@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <fstream>
 
 #include <ola/DmxBuffer.h>
 #include <ola/Logging.h>
@@ -12,6 +13,8 @@
 #include "animator.h"
 
 #include <PCA9685.h>
+
+
 // ------------------------------------------------------------
 // ANIMATION CLASS
 // ------------------------------------------------------------
@@ -34,6 +37,7 @@ LEDAnimation::LEDAnimation(int flash_r, int flash_g, int flash_b, int back_rmin,
 
 // Animation initializer
 void LEDAnimation::init(){
+
     periods_ms[0] = 1000*rand_min_max(MIN_T, MAX_T);
     periods_ms[1] = 1000*rand_min_max(MIN_T, MAX_T);
     periods_ms[2] = 1000*rand_min_max(MIN_T, MAX_T);
@@ -62,7 +66,7 @@ std::vector<int> LEDAnimation::new_frame(unsigned long t, unsigned long t_last_b
     backgd_color[B] = (backgd_RGB_minmax[4]+backgd_RGB_minmax[5])/2 
                         + (backgd_RGB_minmax[5]-backgd_RGB_minmax[4])/4 * (sin(2*3.14*t/periods_ms[4])-sin(2*3.14*t/periods_ms[5]));          
 
-    float coef = exp(-(float)(t-t_last_beat_ms)/fade_rate);
+    float coef = exp(-(double)(t-t_last_beat_ms)/fade_rate);
     if (flash){
         frame[R] = backgd_color[R] + coef*(flash_RGB[R]-backgd_color[R]); 
         frame[G] = backgd_color[G] + coef*(flash_RGB[G]-backgd_color[G]); 
@@ -92,15 +96,21 @@ LEDAnimation* LEDAnimation::get_ptr(){
 // LED FIXTURE CLASS
 // ------------------------------------------------------------
 
+std::streambuf* cout_sbuf; // save original sbuf
+std::ofstream   fout("/dev/null");
+
 // Fixture initalizer
 void LEDFixture::LED_init(){
+    cout_sbuf = std::cout.rdbuf(); // save original sbuf
 
     // intialize hardware output
     _PCA9685_DEBUG = 0;
     _PCA9685_TEST = 0;
 
+    std::cout.rdbuf(fout.rdbuf()); // redirect 'cout' to a 'fout'
     fd = PCA9685_openI2C(1, addr);
     PCA9685_initPWM(fd, addr, _PCA9685_MAXFREQ);
+    std::cout.rdbuf(cout_sbuf); // restore the original stream buffer
 
     // todo move to animation::init();
     // animator.reset_period();
@@ -121,23 +131,19 @@ void LEDFixture::LED_init(){
 
 
 /** 
-* This function takes R G B values in and sends them to the LED controler via I2C
-* r : 12 bits red intensity value (0-4095)
-* g : 12 bits green intensity value (0-4095)
-* b : 12 bits red intensity value (0-4095)
+* This function sends RGB values to the LED controler via I2C
 */
 void LEDFixture::send(){
-    // animator.rval = r;
-    // animator.Gval = g;
-    // animator.Bval = b;
-
     // Send frame to the PCA9685 module
     // Take into account the MASTER DIMMER value !! --> as late as possible, right before data is sent
     setOffVals[LEDRed] = RGB[R] * MASTER_DIMMER/255.0;
     setOffVals[LEDGreen] = RGB[G] * MASTER_DIMMER/255.0;
     setOffVals[LEDBlue] = RGB[B] * MASTER_DIMMER/255.0;
 
+    std::cout.rdbuf(fout.rdbuf()); // redirect 'cout' to a 'fout'
     PCA9685_setPWMVals(fd, addr, setOnVals, setOffVals);
+    std::cout.rdbuf(cout_sbuf); // restore the original stream buffer
+    
 }
 
 LEDFixture led;
