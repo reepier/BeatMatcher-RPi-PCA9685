@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+#include "animator.h"
+
 
 #define LEDCh0      1
 
@@ -11,11 +13,6 @@
 #define LEDRed    15
 #define LEDGreen  14
 #define LEDBlue   13
-
-
-
-
-
 
 /**class prototype*/
 class LEDAnimation : public BaseAnimation{

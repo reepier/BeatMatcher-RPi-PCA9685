@@ -1,9 +1,10 @@
 #pragma once
 
 #include <wiringPi.h>
+#include <string>
 
 #include "music.h"
-#include "LED.h"
+// #include "LED.h"
 
 // background sinewave periods parameters
 #define MAX_T 30
@@ -32,13 +33,14 @@ class AnimationManager{
 };
 
 // Generic (core) description of an animation object
-abstract class BaseAnimation{
+class BaseAnimation{
+  public :
     std::string description;
     int id;
     unsigned long t_animation_start_ms;
 };
 
-abstract class BaseFixture{
+class BaseFixture{
 
 };
 

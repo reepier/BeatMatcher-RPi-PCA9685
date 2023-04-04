@@ -24,6 +24,14 @@
 
 SoundAnalyzer sampler;
 
+void SoundAnalyzer::init(){
+    // initializa connection with MCP3008 ADC
+    adc.connect();
+    // allocate memory fot the fft_signal & fft out storage structures (arrays of doubles)
+    fft_signal = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*SAMPLE_SIZE);
+    fft_out = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*SAMPLE_SIZE);
+}
+
 void SoundAnalyzer::update(){
     this->record();
     this->process_record();
@@ -213,15 +221,6 @@ void SoundAnalyzer::_compute_FFT(){
       sample_spectrum[i][FREQ] = i * SAMPLING_FREQ/SAMPLE_SIZE;
       sample_spectrum[i][AMPL] = (pow(fft_out[i][REAL], 2) + pow(fft_out[i][IMAG],2)) * 7E-5; // compute magnitude + normalize (empirical)
   }  
-}
-
-void SoundAnalyzer::init(){
-    // initializa connection with MCP3008 ADC
-    adc.connect();
-
-    // allocate memory fot the fft_signal & fft out storage structures (arrays of doubles)
-    fft_signal = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*SAMPLE_SIZE);
-    fft_out = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*SAMPLE_SIZE);
 }
 
 void SoundAnalyzer::_sort_memory(){

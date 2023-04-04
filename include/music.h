@@ -6,7 +6,7 @@
 #include <wiringPi.h>
 
 #include "debug.h"
-#include <MCP3008/MCP3008.h>
+#include "MCP3008/MCP3008.h"
 
 #define SAMPLE_SIZE 128      // record length (number of individual samples)
 #define SAMPLING_FREQ 8000     // sampling frequency
