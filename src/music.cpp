@@ -189,6 +189,7 @@ int SoundAnalyzer::recent_maximum(int period){
     for (int i=v_memory.size()-1; i>= i_min; i--){
         if (v_memory[i] > vmax) vmax = v_memory[i];
     }
+    return vmax;
 }
 
 void SoundAnalyzer::_remove_DC_value(){

@@ -18,14 +18,8 @@
 
 
 /**class prototype*/
-class LEDAnimation{
+class LEDAnimation : public BaseAnimation{
   public: 
-
-    // common to all animation
-    std::string description;
-    int id;
-    unsigned long t_animation_start_ms;
-
     // specific args and parameters
     int flash_RGB[3] = {0,0,0};                 // color components of the flash
     int backgd_RGB_minmax[6] = {0,0,0,0,0,0};           // min/max components for the background oscilltions {0 Rmin, 1 Rmax, 2 Gmin, 3 Gmax, 4 Bmin, 5 Bmax}
@@ -45,7 +39,7 @@ class LEDAnimation{
 };
 
 
-class LEDFixture{
+class LEDFixture : public BaseFixture{
   public :
     // Channels :
     uint8_t MASTER_DIMMER = 255;    // Master Dimmer from 0-255
@@ -63,8 +57,8 @@ class LEDFixture{
 
 
     // Animations
-    LEDAnimation * active_animation = nullptr;  // points towards the animation to be exectued
-    std::vector<LEDAnimation> animation;                                // stores the parameters or every (manually) pre-defined animation 
+    LEDAnimation * active_animation = nullptr;  // points towards the animation currently running
+    std::vector<LEDAnimation> animation;        // stores the parameters or every (manually) pre-defined animation 
 
     void LED_init();
     void send();

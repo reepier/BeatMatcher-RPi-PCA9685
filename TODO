@@ -1,18 +1,9 @@
 CLEAN and STRUCTURE the code using as much good practices as possible:
-
-
     - identify & isolate every paramter (threshold values, settings, etc.) in a dedicated module
-
-    - OK isolate & wrap all the animation related stuff (animation count, choice, setting, etc.) in a dedicated class & module
-    
-    - OK create a class that stores (& computes) the LEDcontroler stuff (channel intensity...)
-
     - use chrono::duration rather than unsigned long for timestamps & time management
     - use a t_ d_ naming convention for timestamp vs duration
 
-    - OK replace include guards with pragma once
-
-    - !!! Ncurses for console output !!!!
+    - IN PROGRESS !!! Ncurses for console output !!!!
 
 
 ADD A CONFIGURATION CAPABILITY based on the following principles :
@@ -20,6 +11,10 @@ ADD A CONFIGURATION CAPABILITY based on the following principles :
     Extract the values
     Extract animations
     Run them
+
+ADD command line input argumetns :
+    - to enable/disable FAKEANALYSIS
+        - when enabled, to set BPM ?
 
 
 

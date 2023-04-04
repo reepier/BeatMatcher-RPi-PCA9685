@@ -2,6 +2,9 @@
 #include <ncurses.h>
 #include <sstream>
 #include <cmath>
+#include <algorithm>
+#include <string>
+#include <charconv>
 
 #include "debug.h"
 #include "animator.h"
@@ -19,25 +22,94 @@ WINDOW *animw;
 WINDOW *outputw;
 WINDOW *generalw;
 
+#define WHITEred    3 // WHITE font / red background
+#define WHITEgreen  4
+#define WHITEblue   5
+#define WHITEblack  1
+#define BLACKwhite  2
+
+#define C1 11
+#define C2 74
+#define C3 80
+
+
+
 void init_display(){
     initscr();
     noecho();
     curs_set(0);
-    musicw = newwin(10, 100, 0,0);
-    animw = newwin(3,100,10,0);
-    outputw = newwin(3,100,20,0);
-    generalw = newwin(3,100,30,0);
+    musicw = newwin(10, 120, 0,0);
+    animw = newwin(3,120,10,0);
+    outputw = newwin(3,120,20,0);
+    generalw = newwin(3,120,30,0);
+
+    if (!has_colors()){
+        cout << "NO COLORS";
+        exit(1);
+    }
+    start_color();
+    init_pair(WHITEblack, COLOR_WHITE, COLOR_BLACK);
+    init_pair(BLACKwhite, COLOR_BLACK, COLOR_WHITE);
+    init_pair(WHITEred, COLOR_WHITE, COLOR_RED);
+    init_pair(WHITEgreen, COLOR_WHITE, COLOR_GREEN);
+    init_pair(WHITEblue, COLOR_WHITE, COLOR_BLUE);
 }
 
+void disp_music_window(){
+    
+    //initialize
+    curs_set(0);
+    werase(musicw);
+    box(musicw, ACS_VLINE, ACS_HLINE);
+    wattron(musicw, A_BOLD);
+    mvwprintw(musicw, 0,1, "MUSIC");
+    wattroff(musicw, A_BOLD);
 
-void display_curse(){
     ostringstream volbuf, thrbuf, maxminbuf, clipbuf, beatbuf, statebuf ,nbt, nbk, ndrop;
+    #define MAXVOL 400.0    //max volume value (approx.)   
+    #define MAXVOLPX 60     //number of pixel allocated to volume bar
 
-    volbuf << "Volume    : " << string((int)( pow(sampler.volume/200.0, 0.33)*60    ), 'o');
-    thrbuf << "Threshold : " << string((int)( pow(sampler.recent_maximum(1000)/200.0, 0.33)*60 -1 ), ' ') << '|';
+    // Volume
+    // double vol_unit = max(min(100/MAXVOL, 1.0),0.0);    //unitary volume value [0;1]
+    double vol_unit = max(min(sampler.volume/MAXVOL, 1.0),0.0);    //unitary volume value [0;1]
+    
+    int vol_px = pow(vol_unit, 0.5) * MAXVOLPX;
+    volbuf << string(vol_px, 'o');
+    
+    mvwprintw(musicw, 1,1, "Volume");
+    mvwprintw(musicw, 1,C1,"|");
+    mvwprintw(musicw, 1,C1 + 1, volbuf.str().c_str());
+    mvwprintw(musicw, 1,C2, "|");
+    mvwprintw(musicw, 1,C2+1, to_string(sampler.recent_maximum(1000)).c_str());
+    mvwprintw(musicw, 1,C3, "|");
+    
+    // Threshold
+    // double thr_unit = max(min(100/MAXVOL, 1.0),0.0);  //unitary threshold value [0;1]
+    double thr_unit = max(min(sampler.beat_threshold/MAXVOL, 1.0),0.0);  //unitary threshold value [0;1]
+    int thr_px = pow(thr_unit, 0.5) * MAXVOLPX;
+    thrbuf << "Threshold | " << string(thr_px-1, ' ') << '|' << string(MAXVOLPX-thr_px, ' ') << " | " << (int)sampler.beat_threshold;
+    mvwprintw(musicw, 2,1, "Threshold");
+    mvwprintw(musicw, 2,1, thrbuf.str().c_str());
+    mvwprintw(musicw, 1,80, "|");
+    mvwprintw(musicw, 2,80, "|");
+
+    mvwprintw(musicw, 1, 1 + + thr_px, "|");    //test
+
     maxminbuf << "Max/Min : " << sampler.deb_max << "/" << sampler.deb_min;
+    // mvwprintw(musicw, 3,1, maxminbuf.str().c_str());
+    
+    // CLIPPING warnig
     clipbuf << (sampler.clipping?"CLIP":"");
+    wattron(musicw, A_BOLD);
+    mvwprintw(musicw, 1,83, clipbuf.str().c_str());
+    wattroff(musicw, A_BOLD);
+
+    // BEAT signal 
     beatbuf << (sampler.raw_beat?"BEAT":"");
+    wattron(musicw, A_BOLD);
+    mvwprintw(musicw, 2,83, beatbuf.str().c_str());
+    wattroff(musicw, A_BOLD);
+
     switch(sampler.state){
         case BEAT :
             statebuf << "BEAT";
@@ -51,6 +123,9 @@ void display_curse(){
         default :
         break;
     }
+    mvwprintw(musicw, 4,1, statebuf.str().c_str());
+
+
     #ifdef FAKEMUSIC
         nbt     << "Nxt beat : " << (sampler.t_next_beat_ms - millis())/1000.0;
         nbk     << "Nxt break : " << (sampler.t_next_break_ms - millis())/1000.0  << "s\n";
@@ -59,25 +134,26 @@ void display_curse(){
     
 
     
-    werase(musicw);
-    box(musicw, ACS_VLINE, ACS_HLINE);
-    mvwprintw(musicw, 0,1, "MUSIC");
 
-    mvwprintw(musicw, 1,1, volbuf.str().c_str());
-    mvwprintw(musicw, 2,1, thrbuf.str().c_str());
-    mvwprintw(musicw, 3,1, maxminbuf.str().c_str());
-    mvwprintw(musicw, 4,1, beatbuf.str().c_str());
-    mvwprintw(musicw, 4,10, clipbuf.str().c_str());
-    mvwprintw(musicw, 5,1, statebuf.str().c_str());
+
+    
     #ifdef FAKEMUSIC
         mvwprintw(musicw, 6,1, nbt.str().c_str());
         mvwprintw(musicw, 6,21, nbk.str().c_str());
         mvwprintw(musicw, 6,41, ndrop.str().c_str());
     #endif
+    // mvwprintw(...
     wrefresh(musicw);
+}
 
+void display_curse(){
     
 
+    disp_music_window();
+    // disp_animatin_window();
+    // disp_output_window();
+    // disp_general_window();
+    
     werase(animw);
     box(animw, ACS_VLINE, ACS_HLINE);
     wrefresh(animw);

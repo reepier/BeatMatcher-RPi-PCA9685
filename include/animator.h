@@ -31,4 +31,15 @@ class AnimationManager{
     void update(unsigned int t_current, const SoundAnalyzer &music);
 };
 
+// Generic (core) description of an animation object
+abstract class BaseAnimation{
+    std::string description;
+    int id;
+    unsigned long t_animation_start_ms;
+};
+
+abstract class BaseFixture{
+
+};
+
 extern AnimationManager animator;
