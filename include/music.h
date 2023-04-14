@@ -72,9 +72,10 @@ class SoundAnalyzer{
 
     // Main functions (entry points)
     public :    void init();
-    public :    void update();
+    public :    void update(unsigned long);
     public :    void record();          
     public :    void process_record();
+    public:     void update_beats();
 
     // statistical results
     public :    float volume_percentile(int);
@@ -98,12 +99,16 @@ class SoundAnalyzer{
     // fake analysis function (for animation developpement purpose)
     public :    void fake_analysis(unsigned long); 
 
+    public:     void process_record_fake(unsigned long);
+    private :   void _update_beat_threshold_fake();
+    public:     void record_sample_fake();
+
     // debug intermediary variables
     public :    int deb_max, deb_min;
     
     #ifdef FAKEMUSIC
-    //fake beat
-    unsigned long t_next_break_ms, t_next_drop_ms, t_next_beat_ms;
+        //fake beat
+        unsigned long t_next_break_ms, t_next_drop_ms, t_next_beat_ms;
     #endif // DEBUG
     
 };

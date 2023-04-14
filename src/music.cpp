@@ -32,9 +32,17 @@ void SoundAnalyzer::init(){
     fft_out = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*SAMPLE_SIZE);
 }
 
-void SoundAnalyzer::update(){
-    this->record();
-    this->process_record();
+void SoundAnalyzer::update(unsigned long t){
+    #ifndef FAKEMUSIC
+        this->record();
+        this->process_record();
+    #else
+        sampler.process_record_fake(t);
+    #endif // FAKEMUSIC
+    
+    this->update_beats();
+    this->_update_state();
+    this->_update_beat_threshold();
 }
 
 void SoundAnalyzer::record(){
@@ -70,9 +78,15 @@ void SoundAnalyzer::process_record(){
     v_memory.push_back(volume);
     cpt ++;
     if(_memory_overflow()) v_memory.erase(v_memory.begin());    //when max size is reached, erase oldest values
-    
-    // check for raw_beat 
-    // Compare current level to threshold and control LED 
+
+    if (_condition_for_analyis()){
+        this->_sort_memory();  
+    }
+}
+
+void SoundAnalyzer::update_beats(){
+    // check for raw_beat
+    // Compare current level to threshold and control LED
     if (volume >= beat_threshold){
         if (!raw_beat){
             new_beat = true;
@@ -90,19 +104,11 @@ void SoundAnalyzer::process_record(){
         filtered_beat = false;
         new_beat = false;
     }
+}
 
     // activate phrase analyis enable flag every 32 samples (VOL_BUFF_SIZE/4) 
 
     // if phrase analysis enable flag is TRUE, analyze & compute statistics
-    if (_condition_for_analyis()){
-        this->_sort_memory();  
-        // this->_compute_stats();    // compute the statistics
-    }
-
-    // in any case, update system state
-    this->_update_state();
-    this->_update_beat_threshold();
-}
 
 void SoundAnalyzer::_update_state(){
     // update system state 
@@ -264,6 +270,10 @@ void SoundAnalyzer::_switch_to_state(states s){
 
 
 
+/**---------------------------------------------------------------
+ * FAKE FUNCTIONS
+   ---------------------------------------------------------------*/
+
 #ifdef FAKEMUSIC
 
 #define BPM 110          // BPM
@@ -274,6 +284,64 @@ const int beat_duration_ms = 60000/BPM;
 const int break_duration_ms = BREAKDuration * beat_duration_ms;
 const int drop_duration_ms = DROPDuration * beat_duration_ms;
 
+const int min_volume = 20, max_volume = 400;
+
+inline int fake_volume1(){
+    return min_volume + (max_volume-min_volume)*pow(((sin(2*M_PI*millis()/beat_duration_ms)+1)/2), 4);
+}
+inline int fake_volume2(){
+    return min_volume + 0.25*min_volume*sin(2*M_PI*millis()/1000);
+}
+
+void SoundAnalyzer::process_record_fake(unsigned long t){
+    // initialize
+    static bool init = true;
+    if (init){
+        t_beat_tracking_start = t;
+        t_next_drop_ms = t  + drop_duration_ms + break_duration_ms;
+        t_next_beat_ms = t;
+        t_next_break_ms = t + drop_duration_ms;
+        init = false;
+    }
+
+    static states pseudo_state = BEAT, previous_pseudo_state = pseudo_state;
+    switch(pseudo_state){
+        case BEAT:
+            if (t >= t_next_break_ms){
+                t_next_break_ms += (break_duration_ms + drop_duration_ms);
+                previous_pseudo_state = pseudo_state;
+                pseudo_state = BREAK; 
+            }
+        break;
+        case BREAK:
+            if (t >= t_next_drop_ms){
+                t_next_drop_ms += (drop_duration_ms + break_duration_ms);
+                previous_pseudo_state = pseudo_state;
+                pseudo_state = BEAT;
+            }
+        break;
+        default:
+        break;
+    }
+    // volume
+    switch(pseudo_state){
+        case BEAT:
+            volume = fake_volume1();
+        break;
+        case BREAK:
+            volume = fake_volume2();
+        break;
+    }
+
+    // v_memory
+    v_memory.push_back(volume);
+    cpt ++;
+    if(_memory_overflow()) v_memory.erase(v_memory.begin());    //when max size is reached, erase oldest values
+
+    if (_condition_for_analyis()){
+        this->_sort_memory();  
+    }
+}
 
 void SoundAnalyzer::fake_analysis(unsigned long t){
     // initialize

@@ -15,11 +15,14 @@ using namespace std;
 void initialize() {
     
     // sysfcn_init(); // initialize sysfcn lib FIRST
-
+    #ifdef DEBUG
+    cout << "Init. Sampler..." << endl;
     sampler.init();   // THEN initialize Music lib
+    #endif // DEBUG
     
+    cout << "Init. Leds..." << endl;
     led.LED_init();   // initialize OLA & shit
-
+    cout << "Init. Debug..." << endl;
     init_display();
 }
 
@@ -27,25 +30,32 @@ LoopControler frame;
 
 int main(){
 
-
+    // cout << "Initialization..." << endl;
     initialize();
     
     while (true){
+        // cout << "Start new frame..." << endl;
         // Update general counters and timers
         frame.start_new_frame();
         
-        // Record and process music sample         
-        #ifndef FAKEMUSIC
-        sampler.update();
-        #else
-        sampler.fake_analysis(frame.t_current_ms);
-        #endif // !FAKEMUSIC
-
+        // cout << "Record sample..." << endl;
+        // Record and process music sample
+        // cout << "Process sample..." << endl;         
+        // #ifndef FAKEMUSIC
+        sampler.update(frame.t_current_ms);
+        // #else
+        // sampler.fake_analysis(frame.t_current_ms);
+        // #endif // !FAKEMUSIC
+        // cout << "Run animator..." << endl;
         animator.update(frame.t_current_ms, sampler);
 
+        // cout << "Compute new frame..." << endl;
         led.RGB = led.active_animation->new_frame(frame.t_current_ms, sampler.t_last_new_beat, animator.flash); 
+        
+        // cout << "Send frame..." << endl;
         led.send();
 
+        // cout << "Debug..." << endl;
         // display();
         display_curse();
 

@@ -37,6 +37,7 @@ WINDOW *generalw;
 void init_display(){
     initscr();
     noecho();
+    refresh();
     curs_set(0);
     musicw = newwin(10, 120, 0,0);
     animw = newwin(3,120,10,0);
@@ -66,10 +67,9 @@ void disp_music_window(){
     wattroff(musicw, A_BOLD);
 
     ostringstream volbuf, thrbuf, maxminbuf, clipbuf, beatbuf, statebuf ,nbt, nbk, ndrop;
+    // Volume
     #define MAXVOL 400.0    //max volume value (approx.)   
     #define MAXVOLPX 60     //number of pixel allocated to volume bar
-
-    // Volume
     // double vol_unit = max(min(100/MAXVOL, 1.0),0.0);    //unitary volume value [0;1]
     double vol_unit = max(min(sampler.volume/MAXVOL, 1.0),0.0);    //unitary volume value [0;1]
     
@@ -127,9 +127,9 @@ void disp_music_window(){
 
 
     #ifdef FAKEMUSIC
-        nbt     << "Nxt beat : " << (sampler.t_next_beat_ms - millis())/1000.0;
-        nbk     << "Nxt break : " << (sampler.t_next_break_ms - millis())/1000.0  << "s\n";
-        ndrop   << "Nxt drop : " << (sampler.t_next_drop_ms - millis())/1000.0  << "s\n";
+        nbt     << "| Nxt beat : " << (sampler.t_next_beat_ms - millis())/1000.0 << "s";
+        nbk     << "| Nxt break : " << (sampler.t_next_break_ms - millis())/1000.0  << "s";
+        ndrop   << "| Nxt drop : " << (sampler.t_next_drop_ms - millis())/1000.0  << "s";
     #endif
     
 
@@ -139,11 +139,28 @@ void disp_music_window(){
     
     #ifdef FAKEMUSIC
         mvwprintw(musicw, 6,1, nbt.str().c_str());
-        mvwprintw(musicw, 6,21, nbk.str().c_str());
-        mvwprintw(musicw, 6,41, ndrop.str().c_str());
+        mvwprintw(musicw, 6,31, nbk.str().c_str());
+        mvwprintw(musicw, 6,51, ndrop.str().c_str());
     #endif
     // mvwprintw(...
     wrefresh(musicw);
+}
+
+
+
+void disp_general_window(){
+    //initialize
+    curs_set(0);
+    werase(generalw);
+    box(generalw, ACS_VLINE, ACS_HLINE);
+    wattron(generalw, A_BOLD);
+    mvwprintw(generalw, 0,1, "GENERAL");
+    wattroff(generalw, A_BOLD);
+
+    ostringstream cptbuf;
+    cptbuf << "Frame counter : " << frame.cpt;
+    mvwprintw(generalw, 1,1, cptbuf.str().c_str());
+
 }
 
 void display_curse(){
@@ -152,7 +169,7 @@ void display_curse(){
     disp_music_window();
     // disp_animatin_window();
     // disp_output_window();
-    // disp_general_window();
+    disp_general_window();
     
     werase(animw);
     box(animw, ACS_VLINE, ACS_HLINE);
@@ -161,8 +178,7 @@ void display_curse(){
     box(outputw, ACS_VLINE, ACS_HLINE);
     wrefresh(outputw);
     werase(generalw);
-    box(generalw, ACS_VLINE, ACS_HLINE);
-    wrefresh(generalw);
+    
     
     refresh();
 }
@@ -185,9 +201,9 @@ void display(){
     cout << "State: " << sampler.state  << '\n';
 
     #ifdef FAKEMUSIC
-    cout << "Next beat : " << (sampler.t_next_beat_ms - millis())/1000.0  << "s\n";
-    cout << "Next break : " << (sampler.t_next_break_ms - millis())/1000.0  << "s\n";
-    cout << "Next drop : " << (sampler.t_next_drop_ms - millis())/1000.0  << "s\n";
+        cout << "Next beat : " << (sampler.t_next_beat_ms - millis())/1000.0  << "s\n";
+        cout << "Next break : " << (sampler.t_next_break_ms - millis())/1000.0  << "s\n";
+        cout << "Next drop : " << (sampler.t_next_drop_ms - millis())/1000.0  << "s\n";
     #endif 
     
     
