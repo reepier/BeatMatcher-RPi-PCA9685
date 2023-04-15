@@ -14,15 +14,15 @@ using namespace std;
  
 void initialize() {
     
-    // sysfcn_init(); // initialize sysfcn lib FIRST
-    #ifdef DEBUG
-    cout << "Init. Sampler..." << endl;
-    sampler.init();   // THEN initialize Music lib
-    #endif // DEBUG
+    #ifndef FAKEMUSIC
+        balise("Init. Sampler...");
+        sampler.init();   // THEN initialize Music lib
+    #endif // FAKEMUISC
     
-    cout << "Init. Leds..." << endl;
+    balise("Init. Leds...");
     led.LED_init();   // initialize OLA & shit
-    cout << "Init. Debug..." << endl;
+
+    balise("Init. Debug...");
     init_display();
 }
 
@@ -30,35 +30,32 @@ LoopControler frame;
 
 int main(){
 
-    // cout << "Initialization..." << endl;
+    balise("Initialization...");
     initialize();
     
     while (true){
-        // cout << "Start new frame..." << endl;
         // Update general counters and timers
+        balise("Start new frame...");
         frame.start_new_frame();
         
-        // cout << "Record sample..." << endl;
-        // Record and process music sample
-        // cout << "Process sample..." << endl;         
-        // #ifndef FAKEMUSIC
+        // Record and process music sample 
+        balise("Record & process sample...");   
         sampler.update(frame.t_current_ms);
-        // #else
-        // sampler.fake_analysis(frame.t_current_ms);
-        // #endif // !FAKEMUSIC
-        // cout << "Run animator..." << endl;
+
+        balise("Run animator...");
         animator.update(frame.t_current_ms, sampler);
 
-        // cout << "Compute new frame..." << endl;
+        balise("Compute new frame...");
         led.RGB = led.active_animation->new_frame(frame.t_current_ms, sampler.t_last_new_beat, animator.flash); 
         
-        // cout << "Send frame..." << endl;
+        balise("Send frame...");
         led.send();
 
-        // cout << "Debug..." << endl;
+        balise("Debug...");
         // display();
         display_curse();
 
+        balise("Wait next frame...");
         frame.wait_for_next();
     }
 }

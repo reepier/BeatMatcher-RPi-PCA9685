@@ -20,7 +20,7 @@ class LEDAnimation : public BaseAnimation{
     // specific args and parameters
     int flash_RGB[3] = {0,0,0};                 // color components of the flash
     int backgd_RGB_minmax[6] = {0,0,0,0,0,0};           // min/max components for the background oscilltions {0 Rmin, 1 Rmax, 2 Gmin, 3 Gmax, 4 Bmin, 5 Bmax}
-    int periods_ms[6] = {0,0,0};                  // periods of the background oscillations
+    int periods_ms[6] = {0,0,0,0,0,0};                  // periods of the background oscillations
     int fade_rate = 60;                 //ms flash fade rate (time constant of an exponential decay : intensity = exp(-(t-t0)/fade_rate)          
 
     // Constructor

@@ -15,6 +15,58 @@
 #include <PCA9685.h>
 
 
+
+
+
+// ------------------------------------------------------------
+// LED FIXTURE CLASS
+// ------------------------------------------------------------
+
+std::streambuf* cout_sbuf; // save original sbuf
+std::ofstream   fout("/dev/null");
+
+// Fixture initalizer
+void LEDFixture::LED_init(){
+
+    // intialize hardware output
+    _PCA9685_DEBUG = 0;
+    _PCA9685_TEST = 0;
+
+    fd = PCA9685_openI2C(1, addr);
+    PCA9685_initPWM(fd, addr, _PCA9685_MAXFREQ);
+
+    animation.push_back(LEDAnimation(255<<4, 150<<4, 80<<4,     30<<4,100<<4, 1<<4,7<<4, 0<<4,0<<4,"Warm White Flashes, Red/orange background"));
+    animation.push_back(LEDAnimation(255<<4, 50<<4, 10<<4,      15<<4,50<<4, 0<<4,5<<4, 0<<4,0<<4, "Sodium Flashes, Red/orange background"));
+    animation.push_back(LEDAnimation(255<<4, 0<<4, 0<<4,        0<<4,0<<4, 0<<4,0<<4, 0<<4,0<<4, "Red flashes, Black background"));
+    animation.push_back(LEDAnimation(255<<4, 150<<4, 80<<4,     30<<4,100<<4, 0<<4, 0<<4, 0<<4,10<<4, "Warm White flashes, Red/Pink background"));
+    animation.push_back(LEDAnimation(0<<4, 0<<4, 255<<4,        0<<4,0<<4, 0<<4,0<<4, 0<<4,0<<4, "Blue flashes, Black background"));
+    animation.push_back(LEDAnimation(255<<4, 100<<4, 80<<4,     0<<4,80<<4, 0<<4,0<<4, 0<<4,20<<4, "Warm White flashes, Pink background"));
+    animation.push_back(LEDAnimation(255<<4, 100<<4, 80<<4,     0<<4,50<<4, 0<<4,0<<4, 0<<4,80<<4, "Warm White flashes, Purple background"));
+    animation.push_back(LEDAnimation(255<<4, 100<<4, 80<<4,     0<<4,20<<4, 0<<4, 0<<4, 0<<4,100<<4, "Warm White flashes, Blue/Purple backgroud"));
+    animation.push_back(LEDAnimation(255<<4, 100<<4, 80<<4,     0<<4,10<<4, 0<<4,10<<4, 0<<4,100<<4, "Warm White flashes, cyan background"));    
+    animation.push_back(LEDAnimation(255<<4, 100<<4, 80<<4,     0<<4,0<<4, 0<<4,0<<4, 0<<4,0<<4, "White flashes, Black background"));
+
+    active_animation = animation[animator.animation_i].get_ptr();
+}
+
+
+/** 
+* This function sends RGB values to the LED controler via I2C
+*/
+void LEDFixture::send(){
+    // Send frame to the PCA9685 module
+    // Take into account the MASTER DIMMER value !! --> as late as possible, right before data is sent
+    setOffVals[LEDRed] = RGB[R] * MASTER_DIMMER/255.0;
+    setOffVals[LEDGreen] = RGB[G] * MASTER_DIMMER/255.0;
+    setOffVals[LEDBlue] = RGB[B] * MASTER_DIMMER/255.0;
+
+    PCA9685_setPWMVals(fd, addr, setOnVals, setOffVals);
+    
+}
+
+LEDFixture led;
+
+
 // ------------------------------------------------------------
 // ANIMATION CLASS
 // ------------------------------------------------------------
@@ -90,60 +142,3 @@ void LEDAnimation::display_anim(){
 LEDAnimation* LEDAnimation::get_ptr(){
     return this;
 }
-
-
-// ------------------------------------------------------------
-// LED FIXTURE CLASS
-// ------------------------------------------------------------
-
-std::streambuf* cout_sbuf; // save original sbuf
-std::ofstream   fout("/dev/null");
-
-// Fixture initalizer
-void LEDFixture::LED_init(){
-    cout_sbuf = std::cout.rdbuf(); // save original sbuf
-
-    // intialize hardware output
-    _PCA9685_DEBUG = 0;
-    _PCA9685_TEST = 0;
-
-    std::cout.rdbuf(fout.rdbuf()); // redirect 'cout' to a 'fout'
-    fd = PCA9685_openI2C(1, addr);
-    PCA9685_initPWM(fd, addr, _PCA9685_MAXFREQ);
-    std::cout.rdbuf(cout_sbuf); // restore the original stream buffer
-
-    // todo move to animation::init();
-    // animator.reset_period();
-
-    animation.push_back(LEDAnimation(255<<4, 150<<4, 80<<4,     30<<4,100<<4, 1<<4,7<<4, 0<<4,0<<4,"Warm White Flashes, Red/orange background"));
-    animation.push_back(LEDAnimation(255<<4, 50<<4, 10<<4,      15<<4,50<<4, 0<<4,5<<4, 0<<4,0<<4, "Sodium Flashes, Red/orange background"));
-    animation.push_back(LEDAnimation(255<<4, 0<<4, 0<<4,        0<<4,0<<4, 0<<4,0<<4, 0<<4,0<<4, "Red flashes, Black background"));
-    animation.push_back(LEDAnimation(255<<4, 150<<4, 80<<4,     30<<4,100<<4, 0<<4, 0<<4, 0<<4,10<<4, "Warm White flashes, Red/Pink background"));
-    animation.push_back(LEDAnimation(0<<4, 0<<4, 255<<4,        0<<4,0<<4, 0<<4,0<<4, 0<<4,0<<4, "Blue flashes, Black background"));
-    animation.push_back(LEDAnimation(255<<4, 100<<4, 80<<4,     0<<4,80<<4, 0<<4,0<<4, 0<<4,20<<4, "Warm White flashes, Pink background"));
-    animation.push_back(LEDAnimation(255<<4, 100<<4, 80<<4,     0<<4,50<<4, 0<<4,0<<4, 0<<4,80<<4, "Warm White flashes, Purple background"));
-    animation.push_back(LEDAnimation(255<<4, 100<<4, 80<<4,     0<<4,20<<4, 0<<4, 0<<4, 0<<4,100<<4, "Warm White flashes, Blue/Purple backgroud"));
-    animation.push_back(LEDAnimation(255<<4, 100<<4, 80<<4,     0<<4,10<<4, 0<<4,10<<4, 0<<4,100<<4, "Warm White flashes, cyan background"));    
-    animation.push_back(LEDAnimation(255<<4, 100<<4, 80<<4,     0<<4,0<<4, 0<<4,0<<4, 0<<4,0<<4, "White flashes, Black background"));
-
-    active_animation = animation[animator.animation_i].get_ptr();
-}
-
-
-/** 
-* This function sends RGB values to the LED controler via I2C
-*/
-void LEDFixture::send(){
-    // Send frame to the PCA9685 module
-    // Take into account the MASTER DIMMER value !! --> as late as possible, right before data is sent
-    setOffVals[LEDRed] = RGB[R] * MASTER_DIMMER/255.0;
-    setOffVals[LEDGreen] = RGB[G] * MASTER_DIMMER/255.0;
-    setOffVals[LEDBlue] = RGB[B] * MASTER_DIMMER/255.0;
-
-    std::cout.rdbuf(fout.rdbuf()); // redirect 'cout' to a 'fout'
-    PCA9685_setPWMVals(fd, addr, setOnVals, setOffVals);
-    std::cout.rdbuf(cout_sbuf); // restore the original stream buffer
-    
-}
-
-LEDFixture led;

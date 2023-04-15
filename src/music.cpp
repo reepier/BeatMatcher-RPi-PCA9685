@@ -34,18 +34,18 @@ void SoundAnalyzer::init(){
 
 void SoundAnalyzer::update(unsigned long t){
     #ifndef FAKEMUSIC
-        this->record();
-        this->process_record();
+        this->_record();
+        this->_process_record();
     #else
         sampler.process_record_fake(t);
     #endif // FAKEMUSIC
     
-    this->update_beats();
+    this->_update_beats();
     this->_update_state();
     this->_update_beat_threshold();
 }
 
-void SoundAnalyzer::record(){
+void SoundAnalyzer::_record(){
     unsigned long next_us = micros();
     clipping = false;
     deb_max=MCP3008_MIN, deb_min=MCP3008_MAX;
@@ -66,7 +66,7 @@ void SoundAnalyzer::record(){
 }
 
 // TODO functionalize the content of this function ! There shoumd only remain function calls 
-void SoundAnalyzer::process_record(){
+void SoundAnalyzer::_process_record(){
     _remove_DC_value();
     _compute_FFT();
       
@@ -84,7 +84,7 @@ void SoundAnalyzer::process_record(){
     }
 }
 
-void SoundAnalyzer::update_beats(){
+void SoundAnalyzer::_update_beats(){
     // check for raw_beat
     // Compare current level to threshold and control LED
     if (volume >= beat_threshold){
@@ -271,7 +271,7 @@ void SoundAnalyzer::_switch_to_state(states s){
 
 
 /**---------------------------------------------------------------
- * FAKE FUNCTIONS
+ * FAKE FUNCTIONS to emulate the music input
    ---------------------------------------------------------------*/
 
 #ifdef FAKEMUSIC
@@ -287,7 +287,7 @@ const int drop_duration_ms = DROPDuration * beat_duration_ms;
 const int min_volume = 20, max_volume = 400;
 
 inline int fake_volume1(){
-    return min_volume + (max_volume-min_volume)*pow(((sin(2*M_PI*millis()/beat_duration_ms)+1)/2), 4);
+    return min_volume + (max_volume-min_volume)*pow(((sin(2*M_PI*millis()/beat_duration_ms)+1)/2), 5);
 }
 inline int fake_volume2(){
     return min_volume + 0.25*min_volume*sin(2*M_PI*millis()/1000);
@@ -343,6 +343,7 @@ void SoundAnalyzer::process_record_fake(unsigned long t){
     }
 }
 
+/** DEPRECATED */
 void SoundAnalyzer::fake_analysis(unsigned long t){
     // initialize
     static bool init = true;

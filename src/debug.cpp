@@ -127,7 +127,7 @@ void disp_music_window(){
 
 
     #ifdef FAKEMUSIC
-        nbt     << "| Nxt beat : " << (sampler.t_next_beat_ms - millis())/1000.0 << "s";
+        nbt     << "Nxt beat : " << (sampler.t_next_beat_ms - millis())/1000.0 << "s";
         nbk     << "| Nxt break : " << (sampler.t_next_break_ms - millis())/1000.0  << "s";
         ndrop   << "| Nxt drop : " << (sampler.t_next_drop_ms - millis())/1000.0  << "s";
     #endif
@@ -161,6 +161,7 @@ void disp_general_window(){
     cptbuf << "Frame counter : " << frame.cpt;
     mvwprintw(generalw, 1,1, cptbuf.str().c_str());
 
+    wrefresh(generalw);
 }
 
 void display_curse(){
@@ -177,7 +178,7 @@ void display_curse(){
     werase(outputw);
     box(outputw, ACS_VLINE, ACS_HLINE);
     wrefresh(outputw);
-    werase(generalw);
+
     
     
     refresh();
@@ -219,4 +220,10 @@ void display(){
     cout << "FPS : " << 1.0/frame.loop_duration_ms*1000.0 << "Hz\n";
     cout << "Elapsed time : " << millis()/1000.0 << " s\n";
 
+}
+
+void balise(const char* str){
+    #ifdef  BALISE
+        std::cout << str << std::endl;
+    #endif
 }

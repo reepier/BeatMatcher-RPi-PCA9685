@@ -49,7 +49,7 @@ class SoundAnalyzer{
     // FFT results storage structure
     public  : float sample_spectrum[SAMPLE_SIZE][2];    // stores AMPL x FREQ array;
 
-    public :    bool clipping; // true if record() detects ADC saturation
+    public :    bool clipping; // true if _record() detects ADC saturation
     public :    int volume;
     
     public :    std::vector<int> v_memory;          // time serie of the measured volume
@@ -65,7 +65,7 @@ class SoundAnalyzer{
     public :    unsigned long t_last_new_beat = 0;
     public :    unsigned long t_beat_tracking_start = millis();
 
-    // state machine variables
+    // state machine
     private :   int BS_buff = 0, BT_buff = 0;     // counters used to filter out transents in states estimation
     public :    states state = BEAT, previous_state = BEAT;
     public :    bool state_changed = false;    
@@ -73,11 +73,9 @@ class SoundAnalyzer{
     // Main functions (entry points)
     public :    void init();
     public :    void update(unsigned long);
-    public :    void record();          
-    public :    void process_record();
-    public:     void update_beats();
 
-    // statistical results
+
+    // statistics computation
     public :    float volume_percentile(int);
     public :    float volume_ratio(int, int);
     public :    int recent_maximum(int);
@@ -85,6 +83,9 @@ class SoundAnalyzer{
     // hidden functions (called by the main functions)
     // private :   void _copy_memory();
     // private :   void _compute_stats();
+    public :    void _record();          
+    public :    void _process_record();
+    public:     void _update_beats();
     private :   void _update_beat_threshold();
     private :   void _update_state();
     private :   void _remove_DC_value();
