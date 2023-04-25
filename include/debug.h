@@ -10,6 +10,7 @@
     Serial plotter activated). Comment out the following line to reverse to
     "NORMAL MODE" (DMX Rx activated, Serial plotter unavailabe)
 */
+#define PINAKED     // deactivates PCA9685 output
 #define FAKEMUSIC   // creates fake music signal (too use when MCP3008 is not wired)
 // #define BALISE      // Activates console outputs to debug when the loop does not complete properly
 

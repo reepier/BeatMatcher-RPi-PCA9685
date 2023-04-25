@@ -28,6 +28,7 @@ std::ofstream   fout("/dev/null");
 // Fixture initalizer
 void LEDFixture::LED_init(){
 
+    #ifndef PINAKED
     // intialize hardware output
     _PCA9685_DEBUG = 0;
     _PCA9685_TEST = 0;
@@ -35,6 +36,8 @@ void LEDFixture::LED_init(){
     fd = PCA9685_openI2C(1, addr);
     PCA9685_initPWM(fd, addr, _PCA9685_MAXFREQ);
 
+    #endif // DEBUG
+    
     animation.push_back(LEDAnimation(255<<4, 150<<4, 80<<4,     30<<4,100<<4, 1<<4,7<<4, 0<<4,0<<4,"Warm White Flashes, Red/orange background"));
     animation.push_back(LEDAnimation(255<<4, 50<<4, 10<<4,      15<<4,50<<4, 0<<4,5<<4, 0<<4,0<<4, "Sodium Flashes, Red/orange background"));
     animation.push_back(LEDAnimation(255<<4, 0<<4, 0<<4,        0<<4,0<<4, 0<<4,0<<4, 0<<4,0<<4, "Red flashes, Black background"));
@@ -60,7 +63,9 @@ void LEDFixture::send(){
     setOffVals[LEDGreen] = RGB[G] * MASTER_DIMMER/255.0;
     setOffVals[LEDBlue] = RGB[B] * MASTER_DIMMER/255.0;
 
+    #ifndef PINAKED
     PCA9685_setPWMVals(fd, addr, setOnVals, setOffVals);
+    #endif // DEBUG
     
 }
 
