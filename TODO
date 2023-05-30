@@ -13,8 +13,10 @@ ADD A CONFIGURATION CAPABILITY based on the following principles :
     Run them
 
 ADD command line input argumetns :
-    - to enable/disable FAKEANALYSIS
+    - to enable/disable FAKEANALYSIS / PCA9685
         - when enabled, to set BPM ?
+    - to run one (or more) specific animation (dev mode)
+        --> use id for that
 
 
 

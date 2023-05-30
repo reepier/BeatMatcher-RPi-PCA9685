@@ -15,15 +15,11 @@
 #include <PCA9685.h>
 
 
-
+LEDFixture led;
 
 
 // ------------------------------------------------------------
-// LED FIXTURE CLASS
-// ------------------------------------------------------------
-
-std::streambuf* cout_sbuf; // save original sbuf
-std::ofstream   fout("/dev/null");
+// LED FIXTURE CLASS Function definition
 
 // Fixture initalizer
 void LEDFixture::LED_init(){
@@ -37,26 +33,29 @@ void LEDFixture::LED_init(){
     PCA9685_initPWM(fd, addr, _PCA9685_MAXFREQ);
 
     #endif // DEBUG
-    
-    animation.push_back(LEDAnimation(255<<4, 150<<4, 80<<4,     30<<4,100<<4, 1<<4,7<<4, 0<<4,0<<4,"Warm White Flashes, Red/orange background"));
-    animation.push_back(LEDAnimation(255<<4, 50<<4, 10<<4,      15<<4,50<<4, 0<<4,5<<4, 0<<4,0<<4, "Sodium Flashes, Red/orange background"));
-    animation.push_back(LEDAnimation(255<<4, 0<<4, 0<<4,        0<<4,0<<4, 0<<4,0<<4, 0<<4,0<<4, "Red flashes, Black background"));
-    animation.push_back(LEDAnimation(255<<4, 150<<4, 80<<4,     30<<4,100<<4, 0<<4, 0<<4, 0<<4,10<<4, "Warm White flashes, Red/Pink background"));
-    animation.push_back(LEDAnimation(0<<4, 0<<4, 255<<4,        0<<4,0<<4, 0<<4,0<<4, 0<<4,0<<4, "Blue flashes, Black background"));
-    animation.push_back(LEDAnimation(255<<4, 100<<4, 80<<4,     0<<4,80<<4, 0<<4,0<<4, 0<<4,20<<4, "Warm White flashes, Pink background"));
-    animation.push_back(LEDAnimation(255<<4, 100<<4, 80<<4,     0<<4,50<<4, 0<<4,0<<4, 0<<4,80<<4, "Warm White flashes, Purple background"));
-    animation.push_back(LEDAnimation(255<<4, 100<<4, 80<<4,     0<<4,20<<4, 0<<4, 0<<4, 0<<4,100<<4, "Warm White flashes, Blue/Purple backgroud"));
-    animation.push_back(LEDAnimation(255<<4, 100<<4, 80<<4,     0<<4,10<<4, 0<<4,10<<4, 0<<4,100<<4, "Warm White flashes, cyan background"));    
-    animation.push_back(LEDAnimation(255<<4, 100<<4, 80<<4,     0<<4,0<<4, 0<<4,0<<4, 0<<4,0<<4, "White flashes, Black background"));
 
-    active_animation = animation[animator.animation_i].get_ptr();
+    ola_client.Setup();
+    ola_buffer.Blackout();
+
+
+    animations.push_back(Flash_Back(255<<4, 150<<4, 80<<4,     30<<4,100<<4, 1<<4,7<<4, 0<<4,0<<4,"Warm White Flashes, Red/orange background"));
+    animations.push_back(Flash_Back(255<<4, 50<<4, 10<<4,      15<<4,50<<4, 0<<4,5<<4, 0<<4,0<<4, "Sodium Flashes, Red/orange background"));
+    animations.push_back(Flash_Back(255<<4, 0<<4, 0<<4,        0<<4,0<<4, 0<<4,0<<4, 0<<4,0<<4, "Red flashes, Black background"));
+    animations.push_back(Flash_Back(255<<4, 150<<4, 80<<4,     30<<4,100<<4, 0<<4, 0<<4, 0<<4,10<<4, "Warm White flashes, Red/Pink background"));
+    animations.push_back(Flash_Back(0<<4, 0<<4, 255<<4,        0<<4,0<<4, 0<<4,0<<4, 0<<4,0<<4, "Blue flashes, Black background"));
+    animations.push_back(Flash_Back(255<<4, 100<<4, 80<<4,     0<<4,80<<4, 0<<4,0<<4, 0<<4,20<<4, "Warm White flashes, Pink background"));
+    animations.push_back(Flash_Back(255<<4, 100<<4, 80<<4,     0<<4,50<<4, 0<<4,0<<4, 0<<4,80<<4, "Warm White flashes, Purple background"));
+    animations.push_back(Flash_Back(255<<4, 100<<4, 80<<4,     0<<4,20<<4, 0<<4, 0<<4, 0<<4,100<<4, "Warm White flashes, Blue/Purple backgroud"));
+    animations.push_back(Flash_Back(255<<4, 100<<4, 80<<4,     0<<4,10<<4, 0<<4,10<<4, 0<<4,100<<4, "Warm White flashes, cyan background"));    
+    animations.push_back(Flash_Back(255<<4, 100<<4, 80<<4,     0<<4,0<<4, 0<<4,0<<4, 0<<4,0<<4, "White flashes, Black background"));
+
+    active_animation = animations[animator.animation_i].get_ptr();
 }
 
-
-/** 
-* This function sends RGB values to the LED controler via I2C
-*/
+ 
+// This function sends RGB values to the LED controler via I2C
 void LEDFixture::send(){
+    
     // Send frame to the PCA9685 module
     // Take into account the MASTER DIMMER value !! --> as late as possible, right before data is sent
     setOffVals[LEDRed] = RGB[R] * MASTER_DIMMER/255.0;
@@ -66,18 +65,22 @@ void LEDFixture::send(){
     #ifndef PINAKED
     PCA9685_setPWMVals(fd, addr, setOnVals, setOffVals);
     #endif // DEBUG
-    
+
+    // send DMX frame to OLA server.
+    uint8_t data[] = {MASTER_DIMMER, RGB[R]>>4, RGB[G]>>4, RGB[B]>>4};
+    // ola_buffer.SetChannel(0, 255);
+    ola_buffer.SetRange(0, data, 4);
+    ola_client.SendDmx(1, ola_buffer);
 }
 
-LEDFixture led;
 
 
-// ------------------------------------------------------------
-// ANIMATION CLASS
-// ------------------------------------------------------------
 
+// ----------------------------------------------------------
+// ANIMATION CLASS Function definition
 // Animation constructor
-LEDAnimation::LEDAnimation(int flash_r, int flash_g, int flash_b, int back_rmin, int back_rmax, int back_gmin, int back_gmax, int back_bmin, int back_bmax, std::string descr){
+Flash_Back::Flash_Back(int flash_r, int flash_g, int flash_b, int back_rmin, int back_rmax, int back_gmin, int back_gmax, int back_bmin, int back_bmax, std::string descr){
+    
     this->flash_RGB[R] = flash_r;
     this->flash_RGB[G] = flash_g;
     this->flash_RGB[B] = flash_b;
@@ -93,7 +96,7 @@ LEDAnimation::LEDAnimation(int flash_r, int flash_g, int flash_b, int back_rmin,
 }
 
 // Animation initializer
-void LEDAnimation::init(){
+void Flash_Back::init(){
 
     periods_ms[0] = 1000*rand_min_max(MIN_T, MAX_T);
     periods_ms[1] = 1000*rand_min_max(MIN_T, MAX_T);
@@ -110,7 +113,7 @@ void LEDAnimation::init(){
  * @param t_last_beat_ms : timestamp of the last beat detected 
  * @param flash : if true, the function will display a bright flash for every beat
  * @param fade_rate_ms : duration of the flash's exponential decay */
-std::vector<int> LEDAnimation::new_frame(unsigned long t, unsigned long t_last_beat_ms, bool flash){
+std::vector<int> Flash_Back::new_frame(unsigned long t, unsigned long t_last_beat_ms, bool flash){
     std::vector<int> frame;//(3);
     frame.reserve(3);
 
@@ -138,12 +141,12 @@ std::vector<int> LEDAnimation::new_frame(unsigned long t, unsigned long t_last_b
     return frame;
 }
 
-void LEDAnimation::display_anim(){
+void Flash_Back::display_anim(){
     std::cout << this->description << std::endl; 
     std::cout << "Flash color (R,G,B) : " << this->flash_RGB[R] << " / " << this->flash_RGB[R] << " / " << this->flash_RGB[R] << std::endl;
 
 }
 
-LEDAnimation* LEDAnimation::get_ptr(){
+Flash_Back* Flash_Back::get_ptr(){
     return this;
 }

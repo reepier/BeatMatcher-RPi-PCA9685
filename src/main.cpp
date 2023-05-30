@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <cstring>
 #include <wiringPi.h>
 
 #include "debug.h"
@@ -9,6 +10,7 @@
 #include "music.h"
 #include "animator.h"
 #include "sysfcn.h"
+#include "config.h"
 
 using namespace std;
  
@@ -26,11 +28,36 @@ void initialize() {
     init_display();
 }
 
+bool process_arguments(int n, char* args[]){
+    for (int i=1; i<=n-1; i++){
+        char* arg = args[i];
+
+        if (strcmp(arg, "--noled") == 0){
+            b_NO_LED = true;
+        }
+        else if (strcmp(arg, "--nomusic") == 0){
+            b_NO_MUSIC = true;
+        }
+        else if(strcmp(arg, "--nocurses") == 0){
+            b_CURSES == false;
+        }
+        else{
+            return false;
+        }
+    }
+
+    return true;
+}
+
 LoopControler frame;
 
-int main(){
+int main(int argc, char* argv[]){
 
     balise("Initialization...");
+    if(!process_arguments(argc, argv)){
+        cout << "Initialization failed : unknown argument(s) passed" << endl;
+        return -1;
+    }
     initialize();
     
     while (true){
