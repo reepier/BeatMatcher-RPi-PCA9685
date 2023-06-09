@@ -6,6 +6,7 @@
 #include <string>
 #include <charconv>
 
+#include "sysfcn.h"
 #include "debug.h"
 #include "animator.h"
 #include "music.h"
@@ -40,9 +41,9 @@ void init_display(){
     refresh();
     curs_set(0);
     musicw = newwin(10, 120, 0,0);
-    animw = newwin(3,120,10,0);
-    outputw = newwin(3,120,20,0);
-    generalw = newwin(3,120,30,0);
+    animw = newwin(5,120,10,0);
+    outputw = newwin(5,120,20,0);
+    generalw = newwin(5,120,30,0);
 
     if (!has_colors()){
         cout << "NO COLORS";
@@ -126,30 +127,63 @@ void disp_music_window(){
     mvwprintw(musicw, 4,1, statebuf.str().c_str());
 
 
-    #ifdef FAKEMUSIC
-        nbt     << "Nxt beat : " << (sampler.t_next_beat_ms - millis())/1000.0 << "s";
-        nbk     << "| Nxt break : " << (sampler.t_next_break_ms - millis())/1000.0  << "s";
-        ndrop   << "| Nxt drop : " << (sampler.t_next_drop_ms - millis())/1000.0  << "s";
-    #endif
-    
-
+    nbt     << "Nxt beat : " << (sampler.t_next_beat_ms - millis())/1000.0 << "s";
+    nbk     << "| Nxt break : " << (sampler.t_next_break_ms - millis())/1000.0  << "s";
+    ndrop   << "| Nxt drop : " << (sampler.t_next_drop_ms - millis())/1000.0  << "s";
     
 
 
-    
-    #ifdef FAKEMUSIC
+    #ifdef LINUX_PC
+        // mvwprintw(musicw, 6,1, nbt.str().c_str());
+        mvwprintw(musicw, 6,31, nbk.str().c_str());
+        mvwprintw(musicw, 6,51, ndrop.str().c_str());
+    #else
+    if(b_NO_MUSIC){
         mvwprintw(musicw, 6,1, nbt.str().c_str());
         mvwprintw(musicw, 6,31, nbk.str().c_str());
         mvwprintw(musicw, 6,51, ndrop.str().c_str());
+    }
     #endif
     // mvwprintw(...
     wrefresh(musicw);
 }
 
 
+void disp_output_window(){
+//initialize
+    curs_set(0);
+    werase(outputw);
+    box(outputw, ACS_VLINE, ACS_HLINE);
+    wattron(outputw, A_BOLD);
+    mvwprintw(outputw, 0,1, "OUTPUT");
+    wattroff(outputw, A_BOLD);
+
+
+    ostringstream ledanimbuf, ledoutbuf;
+
+    ledanimbuf<<"LED : "<<led.active_animation->description;
+    ledoutbuf<<"| R:"<<led.RGB[R]<<"\tG:"<<led.RGB[G]<<"\tB:"<<led.RGB[B];
+    mvwprintw(outputw, 1, 1, ledanimbuf.str().c_str());
+    mvwprintw(outputw, 1, 60, ledoutbuf.str().c_str());
+
+    wrefresh(outputw);
+}
+
+void disp_animation_window(){
+//initialize
+    curs_set(0);
+    werase(animw);
+    box(animw, ACS_VLINE, ACS_HLINE);
+    wattron(animw, A_BOLD);
+    mvwprintw(animw, 0,1, "ANIMATION");
+    wattroff(animw, A_BOLD);
+
+
+    wrefresh(animw);
+}
 
 void disp_general_window(){
-    //initialize
+//initialize
     curs_set(0);
     werase(generalw);
     box(generalw, ACS_VLINE, ACS_HLINE);
@@ -168,16 +202,16 @@ void display_curse(){
     
 
     disp_music_window();
-    // disp_animatin_window();
-    // disp_output_window();
+    disp_animation_window();
+    disp_output_window();
     disp_general_window();
     
-    werase(animw);
-    box(animw, ACS_VLINE, ACS_HLINE);
-    wrefresh(animw);
-    werase(outputw);
-    box(outputw, ACS_VLINE, ACS_HLINE);
-    wrefresh(outputw);
+    // werase(animw);
+    // box(animw, ACS_VLINE, ACS_HLINE);
+    // wrefresh(animw);
+    // werase(outputw);
+    // box(outputw, ACS_VLINE, ACS_HLINE);
+    // wrefresh(outputw);
 
     
     

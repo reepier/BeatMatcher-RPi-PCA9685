@@ -24,10 +24,8 @@ void AnimationManager::update(unsigned int t_current_ms, const SoundAnalyzer &mu
         if (music.state_changed && (t_current_ms-t_last_change_ms > TEMPO_ANIM_CHANGE)){
             t_last_change_ms = t_current_ms;
             animation_i = (animation_i+1) % led.animations.size();
-            led.active_animation = led.animations[animation_i].get_ptr();
+            led.active_animation = led.animations[animation_i];
             led.active_animation->init();
-
-            
         }
 
         //flash only if the beat is tracked is OK
@@ -40,7 +38,6 @@ void AnimationManager::update(unsigned int t_current_ms, const SoundAnalyzer &mu
         if (music.state == BEAT && (t_current_ms-music.t_beat_tracking_start) > MAX_CONT_FLASH){
             flash = false;
         }
-
 
         // flash_master(t_current_ms, music.t_last_new_beat, flash, 60);
 }

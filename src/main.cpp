@@ -13,20 +13,6 @@
 #include "config.h"
 
 using namespace std;
- 
-void initialize() {
-    
-    #ifndef FAKEMUSIC
-        balise("Init. Sampler...");
-        sampler.init();   // THEN initialize Music lib
-    #endif // FAKEMUISC
-    
-    balise("Init. Leds...");
-    led.LED_init();   // initialize OLA & shit
-
-    balise("Init. Debug...");
-    init_display();
-}
 
 bool process_arguments(int n, char* args[]){
     for (int i=1; i<=n-1; i++){
@@ -46,7 +32,24 @@ bool process_arguments(int n, char* args[]){
         }
     }
 
+    #ifdef LINUX_PC //if compiling on PC, force NO_MUSIC and NO_LED since PCA9685 and MCP3008 are not compatible
+        b_NO_MUSIC = true;
+        b_NO_LED = true;
+    #endif
+
     return true;
+}
+
+void initialize() {
+    
+    balise("Init. Sampler...");
+    sampler.init();   // initialize Music lib
+    
+    balise("Init. Leds...");
+    led.LED_init();   // initialize OLA & shit
+
+    balise("Init. Debug...");
+    init_display();
 }
 
 LoopControler frame;
@@ -73,14 +76,17 @@ int main(int argc, char* argv[]){
         animator.update(frame.t_current_ms, sampler);
 
         balise("Compute new frame...");
-        led.RGB = led.active_animation->new_frame(frame.t_current_ms, sampler.t_last_new_beat, animator.flash); 
+        led.active_animation->new_frame();
         
         balise("Send frame...");
         led.send();
 
         balise("Debug...");
-        // display();
-        display_curse();
+        if (!b_CURSES){
+            display();
+        }else{
+            display_curse();
+        }
 
         balise("Wait next frame...");
         frame.wait_for_next();

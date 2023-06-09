@@ -4,9 +4,13 @@
 #include <fftw3.h>
 #include <vector>
 #include <wiringPi.h>
+#include "config.h"
+// #include "debug.h"
 
-#include "debug.h"
-#include "MCP3008/MCP3008.h"
+#ifndef LINUX_PC //if compiling on raspberrypi
+    #include "MCP3008/MCP3008.h"
+#endif
+
 
 #define SAMPLE_SIZE 128      // record length (number of individual samples)
 #define SAMPLING_FREQ 8000     // sampling frequency
@@ -39,7 +43,9 @@ enum states{
 
 class SoundAnalyzer{
 
-    MCP3008Lib::MCP3008 adc;    // MCP3008 object
+    #ifndef LINUX_PC //if compiling on raspberrypi
+        MCP3008Lib::MCP3008 adc;    // MCP3008 object
+    #endif
 
     // FFTW lib structures
     public : fftw_complex *fft_signal;
@@ -83,7 +89,9 @@ class SoundAnalyzer{
     // hidden functions (called by the main functions)
     // private :   void _copy_memory();
     // private :   void _compute_stats();
-    public :    void _record();          
+    #ifndef LINUX_PC //if compiling on raspberrypi
+        public :    void _record();
+    #endif          
     public :    void _process_record();
     public:     void _update_beats();
     private :   void _update_beat_threshold();
@@ -107,10 +115,8 @@ class SoundAnalyzer{
     // debug intermediary variables
     public :    int deb_max, deb_min;
     
-    #ifdef FAKEMUSIC
-        //fake beat
-        unsigned long t_next_break_ms, t_next_drop_ms, t_next_beat_ms;
-    #endif // DEBUG
+    //fake beat
+    unsigned long t_next_break_ms, t_next_drop_ms, t_next_beat_ms;
     
 };
 

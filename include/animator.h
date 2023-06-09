@@ -33,8 +33,7 @@ class AnimationManager{
     int animation_i = 0;                          //index for the  animation being displayed currently
 
     unsigned long t_last_change_ms = millis();   //timestamp of last switch between aniamtions
-
-
+    
     void update(unsigned int t_current, const SoundAnalyzer &music);
 };
 
@@ -51,7 +50,7 @@ class BaseFixture{
 
     // Animations
     BaseAnimation * active_animation = nullptr;
-    std::vector<BaseAnimation> animations;
+    std::vector<BaseAnimation*> animations;
 };
 
 
@@ -68,8 +67,8 @@ class BaseAnimation{
 
     BaseAnimation * get_ptr(){return this;}
 
-    // virtual void activate();
-    // virtual void new_frame();
+    virtual void new_frame() = 0;
+    virtual void init() = 0;
 
 };
 

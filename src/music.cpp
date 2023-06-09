@@ -16,6 +16,7 @@
 #include <algorithm>
 #include <cmath>
 
+#include "config.h"
 #include "debug.h"
 #include "music.h"
 #include "constant.h"
@@ -26,25 +27,32 @@ SoundAnalyzer sampler;
 
 void SoundAnalyzer::init(){
     // initializa connection with MCP3008 ADC
-    adc.connect();
+    #ifndef LINUX_PC
+        adc.connect();
+    #endif
     // allocate memory fot the fft_signal & fft out storage structures (arrays of doubles)
     fft_signal = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*SAMPLE_SIZE);
     fft_out = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*SAMPLE_SIZE);
 }
 
 void SoundAnalyzer::update(unsigned long t){
-    #ifndef FAKEMUSIC
+    #ifndef LINUX_PC
+    if(!b_NO_MUSIC){
         this->_record();
         this->_process_record();
+    }else{
+        sampler.process_record_fake(t);
+    }
     #else
         sampler.process_record_fake(t);
-    #endif // FAKEMUSIC
+    #endif // LINUX_PC
     
     this->_update_beats();
     this->_update_state();
     this->_update_beat_threshold();
 }
 
+#ifndef LINUX_PC
 void SoundAnalyzer::_record(){
     unsigned long next_us = micros();
     clipping = false;
@@ -64,6 +72,7 @@ void SoundAnalyzer::_record(){
       while(micros() < next_us){}    // wait until the end of the samplign period
     }
 }
+#endif
 
 // TODO functionalize the content of this function ! There shoumd only remain function calls 
 void SoundAnalyzer::_process_record(){
@@ -274,7 +283,6 @@ void SoundAnalyzer::_switch_to_state(states s){
  * FAKE FUNCTIONS to emulate the music input
    ---------------------------------------------------------------*/
 
-#ifdef FAKEMUSIC
 
 #define BPM 110          // BPM
 #define BREAKDuration 8  // beats
@@ -399,8 +407,6 @@ void SoundAnalyzer::fake_analysis(unsigned long t){
         new_beat = false;
     }
 }
-
-#endif // FAKEMUSIC
 
 /* TODO BETTER
 - wrap the FFT & read process to work with VECTORS !!!
