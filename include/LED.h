@@ -41,6 +41,8 @@ class LEDFixture : public BaseFixture{
     unsigned int setOffVals[_PCA9685_CHANS] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     #endif
 
+
+    //TODO : move this out of this fixture
     // Hardware interface (OLA)
     ola::client::StreamingClient ola_client;
     ola::DmxBuffer ola_buffer;
