@@ -42,17 +42,13 @@ class LEDFixture : public BaseFixture{
     #endif
 
 
-    //TODO : move this out of this fixture
+    //TODO : move this out of this fixture --> ola buffer managment should be outside of any fixture specific class
     // Hardware interface (OLA)
     ola::client::StreamingClient ola_client;
     ola::DmxBuffer ola_buffer;
 
-    // Animations
-    // Flash_Back * active_animation = nullptr;  // points towards the animation currently running
-    // std::vector<Flash_Back> animations;        // stores the parameters or every (manually) pre-defined animation 
-
+    LEDFixture(int addr): BaseFixture(addr){};   
     void LED_init();
-    
     void send();
 };
 extern LEDFixture led;
@@ -65,7 +61,7 @@ class LEDAnimation : public BaseAnimation{
   LEDFixture *fixture = &led;
 };
 
-/**Final animation class*/
+/*Flash on beat and wavy background*/
 class LEDAnimation1 : public LEDAnimation{
   public: 
     // specific parameters
@@ -75,7 +71,7 @@ class LEDAnimation1 : public LEDAnimation{
     int fade_rate = 60;                 //ms flash fade rate (time constant of an exponential decay : intensity = exp(-(t-t0)/fade_rate)          
 
     // Constructor
-    LEDAnimation1(int, int, int, int, int, int ,int, int, int, std::string);
+    LEDAnimation1(int, int, int, int, int, int ,int, int, int, std::string, std::string);
 
     void init();                // initializes/reset what needs to be (initial and/or random values, etc.)
     void new_frame();   // computes the new frame's RGB values

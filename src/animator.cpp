@@ -23,8 +23,8 @@ void AnimationManager::update(unsigned int t_current_ms, const SoundAnalyzer &mu
 
         if (music.state_changed && (t_current_ms-t_last_change_ms > TEMPO_ANIM_CHANGE)){
             t_last_change_ms = t_current_ms;
-            animation_i = (animation_i+1) % led.animations.size();
-            led.active_animation = led.animations[animation_i];
+
+            led.active_animation = led.animations[ rand()%led.animations.size() ];
             led.active_animation->init();
         }
 

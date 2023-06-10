@@ -11,7 +11,7 @@
 #include "LED.h"
 #include "sysfcn.h"
 
-LEDFixture led;
+LEDFixture led(0);
 
 
 // ------------------------------------------------------------
@@ -34,18 +34,18 @@ void LEDFixture::LED_init(){
     ola_buffer.Blackout();
 
 
-    animations.push_back(new LEDAnimation1(255<<4, 150<<4, 80<<4,     30<<4,100<<4, 1<<4,7<<4, 0<<4,0<<4,"Warm White Flashes, Red/orange background"));
-    animations.push_back(new LEDAnimation1(255<<4, 50<<4, 10<<4,      15<<4,50<<4, 0<<4,5<<4, 0<<4,0<<4, "Sodium Flashes, Red/orange background"));
-    animations.push_back(new LEDAnimation1(255<<4, 0<<4, 0<<4,        0<<4,0<<4, 0<<4,0<<4, 0<<4,0<<4, "Red flashes, Black background"));
-    animations.push_back(new LEDAnimation1(255<<4, 150<<4, 80<<4,     30<<4,100<<4, 0<<4, 0<<4, 0<<4,10<<4, "Warm White flashes, Red/Pink background"));
-    animations.push_back(new LEDAnimation1(0<<4, 0<<4, 255<<4,        0<<4,0<<4, 0<<4,0<<4, 0<<4,0<<4, "Blue flashes, Black background"));
-    animations.push_back(new LEDAnimation1(255<<4, 100<<4, 80<<4,     0<<4,80<<4, 0<<4,0<<4, 0<<4,20<<4, "Warm White flashes, Pink background"));
-    animations.push_back(new LEDAnimation1(255<<4, 100<<4, 80<<4,     0<<4,50<<4, 0<<4,0<<4, 0<<4,80<<4, "Warm White flashes, Purple background"));
-    animations.push_back(new LEDAnimation1(255<<4, 100<<4, 80<<4,     0<<4,20<<4, 0<<4, 0<<4, 0<<4,100<<4, "Warm White flashes, Blue/Purple backgroud"));
-    animations.push_back(new LEDAnimation1(255<<4, 100<<4, 80<<4,     0<<4,10<<4, 0<<4,10<<4, 0<<4,100<<4, "Warm White flashes, cyan background"));    
-    animations.push_back(new LEDAnimation1(255<<4, 100<<4, 80<<4,     0<<4,0<<4, 0<<4,0<<4, 0<<4,0<<4, "White flashes, Black background"));
+    animations.push_back(new LEDAnimation1(255<<4, 150<<4, 80<<4,     30<<4,100<<4, 1<<4,7<<4, 0<<4,0<<4,"Warm White Flashes, Red/orange background","LED.1.1"));
+    animations.push_back(new LEDAnimation1(255<<4, 50<<4, 10<<4,      15<<4,50<<4, 0<<4,5<<4, 0<<4,0<<4, "Sodium Flashes, Red/orange background","LED.1.2"));
+    animations.push_back(new LEDAnimation1(255<<4, 0<<4, 0<<4,        0<<4,0<<4, 0<<4,0<<4, 0<<4,0<<4, "Red flashes, Black background","LED.1.3"));
+    animations.push_back(new LEDAnimation1(255<<4, 150<<4, 80<<4,     30<<4,100<<4, 0<<4, 0<<4, 0<<4,10<<4, "Warm White flashes, Red/Pink background","LED.1.4"));
+    animations.push_back(new LEDAnimation1(0<<4, 0<<4, 255<<4,        0<<4,0<<4, 0<<4,0<<4, 0<<4,0<<4, "Blue flashes, Black background","LED.1.5"));
+    animations.push_back(new LEDAnimation1(255<<4, 100<<4, 80<<4,     0<<4,80<<4, 0<<4,0<<4, 0<<4,20<<4, "Warm White flashes, Pink background","LED.1.6"));
+    animations.push_back(new LEDAnimation1(255<<4, 100<<4, 80<<4,     0<<4,50<<4, 0<<4,0<<4, 0<<4,80<<4, "Warm White flashes, Purple background","LED.1.7"));
+    animations.push_back(new LEDAnimation1(255<<4, 100<<4, 80<<4,     0<<4,20<<4, 0<<4, 0<<4, 0<<4,100<<4, "Warm White flashes, Blue/Purple backgroud","LED.1.8"));
+    animations.push_back(new LEDAnimation1(255<<4, 100<<4, 80<<4,     0<<4,10<<4, 0<<4,10<<4, 0<<4,100<<4, "Warm White flashes, cyan background","LED.1.9"));    
+    animations.push_back(new LEDAnimation1(255<<4, 100<<4, 80<<4,     0<<4,0<<4, 0<<4,0<<4, 0<<4,0<<4, "White flashes, Black background","LED.1.10"));
 
-    active_animation = animations[animator.animation_i];
+    active_animation = animations[ rand()%led.animations.size() ];
     active_animation->init();
 }
 
@@ -74,8 +74,10 @@ void LEDFixture::send(){
 // ----------------------------------------------------------
 // ANIMATION CLASS Function definition
 // Animation constructor
-LEDAnimation1::LEDAnimation1(int flash_r, int flash_g, int flash_b, int back_rmin, int back_rmax, int back_gmin, int back_gmax, int back_bmin, int back_bmax, std::string descr){
-    
+LEDAnimation1::LEDAnimation1(int flash_r, int flash_g, int flash_b, int back_rmin, int back_rmax, int back_gmin, int back_gmax, int back_bmin, int back_bmax, std::string d, std::string i){
+    this->name = "Flash / Wavy Backgd";
+    this->description = d;
+    this->id = i;
     this->flash_RGB[R] = flash_r;
     this->flash_RGB[G] = flash_g;
     this->flash_RGB[B] = flash_b;
@@ -87,7 +89,7 @@ LEDAnimation1::LEDAnimation1(int flash_r, int flash_g, int flash_b, int back_rmi
     this->backgd_RGB_minmax[4] = back_bmin;
     this->backgd_RGB_minmax[5] = back_bmax;
 
-    this->description = descr;
+    
 }
 
 // Animation initializer

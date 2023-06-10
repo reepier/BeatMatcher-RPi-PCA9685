@@ -161,7 +161,7 @@ void disp_output_window(){
 
     ostringstream ledanimbuf, ledoutbuf;
 
-    ledanimbuf<<"LED : "<<led.active_animation->description;
+    ledanimbuf<<led.active_animation->id<<" - "<<led.active_animation->description;
     ledoutbuf<<"| R:"<<led.RGB[R]<<"\tG:"<<led.RGB[G]<<"\tB:"<<led.RGB[B];
     mvwprintw(outputw, 1, 1, ledanimbuf.str().c_str());
     mvwprintw(outputw, 1, 60, ledoutbuf.str().c_str());
@@ -243,7 +243,7 @@ void display(){
     
     
     cout << '\n' << "//// ANIMATOR /////" << '\n';
-    cout << "Animation : " << animator.animation_i << " -> " << led.active_animation->description << '\n';
+    cout << "Animation : " << led.active_animation->id << " -> " << led.active_animation->description << '\n';
     cout << "Flash : " << animator.flash << '\n';
     cout << "Last change " << (frame.t_current_ms - animator.t_last_change_ms)/1000 << "s\n";
 

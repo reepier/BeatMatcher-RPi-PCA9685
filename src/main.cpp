@@ -41,7 +41,7 @@ bool process_arguments(int n, char* args[]){
 }
 
 void initialize() {
-    
+    srand((unsigned)time(nullptr));
     balise("Init. Sampler...");
     sampler.init();   // initialize Music lib
     
