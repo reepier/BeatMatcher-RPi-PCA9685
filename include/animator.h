@@ -6,14 +6,9 @@
 #include "music.h"
 // #include "LED.h"
 
-// background sinewave periods parameters
-#define MAX_T 30
-#define MIN_T 2
 
-// indexes for ease of reading --> write { color[R] = ... }  instead of { color[0] = ... } 
-#define R 0
-#define G 1
-#define B 2
+
+
 
 // Declare all the classes before defining them
 class AnimationManager;
@@ -53,6 +48,7 @@ class BaseFixture{
 
     //constructor
     BaseFixture(int addr): address(addr){};
+    virtual void init()=0;
 };
 
 

@@ -6,6 +6,7 @@
 #include "wiringPi.h"
 #include "sysfcn.h"
 #include "LED.h"
+#include "spot.h"
 
 /** Based on the musical analysis (music.state) and the current time, this function 
  * decides when to switch animation from one to another.
@@ -26,6 +27,9 @@ void AnimationManager::update(unsigned int t_current_ms, const SoundAnalyzer &mu
 
             led.active_animation = led.animations[ rand()%led.animations.size() ];
             led.active_animation->init();
+
+            spot.active_animation = spot.animations[ rand()%spot.animations.size() ];
+            spot.active_animation->init(); 
         }
 
         //flash only if the beat is tracked is OK
@@ -39,7 +43,6 @@ void AnimationManager::update(unsigned int t_current_ms, const SoundAnalyzer &mu
             flash = false;
         }
 
-        // flash_master(t_current_ms, music.t_last_new_beat, flash, 60);
 }
 
 

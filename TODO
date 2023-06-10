@@ -21,6 +21,10 @@ ADD command line input argumetns :
 
 
 
+syntax :
+ - use emplace_back instead of push_back
+ - use shared_ptr instead of ptr.
+
 
 
 

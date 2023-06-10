@@ -7,12 +7,26 @@
 #include "debug.h"
 #include "constant.h"
 #include "LED.h"
+#include "spot.h"
 #include "music.h"
 #include "animator.h"
 #include "sysfcn.h"
 #include "config.h"
 
 using namespace std;
+
+#ifndef LINUX_PC // if compiling on raspberrypi
+  // I2C Hardware interface (PCA9685)
+  int fd;
+  int addr = 0x40;
+  unsigned int setOnVals[_PCA9685_CHANS] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+  unsigned int setOffVals[_PCA9685_CHANS] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+#endif
+
+// DMX output interface (OLA)
+  ola::client::StreamingClient ola_client;
+  ola::DmxBuffer ola_buffer;
+
 
 bool process_arguments(int n, char* args[]){
     for (int i=1; i<=n-1; i++){
@@ -42,14 +56,51 @@ bool process_arguments(int n, char* args[]){
 
 void initialize() {
     srand((unsigned)time(nullptr));
+    
+
+    #ifndef LINUX_PC // if compiling on raspberrypi
+        balise("Init. PCA...");
+        _PCA9685_DEBUG = 0;
+        _PCA9685_TEST = 0;
+
+        fd = PCA9685_openI2C(1, addr);
+        PCA9685_initPWM(fd, addr, _PCA9685_MAXFREQ);
+    #endif
+
+    balise("Init. ola...");
+    ola_client.Setup();
+    ola_buffer.Blackout();
+
     balise("Init. Sampler...");
     sampler.init();   // initialize Music lib
     
     balise("Init. Leds...");
-    led.LED_init();   // initialize OLA & shit
+    led.init();   // initialize OLA & shit
+    spot.init();
 
     balise("Init. Debug...");
     init_display();
+}
+
+void send(){
+    #ifndef LINUX_PC // if compiling on raspberrypi
+    // Send frame to the PCA9685 module
+    // Take into account the MASTER DIMMER value !! --> as late as possible, right before data is sent
+    setOffVals[LEDRed] = led.RGB[R] * led.MASTER_DIMMER / 255.0;
+    setOffVals[LEDGreen] = led.RGB[G] * led.MASTER_DIMMER / 255.0;
+    setOffVals[LEDBlue] = led.RGB[B] * led.MASTER_DIMMER / 255.0;
+
+    PCA9685_setPWMVals(fd, addr, setOnVals, setOffVals);
+#endif // DEBUG
+
+    // send DMX frame to OLA server.
+    uint8_t LED_subbuf[] = {led.MASTER_DIMMER, led.RGB[R] >> 4, led.RGB[G] >> 4, led.RGB[B] >> 4};  // TODO : add a funtion to every fixture class to return the sub_buffer
+    uint8_t spot_subbuf[] = {spot.MASTER_DIMMER, spot.RGBW[R], spot.RGBW[G],spot.RGBW[B],spot.RGBW[W]};
+
+    ola_buffer.SetRange(led.address, LED_subbuf, 4);
+    ola_buffer.SetRange(spot.address, spot_subbuf, 4);
+
+    ola_client.SendDmx(1, ola_buffer);
 }
 
 LoopControler frame;
@@ -77,9 +128,10 @@ int main(int argc, char* argv[]){
 
         balise("Compute new frame...");
         led.active_animation->new_frame();
-        
+        spot.active_animation->new_frame();
+
         balise("Send frame...");
-        led.send();
+        send();
 
         balise("Debug...");
         if (!b_CURSES){

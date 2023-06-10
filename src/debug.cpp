@@ -11,6 +11,7 @@
 #include "animator.h"
 #include "music.h"
 #include "LED.h"
+#include "spot.h"
 
 using namespace std;
 
@@ -159,12 +160,17 @@ void disp_output_window(){
     wattroff(outputw, A_BOLD);
 
 
-    ostringstream ledanimbuf, ledoutbuf;
+    ostringstream ledanimbuf, ledoutbuf, spotanimbuf, spotoutbuf;
 
     ledanimbuf<<led.active_animation->id<<" - "<<led.active_animation->description;
     ledoutbuf<<"| R:"<<led.RGB[R]<<"\tG:"<<led.RGB[G]<<"\tB:"<<led.RGB[B];
     mvwprintw(outputw, 1, 1, ledanimbuf.str().c_str());
     mvwprintw(outputw, 1, 60, ledoutbuf.str().c_str());
+
+    spotanimbuf<<spot.active_animation->id<<" - "<<spot.active_animation->description;
+    spotoutbuf<<"| R:"<<(int)spot.RGBW[R]<<"\tG:"<<(int)spot.RGBW[G]<<"\tB:"<<(int)spot.RGBW[B]<<"\tW:"<<(int)spot.RGBW[W];
+    mvwprintw(outputw, 2, 1, spotanimbuf.str().c_str());
+    mvwprintw(outputw, 2, 60, spotoutbuf.str().c_str());
 
     wrefresh(outputw);
 }
