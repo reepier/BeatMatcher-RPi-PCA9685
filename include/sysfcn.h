@@ -27,8 +27,6 @@ class LoopControler{
     }
 
 
-    // This function will break if the Pi stays on for too long (~24h). This is due to micros() overflowing and going ack to 0.
-    // TODO : fix it
     void wait_for_next(){
         while(micros() < 1000*t_next_ms) {
             // std::cout << t_current_ms << " / " << micros()/1000 << " / " << t_next_ms  << std::endl;

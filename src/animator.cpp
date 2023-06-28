@@ -25,7 +25,6 @@ void AnimationManager::update(){
         if (frame.cpt == 0){
             led.activate_random();
             spot_g.activate_random();
-            
         }
 
         if (sampler.state_changed && (frame.t_current_ms-t_last_change_ms > TEMPO_ANIM_CHANGE)){
@@ -46,7 +45,7 @@ void AnimationManager::test(){
         spot_g.activate_by_ID(s_anim_id);
     }
     else if (s_anim_id.find("SFRONT") != std::string::npos){
-        
+
     }
     else if (s_anim_id.find("SBACK") != std::string::npos){
 
