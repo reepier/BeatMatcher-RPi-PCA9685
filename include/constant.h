@@ -7,7 +7,7 @@
 
 
 // -- CONFIG ------------------------------------------------------------
-#define     MAX_CONT_FLASH      100000          // 120000
+#define     MAX_CONT_FLASH      120000          // 120000
 #define     TEMPO_ANIM_CHANGE   10000          // 240000
 #define     MASTERDIMMER        1.0             //fraction --> must be decimal (literal float) !!!
 
@@ -17,6 +17,3 @@
 #define G 1
 #define B 2
 #define W 3
-
-
-

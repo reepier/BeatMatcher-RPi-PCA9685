@@ -16,7 +16,6 @@ class BaseFixture;
 class BaseAnimation;
 
 
-
 /**
  * class AnimationManager is the entity responsible for determining which animation every 
  * fixture should run, based on the musical analysis
@@ -27,7 +26,8 @@ class AnimationManager{
     
     unsigned long t_last_change_ms = millis();   //timestamp of last switch between aniamtions
     
-    void update(unsigned int t_current, const SoundAnalyzer &music);
+    void update();
+    void test();
 };
 
 // Generic (core) description of a fixture (later derived into specific classes)
@@ -40,7 +40,9 @@ class BaseFixture{
 
     // DMX related parameters
     uint8_t MASTER_DIMMER = 255;    // Master Dimmer from 0-255
-    int address;                       // DMX address
+    int address;                    // DMX address
+    bool b_blackout;
+    int nCH;
 
     // Animations
     BaseAnimation * active_animation = nullptr;
@@ -49,6 +51,14 @@ class BaseFixture{
     //constructor
     BaseFixture(int addr): address(addr){};
     virtual void init()=0;
+
+    //animation management
+    void blackout(bool);
+    void activate_random();
+    void activate_by_ID(std::string);
+
+    //DMX output
+    virtual std::vector<uint8_t> buffer() = 0;
 };
 
 

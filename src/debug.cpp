@@ -167,8 +167,8 @@ void disp_output_window(){
     mvwprintw(outputw, 1, 1, ledanimbuf.str().c_str());
     mvwprintw(outputw, 1, 60, ledoutbuf.str().c_str());
 
-    spotanimbuf<<spot.active_animation->id<<" - "<<spot.active_animation->description;
-    spotoutbuf<<"| R:"<<(int)spot.RGBW[R]<<"\tG:"<<(int)spot.RGBW[G]<<"\tB:"<<(int)spot.RGBW[B]<<"\tW:"<<(int)spot.RGBW[W];
+    spotanimbuf<<spot_g.active_animation->id<<" - "<<spot_g.active_animation->description;
+    spotoutbuf<<"| R:"<<(int)spot_g.RGBW[R]<<"\tG:"<<(int)spot_g.RGBW[G]<<"\tB:"<<(int)spot_g.RGBW[B]<<"\tW:"<<(int)spot_g.RGBW[W];
     mvwprintw(outputw, 2, 1, spotanimbuf.str().c_str());
     mvwprintw(outputw, 2, 60, spotoutbuf.str().c_str());
 

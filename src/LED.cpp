@@ -18,6 +18,7 @@ LEDFixture led(0);
 
 // Fixture initalizer
 void LEDFixture::init(){
+    animations.push_back(new LEDAnimation1(this, 0, 0, 0, 0, 0, 0, 0, 0, 0, "Black", "LED.0.0"));
     animations.push_back(new LEDAnimation1(this, 255 << 4, 150 << 4, 80 << 4, 30 << 4, 100 << 4, 1 << 4, 7 << 4, 0 << 4, 0 << 4, "Warm White Flashes, Red/orange background", "LED.1.1"));
     animations.push_back(new LEDAnimation1(this, 255 << 4, 50 << 4, 10 << 4, 15 << 4, 50 << 4, 0 << 4, 5 << 4, 0 << 4, 0 << 4, "Sodium Flashes, Red/orange background", "LED.1.2"));
     animations.push_back(new LEDAnimation1(this, 255 << 4, 0 << 4, 0 << 4, 0 << 4, 0 << 4, 0 << 4, 0 << 4, 0 << 4, 0 << 4, "Red flashes, Black background", "LED.1.3"));
@@ -29,8 +30,13 @@ void LEDFixture::init(){
     animations.push_back(new LEDAnimation1(this, 255 << 4, 100 << 4, 80 << 4, 0 << 4, 10 << 4, 0 << 4, 10 << 4, 0 << 4, 100 << 4, "Warm White flashes, cyan background", "LED.1.9"));
     animations.push_back(new LEDAnimation1(this, 255 << 4, 100 << 4, 80 << 4, 0 << 4, 0 << 4, 0 << 4, 0 << 4, 0 << 4, 0 << 4, "White flashes, Black background", "LED.1.10"));
 
-    active_animation = animations[rand() % led.animations.size()];
-    active_animation->init();
+    this->activate_by_ID("LED.0.0");
+
+    
+}
+
+std::vector<uint8_t> LEDFixture::buffer(){
+    return std::vector<uint8_t>{this->MASTER_DIMMER, (uint8_t)(this->RGB[R] >> 4), (uint8_t)(this->RGB[G] >> 4), (uint8_t)(this->RGB[B] >> 4)};
 }
 
 
@@ -73,7 +79,9 @@ void LEDAnimation1::new_frame(){
 
     unsigned long t_ms = frame.t_current_ms;
     unsigned long t_last_beat_ms = sampler.t_last_new_beat;
-    bool flash = animator.flash; //
+
+    //bool flash = animator.flash; //TOO remove variable flash --> not necessary
+    bool flash = (sampler.state == BEAT) && (frame.t_current_ms-sampler.t_beat_tracking_start < MAX_CONT_FLASH);
 
     int backgd_color[3];
 

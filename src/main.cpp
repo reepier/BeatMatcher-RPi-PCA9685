@@ -41,6 +41,12 @@ bool process_arguments(int n, char* args[]){
         else if(strcmp(arg, "--nocurses") == 0){
             b_CURSES == false;
         }
+        else if(strcmp(arg, "--animation") == 0){
+            b_test = true;
+            ++i; // get the following argument
+            arg = args[i];  
+            s_anim_id = arg;
+        }
         else{
             return false;
         }
@@ -76,7 +82,7 @@ void initialize() {
     
     balise("Init. Leds...");
     led.init();   // initialize OLA & shit
-    spot.init();
+    spot_g.init();
 
     balise("Init. Debug...");
     init_display();
@@ -94,11 +100,11 @@ void send(){
 #endif // DEBUG
 
     // send DMX frame to OLA server.
-    uint8_t LED_subbuf[] = {led.MASTER_DIMMER, led.RGB[R] >> 4, led.RGB[G] >> 4, led.RGB[B] >> 4};  // TODO : add a funtion to every fixture class to return the sub_buffer
-    uint8_t spot_subbuf[] = {spot.MASTER_DIMMER, spot.RGBW[R], spot.RGBW[G],spot.RGBW[B],spot.RGBW[W]};
+    // uint8_t LED_subbuf[] = {led.MASTER_DIMMER, led.RGB[R] >> 4, led.RGB[G] >> 4, led.RGB[B] >> 4};  // TODO : add a funtion to every fixture class to return the sub_buffer
+    // uint8_t spot_subbuf[] = {spot_g.MASTER_DIMMER, spot_g.RGBW[R], spot_g.RGBW[G],spot_g.RGBW[B],spot_g.RGBW[W]};
 
-    ola_buffer.SetRange(led.address, LED_subbuf, 4);
-    ola_buffer.SetRange(spot.address, spot_subbuf, 4);
+    ola_buffer.SetRange(led.address, led.buffer().data(), led.nCH);
+    ola_buffer.SetRange(spot_g.address, spot_g.buffer().data(), spot_g.nCH);
 
     ola_client.SendDmx(1, ola_buffer);
 }
@@ -124,11 +130,16 @@ int main(int argc, char* argv[]){
         sampler.update(frame.t_current_ms);
 
         balise("Run animator...");
-        animator.update(frame.t_current_ms, sampler);
+        if(!b_test){    // if nominal case
+            animator.update();
+        }
+        else if (frame.cpt == 0){   // else activate once and for all the animations to test
+            animator.test();
+        }
 
         balise("Compute new frame...");
         led.active_animation->new_frame();
-        spot.active_animation->new_frame();
+        spot_g.active_animation->new_frame();
 
         balise("Send frame...");
         send();

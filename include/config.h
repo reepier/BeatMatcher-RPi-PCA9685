@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 #include <platform.h>
 
@@ -7,6 +8,8 @@ extern bool b_NO_MUSIC ;    //TRUE: music input & processing ; FALSE: music sign
 extern bool b_NO_LED ;      //TRUE: sends PCA9685 commands ; FALSE: ignores PCA9685 commands 
 extern bool b_CURSES;       //TRUE : use curses HMI ; FALSE : use simple console output
 
+extern bool b_test;
+extern std::string s_anim_id;
 
 // precompiler flags
 /*  
