@@ -6,13 +6,6 @@
  * 
 */
 
-
-/** TODO :
- * - put the MCP3008 object inside the SoundANalyzer class
- * - enumerate everything that can support it (states, variables, etc.)
- * 
-*/
-
 #include <algorithm>
 #include <cmath>
 
@@ -74,7 +67,6 @@ void SoundAnalyzer::_record(){
 }
 #endif
 
-// TODO functionalize the content of this function ! There shoumd only remain function calls 
 void SoundAnalyzer::_process_record(){
     _remove_DC_value();
     _compute_FFT();

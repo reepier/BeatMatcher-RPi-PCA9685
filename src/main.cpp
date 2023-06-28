@@ -100,9 +100,6 @@ void send(){
 #endif // DEBUG
 
     // send DMX frame to OLA server.
-    // uint8_t LED_subbuf[] = {led.MASTER_DIMMER, led.RGB[R] >> 4, led.RGB[G] >> 4, led.RGB[B] >> 4};  // TODO : add a funtion to every fixture class to return the sub_buffer
-    // uint8_t spot_subbuf[] = {spot_g.MASTER_DIMMER, spot_g.RGBW[R], spot_g.RGBW[G],spot_g.RGBW[B],spot_g.RGBW[W]};
-
     ola_buffer.SetRange(led.address, led.buffer().data(), led.nCH);
     ola_buffer.SetRange(spot_g.address, spot_g.buffer().data(), spot_g.nCH);
 
