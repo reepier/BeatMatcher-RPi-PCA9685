@@ -31,6 +31,10 @@ class LEDFixture;
 class LEDAnimation;
 class LEDAnimation1;
 
+// ------------------------------------
+// LED Fixture ------------------------
+// ------------------------------------
+
 class LEDFixture : public BaseFixture
 {
 public:
@@ -45,6 +49,10 @@ public:
   std::vector<uint8_t> buffer();
 };
 extern LEDFixture led;
+
+// ------------------------------------
+// LED Animation ----------------------
+// ------------------------------------
 
 class LEDAnimation : public BaseAnimation
 {
