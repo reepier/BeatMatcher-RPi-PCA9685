@@ -80,9 +80,11 @@ void initialize() {
     balise("Init. Sampler...");
     sampler.init();   // initialize Music lib
     
-    balise("Init. Leds...");
+    balise("Init. fixtures...");
     led.init();   // initialize OLA & shit
-    spot_g.init();
+    front_rack.init_front();
+    //spot_g.init();
+    
 
     balise("Init. Debug...");
     init_display();
@@ -102,6 +104,10 @@ void send(){
     // send DMX frame to OLA server.
     ola_buffer.SetRange(led.address, led.buffer().data(), led.nCH);
     ola_buffer.SetRange(spot_g.address, spot_g.buffer().data(), spot_g.nCH);
+    ola_buffer.SetRange(spot_d.address, spot_d.buffer().data(), spot_d.nCH);
+    ola_buffer.SetRange(spot_1.address, spot_1.buffer().data(), spot_1.nCH);
+    ola_buffer.SetRange(spot_2.address, spot_2.buffer().data(), spot_2.nCH);
+    ola_buffer.SetRange(spot_3.address, spot_3.buffer().data(), spot_3.nCH);
 
     ola_client.SendDmx(1, ola_buffer);
 }
@@ -136,8 +142,9 @@ int main(int argc, char* argv[]){
 
         balise("Compute new frame...");
         led.active_animation->new_frame();
-        spot_g.active_animation->new_frame();
-
+        //spot_g.active_animation->new_frame();
+        front_rack.active_animation->new_frame();
+        
         balise("Send frame...");
         send();
 

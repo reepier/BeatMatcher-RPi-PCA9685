@@ -24,16 +24,19 @@ void AnimationManager::update(){
         // initialization
         if (frame.cpt == 0){
             led.activate_random();
-            spot_g.activate_random();
+            //spot_g.activate_random();
+            front_rack.activate_random();
         }
 
         if (sampler.state_changed && (frame.t_current_ms-t_last_change_ms > TEMPO_ANIM_CHANGE)){
             t_last_change_ms = frame.t_current_ms;
 
             led.activate_random();
-            spot_g.activate_random();
+            //spot_g.activate_random();
+            front_rack.activate_random();
         }
 }
+
 
 void AnimationManager::test(){
 

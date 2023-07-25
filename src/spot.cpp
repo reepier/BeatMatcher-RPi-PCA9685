@@ -1,13 +1,15 @@
+#include <cmath>
+
 #include "spot.h"
 #include "constant.h"
+#include "sysfcn.h"
 
+SpotFixture spot_1(73);     //spot frontal 1
+SpotFixture spot_2(81);     //spot frontal 2
+SpotFixture spot_3(89);    //spot frontal 3
 
-SpotFixture spot_g(73);     //spot d'ambiance gauche
-SpotFixture spot_d(81);     //spot d'ambiance droite
-
-SpotFixture spot_1(89);     //spot frontal 1
-SpotFixture spot_2(97);     //spot frontal 2
-SpotFixture spot_3(105);    //spot frontal 3
+SpotFixture spot_g(97);     //spot d'ambiance gauche
+SpotFixture spot_d(105);     //spot d'ambiance droite
 
 // -----------------------------------
 // INDIVIDUAL SPOT
@@ -63,15 +65,56 @@ void SpotAnimation1::new_frame(){
 // -----------------------------------
 // RACKs of SPOTS
 // -----------------------------------
-SpotFront::SpotFront(SpotFixture* s1, SpotFixture* s2, SpotFixture* s3){
-    this->spots.push_back(s1);
-    this->spots.push_back(s2);
-    this->spots.push_back(s3);
-};
+SpotRack front_rack(&spot_1, &spot_2, &spot_3);
+SpotRack back_rack(&spot_g, &spot_d);
 
-SpotFront rack(&spot_1, &spot_2, &spot_3);
+void SpotRack::init_front(){
+    this->rack_size = this->spots.size();
 
-
-void SpotFront::init(){
     //this->animations.push_back();
+    this->animations.push_back(new SpotFrontAnimation1(this, std::vector<uint8_t>{25,0,60,0}, std::vector<uint8_t>{255,40,0,0}));
+    this->animations.push_back(new SpotFrontAnimation1(this, std::vector<uint8_t>{50,5,0,0}, std::vector<uint8_t>{0,0,0,255}));
+}
+
+void SpotRack::init_back(){
+    this->rack_size = this->spots.size();
+    //this->animations.push_back();
+}
+
+// -----------------------------------
+// FRONTAL RACK of SPOT Animations
+// -----------------------------------
+void SpotFrontAnimation1::init(){
+    const int sin_max_p_ms = 15000;
+    const int sin_min_p_ms = 5000;
+    const int rand_const_ms= 5000;
+    
+    this->frame_cpt = 0;
+    this->t_animation_start_ms;
+    this->p_ms = std::vector<int>{rand_min_max(sin_min_p_ms, sin_max_p_ms),rand_min_max(sin_min_p_ms, sin_max_p_ms),rand_min_max(sin_min_p_ms, sin_max_p_ms), rand_min_max(sin_min_p_ms, sin_max_p_ms), rand_min_max(sin_min_p_ms, sin_max_p_ms)};
+    
+    const int n_spot = this->fixture->spots.size();
+    this->t_next.resize(n_spot);
+    for (int i=0; i<n_spot; i++){
+        t_next[i] = frame.t_current_ms + rand_min_max(rand_const_ms/5, rand_const_ms*2);
+    }
+}
+
+void SpotFrontAnimation1::new_frame(){
+    unsigned long t = frame.t_current_ms;
+    int n_spot = this->fixture->spots.size();
+
+    // update 4 sinewaves of different period
+    std::vector<double> s = {sin(2*M_PI*t/p_ms[0]), sin(2*M_PI*t/p_ms[1]), sin(2*M_PI*t/p_ms[2]), sin(2*M_PI*t/p_ms[3]), sin(2*M_PI*t/p_ms[4]) };
+    
+    // for each spot "i" of the rack
+    for (int i=0; i < this->fixture->rack_size; i++){
+        // compute the background color values : 
+        this->fixture->spots[i]->RGBW[R] = std::min(std::max(    (int) (  (1+0.4*s[(i+4)%5]) * this->color1[R] * (1 + 0.4*s[(i+0)%5]))  ,0),255);
+        this->fixture->spots[i]->RGBW[G] = std::min(std::max(    (int) (  (1+0.4*s[(i+4)%5]) * this->color1[G] * (1 + 0.4*s[(i+1)%5]))  ,0),255);
+        this->fixture->spots[i]->RGBW[B] = std::min(std::max(    (int) (  (1+0.4*s[(i+4)%5]) * this->color1[B] * (1 + 0.4*s[(i+2)%5]))  ,0),255);
+        this->fixture->spots[i]->RGBW[W] = std::min(std::max(    (int) (  (1+0.4*s[(i+4)%5]) * this->color1[W] * (1 + 0.4*s[(i+3)%5]))  ,0),255);
+        // ------------------------------- limit to 0-255 ---------------- Spot Intensity    *  RGBW pixel intensity                            ;
+        
+    }
 }

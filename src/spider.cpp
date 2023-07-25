@@ -34,8 +34,6 @@ std::vector<uint8_t> SpiderFixture::buffer(){
     }
 }
 
-
-
 // ---------------------------------------------
 // SPIDER ANIMATION definition
 // ---------------------------------------------

@@ -3,15 +3,12 @@
 
 #include "animator.h"
 
-
-class SpotFixture;     
+class SpotFixture;
 class SpotAnimation;
 class SpotAnimation1;
 
-class SpotFront;
+class SpotRack;
 class SpotBack;
-
-
 
 // TODO Remove the individual spot class --> I will never need (for now) to control 1 spot individually.
 // -----------------------------------
@@ -22,27 +19,25 @@ class SpotFixture : public BaseFixture{
 public:
     // Channels :
     int nCH = 8;
-    std::vector<uint8_t> RGBW = {0,0,0,0}; // R G B W values (0-255)
-    uint8_t strobe  =0;                     // strobe speed (0 none - 1 slow - 255 fast)
-    uint8_t color_wheel =0;                // fixture preset colors (unused)
-    uint8_t prog =0;                       // fixture preset program (unused)
+    std::vector<uint8_t> RGBW = {0, 0, 0, 0}; // R G B W values (0-255)
+    uint8_t strobe = 0;                       // strobe speed (0 none - 1 slow - 255 fast)
+    uint8_t color_wheel = 0;                  // fixture preset colors (unused)
+    uint8_t prog = 0;                         // fixture preset program (unused)
 
     // constructor
-    SpotFixture(int addr): BaseFixture(addr){};
+    SpotFixture(int addr) : BaseFixture(addr){};
     void init();
 
-    //dmx output
+    // dmx output
     std::vector<uint8_t> buffer();
 };
 extern SpotFixture spot_g, spot_d, spot_1, spot_2, spot_3;
 
-
 /* /!\ /!\ Bullshit class --> I don't plan on coding animation for individual spots */
 class SpotAnimation : public BaseAnimation{
 public:
-    SpotFixture * fixture;
+    SpotFixture *fixture;
 };
-
 
 /* /!\ /!\ Bullshit class --> I don't plan on coding animation for individual spots */
 class SpotAnimation1 : public SpotAnimation{
@@ -52,7 +47,7 @@ public:
     uint8_t blue;
     uint8_t white;
 
-    SpotAnimation1(SpotFixture*,uint8_t,uint8_t,uint8_t,uint8_t, std::string, std::string);
+    SpotAnimation1(SpotFixture *, uint8_t, uint8_t, uint8_t, uint8_t, std::string, std::string);
     void init();
     void new_frame();
 };
@@ -61,29 +56,57 @@ public:
 // RACK of SPOTS
 // -----------------------------------
 /* frontal rack*/
-class SpotFront{
+class SpotRack : public BaseFixture{
 public:
-    std::vector<SpotFixture*> spots;
-    std::vector<BaseAnimation*> animations;
+    std::vector<SpotFixture *> spots;        // pointers to spotFixture object
+    int rack_size;                           // number of spots (derived)
+    //std::vector<BaseAnimation *> animations; // vector containing animations
 
-    /* Hard coded with 3 spots (temporarily?) */
-    SpotFront(SpotFixture*,SpotFixture*,SpotFixture*);
-    void init();
+    /* Hard coded with 2 or 3 spots (temporarily?) */
+    SpotRack(SpotFixture* s1, SpotFixture* s2, SpotFixture* s3) : BaseFixture(512){ 
+        this->spots.push_back(s1);
+        this->spots.push_back(s2);
+        this->spots.push_back(s3);};
+    SpotRack(SpotFixture* s1, SpotFixture* s2) : BaseFixture(512){
+        this->spots.push_back(s1);
+        this->spots.push_back(s2);};
+
+    void init(){};     // empty function (useless)
+    void init_front(); // initialize a frontal rack of spots
+    void init_back();  // initialize a backgoround rack of spots
+
+    std::vector<uint8_t> buffer(){return std::vector<uint8_t>{};}; // empty function (useless)
 };
 
+extern SpotRack front_rack;
+extern SpotRack back_rack;
 
-/*2 Oscillating colors, with one main and one */
-class SpotFrontAnimation1{
+class SpotRackAnimtion : public BaseAnimation
+{
+public:
+    SpotRack *fixture;
+};
 
+/*2 Oscillating colors, with one rising randomly and another one as fluctuating background*/
+class SpotFrontAnimation1 : public SpotRackAnimtion
+{
+public:
+    std::vector<uint8_t> color1;
+    std::vector<uint8_t> color2;
+    std::vector<int> p_ms;             // range of periods for various sine wvaes
+    std::vector<unsigned long> t_next; // timestamp of the next rise ()
+
+    SpotFrontAnimation1(SpotRack *f, std::vector<uint8_t> c1, std::vector<uint8_t> c2)
+    {
+        this->fixture = f;
+        this->color1 = c1;
+        this->color2 = c2;
+    }
+    void init();
+    void new_frame();
 };
 
 /*Strobe*/
-class SpotFrontAnimation2{
-
-};
-
-
-
-/* background rack*/
-class SpotBack{
+class SpotFrontAnimation2
+{
 };
