@@ -87,20 +87,35 @@ public:
     SpotRack *fixture;
 };
 
-/*2 Oscillating colors, with one rising randomly and another one as fluctuating background*/
+/*2 Oscillating colors, with one flashing randomly and another one as fluctuating background*/
 class SpotFrontAnimation1 : public SpotRackAnimtion
 {
 public:
+    // aniation parameters (set by user)
     std::vector<uint8_t> color1;
     std::vector<uint8_t> color2;
+    int sin_max_p_ms;
+    int sin_min_p_ms;
+    int rand_const_ms;
+    int flash_len;
+
+    // Internal variable (for storage between frames)
     std::vector<int> p_ms;             // range of periods for various sine wvaes
     std::vector<unsigned long> t_next; // timestamp of the next rise ()
+    std::vector<unsigned long> t_prev; // timestamp of the prev rise () (memory)
 
-    SpotFrontAnimation1(SpotRack *f, std::vector<uint8_t> c1, std::vector<uint8_t> c2)
+    // fixture, color bckgd, color flash, oscil. period(ms)  max , min, mean time btwn flashes (ms), flash duration(ms), description, id
+    SpotFrontAnimation1(SpotRack *f, std::vector<uint8_t> c1, std::vector<uint8_t> c2, int pmax, int pmin, int prand, int flen, std::string d, std::string i)
     {
+        this->description = d;
+        this->id = i;
         this->fixture = f;
         this->color1 = c1;
         this->color2 = c2;
+        this->sin_max_p_ms = pmax;
+        this->sin_min_p_ms = pmin;
+        this->rand_const_ms = prand;
+        this->flash_len = flen;
     }
     void init();
     void new_frame();

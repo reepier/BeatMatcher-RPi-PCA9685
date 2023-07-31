@@ -32,7 +32,11 @@ bool process_arguments(int n, char* args[]){
     for (int i=1; i<=n-1; i++){
         char* arg = args[i];
 
-        if (strcmp(arg, "--noled") == 0){
+        if (strcmp(arg, "--help") == 0){
+            cout << "Arguments :\n--noled\n--nomusic\n--nocurses\n--animation <anim_id>" << endl;
+            return false;
+        }
+        else if (strcmp(arg, "--noled") == 0){
             b_NO_LED = true;
         }
         else if (strcmp(arg, "--nomusic") == 0){
@@ -137,7 +141,9 @@ int main(int argc, char* argv[]){
             animator.update();
         }
         else if (frame.cpt == 0){   // else activate once and for all the animations to test
-            animator.test();
+            if(!animator.test_animation()){
+                return -1;
+            }
         }
 
         balise("Compute new frame...");

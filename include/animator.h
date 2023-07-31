@@ -2,6 +2,7 @@
 
 #include <wiringPi.h>
 #include <string>
+#include <cmath>
 
 #include "music.h"
 // #include "LED.h"
@@ -27,7 +28,7 @@ class AnimationManager{
     unsigned long t_last_change_ms = millis();   //timestamp of last switch between aniamtions
     
     void update();
-    void test();
+    bool test_animation();
 };
 
 // Generic (core) description of a fixture (later derived into specific classes)
@@ -55,7 +56,7 @@ class BaseFixture{
     //animation management
     void blackout(bool);
     void activate_random();
-    void activate_by_ID(std::string);
+    bool activate_by_ID(std::string);
 
     //DMX output
     virtual std::vector<uint8_t> buffer() = 0;
@@ -79,3 +80,9 @@ class BaseAnimation{
 
 
 extern AnimationManager animator;
+
+
+// -----------------------------------
+// USEFULL FUNCTIONS
+// -----------------------------------
+// TODO

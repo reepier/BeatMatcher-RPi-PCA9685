@@ -8,6 +8,8 @@
 #include "LED.h"
 #include "spot.h"
 
+using namespace std;
+
 /** Based on the musical analysis (music.state) and the current time, this function 
  * decides when to switch animation from one to another.
  * 
@@ -38,21 +40,26 @@ void AnimationManager::update(){
 }
 
 
-void AnimationManager::test(){
-
-    if (s_anim_id.find("LED") != std::string::npos){   // if animation's ID contains "LED"
+bool AnimationManager::test_animation(){
+    bool success = false;
+    if (s_anim_id.find("LED.") != std::string::npos){   // if animation's ID contains "LED"
         // select the right animation and activate it
-        led.activate_by_ID(s_anim_id);
+        success = led.activate_by_ID(s_anim_id);
     }
-    else if (s_anim_id.find("SPOT") != std::string::npos){
-        spot_g.activate_by_ID(s_anim_id);
+    else if (s_anim_id.find("SPOT.") != std::string::npos){ // if animation's ID contains "SPOT"
+        success = spot_g.activate_by_ID(s_anim_id);
     }
-    else if (s_anim_id.find("SFRONT") != std::string::npos){
-
+    else if (s_anim_id.find("FR.") != std::string::npos){   // if animation's ID contains "FR" (Front Rack)
+        success = front_rack.activate_by_ID(s_anim_id);
     }
-    else if (s_anim_id.find("SBACK") != std::string::npos){
-
+    else if (s_anim_id.find("BR.") != std::string::npos){   // if animation's ID contains "BR" (BackgroundRack)
+        success = back_rack.activate_by_ID(s_anim_id);
     }
+    else{
+        cout << "Animation ID prefix unknown... Prgram ended" << endl;
+        success = false;
+    }
+    return success;
 }
 
 
@@ -72,11 +79,17 @@ void BaseFixture::activate_random(){
 
 
 // select and init an animation based on its ID. If the ID cannot be found within the existing animations, does nothing.
-void BaseFixture::activate_by_ID(std::string id){
+bool BaseFixture::activate_by_ID(std::string id){
+    bool found_it = false;
     for (std::vector<BaseAnimation*>::iterator anim_it = this->animations.begin(); anim_it != this->animations.end(); anim_it++){
         if ((*anim_it)->id == id){
+            found_it = true;
             this->active_animation = (*anim_it);
             this->active_animation->init();
         }
-    } 
+    }
+    if (!found_it){
+        cout << "Animation ID unknown... Program ended" << endl;
+    }
+    return found_it;
 }

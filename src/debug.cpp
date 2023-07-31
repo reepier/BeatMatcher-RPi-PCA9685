@@ -38,9 +38,9 @@ WINDOW *generalw;
 
 void init_display(){
     initscr();
-    noecho();
-    refresh();
-    curs_set(0);
+    // noecho();
+    // refresh();
+    // curs_set(0);
     musicw = newwin(10, 120, 0,0);
     animw = newwin(5,120,10,0);
     outputw = newwin(5,120,20,0);
