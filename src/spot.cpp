@@ -34,8 +34,8 @@ void SpotFixture::init(){
     */
 }
 
-vector<uint8_t> SpotFixture::buffer(){
-    return vector<uint8_t>{this->MASTER_DIMMER, this->RGBW[R], this->RGBW[G],this->RGBW[B],this->RGBW[W], this->prog, this->color_wheel, this->strobe};
+DMX_vec SpotFixture::buffer(){
+    return DMX_vec{this->MASTER_DIMMER, this->RGBW[R], this->RGBW[G],this->RGBW[B],this->RGBW[W], this->prog, this->color_wheel, this->strobe};
 }
 
 /* /!\ /!\ Bullshit contructor --> I don't plan on coding animation for individual spots */
@@ -74,24 +74,24 @@ void SpotRack::init_front(){
     this->rack_size = this->spots.size();
 
     //this->animations.push_back();
-    this->animations.push_back(new SpotFrontAnimation1(this, vector<uint8_t>{0,0,0,0},      vector<uint8_t>{0,0,0,0},       15000, 5000, 8000, 1000, "Black", "FR.0.0"));
-    this->animations.push_back(new SpotFrontAnimation1(this, vector<uint8_t>{25,0,60,0},    vector<uint8_t>{255,40,0,110},   15000, 5000, 8000, 1000, "Purple background / orange flashes", "FR.1.01"));
-    this->animations.push_back(new SpotFrontAnimation1(this, vector<uint8_t>{50,5,0,0},     vector<uint8_t>{0,0,0,255},     15000, 5000, 8000, 1000, "Orange background, white flashes", "FR.1.2"));  
-    this->animations.push_back(new SpotFrontAnimation1(this, vector<uint8_t>{50,0,0,0},     vector<uint8_t>{0,0,255,0},     15000, 5000, 8000, 1000, "Red background, Blue flashes", "FR.1.3"));
-    this->animations.push_back(new SpotFrontAnimation1(this, vector<uint8_t>{50,0,0,0},     vector<uint8_t>{255,0,0,0},     15000, 5000, 8000, 1000, "red background, RED flashes", "FR.1.4"));
-    this->animations.push_back(new SpotFrontAnimation1(this, vector<uint8_t>{50,0,0,0},     vector<uint8_t>{255,40,0,40},   15000, 5000, 8000, 1000, "red background orange flashes", "FR.1.5"));
-    this->animations.push_back(new SpotFrontAnimation1(this, vector<uint8_t>{50,0,0,0},     vector<uint8_t>{0,0,0,255},     15000, 5000, 8000, 1000, "red background, white flashes", "FR.1.6"));
-    this->animations.push_back(new SpotFrontAnimation1(this, vector<uint8_t>{50,0,0,0},     vector<uint8_t>{0,0,0,255},     15000, 5000, 3000, 600, "red background, white flashes", "FR.1.61"));
-    this->animations.push_back(new SpotFrontAnimation1(this, vector<uint8_t>{0,0,0,0},      vector<uint8_t>{0,0,0,255},       15000, 5000, 5000, 700, "Black background, White flashes", "FR.1.7"));
-    this->animations.push_back(new SpotFrontAnimation1(this, vector<uint8_t>{0,0,0,0},      vector<uint8_t>{0,0,0,255},       15000, 5000, 3000, 600, "Black background, White flashes", "FR.1.71"));
-    this->animations.push_back(new SpotFrontAnimation1(this, vector<uint8_t>{0,0,0,0},      vector<uint8_t>{255,0,0,0},       15000, 5000, 5000, 700, "Black background, Red flashes", "FR.1.8"));
-    this->animations.push_back(new SpotFrontAnimation1(this, vector<uint8_t>{0,0,0,0},      vector<uint8_t>{0,0,150,0},       15000, 5000, 5000, 700, "Black background, Blue flashes", "FR.1.9"));
-    this->animations.push_back(new SpotFrontAnimation1(this, vector<uint8_t>{0,0,0,0},      vector<uint8_t>{255,40,0,0},       15000, 5000, 5000, 700, "Black background, Orange flashes", "FR.1.10"));
-    this->animations.push_back(new SpotFrontAnimation1(this, vector<uint8_t>{0,0,0,0},      vector<uint8_t>{200,35,0,80},       15000, 5000, 5000, 700, "Black background, Orange/White flashes", "FR.1.11"));
-    this->animations.push_back(new SpotFrontAnimation1(this, vector<uint8_t>{60,0,30,0},      vector<uint8_t>{0,150,150,80},       15000, 5000, 7000, 1000, "Purple background, Cyan flashes", "FR.1.12"));
+    this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{0,0,0,0},      DMX_vec{0,0,0,0},       15000, 5000, 8000, 1000, "Black", "FR.0.0"));
+    this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{25,0,60,0},    DMX_vec{255,40,0,110},   15000, 5000, 8000, 1000, "Purple background / orange flashes", "FR.1.01"));
+    this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{50,5,0,0},     DMX_vec{0,0,0,255},     15000, 5000, 8000, 1000, "Orange background, white flashes", "FR.1.2"));  
+    this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{50,0,0,0},     DMX_vec{0,0,255,0},     15000, 5000, 8000, 1000, "Red background, Blue flashes", "FR.1.3"));
+    this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{50,0,0,0},     DMX_vec{255,0,0,0},     15000, 5000, 8000, 1000, "red background, RED flashes", "FR.1.4"));
+    this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{50,0,0,0},     DMX_vec{255,40,0,40},   15000, 5000, 8000, 1000, "red background orange flashes", "FR.1.5"));
+    this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{50,0,0,0},     DMX_vec{0,0,0,255},     15000, 5000, 8000, 1000, "red background, white flashes", "FR.1.6"));
+    this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{50,0,0,0},     DMX_vec{0,0,0,255},     15000, 5000, 3000, 600, "red background, white flashes", "FR.1.61"));
+    this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{0,0,0,0},      DMX_vec{0,0,0,255},       15000, 5000, 5000, 700, "Black background, White flashes", "FR.1.7"));
+    this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{0,0,0,0},      DMX_vec{0,0,0,255},       15000, 5000, 3000, 600, "Black background, White flashes", "FR.1.71"));
+    this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{0,0,0,0},      DMX_vec{255,0,0,0},       15000, 5000, 5000, 700, "Black background, Red flashes", "FR.1.8"));
+    this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{0,0,0,0},      DMX_vec{0,0,150,0},       15000, 5000, 5000, 700, "Black background, Blue flashes", "FR.1.9"));
+    this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{0,0,0,0},      DMX_vec{255,40,0,0},       15000, 5000, 5000, 700, "Black background, Orange flashes", "FR.1.10"));
+    this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{0,0,0,0},      DMX_vec{200,35,0,80},       15000, 5000, 5000, 700, "Black background, Orange/White flashes", "FR.1.11"));
+    this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{60,0,30,0},    DMX_vec{0,150,150,80},       15000, 5000, 7000, 1000, "Purple background, Cyan flashes", "FR.1.12"));
 
 
-    //this->animations.push_back(new SpotFrontAnimation1(this, vector<uint8_t>{0,0,0,0},      vector<uint8_t>{0,0,0,0},       15000, 5000, 8000, 1000, "...", "FR.1."));
+    //this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{0,0,0,0},      DMX_vec{0,0,0,0},       15000, 5000, 8000, 1000, "...", "FR.1."));
 
 }
 
@@ -128,7 +128,7 @@ void SpotFrontAnimation1::new_frame(){
     
     // for each spot "i" of the rack
     for (int i_spot=0; i_spot < n_spot; i_spot++){
-        vector<uint8_t> backgd_RGBW(4);        
+        DMX_vec backgd_RGBW(4);        
         // compute the background color values : 
             backgd_RGBW[R] = min(max(    (int) (  (1+0.4*s[(i_spot+4)%5]) * this->color1[R] * (1 + 0.4*s[(i_spot+0)%5]))  ,0),255);
             backgd_RGBW[G] = min(max(    (int) (  (1+0.4*s[(i_spot+4)%5]) * this->color1[G] * (1 + 0.4*s[(i_spot+1)%5]))  ,0),255);

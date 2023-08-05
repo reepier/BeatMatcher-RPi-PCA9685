@@ -12,8 +12,3 @@
 #define     MASTERDIMMER        1.0             //fraction --> must be decimal (literal float) !!!
 
 
-// indexes for ease of reading --> write { color[R] = ... }  instead of { color[0] = ... } 
-#define R 0
-#define G 1
-#define B 2
-#define W 3

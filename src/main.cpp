@@ -8,6 +8,7 @@
 #include "constant.h"
 #include "LED.h"
 #include "spot.h"
+#include "spider.h"
 #include "music.h"
 #include "animator.h"
 #include "sysfcn.h"
@@ -84,14 +85,17 @@ void initialize() {
     balise("Init. Sampler...");
     sampler.init();   // initialize Music lib
     
+    //TODO : try to move these calls (or even the init functions content) into the Fixture constructor. 
     balise("Init. fixtures...");
     led.init();   // initialize OLA & shit
     front_rack.init_front();
     //spot_g.init();
+    spider.init();
     
-
-    balise("Init. Debug...");
-    init_display();
+    #ifndef BALISE
+        balise("Init. Debug...");
+        init_display();
+    #endif
 }
 
 void send(){
@@ -106,13 +110,16 @@ void send(){
 #endif // DEBUG
 
     // send DMX frame to OLA server.
-    ola_buffer.SetRange(led.address, led.buffer().data(), led.nCH);
-    ola_buffer.SetRange(spot_g.address, spot_g.buffer().data(), spot_g.nCH);
-    ola_buffer.SetRange(spot_d.address, spot_d.buffer().data(), spot_d.nCH);
-    ola_buffer.SetRange(spot_1.address, spot_1.buffer().data(), spot_1.nCH);
-    ola_buffer.SetRange(spot_2.address, spot_2.buffer().data(), spot_2.nCH);
-    ola_buffer.SetRange(spot_3.address, spot_3.buffer().data(), spot_3.nCH);
+    balise("Construct buffer");
+    // ola_buffer.SetRange(led.address, led.buffer().data(), led.nCH);
+    // ola_buffer.SetRange(spot_g.address, spot_g.buffer().data(), spot_g.nCH);
+    // ola_buffer.SetRange(spot_d.address, spot_d.buffer().data(), spot_d.nCH);
+    // ola_buffer.SetRange(spot_1.address, spot_1.buffer().data(), spot_1.nCH);
+    // ola_buffer.SetRange(spot_2.address, spot_2.buffer().data(), spot_2.nCH);
+    // ola_buffer.SetRange(spot_3.address, spot_3.buffer().data(), spot_3.nCH);
+    ola_buffer.SetRange(spider.address, spider.buffer().data(), spider.nCH);
 
+    balise("OLAclient.send()");
     ola_client.SendDmx(1, ola_buffer);
 }
 
@@ -138,9 +145,11 @@ int main(int argc, char* argv[]){
 
         balise("Run animator...");
         if(!b_test){    // if nominal case
+            balise("Run animator normal update");
             animator.update();
         }
         else if (frame.cpt == 0){   // else activate once and for all the animations to test
+            balise("Run animator test fcn");
             if(!animator.test_animation()){
                 return -1;
             }
@@ -150,16 +159,19 @@ int main(int argc, char* argv[]){
         led.active_animation->new_frame();
         //spot_g.active_animation->new_frame();
         front_rack.active_animation->new_frame();
+        spider.active_animation->new_frame();
         
         balise("Send frame...");
         send();
 
-        balise("Debug...");
-        if (!b_CURSES){
-            display();
-        }else{
-            display_curse();
-        }
+        #ifndef BALISE
+            balise("Debug...");
+            if (!b_CURSES){
+                display();
+            }else{
+                display_curse();
+            }
+        #endif
 
         balise("Wait next frame...");
         frame.wait_for_next();

@@ -19,7 +19,7 @@ class SpotFixture : public BaseFixture{
 public:
     // Channels :
     int nCH = 8;
-    std::vector<uint8_t> RGBW = {0, 0, 0, 0}; // R G B W values (0-255)
+    DMX_vec RGBW = {0, 0, 0, 0}; // R G B W values (0-255)
     uint8_t strobe = 0;                       // strobe speed (0 none - 1 slow - 255 fast)
     uint8_t color_wheel = 0;                  // fixture preset colors (unused)
     uint8_t prog = 0;                         // fixture preset program (unused)
@@ -29,7 +29,7 @@ public:
     void init();
 
     // dmx output
-    std::vector<uint8_t> buffer();
+    DMX_vec buffer();
 };
 extern SpotFixture spot_g, spot_d, spot_1, spot_2, spot_3;
 
@@ -75,7 +75,7 @@ public:
     void init_front(); // initialize a frontal rack of spots
     void init_back();  // initialize a backgoround rack of spots
 
-    std::vector<uint8_t> buffer(){return std::vector<uint8_t>{};}; // empty function (useless)
+    DMX_vec buffer(){return DMX_vec{};}; // empty function (useless)
 };
 
 extern SpotRack front_rack;
@@ -92,8 +92,8 @@ class SpotFrontAnimation1 : public SpotRackAnimtion
 {
 public:
     // aniation parameters (set by user)
-    std::vector<uint8_t> color1;
-    std::vector<uint8_t> color2;
+    DMX_vec color1;
+    DMX_vec color2;
     int sin_max_p_ms;
     int sin_min_p_ms;
     int rand_const_ms;
@@ -105,7 +105,7 @@ public:
     std::vector<unsigned long> t_prev; // timestamp of the prev rise () (memory)
 
     // fixture, color bckgd, color flash, oscil. period(ms)  max , min, mean time btwn flashes (ms), flash duration(ms), description, id
-    SpotFrontAnimation1(SpotRack *f, std::vector<uint8_t> c1, std::vector<uint8_t> c2, int pmax, int pmin, int prand, int flen, std::string d, std::string i)
+    SpotFrontAnimation1(SpotRack *f, DMX_vec c1, DMX_vec c2, int pmax, int pmin, int prand, int flen, std::string d, std::string i)
     {
         this->description = d;
         this->id = i;
@@ -122,6 +122,6 @@ public:
 };
 
 /*Strobe*/
-class SpotFrontAnimation2
-{
+class SpotFrontAnimation2{
+    
 };

@@ -18,4 +18,4 @@ extern std::string s_anim_id;
     "NORMAL MODE" (DMX Rx activated, Serial plotter unavailabe)
 */
 
-// #define BALISE      // Activates console outputs to debug when the loop does not complete properly
+#define BALISE      // Activates console outputs to debug when the loop does not complete properly

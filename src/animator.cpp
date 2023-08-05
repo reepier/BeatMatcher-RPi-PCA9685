@@ -7,6 +7,7 @@
 #include "sysfcn.h"
 #include "LED.h"
 #include "spot.h"
+#include "spider.h"
 
 using namespace std;
 
@@ -28,6 +29,8 @@ void AnimationManager::update(){
             led.activate_random();
             //spot_g.activate_random();
             front_rack.activate_random();
+            balise("Activate random spider animation (init)");
+            spider.activate_random();
         }
 
         if (sampler.state_changed && (frame.t_current_ms-t_last_change_ms > TEMPO_ANIM_CHANGE)){
@@ -36,24 +39,29 @@ void AnimationManager::update(){
             led.activate_random();
             //spot_g.activate_random();
             front_rack.activate_random();
+            balise("Activate random spider animation");
+            spider.activate_random();
         }
 }
 
 
 bool AnimationManager::test_animation(){
     bool success = false;
-    if (s_anim_id.find("LED.") != std::string::npos){   // if animation's ID contains "LED"
-        // select the right animation and activate it
+
+    if (s_anim_id.find("LED.") != string::npos){   // if animation's ID contains "LED"
         success = led.activate_by_ID(s_anim_id);
     }
-    else if (s_anim_id.find("SPOT.") != std::string::npos){ // if animation's ID contains "SPOT"
+    else if (s_anim_id.find("SPOT.") != string::npos){ // if animation's ID contains "SPOT"
         success = spot_g.activate_by_ID(s_anim_id);
     }
-    else if (s_anim_id.find("FR.") != std::string::npos){   // if animation's ID contains "FR" (Front Rack)
+    else if (s_anim_id.find("FR.") != string::npos){   // if animation's ID contains "FR" (Front Rack)
         success = front_rack.activate_by_ID(s_anim_id);
     }
-    else if (s_anim_id.find("BR.") != std::string::npos){   // if animation's ID contains "BR" (BackgroundRack)
+    else if (s_anim_id.find("BR.") != string::npos){   // if animation's ID contains "BR" (BackgroundRack)
         success = back_rack.activate_by_ID(s_anim_id);
+    }
+    else if (s_anim_id.find("SPI.") != string::npos){
+        success = spider.activate_by_ID(s_anim_id);
     }
     else{
         cout << "Animation ID prefix unknown... Prgram ended" << endl;
@@ -71,17 +79,20 @@ void BaseFixture::blackout(bool b){
     this->b_blackout = b;
 }
 
-// randomly select and init an animtion wihtin the list 
+// select and init an animtion randomly picked wihtin the list 
 void BaseFixture::activate_random(){
+    balise("Select");
     this->active_animation = this->animations[ rand()%this->animations.size() ];
+    balise("Init");
     this->active_animation->init();
 } 
 
 
-// select and init an animation based on its ID. If the ID cannot be found within the existing animations, does nothing.
-bool BaseFixture::activate_by_ID(std::string id){
+// select and init an animation with its ID. If the ID cannot be found within the existing animations, does nothing.
+bool BaseFixture::activate_by_ID(string id){
     bool found_it = false;
-    for (std::vector<BaseAnimation*>::iterator anim_it = this->animations.begin(); anim_it != this->animations.end(); anim_it++){
+    
+    for (vector<BaseAnimation*>::iterator anim_it = this->animations.begin(); anim_it != this->animations.end(); anim_it++){
         if ((*anim_it)->id == id){
             found_it = true;
             this->active_animation = (*anim_it);
@@ -93,3 +104,42 @@ bool BaseFixture::activate_by_ID(std::string id){
     }
     return found_it;
 }
+
+
+// -----------------------------------
+// USEFULL FUNCTIONS
+// -----------------------------------
+// TODO
+
+DMX_vec fcn::RGBW(SimpleColor c){
+    switch (c)
+    {
+    case black:
+        return DMX_vec{0,0,0,0};
+        break;
+    case red:
+        return DMX_vec{255,0,0,0};
+        break;
+    case green:
+        return DMX_vec{0,255,0,0};
+        break;
+    case blue:
+        return DMX_vec{0,0,255,0};
+        break;
+    case yellow:
+        return DMX_vec{255,255,0,0};
+        break;
+    case cyan:
+        return DMX_vec{0,255,255,0};
+        break;
+    case magenta:
+        return DMX_vec{255,0,255,0};
+        break;
+    case white:
+        return DMX_vec{0,0,0,255};
+        break;
+    default:
+        break;
+    }
+}
+

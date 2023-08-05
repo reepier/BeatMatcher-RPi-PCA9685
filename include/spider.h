@@ -21,24 +21,25 @@ class SpiderAnimation;
 class SpiderFixture : public BaseFixture
 {
 public:
-    std::vector<uint8_t> pan;               // pan axis [posiiton, Speed]
-    std::vector<uint8_t> tilt;              // tilt axes [tilt 1, tilt 2...]
-    std::vector<std::vector<uint8_t>> RGBW; // LED Pixels [ [R,G,B,W] , [R,G,B,W] , ... [R,G,B,W] ]
+    const int nCH = 44;
+    int pan_position;                   // pan position (°)
+    int  pan_speed;                     // pan speed    [-128 - 127]
+    int_vec tilt;                       // tilt axes [tilt 1, tilt 2...] [0-255] -> -30, +120°
+    std::vector<DMX_vec> RGBW; // LED Pixels [ [R,G,B,W] , [R,G,B,W] , ... [R,G,B,W] ]
     uint8_t strobe;
-    const int nCH = 43;
-
+    uint8_t prog;
+    
     SpiderFixture(int addr) : BaseFixture(addr)
-    {
-        this->pan.resize(2);
+    {  
         this->tilt.resize(3);
-        this->RGBW.resize(NLED, std::vector<uint8_t>(NCOL));
+        this->RGBW.resize(NLED, DMX_vec(NCOL));
     };
 
     void init() override;
 
-    std::vector<uint8_t> buffer() override;
+    DMX_vec buffer() override;
 };
-extern SpiderFixture spider(31);
+extern SpiderFixture spider;
 
 // --------------------------------------
 // SPIDER ANIMATION definition
@@ -53,9 +54,28 @@ public:
 // Static Monochrome Animation
 class SpiderAnimation1 : public SpiderAnimation{
   public:
-    uint8_t RGBW[9][4];
+    int pan_pos;  //pan position °
+    int pan_spd;  //pan speed (-128 ; +127)
+    int_vec tilt;
+    std::vector<DMX_vec> RGBW = std::vector<DMX_vec>(9, fcn::RGBW(black)); // stores RGB values as follow RGBW[Led_i][Pix_i]
 
-    SpiderAnimation1();
+    SpiderAnimation1(SpiderFixture *f, SimpleColor c,  int pos, int spd, int_vec til, std::string d, std::string i){
+        this->description = d;
+        this->id = i; 
+        this->fixture = f;
+
+        if (til.size()==1){
+            this->tilt = int_vec(3, til[0]);
+        }else if (til.size()!=3){
+            this->tilt.resize(0);
+        }else{
+            this->tilt = til;
+        }
+        this->pan_pos = pos;
+        this->pan_spd = spd;
+
+        this->RGBW = std::vector<DMX_vec>(9, fcn::RGBW(c));
+    };
 
     void init() override;
     void new_frame() override;

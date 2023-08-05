@@ -7,15 +7,31 @@
 #include "music.h"
 // #include "LED.h"
 
+// Common Datatypes
+  // indexes for ease of reading --> write { color[R] = ... }  instead of { color[0] = ... } 
+  #define R 0
+  #define G 1
+  #define B 2
+  #define W 3
 
-
-
+  enum SimpleColor{
+    black   =0,
+    red     =1,
+    green   =2,
+    blue    =3,
+    yellow  =4,
+    cyan    =5,
+    magenta =6,
+    white   =7
+  };
+  
+  typedef std::vector<uint8_t>  DMX_vec;  //a vector of 8bit int with values ranging from 0 to 255
+  typedef std::vector<int>      int_vec;  //a vector of standard int 
 
 // Declare all the classes before defining them
 class AnimationManager;
 class BaseFixture;
 class BaseAnimation;
-
 
 /**
  * class AnimationManager is the entity responsible for determining which animation every 
@@ -59,7 +75,7 @@ class BaseFixture{
     bool activate_by_ID(std::string);
 
     //DMX output
-    virtual std::vector<uint8_t> buffer() = 0;
+    virtual DMX_vec buffer() = 0;
 };
 
 
@@ -85,4 +101,11 @@ extern AnimationManager animator;
 // -----------------------------------
 // USEFULL FUNCTIONS
 // -----------------------------------
-// TODO
+// TODO --> tailor these functions specifically for each fixture ! in the <fixture>.cpp
+namespace fcn{
+  // returns a 4 channel DMX vector based on color literal (unnormalized --> full 255)
+  DMX_vec RGBW(SimpleColor);
+
+  // returns a NORMALIZED 4 channel DMX vector based on a DMX_vector and a DMX vlue (0-255)
+  DMX_vec RGBW_norm(DMX_vec, uint8_t);
+}

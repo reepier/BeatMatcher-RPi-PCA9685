@@ -35,8 +35,8 @@ void LEDFixture::init(){
     
 }
 
-std::vector<uint8_t> LEDFixture::buffer(){
-    return std::vector<uint8_t>{this->MASTER_DIMMER, (uint8_t)(this->RGB[R] >> 4), (uint8_t)(this->RGB[G] >> 4), (uint8_t)(this->RGB[B] >> 4)};
+DMX_vec LEDFixture::buffer(){
+    return DMX_vec{this->MASTER_DIMMER, (uint8_t)(this->RGB[R] >> 4), (uint8_t)(this->RGB[G] >> 4), (uint8_t)(this->RGB[B] >> 4)};
 }
 
 
