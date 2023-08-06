@@ -3,8 +3,7 @@
 #include <string>
 #include <vector>
 
-#include <ola/DmxBuffer.h>
-#include <ola/client/StreamingClient.h>
+
 
 #include "debug.h"
 #include "config.h"

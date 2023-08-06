@@ -24,6 +24,13 @@
     magenta =6,
     white   =7
   };
+  enum Shape{
+      square,
+      sinus,
+      triangle,
+      gaussian,
+      saw
+  };
   
   typedef std::vector<uint8_t>  DMX_vec;  //a vector of 8bit int with values ranging from 0 to 255
   typedef std::vector<int>      int_vec;  //a vector of standard int 
@@ -103,9 +110,12 @@ extern AnimationManager animator;
 // -----------------------------------
 // TODO --> tailor these functions specifically for each fixture ! in the <fixture>.cpp
 namespace fcn{
-  // returns a 4 channel DMX vector based on color literal (unnormalized --> full 255)
+  // returns a 4 (or 3 for RGB) channel DMX vector based on color literal (unnormalized --> full 255)
   DMX_vec RGBW(SimpleColor);
+  DMX_vec RGB(SimpleColor);
 
-  // returns a NORMALIZED 4 channel DMX vector based on a DMX_vector and a DMX vlue (0-255)
+
+  // returns a NORMALIZED 4 (or 3 for RGB) channel DMX vector based on a DMX_vector and a DMX vlue (0-255)
   DMX_vec RGBW_norm(DMX_vec, uint8_t);
+  DMX_vec RGB_norm(DMX_vec, uint8_t);
 }

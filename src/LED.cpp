@@ -76,28 +76,30 @@ void LEDAnimation1::init(){
 
 /** Computes the RGB values to send to the led display based on : */
 void LEDAnimation1::new_frame(){
-
+    balise("compute new Led1 frame");
     unsigned long t_ms = frame.t_current_ms;
     unsigned long t_last_beat_ms = sampler.t_last_new_beat;
-
+    balise("0");
     //bool flash = animator.flash; //TOO remove variable flash --> not necessary
     bool flash = (sampler.state == BEAT) && (frame.t_current_ms-sampler.t_beat_tracking_start < MAX_CONT_FLASH);
 
     int backgd_color[3];
-
+    balise("1");
     backgd_color[R] = (backgd_RGB_minmax[0] + backgd_RGB_minmax[1]) / 2 + (backgd_RGB_minmax[1] - backgd_RGB_minmax[0]) / 4 * (sin(2 * 3.14 * t_ms / periods_ms[0]) + sin(2 * 3.14 * t_ms / periods_ms[1]));
     backgd_color[G] = (backgd_RGB_minmax[2] + backgd_RGB_minmax[3]) / 2 + (backgd_RGB_minmax[3] - backgd_RGB_minmax[2]) / 4 * (sin(2 * 3.14 * t_ms / periods_ms[2]) - sin(2 * 3.14 * t_ms / periods_ms[3]));
     backgd_color[B] = (backgd_RGB_minmax[4] + backgd_RGB_minmax[5]) / 2 + (backgd_RGB_minmax[5] - backgd_RGB_minmax[4]) / 4 * (sin(2 * 3.14 * t_ms / periods_ms[4]) - sin(2 * 3.14 * t_ms / periods_ms[5]));
-
+    balise("2");
     float coef = exp(-(double)(t_ms - t_last_beat_ms) / fade_rate);
     if (flash)
     {
+        balise("3");
         fixture->RGB[R] = backgd_color[R] + coef * (flash_RGB[R] - backgd_color[R]);
         fixture->RGB[G] = backgd_color[G] + coef * (flash_RGB[G] - backgd_color[G]);
         fixture->RGB[B] = backgd_color[B] + coef * (flash_RGB[B] - backgd_color[B]);
     }
     else
     {
+        balise("4");
         fixture->RGB[R] = backgd_color[R];
         fixture->RGB[G] = backgd_color[G];
         fixture->RGB[B] = backgd_color[B];

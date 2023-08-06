@@ -4,6 +4,9 @@
 #include <cstring>
 #include <wiringPi.h>
 
+#include <ola/DmxBuffer.h>
+#include <ola/client/StreamingClient.h>
+
 #include "debug.h"
 #include "constant.h"
 #include "LED.h"
@@ -36,6 +39,9 @@ bool process_arguments(int n, char* args[]){
         if (strcmp(arg, "--help") == 0){
             cout << "Arguments :\n--noled\n--nomusic\n--nocurses\n--animation <anim_id>" << endl;
             return false;
+        }else if(strcmp(arg, "--balise") == 0){
+            b_BALISE = true;
+            b_CURSES = false;
         }
         else if (strcmp(arg, "--noled") == 0){
             b_NO_LED = true;
@@ -93,8 +99,10 @@ void initialize() {
     spider.init();
     
     #ifndef BALISE
+    if (!b_BALISE){
         balise("Init. Debug...");
         init_display();
+    }
     #endif
 }
 
@@ -111,12 +119,12 @@ void send(){
 
     // send DMX frame to OLA server.
     balise("Construct buffer");
-    // ola_buffer.SetRange(led.address, led.buffer().data(), led.nCH);
-    // ola_buffer.SetRange(spot_g.address, spot_g.buffer().data(), spot_g.nCH);
-    // ola_buffer.SetRange(spot_d.address, spot_d.buffer().data(), spot_d.nCH);
-    // ola_buffer.SetRange(spot_1.address, spot_1.buffer().data(), spot_1.nCH);
-    // ola_buffer.SetRange(spot_2.address, spot_2.buffer().data(), spot_2.nCH);
-    // ola_buffer.SetRange(spot_3.address, spot_3.buffer().data(), spot_3.nCH);
+    ola_buffer.SetRange(led.address, led.buffer().data(), led.nCH);
+    ola_buffer.SetRange(spot_g.address, spot_g.buffer().data(), spot_g.nCH);
+    ola_buffer.SetRange(spot_d.address, spot_d.buffer().data(), spot_d.nCH);
+    ola_buffer.SetRange(spot_1.address, spot_1.buffer().data(), spot_1.nCH);
+    ola_buffer.SetRange(spot_2.address, spot_2.buffer().data(), spot_2.nCH);
+    ola_buffer.SetRange(spot_3.address, spot_3.buffer().data(), spot_3.nCH);
     ola_buffer.SetRange(spider.address, spider.buffer().data(), spider.nCH);
 
     balise("OLAclient.send()");
@@ -165,12 +173,14 @@ int main(int argc, char* argv[]){
         send();
 
         #ifndef BALISE
+        if (!b_BALISE){
             balise("Debug...");
             if (!b_CURSES){
                 display();
             }else{
                 display_curse();
             }
+        }
         #endif
 
         balise("Wait next frame...");

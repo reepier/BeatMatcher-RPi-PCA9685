@@ -263,7 +263,7 @@ void display(){
 }
 
 void balise(const char* str){
-    #ifdef  BALISE
+    if (b_BALISE){
         std::cout << str << std::endl;
-    #endif
+    }
 }

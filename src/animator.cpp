@@ -60,7 +60,7 @@ bool AnimationManager::test_animation(){
     else if (s_anim_id.find("BR.") != string::npos){   // if animation's ID contains "BR" (BackgroundRack)
         success = back_rack.activate_by_ID(s_anim_id);
     }
-    else if (s_anim_id.find("SPI.") != string::npos){
+    else if (s_anim_id.find("SPI.") != string::npos){   // if animation's ID contains "SPI" (SPIder)
         success = spider.activate_by_ID(s_anim_id);
     }
     else{
@@ -142,4 +142,66 @@ DMX_vec fcn::RGBW(SimpleColor c){
         break;
     }
 }
+DMX_vec fcn::RGB(SimpleColor c){
+    switch (c)
+    {
+    case black:
+        return DMX_vec{0,0,0};
+        break;
+    case red:
+        return DMX_vec{255,0,0};
+        break;
+    case green:
+        return DMX_vec{0,255,0};
+        break;
+    case blue:
+        return DMX_vec{0,0,255};
+        break;
+    case yellow:
+        return DMX_vec{255,255,0};
+        break;
+    case cyan:
+        return DMX_vec{0,255,255};
+        break;
+    case magenta:
+        return DMX_vec{255,0,255};
+        break;
+    case white:
+        return DMX_vec{255,255,255};
+        break;
+    default:
+        break;
+    }
+}
+//  rgbw: color vector ; intensity : equivalent 8bit intensity
+DMX_vec fcn::RGBW_norm(DMX_vec rgbw, uint8_t intensity){
+    DMX_vec ret(4);
+    if (rgbw.size() != 4){
+        ret = DMX_vec{0,0,0,0};
+    }else{
+        
 
+        int input_int = rgbw[R]+rgbw[G]+rgbw[B]+rgbw[W];
+        float gain = (float)intensity/input_int;
+        ret[R] = gain * rgbw[R];
+        ret[G] = gain * rgbw[G];
+        ret[B] = gain * rgbw[B];
+        ret[W] = gain * rgbw[W];
+    }
+    return ret;
+}
+DMX_vec fcn::RGB_norm(DMX_vec rgbw, uint8_t intensity){
+    DMX_vec ret(3);
+    if (rgbw.size() != 3){
+        ret = DMX_vec{0,0,0};
+    }else{
+        
+
+        int input_int = rgbw[R]+rgbw[G]+rgbw[B];
+        float gain = (float)intensity/input_int;
+        ret[R] = gain * rgbw[R];
+        ret[G] = gain * rgbw[G];
+        ret[B] = gain * rgbw[B];
+    }
+    return ret;
+}

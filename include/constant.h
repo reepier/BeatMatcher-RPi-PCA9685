@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 // -- CONFIG ------------------------------------------------------------
 #define FRATE   40                              //Hz program main frame rate
 
