@@ -10,6 +10,7 @@ class SpotAnimation1;
 class SpotRack;
 class SpotBack;
 
+typedef std::vector<SpotFixture*> spot_vec;
 // TODO Remove the individual spot class --> I will never need (for now) to control 1 spot individually.
 // -----------------------------------
 // INDIVIDUAL SPOT
@@ -77,7 +78,7 @@ public:
         this->rack_size = this->spots.size();
         };
 
-    void init();     // empty function (useless)
+    void init() override;     // empty function (useless)
     void init_front(); // initialize a frontal rack of spots
     void init_back();  // initialize a backgoround rack of spots
     
@@ -129,7 +130,24 @@ public:
     void new_frame();
 };
 
+
+#define STRB_FAST 180
+#define STRB_MED 140
+#define STRB_SLOW 100
 /*Strobe*/
-class SpotFrontAnimation2{
+class SpotFrontAnimation2 : public SpotRackAnimtion{
+  public:
+    DMX_vec color;
+    uint8_t strobe_spd;
+
+    SpotFrontAnimation2(SpotRack *f, DMX_vec c, uint8_t speed, std::string d, std::string i){
+        this->description = d;
+        this->id = i;
+        this->fixture = f;
+        this->color = c;
+        this->strobe_spd = speed;
+    }
     
+    void init() override;
+    void new_frame() override;
 };

@@ -113,99 +113,86 @@ bool BaseFixture::activate_by_ID(string id){
 // TODO
 #include <sstream>
 
-DMX_vec fcn::RGBW(SimpleColor c){
+DMX_vec fcn::RGBW(SimpleColor c, uint8_t intensity){
     switch (c)
     {
     case black:
-        return DMX_vec{0,0,0,0};
+        return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);
         break;
     case red:
-        return DMX_vec{255,0,0,0};
+        return fcn::RGBW_norm(DMX_vec{255,0,0,0}, intensity);
         break;
     case green:
-        return DMX_vec{0,255,0,0};
+        return fcn::RGBW_norm(DMX_vec{0,255,0,0}, 160.0/255*intensity);
         break;
     case blue:
-        return DMX_vec{0,0,255,0};
+        return fcn::RGBW_norm(DMX_vec{0,0,255,0}, 190.0/255*intensity);
         break;
     case yellow:
-        return DMX_vec{255,255,0,0};
+        return fcn::RGBW_norm(DMX_vec{255,90,0,0}, intensity);
+        break;
+    case orange:
+        return fcn::RGBW_norm(DMX_vec{255,50,0,0}, intensity);
+        break;
+    case sodium:
+        return fcn::RGBW_norm(DMX_vec{255,20,0,0}, intensity);
         break;
     case cyan:
-        return DMX_vec{0,255,255,0};
+        return fcn::RGBW_norm(DMX_vec{0,219,255,0}, 180.0/255*intensity);
         break;
+    case purple:
+        return fcn::RGBW_norm(DMX_vec{150,0,255,0}, intensity);
+        break;    
     case magenta:
-        return DMX_vec{255,0,255,0};
+        return fcn::RGBW_norm(DMX_vec{255,0,240,0}, intensity);
+        break;
+    case pink:
+        return fcn::RGBW_norm(DMX_vec{255,0,69,0}, intensity);
         break;
     case white:
-        return DMX_vec{0,0,0,255};
+        return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);
+        break;
+    case gold:
+        return fcn::RGBW_norm(DMX_vec{255,40,0,70}, intensity);
         break;
     default:
         break;
     }
 }
-DMX_vec fcn::RGB(SimpleColor c){
-    switch (c)
-    {
-    case black:
-        return DMX_vec{0,0,0};
-        break;
-    case red:
-        return DMX_vec{255,0,0};
-        break;
-    case green:
-        return DMX_vec{0,255,0};
-        break;
-    case blue:
-        return DMX_vec{0,0,255};
-        break;
-    case yellow:
-        return DMX_vec{255,255,0};
-        break;
-    case cyan:
-        return DMX_vec{0,255,255};
-        break;
-    case magenta:
-        return DMX_vec{255,0,255};
-        break;
-    case white:
-        return DMX_vec{255,255,255};
-        break;
-    default:
-        break;
+
+DMX_vec fcn::RGB(SimpleColor color, uint8_t intensity){
+    DMX_vec ret;
+    if (color == black || color == red || color == green || color == blue
+        || color == cyan || color == magenta || color == pink || color == purple
+        || color == yellow || color == orange || color == sodium){
+        ret = fcn::RGBW(color, intensity);
+        ret.pop_back();
+    }
+    
+    else if (color == white){
+        return RGB_norm(DMX_vec{255,90,17});
+    }else if (color == gold){
+        return fcn::RGB_norm(DMX_vec{255,42,7}, intensity);
     }
 }
 //  rgbw: color vector ; intensity : equivalent 8bit intensity
 DMX_vec fcn::RGBW_norm(DMX_vec rgbw, uint8_t intensity){
-    DMX_vec ret(4);
-    if (rgbw.size() != 4){
-        ret = DMX_vec{0,0,0,0};
-    }else{
-        
+    const int size = rgbw.size();
+    DMX_vec ret(size);
+    
+    int sum = 0;
+    for (int i=0; i<size; i++){
+        sum += rgbw[i];
+    }
+    float gain = (float)intensity/sum;
 
-        int input_int = rgbw[R]+rgbw[G]+rgbw[B]+rgbw[W];
-        float gain = (float)intensity/input_int;
-        ret[R] = gain * rgbw[R];
-        ret[G] = gain * rgbw[G];
-        ret[B] = gain * rgbw[B];
-        ret[W] = gain * rgbw[W];
+    for (int i=0; i<size; i++){
+        ret[i] = gain*rgbw[i];
     }
     return ret;
 }
-DMX_vec fcn::RGB_norm(DMX_vec rgbw, uint8_t intensity){
-    DMX_vec ret(3);
-    if (rgbw.size() != 3){
-        ret = DMX_vec{0,0,0};
-    }else{
-        
-
-        int input_int = rgbw[R]+rgbw[G]+rgbw[B];
-        float gain = (float)intensity/input_int;
-        ret[R] = gain * rgbw[R];
-        ret[G] = gain * rgbw[G];
-        ret[B] = gain * rgbw[B];
-    }
-    return ret;
+DMX_vec fcn::RGB_norm(DMX_vec rgb, uint8_t intensity){
+    return fcn::RGBW_norm(rgb, intensity);
 }
 
 string fcn::DMXvec_to_str(DMX_vec data, char sep){

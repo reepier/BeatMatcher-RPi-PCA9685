@@ -76,6 +76,7 @@ void SpotRack::init(){
     this->rack_size = this->spots.size();
 
     //this->animations.push_back();
+    // Animation 1
     this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{0,0,0,0},      DMX_vec{0,0,0,0},       15000, 5000, 8000, 1000, "Black", "FR.0.0"));
     this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{25,0,60,0},    DMX_vec{255,40,0,110},   15000, 5000, 8000, 1000, "Purple background / orange flashes", "FR.1.01"));
     this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{50,5,0,0},     DMX_vec{0,0,0,255},     15000, 5000, 8000, 1000, "Orange background, white flashes", "FR.1.2"));  
@@ -91,7 +92,13 @@ void SpotRack::init(){
     this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{0,0,0,0},      DMX_vec{255,40,0,0},       15000, 5000, 5000, 700, "Black background, Orange flashes", "FR.1.10"));
     this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{0,0,0,0},      DMX_vec{200,35,0,80},       15000, 5000, 5000, 700, "Black background, Orange/White flashes", "FR.1.11"));
     this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{60,0,30,0},    DMX_vec{0,150,150,80},       15000, 5000, 7000, 1000, "Purple background, Cyan flashes", "FR.1.12"));
-
+    // Animation 2:
+    this->animations.push_back(new SpotFrontAnimation2(this, fcn::RGBW(white),    STRB_FAST,    "white, fast strobe", "FR.2.1"));
+    this->animations.push_back(new SpotFrontAnimation2(this, fcn::RGBW(white),    STRB_MED,     "white, medium strobe", "FR.2.2"));
+    this->animations.push_back(new SpotFrontAnimation2(this, fcn::RGBW(white),    STRB_SLOW,    "white, slow strobe", "FR.2.3"));
+    
+    this->animations.push_back(new SpotFrontAnimation2(this, fcn::RGBW(red),    180,    "Red, slow strobe", "FR.2.4"));
+    this->animations.push_back(new SpotFrontAnimation2(this, fcn::RGBW_norm(DMX_vec{255,40,0,100}, 255),    180,    "Gold, slow strobe", "FR.2.5"));
     this->activate_by_ID("FR.0.0");
 
 
@@ -107,11 +114,11 @@ void SpotRack::init_back(){
 // -----------------------------------
 // FRONTAL RACK of SPOT Animations
 // -----------------------------------
+// 1 ---------------------------------
 void SpotFrontAnimation1::init(){
-    
-    
     this->frame_cpt = 0;
     this->t_animation_start_ms;
+
     this->p_ms = vector<int>{rand_min_max(sin_min_p_ms, sin_max_p_ms),rand_min_max(sin_min_p_ms, sin_max_p_ms),rand_min_max(sin_min_p_ms, sin_max_p_ms), rand_min_max(sin_min_p_ms, sin_max_p_ms), rand_min_max(sin_min_p_ms, sin_max_p_ms)};
     
     const int n_spot = this->fixture->spots.size();
@@ -159,5 +166,24 @@ void SpotFrontAnimation1::new_frame(){
             this->fixture->spots[i_spot]->RGBW[G] = min(max( (int)( (1.0-flash_intensity) * backgd_RGBW[G] + flash_intensity * this->color2[G]  ),0),255);
             this->fixture->spots[i_spot]->RGBW[B] = min(max( (int)( (1.0-flash_intensity) * backgd_RGBW[B] + flash_intensity * this->color2[B]  ),0),255);
             this->fixture->spots[i_spot]->RGBW[W] = min(max( (int)( (1.0-flash_intensity) * backgd_RGBW[W] + flash_intensity * this->color2[W]  ),0),255);
+    }
+}
+
+// -----------------------------------
+// 2 ---------------------------------
+void SpotFrontAnimation2::init(){
+    this->frame_cpt = 0;
+    this->t_animation_start_ms = frame.t_current_ms;
+}
+
+void SpotFrontAnimation2::new_frame(){
+    // for readability
+    spot_vec spots = this->fixture->spots;
+    int n_spots = spots.size();
+    unsigned long t = frame.t_current_ms;
+
+    for (int i = 0; i<n_spots; i++){
+        spots[i]->RGBW   = this->color;
+        spots[i]->strobe = min(max( (int)(this->strobe_spd * (1 + 0.1*sin(i*M_PI/3 + 2*M_PI*t/6000)))  ,0),255);
     }
 }

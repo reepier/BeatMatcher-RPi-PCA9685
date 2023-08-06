@@ -35,20 +35,28 @@ void send_buffer(){
 int main(){
     ola_client.Setup();
 
-    // DMX_vec rgbw(4);
-    // while(true){
-    //     rgbw[R] = 255*(1+sin(2*M_PI*millis()/5000))/2;
-    //     rgbw[B] = 255*(1+sin(2*M_PI*millis()/5000 + M_PI))/2;
-    //     spot_1.RGBW = rgbw;
-    //     ola_buffer.SetRange(spot_1.address, spot_1.buffer().data(), spot_1.nCH);
+    DMX_vec rgbw(4);
+    while(true){
+      for(int c = SimpleColor::black; c != SimpleColor::last_color; c++){
         
-    //     ola_client.SendDmx(1, ola_buffer);
-    //     delay(10);
-    // }
+        spot_1.RGBW = fcn::RGBW((SimpleColor)c);
+        spot_2.RGBW = fcn::RGBW((SimpleColor)c);
+        spot_3.RGBW = fcn::RGBW((SimpleColor)c);
+      
+        
+        ola_buffer.SetRange(spot_1.address, spot_1.buffer().data(), spot_1.nCH);
+        ola_buffer.SetRange(spot_2.address, spot_3.buffer().data(), spot_3.nCH);
+        ola_buffer.SetRange(spot_3.address, spot_3.buffer().data(), spot_3.nCH);
+        
+        cout<<colorName[c]<<endl;
+        ola_client.SendDmx(1, ola_buffer);
+        delay(1000);
+      }
+    }
 
-    DMX_vec data = {0,8,255,17};
-    cout << fcn::DMXvec_to_str(data, ',');
-    cout << endl;
-
-    cout << fcn::num_to_str((int)127) << " " << fcn::num_to_str((uint8_t)128) << " " << fcn::num_to_str(129.0) << " "<<endl;
+    // DMX_vec data = {0,8,255,17};
+    // cout << fcn::DMXvec_to_str(data, ',');
+    // cout << endl;
+    
+    // cout << fcn::num_to_str((int)127) << " " << fcn::num_to_str((uint8_t)128) << endl;
 }

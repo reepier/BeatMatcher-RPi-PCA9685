@@ -15,15 +15,25 @@
   #define W 3
 
   enum SimpleColor{
-    black   =0,
-    red     =1,
-    green   =2,
-    blue    =3,
-    yellow  =4,
-    cyan    =5,
-    magenta =6,
-    white   =7
+    black=0,
+    red,
+    green,
+    blue,
+    yellow,
+    orange,
+    sodium,    //RGBW(255,10??,0,0)  --> deep orange, very red
+    cyan,
+    purple,
+    magenta,
+    pink,
+    white,
+    gold,     //RGBW(255,40,0,100 ) --> Orange + White
+    last_color
   };
+  const std::vector<std::string> colorName = {"Black", "Red", "Green", "Blue", 
+                                      "Yellow", "Orange", "Sodium",
+                                      "Cyan", "Purple", "Magenta", "Pink", "White",
+                                      "Gold"};
   enum Shape{
       square,
       sinus,
@@ -41,6 +51,7 @@ class AnimationManager;   //TODO move this in a sceno.h and rename this module b
 class BaseFixture;        //TODO move this in baseFixture.h
 class BaseAnimation;      //TODO move this in baseAnimation.h
 
+typedef std::vector<BaseFixture*> fix_vec;
 /**
  * class AnimationManager is the entity responsible for determining which animation every 
  * fixture should run, based on the musical analysis
@@ -113,14 +124,14 @@ extern AnimationManager animator;
 // -----------------------------------
 // TODO --> tailor these functions specifically for each fixture ! in the <fixture>.cpp
 namespace fcn{
-  // returns a 4 (or 3 for RGB) channel DMX vector based on color literal (unnormalized --> full 255)
-  DMX_vec RGBW(SimpleColor);
-  DMX_vec RGB(SimpleColor);
+  // returns a 255-normalized 4 (or 3 for RGB) channel DMX vector based on color literal
+  DMX_vec RGBW(SimpleColor, uint8_t intensity = 255);
+  DMX_vec RGB(SimpleColor, uint8_t intensity = 255);
 
 
   // returns a NORMALIZED 4 (or 3 for RGB) channel DMX vector based on a DMX_vector and a DMX vlue (0-255)
-  DMX_vec RGBW_norm(DMX_vec, uint8_t);
-  DMX_vec RGB_norm(DMX_vec, uint8_t);
+  DMX_vec RGBW_norm(DMX_vec, uint8_t intensity=255);
+  DMX_vec RGB_norm(DMX_vec, uint8_t intensity=255);
   std::string DMXvec_to_str(DMX_vec, char);
   std::string num_to_str(int);
   std::string num_to_str(uint8_t);
