@@ -9,28 +9,27 @@
 
 #include "debug.h"
 #include "constant.h"
-#include "LED.h"
-#include "spot.h"
-#include "spider.h"
+#include "fixtures.h"
 #include "music.h"
-#include "animator.h"
 #include "sysfcn.h"
 #include "config.h"
 
 using namespace std;
 
 #ifndef LINUX_PC // if compiling on raspberrypi
-  // I2C Hardware interface (PCA9685)
-  int fd;
-  int addr = 0x40;
-  unsigned int setOnVals[_PCA9685_CHANS] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-  unsigned int setOffVals[_PCA9685_CHANS] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    // I2C Hardware interface (PCA9685)
+    int fd;
+    int addr = 0x40;
+    unsigned int setOnVals[_PCA9685_CHANS] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    unsigned int setOffVals[_PCA9685_CHANS] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 #endif
 
 // DMX output interface (OLA)
-  ola::client::StreamingClient ola_client;
-  ola::DmxBuffer ola_buffer;
+    ola::client::StreamingClient ola_client;
+    ola::DmxBuffer ola_buffer;
 
+fix_vec ll_fxtrs = {&led, &spot_1, &spot_2, &spot_3, &spot_d, &spot_g, &spider};
+fix_vec fixtures = {&front_rack, &led, &spider};
 
 bool process_arguments(int n, char* args[]){
     for (int i=1; i<=n-1; i++){
@@ -73,7 +72,6 @@ bool process_arguments(int n, char* args[]){
 
 void initialize() {
     srand((unsigned)time(nullptr));
-    
 
     #ifndef LINUX_PC // if compiling on raspberrypi
         balise("Init. PCA...");
@@ -93,17 +91,19 @@ void initialize() {
     
     //TODO : try to move these calls (or even the init functions content) into the Fixture constructor. 
     balise("Init. fixtures...");
-    led.init();   // initialize OLA & shit
-    front_rack.init_front();
-    //spot_g.init();
-    spider.init();
+    for (fix_vec::iterator fixture = fixtures.begin(); fixture != fixtures.end(); fixture++){
+        balise((*fixture)->name.data());
+        (*fixture)->init();
+    }
+    // led.init();   // initialize OLA & shit
+    // front_rack.init_front();
+    // //spot_g.init();
+    // spider.init();
     
-    #ifndef BALISE
     if (!b_BALISE){
         balise("Init. Debug...");
         init_display();
     }
-    #endif
 }
 
 void send(){
@@ -114,18 +114,27 @@ void send(){
     setOffVals[LEDGreen] = led.RGB[G] * led.MASTER_DIMMER / 255.0;
     setOffVals[LEDBlue] = led.RGB[B] * led.MASTER_DIMMER / 255.0;
 
+  
     PCA9685_setPWMVals(fd, addr, setOnVals, setOffVals);
 #endif // DEBUG
 
     // send DMX frame to OLA server.
     balise("Construct buffer");
-    ola_buffer.SetRange(led.address, led.buffer().data(), led.nCH);
-    ola_buffer.SetRange(spot_g.address, spot_g.buffer().data(), spot_g.nCH);
-    ola_buffer.SetRange(spot_d.address, spot_d.buffer().data(), spot_d.nCH);
-    ola_buffer.SetRange(spot_1.address, spot_1.buffer().data(), spot_1.nCH);
-    ola_buffer.SetRange(spot_2.address, spot_2.buffer().data(), spot_2.nCH);
-    ola_buffer.SetRange(spot_3.address, spot_3.buffer().data(), spot_3.nCH);
-    ola_buffer.SetRange(spider.address, spider.buffer().data(), spider.nCH);
+    for (fix_vec::iterator fx = ll_fxtrs.begin(); fx != ll_fxtrs.end(); fx++){
+        balise(fcn::num_to_str((*fx)->address).data());
+        balise(fcn::DMXvec_to_str((*fx)->buffer(), ',').data());
+        balise(fcn::num_to_str((*fx)->nCH).data());
+
+        ola_buffer.SetRange((*fx)->get_address(), (*fx)->buffer().data(), (*fx)->get_nCH());
+    }
+    // ola_buffer.SetRange(ll_fxtrs[0]->address, ll_fxtrs[0]->buffer().data(), ll_fxtrs[0]->nCH);
+    // ola_buffer.SetRange(led.address, led.buffer().data(), led.nCH);
+    // ola_buffer.SetRange(spot_g.address, spot_g.buffer().data(), spot_g.nCH);
+    // ola_buffer.SetRange(spot_d.address, spot_d.buffer().data(), spot_d.nCH);
+    // ola_buffer.SetRange(spot_1.address, spot_1.buffer().data(), spot_1.nCH);
+    // ola_buffer.SetRange(spot_2.address, spot_2.buffer().data(), spot_2.nCH);
+    // ola_buffer.SetRange(spot_3.address, spot_3.buffer().data(), spot_3.nCH);
+    // ola_buffer.SetRange(spider.address, spider.buffer().data(), spider.nCH);
 
     balise("OLAclient.send()");
     ola_client.SendDmx(1, ola_buffer);
@@ -144,7 +153,7 @@ int main(int argc, char* argv[]){
     
     while (true){
         // Update general counters and timers
-        balise("Start new frame...");
+        balise("----------------------------Start new frame...");
         frame.start_new_frame();
         
         // Record and process music sample 
@@ -164,15 +173,18 @@ int main(int argc, char* argv[]){
         }
 
         balise("Compute new frame...");
-        led.active_animation->new_frame();
-        //spot_g.active_animation->new_frame();
-        front_rack.active_animation->new_frame();
-        spider.active_animation->new_frame();
+        for (fix_vec::iterator fixture = fixtures.begin(); fixture != fixtures.end(); fixture++){
+            balise((*fixture)->active_animation->id.data());
+            (*fixture)->active_animation->new_frame();
+        }
+        // led.active_animation->new_frame();
+        // //spot_g.active_animation->new_frame();
+        // front_rack.active_animation->new_frame();
+        // spider.active_animation->new_frame();
         
         balise("Send frame...");
         send();
 
-        #ifndef BALISE
         if (!b_BALISE){
             balise("Debug...");
             if (!b_CURSES){
@@ -181,7 +193,6 @@ int main(int argc, char* argv[]){
                 display_curse();
             }
         }
-        #endif
 
         balise("Wait next frame...");
         frame.wait_for_next();

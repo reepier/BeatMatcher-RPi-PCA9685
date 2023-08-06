@@ -19,7 +19,7 @@ public:
     uint8_t motor_sync, freq_sync;      // motor speed and flickering freq calibration coefficient 
 
     // constructor
-    LaserFixture(int addr): BaseFixture(addr){};
+    LaserFixture(int addr, int ch, std::string nm): BaseFixture(addr, ch, nm){};
 
     // color macros;
     void red(){        

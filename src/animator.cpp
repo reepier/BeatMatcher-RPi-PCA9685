@@ -79,6 +79,7 @@ void BaseFixture::blackout(bool b){
     this->b_blackout = b;
 }
 
+//TODO move BaseFixure and BaseAnimation functions in basefixture.h and baseanimation.h
 // select and init an animtion randomly picked wihtin the list 
 void BaseFixture::activate_random(){
     balise("Select");
@@ -110,6 +111,7 @@ bool BaseFixture::activate_by_ID(string id){
 // USEFULL FUNCTIONS
 // -----------------------------------
 // TODO
+#include <sstream>
 
 DMX_vec fcn::RGBW(SimpleColor c){
     switch (c)
@@ -204,4 +206,33 @@ DMX_vec fcn::RGB_norm(DMX_vec rgbw, uint8_t intensity){
         ret[B] = gain * rgbw[B];
     }
     return ret;
+}
+
+string fcn::DMXvec_to_str(DMX_vec data, char sep){
+    string ret;
+    for (DMX_vec::iterator px=data.begin(); px!=data.end(); px++){
+        ostringstream oss;
+        oss<<(int)(*px);
+        string sub_ret = oss.str();
+        int sz = sub_ret.size();
+        if (sz < 3){
+            sub_ret.insert(0, string(3-sz, ' '));
+        }
+
+        ret.append(sub_ret);
+        if ( !( (px+1)==data.end()) ){
+            ret.push_back(sep);
+        }
+    }
+    return ret;
+}
+std::string fcn::num_to_str(int val){
+    ostringstream oss;
+    oss<<val;
+    return oss.str();
+}
+std::string fcn::num_to_str(uint8_t val){
+    ostringstream oss;
+    oss<<(int)val;
+    return oss.str();
 }

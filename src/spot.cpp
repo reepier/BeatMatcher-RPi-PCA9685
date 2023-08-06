@@ -7,12 +7,12 @@
 
 using namespace std;
 
-SpotFixture spot_1(73);     //spot frontal 1
-SpotFixture spot_2(81);     //spot frontal 2
-SpotFixture spot_3(89);    //spot frontal 3
+SpotFixture spot_1(73, 8, "Spot 1");     //spot frontal 1
+SpotFixture spot_2(81, 8, "Spot 2");     //spot frontal 2
+SpotFixture spot_3(89, 8, "Spot 3");    //spot frontal 3
 
-SpotFixture spot_g(97);     //spot d'ambiance gauche
-SpotFixture spot_d(105);     //spot d'ambiance droite
+SpotFixture spot_g(97, 8, "Spot g");     //spot d'ambiance gauche
+SpotFixture spot_d(105, 8, "Spot d");     //spot d'ambiance droite
 
 // -----------------------------------
 // INDIVIDUAL SPOT
@@ -69,10 +69,10 @@ void SpotAnimation1::new_frame(){
 // -----------------------------------
 // RACKs of SPOTS
 // -----------------------------------
-SpotRack front_rack(&spot_1, &spot_2, &spot_3);
-SpotRack back_rack(&spot_g, &spot_d);
+SpotRack front_rack(&spot_1, &spot_2, &spot_3, "Front Rack");
+SpotRack back_rack(&spot_g, &spot_d, "Back Rack");
 
-void SpotRack::init_front(){
+void SpotRack::init(){
     this->rack_size = this->spots.size();
 
     //this->animations.push_back();
@@ -127,13 +127,12 @@ void SpotFrontAnimation1::new_frame(){
     balise("compute new front rack1 frame");
     long t = frame.t_current_ms;       // for readability
     int n_spot = this->fixture->spots.size();   // for readability
-    balise("1");
+    
     // update 4 sinewaves of different period
     vector<double> s = {sin(2*M_PI*t/p_ms[0]), sin(2*M_PI*t/p_ms[1]), sin(2*M_PI*t/p_ms[2]), sin(2*M_PI*t/p_ms[3]), sin(2*M_PI*t/p_ms[4]) };
-    balise("2");
+    
     // for each spot "i" of the rack
     for (int i_spot=0; i_spot < n_spot; i_spot++){
-        balise("3");
         DMX_vec backgd_RGBW(4);        
         // compute the background color values : 
             backgd_RGBW[R] = min(max(    (int) (  (1+0.4*s[(i_spot+4)%5]) * this->color1[R] * (1 + 0.4*s[(i_spot+0)%5]))  ,0),255);
@@ -144,9 +143,9 @@ void SpotFrontAnimation1::new_frame(){
         
         // compute the flash = exp( -(spd.(t-t0))²)
             // when the flash passes, compute the next flash timestamp and update prev flash
-            balise("4");
+
             if (t > this->t_next[i_spot]){
-                balise("5");
+
                 this->t_prev[i_spot] = this->t_next[i_spot];
                 this->t_next[i_spot] = this->t_next[i_spot] + rand_min_max(this->rand_const_ms/5, this->rand_const_ms*2);
             }
@@ -155,7 +154,7 @@ void SpotFrontAnimation1::new_frame(){
             int t_prev_flash = this->t_prev[i_spot];        // for readability  
             
             double flash_intensity = exp( -pow(2.5/this->flash_len*(t - t_prev_flash), 2)) + exp( -pow(2.5/this->flash_len*(t - t_next_flash), 2));
-            balise("6");
+
             this->fixture->spots[i_spot]->RGBW[R] = min(max( (int)( (1.0-flash_intensity) * backgd_RGBW[R] + flash_intensity * this->color2[R]  ),0),255); 
             this->fixture->spots[i_spot]->RGBW[G] = min(max( (int)( (1.0-flash_intensity) * backgd_RGBW[G] + flash_intensity * this->color2[G]  ),0),255);
             this->fixture->spots[i_spot]->RGBW[B] = min(max( (int)( (1.0-flash_intensity) * backgd_RGBW[B] + flash_intensity * this->color2[B]  ),0),255);

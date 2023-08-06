@@ -39,13 +39,15 @@ class LEDFixture : public BaseFixture
 public:
   // Channels :
   std::vector<int> RGB = {0, 0, 0}; // = {R,G,B} Values from 0-4095
-  const int nCH = 4;
+  int nCH = 4;
 
 
-  LEDFixture(int addr) : BaseFixture(addr){};
+  LEDFixture(int addr, int ch, std::string nm) : BaseFixture(addr, ch, nm){};
   void init();
 
-  std::vector<uint8_t> buffer();
+  int get_nCH() override { return this->nCH; };
+  int get_address() override { return this->address; };
+  std::vector<uint8_t> buffer() override;
 };
 extern LEDFixture led;
 

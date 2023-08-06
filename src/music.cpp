@@ -276,7 +276,7 @@ void SoundAnalyzer::_switch_to_state(states s){
    ---------------------------------------------------------------*/
 
 
-#define BPM 110          // BPM
+#define BPM 140          // BPM
 #define BREAKDuration 8  // beats
 #define DROPDuration  16 // beats
 

@@ -19,7 +19,6 @@ typedef std::vector<DMX_vec> pixel_vec;
 class SpiderFixture : public BaseFixture
 {
 public:
-    const int nCH = 44;
     int pan_position;                   // pan position (°)
     int  pan_speed;                     // pan speed    [-128 - 127]
     int_vec tilt;                       // tilt axes [tilt 1, tilt 2...] [0-255] -> -30, +120°
@@ -27,7 +26,7 @@ public:
     uint8_t strobe;
     uint8_t prog;
     
-    SpiderFixture(int addr) : BaseFixture(addr)
+    SpiderFixture(int addr, int ch, std::string nm) : BaseFixture(addr, ch, nm)
     {  
         this->tilt.resize(3);
         this->pixels.resize(NLED, DMX_vec(NCOL));
@@ -35,6 +34,8 @@ public:
 
     void init() override;
 
+    int get_nCH() override { return this->nCH; };
+    int get_address() override { return this->address; };
     DMX_vec buffer() override;
 };
 extern SpiderFixture spider;

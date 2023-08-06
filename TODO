@@ -1,11 +1,3 @@
-CLEAN and STRUCTURE the code using as much good practices as possible:
-    - identify & isolate every paramter (threshold values, settings, etc.) in a dedicated module
-    - use chrono::duration rather than unsigned long for timestamps & time management
-    - use a t_ d_ naming convention for timestamp vs duration
-
-    - IN PROGRESS !!! Ncurses for console output !!!!
-
-
 ADD A CONFIGURATION CAPABILITY based on the following principles :
     Read a csv containing the config (define a format & write a parser function)
     Extract the values
@@ -15,11 +7,6 @@ ADD A CONFIGURATION CAPABILITY based on the following principles :
 ADD command line input argumetns :
     - to enable/disable FAKEANALYSIS / PCA9685
         - when enabled, to set BPM ?
-    - to run one (or more) specific animation (dev mode)
-        --> use id for that
-
-
-
 
 syntax :
  - use emplace_back instead of push_back

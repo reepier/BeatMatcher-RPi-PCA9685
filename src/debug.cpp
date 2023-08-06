@@ -11,7 +11,7 @@
 #include "animator.h"
 #include "music.h"
 #include "LED.h"
-#include "spot.h"
+#include "fixtures.h"
 
 using namespace std;
 
@@ -159,13 +159,23 @@ void disp_output_window(){
     mvwprintw(outputw, 0,1, "OUTPUT");
     wattroff(outputw, A_BOLD);
 
+    int i=1;
+    for (fix_vec::iterator fix = fixtures.begin(); fix != fixtures.end(); fix++){
+        ostringstream animbuf, outbuf;
+        animbuf << (*fix)->active_animation->id<<" - "<<(*fix)->active_animation->description;
+        
+        DMX_vec raw_buf = (*fix)->buffer();
+        outbuf << "| " <<fcn::DMXvec_to_str(raw_buf, ',');
 
-    ostringstream ledanimbuf, ledoutbuf, spotanimbuf, spotoutbuf;
-
-    ledanimbuf<<led.active_animation->id<<" - "<<led.active_animation->description;
-    ledoutbuf<<"| R:"<<led.RGB[R]<<"\tG:"<<led.RGB[G]<<"\tB:"<<led.RGB[B];
-    mvwprintw(outputw, 1, 1, ledanimbuf.str().c_str());
-    mvwprintw(outputw, 1, 60, ledoutbuf.str().c_str());
+        mvwprintw(outputw, i, 1, animbuf.str().data());
+        mvwprintw(outputw, i, 55, outbuf.str().size()<60? outbuf.str().data() : outbuf.str().substr(0, 60).data());
+        i++;
+    }
+    // ostringstream ledanimbuf, ledoutbuf, spotanimbuf, spotoutbuf;
+    // ledanimbuf<<led.active_animation->id<<" - "<<led.active_animation->description;
+    // ledoutbuf<<"| R:"<<led.RGB[R]<<"\tG:"<<led.RGB[G]<<"\tB:"<<led.RGB[B];
+    // mvwprintw(outputw, 1, 1, ledanimbuf.str().c_str());
+    // mvwprintw(outputw, 1, 60, ledoutbuf.str().c_str());
 
     // spotanimbuf<<spot_g.active_animation->id<<" - "<<spot_g.active_animation->description;
     // spotoutbuf<<"| R:"<<(int)spot_g.RGBW[R]<<"\tG:"<<(int)spot_g.RGBW[G]<<"\tB:"<<(int)spot_g.RGBW[B]<<"\tW:"<<(int)spot_g.RGBW[W];
@@ -181,7 +191,7 @@ void disp_animation_window(){
     werase(animw);
     box(animw, ACS_VLINE, ACS_HLINE);
     wattron(animw, A_BOLD);
-    mvwprintw(animw, 0,1, "ANIMATION");
+    mvwprintw(animw, 0,1, "ANIMATOR");
     wattroff(animw, A_BOLD);
 
 

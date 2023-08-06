@@ -36,9 +36,10 @@
   typedef std::vector<int>      int_vec;  //a vector of standard int 
 
 // Declare all the classes before defining them
-class AnimationManager;
-class BaseFixture;
-class BaseAnimation;
+class AnimationManager;   //TODO move this in a sceno.h and rename this module baseFixture.h & baseAnimation.h
+
+class BaseFixture;        //TODO move this in baseFixture.h
+class BaseAnimation;      //TODO move this in baseAnimation.h
 
 /**
  * class AnimationManager is the entity responsible for determining which animation every 
@@ -66,14 +67,14 @@ class BaseFixture{
     uint8_t MASTER_DIMMER = 255;    // Master Dimmer from 0-255
     int address;                    // DMX address
     bool b_blackout;
-    int nCH;
+    const int nCH;
 
     // Animations
     BaseAnimation * active_animation = nullptr;
     std::vector<BaseAnimation*> animations;
 
-    //constructor
-    BaseFixture(int addr): address(addr){};
+    //constructor (adresse [0-511], number of channels, fixture's name)
+    BaseFixture(int addr,int ch, std::string nm): address(addr), nCH(ch), name(nm){};
     virtual void init()=0;
 
     //animation management
@@ -82,7 +83,9 @@ class BaseFixture{
     bool activate_by_ID(std::string);
 
     //DMX output
-    virtual DMX_vec buffer() = 0;
+    virtual int get_address() = 0;
+    virtual int get_nCH()     = 0;
+    virtual DMX_vec buffer()  = 0;
 };
 
 
@@ -118,4 +121,7 @@ namespace fcn{
   // returns a NORMALIZED 4 (or 3 for RGB) channel DMX vector based on a DMX_vector and a DMX vlue (0-255)
   DMX_vec RGBW_norm(DMX_vec, uint8_t);
   DMX_vec RGB_norm(DMX_vec, uint8_t);
+  std::string DMXvec_to_str(DMX_vec, char);
+  std::string num_to_str(int);
+  std::string num_to_str(uint8_t);
 }

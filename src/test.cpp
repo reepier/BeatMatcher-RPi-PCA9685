@@ -13,13 +13,14 @@ using namespace std;
 #include "sysfcn.h"
 #include "music.h"
 #include "animator.h"
-#include "spider.h"
-#include "spot.h"
-#include "LED.h"
+#include "fixtures.h"
 
 // DMX output interface (OLA)
   ola::client::StreamingClient ola_client;
   ola::DmxBuffer ola_buffer;
+
+fix_vec ll_fxtrs = {&led, &spot_1, &spot_2, &spot_3, &spot_d, &spot_g, &spider};
+fix_vec fixtures = {&front_rack, &led, &spider};
 
 LoopControler frame;
 
@@ -34,13 +35,20 @@ void send_buffer(){
 int main(){
     ola_client.Setup();
 
-    DMX_vec rgbw(4);
-    while(true){
-        rgbw[R] = 255*(1+sin(2*M_PI*millis()/5000))/2;
-        rgbw[B] = 255*(1+sin(2*M_PI*millis()/5000 + M_PI))/2;
-        spot_1.RGBW = rgbw;
-        ola_buffer.SetRange(spot_1.address, spot_1.buffer().data(), spot_1.nCH);
-        ola_client.SendDmx(1, ola_buffer);
-        delay(10);
-    }
+    // DMX_vec rgbw(4);
+    // while(true){
+    //     rgbw[R] = 255*(1+sin(2*M_PI*millis()/5000))/2;
+    //     rgbw[B] = 255*(1+sin(2*M_PI*millis()/5000 + M_PI))/2;
+    //     spot_1.RGBW = rgbw;
+    //     ola_buffer.SetRange(spot_1.address, spot_1.buffer().data(), spot_1.nCH);
+        
+    //     ola_client.SendDmx(1, ola_buffer);
+    //     delay(10);
+    // }
+
+    DMX_vec data = {0,8,255,17};
+    cout << fcn::DMXvec_to_str(data, ',');
+    cout << endl;
+
+    cout << fcn::num_to_str((int)127) << " " << fcn::num_to_str((uint8_t)128) << " " << fcn::num_to_str(129.0) << " "<<endl;
 }

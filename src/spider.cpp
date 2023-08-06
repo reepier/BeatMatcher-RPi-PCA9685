@@ -7,7 +7,7 @@ using namespace std;
 // --------------------------------------
 // SPIDER FIXTURE definition
 // --------------------------------------
-SpiderFixture spider(29);
+SpiderFixture spider(29, 44, "AFX-9-Beam");
 
 void SpiderFixture::init(){
     // push the animations:

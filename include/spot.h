@@ -25,11 +25,13 @@ public:
     uint8_t prog = 0;                         // fixture preset program (unused)
 
     // constructor
-    SpotFixture(int addr) : BaseFixture(addr){};
+    SpotFixture(int addr, int ch, std::string nm) : BaseFixture(addr, ch, nm){};
     void init();
 
     // dmx output
-    DMX_vec buffer();
+    int get_nCH() override { return this->nCH; };
+    int get_address() override { return this->address; };
+    DMX_vec buffer() override;
 };
 extern SpotFixture spot_g, spot_d, spot_1, spot_2, spot_3;
 
@@ -63,19 +65,25 @@ public:
     //std::vector<BaseAnimation *> animations; // vector containing animations
 
     /* Hard coded with 2 or 3 spots (temporarily?) */
-    SpotRack(SpotFixture* s1, SpotFixture* s2, SpotFixture* s3) : BaseFixture(512){ 
+    SpotRack(SpotFixture* s1, SpotFixture* s2, SpotFixture* s3, std::string nm) : BaseFixture(-1, 0, nm){ 
         this->spots.push_back(s1);
         this->spots.push_back(s2);
-        this->spots.push_back(s3);};
-    SpotRack(SpotFixture* s1, SpotFixture* s2) : BaseFixture(512){
+        this->spots.push_back(s3);
+        this->rack_size = this->spots.size();
+        };
+    SpotRack(SpotFixture* s1, SpotFixture* s2, std::string nm) : BaseFixture(-1, 0, nm){
         this->spots.push_back(s1);
-        this->spots.push_back(s2);};
+        this->spots.push_back(s2);
+        this->rack_size = this->spots.size();
+        };
 
-    void init(){};     // empty function (useless)
+    void init();     // empty function (useless)
     void init_front(); // initialize a frontal rack of spots
     void init_back();  // initialize a backgoround rack of spots
-
-    DMX_vec buffer(){return DMX_vec{};}; // empty function (useless)
+    
+    int get_nCH() override { return this->nCH; };
+    int get_address() override { return this->address; };
+    DMX_vec buffer() override { return DMX_vec{}; }; // empty function (useless)
 };
 
 extern SpotRack front_rack;
