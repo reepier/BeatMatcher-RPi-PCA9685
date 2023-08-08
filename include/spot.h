@@ -132,13 +132,17 @@ public:
 
 
 #define STRB_FAST 180
-#define STRB_MED 140
-#define STRB_SLOW 100
+#define STRB_MED 100
+#define STRB_SLOW 60
 /*Strobe*/
 class SpotFrontAnimation2 : public SpotRackAnimtion{
   public:
     DMX_vec color;
     uint8_t strobe_spd;
+    DMX_vec strobe_spds;
+
+    const float var_min = 0.05;  // relative random variation of speed @255
+    const float var_max = 0.6;  // relative random variation of speed @000
 
     SpotFrontAnimation2(SpotRack *f, DMX_vec c, uint8_t speed, std::string d, std::string i){
         this->description = d;
@@ -146,8 +150,12 @@ class SpotFrontAnimation2 : public SpotRackAnimtion{
         this->fixture = f;
         this->color = c;
         this->strobe_spd = speed;
+        this->strobe_spds.resize(this->fixture->rack_size);
     }
     
     void init() override;
     void new_frame() override;
+private :
+    void shake();
+    unsigned long t_next_shake;
 };

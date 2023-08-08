@@ -35,14 +35,39 @@ void send_buffer(){
 int main(){
     ola_client.Setup();
 
-    DMX_vec rgbw(4);
     while(true){
       for(int c = SimpleColor::black; c != SimpleColor::last_color; c++){
         
-        spot_1.RGBW = fcn::RGBW((SimpleColor)c);
-        spot_2.RGBW = fcn::RGBW((SimpleColor)c);
-        spot_3.RGBW = fcn::RGBW((SimpleColor)c);
-      
+        switch (c)
+        {
+        case black:
+            spot_1.RGBW = BLACK;
+          break;
+        case red:
+            spot_1.RGBW = RED(255);
+          break;
+        case green:
+            spot_1.RGBW = GREEN(255);
+          break;
+        case blue:
+            spot_1.RGBW = BLUE(255);
+          break;
+        case orange:
+            spot_1.RGBW = ORANGE(255);
+          break;
+        case purple:
+            spot_1.RGBW = PURPLE(255);
+          break;
+        case gold:
+            spot_1.RGBW = GOLD(255);
+          break;
+        default:
+            spot_1.RGBW = WHITE(255);
+          break;
+        }      
+
+        spot_2.RGBW = spot_1.RGBW;
+        spot_3.RGBW = spot_1.RGBW;
         
         ola_buffer.SetRange(spot_1.address, spot_1.buffer().data(), spot_1.nCH);
         ola_buffer.SetRange(spot_2.address, spot_3.buffer().data(), spot_3.nCH);

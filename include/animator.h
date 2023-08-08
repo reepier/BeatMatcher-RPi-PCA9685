@@ -124,9 +124,23 @@ extern AnimationManager animator;
 // -----------------------------------
 // TODO --> tailor these functions specifically for each fixture ! in the <fixture>.cpp
 namespace fcn{
-  // returns a 255-normalized 4 (or 3 for RGB) channel DMX vector based on color literal
+  // returns a normalized 4 (or 3 for RGB) channel DMX vector based on color literal
   DMX_vec RGBW(SimpleColor, uint8_t intensity = 255);
   DMX_vec RGB(SimpleColor, uint8_t intensity = 255);
+  #define RED(x) fcn::RGBW(red,x)
+  #define GREEN(x) fcn::RGBW(green,x)
+  #define BLUE(x) fcn::RGBW(blue,x)
+  #define YELLOW(x) fcn::RGBW(yellow,x)
+  #define ORANGE(x) fcn::RGBW(orange,x)
+  #define SODIUM(x) fcn::RGBW(sodium,x)
+  #define PURPLE(x) fcn::RGBW(purple,x)
+  #define MAGENTA(x) fcn::RGBW(magenta,x)
+  #define PINK(x) fcn::RGBW(pink,x)
+  #define CYAN(x) fcn::RGBW(cyan,x)
+  #define GOLD(x) fcn::RGBW(gold,x)
+  #define WHITE(x) fcn::RGBW(white,x)
+  #define BLACK fcn::RGBW(black)
+  
 
 
   // returns a NORMALIZED 4 (or 3 for RGB) channel DMX vector based on a DMX_vector and a DMX vlue (0-255)

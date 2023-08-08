@@ -18,6 +18,7 @@ LEDFixture led(0, 4, "Led Bars");
 
 // Fixture initalizer
 void LEDFixture::init(){
+    //TODO : use color macros
     animations.push_back(new LEDAnimation1(this, 0, 0, 0, 0, 0, 0, 0, 0, 0, "Black", "LED.0.0"));
     animations.push_back(new LEDAnimation1(this, 255 << 4, 150 << 4, 80 << 4, 30 << 4, 100 << 4, 1 << 4, 7 << 4, 0 << 4, 0 << 4, "Warm White Flashes, Red/orange background", "LED.1.1"));
     animations.push_back(new LEDAnimation1(this, 255 << 4, 50 << 4, 10 << 4, 15 << 4, 50 << 4, 0 << 4, 5 << 4, 0 << 4, 0 << 4, "Sodium Flashes, Red/orange background", "LED.1.2"));
@@ -44,7 +45,7 @@ DMX_vec LEDFixture::buffer(){
 
 // ----------------------------------------------------------
 // ANIMATION CLASS Function definition
-// Animation constructor
+// Animation constructor    // TODO : use int_vec in
 LEDAnimation1::LEDAnimation1(LEDFixture* fix, int flash_r, int flash_g, int flash_b, int back_rmin, int back_rmax, int back_gmin, int back_gmax, int back_bmin, int back_bmax, std::string d, std::string i){
     this->fixture = fix;
     this->name = "Flash / Wavy Backgd";

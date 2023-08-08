@@ -20,13 +20,13 @@ SpotFixture spot_d(105, 8, "Spot d");     //spot d'ambiance droite
 /* /!\ /!\ Bullshit initializer --> I don't plan on coding animation for individual spots */
 void SpotFixture::init(){
     this->animations.push_back(new SpotAnimation1(this, 0,0,0,0,    "Black", "SPOT.0.0"));
-    this->animations.push_back(new SpotAnimation1(this, 0,0,0,255,  "White", "SPOT.1.2"));
-    this->animations.push_back(new SpotAnimation1(this, 255,0,0,0,  "Red", "SPOT.1.3"));
-    this->animations.push_back(new SpotAnimation1(this, 0,255,0,0,  "Green", "SPOT.1.4"));
-    this->animations.push_back(new SpotAnimation1(this, 0,0,255,0,  "Blue", "SPOT.1.5"));
-    this->animations.push_back(new SpotAnimation1(this, 255,255,0,0,"Yellow", "SPOT.1.6"));
-    this->animations.push_back(new SpotAnimation1(this, 255,0,255,0,"Magenta", "SPOT.1.7"));
-    this->animations.push_back(new SpotAnimation1(this, 0,255,255,0,"Cyan", "SPOT.1.8"));
+    // this->animations.push_back(new SpotAnimation1(this, 0,0,0,255,  "White", "SPOT.1.2"));
+    // this->animations.push_back(new SpotAnimation1(this, 255,0,0,0,  "Red", "SPOT.1.3"));
+    // this->animations.push_back(new SpotAnimation1(this, 0,255,0,0,  "Green", "SPOT.1.4"));
+    // this->animations.push_back(new SpotAnimation1(this, 0,0,255,0,  "Blue", "SPOT.1.5"));
+    // this->animations.push_back(new SpotAnimation1(this, 255,255,0,0,"Yellow", "SPOT.1.6"));
+    // this->animations.push_back(new SpotAnimation1(this, 255,0,255,0,"Magenta", "SPOT.1.7"));
+    // this->animations.push_back(new SpotAnimation1(this, 0,255,255,0,"Cyan", "SPOT.1.8"));
 
     this->activate_by_ID("SPOT.0.0");
     /*
@@ -77,33 +77,43 @@ void SpotRack::init(){
 
     //this->animations.push_back();
     // Animation 1
-    this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{0,0,0,0},      DMX_vec{0,0,0,0},       15000, 5000, 8000, 1000, "Black", "FR.0.0"));
-    this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{25,0,60,0},    DMX_vec{255,40,0,110},   15000, 5000, 8000, 1000, "Purple background / orange flashes", "FR.1.01"));
-    this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{50,5,0,0},     DMX_vec{0,0,0,255},     15000, 5000, 8000, 1000, "Orange background, white flashes", "FR.1.2"));  
-    this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{50,0,0,0},     DMX_vec{0,0,255,0},     15000, 5000, 8000, 1000, "Red background, Blue flashes", "FR.1.3"));
-    this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{50,0,0,0},     DMX_vec{255,0,0,0},     15000, 5000, 8000, 1000, "red background, RED flashes", "FR.1.4"));
-    this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{50,0,0,0},     DMX_vec{255,40,0,40},   15000, 5000, 8000, 1000, "red background orange flashes", "FR.1.5"));
-    this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{50,0,0,0},     DMX_vec{0,0,0,255},     15000, 5000, 8000, 1000, "red background, white flashes", "FR.1.6"));
-    this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{50,0,0,0},     DMX_vec{0,0,0,255},     15000, 5000, 3000, 600, "red background, white flashes", "FR.1.61"));
-    this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{0,0,0,0},      DMX_vec{0,0,0,255},       15000, 5000, 5000, 700, "Black background, White flashes", "FR.1.7"));
-    this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{0,0,0,0},      DMX_vec{0,0,0,255},       15000, 5000, 3000, 600, "Black background, White flashes", "FR.1.71"));
-    this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{0,0,0,0},      DMX_vec{255,0,0,0},       15000, 5000, 5000, 700, "Black background, Red flashes", "FR.1.8"));
-    this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{0,0,0,0},      DMX_vec{0,0,150,0},       15000, 5000, 5000, 700, "Black background, Blue flashes", "FR.1.9"));
-    this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{0,0,0,0},      DMX_vec{255,40,0,0},       15000, 5000, 5000, 700, "Black background, Orange flashes", "FR.1.10"));
-    this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{0,0,0,0},      DMX_vec{200,35,0,80},       15000, 5000, 5000, 700, "Black background, Orange/White flashes", "FR.1.11"));
-    this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{60,0,30,0},    DMX_vec{0,150,150,80},       15000, 5000, 7000, 1000, "Purple background, Cyan flashes", "FR.1.12"));
+    this->animations.push_back(new SpotFrontAnimation1(this, BLACK,      BLACK,       15000, 5000, 8000, 1000,   "Black", "FR.0.0"));
+
+    this->animations.push_back(new SpotFrontAnimation1(this, PURPLE(50), GOLD(255),   15000, 5000, 8000, 1000,   "Purple background / gold flashes",    "FR.1.1.1"));
+    this->animations.push_back(new SpotFrontAnimation1(this, SODIUM(50), WHITE(255),  15000, 5000, 8000, 1000,   "Orange background, white flashes",    "FR.1.1.2"));
+    this->animations.push_back(new SpotFrontAnimation1(this, RED(50),    BLUE(255),   15000, 5000, 8000, 1000,   "Red background, Blue flashes",        "FR.1.1.3"));
+    this->animations.push_back(new SpotFrontAnimation1(this, RED(50),    RED(255),    15000, 5000, 8000, 1000,   "Red background, RED flashes",         "FR.1.1.4"));
+    this->animations.push_back(new SpotFrontAnimation1(this, RED(50),    GOLD(255),   15000, 5000, 8000, 1000,   "Red background gold flashes",         "FR.1.1.5"));
+    this->animations.push_back(new SpotFrontAnimation1(this, RED(50),    WHITE(255),  15000, 5000, 8000, 1000,   "Red background, white flashes",       "FR.1.1.6"));
+    this->animations.push_back(new SpotFrontAnimation1(this, RED(50),    WHITE(255),  15000, 5000, 3000, 600,    "Red background, fast white flashes",  "FR.1.1.6.1"));
+    this->animations.push_back(new SpotFrontAnimation1(this, PINK(50),   CYAN(255),   15000, 5000, 7000, 1000,   "Purple background, Cyan flashes",     "FR.1.1.7"));
+
+    this->animations.push_back(new SpotFrontAnimation1(this, BLACK,      WHITE(255),  15000, 5000, 8000, 1000,   "Black background, White flashes",     "FR.1.2.1"));
+    this->animations.push_back(new SpotFrontAnimation1(this, BLACK,      WHITE(255),  15000, 5000, 3000, 600,    "Black background, fast White flashes","FR.1.2.1.1"));
+    this->animations.push_back(new SpotFrontAnimation1(this, BLACK,      RED(255),    15000, 5000, 8000, 1000,    "Black background, Red flashes",       "FR.1.2.2"));
+    this->animations.push_back(new SpotFrontAnimation1(this, BLACK,      BLUE(255),   15000, 5000, 8000, 1000,    "Black background, Blue flashes",      "FR.1.2.3"));
+    this->animations.push_back(new SpotFrontAnimation1(this, BLACK,      ORANGE(255), 15000, 5000, 8000, 1000,    "Black background, Orange flashes",    "FR.1.2.4"));
+    this->animations.push_back(new SpotFrontAnimation1(this, BLACK,      GOLD(255),   15000, 5000, 8000, 1000,    "Black background, GOLD flashes",      "FR.1.2.5"));
+    this->animations.push_back(new SpotFrontAnimation1(this, BLACK,      GOLD(255),   15000, 5000, 3000, 600,    "Black background, fast GOLD flashes",  "FR.1.2.5.1"));
+
+    this->animations.push_back(new SpotFrontAnimation1(this, SODIUM(100),   BLACK,   15000, 5000, 7000, 2000,   "Sodium background, Black holes",   "FR.1.3.1"));
+    this->animations.push_back(new SpotFrontAnimation1(this, RED(100),      BLACK,   15000, 5000, 7000, 2000,   "Red background, Black flashes",    "FR.1.3.2"));
+    this->animations.push_back(new SpotFrontAnimation1(this, PURPLE(100),   BLACK,   15000, 5000, 7000, 2000,   "Purple background, Black flashes", "FR.1.3.3"));
+
     // Animation 2:
-    this->animations.push_back(new SpotFrontAnimation2(this, fcn::RGBW(white),    STRB_FAST,    "white, fast strobe", "FR.2.1"));
-    this->animations.push_back(new SpotFrontAnimation2(this, fcn::RGBW(white),    STRB_MED,     "white, medium strobe", "FR.2.2"));
-    this->animations.push_back(new SpotFrontAnimation2(this, fcn::RGBW(white),    STRB_SLOW,    "white, slow strobe", "FR.2.3"));
+    this->animations.push_back(new SpotFrontAnimation2(this, WHITE(255),  STRB_FAST,    "white, fast strobe",   "FR.2.1.1"));
+    this->animations.push_back(new SpotFrontAnimation2(this, WHITE(255),  STRB_MED,     "white, medium strobe", "FR.2.1.2"));
+    this->animations.push_back(new SpotFrontAnimation2(this, WHITE(255),  STRB_SLOW,    "white, slow strobe",   "FR.2.1.3"));
+    this->animations.push_back(new SpotFrontAnimation2(this, RED(255),    STRB_FAST,    "red, fast strobe",     "FR.2.2.1"));
+    this->animations.push_back(new SpotFrontAnimation2(this, RED(255),    STRB_MED,     "red, medium strobe",   "FR.2.2.2"));
+    this->animations.push_back(new SpotFrontAnimation2(this, RED(255),    STRB_SLOW,    "red, slow strobe",     "FR.2.2.3"));
+    this->animations.push_back(new SpotFrontAnimation2(this, GOLD(255),   STRB_FAST,    "gold, fast strobe",    "FR.2.3.1"));
+    this->animations.push_back(new SpotFrontAnimation2(this, GOLD(255),   STRB_MED,     "gold, medium strobe",  "FR.2.3.2"));
+    this->animations.push_back(new SpotFrontAnimation2(this, GOLD(255),   STRB_SLOW,    "gold, slow strobe",    "FR.2.3.3"));
     
-    this->animations.push_back(new SpotFrontAnimation2(this, fcn::RGBW(red),    180,    "Red, slow strobe", "FR.2.4"));
-    this->animations.push_back(new SpotFrontAnimation2(this, fcn::RGBW_norm(DMX_vec{255,40,0,100}, 255),    180,    "Gold, slow strobe", "FR.2.5"));
+
+    
     this->activate_by_ID("FR.0.0");
-
-
-    //this->animations.push_back(new SpotFrontAnimation1(this, DMX_vec{0,0,0,0},      DMX_vec{0,0,0,0},       15000, 5000, 8000, 1000, "...", "FR.1."));
-
 }
 
 void SpotRack::init_back(){
@@ -171,9 +181,20 @@ void SpotFrontAnimation1::new_frame(){
 
 // -----------------------------------
 // 2 ---------------------------------
+void SpotFrontAnimation2::shake(){  //randomizes the strob speeds on request
+    for (DMX_vec::iterator spd = this->strobe_spds.begin(); spd != this->strobe_spds.end(); spd++){
+        float delta =  map((float)this->strobe_spd, 0.0, 255.0, var_max, var_min);          
+        
+        (*spd) = rand_min_max( this->strobe_spd*(1-delta) , this->strobe_spd*(1+delta) ); // initialize each strobe with a slightly different frequency
+    }
+}
+
 void SpotFrontAnimation2::init(){
     this->frame_cpt = 0;
     this->t_animation_start_ms = frame.t_current_ms;
+    this->t_next_shake = frame.t_current_ms + 2000;
+
+    this->shake();
 }
 
 void SpotFrontAnimation2::new_frame(){
@@ -182,8 +203,15 @@ void SpotFrontAnimation2::new_frame(){
     int n_spots = spots.size();
     unsigned long t = frame.t_current_ms;
 
+    if (((long)frame.t_current_ms - (long)this->t_next_shake) > 0){
+        this->shake();
+        this->t_next_shake += 2000; 
+    }
     for (int i = 0; i<n_spots; i++){
         spots[i]->RGBW   = this->color;
-        spots[i]->strobe = min(max( (int)(this->strobe_spd * (1 + 0.1*sin(i*M_PI/3 + 2*M_PI*t/6000)))  ,0),255);
+
+        float delta = map((float)this->strobe_spds[i], 0.0,255.0, var_max, var_min) / 2;
+        spots[i]->strobe = min(max( (int)(this->strobe_spds[i] * (1 + delta*sin(i*M_PI/3 + 2*M_PI*t/3000)))  ,0),255);
+        // spots[i]->strobe = min(max( rand_min_max(this->strobe_spds[i] * (1-delta) , this->strobe_spds[i] * (1+delta))  ,0),255);
     }
 }
