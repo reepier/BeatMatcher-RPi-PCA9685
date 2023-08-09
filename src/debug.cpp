@@ -230,6 +230,9 @@ void disp_console_window(){
         int i = 9;
         for (LogList::reverse_iterator log = log_list.rbegin(); log != log_list.rend(); log++){
             mvwprintw(consolew, i--,1, (*log).message.c_str());
+            if (i==0){
+                break;
+            }
         }
     }
 
