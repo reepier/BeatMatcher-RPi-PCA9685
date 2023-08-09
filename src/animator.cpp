@@ -8,6 +8,7 @@
 #include "LED.h"
 #include "spot.h"
 #include "spider.h"
+#include "debug.h"
 
 using namespace std;
 
@@ -34,6 +35,8 @@ void AnimationManager::update(){
         }
 
         if (sampler.state_changed && (frame.t_current_ms-t_last_change_ms > TEMPO_ANIM_CHANGE)){
+            log(1, "Animator random", " update");
+
             t_last_change_ms = frame.t_current_ms;
 
             led.activate_random();

@@ -1,6 +1,5 @@
 #include <iostream>
 #include <ncurses.h>
-#include <sstream>
 #include <cmath>
 #include <algorithm>
 #include <string>
@@ -19,10 +18,13 @@ extern SoundAnalyzer sampler;
 extern AnimationManager animator;
 extern LoopControler frame;
 
+LogList log_list;
+
 WINDOW *musicw;
 WINDOW *animw;
 WINDOW *outputw;
 WINDOW *generalw;
+WINDOW *consolew;
 
 #define WHITEred    3 // WHITE font / red background
 #define WHITEgreen  4
@@ -34,17 +36,17 @@ WINDOW *generalw;
 #define C2 74
 #define C3 80
 
-
-
 void init_display(){
     initscr();
     // noecho();
     // refresh();
     // curs_set(0);
-    musicw = newwin(10, 120, 0,0);
-    animw = newwin(5,120,10,0);
-    outputw = newwin(5,120,20,0);
-    generalw = newwin(5,120,30,0);
+    musicw      = newwin(10, 120, 0,0);
+    animw       = newwin(5,120,10,0);
+    outputw     = newwin(5,120,20,0);
+    generalw    = newwin(5,120,30,0);
+    consolew    = newwin(10,120,40,0);
+
 
     if (!has_colors()){
         cout << "NO COLORS";
@@ -214,6 +216,26 @@ void disp_general_window(){
     wrefresh(generalw);
 }
 
+void disp_console_window(){
+    curs_set(0);
+    werase(consolew);
+    box(consolew, ACS_VLINE, ACS_HLINE);
+    wattron(consolew, A_BOLD);
+    mvwprintw(consolew, 0,1, "CONSOLE");
+    wattroff(consolew, A_BOLD);
+
+    if (log_list.size() == 0){
+
+    }else{
+        int i = 9;
+        for (LogList::reverse_iterator log = log_list.rbegin(); log != log_list.rend(); log++){
+            mvwprintw(consolew, i--,1, (*log).message.c_str());
+        }
+    }
+
+    wrefresh(consolew);
+}
+
 void display_curse(){
     
 
@@ -221,6 +243,7 @@ void display_curse(){
     disp_animation_window();
     disp_output_window();
     disp_general_window();
+    disp_console_window();
     
     // werase(animw);
     // box(animw, ACS_VLINE, ACS_HLINE);
@@ -275,5 +298,11 @@ void display(){
 void balise(const char* str){
     if (b_BALISE){
         std::cout << str << std::endl;
+    }
+}
+
+void spit_log(){
+    for (LogList::iterator entry = log_list.begin(); entry != log_list.end(); entry++){
+        cout << (*entry).message << endl;;
     }
 }
