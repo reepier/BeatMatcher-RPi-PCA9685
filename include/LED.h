@@ -75,6 +75,6 @@ public:
   // Constructor
   LEDAnimation1(LEDFixture*, int, int, int, int, int, int, int, int, int, std::string, std::string);
 
-  void init();      // initializes/reset what needs to be (initial and/or random values, etc.)
+  void init() override;      // initializes/reset what needs to be (initial and/or random values, etc.)
   void new_frame(); // computes the new frame's RGB values
 };

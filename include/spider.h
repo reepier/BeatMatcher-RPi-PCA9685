@@ -75,6 +75,6 @@ class SpiderAnimation1 : public SpiderAnimation{
         this->pix = pixel_vec(9, fcn::RGBW(c));
     };
     SpiderAnimation1(SpiderFixture *f);
-    void init() override;
+    void init() override{BaseAnimation::init();};
     void new_frame() override;
 };

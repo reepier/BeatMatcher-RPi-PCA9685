@@ -51,10 +51,10 @@ SpotAnimation1::SpotAnimation1(SpotFixture* fix, uint8_t r,uint8_t g,uint8_t b, 
     this->white = w;
 }
 
-void SpotAnimation1::init(){
-    this->t_animation_start_ms = millis();
-    this->frame_cpt = 0;
-}
+// void SpotAnimation1::init(){
+//     this->t_animation_start_ms = millis();
+//     this->frame_cpt = 0;
+// }
 
 void SpotAnimation1::new_frame(){
     balise("compute new spot1 frame");
@@ -126,8 +126,9 @@ void SpotRack::init_back(){
 // -----------------------------------
 // 1 ---------------------------------
 void SpotFrontAnimation1::init(){
-    this->frame_cpt = 0;
-    this->t_animation_start_ms;
+    BaseAnimation::init();
+    // this->frame_cpt = 0;
+    // this->t_animation_start_ms;
 
     this->p_ms = vector<int>{rand_min_max(sin_min_p_ms, sin_max_p_ms),rand_min_max(sin_min_p_ms, sin_max_p_ms),rand_min_max(sin_min_p_ms, sin_max_p_ms), rand_min_max(sin_min_p_ms, sin_max_p_ms), rand_min_max(sin_min_p_ms, sin_max_p_ms)};
     
@@ -190,8 +191,9 @@ void SpotFrontAnimation2::shake(){  //randomizes the strob speeds on request
 }
 
 void SpotFrontAnimation2::init(){
-    this->frame_cpt = 0;
-    this->t_animation_start_ms = frame.t_current_ms;
+    BaseAnimation::init();
+    // this->frame_cpt = 0;
+    // this->t_animation_start_ms = frame.t_current_ms;
     this->t_next_shake = frame.t_current_ms + 2000;
 
     this->shake();

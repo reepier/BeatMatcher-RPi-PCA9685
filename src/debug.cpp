@@ -43,9 +43,9 @@ void init_display(){
     // curs_set(0);
     musicw      = newwin(10, 120, 0,0);
     animw       = newwin(5,120,10,0);
-    outputw     = newwin(5,120,20,0);
-    generalw    = newwin(5,120,30,0);
-    consolew    = newwin(10,120,40,0);
+    outputw     = newwin(5,120,15,0);
+    generalw    = newwin(5,120,20,0);
+    consolew    = newwin(10,120,25,0);
 
 
     if (!has_colors()){

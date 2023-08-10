@@ -51,7 +51,7 @@ public:
     uint8_t white;
 
     SpotAnimation1(SpotFixture *, uint8_t, uint8_t, uint8_t, uint8_t, std::string, std::string);
-    void init();
+    void init() override {BaseAnimation::init();};
     void new_frame();
 };
 
@@ -126,7 +126,7 @@ public:
         this->rand_const_ms = prand;
         this->flash_len = flen;
     }
-    void init();
+    void init() override;
     void new_frame();
 };
 

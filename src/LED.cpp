@@ -65,8 +65,9 @@ LEDAnimation1::LEDAnimation1(LEDFixture* fix, int flash_r, int flash_g, int flas
 
 // Animation initializer
 void LEDAnimation1::init(){
-    this->frame_cpt = 0;
-    this->t_animation_start_ms = millis();
+    BaseAnimation::init();
+    // this->frame_cpt = 0;
+    // this->t_animation_start_ms = millis();
 
     periods_ms[0] = 1000 * rand_min_max(MIN_T, MAX_T);
     periods_ms[1] = 1000 * rand_min_max(MIN_T, MAX_T);

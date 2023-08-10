@@ -4,6 +4,7 @@
 #include <string>
 #include <cmath>
 
+#include "sysfcn.h"
 #include "music.h"
 // #include "LED.h"
 
@@ -110,8 +111,13 @@ class BaseAnimation{
     unsigned long frame_cpt;            // number of frame computed since activation
 
 
-    virtual void new_frame() = 0;
-    virtual void init() = 0;
+    virtual void new_frame(){
+      this->frame_cpt++;
+    }
+    virtual void init(){
+      this->t_animation_start_ms = frame.t_current_ms;
+      this->frame_cpt = 0;
+    };
 
 };
 
