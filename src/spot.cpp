@@ -101,6 +101,8 @@ void SpotRack::init(){
     this->animations.push_back(new SpotFrontAnimation1(this, PURPLE(100),   BLACK,      15000, 5000, 7000, 2000,   "Purple background, Black flashes", "FR.1.3.3"));
 
     // Animation 2:
+    this->animations.push_back(new SpotFrontAnimation2(this, WHITE(255),  255,          "white, Maxstrobe",   "FR.2.1.00"));
+    this->animations.push_back(new SpotFrontAnimation2(this, WHITE(255),  STRB_FASTEST, "white, very fast strobe",   "FR.2.1.0"));
     this->animations.push_back(new SpotFrontAnimation2(this, WHITE(255),  STRB_FAST,    "white, fast strobe",   "FR.2.1.1"));
     this->animations.push_back(new SpotFrontAnimation2(this, WHITE(255),  STRB_MED,     "white, medium strobe", "FR.2.1.2"));
     this->animations.push_back(new SpotFrontAnimation2(this, WHITE(255),  STRB_SLOW,    "white, slow strobe",   "FR.2.1.3"));
@@ -127,6 +129,7 @@ void SpotRack::init_back(){
 // 1 ---------------------------------
 void SpotFrontAnimation1::init(){
     BaseAnimation::init();
+    this->fixture->reset_spots();
 
     this->p_ms = vector<int>{rand_min_max(sin_min_p_ms, sin_max_p_ms),rand_min_max(sin_min_p_ms, sin_max_p_ms),rand_min_max(sin_min_p_ms, sin_max_p_ms), rand_min_max(sin_min_p_ms, sin_max_p_ms), rand_min_max(sin_min_p_ms, sin_max_p_ms)};
     
@@ -140,7 +143,6 @@ void SpotFrontAnimation1::init(){
 }
 
 void SpotFrontAnimation1::new_frame(){
-    balise("compute new front rack1 frame");
     long t = frame.t_current_ms;       // for readability
     int n_spot = this->fixture->spots.size();   // for readability
     
@@ -182,9 +184,7 @@ void SpotFrontAnimation1::new_frame(){
 // 2 ---------------------------------
 void SpotFrontAnimation2::shake(){  //randomizes the strob speeds on request
     for (DMX_vec::iterator spd = this->strobe_spds.begin(); spd != this->strobe_spds.end(); spd++){
-        float delta =  map((float)this->strobe_spd, 0.0, 255.0, var_max, var_min);          
-        
-        (*spd) = rand_min_max( this->strobe_spd*(1-delta) , this->strobe_spd*(1+delta) ); // initialize each strobe with a slightly different frequency
+        (*spd) = (strobe_min<strobe_max)? rand_min_max( this->strobe_min , this->strobe_max ) : this->strobe_max; // initialize each strobe with a slightly different frequency
     }
 }
 
@@ -193,7 +193,6 @@ void SpotFrontAnimation2::init(){
     // this->frame_cpt = 0;
     // this->t_animation_start_ms = frame.t_current_ms;
     this->t_next_shake = frame.t_current_ms + 2000;
-
     this->shake();
 }
 
@@ -210,7 +209,6 @@ void SpotFrontAnimation2::new_frame(){
     for (int i = 0; i<n_spots; i++){
         spots[i]->RGBW   = this->color;
 
-        float delta = map((float)this->strobe_spds[i], 0.0,255.0, var_max, var_min) / 2;
         spots[i]->strobe = min(max( (int)(this->strobe_spds[i] * (1 + delta*sin(i*M_PI/3 + 2*M_PI*t/3000)))  ,0),255);
         // spots[i]->strobe = min(max( rand_min_max(this->strobe_spds[i] * (1-delta) , this->strobe_spds[i] * (1+delta))  ,0),255);
     }

@@ -5,7 +5,7 @@
 
 
 int map(int, int,int,int,int); //tested ok
-float map(float, float,float,float,float);
+double map(double, double,double,double,double);
 int rand_min_max(int, int); // tested ok
 
 

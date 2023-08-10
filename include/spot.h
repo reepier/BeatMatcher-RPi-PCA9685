@@ -1,6 +1,7 @@
 #include <vector>
 #include <string>
 
+#include "debug.h"
 #include "animator.h"
 
 class SpotFixture;
@@ -33,6 +34,13 @@ public:
     int get_nCH() override { return this->nCH; };
     int get_address() override { return this->address; };
     DMX_vec buffer() override;
+    void reset_channels(){
+        this->RGBW = {0, 0, 0, 0};
+        this->strobe = 0;                       
+        this->color_wheel = 0;                  
+        this->prog = 0; 
+    };
+    
 };
 extern SpotFixture spot_g, spot_d, spot_1, spot_2, spot_3;
 
@@ -85,6 +93,11 @@ public:
     int get_nCH() override { return this->nCH; };
     int get_address() override { return this->address; };
     DMX_vec buffer() override { return DMX_vec{}; }; // empty function (useless)
+    void reset_spots(){
+        for (spot_vec::iterator spot = spots.begin(); spot != spots.end(); spot++){
+            (*spot)->reset_channels();
+        }
+    };
 };
 
 extern SpotRack front_rack;
@@ -130,7 +143,7 @@ public:
     void new_frame();
 };
 
-
+#define STRB_FASTEST 220
 #define STRB_FAST 180
 #define STRB_MED 100
 #define STRB_SLOW 60
@@ -139,10 +152,16 @@ class SpotFrontAnimation2 : public SpotRackAnimtion{
   public:
     DMX_vec color;
     uint8_t strobe_spd;
+    uint8_t strobe_max;
+    uint8_t strobe_min;
+
     DMX_vec strobe_spds;
 
-    const float var_min = 0.05;  // relative random variation of speed @255
-    const float var_max = 0.6;  // relative random variation of speed @000
+    double delta;
+    const double DMX_min = 0;
+    const double DMX_max = 240;
+    const double deltaDmin = 0.7;  // relative random variation of speed @255
+    const double deltaDmax = 0.0;  // relative random variation of speed @000
 
     SpotFrontAnimation2(SpotRack *f, DMX_vec c, uint8_t speed, std::string d, std::string i){
         this->description = d;
@@ -151,6 +170,11 @@ class SpotFrontAnimation2 : public SpotRackAnimtion{
         this->color = c;
         this->strobe_spd = speed;
         this->strobe_spds.resize(this->fixture->rack_size);
+        
+        double delta = std::min(std::max( map((double)this->strobe_spd, DMX_min, DMX_max, deltaDmin, deltaDmax) ,deltaDmax),deltaDmin);          
+        // this->delta = map((double)this->strobe_spd, DMX_min, DMX_max, deltaDmin, deltaDmax);
+        this->strobe_max = std::min(std::max( (int)(strobe_spd *(1.0+delta)), 0),255);
+        this->strobe_min = std::min(std::max( (int)(strobe_spd *(1.0-delta)), 0),255);
     }
     
     void init() override;

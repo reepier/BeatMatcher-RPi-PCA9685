@@ -32,8 +32,6 @@ void LEDFixture::init(){
     animations.push_back(new LEDAnimation1(this, 255 << 4, 100 << 4, 80 << 4, 0 << 4, 0 << 4, 0 << 4, 0 << 4, 0 << 4, 0 << 4, "White flashes, Black background", "LED.1.10"));
 
     this->activate_by_ID("LED.0.0");
-
-    
 }
 
 DMX_vec LEDFixture::buffer(){
@@ -66,8 +64,6 @@ LEDAnimation1::LEDAnimation1(LEDFixture* fix, int flash_r, int flash_g, int flas
 // Animation initializer
 void LEDAnimation1::init(){
     BaseAnimation::init();
-    // this->frame_cpt = 0;
-    // this->t_animation_start_ms = millis();
 
     periods_ms[0] = 1000 * rand_min_max(MIN_T, MAX_T);
     periods_ms[1] = 1000 * rand_min_max(MIN_T, MAX_T);

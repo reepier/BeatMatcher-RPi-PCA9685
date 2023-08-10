@@ -11,9 +11,9 @@ int map(int x, int x1, int x2, int y1, int y2){
     return (int)(a*x+b);
 }
 
-float map(float x, float x1, float x2, float y1, float y2){
-    float a = (y2-y1)/(x2-x1);
-    float b = y1 - a*x1;
+double map(double x, double x1, double x2, double y1, double y2){
+    double a = (y2-y1)/(x2-x1);
+    double b = y1 - a*x1;
 
     return a*x+b;
 }

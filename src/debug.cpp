@@ -298,14 +298,3 @@ void display(){
 
 }
 
-void balise(const char* str){
-    if (b_BALISE){
-        std::cout << str << std::endl;
-    }
-}
-
-void spit_log(){
-    for (LogList::iterator entry = log_list.begin(); entry != log_list.end(); entry++){
-        cout << (*entry).message << endl;;
-    }
-}

@@ -50,7 +50,7 @@ void AnimationManager::update(){
 
 bool AnimationManager::test_animation(){
     bool success = false;
-
+    balise(s_anim_id.data());
     if (s_anim_id.find("LED.") != string::npos){   // if animation's ID contains "LED"
         success = led.activate_by_ID(s_anim_id);
     }
@@ -58,7 +58,9 @@ bool AnimationManager::test_animation(){
         success = spot_g.activate_by_ID(s_anim_id);
     }
     else if (s_anim_id.find("FR.") != string::npos){   // if animation's ID contains "FR" (Front Rack)
+        balise("qsd");
         success = front_rack.activate_by_ID(s_anim_id);
+        balise("hjk");
     }
     else if (s_anim_id.find("BR.") != string::npos){   // if animation's ID contains "BR" (BackgroundRack)
         success = back_rack.activate_by_ID(s_anim_id);
@@ -97,10 +99,14 @@ bool BaseFixture::activate_by_ID(string id){
     bool found_it = false;
     
     for (vector<BaseAnimation*>::iterator anim_it = this->animations.begin(); anim_it != this->animations.end(); anim_it++){
+        balise("loop through animation :random ");
+        balise((*anim_it)->id.data());
         if ((*anim_it)->id == id){
             found_it = true;
             this->active_animation = (*anim_it);
+            balise("Activation...");
             this->active_animation->init();
+            balise("Activated !");
         }
     }
     if (!found_it){
@@ -224,5 +230,10 @@ std::string fcn::num_to_str(int val){
 std::string fcn::num_to_str(uint8_t val){
     ostringstream oss;
     oss<<(int)val;
+    return oss.str();
+}
+std::string fcn::num_to_str(double val){
+    ostringstream oss;
+    oss<<val;
     return oss.str();
 }

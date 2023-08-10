@@ -85,10 +85,19 @@ int main(){
     
     // cout << fcn::num_to_str((int)127) << " " << fcn::num_to_str((uint8_t)128) << endl;
 
-    log(1, "Premiere entrée");
-    log(1, "Deuxième entrée");
-    log(1, "Troisième entrée");
-    log(1, "Quatrième entrée");
+    // log(1, "Premiere entrée");
+    // log(1, "Deuxième entrée");
+    // log(1, "Troisième entrée");
+    // log(1, "Quatrième entrée");
 
-    spit_log();
+    // spit_log();
+
+    double delta;
+    const double DMX_min = 0;
+    const double DMX_max = 220;
+    const double deltaDmin = 0.7;  // relative random variation of speed @255
+    const double deltaDmax = 0.0;  // relative random variation of speed @000
+
+    delta = map((double)220, DMX_min, DMX_max, deltaDmin, deltaDmax);
+    cout << delta <<endl;
 }

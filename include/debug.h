@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 
+#include "config.h"
 #include "constant.h"
 #include "wiringPi.h"
 
@@ -13,8 +14,11 @@ void display();
 void display_curse();
 
 
-void balise(const char*);
-
+// void balise(const char* str){
+//     if (b_BALISE){
+//         std::cout << str << std::endl;
+//     }
+// }
 
 class LogEntry{
 public:
@@ -36,6 +40,14 @@ void log(int lvl, const Args&... args) {
     log_list.push_back(LogEntry(lvl, oss.str()));
 }
 
-void spit_log();
-
+template<typename... Args>
+void balise(const Args&... args) {
+    if (b_BALISE){
+        std::ostringstream oss;
+        // oss << first;
+        ((oss << args), ...);
+        std::cout << oss.str() << std::endl;
+        // log_list.push_back(LogEntry(lvl, oss.str()));
+    }
+}
 

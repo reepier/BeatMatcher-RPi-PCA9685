@@ -155,4 +155,5 @@ namespace fcn{
   std::string DMXvec_to_str(DMX_vec, char);
   std::string num_to_str(int);
   std::string num_to_str(uint8_t);
+  std::string num_to_str(double);
 }
