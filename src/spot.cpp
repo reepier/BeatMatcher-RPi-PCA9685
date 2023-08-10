@@ -127,8 +127,6 @@ void SpotRack::init_back(){
 // 1 ---------------------------------
 void SpotFrontAnimation1::init(){
     BaseAnimation::init();
-    // this->frame_cpt = 0;
-    // this->t_animation_start_ms;
 
     this->p_ms = vector<int>{rand_min_max(sin_min_p_ms, sin_max_p_ms),rand_min_max(sin_min_p_ms, sin_max_p_ms),rand_min_max(sin_min_p_ms, sin_max_p_ms), rand_min_max(sin_min_p_ms, sin_max_p_ms), rand_min_max(sin_min_p_ms, sin_max_p_ms)};
     

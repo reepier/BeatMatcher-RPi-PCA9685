@@ -48,11 +48,7 @@ DMX_vec SpiderFixture::buffer(){
 // ---------------------------------------------
 // SPIDER ANIMATION definition
 // ---------------------------------------------
-// void SpiderAnimation1::init(){
-//     BaseAnimation::init();
-//     // this->frame_cpt = 0;
-//     // this->t_animation_start_ms = millis();
-// }
+
 
 void SpiderAnimation1::new_frame(){
     balise("Compute new spider1 frame");
