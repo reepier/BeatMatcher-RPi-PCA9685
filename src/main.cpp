@@ -121,10 +121,6 @@ void send(){
     // send DMX frame to OLA server.
     balise("Construct buffer");
     for (fix_vec::iterator fx = ll_fxtrs.begin(); fx != ll_fxtrs.end(); fx++){
-        balise(fcn::num_to_str((*fx)->address).data());
-        balise(fcn::DMXvec_to_str((*fx)->buffer(), ',').data());
-        balise(fcn::num_to_str((*fx)->nCH).data());
-
         ola_buffer.SetRange((*fx)->get_address(), (*fx)->buffer().data(), (*fx)->get_nCH());
     }
     // ola_buffer.SetRange(ll_fxtrs[0]->address, ll_fxtrs[0]->buffer().data(), ll_fxtrs[0]->nCH);
@@ -174,7 +170,7 @@ int main(int argc, char* argv[]){
 
         balise("Compute new frame...");
         for (fix_vec::iterator fixture = fixtures.begin(); fixture != fixtures.end(); fixture++){
-            balise((*fixture)->active_animation->id.data());
+            balise((*fixture)->name, " : ", (*fixture)->active_animation->id.data());
             (*fixture)->active_animation->new_frame();
         }
         // led.active_animation->new_frame();

@@ -20,23 +20,24 @@ LEDFixture led(0, 4, "Led Bars");
 // Fixture initalizer
 void LEDFixture::init(){
     //TODO : use color macros
-    animations.push_back(new LEDAnimation1(this, 0, 0, 0, 0, 0, 0, 0, 0, 0, "Black", "LED.0.0"));
-    animations.push_back(new LEDAnimation1(this, 255 << 4, 150 << 4, 80 << 4, 30 << 4, 100 << 4, 1 << 4, 7 << 4, 0 << 4, 0 << 4, "Warm White Flashes, Red/orange background", "LED.1.1"));
-    animations.push_back(new LEDAnimation1(this, 255 << 4, 50 << 4, 10 << 4, 15 << 4, 50 << 4, 0 << 4, 5 << 4, 0 << 4, 0 << 4, "Sodium Flashes, Red/orange background", "LED.1.2"));
-    animations.push_back(new LEDAnimation1(this, 255 << 4, 0 << 4, 0 << 4, 0 << 4, 0 << 4, 0 << 4, 0 << 4, 0 << 4, 0 << 4, "Red flashes, Black background", "LED.1.3"));
-    animations.push_back(new LEDAnimation1(this, 255 << 4, 150 << 4, 80 << 4, 30 << 4, 100 << 4, 0 << 4, 0 << 4, 0 << 4, 10 << 4, "Warm White flashes, Red/Pink background", "LED.1.4"));
-    animations.push_back(new LEDAnimation1(this, 0 << 4, 0 << 4, 255 << 4, 0 << 4, 0 << 4, 0 << 4, 0 << 4, 0 << 4, 0 << 4, "Blue flashes, Black background", "LED.1.5"));
-    animations.push_back(new LEDAnimation1(this, 255 << 4, 100 << 4, 80 << 4, 0 << 4, 80 << 4, 0 << 4, 0 << 4, 0 << 4, 20 << 4, "Warm White flashes, Pink background", "LED.1.6"));
-    animations.push_back(new LEDAnimation1(this, 255 << 4, 100 << 4, 80 << 4, 0 << 4, 50 << 4, 0 << 4, 0 << 4, 0 << 4, 80 << 4, "Warm White flashes, Purple background", "LED.1.7"));
-    animations.push_back(new LEDAnimation1(this, 255 << 4, 100 << 4, 80 << 4, 0 << 4, 20 << 4, 0 << 4, 0 << 4, 0 << 4, 100 << 4, "Warm White flashes, Blue/Purple backgroud", "LED.1.8"));
-    animations.push_back(new LEDAnimation1(this, 255 << 4, 100 << 4, 80 << 4, 0 << 4, 10 << 4, 0 << 4, 10 << 4, 0 << 4, 100 << 4, "Warm White flashes, cyan background", "LED.1.9"));
-    animations.push_back(new LEDAnimation1(this, 255 << 4, 100 << 4, 80 << 4, 0 << 4, 0 << 4, 0 << 4, 0 << 4, 0 << 4, 0 << 4, "White flashes, Black background", "LED.1.10"));
+    animations.push_back(new LEDAnimation1(this, fcn::RGB(black),       DMX_vec{0,0,0,0,0,0},           "Black", "LED.0.0"));
+    // animations.push_back(new LEDAnimation1(this, 0, 0, 0, 0, 0, 0, 0, 0, 0, "Black", "LED.0.0"));
+    animations.push_back(new LEDAnimation1(this, DMX_vec{255, 150, 80} ,DMX_vec{30, 100, 1, 7, 0, 0},   "Warm White Flashes, Red/orange background", "LED.1.1.1"));
+    animations.push_back(new LEDAnimation1(this, fcn::RGB(white, -1) ,  DMX_vec{30, 100, 1, 7, 0, 0},   "Warm White Flashes, Red/orange background", "LED.1.1.2"));
+    animations.push_back(new LEDAnimation1(this, DMX_vec{255, 50, 10},  DMX_vec{15, 50, 0, 5, 0, 0},    "Sodium Flashes, Red/orange background", "LED.1.2"));
+    animations.push_back(new LEDAnimation1(this, DMX_vec{255, 0, 0},    DMX_vec{0, 0, 0, 0, 0, 0},      "Red flashes, Black background", "LED.1.3"));
+    animations.push_back(new LEDAnimation1(this, DMX_vec{255, 150, 80}, DMX_vec{30, 100, 0, 0, 0, 10},  "Warm White flashes, Red/Pink background", "LED.1.4"));
+    animations.push_back(new LEDAnimation1(this, DMX_vec{0, 0, 255},    DMX_vec{0, 0, 0, 0, 0, 0},      "Blue flashes, Black background", "LED.1.5"));
+    animations.push_back(new LEDAnimation1(this, DMX_vec{255, 100, 80}, DMX_vec{0, 80, 0, 0, 0, 20},    "Warm White flashes, Pink background", "LED.1.6"));
+    animations.push_back(new LEDAnimation1(this, DMX_vec{255, 100, 80}, DMX_vec{0, 50, 0, 0, 0, 80},    "Warm White flashes, Purple background", "LED.1.7"));
+    animations.push_back(new LEDAnimation1(this, DMX_vec{255, 100, 80}, DMX_vec{0, 20, 0, 0, 0, 100},   "Warm White flashes, Blue/Purple backgroud", "LED.1.8"));
+    animations.push_back(new LEDAnimation1(this, DMX_vec{255, 100, 80}, DMX_vec{0, 10, 0, 10, 0, 100},  "Warm White flashes, cyan background", "LED.1.9"));
+    animations.push_back(new LEDAnimation1(this, DMX_vec{255, 100, 80}, DMX_vec{0, 0, 0, 0, 0, 0},      "White flashes, Black background", "LED.1.10"));
 
     this->activate_by_ID("LED.0.0");
 }
 
 DMX_vec LEDFixture::buffer(){
-    // balise(fcn::DMXvec_to_str({this->MASTER_DIMMER, (uint8_t)(this->RGB[R] >> 4), (uint8_t)(this->RGB[G] >> 4), (uint8_t)(this->RGB[B] >> 4)}).data());
     return DMX_vec{this->MASTER_DIMMER, (uint8_t)(this->RGB[R] >> 4), (uint8_t)(this->RGB[G] >> 4), (uint8_t)(this->RGB[B] >> 4)};
 }
 
@@ -50,9 +51,12 @@ LEDAnimation1::LEDAnimation1(LEDFixture* fix, DMX_vec flash_rgb, DMX_vec bkgd_rg
     this->name = "Flash / Wavy Backgd";
     this->description = d;
     this->id = i;
-    
+
     this->flash_RGB = fcn::convert_8_to_12bits(flash_rgb);
     this->backgd_RGB_minmax = fcn::convert_8_to_12bits(bkgd_rgb_min_max);
+    balise(" yo ");
+    balise(fcn::intvec_to_str(flash_RGB, ',').data());
+    balise(" ya ");
 };
 LEDAnimation1::LEDAnimation1(LEDFixture* fix, int flash_r, int flash_g, int flash_b, int back_rmin, int back_rmax, int back_gmin, int back_gmax, int back_bmin, int back_bmax, string d, string i){
     this->fixture = fix;
@@ -87,7 +91,6 @@ void LEDAnimation1::init(){
 
 /** Computes the RGB values to send to the led display based on : */
 void LEDAnimation1::new_frame(){
-    balise("compute new Led1 frame");
     unsigned long t_ms = frame.t_current_ms;
     unsigned long t_last_beat_ms = sampler.t_last_new_beat;
 

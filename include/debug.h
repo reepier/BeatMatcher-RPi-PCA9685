@@ -14,12 +14,6 @@ void display();
 void display_curse();
 
 
-// void balise(const char* str){
-//     if (b_BALISE){
-//         std::cout << str << std::endl;
-//     }
-// }
-
 class LogEntry{
 public:
     int level;

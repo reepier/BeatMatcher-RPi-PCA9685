@@ -2,8 +2,10 @@
 
 #include <wiringPi.h>
 #include <string>
+#include <sstream>
 #include <cmath>
 
+#include "debug.h"
 #include "sysfcn.h"
 #include "music.h"
 // #include "LED.h"
@@ -130,7 +132,8 @@ extern AnimationManager animator;
 // -----------------------------------
 // TODO --> tailor these functions specifically for each fixture ! in the <fixture>.cpp
 namespace fcn{
-  // returns a normalized 4 (or 3 for RGB) channel DMX vector based on color literal
+  /* returns a normalized 4 (or 3 for RGB) channel DMX vector based on color literal 
+  if intensity = -1, the normalization is disabled*/
   DMX_vec RGBW(SimpleColor, uint8_t intensity = 255);
   DMX_vec RGB(SimpleColor, uint8_t intensity = 255);
   #define RED(x) fcn::RGBW(red,x)
@@ -150,7 +153,10 @@ namespace fcn{
   // returns a NORMALIZED 4 (or 3 for RGB) channel DMX vector based on a DMX_vector and a DMX vlue (0-255)
   DMX_vec RGBW_norm(DMX_vec, uint8_t intensity=255);
   DMX_vec RGB_norm(DMX_vec, uint8_t intensity=255);
+  
   std::string DMXvec_to_str(DMX_vec, char);
+  std::string intvec_to_str(int_vec, char);
+
   std::string num_to_str(int);
   std::string num_to_str(uint8_t);
   std::string num_to_str(double);

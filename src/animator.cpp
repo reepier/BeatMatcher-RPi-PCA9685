@@ -30,19 +30,16 @@ void AnimationManager::update(){
             led.activate_random();
             //spot_g.activate_random();
             front_rack.activate_random();
-            balise("Activate random spider animation (init)");
             spider.activate_random();
         }
 
         if (sampler.state_changed && (frame.t_current_ms-t_last_change_ms > TEMPO_ANIM_CHANGE)){
-            log(1, "Animator random", " update");
-
+            log(1, "Change animation randomly");
             t_last_change_ms = frame.t_current_ms;
 
             led.activate_random();
             //spot_g.activate_random();
             front_rack.activate_random();
-            balise("Activate random spider animation");
             spider.activate_random();
         }
 }
@@ -50,7 +47,6 @@ void AnimationManager::update(){
 
 bool AnimationManager::test_animation(){
     bool success = false;
-    balise(s_anim_id.data());
     if (s_anim_id.find("LED.") != string::npos){   // if animation's ID contains "LED"
         success = led.activate_by_ID(s_anim_id);
     }
@@ -58,9 +54,7 @@ bool AnimationManager::test_animation(){
         success = spot_g.activate_by_ID(s_anim_id);
     }
     else if (s_anim_id.find("FR.") != string::npos){   // if animation's ID contains "FR" (Front Rack)
-        balise("qsd");
         success = front_rack.activate_by_ID(s_anim_id);
-        balise("hjk");
     }
     else if (s_anim_id.find("BR.") != string::npos){   // if animation's ID contains "BR" (BackgroundRack)
         success = back_rack.activate_by_ID(s_anim_id);
@@ -87,9 +81,7 @@ void BaseFixture::blackout(bool b){
 //TODO move BaseFixure and BaseAnimation functions in basefixture.h and baseanimation.h
 // select and init an animtion randomly picked wihtin the list 
 void BaseFixture::activate_random(){
-    balise("Select");
     this->active_animation = this->animations[ rand()%this->animations.size() ];
-    balise("Init");
     this->active_animation->init();
 } 
 
@@ -99,14 +91,10 @@ bool BaseFixture::activate_by_ID(string id){
     bool found_it = false;
     
     for (vector<BaseAnimation*>::iterator anim_it = this->animations.begin(); anim_it != this->animations.end(); anim_it++){
-        balise("loop through animation :random ");
-        balise((*anim_it)->id.data());
         if ((*anim_it)->id == id){
             found_it = true;
             this->active_animation = (*anim_it);
-            balise("Activation...");
             this->active_animation->init();
-            balise("Activated !");
         }
     }
     if (!found_it){
@@ -176,8 +164,8 @@ DMX_vec fcn::RGB(SimpleColor color, uint8_t intensity){
         || color == yellow || color == orange || color == sodium){
         ret = fcn::RGBW(color, intensity);
         ret.pop_back();
+        return ret;
     }
-    
     else if (color == white){
         return RGB_norm(DMX_vec{255,90,17});
     }else if (color == gold){
@@ -193,7 +181,7 @@ DMX_vec fcn::RGBW_norm(DMX_vec rgbw, uint8_t intensity){
     for (int i=0; i<size; i++){
         sum += rgbw[i];
     }
-    float gain = (float)intensity/sum;
+    float gain = (intensity==-1) ? 1.0:(float)intensity/sum;
 
     for (int i=0; i<size; i++){
         ret[i] = gain*rgbw[i];
@@ -222,6 +210,26 @@ string fcn::DMXvec_to_str(DMX_vec data, char sep){
     }
     return ret;
 }
+
+string fcn::intvec_to_str(int_vec data, char sep){
+    string ret;
+    for (int_vec::iterator px=data.begin(); px!=data.end(); px++){
+        ostringstream oss;
+        oss<<(*px);
+        string sub_ret = oss.str();
+        int sz = sub_ret.size();
+        if (sz < 3){
+            sub_ret.insert(0, string(3-sz, ' '));
+        }
+
+        ret.append(sub_ret);
+        if ( !( (px+1)==data.end()) ){
+            ret.push_back(sep);
+        }
+    }
+    return ret;
+}
+
 std::string fcn::num_to_str(int val){
     ostringstream oss;
     oss<<val;
@@ -237,9 +245,12 @@ std::string fcn::num_to_str(double val){
     oss<<val;
     return oss.str();
 }
+
 int_vec fcn::convert_8_to_12bits(DMX_vec in_vec){
-    int_vec ret(in_vec.size());
-    for (int i=0; i<in_vec.size();i++){
-        ret[i] = (in_vec[i]) << 4;
+    const int sz = in_vec.size();
+    int_vec ret;
+    for (int i=0; i<sz;i++){
+        ret.push_back((int)(in_vec[i])*16);
     }
+    return ret;
 }
