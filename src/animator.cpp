@@ -237,3 +237,9 @@ std::string fcn::num_to_str(double val){
     oss<<val;
     return oss.str();
 }
+int_vec fcn::convert_8_to_12bits(DMX_vec in_vec){
+    int_vec ret(in_vec.size());
+    for (int i=0; i<in_vec.size();i++){
+        ret[i] = (in_vec[i]) << 4;
+    }
+}

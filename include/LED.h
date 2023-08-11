@@ -38,7 +38,7 @@ class LEDFixture : public BaseFixture
 {
 public:
   // Channels :
-  std::vector<int> RGB = {0, 0, 0}; // = {R,G,B} Values from 0-4095
+  int_vec RGB = {0, 0, 0}; // = {R,G,B} Values from 0-4095 (12 bits PWM thanks to PCA9685)
   int nCH = 4;
 
 
@@ -67,13 +67,14 @@ class LEDAnimation1 : public LEDAnimation
 {
 public:
   // specific parameters
-  int flash_RGB[3] = {0, 0, 0};                  // color components of the flash
-  int backgd_RGB_minmax[6] = {0, 0, 0, 0, 0, 0}; // min/max components for the background oscilltions {0 Rmin, 1 Rmax, 2 Gmin, 3 Gmax, 4 Bmin, 5 Bmax}
-  int periods_ms[6] = {0, 0, 0, 0, 0, 0};        // periods of the background oscillations
+  int_vec flash_RGB = {0, 0, 0};                  // color components of the flash
+  int_vec backgd_RGB_minmax = {0, 0, 0, 0, 0, 0}; // min/max components for the background oscilltions {0 Rmin, 1 Rmax, 2 Gmin, 3 Gmax, 4 Bmin, 5 Bmax}
+  int_vec periods_ms = {0, 0, 0, 0, 0, 0};        // periods of the background oscillations
   int fade_rate = 60;                            // ms flash fade rate (time constant of an exponential decay : intensity = exp(-(t-t0)/fade_rate)
 
   // Constructor
   LEDAnimation1(LEDFixture*, int, int, int, int, int, int, int, int, int, std::string, std::string);
+  LEDAnimation1(LEDFixture* fix, DMX_vec flash_rgb, DMX_vec bkgd_rgb_min_max, std::string d, std::string i);
 
   void init() override;      // initializes/reset what needs to be (initial and/or random values, etc.)
   void new_frame(); // computes the new frame's RGB values

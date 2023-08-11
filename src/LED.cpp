@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <fstream>
+using namespace std;
 
 #include <ola/DmxBuffer.h>
 #include <ola/Logging.h>
@@ -44,7 +45,16 @@ DMX_vec LEDFixture::buffer(){
 // ----------------------------------------------------------
 // ANIMATION CLASS Function definition
 // Animation constructor    // TODO : use int_vec in
-LEDAnimation1::LEDAnimation1(LEDFixture* fix, int flash_r, int flash_g, int flash_b, int back_rmin, int back_rmax, int back_gmin, int back_gmax, int back_bmin, int back_bmax, std::string d, std::string i){
+LEDAnimation1::LEDAnimation1(LEDFixture* fix, DMX_vec flash_rgb, DMX_vec bkgd_rgb_min_max, string d, string i){
+    this->fixture = fix;
+    this->name = "Flash / Wavy Backgd";
+    this->description = d;
+    this->id = i;
+    
+    this->flash_RGB = fcn::convert_8_to_12bits(flash_rgb);
+    this->backgd_RGB_minmax = fcn::convert_8_to_12bits(bkgd_rgb_min_max);
+};
+LEDAnimation1::LEDAnimation1(LEDFixture* fix, int flash_r, int flash_g, int flash_b, int back_rmin, int back_rmax, int back_gmin, int back_gmax, int back_bmin, int back_bmax, string d, string i){
     this->fixture = fix;
     this->name = "Flash / Wavy Backgd";
     this->description = d;
@@ -64,13 +74,15 @@ LEDAnimation1::LEDAnimation1(LEDFixture* fix, int flash_r, int flash_g, int flas
 // Animation initializer
 void LEDAnimation1::init(){
     BaseAnimation::init();
-
-    periods_ms[0] = 1000 * rand_min_max(MIN_T, MAX_T);
-    periods_ms[1] = 1000 * rand_min_max(MIN_T, MAX_T);
-    periods_ms[2] = 1000 * rand_min_max(MIN_T, MAX_T);
-    periods_ms[3] = 1000 * rand_min_max(MIN_T, MAX_T);
-    periods_ms[4] = 1000 * rand_min_max(MIN_T, MAX_T);
-    periods_ms[5] = 1000 * rand_min_max(MIN_T, MAX_T);
+    for (int_vec::iterator per_it=periods_ms.begin(); per_it!=periods_ms.end(); per_it++){
+        (*per_it) = 1000 * rand_min_max(MIN_T, MAX_T);
+    }
+    // periods_ms[0] = 1000 * rand_min_max(MIN_T, MAX_T);
+    // periods_ms[1] = 1000 * rand_min_max(MIN_T, MAX_T);
+    // periods_ms[2] = 1000 * rand_min_max(MIN_T, MAX_T);
+    // periods_ms[3] = 1000 * rand_min_max(MIN_T, MAX_T);
+    // periods_ms[4] = 1000 * rand_min_max(MIN_T, MAX_T);
+    // periods_ms[5] = 1000 * rand_min_max(MIN_T, MAX_T);
 }
 
 /** Computes the RGB values to send to the led display based on : */
@@ -80,16 +92,16 @@ void LEDAnimation1::new_frame(){
     unsigned long t_last_beat_ms = sampler.t_last_new_beat;
 
     //bool flash = animator.flash; //TOO remove variable flash --> not necessary
-    bool flash = (sampler.state == BEAT) && (frame.t_current_ms-sampler.t_beat_tracking_start < MAX_CONT_FLASH);
+    bool flash_on = (sampler.state == BEAT) && (frame.t_current_ms-sampler.t_beat_tracking_start < MAX_CONT_FLASH);
 
     int backgd_color[3];
 
-    backgd_color[R] = (backgd_RGB_minmax[0] + backgd_RGB_minmax[1]) / 2 + (backgd_RGB_minmax[1] - backgd_RGB_minmax[0]) / 4 * (sin(2 * 3.14 * t_ms / periods_ms[0]) + sin(2 * 3.14 * t_ms / periods_ms[1]));
-    backgd_color[G] = (backgd_RGB_minmax[2] + backgd_RGB_minmax[3]) / 2 + (backgd_RGB_minmax[3] - backgd_RGB_minmax[2]) / 4 * (sin(2 * 3.14 * t_ms / periods_ms[2]) - sin(2 * 3.14 * t_ms / periods_ms[3]));
-    backgd_color[B] = (backgd_RGB_minmax[4] + backgd_RGB_minmax[5]) / 2 + (backgd_RGB_minmax[5] - backgd_RGB_minmax[4]) / 4 * (sin(2 * 3.14 * t_ms / periods_ms[4]) - sin(2 * 3.14 * t_ms / periods_ms[5]));
+    backgd_color[R] = (backgd_RGB_minmax[0] + backgd_RGB_minmax[1]) / 2 + (backgd_RGB_minmax[1] - backgd_RGB_minmax[0]) / 4 * (sin(2*3.14*t_ms / periods_ms[0]) + sin(2*3.14*t_ms / periods_ms[1]));
+    backgd_color[G] = (backgd_RGB_minmax[2] + backgd_RGB_minmax[3]) / 2 + (backgd_RGB_minmax[3] - backgd_RGB_minmax[2]) / 4 * (sin(2*3.14*t_ms / periods_ms[2]) - sin(2*3.14*t_ms / periods_ms[3]));
+    backgd_color[B] = (backgd_RGB_minmax[4] + backgd_RGB_minmax[5]) / 2 + (backgd_RGB_minmax[5] - backgd_RGB_minmax[4]) / 4 * (sin(2*3.14*t_ms / periods_ms[4]) - sin(2*3.14*t_ms / periods_ms[5]));
 
     float coef = exp(-(double)(t_ms - t_last_beat_ms) / fade_rate);
-    if (flash)
+    if (flash_on)
     {
 
         fixture->RGB[R] = backgd_color[R] + coef * (flash_RGB[R] - backgd_color[R]);

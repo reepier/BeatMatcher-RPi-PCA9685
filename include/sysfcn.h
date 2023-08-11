@@ -1,13 +1,30 @@
 #pragma once
+#include <stdlib.h>
+
 
 #include "wiringPi.h"
 #include "constant.h"
 
 
-int map(int, int,int,int,int); //tested ok
-double map(double, double,double,double,double);
-int rand_min_max(int, int); // tested ok
+// int map(int, int,int,int,int); //tested ok
+// double map(double, double,double,double,double);
 
+// linearly interpolates (x;y) between points (x1;y1) and (x2;y2)
+template<typename T>
+T map(T x, T x1, T x2, T y1, T y2){
+    double a = (double)(y2-y1)/(double)(x2-x1);
+    double b = (double)y1 - a*x1;
+    return (T)(a*x+b);
+}
+
+inline int rand_min_max(int min, int max){
+    return rand() % (max-min) + min;
+}
+
+template<typename T>
+T min_max(T x, T min, T max){
+    return (x<min) ? min : ((x>max)? max : x);
+}
 
 // TODO : Move this class elsewhere
 class LoopControler{

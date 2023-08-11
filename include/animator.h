@@ -147,8 +147,6 @@ namespace fcn{
   #define WHITE(x) fcn::RGBW(white,x)
   #define BLACK fcn::RGBW(black)
   
-
-
   // returns a NORMALIZED 4 (or 3 for RGB) channel DMX vector based on a DMX_vector and a DMX vlue (0-255)
   DMX_vec RGBW_norm(DMX_vec, uint8_t intensity=255);
   DMX_vec RGB_norm(DMX_vec, uint8_t intensity=255);
@@ -156,4 +154,5 @@ namespace fcn{
   std::string num_to_str(int);
   std::string num_to_str(uint8_t);
   std::string num_to_str(double);
+  int_vec convert_8_to_12bits(DMX_vec);
 }

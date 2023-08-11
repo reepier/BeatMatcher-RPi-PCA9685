@@ -92,12 +92,7 @@ int main(){
 
     // spit_log();
 
-    double delta;
-    const double DMX_min = 0;
-    const double DMX_max = 220;
-    const double deltaDmin = 0.7;  // relative random variation of speed @255
-    const double deltaDmax = 0.0;  // relative random variation of speed @000
-
-    delta = map((double)220, DMX_min, DMX_max, deltaDmin, deltaDmax);
-    cout << delta <<endl;
+  // for (int i=0; i<255; i++){
+  //   cout<< i <<"\t:\t" << min_max( map(i, 50,180,0,255), 0,255)<<endl;
+  // }
 }
