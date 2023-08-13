@@ -33,13 +33,14 @@ void send_buffer(){
 }
 
 void spit_colors(){
-  for(int c = SimpleColor::black; c != SimpleColor::last_color; c++){
-    cout << colorName[c] << "\t: RGBW{" << fcn::DMXvec_to_str(fcn::RGBW((SimpleColor)c), ',') << "} \t RGB{" << fcn::DMXvec_to_str(fcn::RGB((SimpleColor)c), ',') << "}" << endl;
+  for(int c = simpleColor::black; c != simpleColor::last_color; c++){
+    cout << colorName[c] << "\t: RGBW{" << fcn::DMXvec_to_str(fcn::RGBW((simpleColor)c), ',') << "} \t RGB{" << fcn::DMXvec_to_str(fcn::RGB((simpleColor)c), ',') << "}" << endl;
   }
 }
 
 int main(){
     ola_client.Setup();
+    srand(millis());
 
     // while(true){
     //   for(int c = SimpleColor::black; c != SimpleColor::last_color; c++){
@@ -136,5 +137,10 @@ int main(){
   // ola_buffer.SetRange(led.get_address(), led.buffer().data(), led.get_nCH());
   // ola_client.SendDmx(1, ola_buffer);
 
-  spit_colors();
+  int_vec vals = {0,1};
+  int_vec proba = {5,5};
+
+  for (int i=0; i<30; i++){
+    cout << fcn::random_pick(vals, proba) << endl;
+  }
 }

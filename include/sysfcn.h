@@ -1,5 +1,6 @@
 #pragma once
 #include <stdlib.h>
+#include <cmath>
 
 
 #include "wiringPi.h"
@@ -56,3 +57,11 @@ class LoopControler{
 };
 
 extern LoopControler frame;
+
+/* x [as rad]*/
+inline double sin_min_max(auto x, auto min, auto max){
+    return (max+min)/2.0 + (max-min)/2.0 * std::sin(x); 
+}
+inline double sin2_min_max(auto x, auto min, auto max){
+    return (max+min)/2.0 + (max-min)/2.0 * std::sin(x); 
+}

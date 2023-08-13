@@ -17,7 +17,7 @@
   #define B 2
   #define W 3
 
-  enum SimpleColor{
+  enum simpleColor{
     black=0,
     red,
     green,
@@ -40,13 +40,16 @@
   enum Shape{
       square,
       sinus,
+      sinus2,
       triangle,
       gaussian,
+      gaussian2,
       saw
   };
   
   typedef std::vector<uint8_t>  DMX_vec;  //a vector of 8bit int with values ranging from 0 to 255
-  typedef std::vector<int>      int_vec;  //a vector of standard int 
+  typedef std::vector<int>      int_vec;  //a vector of standard int
+  typedef std::vector<unsigned long> t_vec;
 
 // Declare all the classes before defining them
 class AnimationManager;   //TODO move this in a sceno.h and rename this module baseFixture.h & baseAnimation.h
@@ -134,8 +137,8 @@ extern AnimationManager animator;
 namespace fcn{
   /* returns a normalized 4 (or 3 for RGB) channel DMX vector based on color literal 
   if intensity = -1, the normalization is disabled*/
-  DMX_vec RGBW(SimpleColor, uint8_t intensity = 255);
-  DMX_vec RGB(SimpleColor, uint8_t intensity = 255);
+  DMX_vec RGBW(simpleColor, uint8_t intensity = 255);
+  DMX_vec RGB(simpleColor, uint8_t intensity = 255);
   #define RED(x) fcn::RGBW(red,x)
   #define GREEN(x) fcn::RGBW(green,x)
   #define BLUE(x) fcn::RGBW(blue,x)
@@ -161,4 +164,44 @@ namespace fcn{
   std::string num_to_str(uint8_t);
   std::string num_to_str(double);
   int_vec convert_8_to_12bits(DMX_vec);
+
+  /*shape functions*/
+  // TODO maybe just implement a function for each shape (gaussian(), square(), saw()...)
+  double shape(unsigned long t, unsigned long t0, unsigned long period, Shape shape);
+
+  // random generation functions
+  template<class T>
+  T random_pick(std::vector<T> vals, int_vec proba = {}){
+    int n = vals.size();
+
+    if (n == 0){return (T)0;}
+    else if (n==1) {return vals[0];}
+
+    if (proba.size() == 0){
+      proba.resize(n, 1); // if proba is not passed as an argument, defaut to equiprobability
+    }else if (proba.size() != n){ // if proba vector does not match value vector in size, return & log.
+      log(1, "Proba size differs from vals size !!");
+      return (T)0;
+    }
+
+    int proba_sum = 0;
+    for (int i=0; i<proba.size(); i++){
+      proba_sum += proba[i];
+    }
+    
+    int_vec tab = {proba[0]};
+    for (int i=1; i<n; i++){
+      tab.push_back(proba[i-1] + proba[i]);
+    }
+    int pick = rand_min_max(0, proba_sum);
+    
+    for (int i=0; i<n; i++){
+      if (pick<tab[i]){
+        return vals[i];
+      }
+    }
+
+    return (T)0;    //TODO bellec ce casting est bancale AF
+  }
+
 }

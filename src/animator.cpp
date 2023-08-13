@@ -44,7 +44,6 @@ void AnimationManager::update(){
         }
 }
 
-
 bool AnimationManager::test_animation(){
     bool success = false;
     if (s_anim_id.find("LED.") != string::npos){   // if animation's ID contains "LED"
@@ -69,9 +68,7 @@ bool AnimationManager::test_animation(){
     return success;
 }
 
-
 AnimationManager animator;
-
 
 // toggles blackout boolean
 void BaseFixture::blackout(bool b){
@@ -84,7 +81,6 @@ void BaseFixture::activate_random(){
     this->active_animation = this->animations[ rand()%this->animations.size() ];
     this->active_animation->init();
 } 
-
 
 // select and init an animation with its ID. If the ID cannot be found within the existing animations, does nothing.
 bool BaseFixture::activate_by_ID(string id){
@@ -103,14 +99,13 @@ bool BaseFixture::activate_by_ID(string id){
     return found_it;
 }
 
-
 // -----------------------------------
 // USEFULL FUNCTIONS
 // -----------------------------------
 // TODO
 #include <sstream>
 
-DMX_vec fcn::RGBW(SimpleColor c, uint8_t intensity){
+DMX_vec fcn::RGBW(simpleColor c, uint8_t intensity){
     switch (c)
     {
     case black:
@@ -157,7 +152,7 @@ DMX_vec fcn::RGBW(SimpleColor c, uint8_t intensity){
     }
 }
 
-DMX_vec fcn::RGB(SimpleColor color, uint8_t intensity){
+DMX_vec fcn::RGB(simpleColor color, uint8_t intensity){
     DMX_vec ret;
     if (color == black || color == red || color == green || color == blue
         || color == cyan || color == magenta || color == pink || color == purple
@@ -210,7 +205,6 @@ string fcn::DMXvec_to_str(DMX_vec data, char sep){
     }
     return ret;
 }
-
 string fcn::intvec_to_str(int_vec data, char sep){
     string ret;
     for (int_vec::iterator px=data.begin(); px!=data.end(); px++){
@@ -254,3 +248,23 @@ int_vec fcn::convert_8_to_12bits(DMX_vec in_vec){
     }
     return ret;
 }
+
+double fcn::shape(unsigned long t, unsigned long t0, unsigned long period, Shape shape){
+    switch (shape){
+      case Shape::gaussian:
+        
+        break;
+      case Shape::sinus:
+        
+        break;
+      case Shape::saw:
+        
+        break;
+      case Shape::square:
+        
+        break;
+      default:
+
+        break;
+    }
+  }

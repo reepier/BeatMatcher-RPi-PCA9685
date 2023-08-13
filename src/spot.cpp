@@ -165,13 +165,13 @@ void SpotFrontAnimation1::new_frame(){
             if (t > this->t_next[i_spot]){
 
                 this->t_prev[i_spot] = this->t_next[i_spot];
-                this->t_next[i_spot] = this->t_next[i_spot] + rand_min_max(this->rand_const_ms/5, this->rand_const_ms*2);
+                this->t_next[i_spot] = this->t_next[i_spot] + rand_min_max(this->flash_len, this->rand_const_ms*2);
             }
 
-            int t_next_flash = this->t_next[i_spot];        // for readability
-            int t_prev_flash = this->t_prev[i_spot];        // for readability  
+            int t_next = this->t_next[i_spot];        // for readability
+            int t_prev = this->t_prev[i_spot];        // for readability  
             
-            double flash_intensity = exp( -pow(2.5/this->flash_len*(t - t_prev_flash), 2)) + exp( -pow(2.5/this->flash_len*(t - t_next_flash), 2));
+            double flash_intensity = exp( -pow(2.5/this->flash_len*(t - t_prev), 2)) + exp( -pow(2.5/this->flash_len*(t - t_next), 2));
 
             this->fixture->spots[i_spot]->RGBW[R] = min(max( (int)( (1.0-flash_intensity) * backgd_RGBW[R] + flash_intensity * this->color2[R]  ),0),255); 
             this->fixture->spots[i_spot]->RGBW[G] = min(max( (int)( (1.0-flash_intensity) * backgd_RGBW[G] + flash_intensity * this->color2[G]  ),0),255);
