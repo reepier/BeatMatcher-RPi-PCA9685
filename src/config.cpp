@@ -1,3 +1,4 @@
+#include <vector>
 #include "config.h"
 
 bool b_BALISE = false;
@@ -6,4 +7,4 @@ bool b_NO_MUSIC = false;
 bool b_NO_LED = false;
 
 bool b_test = false;
-std::string s_anim_id;
+std::vector<std::string> vec_anim_id;

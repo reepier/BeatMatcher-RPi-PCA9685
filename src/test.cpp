@@ -19,7 +19,7 @@ using namespace std;
   ola::client::StreamingClient ola_client;
   ola::DmxBuffer ola_buffer;
 
-fix_vec ll_fxtrs = {&led, &spot_1, &spot_2, &spot_3, &spot_d, &spot_g, &spider};
+fix_vec ll_fxtrs = {&led, &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, &spot_d, &spot_g, &spider};
 fix_vec fixtures = {&front_rack, &led, &spider};
 
 LoopControler frame;
@@ -137,10 +137,22 @@ int main(){
   // ola_buffer.SetRange(led.get_address(), led.buffer().data(), led.get_nCH());
   // ola_client.SendDmx(1, ola_buffer);
 
-  int_vec vals = {0,1};
-  int_vec proba = {5,5};
+  // int_vec vals = {0,1};
+  // int_vec proba = {5,5};
 
-  for (int i=0; i<30; i++){
-    cout << fcn::random_pick(vals, proba) << endl;
+  // for (int i=0; i<30; i++){
+  //   cout << fcn::random_pick(vals, proba) << endl;
+  // }
+  time_ms start = millis();
+
+  while (true){
+    time_ms t = millis();
+    int y = (int)fcn::sin_wave(t, 1000, 0,50,0);
+    // int y = (int)fcn::square_wave(t, 1000, 0,50,0.3, 0);
+    // int y = (int)fcn::triangle_wave(t, 1000, 0,50,0.2, 0);
+
+
+    cout << string((int)y, ' ') << '.' << endl;
+    delay(50);
   }
 }

@@ -10,7 +10,7 @@ extern bool b_NO_LED;      //TRUE: sends PCA9685 commands ; FALSE: ignores PCA96
 extern bool b_CURSES;       //TRUE : use curses HMI ; FALSE : use simple console output
 
 extern bool b_test;
-extern std::string s_anim_id;
+extern std::vector<std::string> vec_anim_id;
 
 // precompiler flags
 /*  

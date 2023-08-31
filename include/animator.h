@@ -11,6 +11,7 @@
 // #include "LED.h"
 
 // Common Datatypes
+  typedef unsigned long time_ms;
   // indexes for ease of reading --> write { color[R] = ... }  instead of { color[0] = ... } 
   #define R 0
   #define G 1
@@ -56,6 +57,8 @@ class AnimationManager;   //TODO move this in a sceno.h and rename this module b
 
 class BaseFixture;        //TODO move this in baseFixture.h
 class BaseAnimation;      //TODO move this in baseAnimation.h
+class Scene;              //
+
 
 typedef std::vector<BaseFixture*> fix_vec;
 /**
@@ -126,7 +129,6 @@ class BaseAnimation{
 
 };
 
-
 extern AnimationManager animator;
 
 
@@ -167,7 +169,55 @@ namespace fcn{
 
   /*shape functions*/
   // TODO maybe just implement a function for each shape (gaussian(), square(), saw()...)
-  double shape(unsigned long t, unsigned long t0, unsigned long period, Shape shape);
+
+  // SINGLE BURSTS
+  // pure gaussian shape -> exp(-x²/2)
+  inline double gaussian(time_ms t, time_ms t0, time_ms period, double min, double max){
+      double sigma = period/3.0;
+      return min + (max-min)*std::exp( -std::pow((t-t0)/sigma, 2)/2 );
+  }
+  // squared gaussian shape -> exp(-x⁴/4) (longer plateau, steeper slopes)
+  inline double gaussian2(time_ms t, time_ms t0, time_ms period, double min, double max){ 
+    double sigma = period/3.0;
+    return min + (max-min)*std::exp( -std::pow((t-t0)/sigma, 4)/4 );
+  }
+  inline double square(time_ms t, time_ms t0, time_ms period, double min, double max, double alpha=0.5){
+    if ( t > t0-alpha*period  &&  t < t0+(1-alpha)*period ) {return max;}
+    else {return min;}
+  }
+  inline double triangle(time_ms t, time_ms t0, time_ms period, double min, double max, double alpha=0.5){
+    if ( t0-alpha*period < t  &&  t < t0  )         {return (double)map((double)t, t0-alpha*period, (double)t0,           min, max);}  
+    else if (t0 < t  &&  t < t0+(1-alpha)*period )  {return (double)map((double)t, (double)t0,      t0+(1-alpha)*period,  max, min);}
+    else {return min;}
+  }
+
+  // PERIODIC FUNCTIONS
+  //sine wave
+  inline double sin_wave(time_ms t, time_ms period, double min, double max, double phase = 0){
+    return (max+min)/2 + (max-min)/2*std::sin(2*M_PI*t/period + phase);
+  }
+  //triangular wave
+  inline double triangle_wave(time_ms t, time_ms period, double min, double max, double alpha = 0.5, double phase = 0){
+    if (alpha>1.0){alpha = 1.0;}
+    else if (alpha < 0.0){alpha = 0.0;}
+
+    double t_prime = (t+phase/2.0/M_PI*period) / period;
+    t_prime = t_prime - (int)t_prime;
+
+    if (t_prime<alpha)  {return (double)map(t_prime, 0.0, alpha, min, max);}
+    else                {return (double)map(t_prime, alpha, 1.0, max, min);}
+  }
+  //square wave
+  inline double square_wave(time_ms t, time_ms period, double min, double max, double alpha = 0.5, double phase = 0){
+    if (alpha>1.0){alpha = 1.0;}
+    else if (alpha < 0.0){alpha = 0.0;}
+
+    double t_prime = (t+phase/2.0/M_PI*period) / period;
+    t_prime = t_prime - (int)t_prime;
+
+    if (t_prime<alpha)  {return min;}
+    else                {return max;}
+  }
 
   // random generation functions
   template<class T>
@@ -203,5 +253,4 @@ namespace fcn{
 
     return (T)0;    //TODO bellec ce casting est bancale AF
   }
-
 }

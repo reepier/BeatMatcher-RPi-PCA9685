@@ -28,11 +28,11 @@ using namespace std;
     ola::client::StreamingClient ola_client;
     ola::DmxBuffer ola_buffer;
 
-fix_vec ll_fxtrs = {&led, &spot_1, &spot_2, &spot_3, &spot_d, &spot_g, &spider};
+fix_vec ll_fxtrs = {&led, &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, &spot_d, &spot_g, &spider};
 fix_vec fixtures = {&front_rack, &led, &spider};
 
 bool process_arguments(int n, char* args[]){
-    for (int i=1; i<=n-1; i++){
+    for (int i=1; i<n; i++){
         char* arg = args[i];
 
         if (strcmp(arg, "--help") == 0){
@@ -53,9 +53,10 @@ bool process_arguments(int n, char* args[]){
         }
         else if(strcmp(arg, "--animation") == 0){
             b_test = true;
-            ++i; // get the following argument
-            arg = args[i];  
-            s_anim_id = arg;
+            while ( (i<n-1) && (string(args[++i]).find('-') != 0) ) {
+                vec_anim_id.push_back(string(args[i]));
+                balise( (*(vec_anim_id.end()-1)).data() );
+            }
         }
         else{
             return false;

@@ -108,6 +108,9 @@ class SpiderAnimation2 : public SpiderAnimation{
     // dynamic variables (to compute each frame)
     std::vector<t_vec>      flash_time; //for each of the 9 pixels, stores {time of previous flash, time of next flash} --> needs update at every frame
     
+    // helpful & hidden stuff
+    const int i_next = 1, i_prev = 0;           //indices for readability
+
 //imporvements to allow for more than 1 flash color
     // constant parameters (defining the animation)
     std::vector<flash_vec>  flashes; //for each of the 9 pixels, one vector containing prev_flash and next_flash data (color & timing).

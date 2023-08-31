@@ -18,16 +18,21 @@ void SpiderFixture::init(){
     this->animations.push_back(new SpiderAnimation1(this, red,    0, 20, int_vec{90,90,90},    "Red, 90°, static", "SPI.1.1"));
     this->animations.push_back(new SpiderAnimation1(this, white,    0, 20, int_vec{20,20,20},  "White, 20°, slow", "SPI.1.2"));
     this->animations.push_back(new SpiderAnimation1(this, blue,    0, -20, int_vec{130,130,130},  "Blue, 130°, slow", "SPI.1.3"));
+
     // Animation TYPE 2
     // SpiderAnimation2(SpiderFixture *f, SimpleColor b_col, SimpleColor f_col, Shape f_shp, unsigned long f_len, unsigned long f_dt,int p_pos, int p_speed, int_vec t_pos, int t_per, Shape t_shp, std::string d, std::string i){
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{white}, gaussian,   400, 300,   0, 20,    int_vec{0,0,0}, 10000, sinus, "Developpement animation",   "SPI.2.1"));
-    this->animations.push_back(new SpiderAnimation2(this, red,   color_vec{white}, gaussian,   800, 300,   0, 20,    int_vec{0,0,0}, 10000, sinus, "Developpement animation",   "SPI.2.2"));
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{red, blue}, gaussian,   500, 700,   0, 20,    int_vec{0,0,0}, 10000, sinus, "Developpement animation",   "SPI.2.3"));
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{white}, gaussian,   700, 1000,  0, 20,   int_vec{0,0,0}, 10000, sinus, "Developpement animation",   "SPI.2.4"));
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{white}, gaussian,   1000,2000,  0, 20,  int_vec{0,0,0}, 10000, sinus, "Developpement animation",   "SPI.2.5"));
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{white}, gaussian,   1500,3000,  0, 20,  int_vec{0,0,0}, 10000, sinus, "Developpement animation",   "SPI.2.6"));
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{white}, gaussian,   1500,500,  0, 20,  int_vec{0,0,0}, 10000, sinus, "Developpement animation",   "SPI.2.7"));
-    
+    // monochrome
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{white}, gaussian,   400, 300,   0, 20,    int_vec{}, 10000, sinus, "Fast white flashes, tilt motion",   "SPI.2.1"));
+    this->animations.push_back(new SpiderAnimation2(this, red,   color_vec{white}, gaussian,   2000, 1000,   0, 20,    int_vec{}, 10000, sinus, "Fast white flashes, red back, tilt motion",   "SPI.2.2"));
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{white}, gaussian,   2000, 1000,   0, 20,   int_vec{}, 10000, sinus, "Developpement animation",   "SPI.2.3"));
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{white}, gaussian,   700, 1000,  0, 20,    int_vec{}, 10000, sinus, "Developpement animation",   "SPI.2.4"));
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{white}, gaussian,   1000,2000,  0, 20,    int_vec{}, 10000, sinus, "Developpement animation",   "SPI.2.5"));
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{white}, gaussian,   1500,3000,  0, 20,    int_vec{}, 10000, sinus, "Developpement animation",   "SPI.2.6"));
+    // bichrome
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{red, orange}, gaussian,   1500,500,  0, 20,     int_vec{90,90,90}, 0, sinus, "Red & Sod. flashes, static 90",   "SPI.2.7"));
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{red, orange}, gaussian,   1500,500,  0, 20,     int_vec{0,0,0}, 0, sinus, "Red & Sod. flashes, static flat",   "SPI.2.8"));
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{red, blue}, gaussian,   1500,500,  0, 20,     int_vec{0}, 10000, sinus, "Red & Blue flashes, tilt motion",   "SPI.2.9"));
+
     this->activate_by_ID("SPI.0.0");
 }
 
@@ -77,22 +82,23 @@ void SpiderAnimation1::new_frame(){
 // Animtion TYPE 2
 void SpiderAnimation2::update_flash_time(){
     unsigned long t = frame.t_current_ms;   //for readability
+
     static int cpt = 0;
-    for(int pix = 0; pix < flash_time.size(); pix++){   //pour chaque pixel
+    for(int pix = 0; pix < flashes.size(); pix++){   //pour chaque pixel
         
-        unsigned long t_next = flash_time[pix][1];
+        unsigned long t_next = flashes[pix][i_next].time;
         if (t>t_next){    // si t a depassé t_next
             
-            flash_time[pix][0] = t_next;
-            flash_time[pix][1] = t_next + rand_min_max(flash_length*2, 2*9*flash_dt);   // flash interval : [0+eps ; 2*flash_dt] --> average flash_dt between flashes
+            // flash_time[pix][0] = t_next;
+            // flash_time[pix][1] = t_next + rand_min_max(flash_length*2, 2*9*flash_dt);   // flash interval : [0+eps ; 2*flash_dt] --> average flash_dt between flashes
             
-            flashes[pix][0].time = flashes[pix][1].time;
-            flashes[pix][1].time = flashes[pix][0].time + rand_min_max(flash_length*2, 2*9*flash_dt);
-            flashes[pix][0].color = flashes[pix][1].color;
-            flashes[pix][1].color = fcn::random_pick(flash_colors, flash_color_proba);
+            this->flashes[pix][i_prev].time  = this->flashes[pix][i_next].time;
+            this->flashes[pix][i_next].time  = this->flashes[pix][i_prev].time + rand_min_max(flash_length, 2*9*flash_dt);
+            this->flashes[pix][i_prev].color = this->flashes[pix][i_next].color;
+            this->flashes[pix][i_next].color = fcn::random_pick(flash_colors, flash_color_proba);
             // log(1, );
             cpt++;
-                        // log(1, "now:", t/1000.0, "\tnext:", (flash_time[pix][1]-t)/1000.0);
+            // log(1, "now:", t/1000.0, "\tnext:", (flash_time[pix][1]-t)/1000.0);
         }
     }
 }
@@ -110,20 +116,25 @@ void SpiderAnimation2::new_frame(){
     unsigned long t = frame.t_current_ms;
     double sigma = this->flash_length/3.0;
     DMX_vec background_color_RGBW = fcn::RGBW(this->background_color, 50);
-    DMX_vec flash_color_RGBW = fcn::RGBW(this->flash_colors[0]);   //temporary
+    // DMX_vec flash_color_RGBW = fcn::RGBW(this->flash_colors[0]);   //temporary
     
     // Tilt
     if (this->tilt_period == 0){
         this->fixture->tilt = this->tilt_position;
     }else{
         double rad = 2*M_PI*t/this->tilt_period;
-        this->fixture->tilt     = int_vec{(int)sin_min_max(rad, tiltMIN, tiltMAX), (int)sin_min_max(rad+M_PI/3, tiltMIN, tiltMAX), (int)sin_min_max(rad+2*M_PI/3, tiltMIN, tiltMAX)};
+        this->fixture->tilt     = int_vec{(int)sin_min_max(rad, 5, tiltMAX), (int)sin_min_max(rad+M_PI/3, 5, tiltMAX), (int)sin_min_max(rad+2*M_PI/3, 5, tiltMAX)};
     }
 
     // Colors
     for (int pix = 0; pix < this->fixture->pixels.size(); pix++){
-        unsigned long t_prev = flash_time[pix][0];
-        unsigned long t_next = flash_time[pix][1];
+        unsigned long t_prev = this->flashes[pix][i_prev].time;
+        unsigned long t_next = this->flashes[pix][i_next].time;
+
+        DMX_vec flash_color_RGBW = (t-t_prev > t_next-t) ? fcn::RGBW(this->flashes[pix][i_next].color) : fcn::RGBW(this->flashes[pix][i_prev].color);
+
+        // unsigned long t_prev = flash_time[pix][0];
+        // unsigned long t_next = flash_time[pix][1];
 
         double flash_coef = exp( -pow(pow(t-t_prev ,2)/2/pow(sigma,2), 2)) + exp( -pow(pow(t_next-t ,2)/2/pow(sigma,2),2)); //TODO implement more differnt shapes
 

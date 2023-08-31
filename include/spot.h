@@ -42,7 +42,7 @@ public:
     };
     
 };
-extern SpotFixture spot_g, spot_d, spot_1, spot_2, spot_3;
+extern SpotFixture spot_g, spot_d, spot_1, spot_2, spot_3, spot_4, spot_5, spot_6;
 
 /* /!\ /!\ Bullshit class --> I don't plan on coding animation for individual spots */
 class SpotAnimation : public BaseAnimation{
@@ -69,7 +69,7 @@ public:
 /* frontal rack*/
 class SpotRack : public BaseFixture{
 public:
-    std::vector<SpotFixture *> spots;        // pointers to spotFixture object
+    spot_vec spots;        // pointers to spotFixture object
     int rack_size;                           // number of spots (derived)
     //std::vector<BaseAnimation *> animations; // vector containing animations
 
@@ -85,6 +85,9 @@ public:
         this->spots.push_back(s2);
         this->rack_size = this->spots.size();
         };
+    SpotRack(spot_vec sp, std::string nm): BaseFixture(-1, 0, nm){
+        this->spots = sp;
+    };
 
     void init() override;     // empty function (useless)
     void init_front(); // initialize a frontal rack of spots
@@ -143,10 +146,10 @@ public:
     void new_frame();
 };
 
-#define STRB_FASTEST 220
-#define STRB_FAST 180
-#define STRB_MED 100
-#define STRB_SLOW 60
+#define STRB_FASTEST 180
+#define STRB_FAST 80
+#define STRB_MED 30
+#define STRB_SLOW 1
 /*Strobe*/
 class SpotFrontAnimation2 : public SpotRackAnimtion{
   public:
@@ -160,8 +163,9 @@ class SpotFrontAnimation2 : public SpotRackAnimtion{
     double delta;
     const double DMX_min = 0;
     const double DMX_max = 240;
-    const double deltaDmin = 0.7;  // relative random variation of speed @255
-    const double deltaDmax = 0.0;  // relative random variation of speed @000
+    const double deltaDmin = 30;  // absolute random variation of speed @DMX_min
+    const double deltaDmax = 0;  // absolute random variation of speed @DMX_max
+    
 
     SpotFrontAnimation2(SpotRack *f, DMX_vec c, uint8_t speed, std::string d, std::string i){
         this->description = d;
@@ -173,8 +177,8 @@ class SpotFrontAnimation2 : public SpotRackAnimtion{
         
         double delta = std::min(std::max( map((double)this->strobe_spd, DMX_min, DMX_max, deltaDmin, deltaDmax) ,deltaDmax),deltaDmin);          
         // this->delta = map((double)this->strobe_spd, DMX_min, DMX_max, deltaDmin, deltaDmax);
-        this->strobe_max = std::min(std::max( (int)(strobe_spd *(1.0+delta)), 0),255);
-        this->strobe_min = std::min(std::max( (int)(strobe_spd *(1.0-delta)), 0),255);
+        this->strobe_max = std::min(std::max( (int)(strobe_spd +delta), 1),255);
+        this->strobe_min = std::min(std::max( (int)(strobe_spd -delta), 1),255);
     }
     
     void init() override;

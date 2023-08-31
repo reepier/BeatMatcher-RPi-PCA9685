@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <vector>
 
 #include "animator.h"
 #include "constant.h"
@@ -46,24 +47,29 @@ void AnimationManager::update(){
 
 bool AnimationManager::test_animation(){
     bool success = false;
-    if (s_anim_id.find("LED.") != string::npos){   // if animation's ID contains "LED"
-        success = led.activate_by_ID(s_anim_id);
-    }
-    else if (s_anim_id.find("SPOT.") != string::npos){ // if animation's ID contains "SPOT"
-        success = spot_g.activate_by_ID(s_anim_id);
-    }
-    else if (s_anim_id.find("FR.") != string::npos){   // if animation's ID contains "FR" (Front Rack)
-        success = front_rack.activate_by_ID(s_anim_id);
-    }
-    else if (s_anim_id.find("BR.") != string::npos){   // if animation's ID contains "BR" (BackgroundRack)
-        success = back_rack.activate_by_ID(s_anim_id);
-    }
-    else if (s_anim_id.find("SPI.") != string::npos){   // if animation's ID contains "SPI" (SPIder)
-        success = spider.activate_by_ID(s_anim_id);
-    }
-    else{
-        cout << "Animation ID prefix unknown... Prgram ended" << endl;
-        success = false;
+    balise(fcn::num_to_str((int)vec_anim_id.size()).data());
+    for(vector<string>::iterator anim_id_it = vec_anim_id.begin(); anim_id_it != vec_anim_id.end(); anim_id_it++){
+        string s_anim_id = (*anim_id_it);
+        balise(s_anim_id.data());
+        if (s_anim_id.find("LED.") != string::npos){   // if animation's ID contains "LED"
+            success = led.activate_by_ID(s_anim_id);
+        }
+        else if (s_anim_id.find("SPOT.") != string::npos){ // if animation's ID contains "SPOT"
+            success = spot_g.activate_by_ID(s_anim_id);
+        }
+        else if (s_anim_id.find("FR.") != string::npos){   // if animation's ID contains "FR" (Front Rack)
+            success = front_rack.activate_by_ID(s_anim_id);
+        }
+        else if (s_anim_id.find("BR.") != string::npos){   // if animation's ID contains "BR" (BackgroundRack)
+            success = back_rack.activate_by_ID(s_anim_id);
+        }
+        else if (s_anim_id.find("SPI.") != string::npos){   // if animation's ID contains "SPI" (SPIder)
+            success = spider.activate_by_ID(s_anim_id);
+        }
+        else{
+            cout << "Animation ID prefix unknown... Prgram ended" << endl;
+            success = false;
+        }
     }
     return success;
 }
@@ -248,23 +254,3 @@ int_vec fcn::convert_8_to_12bits(DMX_vec in_vec){
     }
     return ret;
 }
-
-double fcn::shape(unsigned long t, unsigned long t0, unsigned long period, Shape shape){
-    switch (shape){
-      case Shape::gaussian:
-        
-        break;
-      case Shape::sinus:
-        
-        break;
-      case Shape::saw:
-        
-        break;
-      case Shape::square:
-        
-        break;
-      default:
-
-        break;
-    }
-  }
