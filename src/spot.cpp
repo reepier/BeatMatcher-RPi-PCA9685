@@ -79,7 +79,7 @@ SpotRack back_rack(&spot_g, &spot_d, "Back Rack");
 
 void SpotRack::init(){
     this->rack_size = this->spots.size();
-    log(1, "Rack initialized with ", fcn::num_to_str(this->rack_size).data(), " spots !");
+    // log(1, "Rack initialized with ", fcn::num_to_str(this->rack_size).data(), " spots !");
 
     //this->animations.push_back();
     // Animation 1 : Backgrnd color + random soft flashes
@@ -109,7 +109,7 @@ void SpotRack::init(){
     this->animations.push_back(new SpotFrontAnimation1(this, PURPLE(100),   BLACK,      15000, 5000, 2500, 2000,   "Purple background, Black holes",  "FR.1.3.3"));
 
     // Animation 2: Monochrome Stroboscope
-    this->animations.push_back(new SpotFrontAnimation2(this, WHITE(255),  255,          "white, max strobe",   "FR.2.1.00"));
+    // this->animations.push_back(new SpotFrontAnimation2(this, WHITE(255),  255,          "white, max strobe",   "FR.2.1.00"));
     this->animations.push_back(new SpotFrontAnimation2(this, WHITE(255),  STRB_FASTEST, "white, very fast strobe",   "FR.2.1.0"));
     this->animations.push_back(new SpotFrontAnimation2(this, WHITE(255),  STRB_FAST,    "white, fast strobe",   "FR.2.1.1"));
     this->animations.push_back(new SpotFrontAnimation2(this, WHITE(255),  STRB_MED,     "white, medium strobe", "FR.2.1.2"));

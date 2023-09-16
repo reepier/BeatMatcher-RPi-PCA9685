@@ -270,15 +270,12 @@ void SoundAnalyzer::_switch_to_state(states s){
 }
 
 
-
 /**---------------------------------------------------------------
  * FAKE FUNCTIONS to emulate the music input
    ---------------------------------------------------------------*/
 
 
-#define BPM 140          // BPM
-#define BREAKDuration 8  // beats
-#define DROPDuration  16 // beats
+
 
 const int beat_duration_ms = 60000/BPM;
 const int break_duration_ms = BREAKDuration * beat_duration_ms;

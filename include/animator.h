@@ -47,9 +47,9 @@
       gaussian2,
       saw
   };
-  
-  typedef std::vector<uint8_t>  DMX_vec;  //a vector of 8bit int with values ranging from 0 to 255
-  typedef std::vector<int>      int_vec;  //a vector of standard int
+  typedef std::vector<simpleColor>  color_vec;
+  typedef std::vector<uint8_t>      DMX_vec;  //a vector of 8bit int with values ranging from 0 to 255
+  typedef std::vector<int>          int_vec;  //a vector of standard int
   typedef std::vector<unsigned long> t_vec;
 
 // Declare all the classes before defining them
@@ -117,7 +117,7 @@ class BaseAnimation{
     std::string id;                     // unique id 
     unsigned long t_animation_start_ms; // times at which the animation was last activated
     unsigned long frame_cpt;            // number of frame computed since activation
-
+    color_vec colors_used;              // lists the colors used in the animation (initialized by constructor)
 
     virtual void new_frame(){
       this->frame_cpt++;
@@ -127,6 +127,24 @@ class BaseAnimation{
       this->frame_cpt = 0;
     };
 
+  private:
+    void update_colors_used(color_vec colors){
+      for (color_vec::iterator new_c = colors.begin(); new_c != colors.end(); new_c++){
+        // check if new color is not already stored in colors_used
+        bool duplicate = false;
+        for (color_vec::iterator stored_c = colors_used.begin(); stored_c != colors_used.end(); stored_c++){
+          if ((*new_c) == (*stored_c)){
+            duplicate = true;
+          }
+        }
+        if ( (*new_c) != black && !duplicate){
+          this -> colors_used.push_back((*new_c));
+        }
+      }
+    }
+    void update_colors_used(simpleColor color){
+      update_colors_used(color_vec{color});
+    }
 };
 
 extern AnimationManager animator;
@@ -221,32 +239,40 @@ namespace fcn{
 
   // random generation functions
   template<class T>
-  T random_pick(std::vector<T> vals, int_vec proba = {}){
+  T random_pick(std::vector<T> vals, int_vec proba_vec = {}){
     int n = vals.size();
 
-    if (n == 0){return (T)0;}
-    else if (n==1) {return vals[0];}
+    if (n == 0){
+      log(1, "Empty list of values");
+      return (T)0;
+    }
+    else if (n==1) {
+      log(1, "Single value passed");
+      return vals[0];
+    }
 
-    if (proba.size() == 0){
-      proba.resize(n, 1); // if proba is not passed as an argument, defaut to equiprobability
-    }else if (proba.size() != n){ // if proba vector does not match value vector in size, return & log.
+    if (proba_vec.size() == 0){
+      // log(1, "No probability passed --> equipr.");
+      proba_vec.resize(n, 1); // if proba is not passed as an argument, default to equiprobability
+    }else if (proba_vec.size() != n){ // if proba vector does not match value vector in size, return & log.
       log(1, "Proba size differs from vals size !!");
       return (T)0;
     }
 
     int proba_sum = 0;
-    for (int i=0; i<proba.size(); i++){
-      proba_sum += proba[i];
+    for (int i=0; i<proba_vec.size(); i++){
+      proba_sum += proba_vec[i];
     }
     
-    int_vec tab = {proba[0]};
+    int_vec proba_scale = {proba_vec[0]};
     for (int i=1; i<n; i++){
-      tab.push_back(proba[i-1] + proba[i]);
+      proba_scale.push_back(proba_scale[i-1] + proba_vec[i]);
     }
     int pick = rand_min_max(0, proba_sum);
-    
+
     for (int i=0; i<n; i++){
-      if (pick<tab[i]){
+      if (pick < proba_scale[i]){
+        // log(2, "proba_sum:", proba_sum," pick:", pick, " clor:", colorName[(int)vals[i]]);
         return vals[i];
       }
     }

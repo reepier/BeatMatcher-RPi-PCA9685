@@ -143,16 +143,28 @@ int main(){
   // for (int i=0; i<30; i++){
   //   cout << fcn::random_pick(vals, proba) << endl;
   // }
-  time_ms start = millis();
+  // time_ms start = millis();
+
+  // while (true){
+  //   time_ms t = millis();
+  //   int y = (int)fcn::sin_wave(t, 1000, 0,50,0);
+  //   // int y = (int)fcn::square_wave(t, 1000, 0,50,0.3, 0);
+  //   // int y = (int)fcn::triangle_wave(t, 1000, 0,50,0.2, 0);
+
+
+  //   cout << string((int)y, ' ') << '.' << endl;
+  //   delay(50);
+  // }
 
   while (true){
-    time_ms t = millis();
-    int y = (int)fcn::sin_wave(t, 1000, 0,50,0);
-    // int y = (int)fcn::square_wave(t, 1000, 0,50,0.3, 0);
-    // int y = (int)fcn::triangle_wave(t, 1000, 0,50,0.2, 0);
-
-
-    cout << string((int)y, ' ') << '.' << endl;
-    delay(50);
+    cout << rand_min_max(0,4) << endl;
+    delay(200);
   }
+
+  // color_vec c = {};
+  // while (true){
+  //   cout << colorName[(int)fcn::random_pick(c, int_vec{})] << endl;
+  //   delay(200);
+  // }
+
 }

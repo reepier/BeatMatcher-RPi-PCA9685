@@ -22,16 +22,12 @@ void SpiderFixture::init(){
     // Animation TYPE 2
     // SpiderAnimation2(SpiderFixture *f, SimpleColor b_col, SimpleColor f_col, Shape f_shp, unsigned long f_len, unsigned long f_dt,int p_pos, int p_speed, int_vec t_pos, int t_per, Shape t_shp, std::string d, std::string i){
     // monochrome
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{white}, gaussian,   400, 300,   0, 20,    int_vec{}, 10000, sinus, "Fast white flashes, tilt motion",   "SPI.2.1"));
-    this->animations.push_back(new SpiderAnimation2(this, red,   color_vec{white}, gaussian,   2000, 1000,   0, 20,    int_vec{}, 10000, sinus, "Fast white flashes, red back, tilt motion",   "SPI.2.2"));
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{white}, gaussian,   2000, 1000,   0, 20,   int_vec{}, 10000, sinus, "Developpement animation",   "SPI.2.3"));
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{white}, gaussian,   700, 1000,  0, 20,    int_vec{}, 10000, sinus, "Developpement animation",   "SPI.2.4"));
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{white}, gaussian,   1000,2000,  0, 20,    int_vec{}, 10000, sinus, "Developpement animation",   "SPI.2.5"));
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{white}, gaussian,   1500,3000,  0, 20,    int_vec{}, 10000, sinus, "Developpement animation",   "SPI.2.6"));
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{white}, gaussian,   500,  3,   0, 20,    int_vec{}, 10000, sinus, "Fast & short white flashes, tilt motion",   "SPI.2.1.1"));
+    this->animations.push_back(new SpiderAnimation2(this, black,   color_vec{white}, gaussian, 2000, 2,   0, 20,  int_vec{}, 10000, sinus, "Fast white flashes, red back, tilt motion",   "SPI.2.1.2"));
+    
     // bichrome
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{red, orange}, gaussian,   1500,500,  0, 20,     int_vec{90,90,90}, 0, sinus, "Red & Sod. flashes, static 90",   "SPI.2.7"));
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{red, orange}, gaussian,   1500,500,  0, 20,     int_vec{0,0,0}, 0, sinus, "Red & Sod. flashes, static flat",   "SPI.2.8"));
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{red, blue}, gaussian,   1500,500,  0, 20,     int_vec{0}, 10000, sinus, "Red & Blue flashes, tilt motion",   "SPI.2.9"));
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{red, red, red, white}, gaussian, 1000, 1, 0, 20, int_vec{0}, 10000, sinus, "Red & White flashes", "SPI.2.2.1"));
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{red, purple}, gaussian,   1500, 4,  0, 20,     int_vec{0}, 10000, sinus, "Red & Blue flashes, tilt motion",   "SPI.2.2.2"));
 
     this->activate_by_ID("SPI.0.0");
 }
@@ -80,7 +76,7 @@ void SpiderAnimation1::new_frame(){
 
 // ---------------------------------------------
 // Animtion TYPE 2
-void SpiderAnimation2::update_flash_time(){
+void SpiderAnimation2::update_next_flash(){
     unsigned long t = frame.t_current_ms;   //for readability
 
     static int cpt = 0;
@@ -111,7 +107,7 @@ void SpiderAnimation2::new_frame(){
     this->fixture->pan_speed    = this->pan_speed;
     this->fixture->tilt         = int_vec{0,0,0};
 
-    update_flash_time();
+    update_next_flash();
 
     unsigned long t = frame.t_current_ms;
     double sigma = this->flash_length/3.0;

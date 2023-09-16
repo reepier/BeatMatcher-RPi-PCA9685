@@ -116,18 +116,21 @@ class SpiderAnimation2 : public SpiderAnimation{
     std::vector<flash_vec>  flashes; //for each of the 9 pixels, one vector containing prev_flash and next_flash data (color & timing).
 
 
-    SpiderAnimation2(SpiderFixture *f, simpleColor b_col, color_vec f_col, Shape f_shp, unsigned long f_len, unsigned long f_dt,int p_pos, int p_speed, int_vec t_pos, int t_per, Shape t_shp, std::string d, std::string i){
+    SpiderAnimation2(SpiderFixture *f, simpleColor b_col, color_vec f_col, Shape f_shp, unsigned long f_len, unsigned long f_n,int p_pos, int p_speed, int_vec t_pos, int t_per, Shape t_shp, std::string d, std::string i){
         this->fixture     = f;
         this->description       = d;
         this->id                = i;
         this->background_color  = b_col;
         this->flash_colors      = f_col;
-        this->flash_dt          = f_dt;
         this->flash_length      = f_len;
+        this->flash_dt          = this->flash_length / f_n;
         this->pan_position      = p_pos;
         this->pan_speed         = p_speed;
         this->tilt_position     = t_pos;
         this->tilt_period       = t_per;
+
+        this->colors_used.insert(this->colors_used.end(), b_col);
+        this->colors_used.insert(this->colors_used.end(), f_col.begin(), f_col.end());
     };
 
     void init() override{
@@ -149,6 +152,6 @@ class SpiderAnimation2 : public SpiderAnimation{
     void new_frame() override;
 
   private:
-    void update_flash_time();
+    void update_next_flash();
 };
 
