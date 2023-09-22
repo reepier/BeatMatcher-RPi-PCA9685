@@ -52,6 +52,9 @@
   typedef std::vector<int>          int_vec;  //a vector of standard int
   typedef std::vector<unsigned long> t_vec;
 
+  const std::vector<color_vec> colorCouple = {color_vec{white, black}, color_vec{red, blue}};
+
+
 // Declare all the classes before defining them
 class AnimationManager;   //TODO move this in a sceno.h and rename this module baseFixture.h & baseAnimation.h
 
