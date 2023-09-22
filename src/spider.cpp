@@ -13,7 +13,7 @@ SpiderFixture spider(29, 44, "AFX-9-Beam");
 void SpiderFixture::init(){
     // push the animations:
     // Animation TYPE 1
-    this->animations.push_back(new SpiderAnimation1(this, black,  0, 0, int_vec{tiltMIN,tiltMIN,tiltMIN},    "BLACK", "SPI.0.0"));
+    this->animations.push_back(new SpiderAnimation1(this, black,  0, 0, int_vec{tiltMIN,tiltMIN,tiltMIN},    " ", "SPI.0.0"));
     
     this->animations.push_back(new SpiderAnimation1(this, red,    0, 20, int_vec{90,90,90},    "Red, 90°, static", "SPI.1.1"));
     this->animations.push_back(new SpiderAnimation1(this, white,    0, 20, int_vec{20,20,20},  "White, 20°, slow", "SPI.1.2"));
@@ -27,7 +27,8 @@ void SpiderFixture::init(){
     
     // bichrome
     this->animations.push_back(new SpiderAnimation2(this, black, color_vec{red, red, red, white}, gaussian, 1000, 1, 0, 20, int_vec{0}, 10000, sinus, "Red & White flashes", "SPI.2.2.1"));
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{red, purple}, gaussian,   1500, 4,  0, 20,     int_vec{0}, 10000, sinus, "Red & Blue flashes, tilt motion",   "SPI.2.2.2"));
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{red, purple},          gaussian,   1500, 4,  0, 20,     int_vec{0}, 10000, sinus, "Red & Blue flashes, tilt motion",   "SPI.2.2.2"));
+    this->animations.push_back(new SpiderAnimation2(this, white, color_vec{red, blue, green},     gaussian,   1500, 4,  0, 20,     int_vec{0}, 10000, sinus, "white bg, red,green,blue flashes",   "SPI.2.2.3"));
 
     this->activate_by_ID("SPI.0.0");
 }

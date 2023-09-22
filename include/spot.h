@@ -116,13 +116,15 @@ public:
 class SpotFrontAnimation1 : public SpotRackAnimtion
 {
 public:
-    // aniation parameters (set by user)
-    DMX_vec color1;
-    DMX_vec color2;
-    int sin_max_p_ms;
-    int sin_min_p_ms;
+    // animation parameters (set by user)
+    DMX_vec back_color;
+    DMX_vec flash_color;
+    int sin_max_p_ms = 15000;
+    int sin_min_p_ms = 5000;
     int rand_const_ms;
     int flash_len;
+    double fluct_int = 0.4;
+double fluct_col = 0.25;
 
     // Internal variable (for storage between frames)
     std::vector<int> p_ms;             // range of periods for various sine wvaes
@@ -130,17 +132,23 @@ public:
     std::vector<unsigned long> t_prev; // timestamp of the prev rise () (memory)
 
     // fixture, color bckgd, color flash, oscil. period(ms)  max , min, mean time btwn flashes (ms), flash duration(ms), description, id
-    SpotFrontAnimation1(SpotRack *f, DMX_vec c1, DMX_vec c2, int pmax, int pmin, int prand, int flen, std::string d, std::string i)
-    {
+    SpotFrontAnimation1(SpotRack *f, simpleColor b_col, simpleColor f_col, int prand, int flen, std::string d, std::string i){
         this->description = d;
         this->id = i;
         this->fixture = f;
-        this->color1 = c1;
-        this->color2 = c2;
-        this->sin_max_p_ms = pmax;
-        this->sin_min_p_ms = pmin;
+
+        this->flash_color = fcn::RGBW(f_col);
+        if (f_col==black)
+            this->back_color = fcn::RGBW(b_col, 100);     // more intensity if there is no flash
+        else
+            this->back_color = fcn::RGBW(b_col, 50);     // less intensity if there is a flash
+
+        // this->sin_max_p_ms = pmax;
+        // this->sin_min_p_ms = pmin;
         this->rand_const_ms = prand;
         this->flash_len = flen;
+
+        this->update_colors_used(color_vec{b_col, f_col});
     }
     void init() override;
     void new_frame();
@@ -153,7 +161,7 @@ public:
 /*Strobe*/
 class SpotFrontAnimation2 : public SpotRackAnimtion{
   public:
-    DMX_vec color;
+    simpleColor color;
     uint8_t strobe_spd;
     uint8_t strobe_max;
     uint8_t strobe_min;
@@ -167,10 +175,11 @@ class SpotFrontAnimation2 : public SpotRackAnimtion{
     const double deltaDmax = 0;  // absolute random variation of speed @DMX_max
     
 
-    SpotFrontAnimation2(SpotRack *f, DMX_vec c, uint8_t speed, std::string d, std::string i){
+    SpotFrontAnimation2(SpotRack *f, simpleColor c, uint8_t speed, std::string d, std::string i){
         this->description = d;
         this->id = i;
         this->fixture = f;
+
         this->color = c;
         this->strobe_spd = speed;
         this->strobe_spds.resize(this->fixture->rack_size);
@@ -179,6 +188,8 @@ class SpotFrontAnimation2 : public SpotRackAnimtion{
         // this->delta = map((double)this->strobe_spd, DMX_min, DMX_max, deltaDmin, deltaDmax);
         this->strobe_max = std::min(std::max( (int)(strobe_spd +delta), 1),255);
         this->strobe_min = std::min(std::max( (int)(strobe_spd -delta), 1),255);
+
+        this->update_colors_used(c);
     }
     
     void init() override;

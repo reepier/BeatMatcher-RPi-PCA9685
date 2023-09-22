@@ -77,6 +77,8 @@ class SpiderAnimation1 : public SpiderAnimation{
         this->pan_spd = spd;
 
         this->pix = pixel_vec(9, fcn::RGBW(c));
+
+        this->update_colors_used(c);
     };
     void init() override{BaseAnimation::init();};
     void new_frame() override;
@@ -129,8 +131,8 @@ class SpiderAnimation2 : public SpiderAnimation{
         this->tilt_position     = t_pos;
         this->tilt_period       = t_per;
 
-        this->colors_used.insert(this->colors_used.end(), b_col);
-        this->colors_used.insert(this->colors_used.end(), f_col.begin(), f_col.end());
+        this->update_colors_used(b_col);
+        this->update_colors_used(f_col);
     };
 
     void init() override{

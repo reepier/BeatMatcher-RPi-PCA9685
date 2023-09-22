@@ -117,7 +117,7 @@ class BaseAnimation{
     std::string id;                     // unique id 
     unsigned long t_animation_start_ms; // times at which the animation was last activated
     unsigned long frame_cpt;            // number of frame computed since activation
-    color_vec colors_used;              // lists the colors used in the animation (initialized by constructor)
+    color_vec color_palette;              // lists the colors used in the animation (initialized by constructor)
 
     virtual void new_frame(){
       this->frame_cpt++;
@@ -127,18 +127,17 @@ class BaseAnimation{
       this->frame_cpt = 0;
     };
 
-  private:
     void update_colors_used(color_vec colors){
       for (color_vec::iterator new_c = colors.begin(); new_c != colors.end(); new_c++){
-        // check if new color is not already stored in colors_used
+        // check if new color is not already stored in color_palette
         bool duplicate = false;
-        for (color_vec::iterator stored_c = colors_used.begin(); stored_c != colors_used.end(); stored_c++){
+        for (color_vec::iterator stored_c = color_palette.begin(); stored_c != color_palette.end(); stored_c++){
           if ((*new_c) == (*stored_c)){
             duplicate = true;
           }
         }
         if ( (*new_c) != black && !duplicate){
-          this -> colors_used.push_back((*new_c));
+          this -> color_palette.push_back((*new_c));
         }
       }
     }

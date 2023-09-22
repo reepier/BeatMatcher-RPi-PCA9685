@@ -10,6 +10,6 @@
 #define     MASTERDIMMER        1.0             //fraction --> must be decimal (literal float) !!!
 
 // Music Emulator
-#define BPM 140          // BPM
+#define BPM 60          // BPM
 #define BREAKDuration 16  // beats
 #define DROPDuration  32 // beats
