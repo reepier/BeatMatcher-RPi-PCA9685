@@ -28,7 +28,8 @@ void SoundAnalyzer::init(){
     fft_out = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*SAMPLE_SIZE);
 }
 
-void SoundAnalyzer::update(unsigned long t){
+void SoundAnalyzer::update(){
+    time_t t = frame.t_current_ms;
     #ifndef LINUX_PC
     if(!b_NO_MUSIC){
         this->_record();
@@ -37,7 +38,7 @@ void SoundAnalyzer::update(unsigned long t){
         sampler.process_record_fake(t);
     }
     #else
-        sampler.process_record_fake(t);
+        sampler.process_record_fake();
     #endif // LINUX_PC
     
     this->_update_beats();
@@ -290,7 +291,8 @@ inline int fake_volume2(){
     return min_volume + 0.25*min_volume*sin(2*M_PI*millis()/1000);
 }
 
-void SoundAnalyzer::process_record_fake(unsigned long t){
+void SoundAnalyzer::process_record_fake(){
+    time_t t = frame.t_current_ms;
     // initialize
     static bool init = true;
     if (init){
@@ -341,7 +343,8 @@ void SoundAnalyzer::process_record_fake(unsigned long t){
 }
 
 /** DEPRECATED */
-void SoundAnalyzer::fake_analysis(unsigned long t){
+void SoundAnalyzer::fake_analysis(){
+    time_t t = frame.t_current_ms;
     // initialize
     static bool init = true;
     if (init){

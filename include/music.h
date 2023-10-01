@@ -78,7 +78,7 @@ class SoundAnalyzer{
 
     // Main functions (entry points)
     public :    void init();
-    public :    void update(unsigned long);
+    public :    void update();
 
 
     // statistics computation
@@ -106,9 +106,9 @@ class SoundAnalyzer{
     private :   void _switch_to_state(states);
 
     // fake analysis function (for animation developpement purpose)
-    public :    void fake_analysis(unsigned long); 
+    public :    void fake_analysis(); 
 
-    public:     void process_record_fake(unsigned long);
+    public:     void process_record_fake();
     private :   void _update_beat_threshold_fake();
     public:     void record_sample_fake();
 

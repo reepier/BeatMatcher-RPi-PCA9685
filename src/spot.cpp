@@ -150,6 +150,8 @@ void SpotFrontAnimation1::init(){
 }
 
 void SpotFrontAnimation1::new_frame(){
+    BaseAnimation::new_frame();
+
     long t = frame.t_current_ms;       // for readability
     int n_spot = this->fixture->rack_size;   // for readability
     
@@ -199,11 +201,14 @@ void SpotFrontAnimation2::shake(){  //randomizes the strob speeds on request
 
 void SpotFrontAnimation2::init(){
     BaseAnimation::init();
+
     this->t_next_shake = frame.t_current_ms + 2000;
     this->shake();
 }
 
 void SpotFrontAnimation2::new_frame(){
+    BaseAnimation::new_frame();
+    
     // for readability
     spot_vec spots = this->fixture->spots;
     int n_spots = spots.size();

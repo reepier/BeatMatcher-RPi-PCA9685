@@ -3,8 +3,6 @@
 #include <string>
 #include <vector>
 
-
-
 #include "debug.h"
 #include "config.h"
 

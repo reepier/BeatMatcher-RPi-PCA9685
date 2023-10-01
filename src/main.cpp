@@ -155,12 +155,12 @@ int main(int argc, char* argv[]){
         
         // Record and process music sample 
         balise("Record & process sample...");   
-        sampler.update(frame.t_current_ms);
+        sampler.update();
 
         balise("Run animator...");
         if(!b_test){    // if nominal case
             balise("Run animator normal update");
-            animator.update();
+            animator.random_update();
         }
         else if (frame.cpt == 0){   // else activate once and for all the animations to test
             balise("Run animator test fcn");

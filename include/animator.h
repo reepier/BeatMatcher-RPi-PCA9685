@@ -52,7 +52,10 @@
   typedef std::vector<int>          int_vec;  //a vector of standard int
   typedef std::vector<unsigned long> t_vec;
 
-  const std::vector<color_vec> colorCouple = {color_vec{white, black}, color_vec{red, blue}};
+  const std::vector<color_vec> colorPalette = {color_vec{white, black},
+                                              color_vec{red, blue},
+                                              color_vec{red, gold},
+                                              color_vec{purple, cyan}};
 
 
 // Declare all the classes before defining them
@@ -74,7 +77,8 @@ class AnimationManager{
     
     unsigned long t_last_change_ms = millis();   //timestamp of last switch between aniamtions
     
-    void update();
+    void random_update();
+    void palette_update();
     bool test_animation();
 };
 
@@ -121,7 +125,7 @@ class BaseAnimation{
     unsigned long t_animation_start_ms; // times at which the animation was last activated
     unsigned long frame_cpt;            // number of frame computed since activation
     color_vec color_palette;              // lists the colors used in the animation (initialized by constructor)
-
+    bool      is_monochrome(){return (color_palette.size() == 1);};
     virtual void new_frame(){
       this->frame_cpt++;
     }

@@ -67,6 +67,8 @@ DMX_vec SpiderFixture::buffer(){
 // ---------------------------------------------
 // Animtion TYPE 1
 void SpiderAnimation1::new_frame(){
+    BaseAnimation::new_frame();
+
     balise("Compute new spider1 frame");
     // do onothin, simply set the fixture's colors & motor settings
     this->fixture->pan_position = this->pan_pos;
@@ -101,6 +103,8 @@ void SpiderAnimation2::update_next_flash(){
 }
 
 void SpiderAnimation2::new_frame(){
+    BaseAnimation::new_frame();
+
     // TODO finish the transition to a multi color flash capability
 
     this->fixture->pixels       = pixel_vec(9, BLACK);

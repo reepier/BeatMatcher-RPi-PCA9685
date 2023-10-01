@@ -2,47 +2,54 @@
 #include <cmath>
 #include <vector>
 
-#include "animator.h"
+// #include "LED.h"
+// #include "animator.h"
+// #include "spot.h"
+// #include "spider.h"
 #include "constant.h"
 #include "wiringPi.h"
 #include "sysfcn.h"
-#include "LED.h"
-#include "spot.h"
-#include "spider.h"
 #include "debug.h"
+#include "fixtures.h"
 
 using namespace std;
 
 /** Based on the musical analysis (music.state) and the current time, this function 
- * decides when to switch animation from one to another.
- * 
- * INPUTS :
- * t_current_ms : call time in millisecond
- * music : object containing the music analysis result.
- * 
- * OUTPUTS :
- * animtion_i : the index of the animation to run
- * OR
- * Directly call the animation function directly (led.animation[i].run();)
+ * decides when to switch animation
+ * When it switches, it selects randomly within the animations list without trying to match
+ * them by color or style 
  * */
-void AnimationManager::update(){
+void AnimationManager::random_update(){
         // initialization
         if (frame.cpt == 0){
-            led.activate_random();
-            //spot_g.activate_random();
-            front_rack.activate_random();
-            spider.activate_random();
+            // led.activate_random();
+            // //spot_g.activate_random();
+            // front_rack.activate_random();
+            // spider.activate_random();
+
+            for(fix_vec::iterator fix = fixtures.begin(); fix != fixtures.end(); fix++){
+                (*fix)->activate_random();
+            }
         }
 
         if (sampler.state_changed && (frame.t_current_ms-t_last_change_ms > TEMPO_ANIM_CHANGE)){
             log(1, "Change animation randomly");
             t_last_change_ms = frame.t_current_ms;
 
-            led.activate_random();
-            //spot_g.activate_random();
-            front_rack.activate_random();
-            spider.activate_random();
+            // led.activate_random();
+            // //spot_g.activate_random();
+            // front_rack.activate_random();
+            // spider.activate_random();
+            for(fix_vec::iterator fix = fixtures.begin(); fix != fixtures.end(); fix++){
+                (*fix)->activate_random();
+            }
         }
+}
+
+void AnimationManager::palette_update(){
+    // select color theme
+    
+    // select animations matching the theme for each fixture
 }
 
 bool AnimationManager::test_animation(){
