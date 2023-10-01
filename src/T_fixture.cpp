@@ -1,0 +1,1 @@
+/** TEMPALTE FILE for a new fixture module*/

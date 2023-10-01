@@ -4,7 +4,6 @@
 #include <fftw3.h>
 #include <vector>
 #include <wiringPi.h>
-#include "config.h"
 // #include "debug.h"
 
 #ifndef LINUX_PC //if compiling on raspberrypi

@@ -2,13 +2,8 @@
 #include <stdlib.h>
 #include <cmath>
 
-
 #include "wiringPi.h"
-#include "constant.h"
-
-
-// int map(int, int,int,int,int); //tested ok
-// double map(double, double,double,double,double);
+#include "config.h"
 
 // linearly interpolates (x;y) between points (x1;y1) and (x2;y2)
 template<typename T>

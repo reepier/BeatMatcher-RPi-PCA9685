@@ -8,7 +8,6 @@ using namespace std;
 #include <ola/client/StreamingClient.h>
 #include <wiringPi.h>
 
-#include "constant.h"
 #include "LED.h"
 #include "sysfcn.h"
 

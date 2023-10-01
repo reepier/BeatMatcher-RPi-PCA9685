@@ -12,7 +12,6 @@
 #include "config.h"
 #include "debug.h"
 #include "music.h"
-#include "constant.h"
 #include "sysfcn.h"
 #include <wiringPi.h>
 

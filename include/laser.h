@@ -1,6 +1,5 @@
 #include <vector>
 
-#include "constant.h"
 #include "animator.h"
 
 

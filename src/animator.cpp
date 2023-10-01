@@ -6,7 +6,6 @@
 // #include "animator.h"
 // #include "spot.h"
 // #include "spider.h"
-#include "constant.h"
 #include "wiringPi.h"
 #include "sysfcn.h"
 #include "debug.h"

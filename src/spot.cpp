@@ -1,7 +1,6 @@
 #include <cmath>
 
 #include "spot.h"
-#include "constant.h"
 #include "sysfcn.h"
 #include "debug.h"
 

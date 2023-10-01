@@ -8,7 +8,6 @@ using namespace std;
 #include <ola/DmxBuffer.h>
 #include <ola/client/StreamingClient.h>
 
-#include "constant.h"
 #include "config.h"
 #include "sysfcn.h"
 #include "music.h"

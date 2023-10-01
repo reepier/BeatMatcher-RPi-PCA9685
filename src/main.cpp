@@ -8,7 +8,6 @@
 #include <ola/client/StreamingClient.h>
 
 #include "debug.h"
-#include "constant.h"
 #include "fixtures.h"
 #include "music.h"
 #include "sysfcn.h"

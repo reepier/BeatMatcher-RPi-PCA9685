@@ -5,68 +5,13 @@
 #include <sstream>
 #include <cmath>
 
+#include "commonTypes.h"
 #include "debug.h"
 #include "sysfcn.h"
 #include "music.h"
 // #include "LED.h"
 
-// Common Datatypes
-  typedef unsigned long time_ms;
-  // indexes for ease of reading --> write { color[R] = ... }  instead of { color[0] = ... } 
-  #define R 0
-  #define G 1
-  #define B 2
-  #define W 3
 
-  enum simpleColor{
-    black=0,
-    red,
-    green,
-    blue,
-    yellow,
-    orange,
-    sodium,    //RGBW(255,10??,0,0)  --> deep orange, very red
-    cyan,
-    purple,
-    magenta,
-    pink,
-    white,
-    gold,     //RGBW(255,40,0,100 ) --> Orange + White
-    last_color
-  };
-  const std::vector<std::string> colorName = {"Black", "Red", "Green", "Blue", 
-                                      "Yellow", "Orange", "Sodium",
-                                      "Cyan", "Purple", "Magenta", "Pink", "White",
-                                      "Gold"};
-  enum Shape{
-      square,
-      sinus,
-      sinus2,
-      triangle,
-      gaussian,
-      gaussian2,
-      saw
-  };
-  typedef std::vector<simpleColor>  color_vec;
-  typedef std::vector<uint8_t>      DMX_vec;  //a vector of 8bit int with values ranging from 0 to 255
-  typedef std::vector<int>          int_vec;  //a vector of standard int
-  typedef std::vector<unsigned long> t_vec;
-
-  const std::vector<color_vec> colorPalette = {color_vec{white, black},
-                                              color_vec{red, blue},
-                                              color_vec{red, gold},
-                                              color_vec{purple, cyan}};
-
-
-// Declare all the classes before defining them
-class AnimationManager;   //TODO move this in a sceno.h and rename this module baseFixture.h & baseAnimation.h
-
-class BaseFixture;        //TODO move this in baseFixture.h
-class BaseAnimation;      //TODO move this in baseAnimation.h
-class Scene;              //
-
-
-typedef std::vector<BaseFixture*> fix_vec;
 /**
  * class AnimationManager is the entity responsible for determining which animation every 
  * fixture should run, based on the musical analysis
@@ -125,7 +70,9 @@ class BaseAnimation{
     unsigned long t_animation_start_ms; // times at which the animation was last activated
     unsigned long frame_cpt;            // number of frame computed since activation
     color_vec color_palette;              // lists the colors used in the animation (initialized by constructor)
+    
     bool      is_monochrome(){return (color_palette.size() == 1);};
+    
     virtual void new_frame(){
       this->frame_cpt++;
     }
