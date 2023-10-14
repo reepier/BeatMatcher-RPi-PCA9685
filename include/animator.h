@@ -43,7 +43,7 @@ class BaseFixture{
 
     // Animations
     BaseAnimation * active_animation = nullptr;
-    std::vector<BaseAnimation*> animations;
+    anim_vec animations;
 
     //constructor (adresse [0-511], number of channels, fixture's name)
     BaseFixture(int addr,int ch, std::string nm): address(addr), nCH(ch), name(nm){};
@@ -51,8 +51,11 @@ class BaseFixture{
 
     //animation management
     void blackout(bool);
-    void activate_random();
+    bool activate_none();
+    bool activate_by_index(int);
+    bool activate_random();
     bool activate_by_ID(std::string);
+    bool activate_by_color(color_vec);
 
     //DMX output
     virtual int get_address() = 0;
@@ -80,7 +83,6 @@ class BaseAnimation{
       this->t_animation_start_ms = frame.t_current_ms;
       this->frame_cpt = 0;
     };
-
     void update_colors_used(color_vec colors){
       for (color_vec::iterator new_c = colors.begin(); new_c != colors.end(); new_c++){
         // check if new color is not already stored in color_palette
@@ -103,9 +105,14 @@ class BaseAnimation{
 extern AnimationManager animator;
 
 
-// -----------------------------------
-// USEFULL FUNCTIONS
-// -----------------------------------
+/** -----------------------------------
+  ______                _   _                 
+ |  ____|              | | (_)                
+ | |__ _   _ _ __   ___| |_ _  ___  _ __  ___ 
+ |  __| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
+ | |  | |_| | | | | (__| |_| | (_) | | | \__ \
+ |_|   \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
+-----------------------------------                 */
 // TODO --> tailor these functions specifically for each fixture ! in the <fixture>.cpp
 namespace fcn{
   /* returns a normalized 4 (or 3 for RGB) channel DMX vector based on color literal 
@@ -130,8 +137,9 @@ namespace fcn{
   DMX_vec RGBW_norm(DMX_vec, uint8_t intensity=255);
   DMX_vec RGB_norm(DMX_vec, uint8_t intensity=255);
   
-  std::string DMXvec_to_str(DMX_vec, char);
-  std::string intvec_to_str(int_vec, char);
+  std::string vec_to_str(DMX_vec, char);
+  std::string vec_to_str(int_vec, char);
+  std::string vec_to_str(str_vec, char);
 
   std::string num_to_str(int);
   std::string num_to_str(uint8_t);
@@ -196,11 +204,11 @@ namespace fcn{
     int n = vals.size();
 
     if (n == 0){
-      log(1, "Empty list of values");
+      // log(1, "Empty list of values");
       return (T)0;
     }
     else if (n==1) {
-      log(1, "Single value passed");
+      // log(1, "Single value passed");
       return vals[0];
     }
 
@@ -208,7 +216,7 @@ namespace fcn{
       // log(1, "No probability passed --> equipr.");
       proba_vec.resize(n, 1); // if proba is not passed as an argument, default to equiprobability
     }else if (proba_vec.size() != n){ // if proba vector does not match value vector in size, return & log.
-      log(1, "Proba size differs from vals size !!");
+      // log(1, "Proba size differs from vals size !!");
       return (T)0;
     }
 

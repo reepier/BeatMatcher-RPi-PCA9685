@@ -167,7 +167,7 @@ void disp_output_window(){
         animbuf << (*fix)->active_animation->id<<" - "<<(*fix)->active_animation->description;
         
         DMX_vec raw_buf = (*fix)->buffer();
-        outbuf << "| " <<fcn::DMXvec_to_str(raw_buf, ',');
+        outbuf << "| " <<fcn::vec_to_str(raw_buf, ',');
 
         mvwprintw(outputw, i, 1, animbuf.str().data());
         mvwprintw(outputw, i, 55, outbuf.str().size()<60? outbuf.str().data() : outbuf.str().substr(0, 60).data());

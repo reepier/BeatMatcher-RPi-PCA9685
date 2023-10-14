@@ -43,10 +43,11 @@ enum Shape{
     saw       
 };
 
-typedef std::vector<simpleColor>  color_vec;
-typedef std::vector<uint8_t>      DMX_vec;  //a vector of 8bit int with values ranging from 0 to 255
-typedef std::vector<int>          int_vec;  //a vector of standard int
-typedef std::vector<unsigned long> t_vec;
+typedef std::vector<simpleColor>    color_vec;
+typedef std::vector<uint8_t>        DMX_vec;  //a vector of 8bit int with values ranging from 0 to 255
+typedef std::vector<int>            int_vec;  //a vector of standard int
+typedef std::vector<unsigned long>  t_vec;
+typedef std::vector<std::string>    str_vec;
 
   // Declare all the classes before defining them
 class AnimationManager;   //TODO move this in a sceno.h and rename this module baseFixture.h & baseAnimation.h
@@ -54,3 +55,4 @@ class BaseFixture;        //TODO move this in baseFixture.h
 class BaseAnimation;      //TODO move this in baseAnimation.h
 
 typedef std::vector<BaseFixture*> fix_vec;
+typedef std::vector<BaseAnimation*> anim_vec;

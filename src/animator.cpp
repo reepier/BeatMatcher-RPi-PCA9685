@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
+#include <algorithm>
+#include <random>
 
 // #include "LED.h"
 // #include "animator.h"
@@ -13,32 +15,30 @@
 
 using namespace std;
 
+
+/**-------------------------------------------------------------------------------------------
+                 _                 _   _                __  __                                    
+     /\         (_)               | | (_)              |  \/  |                                   
+    /  \   _ __  _ _ __ ___   __ _| |_ _  ___  _ __    | \  / | __ _ _ __   __ _  __ _  ___ _ __  
+   / /\ \ | '_ \| | '_ ` _ \ / _` | __| |/ _ \| '_ \   | |\/| |/ _` | '_ \ / _` |/ _` |/ _ \ '__| 
+  / ____ \| | | | | | | | | | (_| | |_| | (_) | | | |  | |  | | (_| | | | | (_| | (_| |  __/ |    
+ /_/    \_\_| |_|_|_| |_| |_|\__,_|\__|_|\___/|_| |_|  |_|  |_|\__,_|_| |_|\__,_|\__, |\___|_|    
+ -------------------------------------------------------------------------------  __/ | -------   
+                                                                                 |___/             */
+
 /** Based on the musical analysis (music.state) and the current time, this function 
  * decides when to switch animation
  * When it switches, it selects randomly within the animations list without trying to match
  * them by color or style 
  * */
 void AnimationManager::random_update(){
-        // initialization
-        if (frame.cpt == 0){
-            // led.activate_random();
-            // //spot_g.activate_random();
-            // front_rack.activate_random();
-            // spider.activate_random();
 
-            for(fix_vec::iterator fix = fixtures.begin(); fix != fixtures.end(); fix++){
-                (*fix)->activate_random();
-            }
-        }
-
-        if (sampler.state_changed && (frame.t_current_ms-t_last_change_ms > TEMPO_ANIM_CHANGE)){
+        if (  frame.first_loop
+              || (sampler.state_changed && (frame.t_current_ms-t_last_change_ms > TEMPO_ANIM_CHANGE))){
+            
             log(1, "Change animation randomly");
             t_last_change_ms = frame.t_current_ms;
 
-            // led.activate_random();
-            // //spot_g.activate_random();
-            // front_rack.activate_random();
-            // spider.activate_random();
             for(fix_vec::iterator fix = fixtures.begin(); fix != fixtures.end(); fix++){
                 (*fix)->activate_random();
             }
@@ -46,8 +46,28 @@ void AnimationManager::random_update(){
 }
 
 void AnimationManager::palette_update(){
-    // select color theme
     
+    if (  frame.first_loop
+              || (sampler.state_changed && (frame.t_current_ms-t_last_change_ms > TEMPO_ANIM_CHANGE))){
+            
+            t_last_change_ms = frame.t_current_ms;
+
+            // select color theme
+            int i = rand_min_max(0, colorPalette.size());
+            color_vec palette = colorPalette[i];
+            
+            // log it
+            str_vec palette_literal;
+            for (auto col : palette){
+                palette_literal.push_back(colorName[(int)col]);
+            }
+            log(1, "Change animation to color palette : ", fcn::vec_to_str(palette_literal, '/'));
+
+            for(fix_vec::iterator fix = fixtures.begin(); fix != fixtures.end(); fix++){
+                (*fix)->activate_by_color(palette);
+            }
+        }
+    // color_vec palette = 
     // select animations matching the theme for each fixture
 }
 
@@ -82,17 +102,43 @@ bool AnimationManager::test_animation(){
 
 AnimationManager animator;
 
+
+/** ----------------------------------------------------------
+  ____                    ______ _      _                  
+ |  _ \                  |  ____(_)    | |                 
+ | |_) | __ _ ___  ___   | |__   ___  _| |_ _   _ _ __ ___ 
+ |  _ < / _` / __|/ _ \  |  __| | \ \/ / __| | | | '__/ _ \
+ | |_) | (_| \__ \  __/  | |    | |>  <| |_| |_| | | |  __/
+ |____/ \__,_|___/\___|  |_|    |_/_/\_\\__|\__,_|_|  \___|
+ ---------------------------------------------------------------
+ */
+
 // toggles blackout boolean
 void BaseFixture::blackout(bool b){
     this->b_blackout = b;
 }
 
-//TODO move BaseFixure and BaseAnimation functions in basefixture.h and baseanimation.h
+// deactivate fixture (display the "BLACK" animations)
+bool BaseFixture::activate_none(){
+    this->active_animation = this->animations[0];
+    this->active_animation->init();
+}
+
+// selects and init the i_th animation within the list (i being the argument).
+// If i out of range, select the first (black) 
+bool BaseFixture::activate_by_index(int i){
+    if (i < this->animations.size())
+        this->active_animation = this->animations[i];
+    else
+        this->active_animation = this->animations[0];
+    this->active_animation->init();
+}
+
 // select and init an animtion randomly picked wihtin the list 
-void BaseFixture::activate_random(){
+bool BaseFixture::activate_random(){
     this->active_animation = this->animations[ rand()%this->animations.size() ];
     this->active_animation->init();
-} 
+}
 
 // select and init an animation with its ID. If the ID cannot be found within the existing animations, does nothing.
 bool BaseFixture::activate_by_ID(string id){
@@ -111,10 +157,54 @@ bool BaseFixture::activate_by_ID(string id){
     return found_it;
 }
 
-// -----------------------------------
-// USEFULL FUNCTIONS
-// -----------------------------------
-// TODO
+/* Activates an animation whose colors match the ones in palette passed as an argument.
+   All of the selected animations color must be listed in the palette, but all the palette's 
+   color do not have to be listed in the animation's colors */
+bool BaseFixture::activate_by_color(color_vec palette){
+    int n_anim = this->animations.size();
+
+    // copy the fixture's animation list
+        anim_vec fixtures_anim_list = this->animations;
+
+    // randomize the list item's order
+        random_device rd;
+        mt19937 rng(rd());
+        shuffle(fixtures_anim_list.begin(), fixtures_anim_list.end(), rng);
+
+    bool found_it = false;
+    // Parse through the animations'list (in a random order) and select the first anim that matches the palette
+    // All the animation's color must be listed int h
+        for(auto current_animation : fixtures_anim_list){
+            bool animation_match = true;   // becomes false if (at least) one of the animation's color does not match the palette 
+            // for each of the animation color
+            for (auto animation_color : (*current_animation).color_palette){
+                bool color_match = false;   // becomes true if the current color matches on of the palette's color
+                for (auto palette_color : palette){
+                    color_match = color_match || (animation_color == palette_color);
+                }
+                animation_match = animation_match && color_match;
+            }
+
+            // if the animation is a match, activate it and exit the for loop , else deactivate
+            if (animation_match){
+                this->activate_by_ID(current_animation->id);
+                break;
+            }else{
+                this->activate_none();
+            }
+        }
+}   
+
+/** -----------------------------------
+  ______                _   _                 
+ |  ____|              | | (_)                
+ | |__ _   _ _ __   ___| |_ _  ___  _ __  ___ 
+ |  __| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
+ | |  | |_| | | | | (__| |_| | (_) | | | \__ \
+ |_|   \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
+-----------------------------------
+*/
+
 #include <sstream>
 
 DMX_vec fcn::RGBW(simpleColor c, uint8_t intensity){
@@ -199,7 +289,7 @@ DMX_vec fcn::RGB_norm(DMX_vec rgb, uint8_t intensity){
     return fcn::RGBW_norm(rgb, intensity);
 }
 
-string fcn::DMXvec_to_str(DMX_vec data, char sep){
+string fcn::vec_to_str(DMX_vec data, char sep){
     string ret;
     for (DMX_vec::iterator px=data.begin(); px!=data.end(); px++){
         ostringstream oss;
@@ -217,7 +307,7 @@ string fcn::DMXvec_to_str(DMX_vec data, char sep){
     }
     return ret;
 }
-string fcn::intvec_to_str(int_vec data, char sep){
+string fcn::vec_to_str(int_vec data, char sep){
     string ret;
     for (int_vec::iterator px=data.begin(); px!=data.end(); px++){
         ostringstream oss;
@@ -230,6 +320,20 @@ string fcn::intvec_to_str(int_vec data, char sep){
 
         ret.append(sub_ret);
         if ( !( (px+1)==data.end()) ){
+            ret.push_back(sep);
+        }
+    }
+    return ret;
+}
+string fcn::vec_to_str(str_vec data, char sep){
+    string ret;
+    for (str_vec::iterator vec_element=data.begin(); vec_element!=data.end(); vec_element++){
+        ostringstream oss;
+        oss<<(*vec_element);
+        string sub_ret = oss.str();
+
+        ret.append(sub_ret);
+        if ( !( (vec_element+1)==data.end()) ){
             ret.push_back(sep);
         }
     }

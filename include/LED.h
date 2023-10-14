@@ -93,7 +93,7 @@ public:
 
     this->flash_RGB = fcn::convert_8_to_12bits(flash_rgb);
     this->backgd_RGB_minmax = fcn::convert_8_to_12bits(bkgd_rgb_min_max);
-    balise(fcn::intvec_to_str(flash_RGB, ',').data());
+    balise(fcn::vec_to_str(flash_RGB, ',').data());
   }  
   LEDAnimation1(LEDFixture* f, simpleColor f_col, simpleColor b_col, std::string d, std::string i){
     this->fixture = f;

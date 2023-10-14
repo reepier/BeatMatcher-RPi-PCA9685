@@ -2,6 +2,9 @@
 #include <vector>
 #include <string>
 #include <cmath>
+#include <algorithm>
+#include <random>
+
 #include "wiringPi.h"
 using namespace std;
 
@@ -33,8 +36,24 @@ void send_buffer(){
 
 void spit_colors(){
   for(int c = simpleColor::black; c != simpleColor::last_color; c++){
-    cout << colorName[c] << "\t: RGBW{" << fcn::DMXvec_to_str(fcn::RGBW((simpleColor)c), ',') << "} \t RGB{" << fcn::DMXvec_to_str(fcn::RGB((simpleColor)c), ',') << "}" << endl;
+    cout << colorName[c] << "\t: RGBW{" << fcn::vec_to_str(fcn::RGBW((simpleColor)c), ',') << "} \t RGB{" << fcn::vec_to_str(fcn::RGB((simpleColor)c), ',') << "}" << endl;
   }
+}
+
+// Function to read vector elements in random order
+void readVectorInRandomOrder(std::vector<int>& vec) {
+    // Seed the random number generator
+    std::random_device rd;
+    std::mt19937 rng(rd());
+
+    // Shuffle the vector using the random number generator
+    std::shuffle(vec.begin(), vec.end(), rng);
+
+    // Iterate through the shuffled vector and read its elements
+    for (const int& element : vec) {
+        std::cout << element << " ";
+    }
+    std::cout << std::endl;
 }
 
 int main(){
@@ -155,15 +174,30 @@ int main(){
   //   delay(50);
   // }
 
-  while (true){
-    cout << rand_min_max(0,4) << endl;
-    delay(200);
-  }
+  // while (true){
+  //   cout << rand_min_max(0,4) << endl;
+  //   delay(200);
+  // }
 
   // color_vec c = {};
   // while (true){
   //   cout << colorName[(int)fcn::random_pick(c, int_vec{})] << endl;
   //   delay(200);
   // }
+
+  // Chat GPT Example :
+    // std::vector<int> myVector = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+    // std::cout << "Original Vector: ";
+    // for (const int& element : myVector) {
+    //     std::cout << element << " ";
+    // }
+    // std::cout << std::endl;
+
+    // std::cout << "Random Order: ";
+    // readVectorInRandomOrder(myVector);
+
+  front_rack.init();
+  front_rack.activate_by_color(color_vec{black});
 
 }
