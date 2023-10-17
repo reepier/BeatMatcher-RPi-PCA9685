@@ -3,7 +3,7 @@
 	"tasks": [
 		{
 			"type": "cppbuild",
-			"label": "C/C++: g++ build active file",
+			"label": "build main application",
 			"command": "/usr/bin/g++",
 			"args": [
 				"-fdiagnostics-color=always",
@@ -20,6 +20,7 @@
 				"${workspaceFolder}/src/music.cpp",
 				"${workspaceFolder}/src/sysfcn.cpp",
 				"${workspaceFolder}/src/config.cpp",
+				"${workspaceFolder}/src/MCP3008.cpp",
 				"-I${workspaceFolder}/include",
 				"-o",
 				"${workspaceFolder}/bin/beatmatcher",
@@ -27,7 +28,53 @@
 				"-lolacommon",
 				"-lcurses",
 				"-lwiringPi",
-				"-lfftw3"
+				"-lfftw3",
+				"-llgpio",
+				"-lPCA9685"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "compiler: /usr/bin/g++"
+		},
+
+		{
+			"type": "cppbuild",
+			"label": "build test application",
+			"command": "/usr/bin/g++",
+			"args": [
+				"-fdiagnostics-color=always",
+				"-g",
+				"-w",
+				// "${workspaceFolder}/src/main.cpp",
+				"${workspaceFolder}/src/test.cpp",
+				// "${file}",
+				"${workspaceFolder}/src/animator.cpp",
+				"${workspaceFolder}/src/debug.cpp",
+				"${workspaceFolder}/src/LED.cpp",
+				"${workspaceFolder}/src/spot.cpp",
+				"${workspaceFolder}/src/spider.cpp",
+				"${workspaceFolder}/src/music.cpp",
+				"${workspaceFolder}/src/sysfcn.cpp",
+				"${workspaceFolder}/src/config.cpp",
+				"${workspaceFolder}/src/MCP3008.cpp",
+				"-I${workspaceFolder}/include",
+				"-o",
+				"${workspaceFolder}/bin/beatmatcher",
+				"-lola",
+				"-lolacommon",
+				"-lcurses",
+				"-lwiringPi",
+				"-lfftw3",
+				"-llgpio",
+				"-lPCA9685"
 			],
 			"options": {
 				"cwd": "${fileDirname}"

@@ -34,7 +34,7 @@ void SoundAnalyzer::update(){
         this->_record();
         this->_process_record();
     }else{
-        sampler.process_record_fake(t);
+        sampler.process_record_fake();
     }
     #else
         sampler.process_record_fake();

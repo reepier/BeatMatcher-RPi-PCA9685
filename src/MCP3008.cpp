@@ -19,6 +19,8 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+#include <platform.h>
+#ifndef LINUX_PC
 
 #include <MCP3008/MCP3008.h>
 #include <cstdint>
@@ -124,3 +126,5 @@ unsigned short MCP3008::read(const std::uint8_t channel, const Mode m) const {
 }
 
 };
+
+#endif
