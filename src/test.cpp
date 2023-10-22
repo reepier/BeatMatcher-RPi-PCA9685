@@ -21,6 +21,14 @@ using namespace std;
   ola::client::StreamingClient ola_client;
   ola::DmxBuffer ola_buffer;
 
+#ifndef LINUX_PC // if compiling on raspberrypi
+    // I2C Hardware interface (PCA9685)
+    int fd;
+    int addr = 0x40;
+    unsigned int setOnVals[_PCA9685_CHANS] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    unsigned int setOffVals[_PCA9685_CHANS] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+#endif
+
 fix_vec ll_fxtrs = {&led, &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, &spot_d, &spot_g, &spider};
 fix_vec fixtures = {&front_rack, &led, &spider};
 
@@ -30,13 +38,38 @@ void build_buffer(){
     
 }
 
-void send_buffer(){
+void send(){
+    #ifndef LINUX_PC // if compiling on raspberrypi
+    // Send frame to the PCA9685 module
+    // Take into account the MASTER DIMMER value !! --> as late as possible, right before data is sent
+    setOffVals[LEDRed] = led.RGBout[R] * led.MASTER_DIMMER / 255.0;
+    setOffVals[LEDGreen] = led.RGBout[G] * led.MASTER_DIMMER / 255.0;
+    setOffVals[LEDBlue] = led.RGBout[B] * led.MASTER_DIMMER / 255.0;
 
+    PCA9685_setPWMVals(fd, addr, setOnVals, setOffVals);
+#endif // DEBUG
+
+    // send DMX frame to OLA server.
+    balise("Construct buffer");
+    for (fix_vec::iterator fx = ll_fxtrs.begin(); fx != ll_fxtrs.end(); fx++){
+        ola_buffer.SetRange((*fx)->get_address(), (*fx)->buffer().data(), (*fx)->get_nCH());
+    }
+    // ola_buffer.SetRange(ll_fxtrs[0]->address, ll_fxtrs[0]->buffer().data(), ll_fxtrs[0]->nCH);
+    // ola_buffer.SetRange(led.address, led.buffer().data(), led.nCH);
+    // ola_buffer.SetRange(spot_g.address, spot_g.buffer().data(), spot_g.nCH);
+    // ola_buffer.SetRange(spot_d.address, spot_d.buffer().data(), spot_d.nCH);
+    // ola_buffer.SetRange(spot_1.address, spot_1.buffer().data(), spot_1.nCH);
+    // ola_buffer.SetRange(spot_2.address, spot_2.buffer().data(), spot_2.nCH);
+    // ola_buffer.SetRange(spot_3.address, spot_3.buffer().data(), spot_3.nCH);
+    // ola_buffer.SetRange(spider.address, spider.buffer().data(), spider.nCH);
+
+    balise("OLAclient.send()");
+    ola_client.SendDmx(1, ola_buffer);
 }
 
 void spit_colors(){
   for(int c = simpleColor::black; c != simpleColor::last_color; c++){
-    cout << colorName[c] << "\t: RGBW{" << fcn::vec_to_str(fcn::RGBW((simpleColor)c), ',') << "} \t RGB{" << fcn::vec_to_str(fcn::RGB((simpleColor)c), ',') << "}" << endl;
+    // cout << colorName[c] << "\t: RGBW{" << fcn::vec_to_str(fcn::RGBW((simpleColor)c), ',') << "} \t RGB{" << fcn::vec_to_str(fcn::RGB((simpleColor)c), ',') << "}" << endl;
   }
 }
 
@@ -197,7 +230,21 @@ int main(){
     // std::cout << "Random Order: ";
     // readVectorInRandomOrder(myVector);
 
-  front_rack.init();
-  front_rack.activate_by_color(color_vec{black});
 
+    #ifndef LINUX_PC // if compiling on raspberrypi
+      _PCA9685_DEBUG = 0;
+      _PCA9685_TEST = 0;
+
+      fd = PCA9685_openI2C(1, addr);
+      PCA9685_initPWM(fd, addr, _PCA9685_MAXFREQ);
+    #endif
+
+    while (true){
+      static uint8_t i=0;
+
+      led.RGBout=fcn::convert_8_to_12bits(DMX_vec{i,i,i});
+      send();
+      i+=10;
+      delay(100);
+    }
 }

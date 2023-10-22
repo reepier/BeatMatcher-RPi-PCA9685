@@ -36,16 +36,20 @@ class LEDFixture : public BaseFixture
 {
 public:
   // Channels :
-  int_vec RGB = {0, 0, 0}; // = {R,G,B} Values from 0-4095 (12 bits PWM thanks to PCA9685)
+  int_vec RGBout = {0, 0, 0}; // = {R,G,B} Values from 0-4095 (12 bits PWM thanks to PCA9685)
   int nCH = 4;
 
-
+  // Constructor & Initializer
   LEDFixture(int addr, int ch, std::string nm) : BaseFixture(addr, ch, nm){};
   void init();
 
+  // Get functions
   int get_nCH() override { return this->nCH; };
   int get_address() override { return this->address; };
   std::vector<uint8_t> buffer() override;
+
+  // Fixture specific Color Macros
+  DMX_vec RGB(simpleColor, uint8_t intensity = 255) override;
 };
 extern LEDFixture led;
 
@@ -71,37 +75,13 @@ public:
   int fade_rate = 60;                            // ms flash fade rate (time constant of an exponential decay : intensity = exp(-(t-t0)/fade_rate)
 
   // Constructor
-  LEDAnimation1(LEDFixture* fix, int flash_r, int flash_g, int flash_b, int back_rmin, int back_rmax, int back_gmin, int back_gmax, int back_bmin, int back_bmax, std::string d, std::string i){
-    this->fixture = fix;
-    this->description = d;
-    this->id = i;
-    this->flash_RGB[R] = flash_r;
-    this->flash_RGB[G] = flash_g;
-    this->flash_RGB[B] = flash_b;
-
-    this->backgd_RGB_minmax[0] = back_rmin;
-    this->backgd_RGB_minmax[1] = back_rmax;
-    this->backgd_RGB_minmax[2] = back_gmin;
-    this->backgd_RGB_minmax[3] = back_gmax;
-    this->backgd_RGB_minmax[4] = back_bmin;
-    this->backgd_RGB_minmax[5] = back_bmax;
-  }
-  LEDAnimation1(LEDFixture* fix, DMX_vec flash_rgb, DMX_vec bkgd_rgb_min_max, std::string d, std::string i){
-    this->fixture = fix;
-    this->description = d;
-    this->id = i;
-
-    this->flash_RGB = fcn::convert_8_to_12bits(flash_rgb);
-    this->backgd_RGB_minmax = fcn::convert_8_to_12bits(bkgd_rgb_min_max);
-    balise(fcn::vec_to_str(flash_RGB, ',').data());
-  }  
   LEDAnimation1(LEDFixture* f, simpleColor f_col, simpleColor b_col, std::string d, std::string i){
     this->fixture = f;
     this->description = d;
     this->id = i;
 
-    this->flash_RGB = fcn::convert_8_to_12bits(fcn::RGB(f_col));
-    int_vec back_RGB = fcn::convert_8_to_12bits(fcn::RGB(b_col, 35));
+    this->flash_RGB = fcn::convert_8_to_12bits(this->fixture->RGB(f_col));
+    int_vec back_RGB = fcn::convert_8_to_12bits(this->fixture->RGB(b_col, 35));
     double c_min = 0.7, c_max = 1.3;
     this->backgd_RGB_minmax = {(int)(c_min*back_RGB[R]), (int)(c_max*back_RGB[R]), (int)(c_min*back_RGB[G]), (int)(c_max*back_RGB[G]), (int)(c_min*back_RGB[B]), (int)(c_max*back_RGB[B])};
 

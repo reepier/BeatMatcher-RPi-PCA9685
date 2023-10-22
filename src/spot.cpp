@@ -28,52 +28,100 @@ SpotFixture spot_d(130, 8, "Spot d");     //spot d'ambiance droite
 
 / ----------------------------------------------------------------------- */
 /* /!\ /!\ Bullshit initializer --> I don't plan on coding animation for individual spots */
-void SpotFixture::init(){
-    this->animations.push_back(new SpotAnimation1(this, 0,0,0,0,    " ", "SPOT.0.0"));
-    // this->animations.push_back(new SpotAnimation1(this, 0,0,0,255,  "White", "SPOT.1.2"));
-    // this->animations.push_back(new SpotAnimation1(this, 255,0,0,0,  "Red", "SPOT.1.3"));
-    // this->animations.push_back(new SpotAnimation1(this, 0,255,0,0,  "Green", "SPOT.1.4"));
-    // this->animations.push_back(new SpotAnimation1(this, 0,0,255,0,  "Blue", "SPOT.1.5"));
-    // this->animations.push_back(new SpotAnimation1(this, 255,255,0,0,"Yellow", "SPOT.1.6"));
-    // this->animations.push_back(new SpotAnimation1(this, 255,0,255,0,"Magenta", "SPOT.1.7"));
-    // this->animations.push_back(new SpotAnimation1(this, 0,255,255,0,"Cyan", "SPOT.1.8"));
+// void SpotFixture::init(){
+//     this->animations.push_back(new SpotAnimation1(this, 0,0,0,0,    " ", "SPOT.0.0"));
+//     // this->animations.push_back(new SpotAnimation1(this, 0,0,0,255,  "White", "SPOT.1.2"));
+//     // this->animations.push_back(new SpotAnimation1(this, 255,0,0,0,  "Red", "SPOT.1.3"));
+//     // this->animations.push_back(new SpotAnimation1(this, 0,255,0,0,  "Green", "SPOT.1.4"));
+//     // this->animations.push_back(new SpotAnimation1(this, 0,0,255,0,  "Blue", "SPOT.1.5"));
+//     // this->animations.push_back(new SpotAnimation1(this, 255,255,0,0,"Yellow", "SPOT.1.6"));
+//     // this->animations.push_back(new SpotAnimation1(this, 255,0,255,0,"Magenta", "SPOT.1.7"));
+//     // this->animations.push_back(new SpotAnimation1(this, 0,255,255,0,"Cyan", "SPOT.1.8"));
 
-    this->activate_by_ID("SPOT.0.0");
-    /*
-    this->active_animation = this->animations[ rand() % this->animations.size() ];
-    this->active_animation->init();
-    */
-}
+//     this->activate_by_ID("SPOT.0.0");
+//     /*
+//     this->active_animation = this->animations[ rand() % this->animations.size() ];
+//     this->active_animation->init();
+//     */
+// }
 
-DMX_vec SpotFixture::buffer(){
-    return DMX_vec{this->MASTER_DIMMER, this->RGBW[R], this->RGBW[G],this->RGBW[B],this->RGBW[W], this->prog, this->color_wheel, this->strobe};
-}
+// DMX_vec SpotFixture::buffer(){
+    
+// }
+
+// DMX_vec SpotFixture::RGBW(simpleColor c, uint8_t intensity){
+//     switch (c)
+//     {
+//     case black:
+//         return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);
+//         break;
+//     case red:
+//         return fcn::RGBW_norm(DMX_vec{255,0,0,0}, intensity);
+//         break;
+//     case green:
+//         return fcn::RGBW_norm(DMX_vec{0,255,0,0}, 160.0/255*intensity);
+//         break;
+//     case blue:
+//         return fcn::RGBW_norm(DMX_vec{0,0,255,0}, 190.0/255*intensity);
+//         break;
+//     case yellow:
+//         return fcn::RGBW_norm(DMX_vec{255,90,0,0}, intensity);
+//         break;
+//     case orange:
+//         return fcn::RGBW_norm(DMX_vec{255,40,0,0}, intensity);
+//         break;
+//     case sodium:
+//         return fcn::RGBW_norm(DMX_vec{255,20,0,0}, intensity);
+//         break;
+//     case cyan:
+//         return fcn::RGBW_norm(DMX_vec{0,219,255,0}, 180.0/255*intensity);
+//         break;
+//     case purple:
+//         return fcn::RGBW_norm(DMX_vec{150,0,255,0}, intensity);
+//         break;    
+//     case magenta:
+//         return fcn::RGBW_norm(DMX_vec{255,0,240,0}, intensity);
+//         break;
+//     case pink:
+//         return fcn::RGBW_norm(DMX_vec{255,0,100,0}, intensity);
+//         break;
+//     case white:
+//         return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);
+//         break;
+//     case gold:
+//         return fcn::RGBW_norm(DMX_vec{255,40,0,100}, intensity);
+//         break;
+//     default:
+//         break;
+//     }
+// }
+
 
 /* /!\ /!\ Bullshit contructor --> I don't plan on coding animation for individual spots */
-SpotAnimation1::SpotAnimation1(SpotFixture* fix, uint8_t r,uint8_t g,uint8_t b, uint8_t w, string d, string i){
-    this->fixture = fix;
-    this->name  = "Fixed RGB color";
-    this->description = d;
-    this->id    = i;
-    this->red   = r;
-    this->green = g;
-    this->blue  = b;
-    this->white = w;
-}
+// SpotAnimation1::SpotAnimation1(SpotFixture* fix, uint8_t r,uint8_t g,uint8_t b, uint8_t w, string d, string i){
+//     this->fixture = fix;
+//     this->name  = "Fixed RGB color";
+//     this->description = d;
+//     this->id    = i;
+//     this->red   = r;
+//     this->green = g;
+//     this->blue  = b;
+//     this->white = w;
+// }
 
 // void SpotAnimation1::init(){
 //     this->t_animation_start_ms = millis();
 //     this->frame_cpt = 0;
 // }
 
-void SpotAnimation1::new_frame(){
-    balise("compute new spot1 frame");
-    // nothing to do for this animation
-    this->fixture->RGBW[R] = this->red;
-    this->fixture->RGBW[G] = this->green;
-    this->fixture->RGBW[B] = this->blue;
-    this->fixture->RGBW[W] = this->white;
-}
+// void SpotAnimation1::new_frame(){
+//     balise("compute new spot1 frame");
+//     // nothing to do for this animation
+//     this->fixture->RGBWout[R] = this->red;
+//     this->fixture->RGBWout[G] = this->green;
+//     this->fixture->RGBWout[B] = this->blue;
+//     this->fixture->RGBWout[W] = this->white;
+// }
 
 
 /* --------------------------------------------------------------------
@@ -141,6 +189,53 @@ void SpotRack::init_back(){
     //this->animations.push_back();
 }
 
+DMX_vec SpotRack::RGBW(simpleColor c, uint8_t intensity){
+    switch (c)
+    {
+    case black:
+        return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);
+        break;
+    case red:
+        return fcn::RGBW_norm(DMX_vec{255,0,0,0}, intensity);
+        break;
+    case green:
+        return fcn::RGBW_norm(DMX_vec{0,255,0,0}, 160.0/255*intensity);
+        break;
+    case blue:
+        return fcn::RGBW_norm(DMX_vec{0,0,255,0}, 190.0/255*intensity);
+        break;
+    case yellow:
+        return fcn::RGBW_norm(DMX_vec{255,90,0,0}, intensity);
+        break;
+    case orange:
+        return fcn::RGBW_norm(DMX_vec{255,40,0,0}, intensity);
+        break;
+    case sodium:
+        return fcn::RGBW_norm(DMX_vec{255,20,0,0}, intensity);
+        break;
+    case cyan:
+        return fcn::RGBW_norm(DMX_vec{0,219,255,0}, 180.0/255*intensity);
+        break;
+    case purple:
+        return fcn::RGBW_norm(DMX_vec{150,0,255,0}, intensity);
+        break;    
+    case magenta:
+        return fcn::RGBW_norm(DMX_vec{255,0,240,0}, intensity);
+        break;
+    case pink:
+        return fcn::RGBW_norm(DMX_vec{255,0,100,0}, intensity);
+        break;
+    case white:
+        return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);
+        break;
+    case gold:
+        return fcn::RGBW_norm(DMX_vec{255,40,0,100}, intensity);
+        break;
+    default:
+        break;
+    }
+}
+
 // -----------------------------------
 // FRONTAL RACK of SPOT Animations
 // -----------------------------------
@@ -170,8 +265,6 @@ void SpotFrontAnimation1::new_frame(){
     vector<double> s = {sin(2*M_PI*t/p_ms[0]), sin(2*M_PI*t/p_ms[1]), sin(2*M_PI*t/p_ms[2]), sin(2*M_PI*t/p_ms[3]), sin(2*M_PI*t/p_ms[4]) };
     
     // for each spot "i" of the rack
-    
-    
     for (int i_spot=0; i_spot < n_spot; i_spot++){
         DMX_vec backgd_RGBW(4);        
         // compute the background color values : 
@@ -195,10 +288,10 @@ void SpotFrontAnimation1::new_frame(){
             
             double flash_intensity = exp( -pow(2.5/this->flash_len*(t - t_prev), 2)) + exp( -pow(2.5/this->flash_len*(t - t_next), 2));
 
-            this->fixture->spots[i_spot]->RGBW[R] = min(max( (int)( (1.0-flash_intensity) * backgd_RGBW[R] + flash_intensity * this->flash_color[R]  ),0),255); 
-            this->fixture->spots[i_spot]->RGBW[G] = min(max( (int)( (1.0-flash_intensity) * backgd_RGBW[G] + flash_intensity * this->flash_color[G]  ),0),255);
-            this->fixture->spots[i_spot]->RGBW[B] = min(max( (int)( (1.0-flash_intensity) * backgd_RGBW[B] + flash_intensity * this->flash_color[B]  ),0),255);
-            this->fixture->spots[i_spot]->RGBW[W] = min(max( (int)( (1.0-flash_intensity) * backgd_RGBW[W] + flash_intensity * this->flash_color[W]  ),0),255);
+            this->fixture->spots[i_spot]->RGBWout[R] = min(max( (int)( (1.0-flash_intensity) * backgd_RGBW[R] + flash_intensity * this->flash_color[R]  ),0),255); 
+            this->fixture->spots[i_spot]->RGBWout[G] = min(max( (int)( (1.0-flash_intensity) * backgd_RGBW[G] + flash_intensity * this->flash_color[G]  ),0),255);
+            this->fixture->spots[i_spot]->RGBWout[B] = min(max( (int)( (1.0-flash_intensity) * backgd_RGBW[B] + flash_intensity * this->flash_color[B]  ),0),255);
+            this->fixture->spots[i_spot]->RGBWout[W] = min(max( (int)( (1.0-flash_intensity) * backgd_RGBW[W] + flash_intensity * this->flash_color[W]  ),0),255);
     }
 }
 
@@ -235,7 +328,7 @@ void SpotFrontAnimation2::new_frame(){
         this->t_next_shake += 2000; 
     }
     for (int i = 0; i<n_spots; i++){
-        spots[i]->RGBW   = fcn::RGBW(this->color);
+        spots[i]->RGBWout  = this->fixture->RGBW(this->color);
 
         spots[i]->strobe = (int)(this->strobe_spds[i]); // min(max( (int)(this->strobe_spds[i] * (1 + delta*sin(i*M_PI/3 + 2*M_PI*t/3000)))  ,0),255);
         // spots[i]->strobe = min(max( rand_min_max(this->strobe_spds[i] * (1-delta) , this->strobe_spds[i] * (1+delta))  ,0),255);

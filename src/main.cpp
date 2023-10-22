@@ -110,13 +110,13 @@ void send(){
     #ifndef LINUX_PC // if compiling on raspberrypi
     // Send frame to the PCA9685 module
     // Take into account the MASTER DIMMER value !! --> as late as possible, right before data is sent
-    setOffVals[LEDRed] = led.RGB[R] * led.MASTER_DIMMER / 255.0;
-    setOffVals[LEDGreen] = led.RGB[G] * led.MASTER_DIMMER / 255.0;
-    setOffVals[LEDBlue] = led.RGB[B] * led.MASTER_DIMMER / 255.0;
+    setOffVals[LEDRed] = led.RGBout[R] * led.MASTER_DIMMER / 255.0;
+    setOffVals[LEDGreen] = led.RGBout[G] * led.MASTER_DIMMER / 255.0;
+    setOffVals[LEDBlue] = led.RGBout[B] * led.MASTER_DIMMER / 255.0;
 
   
     PCA9685_setPWMVals(fd, addr, setOnVals, setOffVals);
-#endif // DEBUG
+    #endif // DEBUG
 
     // send DMX frame to OLA server.
     balise("Construct buffer");

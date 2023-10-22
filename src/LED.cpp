@@ -45,7 +45,7 @@ void LEDFixture::init(){
 }
 
 DMX_vec LEDFixture::buffer(){
-    return DMX_vec{this->MASTER_DIMMER, (uint8_t)(this->RGB[R] >> 4), (uint8_t)(this->RGB[G] >> 4), (uint8_t)(this->RGB[B] >> 4)};
+    return DMX_vec{this->MASTER_DIMMER, (uint8_t)(this->RGBout[R] >> 4), (uint8_t)(this->RGBout[G] >> 4), (uint8_t)(this->RGBout[B] >> 4)};
 }
 
 // Animation initializer
@@ -73,14 +73,62 @@ void LEDAnimation1::new_frame(){
     float coef = exp(-(double)(t_ms - t_last_beat_ms) / fade_rate);
     if (flash_on)
     {
-        fixture->RGB[R] = backgd_color[R] + coef * (flash_RGB[R] - backgd_color[R]);
-        fixture->RGB[G] = backgd_color[G] + coef * (flash_RGB[G] - backgd_color[G]);
-        fixture->RGB[B] = backgd_color[B] + coef * (flash_RGB[B] - backgd_color[B]);
+        fixture->RGBout[R] = backgd_color[R] + coef * (flash_RGB[R] - backgd_color[R]);
+        fixture->RGBout[G] = backgd_color[G] + coef * (flash_RGB[G] - backgd_color[G]);
+        fixture->RGBout[B] = backgd_color[B] + coef * (flash_RGB[B] - backgd_color[B]);
     }
     else
     {
-        fixture->RGB[R] = backgd_color[R];
-        fixture->RGB[G] = backgd_color[G];
-        fixture->RGB[B] = backgd_color[B];
+        fixture->RGBout[R] = backgd_color[R];
+        fixture->RGBout[G] = backgd_color[G];
+        fixture->RGBout[B] = backgd_color[B];
+    }
+}
+
+// TODO --> move into the LEDFixtureClass o that each Fixtures has its own override of the color function
+DMX_vec LEDFixture::RGB(simpleColor c, uint8_t intensity){
+    switch (c)
+    {
+    case black:
+        return fcn::RGB_norm(DMX_vec{0,0,0}, intensity);
+        break;
+    case red:
+        return fcn::RGB_norm(DMX_vec{255,0,0}, intensity);
+        break;
+    case green:
+        return fcn::RGB_norm(DMX_vec{0,255,0}, intensity);
+        break;
+    case blue:
+        return fcn::RGB_norm(DMX_vec{0,0,255}, intensity);
+        break;
+    case yellow:
+        return fcn::RGB_norm(DMX_vec{255,63,0}, intensity);
+        break;
+    case orange:
+        return fcn::RGB_norm(DMX_vec{255,20,0}, intensity);
+        break;
+    case sodium:
+        return fcn::RGB_norm(DMX_vec{255,9,0}, intensity);
+        break;
+    case cyan:
+        return fcn::RGB_norm(DMX_vec{0,153,255}, intensity);
+        break;
+    case purple:
+        return fcn::RGB_norm(DMX_vec{139,0,255}, intensity);
+        break;    
+    case magenta:
+        return fcn::RGB_norm(DMX_vec{255,0,186}, intensity);
+        break;
+    case pink:
+        return fcn::RGB_norm(DMX_vec{255,0,71}, intensity);
+        break;
+    case white:
+        return fcn::RGB_norm(DMX_vec{255,78,26}, intensity);
+        break;
+    case gold:
+        return fcn::RGB_norm(DMX_vec{255,37,4}, intensity);
+        break;
+    default:
+        break;
     }
 }

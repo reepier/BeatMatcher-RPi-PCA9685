@@ -21,26 +21,28 @@ class SpotFixture : public BaseFixture{
 public:
     // Channels :
     int nCH = 8;
-    DMX_vec RGBW = {0, 0, 0, 0}; // R G B W values (0-255)
+    DMX_vec RGBWout = {0, 0, 0, 0}; // R G B W values (0-255)
     uint8_t strobe = 0;                       // strobe speed (0 none - 1 slow - 255 fast)
     uint8_t color_wheel = 0;                  // fixture preset colors (unused)
     uint8_t prog = 0;                         // fixture preset program (unused)
 
-    // constructor
+    // Constructor & Initializer
     SpotFixture(int addr, int ch, std::string nm) : BaseFixture(addr, ch, nm){};
-    void init();
+    void init(){};
 
-    // dmx output
+    // Get Functions
     int get_nCH() override { return this->nCH; };
     int get_address() override { return this->address; };
-    DMX_vec buffer() override;
+    DMX_vec buffer() override {return DMX_vec{this->MASTER_DIMMER, this->RGBWout[R], this->RGBWout[G],this->RGBWout[B],this->RGBWout[W], this->prog, this->color_wheel, this->strobe};};
     void reset_channels(){
-        this->RGBW = {0, 0, 0, 0};
+        this->RGBWout = {0, 0, 0, 0};
         this->strobe = 0;                       
         this->color_wheel = 0;                  
         this->prog = 0; 
     };
-    
+
+    // DMX_vec RGBW(simpleColor, uint8_t intensity = 255) override {};
+
 };
 extern SpotFixture spot_g, spot_d, spot_1, spot_2, spot_3, spot_4, spot_5, spot_6;
 
@@ -51,17 +53,17 @@ public:
 };
 
 /* /!\ /!\ Bullshit class --> I don't plan on coding animation for individual spots */
-class SpotAnimation1 : public SpotAnimation{
-public:
-    uint8_t red;
-    uint8_t green;
-    uint8_t blue;
-    uint8_t white;
+// class SpotAnimation1 : public SpotAnimation{
+// public:
+//     uint8_t red;
+//     uint8_t green;
+//     uint8_t blue;
+//     uint8_t white;
 
-    SpotAnimation1(SpotFixture *, uint8_t, uint8_t, uint8_t, uint8_t, std::string, std::string);
-    void init() override {BaseAnimation::init();};
-    void new_frame();
-};
+//     SpotAnimation1(SpotFixture *, uint8_t, uint8_t, uint8_t, uint8_t, std::string, std::string);
+//     void init() override {BaseAnimation::init();};
+//     void new_frame();
+// };
 
 // -----------------------------------
 // RACK of SPOTS
@@ -101,6 +103,8 @@ public:
             (*spot)->reset_channels();
         }
     };
+
+    DMX_vec RGBW(simpleColor, uint8_t intensity = 255) override;
 };
 
 extern SpotRack front_rack;
@@ -137,11 +141,11 @@ double fluct_col = 0.25;
         this->id = i;
         this->fixture = f;
 
-        this->flash_color = fcn::RGBW(f_col);
+        this->flash_color = this->fixture->RGBW(f_col);
         if (f_col==black)
-            this->back_color = fcn::RGBW(b_col, 100);     // more intensity if there is no flash
+            this->back_color = this->fixture->RGBW(b_col, 100);     // more intensity if there is no flash
         else
-            this->back_color = fcn::RGBW(b_col, 50);     // less intensity if there is a flash
+            this->back_color = this->fixture->RGBW(b_col, 50);     // less intensity if there is a flash
 
         // this->sin_max_p_ms = pmax;
         // this->sin_min_p_ms = pmin;

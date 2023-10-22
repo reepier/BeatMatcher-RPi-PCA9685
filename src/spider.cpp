@@ -59,6 +59,53 @@ DMX_vec SpiderFixture::buffer(){
     return ret;
 }
 
+DMX_vec SpiderFixture::RGBW(simpleColor c, uint8_t intensity){
+    switch (c)
+    {
+    case black:
+        return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);
+        break;
+    case red:
+        return fcn::RGBW_norm(DMX_vec{255,0,0,0}, intensity);
+        break;
+    case green:
+        return fcn::RGBW_norm(DMX_vec{0,255,0,0}, 160.0/255*intensity);
+        break;
+    case blue:
+        return fcn::RGBW_norm(DMX_vec{0,0,255,0}, 190.0/255*intensity);
+        break;
+    case yellow:
+        return fcn::RGBW_norm(DMX_vec{255,90,0,0}, intensity);
+        break;
+    case orange:
+        return fcn::RGBW_norm(DMX_vec{255,40,0,0}, intensity);
+        break;
+    case sodium:
+        return fcn::RGBW_norm(DMX_vec{255,20,0,0}, intensity);
+        break;
+    case cyan:
+        return fcn::RGBW_norm(DMX_vec{0,219,255,0}, 180.0/255*intensity);
+        break;
+    case purple:
+        return fcn::RGBW_norm(DMX_vec{150,0,255,0}, intensity);
+        break;    
+    case magenta:
+        return fcn::RGBW_norm(DMX_vec{255,0,240,0}, intensity);
+        break;
+    case pink:
+        return fcn::RGBW_norm(DMX_vec{255,0,100,0}, intensity);
+        break;
+    case white:
+        return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);
+        break;
+    case gold:
+        return fcn::RGBW_norm(DMX_vec{255,40,0,100}, intensity);
+        break;
+    default:
+        break;
+    }
+}
+
 // ---------------------------------------------
 // SPIDER ANIMATION definition
 // ---------------------------------------------
@@ -107,7 +154,7 @@ void SpiderAnimation2::new_frame(){
 
     // TODO finish the transition to a multi color flash capability
 
-    this->fixture->pixels       = pixel_vec(9, BLACK);
+    this->fixture->pixels       = pixel_vec(9, DMX_vec{0,0,0,0});
     this->fixture->pan_position = this->pan_position;
     this->fixture->pan_speed    = this->pan_speed;
     this->fixture->tilt         = int_vec{0,0,0};
@@ -116,7 +163,7 @@ void SpiderAnimation2::new_frame(){
 
     unsigned long t = frame.t_current_ms;
     double sigma = this->flash_length/3.0;
-    DMX_vec background_color_RGBW = fcn::RGBW(this->background_color, 50);
+    DMX_vec background_color_RGBW = this->fixture->RGBW(this->background_color, 50);
     // DMX_vec flash_color_RGBW = fcn::RGBW(this->flash_colors[0]);   //temporary
     
     // Tilt
@@ -132,7 +179,7 @@ void SpiderAnimation2::new_frame(){
         unsigned long t_prev = this->flashes[pix][i_prev].time;
         unsigned long t_next = this->flashes[pix][i_next].time;
 
-        DMX_vec flash_color_RGBW = (t-t_prev > t_next-t) ? fcn::RGBW(this->flashes[pix][i_next].color) : fcn::RGBW(this->flashes[pix][i_prev].color);
+        DMX_vec flash_color_RGBW = (t-t_prev > t_next-t) ? this->fixture->RGBW(this->flashes[pix][i_next].color) : this->fixture->RGBW(this->flashes[pix][i_prev].color);
 
         // unsigned long t_prev = flash_time[pix][0];
         // unsigned long t_next = flash_time[pix][1];

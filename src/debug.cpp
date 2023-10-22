@@ -290,7 +290,7 @@ void display(){
     cout << "Last change " << (frame.t_current_ms - animator.t_last_change_ms)/1000 << "s\n";
 
     cout << "\n//// OUTPUT /////" << '\n';
-    cout << "R/G/B : " << led.RGB[R] << " / " << led.RGB[G] << " / " << led.RGB[B] << endl;
+    cout << "R/G/B : " << led.RGBout[R] << " / " << led.RGBout[G] << " / " << led.RGBout[B] << endl;
 
     cout << "\n//// GENERAL /////" << '\n';
     cout << "FPS : " << 1.0/frame.loop_duration_ms*1000.0 << "Hz\n";

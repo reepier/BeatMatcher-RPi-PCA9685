@@ -35,12 +35,15 @@ public:
         this->tilt.resize(3);
         this->pixels.resize(NLED, DMX_vec(NCOL));
     };
-
     void init() override;
 
+    // Get functions
     int get_nCH() override { return this->nCH; };
     int get_address() override { return this->address; };
     DMX_vec buffer() override;
+
+    // Spider Specific Color Macro
+    DMX_vec RGBW(simpleColor, uint8_t intensity = 255) override;
 };
 extern SpiderFixture spider;
 
@@ -61,7 +64,7 @@ class SpiderAnimation1 : public SpiderAnimation{
     int pan_pos;  //pan position °
     int pan_spd;  //pan speed (-128 ; +127)
     int_vec tilt; //tilt position x3 ()
-    pixel_vec pix = pixel_vec(9, fcn::RGBW(black)); // stores RGB values as follow RGBW[Led_i][Pix_i]
+    pixel_vec pix = pixel_vec(9, DMX_vec{0,0,0,0}); // stores RGB values as follow RGBW[Led_i][Pix_i]
 
     SpiderAnimation1(SpiderFixture *f, simpleColor c,  int pos, int spd, int_vec til, std::string d, std::string i){
         this->description = d;
@@ -78,7 +81,7 @@ class SpiderAnimation1 : public SpiderAnimation{
         this->pan_pos = pos;
         this->pan_spd = spd;
 
-        this->pix = pixel_vec(9, fcn::RGBW(c));
+        this->pix = pixel_vec(9, this->fixture->RGBW(c));
 
         this->update_colors_used(c);
     };

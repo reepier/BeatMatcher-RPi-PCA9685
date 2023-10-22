@@ -61,6 +61,9 @@ class BaseFixture{
     virtual int get_address() = 0;
     virtual int get_nCH()     = 0;
     virtual DMX_vec buffer()  = 0;
+
+    virtual DMX_vec RGBW(simpleColor, uint8_t){}; // common (but overriden) function that returns a 4 RGBW vector based on standrad color input
+    virtual DMX_vec RGB(simpleColor, uint8_t){};
 };
 
 
@@ -117,21 +120,21 @@ extern AnimationManager animator;
 namespace fcn{
   /* returns a normalized 4 (or 3 for RGB) channel DMX vector based on color literal 
   if intensity = -1, the normalization is disabled*/
-  DMX_vec RGBW(simpleColor, uint8_t intensity = 255);
-  DMX_vec RGB(simpleColor, uint8_t intensity = 255);
-  #define RED(x) fcn::RGBW(red,x)
-  #define GREEN(x) fcn::RGBW(green,x)
-  #define BLUE(x) fcn::RGBW(blue,x)
-  #define YELLOW(x) fcn::RGBW(yellow,x)
-  #define ORANGE(x) fcn::RGBW(orange,x)
-  #define SODIUM(x) fcn::RGBW(sodium,x)
-  #define PURPLE(x) fcn::RGBW(purple,x)
-  #define MAGENTA(x) fcn::RGBW(magenta,x)
-  #define PINK(x) fcn::RGBW(pink,x)
-  #define CYAN(x) fcn::RGBW(cyan,x)
-  #define GOLD(x) fcn::RGBW(gold,x)
-  #define WHITE(x) fcn::RGBW(white,x)
-  #define BLACK fcn::RGBW(black)
+  // DMX_vec RGBW(simpleColor, uint8_t intensity = 255);
+  // DMX_vec RGB(simpleColor, uint8_t intensity = 255);
+  // #define RED(x) fcn::RGBW(red,x)
+  // #define GREEN(x) fcn::RGBW(green,x)
+  // #define BLUE(x) fcn::RGBW(blue,x)
+  // #define YELLOW(x) fcn::RGBW(yellow,x)
+  // #define ORANGE(x) fcn::RGBW(orange,x)
+  // #define SODIUM(x) fcn::RGBW(sodium,x)
+  // #define PURPLE(x) fcn::RGBW(purple,x)
+  // #define MAGENTA(x) fcn::RGBW(magenta,x)
+  // #define PINK(x) fcn::RGBW(pink,x)
+  // #define CYAN(x) fcn::RGBW(cyan,x)
+  // #define GOLD(x) fcn::RGBW(gold,x)
+  // #define WHITE(x) fcn::RGBW(white,x)
+  // #define BLACK fcn::RGBW(black)
   
   // returns a NORMALIZED 4 (or 3 for RGB) channel DMX vector based on a DMX_vector and a DMX vlue (0-255)
   DMX_vec RGBW_norm(DMX_vec, uint8_t intensity=255);

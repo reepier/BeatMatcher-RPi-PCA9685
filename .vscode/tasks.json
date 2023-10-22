@@ -67,7 +67,7 @@
 				"${workspaceFolder}/src/MCP3008.cpp",
 				"-I${workspaceFolder}/include",
 				"-o",
-				"${workspaceFolder}/bin/beatmatcher",
+				"${workspaceFolder}/bin/test",
 				"-lola",
 				"-lolacommon",
 				"-lcurses",
