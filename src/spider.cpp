@@ -59,7 +59,7 @@ DMX_vec SpiderFixture::buffer(){
     return ret;
 }
 
-DMX_vec SpiderFixture::RGBW(simpleColor c, uint8_t intensity){
+DMX_vec SpiderFixture::RGBW(simpleColor c, int intensity){
     switch (c)
     {
     case black:

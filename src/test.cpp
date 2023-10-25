@@ -92,131 +92,14 @@ void readVectorInRandomOrder(std::vector<int>& vec) {
 int main(){
     ola_client.Setup();
     srand(millis());
+    #ifndef LINUX_PC // if compiling on raspberrypi
+        balise("Init. PCA...");
+        _PCA9685_DEBUG = 0;
+        _PCA9685_TEST = 0;
 
-    // while(true){
-    //   for(int c = SimpleColor::black; c != SimpleColor::last_color; c++){
-        
-    //     switch (c){
-    //     case black:
-    //         spot_1.RGBW = BLACK;
-    //         led.RGB = fcn::convert_8_to_12bits( fcn::RGB(black) );
-    //       break;
-    //     case red:
-    //         spot_1.RGBW = RED(255);
-    //         led.RGB = fcn::convert_8_to_12bits( fcn::RGB(red));
-    //       break;
-    //     case green:
-    //         spot_1.RGBW = GREEN(255);
-    //         led.RGB = fcn::convert_8_to_12bits( fcn::RGB(green));
-    //       break;
-    //     case yellow:
-    //         spot_1.RGBW = YELLOW(255);
-    //         led.RGB = fcn::convert_8_to_12bits( fcn::RGB(yellow));
-    //       break;
-    //     case blue:
-    //         spot_1.RGBW = BLUE(255);
-    //         led.RGB = fcn::convert_8_to_12bits( fcn::RGB(blue));
-    //       break;
-    //     case orange:
-    //         spot_1.RGBW = ORANGE(255);
-    //         led.RGB = fcn::convert_8_to_12bits( fcn::RGB(orange));
-    //       break;
-    //     case sodium:
-    //         spot_1.RGBW = SODIUM(255);
-    //         led.RGB = fcn::convert_8_to_12bits( fcn::RGB(sodium));
-    //       break;
-    //     case cyan:
-    //         spot_1.RGBW = CYAN(255);
-    //         led.RGB = fcn::convert_8_to_12bits( fcn::RGB(cyan));
-    //       break;
-    //     case purple:
-    //         spot_1.RGBW = PURPLE(255);
-    //         led.RGB = fcn::convert_8_to_12bits( fcn::RGB(purple));
-    //       break;
-    //     case magenta:
-    //         spot_1.RGBW = MAGENTA(255);
-    //         led.RGB = fcn::convert_8_to_12bits( fcn::RGB(magenta));
-    //       break;
-    //     case pink:
-    //         spot_1.RGBW = PINK(255);
-    //         led.RGB = fcn::convert_8_to_12bits( fcn::RGB(pink));
-    //       break;
-    //     case gold:
-    //         spot_1.RGBW = GOLD(255);
-    //         led.RGB = fcn::convert_8_to_12bits( fcn::RGB(gold));
-    //       break;
-    //     default:
-    //         spot_1.RGBW = WHITE(255);
-    //         led.RGB = fcn::convert_8_to_12bits( fcn::RGB(white));
-    //       break;
-    //     }      
-
-    //     spot_2.RGBW = spot_1.RGBW;
-    //     spot_3.RGBW = spot_1.RGBW;
-        
-    //     ola_buffer.SetRange(led.get_address(), led.buffer().data(), led.get_nCH());
-    //     ola_buffer.SetRange(spot_1.address, spot_1.buffer().data(), spot_1.nCH);
-    //     ola_buffer.SetRange(spot_2.address, spot_3.buffer().data(), spot_3.nCH);
-    //     ola_buffer.SetRange(spot_3.address, spot_3.buffer().data(), spot_3.nCH);
-        
-    //     ola_client.SendDmx(1, ola_buffer);
-    //     cout<<colorName[c]<<endl;
-    //     cout<<colorName[c]<<endl;
-        
-    //   }
-    // }
-
-    // DMX_vec data = {0,8,255,17};
-    // cout << fcn::DMXvec_to_str(data, ',');
-    // cout << endl;
-    
-    // cout << fcn::num_to_str((int)127) << " " << fcn::num_to_str((uint8_t)128) << endl;
-
-    // log(1, "Premiere entrée");
-    // log(1, "Deuxième entrée");
-    // log(1, "Troisième entrée");
-    // log(1, "Quatrième entrée");
-
-    // spit_log();
-
-  // for (int i=0; i<255; i++){
-  //   cout<< i <<"\t:\t" << min_max( map(i, 50,180,0,255), 0,255)<<endl;
-  // }
-
-
-  // led.RGB = fcn::RGB(white);
-  // ola_buffer.SetRange(led.get_address(), led.buffer().data(), led.get_nCH());
-  // ola_client.SendDmx(1, ola_buffer);
-
-  // int_vec vals = {0,1};
-  // int_vec proba = {5,5};
-
-  // for (int i=0; i<30; i++){
-  //   cout << fcn::random_pick(vals, proba) << endl;
-  // }
-  // time_ms start = millis();
-
-  // while (true){
-  //   time_ms t = millis();
-  //   int y = (int)fcn::sin_wave(t, 1000, 0,50,0);
-  //   // int y = (int)fcn::square_wave(t, 1000, 0,50,0.3, 0);
-  //   // int y = (int)fcn::triangle_wave(t, 1000, 0,50,0.2, 0);
-
-
-  //   cout << string((int)y, ' ') << '.' << endl;
-  //   delay(50);
-  // }
-
-  // while (true){
-  //   cout << rand_min_max(0,4) << endl;
-  //   delay(200);
-  // }
-
-  // color_vec c = {};
-  // while (true){
-  //   cout << colorName[(int)fcn::random_pick(c, int_vec{})] << endl;
-  //   delay(200);
-  // }
+        fd = PCA9685_openI2C(1, addr);
+        PCA9685_initPWM(fd, addr, _PCA9685_MAXFREQ);
+    #endif
 
   // Chat GPT Example :
     // std::vector<int> myVector = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
@@ -231,20 +114,34 @@ int main(){
     // readVectorInRandomOrder(myVector);
 
 
-    #ifndef LINUX_PC // if compiling on raspberrypi
-      _PCA9685_DEBUG = 0;
-      _PCA9685_TEST = 0;
+    // #ifndef LINUX_PC // if compiling on raspberrypi
+    //   _PCA9685_DEBUG = 0;
+    //   _PCA9685_TEST = 0;
 
-      fd = PCA9685_openI2C(1, addr);
-      PCA9685_initPWM(fd, addr, _PCA9685_MAXFREQ);
-    #endif
+    //   fd = PCA9685_openI2C(1, addr);
+    //   PCA9685_initPWM(fd, addr, _PCA9685_MAXFREQ);
+    // #endif
+
+    // while (true){
+    //   static uint8_t i=0;
+
+    //   led.RGBout=fcn::convert_8_to_12bits(DMX_vec{i,i,i});
+    //   send();
+    //   i+=10;
+    //   delay(100);
+    // }
 
     while (true){
-      static uint8_t i=0;
-
-      led.RGBout=fcn::convert_8_to_12bits(DMX_vec{i,i,i});
-      send();
-      i+=10;
-      delay(100);
+        for (simpleColor c = red; c<last_color; c = (simpleColor)(int)(c+1)){
+          // spot_1.RGBWout = front_rack.RGBW(c);
+          // spot_2.RGBWout = front_rack.RGBW(c);
+          // spot_3.RGBWout = front_rack.RGBW(c);
+          cout << colorName[(int)c] << endl;
+          for (auto gain : int_vec{255}){
+            led.RGBout = fcn::convert_8_to_12bits( led.RGB(c, gain) );
+            send();
+            delay(500);
+          }
+        }
     }
 }

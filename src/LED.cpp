@@ -50,12 +50,12 @@ DMX_vec LEDFixture::buffer(){
 
 // Animation initializer
 void LEDAnimation1::init(){
-    BaseAnimation::init();
+    BaseAnimation::init(); 
     for (int_vec::iterator per_it=periods_ms.begin(); per_it!=periods_ms.end(); per_it++){
         (*per_it) = 1000 * rand_min_max(MIN_T, MAX_T);
     }
 }
-
+// does nothing
 /** Computes the RGB values to send to the led display based on : */
 void LEDAnimation1::new_frame(){
     unsigned long t_ms = frame.t_current_ms;
@@ -85,50 +85,62 @@ void LEDAnimation1::new_frame(){
     }
 }
 
-// TODO --> move into the LEDFixtureClass o that each Fixtures has its own override of the color function
-DMX_vec LEDFixture::RGB(simpleColor c, uint8_t intensity){
-    switch (c)
-    {
-    case black:
-        return fcn::RGB_norm(DMX_vec{0,0,0}, intensity);
-        break;
-    case red:
-        return fcn::RGB_norm(DMX_vec{255,0,0}, intensity);
-        break;
-    case green:
-        return fcn::RGB_norm(DMX_vec{0,255,0}, intensity);
-        break;
-    case blue:
-        return fcn::RGB_norm(DMX_vec{0,0,255}, intensity);
-        break;
-    case yellow:
-        return fcn::RGB_norm(DMX_vec{255,63,0}, intensity);
-        break;
-    case orange:
-        return fcn::RGB_norm(DMX_vec{255,20,0}, intensity);
-        break;
-    case sodium:
-        return fcn::RGB_norm(DMX_vec{255,9,0}, intensity);
-        break;
-    case cyan:
-        return fcn::RGB_norm(DMX_vec{0,153,255}, intensity);
-        break;
-    case purple:
-        return fcn::RGB_norm(DMX_vec{139,0,255}, intensity);
-        break;    
-    case magenta:
-        return fcn::RGB_norm(DMX_vec{255,0,186}, intensity);
-        break;
-    case pink:
-        return fcn::RGB_norm(DMX_vec{255,0,71}, intensity);
-        break;
-    case white:
-        return fcn::RGB_norm(DMX_vec{255,78,26}, intensity);
-        break;
-    case gold:
-        return fcn::RGB_norm(DMX_vec{255,37,4}, intensity);
-        break;
-    default:
-        break;
-    }
+DMX_vec LEDFixture::RGB(simpleColor c, int intensity){
+    DMX_vec temp;
+    int ref_int = 255;          // reference intensity, set for each color to get a constnat luminosity trhoughtou the palette
+    
+    // store in vector temp the color vector of norm 255
+    switch (c){
+        case black:
+            temp = fcn::RGB_norm(DMX_vec{0,0,0});
+            break;
+        case red:
+            temp = fcn::RGB_norm(DMX_vec{255,0,0});
+            break;
+        case green:
+            ref_int = 90; 
+            temp = fcn::RGB_norm(DMX_vec{0,255,0});
+            break;
+        case blue:
+            ref_int = 150;
+            temp = fcn::RGB_norm(DMX_vec{0,0,255});
+            break;
+        case yellow:
+            temp = fcn::RGB_norm(DMX_vec{255,63,0});
+            break;
+        case orange:
+            temp = fcn::RGB_norm(DMX_vec{255,20,0});
+            break;
+        case sodium:
+            temp = fcn::RGB_norm(DMX_vec{255,9,0});
+            break;
+        case cyan:
+            ref_int = 130;
+            temp = fcn::RGB_norm(DMX_vec{0,153,255});
+            break;
+        case purple:
+            ref_int = 200;
+            temp = fcn::RGB_norm(DMX_vec{139,0,255});
+            break;    
+        case magenta:
+            ref_int = 220;
+            temp = fcn::RGB_norm(DMX_vec{255,0,186});
+            break;
+        case pink:
+            ref_int = 240;
+            temp = fcn::RGB_norm(DMX_vec{255,0,71});
+            break;
+        case white:
+            temp = fcn::RGB_norm(DMX_vec{255,78,26});
+            break;
+        case gold:
+            temp = fcn::RGB_norm(DMX_vec{255,37,4});
+            break;
+        default:
+            break;
+        }
+
+        /* return a color vector with the same tint as temp but normalized according to a color specific 
+        coefficient (to account for the fixtures's color by color response)*/
+        return fcn::RGB_norm(temp, intensity==-1 ? -1 : (int)ref_int * intensity/255.0);
 }

@@ -62,6 +62,7 @@ bool process_arguments(int n, char* args[]){
         }
     }
 
+
     #ifdef LINUX_PC //if compiling on PC, force NO_MUSIC and NO_LED since PCA9685 and MCP3008 are not compatible
         b_NO_MUSIC = true;
         b_NO_LED = true;

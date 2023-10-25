@@ -43,7 +43,7 @@ public:
     DMX_vec buffer() override;
 
     // Spider Specific Color Macro
-    DMX_vec RGBW(simpleColor, uint8_t intensity = 255) override;
+    DMX_vec RGBW(simpleColor, int intensity = 255) override;
 };
 extern SpiderFixture spider;
 

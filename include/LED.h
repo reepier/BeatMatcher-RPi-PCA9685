@@ -49,7 +49,7 @@ public:
   std::vector<uint8_t> buffer() override;
 
   // Fixture specific Color Macros
-  DMX_vec RGB(simpleColor, uint8_t intensity = 255) override;
+  DMX_vec RGB(simpleColor, int intensity = 255) override;
 };
 extern LEDFixture led;
 
@@ -80,7 +80,7 @@ public:
     this->description = d;
     this->id = i;
 
-    this->flash_RGB = fcn::convert_8_to_12bits(this->fixture->RGB(f_col));
+    this->flash_RGB = fcn::convert_8_to_12bits(this->fixture->RGB(f_col, -1));
     int_vec back_RGB = fcn::convert_8_to_12bits(this->fixture->RGB(b_col, 35));
     double c_min = 0.7, c_max = 1.3;
     this->backgd_RGB_minmax = {(int)(c_min*back_RGB[R]), (int)(c_max*back_RGB[R]), (int)(c_min*back_RGB[G]), (int)(c_max*back_RGB[G]), (int)(c_min*back_RGB[B]), (int)(c_max*back_RGB[B])};

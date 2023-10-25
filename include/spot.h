@@ -104,7 +104,7 @@ public:
         }
     };
 
-    DMX_vec RGBW(simpleColor, uint8_t intensity = 255) override;
+    DMX_vec RGBW(simpleColor, int intensity = 255) override;
 };
 
 extern SpotRack front_rack;

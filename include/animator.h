@@ -62,8 +62,8 @@ class BaseFixture{
     virtual int get_nCH()     = 0;
     virtual DMX_vec buffer()  = 0;
 
-    virtual DMX_vec RGBW(simpleColor, uint8_t){}; // common (but overriden) function that returns a 4 RGBW vector based on standrad color input
-    virtual DMX_vec RGB(simpleColor, uint8_t){};
+    virtual DMX_vec RGBW(simpleColor, int){}; // common (but overriden) function that returns a 4 RGBW vector based on standrad color input
+    virtual DMX_vec RGB(simpleColor, int){};
 };
 
 
@@ -137,8 +137,8 @@ namespace fcn{
   // #define BLACK fcn::RGBW(black)
   
   // returns a NORMALIZED 4 (or 3 for RGB) channel DMX vector based on a DMX_vector and a DMX vlue (0-255)
-  DMX_vec RGBW_norm(DMX_vec, uint8_t intensity=255);
-  DMX_vec RGB_norm(DMX_vec, uint8_t intensity=255);
+  DMX_vec RGBW_norm(DMX_vec, int intensity=255);
+  DMX_vec RGB_norm(DMX_vec, int intensity=255);
   
   std::string vec_to_str(DMX_vec, char);
   std::string vec_to_str(int_vec, char);

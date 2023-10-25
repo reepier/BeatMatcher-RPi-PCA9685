@@ -15,23 +15,20 @@ typedef unsigned long time_ms;
 enum simpleColor{
     black=0,
     red,
-    green,
-    blue,
-    yellow,
-    orange,
     sodium,    //RGBW(255,10??,0,0)  --> deep orange, very red
+    orange,
+    yellow,
+    gold,
+    white,
     cyan,
+    blue,
     purple,
     magenta,
     pink,
-    white,
-    gold,     //RGBW(255,40,0,100 ) --> Orange + White
+    green,
     last_color
 };
-const std::vector<std::string> colorName = {"Black", "Red", "Green", "Blue", 
-                                    "Yellow", "Orange", "Sodium",
-                                    "Cyan", "Purple", "Magenta", "Pink", "White",
-                                    "Gold"};
+const std::vector<std::string> colorName = {"Black", "Red", "Sodium", "Orange", "Yellow", "Gold", "White","Cyan","Blue","Purple","Magenta","Pink","Green"};
 
 enum Shape{
     square,

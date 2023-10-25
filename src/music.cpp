@@ -91,14 +91,14 @@ void SoundAnalyzer::_update_beats(){
     if (volume >= beat_threshold){
         if (!raw_beat){
             new_beat = true;
-            t_last_new_beat = millis();
+            t_last_new_beat = frame.t_current_ms;
         }
         else{
             new_beat = false;
         }
         
         raw_beat = true;
-        t_last_beat = millis();
+        t_last_beat = frame.t_current_ms;
     }
     else{
         raw_beat = false;

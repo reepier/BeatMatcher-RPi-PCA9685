@@ -189,7 +189,7 @@ void SpotRack::init_back(){
     //this->animations.push_back();
 }
 
-DMX_vec SpotRack::RGBW(simpleColor c, uint8_t intensity){
+DMX_vec SpotRack::RGBW(simpleColor c, int intensity){
     switch (c)
     {
     case black:
@@ -199,7 +199,7 @@ DMX_vec SpotRack::RGBW(simpleColor c, uint8_t intensity){
         return fcn::RGBW_norm(DMX_vec{255,0,0,0}, intensity);
         break;
     case green:
-        return fcn::RGBW_norm(DMX_vec{0,255,0,0}, 160.0/255*intensity);
+        return fcn::RGBW_norm(DMX_vec{0,255,0,0}, 161.0/255*intensity);
         break;
     case blue:
         return fcn::RGBW_norm(DMX_vec{0,0,255,0}, 190.0/255*intensity);

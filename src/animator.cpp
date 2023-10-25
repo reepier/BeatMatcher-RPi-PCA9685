@@ -270,15 +270,20 @@ bool BaseFixture::activate_by_color(color_vec palette){
 // }
 //  rgbw: color vector ; intensity : equivalent 8bit intensity
 //  todo : allow for intensity > 255 (brighter flashes)
-DMX_vec fcn::RGBW_norm(DMX_vec rgbw, uint8_t intensity){
+DMX_vec fcn::RGBW_norm(DMX_vec rgbw, int intensity){
     const int size = rgbw.size();
     DMX_vec ret(size);
     
+    int max = 0;
     int sum = 0;
     for (int i=0; i<size; i++){
         sum += rgbw[i];
+        max = rgbw[i]>max ? rgbw[i] : max;
     }
-    float gain = (intensity==-1) ? 1.0:(float)intensity/sum;
+
+    double max_gain = max!=0 ? 255.0/max : 0;
+    double gain = (intensity==-1) ? max_gain : (double)intensity/sum;
+    gain = gain>max_gain? max_gain : gain;
 
     for (int i=0; i<size; i++){
         ret[i] = gain*rgbw[i];
@@ -286,7 +291,7 @@ DMX_vec fcn::RGBW_norm(DMX_vec rgbw, uint8_t intensity){
     return ret;
 }
 
-DMX_vec fcn::RGB_norm(DMX_vec rgb, uint8_t intensity){
+DMX_vec fcn::RGB_norm(DMX_vec rgb, int intensity){
     return fcn::RGBW_norm(rgb, intensity);
 }
 
