@@ -50,7 +50,7 @@ DMX_vec LEDFixture::buffer(){
 
 // Animation initializer
 void LEDAnimation1::init(){
-    BaseAnimation::init(); 
+    BaseAnimation::init();
     for (int_vec::iterator per_it=periods_ms.begin(); per_it!=periods_ms.end(); per_it++){
         (*per_it) = 1000 * rand_min_max(MIN_T, MAX_T);
     }
@@ -88,7 +88,6 @@ void LEDAnimation1::new_frame(){
 DMX_vec LEDFixture::RGB(simpleColor c, int intensity){
     DMX_vec temp;
     int ref_int = 255;          // reference intensity, set for each color to get a constnat luminosity trhoughtou the palette
-    
     // store in vector temp the color vector of norm 255
     switch (c){
         case black:

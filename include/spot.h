@@ -128,7 +128,7 @@ public:
     int rand_const_ms;
     int flash_len;
     double fluct_int = 0.4;
-double fluct_col = 0.25;
+    double fluct_col = 0.25;
 
     // Internal variable (for storage between frames)
     std::vector<int> p_ms;             // range of periods for various sine wvaes
@@ -145,7 +145,7 @@ double fluct_col = 0.25;
         if (f_col==black)
             this->back_color = this->fixture->RGBW(b_col, 100);     // more intensity if there is no flash
         else
-            this->back_color = this->fixture->RGBW(b_col, 50);     // less intensity if there is a flash
+            this->back_color = this->fixture->RGBW(b_col, 20);     // less intensity if there is a flash
 
         // this->sin_max_p_ms = pmax;
         // this->sin_min_p_ms = pmin;

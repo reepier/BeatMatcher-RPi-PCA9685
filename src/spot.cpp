@@ -153,7 +153,7 @@ void SpotRack::init(){
     this->animations.push_back(new SpotFrontAnimation1(this, red,       gold,   1000, 1000,   "Red background fast gold flashes",         "FR.1.1.5.1"));
     this->animations.push_back(new SpotFrontAnimation1(this, red,       white,  2500, 1000,   "Red background, white flashes",       "FR.1.1.6"));
     this->animations.push_back(new SpotFrontAnimation1(this, red,       white,  1000, 1000,   "Red background, fast white flashes",  "FR.1.1.6.1"));
-    this->animations.push_back(new SpotFrontAnimation1(this, pink,      cyan,   2500, 1000,   "Purple background, Cyan flashes",     "FR.1.1.7"));
+    this->animations.push_back(new SpotFrontAnimation1(this, pink,      cyan,   2500, 1000,   "Pink background, Cyan flashes",     "FR.1.1.7"));
 
     this->animations.push_back(new SpotFrontAnimation1(this, black,         white,  2500, 1000,   "Black background, White flashes",      "FR.1.2.1"));
     this->animations.push_back(new SpotFrontAnimation1(this, black,         white,  1000, 600,    "Black background, fast White flashes", "FR.1.2.1.1"));

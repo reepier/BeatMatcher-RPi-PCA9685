@@ -15,13 +15,16 @@
 #define LEDCh0 1
 
 // PCA9685 channel (0-15) for each color
-#define LEDRed 15
-#define LEDGreen 14
-#define LEDBlue 13
+#define LEDRed1 15
+#define LEDGreen1 14
+#define LEDBlue1 13
+#define LEDRed2 11
+#define LEDGreen2 10
+#define LEDBlue2 9
 
 // background sinewave periods parameters
-#define MAX_T 30
-#define MIN_T 2
+#define MAX_T 15  //s
+#define MIN_T 2   //s
 
 // Declare all the classes before defining them
 class LEDFixture;
@@ -80,9 +83,9 @@ public:
     this->description = d;
     this->id = i;
 
-    this->flash_RGB = fcn::convert_8_to_12bits(this->fixture->RGB(f_col, -1));
+    this->flash_RGB = fcn::convert_8_to_12bits(this->fixture->RGB(f_col, 300));
     int_vec back_RGB = fcn::convert_8_to_12bits(this->fixture->RGB(b_col, 35));
-    double c_min = 0.7, c_max = 1.3;
+    double c_min = 0.7, c_max = 1.5;
     this->backgd_RGB_minmax = {(int)(c_min*back_RGB[R]), (int)(c_max*back_RGB[R]), (int)(c_min*back_RGB[G]), (int)(c_max*back_RGB[G]), (int)(c_min*back_RGB[B]), (int)(c_max*back_RGB[B])};
 
     this->update_colors_used(color_vec{f_col, b_col});
