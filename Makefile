@@ -1,6 +1,8 @@
 app = bin/beatmatcher 
 test_app = bin/test
 
+main = src/main.cpp
+test = src/test.cpp
 objects = build/MCP3008.o build/animator.o build/config.o build/debug.o build/laser.o build/LED.o build/music.o build/spider.o build/spot.o
 libs = -lola -lolacommon -lcurses -lwiringPi -lfftw3 -llgpio -lPCA9685
 
@@ -10,10 +12,10 @@ test: $(test_app)
 
 all: $(test_app) $(app)
 
-$(test_app) : $(objects)
+$(test_app) : $(test) $(objects)
 	g++ src/test.cpp $(objects) -Iinclude $(libs) -o $(test_app)
 
-$(app): $(objects)
+$(app): $(main) $(objects) 
 	g++ src/main.cpp $(objects) -Iinclude $(libs) -o $(app)
 
 

@@ -6,7 +6,7 @@
 #include <cmath>
 
 #include "commonTypes.h"
-#include "debug.h"
+#include "debug.h" 
 #include "sysfcn.h"
 #include "music.h"
 // #include "LED.h"
@@ -86,7 +86,8 @@ class BaseAnimation{
       this->t_animation_start_ms = frame.t_current_ms;
       this->frame_cpt = 0;
     };
-    void update_colors_used(color_vec colors){
+    
+    void update_palette(color_vec colors){
       for (color_vec::iterator new_c = colors.begin(); new_c != colors.end(); new_c++){
         // check if new color is not already stored in color_palette
         bool duplicate = false;
@@ -100,8 +101,8 @@ class BaseAnimation{
         }
       }
     }
-    void update_colors_used(simpleColor color){
-      update_colors_used(color_vec{color});
+    void update_palette(simpleColor color){
+      update_palette(color_vec{color});
     }
 };
 

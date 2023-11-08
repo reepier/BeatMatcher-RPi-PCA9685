@@ -3,9 +3,9 @@
 #include <fstream>
 using namespace std;
 
-#include <ola/DmxBuffer.h>
-#include <ola/Logging.h>
-#include <ola/client/StreamingClient.h>
+// #include <ola/DmxBuffer.h>
+// #include <ola/Logging.h>
+// #include <ola/client/StreamingClient.h>
 #include <wiringPi.h>
 
 #include "LED.h"

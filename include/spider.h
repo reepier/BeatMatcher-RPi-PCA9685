@@ -83,7 +83,7 @@ class SpiderAnimation1 : public SpiderAnimation{
 
         this->pix = pixel_vec(9, this->fixture->RGBW(c));
 
-        this->update_colors_used(c);
+        this->update_palette(c);
     };
     void init() override{BaseAnimation::init();};
     void new_frame() override;
@@ -136,8 +136,8 @@ class SpiderAnimation2 : public SpiderAnimation{
         this->tilt_position     = t_pos;
         this->tilt_period       = t_per;
 
-        this->update_colors_used(b_col);
-        this->update_colors_used(f_col);
+        this->update_palette(b_col);
+        this->update_palette(f_col);
     };
 
     void init() override{

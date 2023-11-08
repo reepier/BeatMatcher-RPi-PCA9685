@@ -22,7 +22,7 @@ void SpiderFixture::init(){
     // Animation TYPE 2
     // SpiderAnimation2(SpiderFixture *f, SimpleColor b_col, SimpleColor f_col, Shape f_shp, unsigned long f_len, unsigned long f_dt,int p_pos, int p_speed, int_vec t_pos, int t_per, Shape t_shp, std::string d, std::string i){
     // monochrome
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{white}, gaussian,   500,  3,   0, 20,    int_vec{}, 10000, sinus, "Fast & short white flashes, tilt motion",   "SPI.2.1.1"));
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{white}, gaussian,   500,  3,   0, 20,  int_vec{}, 10000, sinus, "Fast & short white flashes, tilt motion",   "SPI.2.1.1"));
     this->animations.push_back(new SpiderAnimation2(this, black,   color_vec{white}, gaussian, 2000, 2,   0, 20,  int_vec{}, 10000, sinus, "Fast white flashes, red back, tilt motion",   "SPI.2.1.2"));
     
     // bichrome

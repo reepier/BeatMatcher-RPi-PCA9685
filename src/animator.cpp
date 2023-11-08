@@ -92,6 +92,9 @@ bool AnimationManager::test_animation(){
         else if (s_anim_id.find("SPI.") != string::npos){   // if animation's ID contains "SPI" (SPIder)
             success = spider.activate_by_ID(s_anim_id);
         }
+        else if (s_anim_id.find("LAS.") != string::npos){   // if animation's ID contains "LAS" (LASer)
+            success = laser.activate_by_ID(s_anim_id);
+        }
         else{
             cout << "Animation ID prefix unknown... Prgram ended" << endl;
             success = false;

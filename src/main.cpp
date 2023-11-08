@@ -19,7 +19,7 @@ using namespace std;
     // I2C Hardware interface (PCA9685)
     int fd;
     int addr = 0x40;
-    unsigned int setOnVals[_PCA9685_CHANS] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    unsigned int setOnVals[_PCA9685_CHANS]  = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     unsigned int setOffVals[_PCA9685_CHANS] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 #endif
 
@@ -27,8 +27,8 @@ using namespace std;
     ola::client::StreamingClient ola_client;
     ola::DmxBuffer ola_buffer;
 
-fix_vec ll_fxtrs = {&led, &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, &spot_d, &spot_g, &spider};
-fix_vec fixtures = {&front_rack, &led, &spider};
+fix_vec ll_fxtrs = {&led, &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, &spot_d, &spot_g, &spider, &laser};
+fix_vec fixtures = {&front_rack, &led, &spider, &laser};
 
 bool process_arguments(int n, char* args[]){
     for (int i=1; i<n; i++){
@@ -96,10 +96,7 @@ void initialize() {
         balise((*fixture)->name.data());
         (*fixture)->init();
     }
-    // led.init();   // initialize OLA & shit
-    // front_rack.init_front();
-    // //spot_g.init();
-    // spider.init();
+
     
     if (!b_BALISE){
         balise("Init. Debug...");
@@ -127,14 +124,6 @@ void send(){
     for (fix_vec::iterator fx = ll_fxtrs.begin(); fx != ll_fxtrs.end(); fx++){
         ola_buffer.SetRange((*fx)->get_address(), (*fx)->buffer().data(), (*fx)->get_nCH());
     }
-    // ola_buffer.SetRange(ll_fxtrs[0]->address, ll_fxtrs[0]->buffer().data(), ll_fxtrs[0]->nCH);
-    // ola_buffer.SetRange(led.address, led.buffer().data(), led.nCH);
-    // ola_buffer.SetRange(spot_g.address, spot_g.buffer().data(), spot_g.nCH);
-    // ola_buffer.SetRange(spot_d.address, spot_d.buffer().data(), spot_d.nCH);
-    // ola_buffer.SetRange(spot_1.address, spot_1.buffer().data(), spot_1.nCH);
-    // ola_buffer.SetRange(spot_2.address, spot_2.buffer().data(), spot_2.nCH);
-    // ola_buffer.SetRange(spot_3.address, spot_3.buffer().data(), spot_3.nCH);
-    // ola_buffer.SetRange(spider.address, spider.buffer().data(), spider.nCH);
 
     balise("OLAclient.send()");
     ola_client.SendDmx(1, ola_buffer);
@@ -163,8 +152,8 @@ int main(int argc, char* argv[]){
         balise("Run animator...");
         if(!b_test){    // if nominal case
             balise("Run animator normal update");
-            animator.random_update();
-            // animator.palette_update();
+            // animator.random_update();
+            animator.palette_update();
         }
         else if (frame.cpt == 0){   // else activate once and for all the animations to test
             balise("Run animator test fcn");

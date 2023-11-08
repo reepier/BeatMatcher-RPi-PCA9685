@@ -21,6 +21,7 @@ class SpotFixture : public BaseFixture{
 public:
     // Channels :
     int nCH = 8;
+    uint8_t MASTER_DIMMER = 255;
     DMX_vec RGBWout = {0, 0, 0, 0}; // R G B W values (0-255)
     uint8_t strobe = 0;                       // strobe speed (0 none - 1 slow - 255 fast)
     uint8_t color_wheel = 0;                  // fixture preset colors (unused)
@@ -152,7 +153,7 @@ public:
         this->rand_const_ms = prand;
         this->flash_len = flen;
 
-        this->update_colors_used(color_vec{b_col, f_col});
+        this->update_palette(color_vec{b_col, f_col});
     }
     void init() override;
     void new_frame();
@@ -193,7 +194,7 @@ class SpotFrontAnimation2 : public SpotRackAnimtion{
         this->strobe_max = std::min(std::max( (int)(strobe_spd +delta), 1),255);
         this->strobe_min = std::min(std::max( (int)(strobe_spd -delta), 1),255);
 
-        this->update_colors_used(c);
+        this->update_palette(c);
     }
     
     void init() override;

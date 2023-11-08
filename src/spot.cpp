@@ -300,7 +300,7 @@ void SpotFrontAnimation1::new_frame(){
 void SpotFrontAnimation2::shake(){  //randomizes the strob speeds on request
     for (DMX_vec::iterator spd = this->strobe_spds.begin(); spd != this->strobe_spds.end(); spd++){
         (*spd) = (strobe_min<strobe_max)? rand_min_max( this->strobe_min , this->strobe_max ) : this->strobe_max; // initialize each strobe with a slightly different frequency
-        log(1, "Min:", fcn::num_to_str(strobe_min), " Max:", fcn::num_to_str(strobe_max), " picked", fcn::num_to_str((*spd)));
+        // log(1, "Min:", fcn::num_to_str(strobe_min), " Max:", fcn::num_to_str(strobe_max), " picked", fcn::num_to_str((*spd)));
 
     }
 }
@@ -311,7 +311,7 @@ void SpotFrontAnimation2::init(){
     this->t_next_shake = frame.t_current_ms + 2000;
     this->shake();
 
-    log(1, "Min:", fcn::num_to_str(strobe_min), " Max:", fcn::num_to_str(strobe_max));
+    // log(1, "Min:", fcn::num_to_str(strobe_min), " Max:", fcn::num_to_str(strobe_max));
 
 }
 

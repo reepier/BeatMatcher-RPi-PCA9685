@@ -44,12 +44,12 @@ public:
 
   // Constructor & Initializer
   LEDFixture(int addr, int ch, std::string nm) : BaseFixture(addr, ch, nm){};
-  void init();
+  void init() override;
 
   // Get functions
   int get_nCH() override { return this->nCH; };
   int get_address() override { return this->address; };
-  std::vector<uint8_t> buffer() override;
+  DMX_vec buffer() override;
 
   // Fixture specific Color Macros
   DMX_vec RGB(simpleColor, int intensity = 255) override;
@@ -88,7 +88,7 @@ public:
     double c_min = 0.7, c_max = 1.5;
     this->backgd_RGB_minmax = {(int)(c_min*back_RGB[R]), (int)(c_max*back_RGB[R]), (int)(c_min*back_RGB[G]), (int)(c_max*back_RGB[G]), (int)(c_min*back_RGB[B]), (int)(c_max*back_RGB[B])};
 
-    this->update_colors_used(color_vec{f_col, b_col});
+    this->update_palette(color_vec{f_col, b_col});
   }
 
   void init() override;      // initializes/reset what needs to be (initial and/or random values, etc.)
