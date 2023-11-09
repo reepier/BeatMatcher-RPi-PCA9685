@@ -24,6 +24,7 @@ class AnimationManager{
     
     void random_update();
     void palette_update();
+    void test_update();
     bool test_animation();
 };
 

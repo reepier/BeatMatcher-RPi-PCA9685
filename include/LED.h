@@ -72,17 +72,19 @@ class LEDAnimation1 : public LEDAnimation
 {
 public:
   // specific parameters
+  bool param_activate_flash;
   int_vec flash_RGB = {0, 0, 0};                  // color components of the flash
   int_vec backgd_RGB_minmax = {0, 0, 0, 0, 0, 0}; // min/max components for the background oscilltions {Rmin, Rmax, Gmin, Gmax, Bmin, Bmax}
   int_vec periods_ms = {0, 0, 0, 0, 0, 0};        // periods of the background oscillations
   int fade_rate = 60;                            // ms flash fade rate (time constant of an exponential decay : intensity = exp(-(t-t0)/fade_rate)
 
   // Constructor
-  LEDAnimation1(LEDFixture* f, simpleColor f_col, simpleColor b_col, std::string d, std::string i){
+  LEDAnimation1(LEDFixture* f, simpleColor f_col, simpleColor b_col, std::string d, std::string i, bool flash = true){
     this->fixture = f;
     this->description = d;
     this->id = i;
 
+    this->param_activate_flash = flash;
     this->flash_RGB = fcn::convert_8_to_12bits(this->fixture->RGB(f_col, 350));
     int_vec back_RGB = fcn::convert_8_to_12bits(this->fixture->RGB(b_col, 25));
     double c_min = 0.7, c_max = 1.5;

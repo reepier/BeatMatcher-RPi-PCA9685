@@ -33,6 +33,20 @@ void LEDFixture::init(){
     // animations.push_back(new LEDAnimation1(this, gold,  black,   "Gold Flashes, black background",    "LED.1.9"));
 
     // New animations:
+    // Monochrome background
+    animations.push_back(new LEDAnimation1(this, black,       red,  "Red background",      "LED.1", false));
+    animations.push_back(new LEDAnimation1(this, black,    sodium,  "Sodium background",   "LED.2", false));
+    animations.push_back(new LEDAnimation1(this, black,    orange,  "Orange background",   "LED.3", false));
+    animations.push_back(new LEDAnimation1(this, black,    yellow,  "Yellow background",   "LED.4", false));
+    animations.push_back(new LEDAnimation1(this, black,      gold,  "Gold background",     "LED.5", false));
+    animations.push_back(new LEDAnimation1(this, black,     white,  "White background",    "LED.6", false));
+    animations.push_back(new LEDAnimation1(this, black,      cyan,  "Cyan background",     "LED.7", false));
+    animations.push_back(new LEDAnimation1(this, black,      blue,  "Blue background",     "LED.8", false));
+    animations.push_back(new LEDAnimation1(this, black,    purple,  "Purple background",   "LED.9", false));
+    animations.push_back(new LEDAnimation1(this, black,   magenta,  "Magenta background",  "LED.10", false));
+    animations.push_back(new LEDAnimation1(this, black,      pink,  "Pink background",     "LED.11", false));
+    animations.push_back(new LEDAnimation1(this, black,     green,  "Green background",    "LED.12", false));
+    
     // Monochrome Flash
     animations.push_back(new LEDAnimation1(this, red,       black,  "Red Flashes",      "LED.1.1"));
     animations.push_back(new LEDAnimation1(this, sodium,    black,  "Sodium Flashes",   "LED.1.2"));
@@ -87,6 +101,25 @@ void LEDFixture::init(){
     animations.push_back(new LEDAnimation1(this, magenta, white,    " Magenta Flashes, White background",  "LED.4.10"));
     animations.push_back(new LEDAnimation1(this, pink,    white,    " Pink Flashes, White background",     "LED.4.11"));
     animations.push_back(new LEDAnimation1(this, green,   white,    " Green Flashes, White background",    "LED.4.12"));
+
+    // Bicolor animation based on color palettes
+    animations.push_back(new LEDAnimation1(this, cyan,     red,       "cyan Flashes, red background",         "LED.6.1"));
+    animations.push_back(new LEDAnimation1(this, cyan,     magenta,   "cyan Flashes, magenta background",     "LED.6.2"));
+    animations.push_back(new LEDAnimation1(this, gold,     purple,    "gold Flashes, purple background",      "LED.6.3"));
+    animations.push_back(new LEDAnimation1(this, gold,     red,       "gold Flashes, red background",         "LED.6.4"));
+    animations.push_back(new LEDAnimation1(this, gold,     orange,    "gold Flashes, orange background",      "LED.6.5"));
+    animations.push_back(new LEDAnimation1(this, gold,     sodium,    "gold Flashes, sodium background",      "LED.6.6"));
+    animations.push_back(new LEDAnimation1(this, cyan,     purple,    "cyan Flashes, purple background",      "LED.6.7"));
+    animations.push_back(new LEDAnimation1(this, pink,     purple,    "pink Flashes, purple background",      "LED.6.8"));
+    animations.push_back(new LEDAnimation1(this, cyan,     pink,      "cyan Flashes, pink background",        "LED.6.9"));
+    
+    
+
+
+    
+
+
+
     
     
     this->activate_by_index(0);
@@ -94,11 +127,21 @@ void LEDFixture::init(){
 }
 
 DMX_vec LEDFixture::buffer(){
+    int_vec RGBcoarse = {0,0,0};
+    int_vec RGBfine = {0,0,0};
+    for(auto i : int_vec{R,G,B}){
+        RGBcoarse[i]   = ( this->RGBout[i] ) >> 4;
+        RGBfine[i]     = ( (this->RGBout[i] - (RGBcoarse[i]<<4) ) << 4 );
+    }
+
+    // log(1, fcn::num_to_str(this->RGBout[G]), " c:", fcn::num_to_str(RGBcoarse[G])," f:", fcn::num_to_str(RGBfine[G]>>4 )," synt:", fcn::num_to_str( ((RGBcoarse[G]) << 4) + ((RGBfine[G]) >> 4) ));
+
     return DMX_vec{MASTER_DIMMER, 
-        (uint8_t)(RGBout[R] >> 4), (uint8_t)(RGBout[G] >> 4), (uint8_t)(RGBout[B] >> 4),
-        (uint8_t)(RGBout[R] >> 4), (uint8_t)(RGBout[G] >> 4), (uint8_t)(RGBout[B] >> 4),
-        (uint8_t)(RGBout[R] - (RGBout[R] >> 4) << 4), (uint8_t)(RGBout[G] - (RGBout[G] >> 4) << 4), (uint8_t)(RGBout[B] - (RGBout[B] >> 4) << 4),
-        (uint8_t)(RGBout[R] - (RGBout[R] >> 4) << 4), (uint8_t)(RGBout[G] - (RGBout[G] >> 4) << 4), (uint8_t)(RGBout[B] - (RGBout[B] >> 4) << 4)};
+        (uint8_t)(RGBcoarse[R]), (uint8_t)(RGBcoarse[G]), (uint8_t)(RGBcoarse[B]),
+        (uint8_t)(RGBcoarse[R]), (uint8_t)(RGBcoarse[G]), (uint8_t)(RGBcoarse[B]),
+        (uint8_t)(RGBfine[R]),(uint8_t)(RGBfine[G]),(uint8_t)(RGBfine[B]),
+        (uint8_t)(RGBfine[R]),(uint8_t)(RGBfine[G]),(uint8_t)(RGBfine[B]) };
+
 }
 
 // Animation initializer
@@ -115,7 +158,7 @@ void LEDAnimation1::new_frame(){
     unsigned long t_last_beat_ms = sampler.t_last_new_beat;
 
     //bool flash = animator.flash; //TOO remove variable flash --> not necessary
-    bool flash_on = (sampler.state == BEAT) && (frame.t_current_ms-sampler.t_beat_tracking_start < MAX_CONT_FLASH);
+    bool auto_activate_flash = (sampler.state == BEAT) && (frame.t_current_ms-sampler.t_beat_tracking_start < MAX_CONT_FLASH);
 
     int backgd_color[3];
 
@@ -124,11 +167,11 @@ void LEDAnimation1::new_frame(){
     backgd_color[B] = (backgd_RGB_minmax[4] + backgd_RGB_minmax[5]) / 2 + (backgd_RGB_minmax[5] - backgd_RGB_minmax[4]) / 4 * (sin(2*M_PI*t_ms / periods_ms[4]) - sin(2*M_PI*t_ms / periods_ms[5]));
 
     float coef = exp(-(double)(t_ms - t_last_beat_ms) / fade_rate);
-    if (flash_on)
+    if (param_activate_flash && auto_activate_flash)
     {
-        fixture->RGBout[R] = backgd_color[R] + coef * (flash_RGB[R] - backgd_color[R]);
-        fixture->RGBout[G] = backgd_color[G] + coef * (flash_RGB[G] - backgd_color[G]);
-        fixture->RGBout[B] = backgd_color[B] + coef * (flash_RGB[B] - backgd_color[B]);
+        fixture->RGBout[R] = (1-pow(coef, 0.2)) * backgd_color[R] + coef * flash_RGB[R];
+        fixture->RGBout[G] = (1-pow(coef, 0.2)) * backgd_color[G] + coef * flash_RGB[G];
+        fixture->RGBout[B] = (1-pow(coef, 0.2)) * backgd_color[B] + coef * flash_RGB[B];
     }
     else
     {
@@ -136,6 +179,7 @@ void LEDAnimation1::new_frame(){
         fixture->RGBout[G] = backgd_color[G];
         fixture->RGBout[B] = backgd_color[B];
     }
+    // log(1, fcn::vec_to_str(this->fixture->RGBout, '\t'));
 }
 
 DMX_vec LEDFixture::RGB(simpleColor c, int intensity){

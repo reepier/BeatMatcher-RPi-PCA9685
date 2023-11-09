@@ -152,13 +152,14 @@ int main(int argc, char* argv[]){
         balise("Run animator...");
         if(!b_test){    // if nominal case
             balise("Run animator normal update");
-            animator.random_update();
-            // animator.palette_update();
+            // animator.random_update();
+            animator.palette_update();
+            // animator.test_update();
         }
         else if (frame.cpt == 0){   // else activate once and for all the animations to test
             balise("Run animator test fcn");
             if(!animator.test_animation()){
-                return -1;
+                // return -1;
             }
         }
 

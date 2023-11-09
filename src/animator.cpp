@@ -71,34 +71,55 @@ void AnimationManager::palette_update(){
     // select animations matching the theme for each fixture
 }
 
+void AnimationManager::test_update(){
+    if (  frame.first_loop  || (sampler.state_changed && (frame.t_current_ms-t_last_change_ms > TEMPO_ANIM_CHANGE))){
+        t_last_change_ms = frame.t_current_ms;
+        string id = fcn::random_pick(str_vec{"LED.6.1","LED.6.2","LED.6.3","LED.6.4","LED.6.5","LED.6.6","LED.6.7","LED.6.8","LED.6.9"});
+        led.activate_by_ID(id);
+        log(1, "Activate : ", led.active_animation->id, " - ", led.active_animation->description);
+
+    }
+}
+
 bool AnimationManager::test_animation(){
     bool success = false;
     balise(fcn::num_to_str((int)vec_anim_id.size()).data());
     for(vector<string>::iterator anim_id_it = vec_anim_id.begin(); anim_id_it != vec_anim_id.end(); anim_id_it++){
         string s_anim_id = (*anim_id_it);
         balise(s_anim_id.data());
-        if (s_anim_id.find("LED.") != string::npos){   // if animation's ID contains "LED"
-            success = led.activate_by_ID(s_anim_id);
+
+        for (auto fix : fixtures){
+            success = fix->activate_by_ID(s_anim_id);
+            if (success) break;
         }
-        else if (s_anim_id.find("SPOT.") != string::npos){ // if animation's ID contains "SPOT"
-            success = spot_7.activate_by_ID(s_anim_id);
-        }
-        else if (s_anim_id.find("FR.") != string::npos){   // if animation's ID contains "FR" (Front Rack)
-            success = front_rack.activate_by_ID(s_anim_id);
-        }
-        else if (s_anim_id.find("BR.") != string::npos){   // if animation's ID contains "BR" (BackgroundRack)
-            success = back_rack.activate_by_ID(s_anim_id);
-        }
-        else if (s_anim_id.find("SPI.") != string::npos){   // if animation's ID contains "SPI" (SPIder)
-            success = spider.activate_by_ID(s_anim_id);
-        }
-        else if (s_anim_id.find("LAS.") != string::npos){   // if animation's ID contains "LAS" (LASer)
-            success = laser.activate_by_ID(s_anim_id);
-        }
-        else{
+
+        if (!success){
             cout << "Animation ID prefix unknown... Prgram ended" << endl;
             success = false;
         }
+
+        // if (s_anim_id.find("LED.") != string::npos){   // if animation's ID contains "LED"
+        //     success = led.activate_by_ID(s_anim_id);
+        // }
+        // else if (s_anim_id.find("SPOT.") != string::npos){ // if animation's ID contains "SPOT"
+        //     success = spot_7.activate_by_ID(s_anim_id);
+        // }
+        // else if (s_anim_id.find("FR.") != string::npos){   // if animation's ID contains "FR" (Front Rack)
+        //     success = front_rack.activate_by_ID(s_anim_id);
+        // }
+        // else if (s_anim_id.find("BR.") != string::npos){   // if animation's ID contains "BR" (BackgroundRack)
+        //     success = back_rack.activate_by_ID(s_anim_id);
+        // }
+        // else if (s_anim_id.find("SPI.") != string::npos){   // if animation's ID contains "SPI" (SPIder)
+        //     success = spider.activate_by_ID(s_anim_id);
+        // }
+        // else if (s_anim_id.find("LAS.") != string::npos){   // if animation's ID contains "LAS" (LASer)
+        //     success = laser.activate_by_ID(s_anim_id);
+        // }
+        // else{
+        //     cout << "Animation ID prefix unknown... Prgram ended" << endl;
+        //     success = false;
+        // }
     }
     return success;
 }
@@ -152,11 +173,22 @@ bool BaseFixture::activate_by_ID(string id){
             found_it = true;
             this->active_animation = (*anim_it);
             this->active_animation->init();
+            return found_it;
         }
     }
-    if (!found_it){
-        cout << "Animation ID unknown... Program ended" << endl;
-    }
+    // // if the loop exits without any match, then fold back to an approximate search (selects the first animations whose id starts witht he string passed as argument) --> allow for range
+    // for (vector<BaseAnimation*>::iterator anim_it = this->animations.begin(); anim_it != this->animations.end(); anim_it++){
+    //     if ((*anim_it)->id.find(id) == 0){
+    //         found_it = true;
+    //         this->active_animation = (*anim_it);
+    //         this->active_animation->init();
+    //         return found_it;
+    //     }
+    // }
+
+    // if (!found_it){
+    //     cout << "Animation ID unknown... Program ended" << endl;
+    // }
     return found_it;
 }
 
