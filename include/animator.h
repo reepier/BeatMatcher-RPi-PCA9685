@@ -117,29 +117,38 @@ extern AnimationManager animator;
  | |  | |_| | | | | (__| |_| | (_) | | | \__ \
  |_|   \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
 -----------------------------------                 */
-// TODO --> tailor these functions specifically for each fixture ! in the <fixture>.cpp
 namespace fcn{
   /* returns a normalized 4 (or 3 for RGB) channel DMX vector based on color literal 
   if intensity = -1, the normalization is disabled*/
-  // DMX_vec RGBW(simpleColor, uint8_t intensity = 255);
-  // DMX_vec RGB(simpleColor, uint8_t intensity = 255);
-  // #define RED(x) fcn::RGBW(red,x)
-  // #define GREEN(x) fcn::RGBW(green,x)
-  // #define BLUE(x) fcn::RGBW(blue,x)
-  // #define YELLOW(x) fcn::RGBW(yellow,x)
-  // #define ORANGE(x) fcn::RGBW(orange,x)
-  // #define SODIUM(x) fcn::RGBW(sodium,x)
-  // #define PURPLE(x) fcn::RGBW(purple,x)
-  // #define MAGENTA(x) fcn::RGBW(magenta,x)
-  // #define PINK(x) fcn::RGBW(pink,x)
-  // #define CYAN(x) fcn::RGBW(cyan,x)
-  // #define GOLD(x) fcn::RGBW(gold,x)
-  // #define WHITE(x) fcn::RGBW(white,x)
-  // #define BLACK fcn::RGBW(black)
+
   
   // returns a NORMALIZED 4 (or 3 for RGB) channel DMX vector based on a DMX_vector and a DMX vlue (0-255)
-  DMX_vec RGBW_norm(DMX_vec, int intensity=255);
-  DMX_vec RGB_norm(DMX_vec, int intensity=255);
+  template<typename T>
+  std::vector<T> RGBW_norm(std::vector<T> rgbw, int intensity=255){
+    const int size = rgbw.size();
+    std::vector<T> ret(size);
+    
+    int max = 0;
+    int sum = 0;
+    for (int i=0; i<size; i++){
+        sum += rgbw[i];
+        max = rgbw[i]>max ? rgbw[i] : max;
+    }
+
+    double max_gain = max!=0 ? 255.0/max : 0;
+    double gain = (intensity==-1) ? max_gain : (double)intensity/sum;
+    gain = gain>max_gain? max_gain : gain;
+
+    for (int i=0; i<size; i++){
+        ret[i] = gain*rgbw[i];
+    }
+    return ret;
+  }
+
+  template<typename T>
+  std::vector<T> RGB_norm(std::vector<T> rgb, int intensity=255){
+    return fcn::RGBW_norm(rgb, intensity);
+  }
   
   std::string vec_to_str(DMX_vec, char);
   std::string vec_to_str(int_vec, char);

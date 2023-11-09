@@ -29,8 +29,8 @@ using namespace std;
     unsigned int setOffVals[_PCA9685_CHANS] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 #endif
 
-fix_vec ll_fxtrs = {&led, &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, &spot_8, &spot_7, &spider};
-fix_vec fixtures = {&front_rack, &led, &spider};
+fix_vec ll_fxtrs = {&led, &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, &spot_7, &spider, &laser};
+fix_vec fixtures = {&front_rack, &back_rack, &led, &spider, &laser};
 
 LoopControler frame;
 
@@ -132,16 +132,32 @@ int main(){
     // }
 
     while (true){
-        for (simpleColor c = red; c<last_color; c = (simpleColor)(int)(c+1)){
+        for (simpleColor c = orange; c<last_color; c = (simpleColor)(int)(c+1)){
           // spot_1.RGBWout = front_rack.RGBW(c);
           // spot_2.RGBWout = front_rack.RGBW(c);
           // spot_3.RGBWout = front_rack.RGBW(c);
-          cout << colorName[(int)c] << endl;
-          for (auto gain : int_vec{255}){
-            led.RGBout = fcn::convert_8_to_12bits( led.RGB(c, gain) );
-            send();
-            delay(500);
+          for (simpleColor color : color_vec{red, c}){
+            cout << colorName[(int)c] << endl;
+            for (auto gain : int_vec{255}){
+              led.RGBout = fcn::convert_8_to_12bits( led.RGB(color, gain) );
+              send();
+              delay(500);
+            }
           }
         }
     }
+
+    // while(true){
+    //   for (int i=255; i>0; i--){
+    //     led.RGBout = fcn::convert_8_to_12bits( led.RGB(sodium, i));
+    //     send();
+    //     delay(10);
+    //   }
+
+    //   for (int i=0; i<255; i++){
+    //     led.RGBout = fcn::convert_8_to_12bits( led.RGB(sodium, i));
+    //     send();
+    //     delay(10);
+    //   }
+    // }
 }

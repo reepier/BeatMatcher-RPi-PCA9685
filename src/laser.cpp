@@ -20,20 +20,20 @@ void LaserFixture::init(){
     this->animations.push_back(new LaserAnimation1(this, 6,  color_vec{magenta},   "Circle Dance magenta",   "LAS.1.1.6"));
     this->animations.push_back(new LaserAnimation1(this, 7,  color_vec{white},     "Circle Dance white",     "LAS.1.1.7"));
     // Circle dance Bicolor
-    this->animations.push_back(new LaserAnimation1(this, 8,  color_vec{white, red},     "Circle Dance white, red",      "LAS.1.2.1"));
-    this->animations.push_back(new LaserAnimation1(this, 9,  color_vec{white, green},   "Circle Dance white, green",    "LAS.1.2.2"));
-    this->animations.push_back(new LaserAnimation1(this, 10,  color_vec{white, blue},   "Circle Dance white, blue",     "LAS.1.2.3"));
-    this->animations.push_back(new LaserAnimation1(this, 11, color_vec{white, yellow, gold},  "Circle Dance white, yellow",   "LAS.1.2.4"));
-    this->animations.push_back(new LaserAnimation1(this, 12, color_vec{white, cyan},    "Circle Dance white, cyan",     "LAS.1.2.5"));
-    this->animations.push_back(new LaserAnimation1(this, 13, color_vec{white, magenta, pink}, "Circle Dance white, magenta",  "LAS.1.2.6"));
+    this->animations.push_back(new LaserAnimation1(this, 8,  color_vec{white, red},             "Circle Dance white, red",      "LAS.1.2.1"));
+    this->animations.push_back(new LaserAnimation1(this, 9,  color_vec{white, green},           "Circle Dance white, green",    "LAS.1.2.2"));
+    this->animations.push_back(new LaserAnimation1(this, 10,  color_vec{white, blue},           "Circle Dance white, blue",     "LAS.1.2.3"));
+    this->animations.push_back(new LaserAnimation1(this, 11, color_vec{white, yellow, gold},    "Circle Dance white, yellow",   "LAS.1.2.4"));
+    this->animations.push_back(new LaserAnimation1(this, 12, color_vec{white, cyan},            "Circle Dance white, cyan",     "LAS.1.2.5"));
+    this->animations.push_back(new LaserAnimation1(this, 13, color_vec{white, magenta, pink},   "Circle Dance white, magenta",  "LAS.1.2.6"));
 
     // Glitch Bicolor
     this->animations.push_back(new LaserAnimation1(this, 20,    color_vec{white, red},           "Glitch white, red",      "LAS.2.1.1"));
     this->animations.push_back(new LaserAnimation1(this, 21,    color_vec{white, green},         "Glitch white, green",    "LAS.2.1.2"));
     this->animations.push_back(new LaserAnimation1(this, 22,    color_vec{white, blue},          "Glitch white, blue",     "LAS.2.1.3"));
-    this->animations.push_back(new LaserAnimation1(this, 23,    color_vec{white, yellow, gold},  "Glitch white, yellow",   "LAS.2.1.4"));
+    this->animations.push_back(new LaserAnimation1(this, 23,    color_vec{white, yellow},        "Glitch white, yellow",   "LAS.2.1.4"));
     this->animations.push_back(new LaserAnimation1(this, 24,    color_vec{white, cyan},          "Glitch white, cyan",     "LAS.2.1.5"));
-    this->animations.push_back(new LaserAnimation1(this, 25,    color_vec{white, magenta, pink}, "Glitch white, magenta",  "LAS.2.1.6"));
+    this->animations.push_back(new LaserAnimation1(this, 25,    color_vec{white, magenta},       "Glitch white, magenta",  "LAS.2.1.6"));
     // Glitch Monochrome
     this->animations.push_back(new LaserAnimation1(this, 26,    color_vec{red},        "Glitch red",        "LAS.2.2.1"));
     this->animations.push_back(new LaserAnimation1(this, 27,    color_vec{green},      "Glitch green",      "LAS.2.2.2"));

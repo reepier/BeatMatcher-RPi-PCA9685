@@ -40,7 +40,7 @@ class LEDFixture : public BaseFixture
 public:
   // Channels :
   int_vec RGBout = {0, 0, 0}; // = {R,G,B} Values from 0-4095 (12 bits PWM thanks to PCA9685)
-  int nCH = 4;
+  // int nCH = 4;
 
   // Constructor & Initializer
   LEDFixture(int addr, int ch, std::string nm) : BaseFixture(addr, ch, nm){};
@@ -83,8 +83,8 @@ public:
     this->description = d;
     this->id = i;
 
-    this->flash_RGB = fcn::convert_8_to_12bits(this->fixture->RGB(f_col, 300));
-    int_vec back_RGB = fcn::convert_8_to_12bits(this->fixture->RGB(b_col, 35));
+    this->flash_RGB = fcn::convert_8_to_12bits(this->fixture->RGB(f_col, 350));
+    int_vec back_RGB = fcn::convert_8_to_12bits(this->fixture->RGB(b_col, 25));
     double c_min = 0.7, c_max = 1.5;
     this->backgd_RGB_minmax = {(int)(c_min*back_RGB[R]), (int)(c_max*back_RGB[R]), (int)(c_min*back_RGB[G]), (int)(c_max*back_RGB[G]), (int)(c_min*back_RGB[B]), (int)(c_max*back_RGB[B])};
 
