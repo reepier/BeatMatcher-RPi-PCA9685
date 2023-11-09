@@ -29,7 +29,7 @@ using namespace std;
     unsigned int setOffVals[_PCA9685_CHANS] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 #endif
 
-fix_vec ll_fxtrs = {&led, &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, &spot_d, &spot_g, &spider};
+fix_vec ll_fxtrs = {&led, &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, &spot_8, &spot_7, &spider};
 fix_vec fixtures = {&front_rack, &led, &spider};
 
 LoopControler frame;

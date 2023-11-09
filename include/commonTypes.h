@@ -28,7 +28,20 @@ enum simpleColor{
     green,
     last_color
 };
-const std::vector<std::string> colorName = {"Black", "Red", "Sodium", "Orange", "Yellow", "Gold", "White","Cyan","Blue","Purple","Magenta","Pink","Green"};
+const std::vector<std::string> colorName = {
+    "Black",
+    "Red",
+    "Sodium",
+    "Orange",
+    "Yellow",
+    "Gold",
+    "White",
+    "Cyan",
+    "Blue",
+    "Purple",
+    "Magenta",
+    "Pink",
+    "Green"};
 
 enum Shape{
     square,

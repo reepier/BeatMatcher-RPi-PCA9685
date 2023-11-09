@@ -59,6 +59,8 @@ void LaserFixture::init(){
     this->animations.push_back(new LaserAnimation1(this, 61,    color_vec{magenta}, "Palm Dance magenta",   "LAS.3.2.6"));
     this->animations.push_back(new LaserAnimation1(this, 62,    color_vec{white},   "Palm Dance white",     "LAS.3.2.7"));
 
+
+    this->activate_by_index(0);
 }
 
 

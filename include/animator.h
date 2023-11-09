@@ -33,7 +33,7 @@ class BaseFixture{
     // Generic attributes
     std::string name;                   // 
     std::string description;            // textual description
-    std::string id;                     // unique id 
+    int id;                             // unique id to differentiate between vseveral fixtres of the same type (i.e. COTS PAR spots & racks)
 
     // DMX related parameters
     uint8_t MASTER_DIMMER = 255;    // Master Dimmer from 0-255
@@ -46,7 +46,7 @@ class BaseFixture{
     anim_vec animations;
 
     //constructor (adresse [0-511], number of channels, fixture's name)
-    BaseFixture(int addr,int ch, std::string nm): address(addr), nCH(ch), name(nm){};
+    BaseFixture(int addr,int ch, std::string nm, int i=0): address(addr), nCH(ch), name(nm), id(i){};
     virtual void init()=0;
 
     //animation management

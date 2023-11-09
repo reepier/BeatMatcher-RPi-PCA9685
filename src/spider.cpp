@@ -30,7 +30,7 @@ void SpiderFixture::init(){
     this->animations.push_back(new SpiderAnimation2(this, black, color_vec{red, purple},          gaussian,   1500, 4,  0, 20,     int_vec{0}, 10000, sinus, "Red & Blue flashes, tilt motion",   "SPI.2.2.2"));
     this->animations.push_back(new SpiderAnimation2(this, white, color_vec{red, blue, green},     gaussian,   1500, 4,  0, 20,     int_vec{0}, 10000, sinus, "white bg, red,green,blue flashes",   "SPI.2.2.3"));
 
-    this->activate_by_ID("SPI.0.0");
+    this->activate_by_index(0);
 }
 
 DMX_vec SpiderFixture::buffer(){

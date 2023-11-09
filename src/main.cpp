@@ -27,8 +27,8 @@ using namespace std;
     ola::client::StreamingClient ola_client;
     ola::DmxBuffer ola_buffer;
 
-fix_vec ll_fxtrs = {&led, &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, &spot_d, &spot_g, &spider, &laser};
-fix_vec fixtures = {&front_rack, &led, &spider, &laser};
+fix_vec ll_fxtrs = {&led, &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, &spot_7, &spider, &laser};
+fix_vec fixtures = {&front_rack, &back_rack, &led, &spider, &laser};
 
 bool process_arguments(int n, char* args[]){
     for (int i=1; i<n; i++){
@@ -39,7 +39,7 @@ bool process_arguments(int n, char* args[]){
             return false;
         }else if(strcmp(arg, "--balise") == 0){
             b_BALISE = true;
-            b_CURSES = false;
+            // b_CURSES = false;
         }
         else if (strcmp(arg, "--noled") == 0){
             b_NO_LED = true;
@@ -90,10 +90,9 @@ void initialize() {
     balise("Init. Sampler...");
     sampler.init();   // initialize Music lib
     
-    //TODO : try to move these calls (or even the init functions content) into the Fixture constructor. 
     balise("Init. fixtures...");
     for (fix_vec::iterator fixture = fixtures.begin(); fixture != fixtures.end(); fixture++){
-        balise((*fixture)->name.data());
+        balise("Initializing ", (*fixture)->name);
         (*fixture)->init();
     }
 
@@ -139,7 +138,8 @@ int main(int argc, char* argv[]){
         return -1;
     }
     initialize();
-    
+    balise("Initalisation terminated with success !");
+
     while (true){
         // Update general counters and timers
         balise("----------------------------Start new frame...");
@@ -152,8 +152,8 @@ int main(int argc, char* argv[]){
         balise("Run animator...");
         if(!b_test){    // if nominal case
             balise("Run animator normal update");
-            // animator.random_update();
-            animator.palette_update();
+            animator.random_update();
+            // animator.palette_update();
         }
         else if (frame.cpt == 0){   // else activate once and for all the animations to test
             balise("Run animator test fcn");
@@ -175,7 +175,7 @@ int main(int argc, char* argv[]){
         balise("Send frame...");
         send();
 
-        if (!b_BALISE){
+        if (true || !b_BALISE){
             balise("Debug...");
             if (!b_CURSES){
                 display();

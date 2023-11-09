@@ -43,9 +43,9 @@ void init_display(){
     // curs_set(0);
     musicw      = newwin(10, 120, 0,0);
     animw       = newwin(5,120,10,0);
-    outputw     = newwin(5,120,15,0);
-    generalw    = newwin(5,120,20,0);
-    consolew    = newwin(10,120,25,0);
+    outputw     = newwin(10,120,15,0);
+    generalw    = newwin(3,120,25,0);
+    consolew    = newwin(10,120,28,0);
 
 
     if (!has_colors()){
@@ -241,11 +241,15 @@ void disp_console_window(){
 
 void display_curse(){
     
-
+    // balise("*********music window");
     disp_music_window();
+    // balise("*********animation window");
     disp_animation_window();
+    // balise("*********output window");
     disp_output_window();
+    // balise("*********general window");
     disp_general_window();
+    // balise("*********console window");
     disp_console_window();
     
     // werase(animw);

@@ -56,7 +56,7 @@ public:
         for (auto col : this->color_palette){
             palette_literal.push_back(colorName[(int)col]);
         }
-        log(1, this->id, " ", fcn::vec_to_str(palette_literal, '/'));
+        // log(1, this->id, " ", fcn::vec_to_str(palette_literal, '/'));
     }
     
     void init() override {this->fixture->prog = this->indice;};

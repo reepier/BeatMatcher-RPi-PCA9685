@@ -13,9 +13,15 @@ class SpotBack;
 
 typedef std::vector<SpotFixture*> spot_vec;
 // TODO Remove the individual spot class --> I will never need (for now) to control 1 spot individually.
-// -----------------------------------
-// INDIVIDUAL SPOT
-// -----------------------------------
+/* --------------------------------------------------------------------
+   _____ _____   ____ _______ 
+  / ____|  __ \ / __ \__   __|
+ | (___ | |__) | |  | | | |   
+  \___ \|  ___/| |  | | | |   
+  ____) | |    | |__| | | |   
+ |_____/|_|     \____/  |_|   
+
+/ ----------------------------------------------------------------------- */
 
 class SpotFixture : public BaseFixture{
 public:
@@ -45,7 +51,7 @@ public:
     // DMX_vec RGBW(simpleColor, uint8_t intensity = 255) override {};
 
 };
-extern SpotFixture spot_g, spot_d, spot_1, spot_2, spot_3, spot_4, spot_5, spot_6;
+extern SpotFixture spot_7, spot_8, spot_1, spot_2, spot_3, spot_4, spot_5, spot_6;
 
 /* /!\ /!\ Bullshit class --> I don't plan on coding animation for individual spots */
 class SpotAnimation : public BaseAnimation{
@@ -66,9 +72,15 @@ public:
 //     void new_frame();
 // };
 
-// -----------------------------------
-// RACK of SPOTS
-// -----------------------------------
+/* --------------------------------------------------------------------
+   _____ _____   ____ _______    _____            _____ _  __ _____ 
+  / ____|  __ \ / __ \__   __|  |  __ \     /\   / ____| |/ // ____|
+ | (___ | |__) | |  | | | |     | |__) |   /  \ | |    | ' /| (___  
+  \___ \|  ___/| |  | | | |     |  _  /   / /\ \| |    |  <  \___ \ 
+  ____) | |    | |__| | | |     | | \ \  / ____ \ |____| . \ ____) |
+ |_____/|_|     \____/  |_|     |_|  \_\/_/    \_\_____|_|\_\_____/ 
+
+/ ----------------------------------------------------------------------- */
 /* frontal rack*/
 class SpotRack : public BaseFixture{
 public:
@@ -77,19 +89,21 @@ public:
     //std::vector<BaseAnimation *> animations; // vector containing animations
 
     /* Hard coded with 2 or 3 spots (temporarily?) */
-    SpotRack(SpotFixture* s1, SpotFixture* s2, SpotFixture* s3, std::string nm) : BaseFixture(-1, 0, nm){ 
-        this->spots.push_back(s1);
-        this->spots.push_back(s2);
-        this->spots.push_back(s3);
-        this->rack_size = this->spots.size();
-        };
-    SpotRack(SpotFixture* s1, SpotFixture* s2, std::string nm) : BaseFixture(-1, 0, nm){
-        this->spots.push_back(s1);
-        this->spots.push_back(s2);
-        this->rack_size = this->spots.size();
-        };
-    SpotRack(spot_vec sp, std::string nm): BaseFixture(-1, 0, nm){
+    // SpotRack(SpotFixture* s1, SpotFixture* s2, SpotFixture* s3, std::string nm) : BaseFixture(-1, 0, nm){ 
+    //     this->spots.push_back(s1);
+    //     this->spots.push_back(s2);
+    //     this->spots.push_back(s3);
+    //     this->rack_size = this->spots.size();
+    //     };
+    // SpotRack(SpotFixture* s1, SpotFixture* s2, std::string nm) : BaseFixture(-1, 0, nm){
+    //     this->spots.push_back(s1);
+    //     this->spots.push_back(s2);
+    //     this->rack_size = this->spots.size();
+    //     };
+    SpotRack(spot_vec sp, std::string nm, int i): BaseFixture(-1, 0, nm, i){
+        this->id = i;
         this->spots = sp;
+        this->rack_size = sp.size();
     };
 
     void init() override;     // empty function (useless)

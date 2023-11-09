@@ -81,7 +81,7 @@ bool AnimationManager::test_animation(){
             success = led.activate_by_ID(s_anim_id);
         }
         else if (s_anim_id.find("SPOT.") != string::npos){ // if animation's ID contains "SPOT"
-            success = spot_g.activate_by_ID(s_anim_id);
+            success = spot_7.activate_by_ID(s_anim_id);
         }
         else if (s_anim_id.find("FR.") != string::npos){   // if animation's ID contains "FR" (Front Rack)
             success = front_rack.activate_by_ID(s_anim_id);

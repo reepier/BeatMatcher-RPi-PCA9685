@@ -19,7 +19,7 @@ $(app): $(main) $(objects)
 	g++ src/main.cpp $(objects) -Iinclude $(libs) -o $(app)
 
 
-build/animator.o: src/animator.cpp include/animator.h
+build/animator.o: src/animator.cpp include/animator.h 
 	g++ -c src/animator.cpp -I include -o build/animator.o
 build/config.o: src/config.cpp include/config.h
 	g++ -c src/config.cpp -I include -o build/config.o
