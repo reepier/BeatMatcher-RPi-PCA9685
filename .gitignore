@@ -1,4 +1,6 @@
 .o
 .txt
-**/bin
+bin/beatmatcher
+bin/test
 **/build
+Makefile
