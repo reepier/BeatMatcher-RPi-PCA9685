@@ -37,3 +37,5 @@ The detailed TODO list should be developped in the TODO File.
     --> The config_fil should be easy and comfortable to generate using a desktop application (EXCEL + VBA)
 
 - Add a dual output (DMX AND PCA9685) for genericity with the other elements
+
+  git pull test
