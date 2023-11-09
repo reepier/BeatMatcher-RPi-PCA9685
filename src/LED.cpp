@@ -88,19 +88,19 @@ void LEDFixture::init(){
     animations.push_back(new LEDAnimation1(this, white,     pink,    "White Flashes, Pink background",     "LED.3.11"));
     animations.push_back(new LEDAnimation1(this, white,     green,   "White Flashes, Green background",    "LED.3.12"));
     
-    // Monochrome Flashes with white background
-    animations.push_back(new LEDAnimation1(this, red,     white,    " Red Flashes, White background",      "LED.4.1"));
-    animations.push_back(new LEDAnimation1(this, sodium,  white,    " Sodium Flashes, White background",   "LED.4.2"));
-    animations.push_back(new LEDAnimation1(this, orange,  white,    " Orange Flashes, White background",   "LED.4.3"));
-    animations.push_back(new LEDAnimation1(this, yellow,  white,    " Yellow Flashes, White background",   "LED.4.4"));
-    animations.push_back(new LEDAnimation1(this, gold,    white,    " Gold Flashes, White background",     "LED.4.5"));
-    animations.push_back(new LEDAnimation1(this, white,   white,    " White Flashes, White background",    "LED.4.6"));
-    animations.push_back(new LEDAnimation1(this, cyan,    white,    " Cyan Flashes, White background",     "LED.4.7"));
-    animations.push_back(new LEDAnimation1(this, blue,    white,    " Blue Flashes, White background",     "LED.4.8"));
-    animations.push_back(new LEDAnimation1(this, purple,  white,    " Purple Flashes, White background",   "LED.4.9"));
-    animations.push_back(new LEDAnimation1(this, magenta, white,    " Magenta Flashes, White background",  "LED.4.10"));
-    animations.push_back(new LEDAnimation1(this, pink,    white,    " Pink Flashes, White background",     "LED.4.11"));
-    animations.push_back(new LEDAnimation1(this, green,   white,    " Green Flashes, White background",    "LED.4.12"));
+    // Monochrome Flashes with white background --> Low intensity white looks like SHIT !!
+    // animations.push_back(new LEDAnimation1(this, red,     white,    " Red Flashes, White background",      "LED.4.1"));
+    // animations.push_back(new LEDAnimation1(this, sodium,  white,    " Sodium Flashes, White background",   "LED.4.2"));
+    // animations.push_back(new LEDAnimation1(this, orange,  white,    " Orange Flashes, White background",   "LED.4.3"));
+    // animations.push_back(new LEDAnimation1(this, yellow,  white,    " Yellow Flashes, White background",   "LED.4.4"));
+    // animations.push_back(new LEDAnimation1(this, gold,    white,    " Gold Flashes, White background",     "LED.4.5"));
+    // animations.push_back(new LEDAnimation1(this, white,   white,    " White Flashes, White background",    "LED.4.6"));
+    // animations.push_back(new LEDAnimation1(this, cyan,    white,    " Cyan Flashes, White background",     "LED.4.7"));
+    // animations.push_back(new LEDAnimation1(this, blue,    white,    " Blue Flashes, White background",     "LED.4.8"));
+    // animations.push_back(new LEDAnimation1(this, purple,  white,    " Purple Flashes, White background",   "LED.4.9"));
+    // animations.push_back(new LEDAnimation1(this, magenta, white,    " Magenta Flashes, White background",  "LED.4.10"));
+    // animations.push_back(new LEDAnimation1(this, pink,    white,    " Pink Flashes, White background",     "LED.4.11"));
+    // animations.push_back(new LEDAnimation1(this, green,   white,    " Green Flashes, White background",    "LED.4.12"));
 
     // Bicolor animation based on color palettes
     animations.push_back(new LEDAnimation1(this, cyan,     red,       "cyan Flashes, red background",         "LED.6.1"));

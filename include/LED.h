@@ -87,7 +87,7 @@ public:
     this->param_activate_flash = flash;
     this->flash_RGB = fcn::convert_8_to_12bits(this->fixture->RGB(f_col, 350));
     int_vec back_RGB = fcn::convert_8_to_12bits(this->fixture->RGB(b_col, 25));
-    double c_min = 0.7, c_max = 1.5;
+    double c_min = 0.9, c_max = 1.1;
     this->backgd_RGB_minmax = {(int)(c_min*back_RGB[R]), (int)(c_max*back_RGB[R]), (int)(c_min*back_RGB[G]), (int)(c_max*back_RGB[G]), (int)(c_min*back_RGB[B]), (int)(c_max*back_RGB[B])};
 
     this->update_palette(color_vec{f_col, b_col});

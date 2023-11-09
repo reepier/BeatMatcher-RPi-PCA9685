@@ -131,33 +131,33 @@ int main(){
     //   delay(100);
     // }
 
-    while (true){
-        for (simpleColor c = orange; c<last_color; c = (simpleColor)(int)(c+1)){
+    // while (true){
+        // for (simpleColor c = orange; c<last_color; c = (simpleColor)(int)(c+1)){
           // spot_1.RGBWout = front_rack.RGBW(c);
           // spot_2.RGBWout = front_rack.RGBW(c);
           // spot_3.RGBWout = front_rack.RGBW(c);
-          for (simpleColor color : color_vec{red, c}){
-            cout << colorName[(int)c] << endl;
-            for (auto gain : int_vec{255}){
-              led.RGBout = fcn::convert_8_to_12bits( led.RGB(color, gain) );
-              send();
-              delay(500);
-            }
-          }
-        }
-    }
-
-    // while(true){
-    //   for (int i=255; i>0; i--){
-    //     led.RGBout = fcn::convert_8_to_12bits( led.RGB(sodium, i));
-    //     send();
-    //     delay(10);
-    //   }
-
-    //   for (int i=0; i<255; i++){
-    //     led.RGBout = fcn::convert_8_to_12bits( led.RGB(sodium, i));
-    //     send();
-    //     delay(10);
-    //   }
+          // for (simpleColor color : color_vec{red, c}){
+            // cout << colorName[(int)c] << endl;
+            // for (auto gain : int_vec{255}){
+              // led.RGBout = fcn::convert_8_to_12bits( led.RGB(color, gain) );
+              // send();
+              // delay(500);
+            // }
+          // }
+        // }
     // }
+
+    while(true){
+      for (int i=500; i>0; i--){
+        led.RGBout = fcn::convert_8_to_12bits( led.RGB(white, i));
+        send();
+        delay(10);
+      }
+
+      for (int i=0; i<500; i++){
+        led.RGBout = fcn::convert_8_to_12bits( led.RGB(white, i));
+        send();
+        delay(10);
+      }
+    }
 }
