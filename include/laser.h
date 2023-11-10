@@ -19,7 +19,7 @@ public:
     int nCH = 8;
 
     // constructor
-    LaserFixture(int addr, int ch, std::string nm): BaseFixture(addr, ch, nm){};
+    LaserFixture(int addr, int ch, std::string nm): BaseFixture(addr, ch, nm, 1,255){};
     void init() override;
 
     int get_nCH() override {return this->nCH;};

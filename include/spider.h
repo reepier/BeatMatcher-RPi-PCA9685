@@ -18,8 +18,8 @@ typedef std::vector<DMX_vec> pixel_vec;
 // SPIDER FIXTURE definition
 // --------------------------------------
 
-#define tiltMIN -30 //tilt min angle (°)
-#define tiltMAX 120 //tilt max angle (°)
+#define tiltMIN -20 //tilt min angle (°)
+#define tiltMAX 135 //tilt max angle (°)
 class SpiderFixture : public BaseFixture
 {
 public:
@@ -30,7 +30,7 @@ public:
     uint8_t strobe;
     uint8_t prog;
     
-    SpiderFixture(int addr, int ch, std::string nm) : BaseFixture(addr, ch, nm)
+    SpiderFixture(int addr, int ch, std::string nm, int id, uint8_t mast=255) : BaseFixture(addr, ch, nm, id, mast)
     {  
         this->tilt.resize(3);
         this->pixels.resize(NLED, DMX_vec(NCOL));

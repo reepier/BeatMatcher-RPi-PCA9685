@@ -45,7 +45,7 @@ void init_display(){
     animw       = newwin(5,120,10,0);
     outputw     = newwin(10,120,15,0);
     generalw    = newwin(3,120,25,0);
-    consolew    = newwin(10,120,28,0);
+    consolew    = newwin(20,120,28,0);
 
 
     if (!has_colors()){
@@ -227,7 +227,7 @@ void disp_console_window(){
     if (log_list.size() == 0){
 
     }else{
-        int i = 9;
+        int i = 19;
         for (LogList::reverse_iterator log = log_list.rbegin(); log != log_list.rend(); log++){
             mvwprintw(consolew, i--,1+(*log).level-1, (*log).message.c_str());
             if (i==0){

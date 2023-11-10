@@ -12,102 +12,6 @@
 // #include "LED.h"
 
 
-/**
- * class AnimationManager is the entity responsible for determining which animation every 
- * fixture should run, based on the musical analysis
-*/
-class AnimationManager{
-    public :
-    bool flash = true;
-    
-    unsigned long t_last_change_ms = millis();   //timestamp of last switch between aniamtions
-    
-    void random_update();
-    void palette_update();
-    void test_update();
-    bool test_animation();
-};
-
-// Generic (core) description of a fixture (later derived into specific classes)
-class BaseFixture{
-  public:
-    // Generic attributes
-    std::string name;                   // 
-    std::string description;            // textual description
-    int id;                             // unique id to differentiate between vseveral fixtres of the same type (i.e. COTS PAR spots & racks)
-
-    // DMX related parameters
-    uint8_t MASTER_DIMMER = 255;    // Master Dimmer from 0-255
-    int address;                    // DMX address
-    bool b_blackout;
-    const int nCH;
-
-    // Animations
-    BaseAnimation * active_animation = nullptr;
-    anim_vec animations;
-
-    //constructor (adresse [0-511], number of channels, fixture's name)
-    BaseFixture(int addr,int ch, std::string nm, int i=0): address(addr), nCH(ch), name(nm), id(i){};
-    virtual void init()=0;
-
-    //animation management
-    void blackout(bool);
-    bool activate_none();
-    bool activate_by_index(int);
-    bool activate_random();
-    bool activate_by_ID(std::string);
-    bool activate_by_color(color_vec);
-
-    //DMX output
-    virtual int get_address() = 0;
-    virtual int get_nCH()     = 0;
-    virtual DMX_vec buffer()  = 0;
-
-    virtual DMX_vec RGBW(simpleColor, int){}; // common (but overriden) function that returns a 4 RGBW vector based on standrad color input
-    virtual DMX_vec RGB(simpleColor, int){};
-};
-
-
-// Generic (core) description of an animation object
-class BaseAnimation{
-  public :
-    std::string name;                   
-    std::string description;            // textual description
-    std::string id;                     // unique id 
-    unsigned long t_animation_start_ms; // times at which the animation was last activated
-    unsigned long frame_cpt;            // number of frame computed since activation
-    color_vec color_palette;              // lists the colors used in the animation (initialized by constructor)
-    
-    bool      is_monochrome(){return (color_palette.size() == 1);};
-    
-    virtual void new_frame(){
-      this->frame_cpt++;
-    }
-    virtual void init(){
-      this->t_animation_start_ms = frame.t_current_ms;
-      this->frame_cpt = 0;
-    };
-    
-    void update_palette(color_vec colors){
-      for (color_vec::iterator new_c = colors.begin(); new_c != colors.end(); new_c++){
-        // check if new color is not already stored in color_palette
-        bool duplicate = false;
-        for (color_vec::iterator stored_c = color_palette.begin(); stored_c != color_palette.end(); stored_c++){
-          if ((*new_c) == (*stored_c)){
-            duplicate = true;
-          }
-        }
-        if ( (*new_c) != black && !duplicate){
-          this -> color_palette.push_back((*new_c));
-        }
-      }
-    }
-    void update_palette(simpleColor color){
-      update_palette(color_vec{color});
-    }
-};
-
-extern AnimationManager animator;
 
 
 /** -----------------------------------
@@ -156,6 +60,7 @@ namespace fcn{
   std::string vec_to_str(str_vec, char);
 
   std::string num_to_str(int);
+  std::string num_to_str(time_t);
   std::string num_to_str(uint8_t);
   std::string num_to_str(double);
   int_vec convert_8_to_12bits(DMX_vec);
@@ -255,3 +160,103 @@ namespace fcn{
     return (T)0;    //TODO bellec ce casting est bancale AF
   }
 }
+
+
+
+
+/**
+ * class AnimationManager is the entity responsible for determining which animation every 
+ * fixture should run, based on the musical analysis
+*/
+class AnimationManager{
+    public :
+    bool flash = true;
+    
+    unsigned long t_last_change_ms = millis();   //timestamp of last switch between aniamtions
+    
+    void random_update();
+    void palette_update();
+    void test_update();
+    bool test_animation();
+};
+
+// Generic (core) description of a fixture (later derived into specific classes)
+class BaseFixture{
+  public:
+    // Generic attributes
+    std::string name;                   // 
+    std::string description;            // textual description
+    int id;                             // unique id to differentiate between vseveral fixtres of the same type (i.e. COTS PAR spots & racks)
+
+    // DMX related parameters
+    uint8_t MASTER_DIMMER;    // Master Dimmer from 0-255
+    int address;                    // DMX address
+    bool b_blackout;
+    const int nCH;
+
+    // Animations
+    BaseAnimation * active_animation = nullptr;
+    anim_vec animations;
+
+    //constructor (adresse [0-511], number of channels, fixture's name)
+    BaseFixture(int addr,int ch, std::string nm, int i, uint8_t mast): address(addr), nCH(ch), name(nm), id(i), MASTER_DIMMER(mast){log(1, "Base.", this->name, " : ", fcn::num_to_str(mast), "/", fcn::num_to_str(MASTER_DIMMER));};
+    virtual void init()=0;
+
+    //animation management
+    void blackout(bool);
+    bool activate_none();
+    bool activate_by_index(int);
+    bool activate_random();
+    bool activate_by_ID(std::string);
+    bool activate_by_color(color_vec);
+
+    //DMX output
+    virtual int get_address() = 0;
+    virtual int get_nCH()     = 0;
+    virtual DMX_vec buffer()  = 0;
+
+    virtual DMX_vec RGBW(simpleColor, int){}; // common (but overriden) function that returns a 4 RGBW vector based on standrad color input
+    virtual DMX_vec RGB(simpleColor, int){};
+};
+
+
+// Generic (core) description of an animation object
+class BaseAnimation{
+  public :
+    std::string name;                   
+    std::string description;            // textual description
+    std::string id;                     // unique id 
+    unsigned long t_animation_start_ms; // times at which the animation was last activated
+    unsigned long frame_cpt;            // number of frame computed since activation
+    color_vec color_palette;              // lists the colors used in the animation (initialized by constructor)
+    
+    bool      is_monochrome(){return (color_palette.size() == 1);};
+    
+    virtual void new_frame(){
+      this->frame_cpt++;
+    }
+    virtual void init(){
+      this->t_animation_start_ms = frame.t_current_ms;
+      this->frame_cpt = 0;
+    };
+    
+    void update_palette(color_vec colors){
+      for (color_vec::iterator new_c = colors.begin(); new_c != colors.end(); new_c++){
+        // check if new color is not already stored in color_palette
+        bool duplicate = false;
+        for (color_vec::iterator stored_c = color_palette.begin(); stored_c != color_palette.end(); stored_c++){
+          if ((*new_c) == (*stored_c)){
+            duplicate = true;
+          }
+        }
+        if ( (*new_c) != black && !duplicate){
+          this -> color_palette.push_back((*new_c));
+        }
+      }
+    }
+    void update_palette(simpleColor color){
+      update_palette(color_vec{color});
+    }
+};
+
+extern AnimationManager animator;

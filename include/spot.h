@@ -36,7 +36,7 @@ public:
     uint8_t prog = 0;                         // fixture preset program (unused)
 
     // Constructor & Initializer
-    SpotFixture(int addr, int ch, std::string nm) : BaseFixture(addr, ch, nm){};
+    SpotFixture(int addr, int ch, std::string nm, int id, uint8_t mast=255) : BaseFixture(addr, ch, nm, id, mast){};
     void init(){};
 
     // Get Functions
@@ -102,10 +102,14 @@ public:
     //     this->spots.push_back(s2);
     //     this->rack_size = this->spots.size();
     //     };
-    SpotRack(spot_vec sp, std::string nm, int i): BaseFixture(-1, 0, nm, i){
+    SpotRack(spot_vec sp, std::string nm, int i, uint8_t mast=255): BaseFixture(-1, 0, nm, i, mast){
         this->id = i;
         this->spots = sp;
         this->rack_size = sp.size();
+
+        for (auto s : spots){
+            s->MASTER_DIMMER = this->MASTER_DIMMER;
+        }
     };
 
     void init() override;     // empty function (useless)
@@ -192,7 +196,7 @@ class SpotFrontAnimation2 : public SpotRackAnimtion{
     double delta;
     const double DMX_min = 0;
     const double DMX_max = 240;
-    const double deltaDmin = 30;  // absolute random variation of speed @DMX_min
+    const double deltaDmin = 60;  // absolute random variation of speed @DMX_min
     const double deltaDmax = 0;  // absolute random variation of speed @DMX_max
     
 

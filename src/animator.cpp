@@ -54,6 +54,7 @@ void AnimationManager::palette_update(){
 
             // select color theme
             int i = rand_min_max(0, colorPalette.size());
+            // log(1, fcn::num_to_str((int)colorPalette.size()));
             color_vec palette = colorPalette[i];
             
             // log it
@@ -359,6 +360,11 @@ string fcn::vec_to_str(str_vec data, char sep){
 }
 
 std::string fcn::num_to_str(int val){
+    ostringstream oss;
+    oss<<val;
+    return oss.str();
+}
+std::string fcn::num_to_str(time_t val){
     ostringstream oss;
     oss<<val;
     return oss.str();

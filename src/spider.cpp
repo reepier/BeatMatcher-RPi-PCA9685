@@ -8,27 +8,39 @@ using namespace std;
 // --------------------------------------
 // SPIDER FIXTURE definition
 // --------------------------------------
-SpiderFixture spider(29, 44, "AFX-9-Beam");
+SpiderFixture spider(29, 44, "AFX-9-Beam", 1);
 
 void SpiderFixture::init(){
+    this->animations.push_back(new SpiderAnimation1(this, black,  0, 0, int_vec{tiltMAX,tiltMAX,tiltMAX},    " ", "SPI.0.0"));
+
     // push the animations:
     // Animation TYPE 1
-    this->animations.push_back(new SpiderAnimation1(this, black,  0, 0, int_vec{tiltMIN,tiltMIN,tiltMIN},    " ", "SPI.0.0"));
     
-    this->animations.push_back(new SpiderAnimation1(this, red,    0, 20, int_vec{90,90,90},    "Red, 90°, static", "SPI.1.1"));
-    this->animations.push_back(new SpiderAnimation1(this, white,    0, 20, int_vec{20,20,20},  "White, 20°, slow", "SPI.1.2"));
-    this->animations.push_back(new SpiderAnimation1(this, blue,    0, -20, int_vec{130,130,130},  "Blue, 130°, slow", "SPI.1.3"));
+    this->animations.push_back(new SpiderAnimation1(this, red,     0, 0,    int_vec{-10,135,135},  "Red static (coin chill)",       "SPI.1"));
+    this->animations.push_back(new SpiderAnimation1(this, sodium,  120, 0,  int_vec{135,-10,135},  "Sodium static (coin chill)",    "SPI.2"));
+    this->animations.push_back(new SpiderAnimation1(this, orange,  240, 0,  int_vec{135,135,-10},  "Orange static (coin chill)",    "SPI.3"));
+    this->animations.push_back(new SpiderAnimation1(this, yellow,  0, 0,    int_vec{-10,135,135},  "Yellow static (coin chill)",    "SPI.4"));
+    this->animations.push_back(new SpiderAnimation1(this, gold,    120, 0,  int_vec{135,-10,135},  "Gold static (coin chill)",      "SPI.5"));
+    this->animations.push_back(new SpiderAnimation1(this, white,   240, 0,  int_vec{135,135,-10},  "White static (coin chill)",     "SPI.6"));
+    this->animations.push_back(new SpiderAnimation1(this, cyan,    0, 0,    int_vec{-10,135,135},  "Cyan static (coin chill)",      "SPI.7"));
+    this->animations.push_back(new SpiderAnimation1(this, blue,    120, 0,  int_vec{135,-10,135},  "Blue static (coin chill)",      "SPI.8"));
+    this->animations.push_back(new SpiderAnimation1(this, purple,  240, 0,  int_vec{135,135,-10},  "Purple static (coin chill)",    "SPI.9"));
+    this->animations.push_back(new SpiderAnimation1(this, magenta, 0, 0,    int_vec{-10,135,135},  "Magenta static (coin chill)",   "SPI.10"));
+    this->animations.push_back(new SpiderAnimation1(this, pink,    120, 0,  int_vec{135,-10,135},  "Pink static (coin chill)",      "SPI.11"));
+    this->animations.push_back(new SpiderAnimation1(this, green,   240, 0,  int_vec{135,135,-10},  "Green static (coin chill)",     "SPI.12"));
+    // this->animations.push_back(new SpiderAnimation1(this, white,    0, 20, int_vec{20,20,20},  "White, 20°, slow", "SPI.1.2"));
+    // this->animations.push_back(new SpiderAnimation1(this, blue,    0, -20, int_vec{130,130,130},  "Blue, 130°, slow", "SPI.1.3"));
 
     // Animation TYPE 2
     // SpiderAnimation2(SpiderFixture *f, SimpleColor b_col, SimpleColor f_col, Shape f_shp, unsigned long f_len, unsigned long f_dt,int p_pos, int p_speed, int_vec t_pos, int t_per, Shape t_shp, std::string d, std::string i){
     // monochrome
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{white}, gaussian,   500,  3,   0, 20,  int_vec{}, 10000, sinus, "Fast & short white flashes, tilt motion",   "SPI.2.1.1"));
-    this->animations.push_back(new SpiderAnimation2(this, black,   color_vec{white}, gaussian, 2000, 2,   0, 20,  int_vec{}, 10000, sinus, "Fast white flashes, red back, tilt motion",   "SPI.2.1.2"));
+    // this->animations.push_back(new SpiderAnimation2(this, black, color_vec{white}, gaussian,   500,  3,   0, 20,  int_vec{}, 10000, sinus, "Fast & short white flashes, tilt motion",   "SPI.2.1.1"));
+    // this->animations.push_back(new SpiderAnimation2(this, black,   color_vec{white}, gaussian, 2000, 2,   0, 20,  int_vec{}, 10000, sinus, "Fast white flashes, red back, tilt motion",   "SPI.2.1.2"));
     
-    // bichrome
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{red, red, red, white}, gaussian, 1000, 1, 0, 20, int_vec{0}, 10000, sinus, "Red & White flashes", "SPI.2.2.1"));
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{red, purple},          gaussian,   1500, 4,  0, 20,     int_vec{0}, 10000, sinus, "Red & Blue flashes, tilt motion",   "SPI.2.2.2"));
-    this->animations.push_back(new SpiderAnimation2(this, white, color_vec{red, blue, green},     gaussian,   1500, 4,  0, 20,     int_vec{0}, 10000, sinus, "white bg, red,green,blue flashes",   "SPI.2.2.3"));
+    // // bichrome
+    // this->animations.push_back(new SpiderAnimation2(this, black, color_vec{red, red, red, white}, gaussian, 1000, 1, 0, 20, int_vec{0}, 10000, sinus, "Red & White flashes", "SPI.2.2.1"));
+    // this->animations.push_back(new SpiderAnimation2(this, black, color_vec{red, purple},          gaussian,   1500, 4,  0, 20,     int_vec{0}, 10000, sinus, "Red & Blue flashes, tilt motion",   "SPI.2.2.2"));
+    // this->animations.push_back(new SpiderAnimation2(this, white, color_vec{red, blue, green},     gaussian,   1500, 4,  0, 20,     int_vec{0}, 10000, sinus, "white bg, red,green,blue flashes",   "SPI.2.2.3"));
 
     this->activate_by_index(0);
 }
@@ -42,9 +54,9 @@ DMX_vec SpiderFixture::buffer(){
                     (this->pan_speed<0) ? max(min( map(this->pan_speed, -128, -1, 10, 127), 255),10) :
                         max(min( map(this->pan_speed, 1, 127, 128, 255), 255),10);
 
-    ret[2]= min(max(    map(this->tilt[0], -30, 120, 0, 255)    ,0),255);
-    ret[3]= min(max(    map(this->tilt[1], -30, 120, 0, 255)    ,0),255);
-    ret[4]= min(max(    map(this->tilt[2], -30, 120, 0, 255)    ,0),255);
+    ret[2]= min(max(    map(this->tilt[0], tiltMIN, tiltMAX, 0, 255)    ,0),255);
+    ret[3]= min(max(    map(this->tilt[1], tiltMIN, tiltMAX, 0, 255)    ,0),255);
+    ret[4]= min(max(    map(this->tilt[2], tiltMIN, tiltMAX, 0, 255)    ,0),255);
     
     ret[5]=this->MASTER_DIMMER;
     ret[6]=this->strobe;

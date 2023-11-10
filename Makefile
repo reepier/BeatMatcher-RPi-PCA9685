@@ -37,3 +37,7 @@ build/spot.o: src/spot.cpp include/spot.h
 	g++ -c src/spot.cpp -I include -o build/spot.o
 build/MCP3008.o: src/MCP3008.cpp
 	g++ -c src/MCP3008.cpp -I include -o build/MCP3008.o
+
+clean:
+	rm build/*.o bin/*
+	
