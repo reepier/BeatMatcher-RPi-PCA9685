@@ -31,7 +31,7 @@ class LEDFixture;
 class LEDAnimation;
 class LEDAnimation1;
 
-/**
+/** 
 ####### ### #     # ####### #     # ######  ####### 
 #        #   #   #     #    #     # #     # #       
 #        #    # #      #    #     # #     # #       
@@ -39,8 +39,7 @@ class LEDAnimation1;
 #        #    # #      #    #     # #   #   #       
 #        #   #   #     #    #     # #    #  #       
 #       ### #     #    #     #####  #     # ####### 
-*/
-
+*/ // ASCI marks generated using : https://patorjk.com/software/taag/#p=display&f=Old%20Banner&t=FIXTURE
 class LEDFixture : public BaseFixture
 {
 public:

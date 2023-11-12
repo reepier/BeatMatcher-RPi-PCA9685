@@ -34,7 +34,7 @@ const std::vector<color_vec> colorPalette = {
                                                 // color_vec{green},        
                                                 
                                                 // Color + White
-                                                color_vec{white, red},
+                                                color_vec{white, red},  
                                                 color_vec{white, sodium},
                                                 // color_vec{white, orange},
                                                 // color_vec{white, yellow},
