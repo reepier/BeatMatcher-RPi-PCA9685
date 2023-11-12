@@ -17,12 +17,14 @@ SpotFixture spot_7(122, 8, "Spot 7 (122)", 7);
 // SpotFixture spot_8(130, 8, "Spot 8 (130)");     
 
 /* --------------------------------------------------------------------
-   _____ _____   ____ _______ 
-  / ____|  __ \ / __ \__   __|
- | (___ | |__) | |  | | | |   
-  \___ \|  ___/| |  | | | |   
-  ____) | |    | |__| | | |   
- |_____/|_|     \____/  |_|   
+
+ #####  ######  ####### ####### 
+#     # #     # #     #    #    
+#       #     # #     #    #    
+ #####  ######  #     #    #    
+      # #       #     #    #    
+#     # #       #     #    #    
+ #####  #       #######    #    
 
 / ----------------------------------------------------------------------- */
 /* /!\ /!\ Bullshit initializer --> I don't plan on coding animation for individual spots */
@@ -123,12 +125,13 @@ SpotFixture spot_7(122, 8, "Spot 7 (122)", 7);
 
 
 /* --------------------------------------------------------------------
-   _____ _____   ____ _______    _____            _____ _  __ _____ 
-  / ____|  __ \ / __ \__   __|  |  __ \     /\   / ____| |/ // ____|
- | (___ | |__) | |  | | | |     | |__) |   /  \ | |    | ' /| (___  
-  \___ \|  ___/| |  | | | |     |  _  /   / /\ \| |    |  <  \___ \ 
-  ____) | |    | |__| | | |     | | \ \  / ____ \ |____| . \ ____) |
- |_____/|_|     \____/  |_|     |_|  \_\/_/    \_\_____|_|\_\_____/ 
+ #####  ######  ####### #######    ######     #     #####  #    #  #####  
+#     # #     # #     #    #       #     #   # #   #     # #   #  #     # 
+#       #     # #     #    #       #     #  #   #  #       #  #   #       
+ #####  ######  #     #    #       ######  #     # #       ###     #####  
+      # #       #     #    #       #   #   ####### #       #  #         # 
+#     # #       #     #    #       #    #  #     # #     # #   #  #     # 
+ #####  #       #######    #       #     # #     #  #####  #    #  #####  
 
 / ----------------------------------------------------------------------- */
 SpotRack front_rack(spot_vec{&spot_1, &spot_2, &spot_3, &spot_4}, "Front Rack", 1);
@@ -145,7 +148,7 @@ void SpotRack::init(){
 
         
 
-        // Animation 2: Stroboscope
+        // Animation 2: Stroboscope --> To be used as LEAD animation
         // Very Fast
         this->animations.push_back(new SpotFrontAnimation2(this, white,     STRB_FASTEST, "white, VFAST strobe",     "FR.1.1.6"));
         this->animations.push_back(new SpotFrontAnimation2(this, gold,      STRB_FASTEST, "gold, VFAST strobe",      "FR.1.1.5"));
@@ -185,7 +188,7 @@ void SpotRack::init(){
         this->animations.push_back(new SpotFrontAnimation2(this, purple,    STRB_SLOW, "purple, SLW strobe",    "FR.1.4.9"));
 
         // Animation 1
-        // Bubbles (short & fast)
+        // Bubbles (short & fast) --> to be used as solo animation during breaks
         this->animations.push_back(new SpotFrontAnimation1(this, black,    white,       1500, 600,   "white bubbles",       "FR.2.1.6"));
         this->animations.push_back(new SpotFrontAnimation1(this, black,    gold,        1500, 600,   "gold bubbles",        "FR.2.1.5"));
         this->animations.push_back(new SpotFrontAnimation1(this, black,    cyan,        1500, 600,   "cyan bubbles",        "FR.2.1.7"));
@@ -194,7 +197,7 @@ void SpotRack::init(){
         this->animations.push_back(new SpotFrontAnimation1(this, black,    pink,        1500, 600,   "pink bubbles",        "FR.2.1.11"));
         this->animations.push_back(new SpotFrontAnimation1(this, black,    magenta,     1500, 600,   "magenta bubbles",     "FR.2.1.10"));
         this->animations.push_back(new SpotFrontAnimation1(this, black,    purple,      1500, 600,   "purple bubbles",      "FR.2.1.9"));
-        // Bubbles (short & slower)
+        // Bubbles (short & slower) --> to be used as backer animation with LED (or else)
         this->animations.push_back(new SpotFrontAnimation1(this, black,    white,       2500, 400,   "white bubbles",       "FR.2.2.6"));
         this->animations.push_back(new SpotFrontAnimation1(this, black,    gold,        2500, 400,   "gold bubbles",        "FR.2.2.5"));
         this->animations.push_back(new SpotFrontAnimation1(this, black,    cyan,        2500, 400,   "cyan bubbles",        "FR.2.2.7"));

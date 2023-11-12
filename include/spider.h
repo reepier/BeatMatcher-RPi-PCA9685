@@ -13,11 +13,17 @@
 class SpiderFixture;
 class SpiderAnimation;
 
-typedef std::vector<DMX_vec> pixel_vec; 
-// --------------------------------------
-// SPIDER FIXTURE definition
-// --------------------------------------
+typedef std::vector<DMX_vec> pixel_vec;
 
+/**
+####### ### #     # ####### #     # ######  ####### 
+#        #   #   #     #    #     # #     # #       
+#        #    # #      #    #     # #     # #       
+#####    #     #       #    #     # ######  #####   
+#        #    # #      #    #     # #   #   #       
+#        #   #   #     #    #     # #    #  #       
+#       ### #     #    #     #####  #     # ####### 
+*/
 #define tiltMIN -20 //tilt min angle (°)
 #define tiltMAX 135 //tilt max angle (°)
 class SpiderFixture : public BaseFixture
@@ -47,10 +53,15 @@ public:
 };
 extern SpiderFixture spider;
 
-// --------------------------------------
-// SPIDER ANIMATION definition
-// --------------------------------------
-
+/**
+   #    #     # ### #     #    #    ####### ### ####### #     #  #####  
+  # #   ##    #  #  ##   ##   # #      #     #  #     # ##    # #     # 
+ #   #  # #   #  #  # # # #  #   #     #     #  #     # # #   # #       
+#     # #  #  #  #  #  #  # #     #    #     #  #     # #  #  #  #####  
+####### #   # #  #  #     # #######    #     #  #     # #   # #       # 
+#     # #    ##  #  #     # #     #    #     #  #     # #    ## #     # 
+#     # #     # ### #     # #     #    #    ### ####### #     #  #####  
+*/
 class SpiderAnimation : public BaseAnimation{
 public:
     SpiderFixture *fixture;

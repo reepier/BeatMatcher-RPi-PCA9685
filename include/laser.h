@@ -7,7 +7,15 @@ class LaserFixture;
 class LaserAnimation;
 class LaserAnimation1;
 
-
+/**
+####### ### #     # ####### #     # ######  ####### 
+#        #   #   #     #    #     # #     # #       
+#        #    # #      #    #     # #     # #       
+#####    #     #       #    #     # ######  #####   
+#        #    # #      #    #     # #   #   #       
+#        #   #   #     #    #     # #    #  #       
+#       ### #     #    #     #####  #     # ####### 
+*/
 class LaserFixture : public BaseFixture{
 public:    
     // Channels
@@ -35,6 +43,15 @@ class LaserAnimation : public BaseAnimation{
     LaserFixture* fixture;
 };
 
+/**
+   #    #     # ### #     #    #    ####### ### ####### #     #  #####  
+  # #   ##    #  #  ##   ##   # #      #     #  #     # ##    # #     # 
+ #   #  # #   #  #  # # # #  #   #     #     #  #     # # #   # #       
+#     # #  #  #  #  #  #  # #     #    #     #  #     # #  #  #  #####  
+####### #   # #  #  #     # #######    #     #  #     # #   # #       # 
+#     # #    ##  #  #     # #     #    #     #  #     # #    ## #     # 
+#     # #     # ### #     # #     #    #    ### ####### #     #  #####  
+*/
 /**Prebuilt animation*/
 class LaserAnimation1 : public LaserAnimation{
 public:

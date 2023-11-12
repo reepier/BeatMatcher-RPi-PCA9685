@@ -16,12 +16,14 @@ class SpotBack;
 typedef std::vector<SpotFixture*> spot_vec;
 // TODO Remove the individual spot class --> I will never need (for now) to control 1 spot individually.
 /* --------------------------------------------------------------------
-   _____ _____   ____ _______ 
-  / ____|  __ \ / __ \__   __|
- | (___ | |__) | |  | | | |   
-  \___ \|  ___/| |  | | | |   
-  ____) | |    | |__| | | |   
- |_____/|_|     \____/  |_|   
+
+ #####  ######  ####### ####### 
+#     # #     # #     #    #    
+#       #     # #     #    #    
+ #####  ######  #     #    #    
+      # #       #     #    #    
+#     # #       #     #    #    
+ #####  #       #######    #    
 
 / ----------------------------------------------------------------------- */
 
@@ -75,12 +77,13 @@ public:
 // };
 
 /* --------------------------------------------------------------------
-   _____ _____   ____ _______    _____            _____ _  __ _____ 
-  / ____|  __ \ / __ \__   __|  |  __ \     /\   / ____| |/ // ____|
- | (___ | |__) | |  | | | |     | |__) |   /  \ | |    | ' /| (___  
-  \___ \|  ___/| |  | | | |     |  _  /   / /\ \| |    |  <  \___ \ 
-  ____) | |    | |__| | | |     | | \ \  / ____ \ |____| . \ ____) |
- |_____/|_|     \____/  |_|     |_|  \_\/_/    \_\_____|_|\_\_____/ 
+ #####  ######  ####### #######    ######     #     #####  #    #  #####  
+#     # #     # #     #    #       #     #   # #   #     # #   #  #     # 
+#       #     # #     #    #       #     #  #   #  #       #  #   #       
+ #####  ######  #     #    #       ######  #     # #       ###     #####  
+      # #       #     #    #       #   #   ####### #       #  #         # 
+#     # #       #     #    #       #    #  #     # #     # #   #  #     # 
+ #####  #       #######    #       #     # #     #  #####  #    #  #####  
 
 / ----------------------------------------------------------------------- */
 /* frontal rack*/
@@ -90,18 +93,6 @@ public:
     int rack_size;                           // number of spots (derived)
     //std::vector<BaseAnimation *> animations; // vector containing animations
 
-    /* Hard coded with 2 or 3 spots (temporarily?) */
-    // SpotRack(SpotFixture* s1, SpotFixture* s2, SpotFixture* s3, std::string nm) : BaseFixture(-1, 0, nm){ 
-    //     this->spots.push_back(s1);
-    //     this->spots.push_back(s2);
-    //     this->spots.push_back(s3);
-    //     this->rack_size = this->spots.size();
-    //     };
-    // SpotRack(SpotFixture* s1, SpotFixture* s2, std::string nm) : BaseFixture(-1, 0, nm){
-    //     this->spots.push_back(s1);
-    //     this->spots.push_back(s2);
-    //     this->rack_size = this->spots.size();
-    //     };
     SpotRack(spot_vec sp, std::string nm, int i, uint8_t mast=255): BaseFixture(-1, 0, nm, i, mast){
         this->id = i;
         this->spots = sp;
@@ -130,6 +121,16 @@ public:
 
 extern SpotRack front_rack;
 extern SpotRack back_rack;
+
+/**
+   #    #     # ### #     #    #    ####### ### ####### #     #  #####  
+  # #   ##    #  #  ##   ##   # #      #     #  #     # ##    # #     # 
+ #   #  # #   #  #  # # # #  #   #     #     #  #     # # #   # #       
+#     # #  #  #  #  #  #  # #     #    #     #  #     # #  #  #  #####  
+####### #   # #  #  #     # #######    #     #  #     # #   # #       # 
+#     # #    ##  #  #     # #     #    #     #  #     # #    ## #     # 
+#     # #     # ### #     # #     #    #    ### ####### #     #  #####  
+*/
 
 class SpotRackAnimtion : public BaseAnimation
 {
