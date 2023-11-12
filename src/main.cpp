@@ -90,6 +90,9 @@ void initialize() {
     balise("Init. Sampler...");
     sampler.init();   // initialize Music lib
     
+    balise("Init Animator...");
+    animator.init();
+    
     balise("Init. fixtures...");
     for (fix_vec::iterator fixture = fixtures.begin(); fixture != fixtures.end(); fixture++){
         balise("Initializing ", (*fixture)->name);
@@ -153,8 +156,8 @@ int main(int argc, char* argv[]){
         if(!b_test){    // if nominal case
             balise("Run animator normal update");
             // animator.random_update();
-            animator.palette_update();
-            // animator.test_update();
+            // animator.palette_update();
+            animator.test_update();
         }
         else if (frame.cpt == 0){   // else activate once and for all the animations to test
             balise("Run animator test fcn");

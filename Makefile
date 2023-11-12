@@ -21,7 +21,7 @@ $(app): $(main) $(build_dir) $(objects)
 
 build/:
 	mkdir build
-build/animator.o: src/animator.cpp include/animator.h 
+build/animator.o: src/animator.cpp include/animator.h include/config.h
 	g++ -c src/animator.cpp -I include -o build/animator.o
 build/config.o: src/config.cpp include/config.h
 	g++ -c src/config.cpp -I include -o build/config.o

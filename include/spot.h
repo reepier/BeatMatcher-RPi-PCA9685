@@ -139,7 +139,7 @@ public:
 };
 
 /*2 Oscillating colors, with one flashing randomly and another one as fluctuating background*/
-class SpotFrontAnimation1 : public SpotRackAnimtion
+class SpotRackAnimation1 : public SpotRackAnimtion
 {
 public:
     // animation parameters (set by user)
@@ -159,10 +159,11 @@ public:
     std::vector<unsigned long> t_prev; // timestamp of the prev rise () (memory)
 
     // fixture, color bckgd, color flash, oscil. period(ms)  max , min, mean time btwn flashes (ms), flash duration(ms), description, id
-    SpotFrontAnimation1(SpotRack *f, simpleColor b_col, simpleColor f_col, int prand, int flen, std::string d, std::string i){
+    SpotRackAnimation1(SpotRack *f, simpleColor b_col, simpleColor f_col, int prand, int flen, std::string d, std::string i, AnimationType t){
         this->description = d;
         this->id = i;
         this->fixture = f;
+        this->type = t;
     
         this->flash_color = this->fixture->RGBW(f_col);
         if (f_col==black)
@@ -178,7 +179,7 @@ public:
         this->update_palette(color_vec{b_col, f_col});
     }
     // overloaded constructor to create the same animation without flash (everything else being equal)
-    SpotFrontAnimation1(SpotRack *f, simpleColor b_col, int prand, int flen, std::string d, std::string i) : SpotFrontAnimation1(f, b_col, b_col, prand, flen,d, i){
+    SpotRackAnimation1(SpotRack *f, simpleColor b_col, int prand, int flen, std::string d, std::string i, AnimationType t) : SpotRackAnimation1(f, b_col, b_col, prand, flen, d, i, t){
         this->flash_activation = false;
     }
 
@@ -191,7 +192,7 @@ public:
 #define STRB_MED 30
 #define STRB_SLOW 1
 /*Strobe*/
-class SpotFrontAnimation2 : public SpotRackAnimtion{
+class SpotRackAnimation2 : public SpotRackAnimtion{
   public:
     simpleColor color;
     uint8_t strobe_spd;
@@ -207,12 +208,13 @@ class SpotFrontAnimation2 : public SpotRackAnimtion{
     const double deltaDmax = 0;  // absolute random variation of speed @DMX_max
     
 
-    SpotFrontAnimation2(SpotRack *f, simpleColor c, uint8_t speed, std::string d, std::string i){
+    SpotRackAnimation2(SpotRack *f, simpleColor c, uint8_t speed, std::string d, std::string i, AnimationType t){
         this->description = d;
         this->id = i;
         this->fixture = f;
+        this->type = t;
 
-        this->color = c;
+        this->color =  c;
         this->strobe_spd = speed;
         this->strobe_spds.resize(this->fixture->rack_size);
         

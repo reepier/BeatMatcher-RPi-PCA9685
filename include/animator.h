@@ -58,10 +58,14 @@ namespace fcn{
   std::string vec_to_str(int_vec, char);
   std::string vec_to_str(str_vec, char);
 
+  std::string palette_to_string(color_vec, char);
+
   std::string num_to_str(int);
   std::string num_to_str(time_t);
   std::string num_to_str(uint8_t);
   std::string num_to_str(double);
+
+  
   int_vec convert_8_to_12bits(DMX_vec);
 
   /*shape functions*/
@@ -160,7 +164,27 @@ namespace fcn{
   }
 }
 
+class ColorPaletteMagazine{
+    std::vector<color_vec>   color_palettes;
+    int_vec     probas;
 
+  public:
+    void push_back(color_vec palette, int proba){
+        color_palettes.push_back(palette);
+        probas.push_back(proba);
+    }
+
+    int get_size(){return color_palettes.size();}
+    //returns a random palette within the magasine (weighed by proba)
+    color_vec get_random_palette(){return fcn::random_pick(color_palettes, probas);}
+    // returns a palette with at least 1 common color with the palette passed as argument (wweighed by prba if several candidates exist)
+    color_vec get_similar_palette(color_vec current_palette){
+        //list candidates
+
+        // choses randomly taking proba into account
+         
+    }
+};
 
 /**-------------------------------------------------------------------------------------------
    #                                                    #     #               
@@ -171,21 +195,28 @@ namespace fcn{
 #     # #   ## # #    # #    #   #   # #    # #   ##    #     # #    # #   #  
 #     # #    # # #    # #    #   #   #  ####  #    #    #     #  ####  #    # 
 
--------------------------------------------------------------------------------                                                                                 |___/             */
+------------------------------------------------------------------------------- */
 /**
  * class AnimationManager is the entity responsible for determining which animation every 
  * fixture should run, based on the musical analysis
 */
 class AnimationManager{
-    public :
+  public :
     bool flash = true;
-    
+    time_t timer_start_ms = 0, timer_end_ms=0, timer_duration_ms = 0;
     unsigned long t_last_change_ms = millis();   //timestamp of last switch between aniamtions
-    
+    ColorPaletteMagazine palette_magasine;
+
+    void init();
+
     void random_update();
     void palette_update();
     void test_update();
     bool test_animation();
+
+    void set_timer(time_t);
+    void reset_timer();
+    bool timer_elapsed();
 };
 
 
@@ -226,7 +257,7 @@ class BaseFixture{
     bool activate_by_index(int);
     bool activate_random();
     bool activate_by_ID(std::string);
-    bool activate_by_color(color_vec);
+    bool activate_by_color(color_vec, AnimationType arg_type = any); //additionnal argument to orient the activation toward a leading or backing aniation
 
     //DMX output
     virtual int get_address() = 0;
@@ -252,12 +283,13 @@ class BaseAnimation{
   public :
     std::string name;                   
     std::string description;            // textual description
-    std::string id;                     // unique id 
+    std::string id;                     // unique id
+    AnimationType type = any;
     unsigned long t_animation_start_ms; // times at which the animation was last activated
     unsigned long frame_cpt;            // number of frame computed since activation
     color_vec color_palette;              // lists the colors used in the animation (initialized by constructor)
     
-    bool      is_monochrome(){return (color_palette.size() == 1);};
+    bool is_monochrome(){return (color_palette.size() == 1);};
     
     virtual void new_frame(){
       this->frame_cpt++;

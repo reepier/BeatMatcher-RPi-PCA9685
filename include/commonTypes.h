@@ -53,6 +53,13 @@ enum Shape{
     saw       
 };
 
+enum AnimationType{
+    leader,
+    backer,
+    any
+};
+
+// different types of commonly used vectors
 typedef std::vector<simpleColor>    color_vec;
 typedef std::vector<uint8_t>        DMX_vec;  //a vector of 8bit int with values ranging from 0 to 255
 typedef std::vector<int>            int_vec;  //a vector of standard int
@@ -66,3 +73,4 @@ class BaseAnimation;      //TODO move this in baseAnimation.h
 
 typedef std::vector<BaseFixture*> fix_vec;
 typedef std::vector<BaseAnimation*> anim_vec;
+

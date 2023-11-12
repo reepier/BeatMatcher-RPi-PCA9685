@@ -60,6 +60,16 @@ void init_display(){
     init_pair(WHITEblue, COLOR_WHITE, COLOR_BLUE);
 }
 
+
+/**
+#     #                        
+##   ## #    #  ####  #  ####  
+# # # # #    # #      # #    # 
+#  #  # #    #  ####  # #      
+#     # #    #      # # #      
+#     # #    # #    # # #    # 
+#     #  ####   ####  #  ####  
+*/
 void disp_music_window(){
     
     //initialize
@@ -151,7 +161,15 @@ void disp_music_window(){
     wrefresh(musicw);
 }
 
-
+/**
+#######                                  
+#     # #    # ##### #####  #    # ##### 
+#     # #    #   #   #    # #    #   #   
+#     # #    #   #   #    # #    #   #   
+#     # #    #   #   #####  #    #   #   
+#     # #    #   #   #      #    #   #   
+#######  ####    #   #       ####    #   
+*/
 void disp_output_window(){
 //initialize
     curs_set(0);
@@ -162,11 +180,11 @@ void disp_output_window(){
     wattroff(outputw, A_BOLD);
 
     int i=1;
-    for (fix_vec::iterator fix = fixtures.begin(); fix != fixtures.end(); fix++){
+    for (auto fix : fixtures){
         ostringstream animbuf, outbuf;
-        animbuf << (*fix)->active_animation->id<<" - "<<(*fix)->active_animation->description;
+        animbuf << ((fix->active_animation->type == leader) ? "(L) ":"(b) ") << fix->name << " " << fix->active_animation->id << " - " << fix->active_animation->description;
         
-        DMX_vec raw_buf = (*fix)->buffer();
+        DMX_vec raw_buf = fix->buffer();
         outbuf << "| " <<fcn::vec_to_str(raw_buf, ',');
 
         mvwprintw(outputw, i, 1, animbuf.str().data());
@@ -199,7 +217,15 @@ void disp_animation_window(){
 
     wrefresh(animw);
 }
-
+/**
+ #####                                            
+#     # ###### #    # ###### #####    ##   #      
+#       #      ##   # #      #    #  #  #  #      
+#  #### #####  # #  # #####  #    # #    # #      
+#     # #      #  # # #      #####  ###### #      
+#     # #      #   ## #      #   #  #    # #      
+ #####  ###### #    # ###### #    # #    # ###### 
+*/
 void disp_general_window(){
 //initialize
     curs_set(0);
@@ -215,6 +241,16 @@ void disp_general_window(){
 
     wrefresh(generalw);
 }
+
+/**
+ #####                                            
+#     #  ####  #    #  ####   ####  #      ###### 
+#       #    # ##   # #      #    # #      #      
+#       #    # # #  #  ####  #    # #      #####  
+#       #    # #  # #      # #    # #      #      
+#     # #    # #   ## #    # #    # #      #      
+ #####   ####  #    #  ####   ####  ###### ###### 
+*/
 
 void disp_console_window(){
     curs_set(0);

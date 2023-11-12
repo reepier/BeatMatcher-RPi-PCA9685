@@ -57,12 +57,13 @@ class LaserAnimation1 : public LaserAnimation{
 public:
     uint8_t indice;
 
-    LaserAnimation1(LaserFixture* fix, uint8_t ind, color_vec c, std::string d, std::string i){
+    LaserAnimation1(LaserFixture* fix, uint8_t ind, color_vec c, std::string d, std::string i, AnimationType t){
         this->fixture = fix;
         this->description = d;
         this->id = i;
-        this->indice = ind;
+        this->type = t;
 
+        this->indice = ind;
         for (auto col : c){
             this->update_palette(col);
             if (col == magenta)

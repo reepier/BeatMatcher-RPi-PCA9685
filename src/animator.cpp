@@ -16,15 +16,61 @@
 using namespace std;
 
 
-/**-------------------------------------------------------------------------------------------
-                 _                 _   _                __  __                                    
-     /\         (_)               | | (_)              |  \/  |                                   
-    /  \   _ __  _ _ __ ___   __ _| |_ _  ___  _ __    | \  / | __ _ _ __   __ _  __ _  ___ _ __  
-   / /\ \ | '_ \| | '_ ` _ \ / _` | __| |/ _ \| '_ \   | |\/| |/ _` | '_ \ / _` |/ _` |/ _ \ '__| 
-  / ____ \| | | | | | | | | | (_| | |_| | (_) | | | |  | |  | | (_| | | | | (_| | (_| |  __/ |    
- /_/    \_\_| |_|_|_| |_| |_|\__,_|\__|_|\___/|_| |_|  |_|  |_|\__,_|_| |_|\__,_|\__, |\___|_|    
- -------------------------------------------------------------------------------  __/ | -------   
-                                                                                 |___/             */
+/**
+   #                                                    #     #               
+  # #   #    # # #    #   ##   ##### #  ####  #    #    ##   ##  ####  #####  
+ #   #  ##   # # ##  ##  #  #    #   # #    # ##   #    # # # # #    # #    # 
+#     # # #  # # # ## # #    #   #   # #    # # #  #    #  #  # #      #    # 
+####### #  # # # #    # ######   #   # #    # #  # #    #     # #  ### #####  
+#     # #   ## # #    # #    #   #   # #    # #   ##    #     # #    # #   #  
+#     # #    # # #    # #    #   #   #  ####  #    #    #     #  ####  #    # 
+
+*/
+
+void AnimationManager::init(){
+    palette_magasine.push_back(    color_vec{red}    ,1   );
+    palette_magasine.push_back(    color_vec{sodium} ,1   );
+    palette_magasine.push_back(    color_vec{orange} ,1   );
+ // palette_magasine.push_back(    color_vec{yellow} ,1   );
+ // palette_magasine.push_back(    color_vec{gold}   ,1   );
+ // palette_magasine.push_back(    color_vec{white}  ,1   );
+ // palette_magasine.push_back(    color_vec{cyan}   ,1   );
+    palette_magasine.push_back(    color_vec{blue}   ,1   );
+ // palette_magasine.push_back(    color_vec{purple} ,1   );
+ // palette_magasine.push_back(    color_vec{magenta},1   );
+ // palette_magasine.push_back(    color_vec{pink}   ,1   );
+ // palette_magasine.push_back(    color_vec{green}  ,1   );
+    
+    palette_magasine.push_back(     color_vec{white, red}       ,1      );
+ // palette_magasine.push_back(     color_vec{white, sodium}    ,1      );
+ // palette_magasine.push_back(     color_vec{white, orange}    ,1      );
+ // palette_magasine.push_back(     color_vec{white, yellow}    ,1      );
+ // palette_magasine.push_back(     color_vec{white, gold}      ,1      );
+ // palette_magasine.push_back(     color_vec{white, white}     ,1      );
+ // palette_magasine.push_back(     color_vec{white, cyan}      ,1      );
+    palette_magasine.push_back(     color_vec{white, blue}      ,1      );
+    palette_magasine.push_back(     color_vec{white, purple}    ,1      );
+    palette_magasine.push_back(     color_vec{white, magenta}   ,1      );
+    palette_magasine.push_back(     color_vec{white, pink}      ,1      );
+    palette_magasine.push_back(     color_vec{white, green}     ,1      );
+
+
+    palette_magasine.push_back(    color_vec{cyan, magenta}    ,1       );
+    palette_magasine.push_back(    color_vec{gold, red}        ,1       );
+    palette_magasine.push_back(    color_vec{gold, orange}     ,1       );
+    palette_magasine.push_back(    color_vec{gold, sodium}     ,1       );
+    palette_magasine.push_back(    color_vec{red, blue}        ,1       );
+    palette_magasine.push_back(    color_vec{red, purple}      ,1       );
+ // palette_magasine.push_back(    color_vec{orange, purple}   ,1       );
+    palette_magasine.push_back(    color_vec{blue, purple}     ,1       );
+ // palette_magasine.push_back(    color_vec{pink, purple}     ,1       );
+ // palette_magasine.push_back(    color_vec{cyan, pink}       ,1       );
+ // palette_magasine.push_back(    color_vec{cyan, magenta}    ,1       );
+    palette_magasine.push_back(    color_vec{cyan, purple}     ,1       );
+    palette_magasine.push_back(    color_vec{cyan, red}        ,1       );
+    palette_magasine.push_back(    color_vec{blue, cyan}       ,1       );
+
+}
 
 /** Based on the musical analysis (music.state) and the current time, this function 
  * decides when to switch animation
@@ -53,9 +99,7 @@ void AnimationManager::palette_update(){
             t_last_change_ms = frame.t_current_ms;
 
             // select color theme
-            int i = rand_min_max(0, colorPalette.size());
-            // log(1, fcn::num_to_str((int)colorPalette.size()));
-            color_vec palette = colorPalette[i];
+            color_vec palette = this->palette_magasine.get_random_palette();
             
             // log it
             str_vec palette_literal;
@@ -72,14 +116,51 @@ void AnimationManager::palette_update(){
     // select animations matching the theme for each fixture
 }
 
+// The purpose of this animation is to test ranges of animations or play with different control logics
 void AnimationManager::test_update(){
-    if (  frame.first_loop  || (sampler.state_changed && (frame.t_current_ms-t_last_change_ms > TEMPO_ANIM_CHANGE))){
-        t_last_change_ms = frame.t_current_ms;
-        string id = fcn::random_pick(str_vec{"LED.6.1","LED.6.2","LED.6.3","LED.6.4","LED.6.5","LED.6.6","LED.6.7","LED.6.8","LED.6.9"});
-        led.activate_by_ID(id);
-        log(1, "Activate : ", led.active_animation->id, " - ", led.active_animation->description);
+    /** Animation switch occurs based on different principles :
+     *  - (legacy) change when a MAX timer has elapsed AND when the Beat State changes
+     *  - (new) Change when a custom, sequence specific  timer has elpased (i.e. -> to avoid long periods of stroboscopic animation); */
+    if (  frame.first_loop
+        || (sampler.state_changed && (frame.t_current_ms-t_last_change_ms > TEMPO_ANIM_CHANGE))
+        || this->timer_elapsed()){
 
+        
+        // log(1, fcn::num_to_str((int)colorPalette.size()));
+        static color_vec current_palette;
+        static int palette_lifespan = 5;
+        
+        if (frame.first_loop || palette_lifespan == 0){
+            // color_vec::size_type i = rand_min_max(0, colorPalettes.size());
+            current_palette = palette_magasine.get_random_palette();
+            palette_lifespan = 5;
+        }
+
+        // select a leader among Led bars, Front rack, and Laser
+        auto lead_fix = fcn::random_pick(fix_vec{&led, &front_rack, & laser}, {4, 2, 1});
+        // reference the other fixtures as "backer fixtures" in a vector (for ease of acccess & modularity)
+        fix_vec backer_fix;
+        for (auto fix : fixtures){
+            if (fix->name != lead_fix->name){
+                backer_fix.push_back(fix);
+            }
+        }
+
+        lead_fix->activate_by_color(current_palette, leader);
+        for (auto fix : backer_fix){
+            fix->activate_by_color(current_palette, backer);
+        }
+
+        // log the results
+        log(1, "Color palette : ", fcn::palette_to_string(current_palette, '/')," ", fcn::num_to_str(palette_lifespan), " Leader : ", lead_fix->name);
+                
+        palette_lifespan-- ;
     }
+
+    //TODO : use the same color palette several times in a row with different combination of Leader/backer (changes are too harsh otherwise)
+    //TODO : switch to neighboring palette to avoid incosistent color transition (orange -> pink looks bad) 
+    //TODO randomize the number of backer animations
+    //TODO : give different weight to every palette so that 
 }
 
 bool AnimationManager::test_animation(){
@@ -95,32 +176,9 @@ bool AnimationManager::test_animation(){
         }
 
         if (!success){
-            cout << "Animation ID prefix unknown... Prgram ended" << endl;
+            cout << "Animation ID prefix unknown..." << endl;
             success = false;
         }
-
-        // if (s_anim_id.find("LED.") != string::npos){   // if animation's ID contains "LED"
-        //     success = led.activate_by_ID(s_anim_id);
-        // }
-        // else if (s_anim_id.find("SPOT.") != string::npos){ // if animation's ID contains "SPOT"
-        //     success = spot_7.activate_by_ID(s_anim_id);
-        // }
-        // else if (s_anim_id.find("FR.") != string::npos){   // if animation's ID contains "FR" (Front Rack)
-        //     success = front_rack.activate_by_ID(s_anim_id);
-        // }
-        // else if (s_anim_id.find("BR.") != string::npos){   // if animation's ID contains "BR" (BackgroundRack)
-        //     success = back_rack.activate_by_ID(s_anim_id);
-        // }
-        // else if (s_anim_id.find("SPI.") != string::npos){   // if animation's ID contains "SPI" (SPIder)
-        //     success = spider.activate_by_ID(s_anim_id);
-        // }
-        // else if (s_anim_id.find("LAS.") != string::npos){   // if animation's ID contains "LAS" (LASer)
-        //     success = laser.activate_by_ID(s_anim_id);
-        // }
-        // else{
-        //     cout << "Animation ID prefix unknown... Prgram ended" << endl;
-        //     success = false;
-        // }
     }
     return success;
 }
@@ -129,12 +187,13 @@ AnimationManager animator;
 
 
 /** ----------------------------------------------------------
-  ____                    ______ _      _                  
- |  _ \                  |  ____(_)    | |                 
- | |_) | __ _ ___  ___   | |__   ___  _| |_ _   _ _ __ ___ 
- |  _ < / _` / __|/ _ \  |  __| | \ \/ / __| | | | '__/ _ \
- | |_) | (_| \__ \  __/  | |    | |>  <| |_| |_| | | |  __/
- |____/ \__,_|___/\___|  |_|    |_/_/\_\\__|\__,_|_|  \___|
+######                          #######                                     
+#     #   ##    ####  ######    #       # #    # ##### #    # #####  ###### 
+#     #  #  #  #      #         #       #  #  #    #   #    # #    # #      
+######  #    #  ####  #####     #####   #   ##     #   #    # #    # #####  
+#     # ######      # #         #       #   ##     #   #    # #####  #      
+#     # #    # #    # #         #       #  #  #    #   #    # #   #  #      
+######  #    #  ####  ######    #       # #    #   #    ####  #    # ###### 
  --------------------------------------------------------------- */
 
 // toggles blackout boolean
@@ -176,26 +235,14 @@ bool BaseFixture::activate_by_ID(string id){
             return found_it;
         }
     }
-    // // if the loop exits without any match, then fold back to an approximate search (selects the first animations whose id starts witht he string passed as argument) --> allow for range
-    // for (vector<BaseAnimation*>::iterator anim_it = this->animations.begin(); anim_it != this->animations.end(); anim_it++){
-    //     if ((*anim_it)->id.find(id) == 0){
-    //         found_it = true;
-    //         this->active_animation = (*anim_it);
-    //         this->active_animation->init();
-    //         return found_it;
-    //     }
-    // }
 
-    // if (!found_it){
-    //     cout << "Animation ID unknown... Program ended" << endl;
-    // }
     return found_it;
 }
 
 /* Activates an animation whose colors match the ones in palette passed as an argument.
    All of the selected animations color must be listed in the palette, but all the palette's 
    color do not have to be listed in the animation's colors */
-bool BaseFixture::activate_by_color(color_vec palette){
+bool BaseFixture::activate_by_color(color_vec arg_palette, AnimationType arg_type){
     int n_anim = this->animations.size();
 
     // copy the fixture's animation list
@@ -208,105 +255,66 @@ bool BaseFixture::activate_by_color(color_vec palette){
         shuffle(fixtures_anim_list.begin(), fixtures_anim_list.end(), rng);
 
     bool found_it = false;
+    this->activate_none(); // start by resetting the fixture to the black animation
     // Parse through the animations'list (in a random order) and select the first anim that matches the palette
     // All the animation's color must be listed int h
-        for(auto current_animation : fixtures_anim_list){
-            bool animation_match = true;   // becomes false if (at least) one of the animation's color does not match the palette 
-            // for each of the animation color
-            for (auto animation_color : (*current_animation).color_palette){
-                bool color_match = false;   // becomes true if the current color matches on of the palette's color
-                for (auto palette_color : palette){
-                    color_match = color_match || (animation_color == palette_color);
+        for(auto each_animation : fixtures_anim_list){
+            bool animation_match = true;   // starts true & becomes false if (at least) one of the animation's attributes does not match the functions arguments (animation color & type) 
+            
+            // check the compatibility between the current animation's & the argument type
+            animation_match =  arg_type == any || each_animation->type == any || each_animation->type == arg_type ;
+
+            // for each of the animation's colors, check if they are compatible with the argument color palette
+            if(animation_match){
+                for (auto each_animation_color : (*each_animation).color_palette){
+                    bool color_match = false;   // becomes true if the current color matches on of the palette's color
+                    for (auto each_arg_palette_color : arg_palette){
+                        color_match = color_match || (each_animation_color == each_arg_palette_color);
+                    }
+                    animation_match = animation_match && color_match;
                 }
-                animation_match = animation_match && color_match;
             }
 
-            // if the animation is a match, activate it and exit the for loop , else deactivate
+            // if the animation is a match, activate it and exit the for loop and return true, else deactivate the fixture (by activating the black animation)
             if (animation_match){
-                this->activate_by_ID(current_animation->id);
+                found_it = true;
+                this->activate_by_ID(each_animation->id);
                 break;
-            }else{
-                this->activate_none();
             }
         }
+
+    return found_it;
 }   
 
+
+void AnimationManager::set_timer(time_t duration_ms){
+    this->timer_start_ms = frame.t_current_ms;
+    this->timer_duration_ms = duration_ms;
+    this-> timer_end_ms = frame.t_current_ms + duration_ms;
+}
+void AnimationManager::reset_timer(){
+    this->timer_start_ms = 0;
+    this->timer_duration_ms = 0;
+    this-> timer_end_ms = 0;
+}
+bool AnimationManager::timer_elapsed(){
+    bool ret = this->timer_start_ms == 0 && this->timer_duration_ms == 0 && this->timer_end_ms == 0 ? false : 
+             frame.t_current_ms - this->timer_start_ms > this->timer_duration_ms ? true : false;
+
+    if (ret) this->reset_timer();   // reset timer when timer has elapsed
+    return ret;
+}
+
 /** -----------------------------------
-  ______                _   _                 
- |  ____|              | | (_)                
- | |__ _   _ _ __   ___| |_ _  ___  _ __  ___ 
- |  __| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
- | |  | |_| | | | | (__| |_| | (_) | | | \__ \
- |_|   \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
------------------------------------
-*/
+#######                                                   
+#       #    # #    #  ####  ##### #  ####  #    #  ####  
+#       #    # ##   # #    #   #   # #    # ##   # #      
+#####   #    # # #  # #        #   # #    # # #  #  ####  
+#       #    # #  # # #        #   # #    # #  # #      # 
+#       #    # #   ## #    #   #   # #    # #   ## #    # 
+#        ####  #    #  ####    #   #  ####  #    #  ####  
+-----------------------------------                 */
 #include <sstream>
-
-// DMX_vec fcn::RGBW(simpleColor c, uint8_t intensity){
-//     switch (c)
-//     {
-//     case black:
-//         return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);
-//         break;
-//     case red:
-//         return fcn::RGBW_norm(DMX_vec{255,0,0,0}, intensity);
-//         break;
-//     case green:
-//         return fcn::RGBW_norm(DMX_vec{0,255,0,0}, 160.0/255*intensity);
-//         break;
-//     case blue:
-//         return fcn::RGBW_norm(DMX_vec{0,0,255,0}, 190.0/255*intensity);
-//         break;
-//     case yellow:
-//         return fcn::RGBW_norm(DMX_vec{255,90,0,0}, intensity);
-//         break;
-//     case orange:
-//         return fcn::RGBW_norm(DMX_vec{255,40,0,0}, intensity);
-//         break;
-//     case sodium:
-//         return fcn::RGBW_norm(DMX_vec{255,20,0,0}, intensity);
-//         break;
-//     case cyan:
-//         return fcn::RGBW_norm(DMX_vec{0,219,255,0}, 180.0/255*intensity);
-//         break;
-//     case purple:
-//         return fcn::RGBW_norm(DMX_vec{150,0,255,0}, intensity);
-//         break;    
-//     case magenta:
-//         return fcn::RGBW_norm(DMX_vec{255,0,240,0}, intensity);
-//         break;
-//     case pink:
-//         return fcn::RGBW_norm(DMX_vec{255,0,100,0}, intensity);
-//         break;
-//     case white:
-//         return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);
-//         break;
-//     case gold:
-//         return fcn::RGBW_norm(DMX_vec{255,40,0,100}, intensity);
-//         break;
-//     default:
-//         break;
-//     }
-// }
-
-// DMX_vec fcn::RGB(simpleColor color, uint8_t intensity){
-//     DMX_vec ret;
-//     if (color == black || color == red || color == green || color == blue
-//         || color == cyan || color == magenta || color == pink || color == purple
-//         || color == yellow || color == orange || color == sodium){
-//         ret = fcn::RGBW(color, intensity);
-//         ret.pop_back();
-//         return ret;
-//     }
-//     else if (color == white){
-//         return RGB_norm(DMX_vec{255,90,17});
-//     }else if (color == gold){
-//         return fcn::RGB_norm(DMX_vec{255,42,7}, intensity);
-//     }
-// }
-//  rgbw: color vector ; intensity : equivalent 8bit intensity
-//  todo : allow for intensity > 255 (brighter flashes)
-
 
 string fcn::vec_to_str(DMX_vec data, char sep){
     string ret;
@@ -358,6 +366,15 @@ string fcn::vec_to_str(str_vec data, char sep){
     }
     return ret;
 }
+
+string fcn::palette_to_string(color_vec cols, char sep){
+    str_vec palette_literal;
+        for (auto col : cols){
+            palette_literal.push_back(colorName[(int)col]);
+        }
+    return fcn::vec_to_str(palette_literal, sep);
+}
+
 
 std::string fcn::num_to_str(int val){
     ostringstream oss;

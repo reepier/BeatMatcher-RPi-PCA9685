@@ -90,11 +90,12 @@ public:
   int fade_rate = 60;                            // ms flash fade rate (time constant of an exponential decay : intensity = exp(-(t-t0)/fade_rate)
 
   // Constructor
-  LEDAnimation1(LEDFixture* f, simpleColor f_col, simpleColor b_col, std::string d, std::string i, bool flash = true){
+  LEDAnimation1(LEDFixture* f, simpleColor f_col, simpleColor b_col, std::string d, std::string i, AnimationType typ, bool flash = true){
     this->fixture = f;
     this->description = d;
     this->id = i;
 
+    this->type = typ;
     this->param_activate_flash = flash;
     this->flash_RGB = fcn::convert_8_to_12bits(this->fixture->RGB(f_col, 450));
     int_vec back_RGB = fcn::convert_8_to_12bits(this->fixture->RGB(b_col, 25));
