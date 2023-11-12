@@ -67,24 +67,24 @@ void SpotRack::init(){
 
         // Animation 2: Stroboscope --> To be used as LEAD animation
         // Very Fast
-        this->animations.push_back(new SpotRackAnimation2(this, white,     STRB_FASTEST, "white, VFAST strobe",     "FR.1.1.6", backer));
-        this->animations.push_back(new SpotRackAnimation2(this, gold,      STRB_FASTEST, "gold, VFAST strobe",      "FR.1.1.5", backer));
-        this->animations.push_back(new SpotRackAnimation2(this, cyan,      STRB_FASTEST, "cyan, VFAST strobe",      "FR.1.1.7", backer));
-        this->animations.push_back(new SpotRackAnimation2(this, red,       STRB_FASTEST, "red, VFAST strobe",       "FR.1.1.1", backer));
-        this->animations.push_back(new SpotRackAnimation2(this, blue,      STRB_FASTEST, "blue, 8 strobe",          "FR.1.1.8", backer));
-        this->animations.push_back(new SpotRackAnimation2(this, pink,      STRB_FASTEST, "pink, VFAST strobe",      "FR.1.1.11", backer));
-        this->animations.push_back(new SpotRackAnimation2(this, magenta,   STRB_FASTEST, "magenta, VFAST strobe",   "FR.1.1.10", backer));
-        this->animations.push_back(new SpotRackAnimation2(this, purple,    STRB_FASTEST, "purple, VFAST strobe",    "FR.1.1.9", backer));
+        this->animations.push_back(new SpotRackAnimation2(this, white,     STRB_FASTEST, "white, VFAST strobe",     "FR.1.1.6",     leader));
+        this->animations.push_back(new SpotRackAnimation2(this, gold,      STRB_FASTEST, "gold, VFAST strobe",      "FR.1.1.5",     leader));
+        this->animations.push_back(new SpotRackAnimation2(this, cyan,      STRB_FASTEST, "cyan, VFAST strobe",      "FR.1.1.7",     leader));
+        this->animations.push_back(new SpotRackAnimation2(this, red,       STRB_FASTEST, "red, VFAST strobe",       "FR.1.1.1",     leader));
+        this->animations.push_back(new SpotRackAnimation2(this, blue,      STRB_FASTEST, "blue, 8 strobe",          "FR.1.1.8",     leader));
+        this->animations.push_back(new SpotRackAnimation2(this, pink,      STRB_FASTEST, "pink, VFAST strobe",      "FR.1.1.11",    leader));
+        this->animations.push_back(new SpotRackAnimation2(this, magenta,   STRB_FASTEST, "magenta, VFAST strobe",   "FR.1.1.10",    leader));
+        this->animations.push_back(new SpotRackAnimation2(this, purple,    STRB_FASTEST, "purple, VFAST strobe",    "FR.1.1.9",     leader));
 
 
-        this->animations.push_back(new SpotRackAnimation2(this, white,     STRB_SLOW, "white, SLW strobe",     "FR.1.4.6", backer));
-        this->animations.push_back(new SpotRackAnimation2(this, gold,      STRB_SLOW, "gold, SLW strobe",      "FR.1.4.5", backer));
-        this->animations.push_back(new SpotRackAnimation2(this, cyan,      STRB_SLOW, "cyan, SLW strobe",      "FR.1.4.7", backer));
-        this->animations.push_back(new SpotRackAnimation2(this, red,       STRB_SLOW, "red, SLW strobe",       "FR.1.4.1", backer));
-        this->animations.push_back(new SpotRackAnimation2(this, blue,      STRB_SLOW, "blue, SLW strobe",      "FR.1.4.8", backer));
-        this->animations.push_back(new SpotRackAnimation2(this, pink,      STRB_SLOW, "pink, SLW strobe",      "FR.1.4.11", backer));
-        this->animations.push_back(new SpotRackAnimation2(this, magenta,   STRB_SLOW, "magenta, SLW strobe",   "FR.1.4.10", backer));
-        this->animations.push_back(new SpotRackAnimation2(this, purple,    STRB_SLOW, "purple, SLW strobe",    "FR.1.4.9", backer));
+        this->animations.push_back(new SpotRackAnimation2(this, white,     STRB_SLOW, "white, SLW strobe",     "FR.1.4.6",  leader));
+        this->animations.push_back(new SpotRackAnimation2(this, gold,      STRB_SLOW, "gold, SLW strobe",      "FR.1.4.5",  leader));
+        this->animations.push_back(new SpotRackAnimation2(this, cyan,      STRB_SLOW, "cyan, SLW strobe",      "FR.1.4.7",  leader));
+        this->animations.push_back(new SpotRackAnimation2(this, red,       STRB_SLOW, "red, SLW strobe",       "FR.1.4.1",  leader));
+        this->animations.push_back(new SpotRackAnimation2(this, blue,      STRB_SLOW, "blue, SLW strobe",      "FR.1.4.8",  leader));
+        this->animations.push_back(new SpotRackAnimation2(this, pink,      STRB_SLOW, "pink, SLW strobe",      "FR.1.4.11", leader));
+        this->animations.push_back(new SpotRackAnimation2(this, magenta,   STRB_SLOW, "magenta, SLW strobe",   "FR.1.4.10", leader));
+        this->animations.push_back(new SpotRackAnimation2(this, purple,    STRB_SLOW, "purple, SLW strobe",    "FR.1.4.9",  leader));
 
         // Animation 1
         // Bubbles (short & fast) --> to be used as solo animation during breaks
