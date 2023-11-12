@@ -24,13 +24,13 @@ const std::vector<color_vec> colorPalette = {
                                                 color_vec{sodium},  
                                                 color_vec{orange},  
                                                 // color_vec{yellow},  
-                                                color_vec{gold},    
-                                                color_vec{white},   
-                                                color_vec{cyan},    
+                                                // color_vec{gold},    
+                                                // color_vec{white},   
+                                                // color_vec{cyan},    
                                                 color_vec{blue},    
                                                 color_vec{purple},  
                                                 color_vec{magenta}, 
-                                                color_vec{pink},    
+                                                // color_vec{pink},    
                                                 // color_vec{green},        
                                                 
                                                 // Color + White
@@ -40,11 +40,11 @@ const std::vector<color_vec> colorPalette = {
                                                 // color_vec{white, yellow},
                                                 // color_vec{white, gold},
                                                 // color_vec{white, white},
-                                                color_vec{white, cyan},
+                                                // color_vec{white, cyan},
                                                 color_vec{white, blue},
                                                 color_vec{white, purple},
                                                 color_vec{white, magenta},
-                                                color_vec{white, pink},
+                                                // color_vec{white, pink},
                                                 // color_vec{white, green}
                                                 
                                                 // Color couples
@@ -71,5 +71,5 @@ const std::vector<color_vec> colorPalette = {
 
 // -- CONFIG ------------------------------------------------------------
 #define     MAX_CONT_FLASH      120000          // 120000
-#define     TEMPO_ANIM_CHANGE   10000          // 240000
+#define     TEMPO_ANIM_CHANGE   30000          // 240000
 #define     MASTERDIMMER        1.0             //fraction --> must be decimal (literal float) !!!

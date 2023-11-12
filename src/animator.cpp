@@ -135,8 +135,7 @@ AnimationManager animator;
  |  _ < / _` / __|/ _ \  |  __| | \ \/ / __| | | | '__/ _ \
  | |_) | (_| \__ \  __/  | |    | |>  <| |_| |_| | | |  __/
  |____/ \__,_|___/\___|  |_|    |_/_/\_\\__|\__,_|_|  \___|
- ---------------------------------------------------------------
- */
+ --------------------------------------------------------------- */
 
 // toggles blackout boolean
 void BaseFixture::blackout(bool b){
@@ -201,6 +200,7 @@ bool BaseFixture::activate_by_color(color_vec palette){
 
     // copy the fixture's animation list
         anim_vec fixtures_anim_list = this->animations;
+        fixtures_anim_list.erase(fixtures_anim_list.begin());    // avoid black animation
 
     // randomize the list item's order
         random_device rd;

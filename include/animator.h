@@ -178,7 +178,7 @@ namespace fcn{
 */
 class AnimationManager{
     public :
-    bool flash = true;NA
+    bool flash = true;
     
     unsigned long t_last_change_ms = millis();   //timestamp of last switch between aniamtions
     

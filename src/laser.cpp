@@ -9,7 +9,7 @@ DMX_vec LaserFixture::buffer(){
 
 void LaserFixture::init(){
     // BLACK
-    this->animations.push_back(new LaserAnimation1(this, 0,     color_vec{black},   "Black",     "LAS.0.0"));
+    this->animations.push_back(new LaserAnimation1(this, 0,     color_vec{black},   " ",     "LAS.0"));
 
     // Circle dance Monochrome
     this->animations.push_back(new LaserAnimation1(this, 1,  color_vec{red},       "Circle Dance red",       "LAS.1.1.1"));

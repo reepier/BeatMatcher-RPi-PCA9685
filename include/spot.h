@@ -143,6 +143,7 @@ class SpotFrontAnimation1 : public SpotRackAnimtion
 {
 public:
     // animation parameters (set by user)
+    bool flash_activation = true;
     DMX_vec back_color;
     DMX_vec flash_color;
     int sin_max_p_ms = 15000;
@@ -162,7 +163,7 @@ public:
         this->description = d;
         this->id = i;
         this->fixture = f;
-
+    
         this->flash_color = this->fixture->RGBW(f_col);
         if (f_col==black)
             this->back_color = this->fixture->RGBW(b_col, 100);     // more intensity if there is no flash
@@ -176,6 +177,11 @@ public:
 
         this->update_palette(color_vec{b_col, f_col});
     }
+    // overloaded constructor to create the same animation without flash (everything else being equal)
+    SpotFrontAnimation1(SpotRack *f, simpleColor b_col, int prand, int flen, std::string d, std::string i) : SpotFrontAnimation1(f, b_col, b_col, prand, flen,d, i){
+        this->flash_activation = false;
+    }
+
     void init() override;
     void new_frame();
 };
