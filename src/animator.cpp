@@ -137,7 +137,7 @@ void AnimationManager::test_update(){
         }
 
         // select a leader among Led bars, Front rack, and Laser
-        auto lead_fix = fcn::random_pick(fix_vec{&led, &front_rack, & laser}, {4, 2, 1});
+        auto lead_fix = fcn::random_pick(fix_vec{&led, &front_rack, & laser}, {5, 2, 1});
         // reference the other fixtures as "backer fixtures" in a vector (for ease of acccess & modularity)
         fix_vec backer_fix;
         for (auto fix : fixtures){
@@ -153,7 +153,8 @@ void AnimationManager::test_update(){
 
         // log the results
         log(1, "Color palette : ", fcn::palette_to_string(current_palette, '/')," ", fcn::num_to_str(palette_lifespan), " Leader : ", lead_fix->name);
-                
+        
+        t_last_change_ms = frame.t_current_ms;
         palette_lifespan-- ;
     }
 

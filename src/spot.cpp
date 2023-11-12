@@ -88,14 +88,14 @@ void SpotRack::init(){
 
         // Animation 1
         // Bubbles (short & fast) --> to be used as solo animation during breaks
-        this->animations.push_back(new SpotRackAnimation1(this, black,    white,       1500, 600,   "white fast bubbles",       "FR.2.1.6", leader));
-        this->animations.push_back(new SpotRackAnimation1(this, black,    gold,        1500, 600,   "gold fast bubbles",        "FR.2.1.5", leader));
-        this->animations.push_back(new SpotRackAnimation1(this, black,    cyan,        1500, 600,   "cyan fast bubbles",        "FR.2.1.7", leader));
-        this->animations.push_back(new SpotRackAnimation1(this, black,    red,         1500, 600,   "red fast bubbles",         "FR.2.1.1", leader));
-        this->animations.push_back(new SpotRackAnimation1(this, black,    blue,        1500, 600,   "blue fast bubbles",        "FR.2.1.8", leader));
-        this->animations.push_back(new SpotRackAnimation1(this, black,    pink,        1500, 600,   "pink fast bubbles",        "FR.2.1.11", leader));
-        this->animations.push_back(new SpotRackAnimation1(this, black,    magenta,     1500, 600,   "magenta fast bubbles",     "FR.2.1.10", leader));
-        this->animations.push_back(new SpotRackAnimation1(this, black,    purple,      1500, 600,   "purple fast bubbles",      "FR.2.1.9", leader));
+        this->animations.push_back(new SpotRackAnimation1(this, black,    white,       1000, 600,   "white fast bubbles",       "FR.2.1.6", leader));
+        this->animations.push_back(new SpotRackAnimation1(this, black,    gold,        1000, 600,   "gold fast bubbles",        "FR.2.1.5", leader));
+        this->animations.push_back(new SpotRackAnimation1(this, black,    cyan,        1000, 600,   "cyan fast bubbles",        "FR.2.1.7", leader));
+        this->animations.push_back(new SpotRackAnimation1(this, black,    red,         1000, 600,   "red fast bubbles",         "FR.2.1.1", leader));
+        this->animations.push_back(new SpotRackAnimation1(this, black,    blue,        1000, 600,   "blue fast bubbles",        "FR.2.1.8", leader));
+        this->animations.push_back(new SpotRackAnimation1(this, black,    pink,        1000, 600,   "pink fast bubbles",        "FR.2.1.11", leader));
+        this->animations.push_back(new SpotRackAnimation1(this, black,    magenta,     1000, 600,   "magenta fast bubbles",     "FR.2.1.10", leader));
+        this->animations.push_back(new SpotRackAnimation1(this, black,    purple,      1000, 600,   "purple fast bubbles",      "FR.2.1.9", leader));
         // Bubbles (short & slower) --> to be used as backer animation with LED (or else)
         this->animations.push_back(new SpotRackAnimation1(this, black,    white,       2500, 400,   "white slow bubbles",       "FR.2.2.6", backer));
         this->animations.push_back(new SpotRackAnimation1(this, black,    gold,        2500, 400,   "gold slow bubbles",        "FR.2.2.5", backer));
@@ -370,4 +370,6 @@ void SpotRackAnimation2::new_frame(){
         spots[i]->strobe = (int)(this->strobe_spds[i]); // min(max( (int)(this->strobe_spds[i] * (1 + delta*sin(i*M_PI/3 + 2*M_PI*t/3000)))  ,0),255);
         // spots[i]->strobe = min(max( rand_min_max(this->strobe_spds[i] * (1-delta) , this->strobe_spds[i] * (1+delta))  ,0),255);
     }
+
+    //TODO : disable the flash when sampler.state == BREAK & animation is leader ; --> avoid flashing when the beat is low
 }

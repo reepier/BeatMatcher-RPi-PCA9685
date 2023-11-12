@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 
+#include "sysfcn.h"
 #include "config.h"
 #include "wiringPi.h"
  
@@ -17,7 +18,9 @@ class LogEntry{
 public:
     int level;
     std::string message;
-    LogEntry(int lvl, std::string msg) : level(lvl), message(msg) {};
+    time_t timestamp;
+
+    LogEntry(int lvl, std::string msg) : level(lvl), message(msg), timestamp(frame.t_current_ms) {};
 };
 typedef std::vector<LogEntry> LogList;
 
