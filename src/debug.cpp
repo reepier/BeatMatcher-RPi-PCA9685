@@ -161,6 +161,8 @@ void disp_music_window(){
     wrefresh(musicw);
 }
 
+//TODO : Fill animator window with with timer to animation change
+
 /**
 #######                                  
 #     # #    # ##### #####  #    # ##### 
@@ -233,6 +235,10 @@ void disp_general_window(){
     cptbuf << "Frame counter : " << frame.cpt;
     mvwprintw(generalw, 1,1, cptbuf.str().c_str());
 
+    ostringstream timbuf;
+    timbuf << "Clock : " << frame.t_current_ms/1000.0 << "s";
+    mvwprintw(generalw, 1, 35, timbuf.str().c_str());
+
     wrefresh(generalw);
 }
 
@@ -259,7 +265,7 @@ void disp_console_window(){
     }else{
         int i = 19;
         for (LogList::reverse_iterator log = log_list.rbegin(); log != log_list.rend(); log++){
-            mvwprintw(consolew, i, 1+(*log).level-1, fcn::num_to_str((*log).timestamp/1000.0).c_str());
+            mvwprintw(consolew, i, 1, fcn::num_to_str((*log).timestamp/1000.0).c_str());
             mvwprintw(consolew, i--, 1+(*log).level-1+10, (*log).message.c_str());
             if (i==0){
                 break;

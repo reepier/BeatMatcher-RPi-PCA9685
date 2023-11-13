@@ -133,18 +133,18 @@ void SpotRack::init(){
         this->animations.push_back(new SpotRackAnimation1(this, green,    3000, 1500, "Green background",      "BR.12", backer));
         
         // Color Bubbles on Black background
-        this->animations.push_back(new SpotRackAnimation1(this, black, red,      3000, 1500, "Red bubbles",     "BR.1.1.1", backer));
-        this->animations.push_back(new SpotRackAnimation1(this, black, sodium,   3000, 1500, "Sodium bubbles",  "BR.1.1.2", backer));
-        this->animations.push_back(new SpotRackAnimation1(this, black, orange,   3000, 1500, "Orange bubbles",  "BR.1.1.3", backer));
-        this->animations.push_back(new SpotRackAnimation1(this, black, yellow,   3000, 1500, "Yellow bubbles",  "BR.1.1.4", backer));
-        this->animations.push_back(new SpotRackAnimation1(this, black, gold,     3000, 1500, "Gold bubbles",    "BR.1.1.5", backer));
-        this->animations.push_back(new SpotRackAnimation1(this, black, white,    3000, 1500, "White bubbles",   "BR.1.1.6", backer));
-        this->animations.push_back(new SpotRackAnimation1(this, black, cyan,     3000, 1500, "Cyan bubbles",    "BR.1.1.7", backer));
-        this->animations.push_back(new SpotRackAnimation1(this, black, blue,     3000, 1500, "Blue bubbles",    "BR.1.1.8", backer));
-        this->animations.push_back(new SpotRackAnimation1(this, black, purple,   3000, 1500, "Purple bubbles",  "BR.1.1.9", backer));
-        this->animations.push_back(new SpotRackAnimation1(this, black, magenta,  3000, 1500, "Magenta bubbles", "BR.1.1.10", backer));
-        this->animations.push_back(new SpotRackAnimation1(this, black, pink,     3000, 1500, "Pink bubbles",    "BR.1.1.11", backer));
-        this->animations.push_back(new SpotRackAnimation1(this, black, green,    3000, 1500, "Green bubbles",   "BR.1.1.12", backer));
+        // this->animations.push_back(new SpotRackAnimation1(this, black, red,      3000, 1500, "Red bubbles",     "BR.1.1.1", backer));
+        // this->animations.push_back(new SpotRackAnimation1(this, black, sodium,   3000, 1500, "Sodium bubbles",  "BR.1.1.2", backer));
+        // this->animations.push_back(new SpotRackAnimation1(this, black, orange,   3000, 1500, "Orange bubbles",  "BR.1.1.3", backer));
+        // this->animations.push_back(new SpotRackAnimation1(this, black, yellow,   3000, 1500, "Yellow bubbles",  "BR.1.1.4", backer));
+        // this->animations.push_back(new SpotRackAnimation1(this, black, gold,     3000, 1500, "Gold bubbles",    "BR.1.1.5", backer));
+        // this->animations.push_back(new SpotRackAnimation1(this, black, white,    3000, 1500, "White bubbles",   "BR.1.1.6", backer));
+        // this->animations.push_back(new SpotRackAnimation1(this, black, cyan,     3000, 1500, "Cyan bubbles",    "BR.1.1.7", backer));
+        // this->animations.push_back(new SpotRackAnimation1(this, black, blue,     3000, 1500, "Blue bubbles",    "BR.1.1.8", backer));
+        // this->animations.push_back(new SpotRackAnimation1(this, black, purple,   3000, 1500, "Purple bubbles",  "BR.1.1.9", backer));
+        // this->animations.push_back(new SpotRackAnimation1(this, black, magenta,  3000, 1500, "Magenta bubbles", "BR.1.1.10", backer));
+        // this->animations.push_back(new SpotRackAnimation1(this, black, pink,     3000, 1500, "Pink bubbles",    "BR.1.1.11", backer));
+        // this->animations.push_back(new SpotRackAnimation1(this, black, green,    3000, 1500, "Green bubbles",   "BR.1.1.12", backer));
         // Color Bubbles on same color background
         this->animations.push_back(new SpotRackAnimation1(this, red,      red,      3000, 1500, "Red bubbles, Red background",         "BR.1.2.1", backer));
         this->animations.push_back(new SpotRackAnimation1(this, sodium,   sodium,   3000, 1500, "Sodium bubbles, Sodium background",   "BR.1.2.2", backer));
@@ -348,6 +348,7 @@ void SpotRackAnimation2::init(){
     this->t_next_shake = frame.t_current_ms + 2000;
     this->shake();
     animator.set_timer(STROBE_ANI_DURA);
+    // log(2, "Stroboscopic animation started, timer set to ", STROBE_ANI_DURA, "ms");
     // log(1, "Min:", fcn::num_to_str(strobe_min), " Max:", fcn::num_to_str(strobe_max));
 
 }
@@ -374,6 +375,4 @@ void SpotRackAnimation2::new_frame(){
         spots[i]->strobe = (int)(this->strobe_spds[i]); // min(max( (int)(this->strobe_spds[i] * (1 + delta*sin(i*M_PI/3 + 2*M_PI*t/3000)))  ,0),255);
         // spots[i]->strobe = min(max( rand_min_max(this->strobe_spds[i] * (1-delta) , this->strobe_spds[i] * (1+delta))  ,0),255);
     }
-
-    //TODO : disable the flash when sampler.state == BREAK & animation is leader ; --> avoid flashing when the beat is low
 }

@@ -133,22 +133,21 @@ void AnimationManager::test_update(){
         if (frame.first_loop || palette_lifespan == 0){
             // color_vec::size_type i = rand_min_max(0, colorPalettes.size());
             current_palette = palette_magasine.get_similar_palette(current_palette);
-            // switch(current_palette.size()){
-	    	// case 1 :
-	    	// 	palette_lifespan = 2;
-			//     break;
-		    // case 2 :
-			//     palette_lifespan = 5;
-			//     break;
-		    // default :
-			//     palette_lifespan = 5;
-			// break;
-            // }   
-	        palette_lifespan = 1;
+            switch(current_palette.size()){
+	    	case 1 :
+	    		palette_lifespan = PAL_LIFESPAN_MONO;
+			    break;
+		    case 2 :
+			    palette_lifespan = PAL_LIFESPAN_BICO;
+			    break;
+		    default :
+			    palette_lifespan = PAL_LIFESPAN_BICO;
+			break;
+            }   
         }
 
         // select a leader among Led bars, Front rack, and Laser
-        auto lead_fix = fcn::random_pick(fix_vec{&led, &front_rack, & laser}, {4, 2, 1});
+        auto lead_fix = fcn::random_pick(fix_vec{&led, &front_rack, & laser}, {5, 2, 1});
         
         // reference the other fixtures as "backer fixtures" in a vector (for ease of acccess & modularity)
         fix_vec backer_fix;
@@ -163,11 +162,15 @@ void AnimationManager::test_update(){
         shuffle(backer_fix.begin(), backer_fix.end(), rng);
 
         /** pick randomly how many backer fixtures will light up to back the leader fixture
-         *  3 time out of 6 there should be 2 backer (3 fixtures total)
-         *  2 time out of 6 there should be 1 backer
-         *  1 tme out of 6 there should be NO backer */
+         *  50% of time there should be 2 backer (3 fixtures total)
+         *  33% of time there should be 1 backer
+         *  17% of time ther should be NO backer */
         int back_fix_n = fcn::random_pick( int_vec{2,1,0}, int_vec{3,2,1} );
 
+        // log the results
+        log(1, "Color palette ", fcn::palette_to_string(current_palette, '/')," ", fcn::num_to_str(palette_lifespan), " | Leader->", lead_fix->name, " ", fcn::num_to_str(back_fix_n), " backers");
+
+        // activate animations based on the new settings
         lead_fix->activate_by_color(current_palette, leader);
         for (int i = 0; i<backer_fix.size(); i++){
             if (i<back_fix_n)
@@ -177,15 +180,13 @@ void AnimationManager::test_update(){
         }
         back_rack.activate_by_color(current_palette);   // deal with the backstage rack separately
 
-        // log the results
-        log(1, "Color palette ", fcn::palette_to_string(current_palette, '/')," ", fcn::num_to_str(palette_lifespan), " | Leader->", lead_fix->name, " ", fcn::num_to_str(back_fix_n), " backers");
         
         t_last_change_ms = frame.t_current_ms;
         palette_lifespan-- ;
     }
 
-    //TODO : randomize the number of backer animations (between 0 to 2)
-    //TODO : give different weight to every palette so that 
+    //TODO give weight to every animation (maybe internally within the constructor rather than with a dedicated argument...) --> less strobe ?
+
 
     static time_t last_spider_switch = 0;
     // Manage Lyre :
@@ -335,7 +336,10 @@ bool AnimationManager::timer_elapsed(){
     bool ret = this->timer_start_ms == 0 && this->timer_duration_ms == 0 && this->timer_end_ms == 0 ? false : 
              frame.t_current_ms - this->timer_start_ms > this->timer_duration_ms ? true : false;
 
-    if (ret) this->reset_timer();   // reset timer when timer has elapsed
+    if (ret) {
+        this->reset_timer();   // reset timer when timer has elapsed
+        log(2, "Stroboscopic animations time out...");
+    }
     return ret;
 }
 
