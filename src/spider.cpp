@@ -11,6 +11,8 @@ using namespace std;
 SpiderFixture spider(29, 44, "AFX-9-Beam", 1);
 
 void SpiderFixture::init(){
+        log(4, __FILE__, " ", __LINE__, " ",__func__);
+
     this->animations.push_back(new SpiderAnimation1(this, black,  0, 0, int_vec{tiltMAX,tiltMAX,tiltMAX},    " ", "SPI.0.0"));
 
     // push the animations:
@@ -46,6 +48,8 @@ void SpiderFixture::init(){
 }
 
 DMX_vec SpiderFixture::buffer(){
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
+
     DMX_vec ret(this->nCH);
     // ret.resize(this->nCH);
     
@@ -72,6 +76,8 @@ DMX_vec SpiderFixture::buffer(){
 }
 
 DMX_vec SpiderFixture::RGBW(simpleColor c, int intensity){
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
+
     switch (c)
     {
     case black:
@@ -126,6 +132,8 @@ DMX_vec SpiderFixture::RGBW(simpleColor c, int intensity){
 // ---------------------------------------------
 // Animtion TYPE 1
 void SpiderAnimation1::new_frame(){
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
+
     BaseAnimation::new_frame();
 
     balise("Compute new spider1 frame");
@@ -139,6 +147,8 @@ void SpiderAnimation1::new_frame(){
 // ---------------------------------------------
 // Animtion TYPE 2
 void SpiderAnimation2::update_next_flash(){
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
+
     unsigned long t = frame.t_current_ms;   //for readability
 
     static int cpt = 0;
@@ -162,6 +172,8 @@ void SpiderAnimation2::update_next_flash(){
 }
 
 void SpiderAnimation2::new_frame(){
+        log(4, __FILE__, " ", __LINE__, " ",__func__);
+
     BaseAnimation::new_frame();
 
     // TODO finish the transition to a multi color flash capability

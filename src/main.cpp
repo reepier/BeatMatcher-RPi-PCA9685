@@ -134,6 +134,8 @@ void send(){
 LoopControler frame;
 
 int main(int argc, char* argv[]){
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
+
 
     balise("Initialization...");
     if(!process_arguments(argc, argv)){
@@ -144,6 +146,8 @@ int main(int argc, char* argv[]){
     balise("Initalisation terminated with success !");
 
     while (true){
+        log(4, __FILE__, " ",__LINE__, " ", __func__);
+
         // Update general counters and timers
         balise("----------------------------Start new frame...");
         frame.start_new_frame();

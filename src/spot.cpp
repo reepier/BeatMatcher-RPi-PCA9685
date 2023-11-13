@@ -45,6 +45,8 @@ SpotRack front_rack(spot_vec{&spot_1, &spot_2, &spot_3, &spot_4}, "Front Rack", 
 SpotRack back_rack(spot_vec{&spot_5, &spot_6, &spot_7}, "Back Rack", 2);
 
 void SpotRack::init(){
+    log(4, __FILE__, " ", __LINE__, " ",__func__);
+
     balise(1, "Rack initialized with ", fcn::num_to_str(this->rack_size).data(), " spots !");
 
     switch (this->id){
@@ -195,6 +197,8 @@ void SpotRack::init(){
 }
 
 void SpotRack::init_back(){
+    log(4, __FILE__, " ", __LINE__, " ",__func__);
+
     this->rack_size = this->spots.size();
     //this->animations.push_back();
 }
@@ -210,6 +214,8 @@ void SpotRack::init_back(){
 */
 
 DMX_vec SpotRack::RGBW(simpleColor c, int intensity){
+    log(4, __FILE__, " ", __LINE__, " ",__func__);
+
     switch (c)
     {
     case black:
@@ -267,6 +273,8 @@ DMX_vec SpotRack::RGBW(simpleColor c, int intensity){
 */
 // Bubbles
 void SpotRackAnimation1::init(){
+    log(4, __FILE__, " ", __LINE__, " ",__func__);
+
     BaseAnimation::init();
     this->fixture->reset_spots();
 
@@ -282,6 +290,8 @@ void SpotRackAnimation1::init(){
 }
 
 void SpotRackAnimation1::new_frame(){
+    log(4, __FILE__, " ", __LINE__, " ",__func__);
+
     BaseAnimation::new_frame();
 
     long t = frame.t_current_ms;       // for readability
@@ -336,6 +346,8 @@ void SpotRackAnimation1::new_frame(){
 */
 // Stroboscope
 void SpotRackAnimation2::shake(){  //randomizes the strob speeds on request
+    log(4, __FILE__, " ", __LINE__, " ",__func__);
+
     for (DMX_vec::iterator spd = this->strobe_spds.begin(); spd != this->strobe_spds.end(); spd++){
         (*spd) = (strobe_min<strobe_max)? rand_min_max( this->strobe_min , this->strobe_max ) : this->strobe_max; // initialize each strobe with a slightly different frequency
         // log(1, "Min:", fcn::num_to_str(strobe_min), " Max:", fcn::num_to_str(strobe_max), " picked", fcn::num_to_str((*spd)));
@@ -344,6 +356,8 @@ void SpotRackAnimation2::shake(){  //randomizes the strob speeds on request
 }
 
 void SpotRackAnimation2::init(){
+    log(4, __FILE__, " ", __LINE__, " ",__func__);
+
     BaseAnimation::init();
     this->t_next_shake = frame.t_current_ms + 2000;
     this->shake();
@@ -354,6 +368,8 @@ void SpotRackAnimation2::init(){
 }
 
 void SpotRackAnimation2::new_frame(){
+    log(4, __FILE__, " ", __LINE__, " ",__func__);
+
     BaseAnimation::new_frame();
     
     // for readability

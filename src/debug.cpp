@@ -37,6 +37,7 @@ WINDOW *consolew;
 #define C3 80
 
 void init_display(){
+
     initscr();
     // noecho();
     // refresh();
@@ -99,7 +100,7 @@ void disp_music_window(){
     
     // Threshold
     // double thr_unit = max(min(100/MAXVOL, 1.0),0.0);  //unitary threshold value [0;1]
-    double thr_unit = max(min(sampler.beat_threshold/MAXVOL, 1.0),0.0);  //unitary threshold value [0;1]
+    double thr_unit = max(min(   sampler.beat_threshold/MAXVOL  ,1.0),0.0);  //unitary threshold value [0;1]
     int thr_px = pow(thr_unit, 0.5) * MAXVOLPX;
     thrbuf << "Threshold | " << string(thr_px-1, ' ') << '|' << string(MAXVOLPX-thr_px, ' ') << " | " << (int)sampler.beat_threshold;
     mvwprintw(musicw, 2,1, "Threshold");
@@ -107,7 +108,7 @@ void disp_music_window(){
     mvwprintw(musicw, 1,80, "|");
     mvwprintw(musicw, 2,80, "|");
 
-    mvwprintw(musicw, 1, 1 + + thr_px, "|");    //test
+    mvwprintw(musicw, 1, C1 + thr_px, "|");    //test
 
     maxminbuf << "Max/Min : " << sampler.deb_max << "/" << sampler.deb_min;
     // mvwprintw(musicw, 3,1, maxminbuf.str().c_str());
@@ -210,6 +211,11 @@ void disp_animation_window(){
     mvwprintw(animw, 0,1, "ANIMATOR");
     wattroff(animw, A_BOLD);
 
+    ostringstream anim_change_buf;
+    long timer =  ((long)animator.t_last_change_ms + (long)TEMPO_ANIM_CHANGE - (long)frame.t_current_ms)/1000.0;
+
+    anim_change_buf << "Animation switch : " << (timer>0 ? timer : 0);
+    mvwprintw(animw, 2, 1, anim_change_buf.str().c_str());
 
     wrefresh(animw);
 }

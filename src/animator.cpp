@@ -28,12 +28,14 @@ using namespace std;
 */
 
 void AnimationManager::init(){
+    log(4, __FILE__, " ",__func__);
+    
     palette_magasine.push_back(    color_vec{red}    ,2   );
     palette_magasine.push_back(    color_vec{sodium} ,1   );
     palette_magasine.push_back(    color_vec{orange} ,1   );
  // palette_magasine.push_back(    color_vec{yellow} ,1   );
- // palette_magasine.push_back(    color_vec{gold}   ,1   );
- // palette_magasine.push_back(    color_vec{white}  ,1   );
+    palette_magasine.push_back(    color_vec{gold}   ,1   );
+    palette_magasine.push_back(    color_vec{white}  ,1   );
  // palette_magasine.push_back(    color_vec{cyan}   ,1   );
     palette_magasine.push_back(    color_vec{blue}   ,2   );
     palette_magasine.push_back(    color_vec{purple} ,1   );
@@ -59,14 +61,17 @@ void AnimationManager::init(){
     palette_magasine.push_back(    color_vec{gold, red}        ,3       );
     palette_magasine.push_back(    color_vec{gold, orange}     ,1       );
     palette_magasine.push_back(    color_vec{gold, sodium}     ,1       );
+    palette_magasine.push_back(    color_vec{gold, blue}       ,1       );
     palette_magasine.push_back(    color_vec{red, blue}        ,3       );
+    palette_magasine.push_back(    color_vec{magenta, blue}        ,3       );
     palette_magasine.push_back(    color_vec{red, purple}      ,3       );
     palette_magasine.push_back(    color_vec{gold, purple}     ,2       );
     palette_magasine.push_back(    color_vec{blue, purple}     ,1       );
     palette_magasine.push_back(    color_vec{cyan, purple}     ,1       );
     palette_magasine.push_back(    color_vec{cyan, red}        ,3       );
     palette_magasine.push_back(    color_vec{blue, cyan}       ,1       );
-
+    palette_magasine.push_back(    color_vec{purple, magenta}  ,1       );
+    palette_magasine.push_back(    color_vec{red, purple}      ,2       );
 }
 
 /** Based on the musical analysis (music.state) and the current time, this function 
@@ -75,6 +80,7 @@ void AnimationManager::init(){
  * them by color or style 
  * */
 void AnimationManager::random_update(){
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
 
         if (  frame.first_loop
               || (sampler.state_changed && (frame.t_current_ms-t_last_change_ms > TEMPO_ANIM_CHANGE))){
@@ -89,7 +95,8 @@ void AnimationManager::random_update(){
 }
 
 void AnimationManager::palette_update(){
-    
+    log(4, __FILE__, " ",__func__);
+
     if (  frame.first_loop
               || (sampler.state_changed && (frame.t_current_ms-t_last_change_ms > TEMPO_ANIM_CHANGE))){
             
@@ -115,6 +122,8 @@ void AnimationManager::palette_update(){
 
 // The purpose of this animation is to test ranges of animations or play with different control logics
 void AnimationManager::test_update(){
+    log(4, __FILE__, " ",__func__);
+
     static color_vec current_palette;
     static int palette_lifespan;
     /** Animation switch occurs based on different principles :
@@ -199,6 +208,8 @@ void AnimationManager::test_update(){
 }
 
 bool AnimationManager::test_animation(){
+    log(4, __FILE__, " ",__func__);
+
     bool success = false;
     balise(fcn::num_to_str((int)vec_anim_id.size()).data());
     for(vector<string>::iterator anim_id_it = vec_anim_id.begin(); anim_id_it != vec_anim_id.end(); anim_id_it++){
@@ -238,6 +249,8 @@ void BaseFixture::blackout(bool b){
 
 // deactivate fixture (display the "BLACK" animations)
 bool BaseFixture::activate_none(){
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
+
     this->active_animation = this->animations[0];
     this->active_animation->init();
 }
@@ -245,6 +258,8 @@ bool BaseFixture::activate_none(){
 // selects and init the i_th animation within the list (i being the argument).
 // If i out of range, select the first (black) 
 bool BaseFixture::activate_by_index(int i){
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
+
     if (i < this->animations.size())
         this->active_animation = this->animations[i];
     else
@@ -254,12 +269,16 @@ bool BaseFixture::activate_by_index(int i){
 
 // select and init an animtion randomly picked wihtin the list 
 bool BaseFixture::activate_random(){
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
+
     this->active_animation = this->animations[ rand()%this->animations.size() ];
     this->active_animation->init();
 }
 
 // select and init an animation with its ID. If the ID cannot be found within the existing animations, does nothing.
 bool BaseFixture::activate_by_ID(string id){
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
+
     bool found_it = false;
     
     for (vector<BaseAnimation*>::iterator anim_it = this->animations.begin(); anim_it != this->animations.end(); anim_it++){
@@ -278,6 +297,8 @@ bool BaseFixture::activate_by_ID(string id){
    All of the selected animations color must be listed in the palette, but all the palette's 
    color do not have to be listed in the animation's colors */
 bool BaseFixture::activate_by_color(color_vec arg_palette, AnimationType arg_type){
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
+
     int n_anim = this->animations.size();
 
     // copy the fixture's animation list

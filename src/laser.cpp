@@ -13,10 +13,14 @@ LaserFixture laser(13, 8, "Laser");
 #       ### #     #    #     #####  #     # ####### 
 */
 DMX_vec LaserFixture::buffer(){
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
+
     return DMX_vec{motor1, motor2, RGB[R], RGB[G], RGB[B], prog, motor_sync, freq_sync};
 }
 
 void LaserFixture::init(){
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
+
     // BLACK
     this->animations.push_back(new LaserAnimation1(this, 0,     color_vec{black},   " ",     "LAS.0", backer));
 
@@ -74,6 +78,8 @@ void LaserFixture::init(){
 
 // laser specific function to activate magenta animations when current palette contains pink
 bool LaserFixture::activate_by_color(color_vec arg_palette, AnimationType arg_type){
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
+
     for (auto col : arg_palette){
         if (col==pink)
             arg_palette.push_back(magenta);
@@ -94,5 +100,7 @@ bool LaserFixture::activate_by_color(color_vec arg_palette, AnimationType arg_ty
 #     # #     # ### #     # #     #    #    ### ####### #     #  #####  
 */
 void LaserAnimation1::new_frame(){
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
+
     
 }
