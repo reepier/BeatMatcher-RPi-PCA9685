@@ -34,6 +34,9 @@ public:
     int get_address() override {return this->address;};
     DMX_vec buffer() override;
 
+    bool activate_by_color(color_vec, AnimationType arg_type = any) override; // laser-specific override
+
+
 };
 extern LaserFixture laser;
 

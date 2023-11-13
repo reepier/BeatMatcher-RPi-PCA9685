@@ -28,7 +28,7 @@ using namespace std;
     ola::DmxBuffer ola_buffer;
 
 fix_vec ll_fxtrs = {&led, &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, &spot_7, &spider, &laser};
-fix_vec fixtures = {&front_rack, &back_rack, &led, &spider, &laser};
+fix_vec fixtures = {&led, &laser, &front_rack, &back_rack, &spider};
 
 bool process_arguments(int n, char* args[]){
     for (int i=1; i<n; i++){

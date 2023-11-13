@@ -11,11 +11,11 @@ using namespace std;
 #include <ola/DmxBuffer.h>
 #include <ola/client/StreamingClient.h>
 
-#include "config.h"
-#include "sysfcn.h"
-#include "music.h"
-#include "animator.h"
-#include "fixtures.h"
+#include "../include/config.h"
+#include "../include/sysfcn.h"
+#include "../include/music.h"
+#include "../include/animator.h"
+#include "../include/fixtures.h"
 
 // DMX output interface (OLA)
   ola::client::StreamingClient ola_client;
@@ -42,9 +42,13 @@ void send(){
     #ifndef LINUX_PC // if compiling on raspberrypi
     // Send frame to the PCA9685 module
     // Take into account the MASTER DIMMER value !! --> as late as possible, right before data is sent
-    setOffVals[LEDRed] = led.RGBout[R] * led.MASTER_DIMMER / 255.0;
-    setOffVals[LEDGreen] = led.RGBout[G] * led.MASTER_DIMMER / 255.0;
-    setOffVals[LEDBlue] = led.RGBout[B] * led.MASTER_DIMMER / 255.0;
+    setOffVals[LEDRed1] = led.RGBout[R] * led.MASTER_DIMMER / 255.0;
+    setOffVals[LEDGreen1] = led.RGBout[G] * led.MASTER_DIMMER / 255.0;
+    setOffVals[LEDBlue1] = led.RGBout[B] * led.MASTER_DIMMER / 255.0;
+    
+    setOffVals[LEDRed2] = led.RGBout[R] * led.MASTER_DIMMER / 255.0;
+    setOffVals[LEDGreen2] = led.RGBout[G] * led.MASTER_DIMMER / 255.0;
+    setOffVals[LEDBlue2] = led.RGBout[B] * led.MASTER_DIMMER / 255.0;
 
     PCA9685_setPWMVals(fd, addr, setOnVals, setOffVals);
 #endif // DEBUG
@@ -54,14 +58,6 @@ void send(){
     for (fix_vec::iterator fx = ll_fxtrs.begin(); fx != ll_fxtrs.end(); fx++){
         ola_buffer.SetRange((*fx)->get_address(), (*fx)->buffer().data(), (*fx)->get_nCH());
     }
-    // ola_buffer.SetRange(ll_fxtrs[0]->address, ll_fxtrs[0]->buffer().data(), ll_fxtrs[0]->nCH);
-    // ola_buffer.SetRange(led.address, led.buffer().data(), led.nCH);
-    // ola_buffer.SetRange(spot_g.address, spot_g.buffer().data(), spot_g.nCH);
-    // ola_buffer.SetRange(spot_d.address, spot_d.buffer().data(), spot_d.nCH);
-    // ola_buffer.SetRange(spot_1.address, spot_1.buffer().data(), spot_1.nCH);
-    // ola_buffer.SetRange(spot_2.address, spot_2.buffer().data(), spot_2.nCH);
-    // ola_buffer.SetRange(spot_3.address, spot_3.buffer().data(), spot_3.nCH);
-    // ola_buffer.SetRange(spider.address, spider.buffer().data(), spider.nCH);
 
     balise("OLAclient.send()");
     ola_client.SendDmx(1, ola_buffer);
@@ -101,63 +97,15 @@ int main(){
         PCA9685_initPWM(fd, addr, _PCA9685_MAXFREQ);
     #endif
 
-  // Chat GPT Example :
-    // std::vector<int> myVector = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    color_vec cp1 = {black, white};
+    color_vec cp2 = {red, black};
+    color_vec cp3 = {purple, orange};
+    color_vec cp4 = {white, black};
 
-    // std::cout << "Original Vector: ";
-    // for (const int& element : myVector) {
-    //     std::cout << element << " ";
-    // }
-    // std::cout << std::endl;
+    cout << (fcn::are_consistent(cp1, cp2) ? 1 : 0) << endl;
+    cout << (fcn::are_consistent(cp1, cp2, 2) ? 1 : 0) << endl;
 
-    // std::cout << "Random Order: ";
-    // readVectorInRandomOrder(myVector);
-
-
-    // #ifndef LINUX_PC // if compiling on raspberrypi
-    //   _PCA9685_DEBUG = 0;
-    //   _PCA9685_TEST = 0;
-
-    //   fd = PCA9685_openI2C(1, addr);
-    //   PCA9685_initPWM(fd, addr, _PCA9685_MAXFREQ);
-    // #endif
-
-    // while (true){
-    //   static uint8_t i=0;
-
-    //   led.RGBout=fcn::convert_8_to_12bits(DMX_vec{i,i,i});
-    //   send();
-    //   i+=10;
-    //   delay(100);
-    // }
-
-    // while (true){
-        // for (simpleColor c = orange; c<last_color; c = (simpleColor)(int)(c+1)){
-          // spot_1.RGBWout = front_rack.RGBW(c);
-          // spot_2.RGBWout = front_rack.RGBW(c);
-          // spot_3.RGBWout = front_rack.RGBW(c);
-          // for (simpleColor color : color_vec{red, c}){
-            // cout << colorName[(int)c] << endl;
-            // for (auto gain : int_vec{255}){
-              // led.RGBout = fcn::convert_8_to_12bits( led.RGB(color, gain) );
-              // send();
-              // delay(500);
-            // }
-          // }
-        // }
-    // }
-
-    while(true){
-      for (int i=500; i>0; i--){
-        led.RGBout = fcn::convert_8_to_12bits( led.RGB(white, i));
-        send();
-        delay(10);
-      }
-
-      for (int i=0; i<500; i++){
-        led.RGBout = fcn::convert_8_to_12bits( led.RGB(white, i));
-        send();
-        delay(10);
-      }
-    }
-}
+    cout << (fcn::are_consistent(cp1, cp3) ? 1 : 0) << endl;
+    cout << (fcn::are_consistent(cp1, cp4, 2) ? 1 : 0) << endl;
+    cout << (fcn::are_consistent(cp1, cp4, 1) ? 1 : 0) << endl;
+  }

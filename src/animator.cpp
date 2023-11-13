@@ -28,15 +28,15 @@ using namespace std;
 */
 
 void AnimationManager::init(){
-    palette_magasine.push_back(    color_vec{red}    ,1   );
+    palette_magasine.push_back(    color_vec{red}    ,2   );
     palette_magasine.push_back(    color_vec{sodium} ,1   );
     palette_magasine.push_back(    color_vec{orange} ,1   );
  // palette_magasine.push_back(    color_vec{yellow} ,1   );
  // palette_magasine.push_back(    color_vec{gold}   ,1   );
  // palette_magasine.push_back(    color_vec{white}  ,1   );
  // palette_magasine.push_back(    color_vec{cyan}   ,1   );
-    palette_magasine.push_back(    color_vec{blue}   ,1   );
- // palette_magasine.push_back(    color_vec{purple} ,1   );
+    palette_magasine.push_back(    color_vec{blue}   ,2   );
+    palette_magasine.push_back(    color_vec{purple} ,1   );
  // palette_magasine.push_back(    color_vec{magenta},1   );
  // palette_magasine.push_back(    color_vec{pink}   ,1   );
  // palette_magasine.push_back(    color_vec{green}  ,1   );
@@ -50,24 +50,21 @@ void AnimationManager::init(){
  // palette_magasine.push_back(     color_vec{white, cyan}      ,1      );
     palette_magasine.push_back(     color_vec{white, blue}      ,1      );
     palette_magasine.push_back(     color_vec{white, purple}    ,1      );
-    palette_magasine.push_back(     color_vec{white, magenta}   ,1      );
-    palette_magasine.push_back(     color_vec{white, pink}      ,1      );
-    palette_magasine.push_back(     color_vec{white, green}     ,1      );
+ // palette_magasine.push_back(     color_vec{white, magenta}   ,1      );
+ // palette_magasine.push_back(     color_vec{white, pink}      ,1      );
+ // palette_magasine.push_back(     color_vec{white, green}     ,1      );
 
 
     palette_magasine.push_back(    color_vec{cyan, magenta}    ,1       );
-    palette_magasine.push_back(    color_vec{gold, red}        ,1       );
+    palette_magasine.push_back(    color_vec{gold, red}        ,3       );
     palette_magasine.push_back(    color_vec{gold, orange}     ,1       );
     palette_magasine.push_back(    color_vec{gold, sodium}     ,1       );
-    palette_magasine.push_back(    color_vec{red, blue}        ,1       );
-    palette_magasine.push_back(    color_vec{red, purple}      ,1       );
- // palette_magasine.push_back(    color_vec{orange, purple}   ,1       );
+    palette_magasine.push_back(    color_vec{red, blue}        ,3       );
+    palette_magasine.push_back(    color_vec{red, purple}      ,3       );
+    palette_magasine.push_back(    color_vec{gold, purple}     ,2       );
     palette_magasine.push_back(    color_vec{blue, purple}     ,1       );
- // palette_magasine.push_back(    color_vec{pink, purple}     ,1       );
- // palette_magasine.push_back(    color_vec{cyan, pink}       ,1       );
- // palette_magasine.push_back(    color_vec{cyan, magenta}    ,1       );
     palette_magasine.push_back(    color_vec{cyan, purple}     ,1       );
-    palette_magasine.push_back(    color_vec{cyan, red}        ,1       );
+    palette_magasine.push_back(    color_vec{cyan, red}        ,3       );
     palette_magasine.push_back(    color_vec{blue, cyan}       ,1       );
 
 }
@@ -118,6 +115,8 @@ void AnimationManager::palette_update(){
 
 // The purpose of this animation is to test ranges of animations or play with different control logics
 void AnimationManager::test_update(){
+    static color_vec current_palette;
+    static int palette_lifespan;
     /** Animation switch occurs based on different principles :
      *  - (legacy) change when a MAX timer has elapsed AND when the Beat State changes
      *  - (new) Change when a custom, sequence specific  timer has elpased (i.e. -> to avoid long periods of stroboscopic animation); */
@@ -125,43 +124,77 @@ void AnimationManager::test_update(){
         || (sampler.state_changed && (frame.t_current_ms-t_last_change_ms > TEMPO_ANIM_CHANGE))
         || this->timer_elapsed()){
 
-        
-        // log(1, fcn::num_to_str((int)colorPalette.size()));
-        static color_vec current_palette;
-        static int palette_lifespan = 5;
-        
-        if (frame.first_loop || palette_lifespan == 0){
-            // color_vec::size_type i = rand_min_max(0, colorPalettes.size());
+
+        if (frame.first_loop){
             current_palette = palette_magasine.get_random_palette();
             palette_lifespan = 5;
         }
 
+        if (frame.first_loop || palette_lifespan == 0){
+            // color_vec::size_type i = rand_min_max(0, colorPalettes.size());
+            current_palette = palette_magasine.get_similar_palette(current_palette);
+            // switch(current_palette.size()){
+	    	// case 1 :
+	    	// 	palette_lifespan = 2;
+			//     break;
+		    // case 2 :
+			//     palette_lifespan = 5;
+			//     break;
+		    // default :
+			//     palette_lifespan = 5;
+			// break;
+            // }   
+	        palette_lifespan = 1;
+        }
+
         // select a leader among Led bars, Front rack, and Laser
-        auto lead_fix = fcn::random_pick(fix_vec{&led, &front_rack, & laser}, {5, 2, 1});
+        auto lead_fix = fcn::random_pick(fix_vec{&led, &front_rack, & laser}, {4, 2, 1});
+        
         // reference the other fixtures as "backer fixtures" in a vector (for ease of acccess & modularity)
         fix_vec backer_fix;
-        for (auto fix : fixtures){
+        for (auto fix : fix_vec{&led, &front_rack, &laser}){
             if (fix->name != lead_fix->name){
                 backer_fix.push_back(fix);
             }
         }
+        // sort the backer fixtures in a random order
+        random_device rd;
+        mt19937 rng(rd());
+        shuffle(backer_fix.begin(), backer_fix.end(), rng);
+
+        /** pick randomly how many backer fixtures will light up to back the leader fixture
+         *  3 time out of 6 there should be 2 backer (3 fixtures total)
+         *  2 time out of 6 there should be 1 backer
+         *  1 tme out of 6 there should be NO backer */
+        int back_fix_n = fcn::random_pick( int_vec{2,1,0}, int_vec{3,2,1} );
 
         lead_fix->activate_by_color(current_palette, leader);
-        for (auto fix : backer_fix){
-            fix->activate_by_color(current_palette, backer);
+        for (int i = 0; i<backer_fix.size(); i++){
+            if (i<back_fix_n)
+                backer_fix[i]->activate_by_color(current_palette, backer);
+            else
+                backer_fix[i]->activate_none();
         }
+        back_rack.activate_by_color(current_palette);   // deal with the backstage rack separately
 
         // log the results
-        log(1, "Color palette : ", fcn::palette_to_string(current_palette, '/')," ", fcn::num_to_str(palette_lifespan), " Leader : ", lead_fix->name);
+        log(1, "Color palette ", fcn::palette_to_string(current_palette, '/')," ", fcn::num_to_str(palette_lifespan), " | Leader->", lead_fix->name, " ", fcn::num_to_str(back_fix_n), " backers");
         
         t_last_change_ms = frame.t_current_ms;
         palette_lifespan-- ;
     }
 
-    //TODO : use the same color palette several times in a row with different combination of Leader/backer (changes are too harsh otherwise)
-    //TODO : switch to neighboring palette to avoid incosistent color transition (orange -> pink looks bad) 
-    //TODO randomize the number of backer animations
+    //TODO : randomize the number of backer animations (between 0 to 2)
     //TODO : give different weight to every palette so that 
+
+    static time_t last_spider_switch = 0;
+    // Manage Lyre :
+    if (frame.t_current_ms - last_spider_switch > SPIDER_ANI_DURA){
+        spider.activate_random();
+        // log(1, "Switch Spider animation --> ", spider.active_animation->description);
+        last_spider_switch = frame.t_current_ms;
+    }
+
 }
 
 bool AnimationManager::test_animation(){
@@ -291,7 +324,7 @@ bool BaseFixture::activate_by_color(color_vec arg_palette, AnimationType arg_typ
 void AnimationManager::set_timer(time_t duration_ms){
     this->timer_start_ms = frame.t_current_ms;
     this->timer_duration_ms = duration_ms;
-    this-> timer_end_ms = frame.t_current_ms + duration_ms;
+    this->timer_end_ms = frame.t_current_ms + duration_ms;
 }
 void AnimationManager::reset_timer(){
     this->timer_start_ms = 0;

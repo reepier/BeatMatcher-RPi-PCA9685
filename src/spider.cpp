@@ -15,19 +15,19 @@ void SpiderFixture::init(){
 
     // push the animations:
     // Animation TYPE 1
-    
-    this->animations.push_back(new SpiderAnimation1(this, red,     0, 0,    int_vec{-10,135,135},  "Red static (coin chill)",       "SPI.1"));
-    this->animations.push_back(new SpiderAnimation1(this, sodium,  120, 0,  int_vec{135,-10,135},  "Sodium static (coin chill)",    "SPI.2"));
-    this->animations.push_back(new SpiderAnimation1(this, orange,  240, 0,  int_vec{135,135,-10},  "Orange static (coin chill)",    "SPI.3"));
-    this->animations.push_back(new SpiderAnimation1(this, yellow,  0, 0,    int_vec{-10,135,135},  "Yellow static (coin chill)",    "SPI.4"));
-    this->animations.push_back(new SpiderAnimation1(this, gold,    120, 0,  int_vec{135,-10,135},  "Gold static (coin chill)",      "SPI.5"));
-    this->animations.push_back(new SpiderAnimation1(this, white,   240, 0,  int_vec{135,135,-10},  "White static (coin chill)",     "SPI.6"));
-    this->animations.push_back(new SpiderAnimation1(this, cyan,    0, 0,    int_vec{-10,135,135},  "Cyan static (coin chill)",      "SPI.7"));
-    this->animations.push_back(new SpiderAnimation1(this, blue,    120, 0,  int_vec{135,-10,135},  "Blue static (coin chill)",      "SPI.8"));
-    this->animations.push_back(new SpiderAnimation1(this, purple,  240, 0,  int_vec{135,135,-10},  "Purple static (coin chill)",    "SPI.9"));
-    this->animations.push_back(new SpiderAnimation1(this, magenta, 0, 0,    int_vec{-10,135,135},  "Magenta static (coin chill)",   "SPI.10"));
-    this->animations.push_back(new SpiderAnimation1(this, pink,    120, 0,  int_vec{135,-10,135},  "Pink static (coin chill)",      "SPI.11"));
-    this->animations.push_back(new SpiderAnimation1(this, green,   240, 0,  int_vec{135,135,-10},  "Green static (coin chill)",     "SPI.12"));
+    int high_pos = 135, low_pos = -10;
+    this->animations.push_back(new SpiderAnimation1(this, red,     0, 0,    int_vec{low_pos,high_pos,high_pos},  "Red static (coin chill)",       "SPI.1"));
+    // this->animations.push_back(new SpiderAnimation1(this, sodium,  120, 0,  int_vec{high_pos,low_pos,high_pos},  "Sodium static (coin chill)",    "SPI.2"));
+    // this->animations.push_back(new SpiderAnimation1(this, orange,  240, 0,  int_vec{high_pos,high_pos,low_pos},  "Orange static (coin chill)",    "SPI.3"));
+    this->animations.push_back(new SpiderAnimation1(this, yellow,  0, 0,    int_vec{low_pos,high_pos,high_pos},  "Yellow static (coin chill)",    "SPI.4"));
+    // this->animations.push_back(new SpiderAnimation1(this, gold,    120, 0,  int_vec{high_pos,low_pos,high_pos},  "Gold static (coin chill)",      "SPI.5"));
+    this->animations.push_back(new SpiderAnimation1(this, white,   240, 0,  int_vec{high_pos,high_pos,low_pos},  "White static (coin chill)",     "SPI.6"));
+    // this->animations.push_back(new SpiderAnimation1(this, cyan,    0, 0,    int_vec{low_pos,high_pos,high_pos},  "Cyan static (coin chill)",      "SPI.7"));
+    // this->animations.push_back(new SpiderAnimation1(this, blue,    120, 0,  int_vec{high_pos,low_pos,high_pos},  "Blue static (coin chill)",      "SPI.8"));
+    this->animations.push_back(new SpiderAnimation1(this, purple,  240, 0,  int_vec{high_pos,high_pos,low_pos},  "Purple static (coin chill)",    "SPI.9"));
+    // this->animations.push_back(new SpiderAnimation1(this, magenta, 0, 0,    int_vec{low_pos,high_pos,high_pos},  "Magenta static (coin chill)",   "SPI.10"));
+    // this->animations.push_back(new SpiderAnimation1(this, pink,    120, 0,  int_vec{high_pos,low_pos,high_pos},  "Pink static (coin chill)",      "SPI.11"));
+    // this->animations.push_back(new SpiderAnimation1(this, green,   240, 0,  int_vec{high_pos,high_pos,low_pos},  "Green static (coin chill)",     "SPI.12"));
     // this->animations.push_back(new SpiderAnimation1(this, white,    0, 20, int_vec{20,20,20},  "White, 20°, slow", "SPI.1.2"));
     // this->animations.push_back(new SpiderAnimation1(this, blue,    0, -20, int_vec{130,130,130},  "Blue, 130°, slow", "SPI.1.3"));
 

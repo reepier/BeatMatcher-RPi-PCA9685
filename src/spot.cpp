@@ -75,17 +75,16 @@ void SpotRack::init(){
         this->animations.push_back(new SpotRackAnimation2(this, pink,      STRB_FASTEST, "pink, VFAST strobe",      "FR.1.1.11",    leader));
         this->animations.push_back(new SpotRackAnimation2(this, magenta,   STRB_FASTEST, "magenta, VFAST strobe",   "FR.1.1.10",    leader));
         this->animations.push_back(new SpotRackAnimation2(this, purple,    STRB_FASTEST, "purple, VFAST strobe",    "FR.1.1.9",     leader));
-
-
-        this->animations.push_back(new SpotRackAnimation2(this, white,     STRB_SLOW, "white, SLW strobe",     "FR.1.4.6",  leader));
-        this->animations.push_back(new SpotRackAnimation2(this, gold,      STRB_SLOW, "gold, SLW strobe",      "FR.1.4.5",  leader));
-        this->animations.push_back(new SpotRackAnimation2(this, cyan,      STRB_SLOW, "cyan, SLW strobe",      "FR.1.4.7",  leader));
-        this->animations.push_back(new SpotRackAnimation2(this, red,       STRB_SLOW, "red, SLW strobe",       "FR.1.4.1",  leader));
-        this->animations.push_back(new SpotRackAnimation2(this, blue,      STRB_SLOW, "blue, SLW strobe",      "FR.1.4.8",  leader));
-        this->animations.push_back(new SpotRackAnimation2(this, pink,      STRB_SLOW, "pink, SLW strobe",      "FR.1.4.11", leader));
-        this->animations.push_back(new SpotRackAnimation2(this, magenta,   STRB_SLOW, "magenta, SLW strobe",   "FR.1.4.10", leader));
-        this->animations.push_back(new SpotRackAnimation2(this, purple,    STRB_SLOW, "purple, SLW strobe",    "FR.1.4.9",  leader));
-
+	    // Slow strobe
+        this->animations.push_back(new SpotRackAnimation2(this, white,     STRB_SLOW, "white, SLW strobe",     "FR.1.4.6",  backer));
+        this->animations.push_back(new SpotRackAnimation2(this, gold,      STRB_SLOW, "gold, SLW strobe",      "FR.1.4.5",  backer));
+        this->animations.push_back(new SpotRackAnimation2(this, cyan,      STRB_SLOW, "cyan, SLW strobe",      "FR.1.4.7",  backer));
+        this->animations.push_back(new SpotRackAnimation2(this, red,       STRB_SLOW, "red, SLW strobe",       "FR.1.4.1",  backer));
+        this->animations.push_back(new SpotRackAnimation2(this, blue,      STRB_SLOW, "blue, SLW strobe",      "FR.1.4.8",  backer));
+        this->animations.push_back(new SpotRackAnimation2(this, pink,      STRB_SLOW, "pink, SLW strobe",      "FR.1.4.11", backer));
+        this->animations.push_back(new SpotRackAnimation2(this, magenta,   STRB_SLOW, "magenta, SLW strobe",   "FR.1.4.10", backer));
+        this->animations.push_back(new SpotRackAnimation2(this, purple,    STRB_SLOW, "purple, SLW strobe",    "FR.1.4.9",  backer));
+ 
         // Animation 1
         // Bubbles (short & fast) --> to be used as solo animation during breaks
         this->animations.push_back(new SpotRackAnimation1(this, black,    white,       1000, 600,   "white fast bubbles",       "FR.2.1.6", leader));
@@ -266,6 +265,7 @@ DMX_vec SpotRack::RGBW(simpleColor c, int intensity){
 #     # #    ##  #  #     # #     #    #     #  #     # #    ## #     #                #   
 #     # #     # ### #     # #     #    #    ### ####### #     #  #####               ##### 
 */
+// Bubbles
 void SpotRackAnimation1::init(){
     BaseAnimation::init();
     this->fixture->reset_spots();
@@ -334,6 +334,7 @@ void SpotRackAnimation1::new_frame(){
 #     # #    ##  #               #          
 #     # #     # ###              #######    
 */
+// Stroboscope
 void SpotRackAnimation2::shake(){  //randomizes the strob speeds on request
     for (DMX_vec::iterator spd = this->strobe_spds.begin(); spd != this->strobe_spds.end(); spd++){
         (*spd) = (strobe_min<strobe_max)? rand_min_max( this->strobe_min , this->strobe_max ) : this->strobe_max; // initialize each strobe with a slightly different frequency
@@ -344,10 +345,9 @@ void SpotRackAnimation2::shake(){  //randomizes the strob speeds on request
 
 void SpotRackAnimation2::init(){
     BaseAnimation::init();
-
     this->t_next_shake = frame.t_current_ms + 2000;
     this->shake();
-
+    animator.set_timer(STROBE_ANI_DURA);
     // log(1, "Min:", fcn::num_to_str(strobe_min), " Max:", fcn::num_to_str(strobe_max));
 
 }
@@ -365,7 +365,11 @@ void SpotRackAnimation2::new_frame(){
         this->t_next_shake += 2000; 
     }
     for (int i = 0; i<n_spots; i++){
-        spots[i]->RGBWout  = this->fixture->RGBW(this->color);
+        if (sampler.state == BEAT)
+            spots[i]->RGBWout  = this->fixture->RGBW(this->color);
+        else    
+            spots[i]->RGBWout  = this->fixture->RGBW(black);
+
 
         spots[i]->strobe = (int)(this->strobe_spds[i]); // min(max( (int)(this->strobe_spds[i] * (1 + delta*sin(i*M_PI/3 + 2*M_PI*t/3000)))  ,0),255);
         // spots[i]->strobe = min(max( rand_min_max(this->strobe_spds[i] * (1-delta) , this->strobe_spds[i] * (1+delta))  ,0),255);

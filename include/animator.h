@@ -162,29 +162,65 @@ namespace fcn{
 
     return (T)0;    //TODO bellec ce casting est bancale AF
   }
-}
+
+  // Color functions
+  // check wether color palettes cp1 and cp2 have at least n color in common
+  inline bool are_consistent(color_vec cp1, color_vec cp2, int n = 1){
+    int common_col = 0;
+    for (auto c1 : cp1){
+      for (auto c2 : cp2){
+        if (c1 == c2)
+          common_col++;
+      }
+    }
+
+    return common_col>=n;
+  }
+
+} 
 
 class ColorPaletteMagazine{
     std::vector<color_vec>   color_palettes;
     int_vec     probas;
 
   public:
+
     void push_back(color_vec palette, int proba){
         color_palettes.push_back(palette);
         probas.push_back(proba);
     }
 
-    int get_size(){return color_palettes.size();}
+    int size(){return color_palettes.size();}
+    
     //returns a random palette within the magasine (weighed by proba)
     color_vec get_random_palette(){return fcn::random_pick(color_palettes, probas);}
+    
     // returns a palette with at least 1 common color with the palette passed as argument (wweighed by prba if several candidates exist)
     color_vec get_similar_palette(color_vec current_palette){
         //list candidates
-
+        ColorPaletteMagazine candidates;
+        for (int i = 0; i<this->size(); i++){
+          if (fcn::are_consistent(this->color_palettes[i], current_palette)){
+            candidates.push_back(this->color_palettes[i], this->probas[i]);
+          }
+        }
         // choses randomly taking proba into account
-         
+        if (candidates.size() !=0 ){
+          return candidates.get_random_palette();
+        }else{
+          log(1, "No similar color palette exist... ", fcn::palette_to_string(current_palette, '/'));
+          return this->get_random_palette();
+        }
     }
+
+    color_vec get_similar_palette(){
+      return this->get_random_palette();
+    }
+
+    // TODO do not return the same colorpalette as the one passed as argument
+    //    -> worst acse, return a random animaiton to get out of the color well
 };
+
 
 /**-------------------------------------------------------------------------------------------
    #                                                    #     #               
@@ -248,7 +284,7 @@ class BaseFixture{
     anim_vec animations;
 
     //constructor (adresse [0-511], number of channels, fixture's name)
-    BaseFixture(int addr,int ch, std::string nm, int i, uint8_t mast): address(addr), nCH(ch), name(nm), id(i), MASTER_DIMMER(mast){log(1, "Base.", this->name, " : ", fcn::num_to_str(mast), "/", fcn::num_to_str(MASTER_DIMMER));};
+    BaseFixture(int addr,int ch, std::string nm, int i, uint8_t mast): address(addr), nCH(ch), name(nm), id(i), MASTER_DIMMER(mast){};
     virtual void init()=0;
 
     //animation management
@@ -257,7 +293,7 @@ class BaseFixture{
     bool activate_by_index(int);
     bool activate_random();
     bool activate_by_ID(std::string);
-    bool activate_by_color(color_vec, AnimationType arg_type = any); //additionnal argument to orient the activation toward a leading or backing aniation
+    virtual bool activate_by_color(color_vec, AnimationType arg_type = any); //additionnal argument to orient the activation toward a leading or backing aniation
 
     //DMX output
     virtual int get_address() = 0;

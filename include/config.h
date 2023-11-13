@@ -26,3 +26,6 @@ extern std::vector<std::string> vec_anim_id;
 #define     MAX_CONT_FLASH      120000          // 120000
 #define     TEMPO_ANIM_CHANGE   20000          // 240000
 #define     MASTERDIMMER        1.0             //fraction --> must be decimal (literal float) !!!
+
+#define     SPIDER_ANI_DURA     600000 
+#define     STROBE_ANI_DURA     30000

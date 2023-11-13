@@ -48,7 +48,7 @@ public:
   // int nCH = 4;
 
   // Constructor & Initializer
-  LEDFixture(int addr, int ch, std::string nm, int id, uint8_t mast=255) : BaseFixture(addr, ch, nm, id,  mast){log(1, "LED master : ", fcn::num_to_str(mast), "/",fcn::num_to_str(MASTER_DIMMER));};
+  LEDFixture(int addr, int ch, std::string nm, int id, uint8_t mast=255) : BaseFixture(addr, ch, nm, id,  mast){};
   void init() override;
 
   // Get functions
