@@ -51,6 +51,7 @@ void SoundAnalyzer::update(){
 
 #ifndef LINUX_PC
 void SoundAnalyzer::_record(){
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
 
     unsigned long next_us = micros();
     clipping = false;
@@ -73,6 +74,8 @@ void SoundAnalyzer::_record(){
 #endif
 
 void SoundAnalyzer::_process_record(){
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
+
     _remove_DC_value();
     _compute_FFT();
       
@@ -91,6 +94,8 @@ void SoundAnalyzer::_process_record(){
 }
 
 void SoundAnalyzer::_update_beats(){
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
+
     // check for raw_beat
     // Compare current level to threshold and control LED
     if (volume >= beat_threshold){
@@ -117,6 +122,8 @@ void SoundAnalyzer::_update_beats(){
     // if phrase analysis enable flag is TRUE, analyze & compute statistics
 
 void SoundAnalyzer::_update_state(){
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
+
     // update system state 
     switch (state){     
         // If Beat Tracking
@@ -172,6 +179,8 @@ void SoundAnalyzer::_update_state(){
 }
 
 void SoundAnalyzer::_update_beat_threshold(){
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
+
     if (_condition_for_analyis() && state != BREAK){
           beat_threshold = volume_percentile(90) * (float)1/10 + beat_threshold*(float)9/10;
         }
