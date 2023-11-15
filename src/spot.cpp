@@ -187,6 +187,8 @@ void SpotRack::init(){
         this->animations.push_back(new SpotRackAnimation1(this, purple,  pink,   3000, 1500, "pink bubbles, purple background",    "BR.1.4.10", backer));
         this->animations.push_back(new SpotRackAnimation1(this, purple,  cyan,   3000, 1500, "cyan bubbles, purple background",    "BR.1.4.11", backer));
         this->animations.push_back(new SpotRackAnimation1(this, pink,    cyan,   3000, 1500, "cyan bubbles, pink background",      "BR.1.4.12", backer));
+        this->animations.push_back(new SpotRackAnimation1(this, purple,  red,    3000, 1500, "purple bubbles,red background",      "BR.1.4.13", backer));
+        this->animations.push_back(new SpotRackAnimation1(this, red,     purple, 3000, 1500, "red bubbles, purple background",     "BR.1.4.14", backer));
         
         break;
         default:
