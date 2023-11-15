@@ -18,6 +18,8 @@
 SoundAnalyzer sampler;
 
 void SoundAnalyzer::init(){
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
+
     // initializa connection with MCP3008 ADC
     #ifndef LINUX_PC
         adc.connect();
@@ -28,6 +30,8 @@ void SoundAnalyzer::init(){
 }
 
 void SoundAnalyzer::update(){
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
+
     time_t t = frame.t_current_ms;
     #ifndef LINUX_PC
     if(!b_NO_MUSIC){
@@ -47,6 +51,7 @@ void SoundAnalyzer::update(){
 
 #ifndef LINUX_PC
 void SoundAnalyzer::_record(){
+
     unsigned long next_us = micros();
     clipping = false;
     deb_max=MCP3008_MIN, deb_min=MCP3008_MAX;

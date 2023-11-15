@@ -18,7 +18,7 @@ LEDFixture led(0, 13, "Led Bars", 1, 255);
 
 // Fixture initalizer
 void LEDFixture::init(){
-    log(4, __FILE__, " ",__func__);
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
 
     animations.push_back(new LEDAnimation1(this, black,  black,  " ",    "LED.0.0", backer));
 
@@ -116,7 +116,7 @@ void LEDFixture::init(){
 }
 
 DMX_vec LEDFixture::buffer(){
-    log(4, __FILE__, " ",__func__);
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
 
     int_vec RGBcoarse = {0,0,0};
     int_vec RGBfine = {0,0,0};
@@ -146,7 +146,7 @@ DMX_vec LEDFixture::buffer(){
 */
 // Animation initializer
 void LEDAnimation1::init(){
-    log(4, __FILE__, " ",__func__);
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
 
     BaseAnimation::init();
     for (int_vec::iterator per_it=periods_ms.begin(); per_it!=periods_ms.end(); per_it++){
@@ -156,7 +156,7 @@ void LEDAnimation1::init(){
 // does nothing
 /** Computes the RGB values to send to the led display based on : */
 void LEDAnimation1::new_frame(){
-    log(4, __FILE__, " ",__func__);
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
 
     unsigned long t_ms = frame.t_current_ms;
     unsigned long t_last_beat_ms = sampler.t_last_new_beat;
@@ -197,7 +197,7 @@ void LEDAnimation1::new_frame(){
 #     #  #####  ######   ## ##     #        ####  #    # 
 */
 DMX_vec LEDFixture::RGB(simpleColor c, int intensity){
-    log(4, __FILE__, " ",__func__);
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
 
     DMX_vec temp;
     int ref_int = 255;          // reference intensity, set for each color to get a constnat luminosity trhoughtou the palette

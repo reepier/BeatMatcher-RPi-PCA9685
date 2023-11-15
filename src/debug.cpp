@@ -37,6 +37,8 @@ WINDOW *consolew;
 #define C3 80
 
 void init_display(){
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
+
 
     initscr();
     // noecho();
@@ -72,6 +74,8 @@ void init_display(){
 #     #  ####   ####  #  ####  
 */
 void disp_music_window(){
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
+
     
     //initialize
     curs_set(0);
@@ -174,6 +178,8 @@ void disp_music_window(){
 #######  ####    #   #       ####    #   
 */
 void disp_output_window(){
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
+
 //initialize
     curs_set(0);
     werase(outputw);
@@ -203,6 +209,8 @@ void disp_output_window(){
 }
 
 void disp_animation_window(){
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
+
 //initialize
     curs_set(0);
     werase(animw);
@@ -229,6 +237,8 @@ void disp_animation_window(){
  #####  ###### #    # ###### #    # #    # ###### 
 */
 void disp_general_window(){
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
+
 //initialize
     curs_set(0);
     werase(generalw);
@@ -259,6 +269,8 @@ void disp_general_window(){
 */
 
 void disp_console_window(){
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
+
     curs_set(0);
     werase(consolew);
     box(consolew, ACS_VLINE, ACS_HLINE);
@@ -283,6 +295,8 @@ void disp_console_window(){
 }
 
 void display_curse(){
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
+
     
     // balise("*********music window");
     disp_music_window();
@@ -308,6 +322,8 @@ void display_curse(){
 }
 /** Displays Critical variables in real time on the console */
 void display(){
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
+
     
     cout << "\x1B[2J\x1B[H";// << flush;
     cout << "//// MUSIQUE /////\n";
