@@ -159,11 +159,12 @@ public:
     std::vector<unsigned long> t_prev; // timestamp of the prev rise () (memory)
 
     // fixture, color bckgd, color flash, oscil. period(ms)  max , min, mean time btwn flashes (ms), flash duration(ms), description, id
-    SpotRackAnimation1(SpotRack *f, simpleColor b_col, simpleColor f_col, int prand, int flen, std::string d, std::string i, AnimationType t){
+    SpotRackAnimation1(SpotRack *f, simpleColor b_col, simpleColor f_col, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio){
         this->description = d;
         this->id = i;
         this->fixture = f;
         this->type = t;
+        this->priority = prio;
     
         this->flash_color = this->fixture->RGBW(f_col);
         if (f_col==black)
@@ -179,7 +180,7 @@ public:
         this->update_palette(color_vec{b_col, f_col});
     }
     // overloaded constructor to create the same animation without flash (everything else being equal)
-    SpotRackAnimation1(SpotRack *f, simpleColor b_col, int prand, int flen, std::string d, std::string i, AnimationType t) : SpotRackAnimation1(f, b_col, b_col, prand, flen, d, i, t){
+    SpotRackAnimation1(SpotRack *f, simpleColor b_col, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio) : SpotRackAnimation1(f, b_col, b_col, prand, flen, d, i, t, prio){
         this->flash_activation = false;
     }
 
@@ -208,11 +209,12 @@ class SpotRackAnimation2 : public SpotRackAnimtion{
     const double deltaDmax = 0;  // absolute random variation of speed @DMX_max
     
 
-    SpotRackAnimation2(SpotRack *f, simpleColor c, uint8_t speed, std::string d, std::string i, AnimationType t){
+    SpotRackAnimation2(SpotRack *f, simpleColor c, uint8_t speed, std::string d, std::string i, AnimationType t, uint8_t prio){
         this->description = d;
         this->id = i;
         this->fixture = f;
         this->type = t;
+        this->priority = prio;
 
         this->color =  c;
         this->strobe_spd = speed;

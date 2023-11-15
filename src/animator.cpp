@@ -229,6 +229,27 @@ bool AnimationManager::test_animation(){
     return success;
 }
 
+void AnimationManager::set_timer(time_t duration_ms){
+    this->timer_start_ms = frame.t_current_ms;
+    this->timer_duration_ms = duration_ms;
+    this->timer_end_ms = frame.t_current_ms + duration_ms;
+}
+void AnimationManager::reset_timer(){
+    this->timer_start_ms = 0;
+    this->timer_duration_ms = 0;
+    this-> timer_end_ms = 0;
+}
+bool AnimationManager::timer_elapsed(){
+    bool ret = this->timer_start_ms == 0 && this->timer_duration_ms == 0 && this->timer_end_ms == 0 ? false : 
+             frame.t_current_ms - this->timer_start_ms > this->timer_duration_ms ? true : false;
+
+    if (ret) {
+        this->reset_timer();   // reset timer when timer has elapsed
+        log(2, "Stroboscopic animations time out...");
+    }
+    return ret;
+}
+
 AnimationManager animator;
 
 
@@ -300,7 +321,8 @@ bool BaseFixture::activate_by_color(color_vec arg_palette, AnimationType arg_typ
     log(4, __FILE__, " ",__LINE__, " ", __func__);
 
     int n_anim = this->animations.size();
-
+    anim_vec candidates;
+    int_vec probas;
     // copy the fixture's animation list
         anim_vec fixtures_anim_list = this->animations;
         fixtures_anim_list.erase(fixtures_anim_list.begin());    // avoid black animation
@@ -310,7 +332,7 @@ bool BaseFixture::activate_by_color(color_vec arg_palette, AnimationType arg_typ
         mt19937 rng(rd());
         shuffle(fixtures_anim_list.begin(), fixtures_anim_list.end(), rng);
 
-    bool found_it = false;
+    // bool found_it = false;
     this->activate_none(); // start by resetting the fixture to the black animation
     // Parse through the animations'list (in a random order) and select the first anim that matches the palette
     // All the animation's color must be listed int h
@@ -333,36 +355,31 @@ bool BaseFixture::activate_by_color(color_vec arg_palette, AnimationType arg_typ
 
             // if the animation is a match, activate it and exit the for loop and return true, else deactivate the fixture (by activating the black animation)
             if (animation_match){
-                found_it = true;
-                this->activate_by_ID(each_animation->id);
-                break;
+
+                candidates.push_back(each_animation);
+                probas.push_back(each_animation->priority);
+
+                // found_it = true;
+                // this->activate_by_ID(each_animation->id);
+                // break;
             }
         }
 
-    return found_it;
+    
+    if (candidates.size()>0){
+        BaseAnimation* anim = fcn::random_pick(candidates, probas);
+        this->activate_by_ptr(anim);
+    }
+
+    return candidates.size()>0 ;
 }   
 
+bool BaseFixture::activate_by_ptr(BaseAnimation * anim_ptr){
+    this->active_animation = anim_ptr;
+    this->active_animation->init();
+}
 
-void AnimationManager::set_timer(time_t duration_ms){
-    this->timer_start_ms = frame.t_current_ms;
-    this->timer_duration_ms = duration_ms;
-    this->timer_end_ms = frame.t_current_ms + duration_ms;
-}
-void AnimationManager::reset_timer(){
-    this->timer_start_ms = 0;
-    this->timer_duration_ms = 0;
-    this-> timer_end_ms = 0;
-}
-bool AnimationManager::timer_elapsed(){
-    bool ret = this->timer_start_ms == 0 && this->timer_duration_ms == 0 && this->timer_end_ms == 0 ? false : 
-             frame.t_current_ms - this->timer_start_ms > this->timer_duration_ms ? true : false;
 
-    if (ret) {
-        this->reset_timer();   // reset timer when timer has elapsed
-        log(2, "Stroboscopic animations time out...");
-    }
-    return ret;
-}
 
 /** -----------------------------------
 #######                                                   

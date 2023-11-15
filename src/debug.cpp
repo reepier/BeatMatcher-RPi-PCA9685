@@ -163,6 +163,8 @@ void disp_music_window(){
     }
     #endif
     // mvwprintw(...
+
+    //TODO print a gauge bar with break indicator vs break threshold 
     wrefresh(musicw);
 }
 

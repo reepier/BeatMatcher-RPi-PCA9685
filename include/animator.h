@@ -294,7 +294,7 @@ class BaseFixture{
     bool activate_random();
     bool activate_by_ID(std::string);
     virtual bool activate_by_color(color_vec, AnimationType arg_type = any); //additionnal argument to orient the activation toward a leading or backing aniation
-
+    bool activate_by_ptr(BaseAnimation*);
     //DMX output
     virtual int get_address() = 0;
     virtual int get_nCH()     = 0;
@@ -323,8 +323,9 @@ class BaseAnimation{
     AnimationType type = any;
     unsigned long t_animation_start_ms; // times at which the animation was last activated
     unsigned long frame_cpt;            // number of frame computed since activation
-    color_vec color_palette;              // lists the colors used in the animation (initialized by constructor)
-    
+    color_vec color_palette;            // lists the colors used in the animation (initialized by constructor)
+    int priority = 1;                  // weight on the priority list (animations with higher priority will be have higher chance of activation)
+
     bool is_monochrome(){return (color_palette.size() == 1);};
     
     virtual void new_frame(){
