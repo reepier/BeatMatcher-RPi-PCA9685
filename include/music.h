@@ -24,7 +24,7 @@
 #define CLIP_MARGIN 80
 
 // thresholds
-#define THD_toBK 45     // Volume Threshold to go from state X to BREAK  mode
+#define THD_toBK 30     // Volume Threshold to go from state X to BREAK  mode
 #define THD_BTtoBS 3    // Threshold to go from BEAT TRACKING to BAD SIGNAL mode
 #define THD_BStoBT 5    // Threshold to go from  BAD SIGNAL to BEAT TRACKING mode
 
