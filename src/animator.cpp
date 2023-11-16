@@ -206,10 +206,10 @@ void AnimationManager::test_update(){
         palette_lifespan-- ;
     }
 
-    static time_t last_spider_switch = 0;
     // Manage Lyre :
+    static time_t last_spider_switch = 0;
     if (frame.t_current_ms - last_spider_switch > SPIDER_ANI_DURA){
-        spider.activate_random();
+        spider.activate_random(false);
         // log(1, "Switch Spider animation --> ", spider.active_animation->description);
         last_spider_switch = frame.t_current_ms;
     }
@@ -298,10 +298,12 @@ bool BaseFixture::activate_by_index(int i){
 }
 
 // select and init an animtion randomly picked wihtin the list 
-bool BaseFixture::activate_random(){
+bool BaseFixture::activate_random(bool include_black){
     log(4, __FILE__, " ",__LINE__, " ", __func__);
-
-    this->active_animation = this->animations[ rand()%this->animations.size() ];
+    if (include_black)
+        this->active_animation = this->animations[ rand()%(this->animations.size())];
+    else
+        this->active_animation = this->animations[ rand()%(this->animations.size()-1) +1];
     this->active_animation->init();
 }
 

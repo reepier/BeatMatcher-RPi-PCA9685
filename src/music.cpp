@@ -8,6 +8,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <climits>
 
 #include "config.h"
 #include "debug.h"
@@ -52,6 +53,11 @@ void SoundAnalyzer::update(){
 #ifndef LINUX_PC
 void SoundAnalyzer::_record(){
     log(4, __FILE__, " ",__LINE__, " ", __func__);
+
+    if (micros() > (ULLONG_MAX - SAMPLE_SIZE*1000000/SAMPLING_FREQ)){ // if micros() is about to overflow
+        log(4, micros(), " ",ULLONG_MAX," ", SAMPLE_SIZE*1000000/SAMPLING_FREQ);
+        delayMicroseconds(SAMPLE_SIZE*1000000/SAMPLING_FREQ*2); // wait for the overflow to complete & resume
+    }
 
     unsigned long next_us = micros();
     clipping = false;

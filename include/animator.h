@@ -291,7 +291,7 @@ class BaseFixture{
     void blackout(bool);
     bool activate_none();
     bool activate_by_index(int);
-    bool activate_random();
+    bool activate_random(bool include_black = true);
     bool activate_by_ID(std::string);
     virtual bool activate_by_color(color_vec, AnimationType arg_type = any); //additionnal argument to orient the activation toward a leading or backing aniation
     bool activate_by_ptr(BaseAnimation*);
