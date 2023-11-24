@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 
+#include "config.h"
 #include "debug.h"
 #include "animator.h"
 
@@ -170,7 +171,7 @@ public:
         if (f_col==black)
             this->back_color = this->fixture->RGBW(b_col, 100);     // more intensity if there is no flash
         else
-            this->back_color = this->fixture->RGBW(b_col, 20);     // less intensity if there is a flash
+            this->back_color = this->fixture->RGBW(b_col, SPOTRACK_BG_INTENSITY);     // less intensity if there is a flash
 
         // this->sin_max_p_ms = pmax;
         // this->sin_min_p_ms = pmin;

@@ -31,8 +31,8 @@ void AnimationManager::init(){
     log(4, __FILE__, " ",__func__);
     
     palette_magasine.push_back(    color_vec{red}    ,2   );
-    palette_magasine.push_back(    color_vec{sodium} ,1   );
-    palette_magasine.push_back(    color_vec{orange} ,1   );
+ // palette_magasine.push_back(    color_vec{sodium} ,1   );
+ // palette_magasine.push_back(    color_vec{orange} ,1   );
  // palette_magasine.push_back(    color_vec{yellow} ,1   );
     palette_magasine.push_back(    color_vec{gold}   ,1   );
     palette_magasine.push_back(    color_vec{white}  ,1   );
@@ -160,11 +160,19 @@ void AnimationManager::test_update(){
             }   
         }
 
-        // select a leader among Led bars, Front rack, and Laser
-        balise(__FILE__, " ", __LINE__, "select leader fixture");
+        BaseFixture* lead_fix;
+        bool leader_OK = true;
+        int trial_cpt = 0;
+        do{
+            // select a leader among Led bars, Front rack, and Laser
+            balise(__FILE__, " ", __LINE__, "select leader fixture");
+            lead_fix = fcn::random_pick(fix_vec{&led, &front_rack, & laser}, {4, 2, 2});
+            
+            // activate leader animation
+            balise(__FILE__, " ", __LINE__, "activate leader animation");
+            leader_OK = lead_fix->activate_by_color(current_palette, leader);
+        }while(!leader_OK && ++trial_cpt<10);
 
-        auto lead_fix = fcn::random_pick(fix_vec{&led, &front_rack, & laser}, {5, 2, 1});
-        
         // reference the other fixtures as "backer fixtures" in a vector (for ease of acccess & modularity)
         balise(__FILE__, " ", __LINE__, "select backer fixture");
         fix_vec backer_fix;
@@ -182,15 +190,13 @@ void AnimationManager::test_update(){
          *  50% of time there should be 2 backer (3 fixtures total)
          *  33% of time there should be 1 backer
          *  17% of time ther should be NO backer */
-        int back_fix_n = fcn::random_pick( int_vec{2,1,0}, int_vec{3,2,1} );
+        int back_fix_n = fcn::random_pick( int_vec{2,1,0}, int_vec{2,2,1} );
 
         // log the results
         log(1, "Color palette ", fcn::palette_to_string(current_palette, '/')," ", fcn::num_to_str(palette_lifespan), " | Leader->", lead_fix->name, " ", fcn::num_to_str(back_fix_n), " backers");
 
 
-        // activate animations based on the new settings
-        balise(__FILE__, " ", __LINE__, "activate leader animation");
-        lead_fix->activate_by_color(current_palette, leader);
+        // activate backer animations based on the new settings
         balise(__FILE__, " ", __LINE__, "activate backer animation");
         for (int i = 0; i<backer_fix.size(); i++){
             if (i<back_fix_n)
@@ -338,12 +344,7 @@ bool BaseFixture::activate_by_color(color_vec arg_palette, AnimationType arg_typ
         anim_vec fixtures_anim_list = this->animations;
         fixtures_anim_list.erase(fixtures_anim_list.begin());    // avoid black animation
 
-    // randomize the list item's order
-        // random_device rd;
-        // mt19937 rng(rd());
-        // shuffle(fixtures_anim_list.begin(), fixtures_anim_list.end(), rng);
-
-    // bool found_it = false;
+    bool found_it = false;
     this->activate_none(); // start by resetting the fixture to the black animation
     // Parse through the animations'list (in a random order) and select the first anim that matches the palette
     // All the animation's color must be listed int h
@@ -380,9 +381,10 @@ bool BaseFixture::activate_by_color(color_vec arg_palette, AnimationType arg_typ
     if (candidates.size()>0){
         BaseAnimation* anim = fcn::random_pick(candidates, probas);
         this->activate_by_ptr(anim);
+        found_it=true;
     }
 
-    return candidates.size()>0;
+    return found_it;
 }   
 
 bool BaseFixture::activate_by_ptr(BaseAnimation * anim_ptr){

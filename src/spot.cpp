@@ -98,14 +98,14 @@ void SpotRack::init(){
         this->animations.push_back(new SpotRackAnimation1(this, black,    magenta,     1000, 600,   "magenta fast bubbles",     "FR.2.1.10", leader, 2));
         this->animations.push_back(new SpotRackAnimation1(this, black,    purple,      1000, 600,   "purple fast bubbles",      "FR.2.1.9", leader, 2));
         // Bubbles (short & slower) --> to be used as backer animation with LED (or else)
-        this->animations.push_back(new SpotRackAnimation1(this, black,    white,       2500, 400,   "white slow bubbles",       "FR.2.2.6", backer, 2));
-        this->animations.push_back(new SpotRackAnimation1(this, black,    gold,        2500, 400,   "gold slow bubbles",        "FR.2.2.5", backer, 2));
-        this->animations.push_back(new SpotRackAnimation1(this, black,    cyan,        2500, 400,   "cyan slow bubbles",        "FR.2.2.7", backer, 2));
-        this->animations.push_back(new SpotRackAnimation1(this, black,    red,         2500, 400,   "red slow bubbles",         "FR.2.2.1", backer, 2));
-        this->animations.push_back(new SpotRackAnimation1(this, black,    blue,        2500, 400,   "blue slow bubbles",        "FR.2.2.8", backer, 2));
-        this->animations.push_back(new SpotRackAnimation1(this, black,    pink,        2500, 400,   "pink slow bubbles",        "FR.2.2.11", backer, 2));
-        this->animations.push_back(new SpotRackAnimation1(this, black,    magenta,     2500, 400,   "magenta slow bubbles",     "FR.2.2.10", backer, 2));
-        this->animations.push_back(new SpotRackAnimation1(this, black,    purple,      2500, 400,   "purple slow bubbles",      "FR.2.2.9", backer, 2));
+        this->animations.push_back(new SpotRackAnimation1(this, black,    white,       2500, 800,   "white slow bubbles",       "FR.2.2.6", backer, 2));
+        this->animations.push_back(new SpotRackAnimation1(this, black,    gold,        2500, 800,   "gold slow bubbles",        "FR.2.2.5", backer, 2));
+        this->animations.push_back(new SpotRackAnimation1(this, black,    cyan,        2500, 800,   "cyan slow bubbles",        "FR.2.2.7", backer, 2));
+        this->animations.push_back(new SpotRackAnimation1(this, black,    red,         2500, 800,   "red slow bubbles",         "FR.2.2.1", backer, 2));
+        this->animations.push_back(new SpotRackAnimation1(this, black,    blue,        2500, 800,   "blue slow bubbles",        "FR.2.2.8", backer, 2));
+        this->animations.push_back(new SpotRackAnimation1(this, black,    pink,        2500, 800,   "pink slow bubbles",        "FR.2.2.11", backer, 2));
+        this->animations.push_back(new SpotRackAnimation1(this, black,    magenta,     2500, 800,   "magenta slow bubbles",     "FR.2.2.10", backer, 2));
+        this->animations.push_back(new SpotRackAnimation1(this, black,    purple,      2500, 800,   "purple slow bubbles",      "FR.2.2.9", backer, 2));
 
         break;
 
