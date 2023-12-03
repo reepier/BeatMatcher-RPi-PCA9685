@@ -69,27 +69,46 @@ namespace fcn{
   int_vec convert_8_to_12bits(DMX_vec);
 
   /*shape functions*/
-  // TODO maybe just implement a function for each shape (gaussian(), square(), saw()...)
 
   // SINGLE BURSTS
   // pure gaussian shape -> exp(-x²/2)
   inline double gaussian(time_ms t, time_ms t0, time_ms period, double min, double max){
       double sigma = period/3.0;
-      return min + (max-min)*std::exp( -std::pow((t-t0)/sigma, 2)/2 );
+      // return min + (max-min)*std::exp( -std::pow((t-t0)/sigma, 2)/2 );
+
+      double x = ((int)t-(int)t0)/sigma;
+      return min + (max-min)*std::exp( -std::pow(x, 2)/2 ); 
   }
+
   // squared gaussian shape -> exp(-x⁴/4) (longer plateau, steeper slopes)
   inline double gaussian2(time_ms t, time_ms t0, time_ms period, double min, double max){ 
     double sigma = period/3.0;
-    return min + (max-min)*std::exp( -std::pow((t-t0)/sigma, 4)/4 );
+    double x = ((int)t-(int)t0)/sigma;
+    // return min + (max-min)*std::exp( -std::pow((t-t0)/sigma, 4)/4 );
+    return min + (max-min)*std::exp( -std::pow(x, 4)/4 );
   }
+
   inline double square(time_ms t, time_ms t0, time_ms period, double min, double max, double alpha=0.5){
     if ( t > t0-alpha*period  &&  t < t0+(1-alpha)*period ) {return max;}
     else {return min;}
   }
+  
   inline double triangle(time_ms t, time_ms t0, time_ms period, double min, double max, double alpha=0.5){
-    if ( t0-alpha*period < t  &&  t < t0  )         {return (double)map((double)t, t0-alpha*period, (double)t0,           min, max);}  
-    else if (t0 < t  &&  t < t0+(1-alpha)*period )  {return (double)map((double)t, (double)t0,      t0+(1-alpha)*period,  max, min);}
-    else {return min;}
+    double x = ( (int)t-(int)t0 ) / (double)period;
+    // cout << "\tt:"<<(int)t<< "\tt0:"<<(int)t0<< "\tT:"<<(int)period<< "\ta:"<<alpha<< "\tx:"<<x<<endl;
+
+    if ( -alpha <= x  &&  x <= 0  ){
+    //   std::cout<<"mark1: " << -alpha << " "<< x << " "<< 0 << " " << endl; 
+        return map(x, -alpha, 0.0, (double)min, (double)max);
+    }
+    else if (0 < x  &&  x <= 1-alpha ){
+    //   std::cout<<"mark2: " << 0 << " "<< x << " "<< 1-alpha << " " << endl;
+        return map(x, 0.0, 1.0-alpha, (double)max, (double)min);
+    }
+    else {
+    //   std::cout<<"mark3: " << endl;
+        return min;
+    }
   }
 
   // PERIODIC FUNCTIONS

@@ -85,6 +85,25 @@ void readVectorInRandomOrder(std::vector<int>& vec) {
     std::cout << std::endl;
 }
 
+double tri(time_ms t, time_ms t0, time_ms period, double min, double max, double alpha=0.5){
+    double x = ( (int)t-(int)t0 )/ (double)period;
+    // cout << "\tt:"<<(int)t<< "\tt0:"<<(int)t0<< "\tT:"<<(int)period<< "\ta:"<<alpha<< "\tx:"<<x<<endl;
+
+    if ( -alpha <= x  &&  x <= 0  ){
+    //   std::cout<<"mark1: " << -alpha << " "<< x << " "<< 0 << " " << endl; 
+        return map(x, -alpha, 0.0, (double)min, (double)max);
+    }
+    else if (0 < x  &&  x <= 1-alpha ){
+    //   std::cout<<"mark2: " << 0 << " "<< x << " "<< 1-alpha << " " << endl;
+        return map(x, 0.0, 1.0-alpha, (double)max, (double)min);
+    }
+    else {
+    //   std::cout<<"mark3: " << endl;
+        return min;
+    }
+}
+
+
 int main(){
     ola_client.Setup();
     srand(millis());
@@ -97,15 +116,38 @@ int main(){
         PCA9685_initPWM(fd, addr, _PCA9685_MAXFREQ);
     #endif
 
-    color_vec cp1 = {black, white};
-    color_vec cp2 = {red, black};
-    color_vec cp3 = {purple, orange};
-    color_vec cp4 = {white, black};
+    // color_vec cp1 = {black, white};
+    // color_vec cp2 = {red, black};
+    // color_vec cp3 = {purple, orange};
+    // color_vec cp4 = {white, black};
 
-    cout << (fcn::are_consistent(cp1, cp2) ? 1 : 0) << endl;
-    cout << (fcn::are_consistent(cp1, cp2, 2) ? 1 : 0) << endl;
+    // cout << (fcn::are_consistent(cp1, cp2) ? 1 : 0) << endl;
+    // cout << (fcn::are_consistent(cp1, cp2, 2) ? 1 : 0) << endl;
 
-    cout << (fcn::are_consistent(cp1, cp3) ? 1 : 0) << endl;
-    cout << (fcn::are_consistent(cp1, cp4, 2) ? 1 : 0) << endl;
-    cout << (fcn::are_consistent(cp1, cp4, 1) ? 1 : 0) << endl;
-  }
+    // cout << (fcn::are_consistent(cp1, cp3) ? 1 : 0) << endl;
+    // cout << (fcn::are_consistent(cp1, cp4, 2) ? 1 : 0) << endl;
+    // cout << (fcn::are_consistent(cp1, cp4, 1) ? 1 : 0) << endl;
+
+    while (true) {
+        for (int i=0; i<40; i++){
+            // cout << i << ":\t" << string((int)fcn::gaussian(i, 20, 15, 1, 80)-1, '-')<<'o' << endl;
+            // cout << i << ":\t" << string((int)fcn::gaussian2(i, 20, 15, 1, 80)-1, '-')<<'o' << endl;
+            // cout << i << ":\t" << string((int)tri(i, 20, 20, 1, 80, 0.2)-1, '-')<<'o'<< endl;
+            // cout << i << ":\t" << string((int)fcn::triangle(i, 20, 20, 1, 80, 0.8)-1, '-')<<'o'<< endl;
+            // cout << i << ":\t" << string((int)fcn::square(i, 20, 15, 1, 80, 0.2)-1, '-')<<'o'<< endl;
+            delay(100);
+        }
+    }
+
+    // double y = tri(8,10,20, 0,15, 0.2);
+    // cout << y << endl;
+
+    // y = tri(10,10,20, 0,15, 0.2);
+    // cout << y << endl;
+
+    // y = tri(12,10,20, 0,15, 0.2);
+    // cout << y << endl;
+
+    // y = tri(30,10,20, 0,15, 0.2);
+    // cout << y << endl;
+}

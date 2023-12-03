@@ -7,9 +7,6 @@
 #define NLED 9
 #define NCOL 4
 
-
-
-
 class SpiderFixture;
 class SpiderAnimation;
 
@@ -24,8 +21,8 @@ typedef std::vector<DMX_vec> pixel_vec;
 #        #   #   #     #    #     # #    #  #       
 #       ### #     #    #     #####  #     # ####### 
 */
-#define tiltMIN -20 //tilt min angle (°)
-#define tiltMAX 135 //tilt max angle (°)
+#define tiltMIN -30 //tilt min angle (°)
+#define tiltMAX 120 //tilt max angle (°)
 class SpiderFixture : public BaseFixture
 {
 public:
@@ -67,8 +64,15 @@ public:
     SpiderFixture *fixture;
 };
 
-// --------------------------------------
-// Animation 1
+/*
+   #             #   
+  # #           ##   
+ #   #         # #   
+#     # #####    #   
+#######          #   
+#     #          #   
+#     #        ##### 
+*/
 // Static Monochrome
 class SpiderAnimation1 : public SpiderAnimation{
   public:
@@ -100,8 +104,15 @@ class SpiderAnimation1 : public SpiderAnimation{
     void new_frame() override;
 };
 
-// ----------------------------------
-// Animation 2
+/*
+   #           #####  
+  # #         #     # 
+ #   #              # 
+#     # #####  #####  
+#######       #       
+#     #       #       
+#     #       ####### 
+*/
 // Random beams
 struct Flash{
     simpleColor color;
@@ -117,6 +128,7 @@ class SpiderAnimation2 : public SpiderAnimation{
     color_vec flash_colors;                 // stores the different fkash colors
     int_vec flash_color_proba = {};              // stores each flash color's probability of occurence
     unsigned long flash_dt;
+    Shape flash_shape;
     int flash_length;
     int pan_position;
     int pan_speed;
@@ -129,22 +141,38 @@ class SpiderAnimation2 : public SpiderAnimation{
     // helpful & hidden stuff
     const int i_next = 1, i_prev = 0;           //indices for readability
 
-//imporvements to allow for more than 1 flash color
     // constant parameters (defining the animation)
     std::vector<flash_vec>  flashes; //for each of the 9 pixels, one vector containing prev_flash and next_flash data (color & timing).
 
-
-    SpiderAnimation2(SpiderFixture *f, simpleColor b_col, color_vec f_col, Shape f_shp, unsigned long f_len, unsigned long f_n,int p_pos, int p_speed, int_vec t_pos, int t_per, Shape t_shp, std::string d, std::string i){
+    SpiderAnimation2(SpiderFixture *f, simpleColor b_col, color_vec f_col, Shape f_shp, unsigned long f_len, unsigned long f_n,int p_pos, int p_speed, int_vec t_pos, std::string d, std::string i){
         this->fixture     = f;
         this->description       = d;
         this->id                = i;
         this->background_color  = b_col;
         this->flash_colors      = f_col;
         this->flash_length      = f_len;
+        this->flash_shape       = f_shp;
         this->flash_dt          = this->flash_length / f_n;
         this->pan_position      = p_pos;
         this->pan_speed         = p_speed;
         this->tilt_position     = t_pos;
+        this->tilt_period = 0;
+
+        this->update_palette(b_col);
+        this->update_palette(f_col);
+    };
+    SpiderAnimation2(SpiderFixture *f, simpleColor b_col, color_vec f_col, Shape f_shp, unsigned long f_len, unsigned long f_n,int p_pos, int p_speed, int_vec t_minmax, int t_per, std::string d, std::string i){
+        this->fixture     = f;
+        this->description       = d;
+        this->id                = i;
+        this->background_color  = b_col;
+        this->flash_colors      = f_col;
+        this->flash_length      = f_len;
+        this->flash_shape       = f_shp;
+        this->flash_dt          = this->flash_length / f_n;
+        this->pan_position      = p_pos;
+        this->pan_speed         = p_speed;
+        this->tilt_position     = t_minmax;
         this->tilt_period       = t_per;
 
         this->update_palette(b_col);

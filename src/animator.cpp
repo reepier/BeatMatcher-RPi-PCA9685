@@ -494,3 +494,5 @@ int_vec fcn::convert_8_to_12bits(DMX_vec in_vec){
     }
     return ret;
 }
+
+
