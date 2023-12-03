@@ -9,10 +9,10 @@ using namespace std;
 SpotFixture spot_1(73,  8, "Spot 1 (74)", 1);     
 SpotFixture spot_2(81,  8, "Spot 2 (82)", 2);     
 SpotFixture spot_3(89,  8, "Spot 3 (90)", 3);     
-SpotFixture spot_4(97,  8, "Spot 4 (98)", 4);     
-SpotFixture spot_5(105, 8, "Spot 5 (106)", 5);     
-SpotFixture spot_6(113, 8, "Spot 6 (114)", 6);     
-SpotFixture spot_7(121, 8, "Spot 7 15° (122)", 7);  
+SpotFixture spot_4(105,  8, "Spot 4 (98)", 4);     
+SpotFixture spot_5(121, 8, "Spot 5 (122)", 5);     
+SpotFixture spot_6(129, 8, "Spot 6 (130)", 6);     
+SpotFixture spot_7(137, 8, "Spot 7 15° (122)", 7);  
 
 // SpotFixture spot_8(130, 8, "Spot 8 (130)");     
 

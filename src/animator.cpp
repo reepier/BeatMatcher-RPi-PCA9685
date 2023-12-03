@@ -190,7 +190,7 @@ void AnimationManager::test_update(){
          *  50% of time there should be 2 backer (3 fixtures total)
          *  33% of time there should be 1 backer
          *  17% of time ther should be NO backer */
-        int back_fix_n = fcn::random_pick( int_vec{2,1,0}, int_vec{2,2,1} );
+        int back_fix_n = fcn::random_pick( int_vec{2,1}, int_vec{2,2} );
 
         // log the results
         log(1, "Color palette ", fcn::palette_to_string(current_palette, '/')," ", fcn::num_to_str(palette_lifespan), " | Leader->", lead_fix->name, " ", fcn::num_to_str(back_fix_n), " backers");
@@ -214,7 +214,7 @@ void AnimationManager::test_update(){
 
     // Manage Lyre :
     static time_t last_spider_switch = 0;
-    if (frame.t_current_ms - last_spider_switch > SPIDER_ANI_DURA){
+    if (frame.first_loop || frame.t_current_ms - last_spider_switch > SPIDER_ANI_DURA){
         spider.activate_random(false);
         // log(1, "Switch Spider animation --> ", spider.active_animation->description);
         last_spider_switch = frame.t_current_ms;

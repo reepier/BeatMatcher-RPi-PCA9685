@@ -214,7 +214,7 @@ DMX_vec LEDFixture::RGB(simpleColor c, int intensity){
             temp = fcn::RGB_norm(DMX_vec{0,255,0});
             break;
         case blue:
-            ref_int = 60;
+            ref_int = 40;
             temp = fcn::RGB_norm(DMX_vec{0,0,255});
             break;
         case yellow:

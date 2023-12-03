@@ -30,8 +30,8 @@ extern std::vector<std::string> vec_anim_id;
 #define     SPIDER_ANI_DURA     600000 
 #define     STROBE_ANI_DURA     45000
 
-#define      PAL_LIFESPAN_BICO  3
-#define      PAL_LIFESPAN_MONO  2
+#define      PAL_LIFESPAN_BICO  1
+#define      PAL_LIFESPAN_MONO  1
 
 #define     SPOTRACK_BG_INTENSITY   40
 
