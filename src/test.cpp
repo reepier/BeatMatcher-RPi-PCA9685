@@ -152,13 +152,35 @@ int main(){
     // y = tri(30,10,20, 0,15, 0.2);
     // cout << y << endl;
 
-    cout << "start"<<endl;
-    int_vec vec = {1,2,3,4,5,6};
-    cout << "base vec created"<<endl;
-    while(true){
-        int_vec out_vec = fcn::randomized_vector(vec);
-        cout << fcn::vec_to_str(  vec, ',') << "  -->  ";
-        cout << fcn::vec_to_str(  out_vec, ',') <<endl;
-        delay(1000); 
-    }
+    // cout << "start"<<endl;
+    // int_vec vec = {1,2,3,4,5,6};
+    // cout << "base vec created"<<endl;
+    // while(true){
+    //     int_vec out_vec = fcn::randomized_vector(vec);
+    //     cout << fcn::vec_to_str(  vec, ',') << "  -->  ";
+    //     cout << fcn::vec_to_str(  out_vec, ',') <<endl;
+    //     delay(1000); 
+    // }
+
+    animator.init();
+    spider.init();
+
+    // cout << "Animations : " << endl;
+    // for (auto anim : spider.animations){
+    //     cout << anim->id << " : " << fcn::palette_to_string(anim->color_palette, '/') << endl;
+    // }
+
+    // for (auto pal : animator.palette_magasine.color_palettes){
+    //     cout << "Palette " << fcn::palette_to_string(pal, '/') << endl;
+    //     for (int i=0; i<5; i++){
+    //         spider.activate_by_color(pal);
+    //         cout << "Tirage : " << spider.active_animation->id << "\t" << fcn::palette_to_string(spider.active_animation->color_palette, '/') << endl;
+    //     }
+    // }
+
+    spider.activate_by_color(color_vec{blue, purple}, leader);
+    spider.activate_by_color(color_vec{blue, purple}, backer);
+    spider.activate_by_color(color_vec{blue, purple}, any);
+    
+
 }

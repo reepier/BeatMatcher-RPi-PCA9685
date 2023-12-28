@@ -211,10 +211,9 @@ namespace fcn{
 } 
 
 class ColorPaletteMagazine{
+  public:
     std::vector<color_vec>   color_palettes;
     int_vec     probas;
-
-  public:
 
     void push_back(color_vec palette, int proba){
         color_palettes.push_back(palette);

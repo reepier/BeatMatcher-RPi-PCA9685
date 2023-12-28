@@ -137,9 +137,10 @@ void SoundAnalyzer::_update_state(){
             if (_condition_for_analyis()){
                 
                 // If volume drops below threshold, go to BREAK
-                if (volume_percentile(95) < THD_toBK){
+                // if (volume_percentile(95) < THD_toBK){
+                if (frame.t_current_ms - t_last_beat > TEMPO_BEAT_BREAK){
                   state = BREAK;
-                }
+                }   //TODO switch to break when last beat since 1000 ms --> might be more reactive and less susceptible to lock the state in beat when break music is too loud
 
                 // If no beat is discernible 
                 else if (volume_ratio(95, 25) < THD_BTtoBS){

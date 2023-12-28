@@ -62,7 +62,7 @@ void AnimationManager::init(){
     palette_magasine.push_back(    color_vec{gold, sodium}     ,1       );
     palette_magasine.push_back(    color_vec{gold, blue}       ,1       );
     palette_magasine.push_back(    color_vec{red, blue}        ,3       );
-    palette_magasine.push_back(    color_vec{magenta, blue}        ,3       );
+    palette_magasine.push_back(    color_vec{magenta, blue}    ,3       );
     palette_magasine.push_back(    color_vec{red, purple}      ,3       );
     palette_magasine.push_back(    color_vec{gold, purple}     ,2       );
     palette_magasine.push_back(    color_vec{blue, purple}     ,1       );
@@ -154,7 +154,10 @@ void AnimationManager::test_update(){
 		    default :
 			    palette_lifespan = PAL_LIFESPAN_BICO;
 			break;
-            }   
+            }
+
+            log(1, "Color palette ", fcn::palette_to_string(current_palette, '/'));
+   
         }
 
         BaseFixture* lead_fix;
@@ -163,7 +166,8 @@ void AnimationManager::test_update(){
         do{
             // select a leader among Led bars, Front rack, and Laser
             balise(__FILE__, " ", __LINE__, "select leader fixture");
-            lead_fix = fcn::random_pick(fix_vec{&led, &front_rack, & laser, &spider}, {4,2,2,3});
+            // lead_fix = fcn::random_pick(fix_vec{&led, &front_rack, & laser, &spider}, {4,2,2,3});
+            lead_fix = fcn::random_pick(fix_vec{&led, &spider}, {2,2});
             
             // activate leader animation
             balise(__FILE__, " ", __LINE__, "activate leader animation");
@@ -173,7 +177,8 @@ void AnimationManager::test_update(){
         // reference the other fixtures as "backer fixtures" in a vector (for ease of acccess & modularity)
         balise(__FILE__, " ", __LINE__, "select backer fixture");
         fix_vec backer_fix;
-        for (auto fix : fix_vec{&led, &front_rack, &laser, &spider}){
+        // for (auto fix : fix_vec{&led, &front_rack, &laser, &spider}){
+        for (auto fix : fix_vec{&led, &spider}){
             if (fix != lead_fix){
                 backer_fix.push_back(fix);
             }
@@ -190,7 +195,7 @@ void AnimationManager::test_update(){
         int back_fix_n = fcn::random_pick( int_vec{2,1,0}, int_vec{2,2,1} );
 
         // log the results
-        log(1, "Color palette ", fcn::palette_to_string(current_palette, '/')," ", fcn::num_to_str(palette_lifespan), " | Leader->", lead_fix->name, " ", fcn::num_to_str(back_fix_n), " backers");
+        log(2, fcn::num_to_str(palette_lifespan), ") Leader->", lead_fix->name, "\t", fcn::num_to_str(back_fix_n), " backers");
 
         // activate backer animations based on the new settings
         balise(__FILE__, " ", __LINE__, "activate backer animation");
@@ -202,7 +207,7 @@ void AnimationManager::test_update(){
         }
         
         balise(__FILE__, " ", __LINE__, "activate backstage rack  animation");
-        back_rack.activate_by_color(current_palette);   // deal with the backstage rack separately
+        // back_rack.activate_by_color(current_palette);   // deal with the backstage rack separately
 
         
         t_last_change_ms = frame.t_current_ms;
@@ -338,21 +343,30 @@ bool BaseFixture::activate_by_color(color_vec arg_palette, AnimationType arg_typ
     int_vec probas;
     // copy the fixture's animation list
         anim_vec fixtures_anim_list = this->animations;
-        fixtures_anim_list.erase(fixtures_anim_list.begin());    // avoid black animation
+        fixtures_anim_list.erase(fixtures_anim_list.begin());    // avoid black (first) animation
 
     bool found_it = false;
     this->activate_none(); // start by resetting the fixture to the black animation
+
+    // cout << "Palette : " << fcn::palette_to_string(arg_palette, '/');
+    // cout << ((arg_type == leader) ? "  (lead.)" : (arg_type == backer) ? "  (back.)" : "  (any)")  <<  endl;
+
+    // cout << "Animations : " << endl;
+    // for (auto anim : fixtures_anim_list){
+    //     cout << anim->id << " : " << fcn::palette_to_string(anim->color_palette, '/') << endl;
+    // }
+
     // Parse through the animations'list (in a random order) and select the first anim that matches the palette
     // All the animation's color must be listed int h
-        for(auto each_animation = this->animations.begin(); each_animation != this->animations.end(); each_animation++){
+        for(auto each_animation : fixtures_anim_list){
             bool animation_match = true;   // starts true & becomes false if (at least) one of the animation's attributes does not match the functions arguments (animation color & type) 
             
             // check the compatibility between the current animation's & the argument type
-            animation_match =  arg_type == any || (*each_animation)->type == any || (*each_animation)->type == arg_type ;
+            animation_match =  arg_type == any || each_animation->type == any || each_animation->type == arg_type ;
 
             // for each of the animation's colors, check if they are compatible with the argument color palette
             if(animation_match){
-                for (auto each_animation_color : (*each_animation)->color_palette){
+                for (auto each_animation_color : each_animation->color_palette){
                     bool color_match = false;   // becomes true if the current color matches on of the palette's color
                     for (auto each_arg_palette_color : arg_palette){
                         color_match = color_match || (each_animation_color == each_arg_palette_color);
@@ -364,8 +378,8 @@ bool BaseFixture::activate_by_color(color_vec arg_palette, AnimationType arg_typ
             // if the animation is a match, activate it and exit the for loop and return true, else deactivate the fixture (by activating the black animation)
             if (animation_match){
 
-                candidates.push_back((*each_animation));
-                probas.push_back((*each_animation)->priority);
+                candidates.push_back(each_animation);
+                probas.push_back(each_animation->priority);
 
                 // found_it = true;
                 // this->activate_by_ID(each_animation->id);
@@ -373,11 +387,23 @@ bool BaseFixture::activate_by_color(color_vec arg_palette, AnimationType arg_typ
             }
         }
 
+        // cout << "Candidates : " << endl; 
+        // for (auto anim : candidates){
+        //     cout << anim->id << " : " << fcn::palette_to_string(anim->color_palette, '/') << "\t";
+        //     cout << ((anim->type == leader) ? "  (lead.)" : (anim->type == backer) ? "  (back.)" : "  (any)")  <<  endl;
+
+        // }
+
+
     balise(__FILE__, " ", __LINE__, "candidat animations found");
     if (candidates.size()>0){
         BaseAnimation* anim = fcn::random_pick(candidates, probas);
         this->activate_by_ptr(anim);
         found_it=true;
+
+        // cout << "Winner : " << endl; 
+        // cout << anim->id << " : " << fcn::palette_to_string(anim->color_palette, '/') << endl;
+        
     }
 
     return found_it;

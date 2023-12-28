@@ -161,6 +161,8 @@ class SpiderAnimation2 : public SpiderAnimation{
         this->fixture     = f;
         this->description       = d;
         this->id                = i;
+        this->type              = typ;
+
         this->background_color  = b_col;
         this->flash_colors      = f_col;
         this->flash_length      = f_len;
@@ -189,6 +191,9 @@ class SpiderAnimation2 : public SpiderAnimation{
             flashes[pix][0].color = black;
             flashes[pix][1].color = fcn::random_pick(flash_colors, flash_color_proba);
         }
+
+        if (flash_length<200){animator.set_timer(STROBE_ANI_DURA);}
+
     };
 
     void new_frame() override;
@@ -217,7 +222,7 @@ class SpiderAnimation3 : public SpiderAnimation{
     const int param_anim_pan_spd = 20;
 
     color_vec flash_colors;      // beam colors
-    const int fade_rate = 90;          // ms flash fade rate (time constant of an exponential decay : intensity = exp(-(t-t0)/fade_rate)
+    const int fade_rate = 60;          // ms flash fade rate (time constant of an exponential decay : intensity = exp(-(t-t0)/fade_rate)
 
 
     const int_vec index_vector = {0,1,2,3,4,5,6,7,8}; // vectr storing the idex of every spider pixel [0-8]

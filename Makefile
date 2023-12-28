@@ -5,7 +5,7 @@ build_dir = build/
 main = src/main.cpp
 test = src/test.cpp
 objects = build/MCP3008.o build/animator.o build/config.o build/debug.o build/laser.o build/LED.o build/music.o build/spider.o build/spot.o
-libs = -lola -lolacommon -lcurses  -lfftw3 -lwiringPi #-llgpio -lPCA9685 
+libs = -lola -lolacommon -lcurses  -lfftw3 -lwiringPi -llgpio -lPCA9685 
 
 app: $(app)
 
@@ -42,5 +42,5 @@ build/MCP3008.o: src/MCP3008.cpp
 
 
 clean:
-	rm build/*.o bin/*
+	rm build/*.o bin/* 
 	

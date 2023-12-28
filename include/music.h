@@ -11,11 +11,7 @@
 #endif
 
 
-#define SAMPLE_SIZE 128      // record length (number of individual samples)
-#define SAMPLING_FREQ 8000     // sampling frequency
-#define FREQ_BAND 2     // frequency band used to evaluate volume (low value for bass / high value for treble)
 
-#define VOL_BUFF_SIZE 128   // size of the volume buffer
 
 // MCP3008
 #define MCP3008_MAX 1023
