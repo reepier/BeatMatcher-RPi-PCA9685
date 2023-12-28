@@ -184,10 +184,10 @@ void AnimationManager::test_update(){
         shuffle(backer_fix.begin(), backer_fix.end(), rng);
 
         /** pick randomly how many backer fixtures will light up to back the leader fixture
-         *  50% of time there should be 2 backer (3 fixtures total)
-         *  33% of time there should be 1 backer
-         *  17% of time ther should be NO backer */
-        int back_fix_n = fcn::random_pick( int_vec{2,1}, int_vec{2,2} );
+         *  40% of time there should be 2 backer (3 fixtures total)
+         *  40% of time there should be 1 backer
+         *  20% of time ther should be NO backer */
+        int back_fix_n = fcn::random_pick( int_vec{2,1,0}, int_vec{2,2,1} );
 
         // log the results
         log(1, "Color palette ", fcn::palette_to_string(current_palette, '/')," ", fcn::num_to_str(palette_lifespan), " | Leader->", lead_fix->name, " ", fcn::num_to_str(back_fix_n), " backers");
