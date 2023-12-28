@@ -157,7 +157,7 @@ class SpiderAnimation2 : public SpiderAnimation{
         this->update_palette(b_col);
         this->update_palette(f_col);
     };
-    SpiderAnimation2(SpiderFixture *f, simpleColor b_col, color_vec f_col, Shape f_shp, unsigned long f_len, double f_n,int p_pos, int p_speed, int_vec t_minmax, int t_per, std::string d, std::string i){
+    SpiderAnimation2(SpiderFixture *f, simpleColor b_col, color_vec f_col, Shape f_shp, unsigned long f_len, double f_n,int p_pos, int p_speed, int_vec t_minmax, int t_per, std::string d, std::string i, AnimationType typ=any){
         this->fixture     = f;
         this->description       = d;
         this->id                = i;
@@ -227,11 +227,11 @@ class SpiderAnimation3 : public SpiderAnimation{
     color_vec rand_col_vector = color_vec(NLED, black);
 
     // Constructor
-    SpiderAnimation3(SpiderFixture *f, color_vec f_col, std::string d, std::string i)
-    {
+    SpiderAnimation3(SpiderFixture *f, color_vec f_col, std::string d, std::string i, AnimationType typ = any){
         this->description = d;
         this->id = i; 
         this->fixture = f;
+        this->type = typ;
 
         this->flash_colors = f_col;
 

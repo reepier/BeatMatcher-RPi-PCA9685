@@ -19,22 +19,22 @@ SpiderFixture spider(29, 44, "AFX-9-Beam", 1);
 void SpiderFixture::init(){
         log(4, __FILE__, " ", __LINE__, " ",__func__);
 
-    this->animations.push_back(new SpiderAnimation1(this, black,  0, 0, int_vec{tiltMAX,tiltMAX,tiltMAX},    " ", "SPI.0.0"));
-    this->animations.push_back(new SpiderAnimation1(this, white,     0, 30,    int_vec{0, 0, 0},    "Horizontality check",       "SPI.0.1"));
-    this->animations.push_back(new SpiderAnimation1(this, white,     0, 30,    int_vec{90, 90, 90}, "Orthogonality check",       "SPI.0.2"));
+    // this->animations.push_back(new SpiderAnimation1(this, black,  0, 0, int_vec{tiltMAX,tiltMAX,tiltMAX},    " ", "SPI.0.0"));
+    // this->animations.push_back(new SpiderAnimation1(this, white,     0, 30,    int_vec{0, 0, 0},    "Horizontality check",       "SPI.0.1"));
+    // this->animations.push_back(new SpiderAnimation1(this, white,     0, 30,    int_vec{90, 90, 90}, "Orthogonality check",       "SPI.0.2"));
 
     // push the animations:
     // Animation TYPE 1 --> fixed position for chill zone @OMERTA IX
     int high_pos = 100, low_pos = -10;
-    this->animations.push_back(new SpiderAnimation1(this, red,     0, 0,    int_vec{low_pos, high_pos, high_pos},  "Red static (coin chill)",       "SPI.1"));
+    // this->animations.push_back(new SpiderAnimation1(this, red,     0, 0,    int_vec{low_pos, high_pos, high_pos},  "Red static (coin chill)",       "SPI.1"));
     // this->animations.push_back(new SpiderAnimation1(this, sodium,  120, 0,  int_vec{high_pos,low_pos,high_pos},  "Sodium static (coin chill)",    "SPI.2"));
     // this->animations.push_back(new SpiderAnimation1(this, orange,  240, 0,  int_vec{high_pos,high_pos,low_pos},  "Orange static (coin chill)",    "SPI.3"));
-    this->animations.push_back(new SpiderAnimation1(this, yellow,  0, 0,    int_vec{low_pos,high_pos,high_pos},  "Yellow static (coin chill)",    "SPI.4"));
+    // this->animations.push_back(new SpiderAnimation1(this, yellow,  0, 0,    int_vec{low_pos,high_pos,high_pos},  "Yellow static (coin chill)",    "SPI.4"));
     // this->animations.push_back(new SpiderAnimation1(this, gold,    120, 0,  int_vec{high_pos,low_pos,high_pos},  "Gold static (coin chill)",      "SPI.5"));
-    this->animations.push_back(new SpiderAnimation1(this, white,   240, 0,  int_vec{high_pos,high_pos,low_pos},  "White static (coin chill)",     "SPI.6"));
+    // this->animations.push_back(new SpiderAnimation1(this, white,   240, 0,  int_vec{high_pos,high_pos,low_pos},  "White static (coin chill)",     "SPI.6"));
     // this->animations.push_back(new SpiderAnimation1(this, cyan,    0, 0,    int_vec{low_pos,high_pos,high_pos},  "Cyan static (coin chill)",      "SPI.7"));
     // this->animations.push_back(new SpiderAnimation1(this, blue,    120, 0,  int_vec{high_pos,low_pos,high_pos},  "Blue static (coin chill)",      "SPI.8"));
-    this->animations.push_back(new SpiderAnimation1(this, purple,  240, 0,  int_vec{high_pos,high_pos,low_pos},  "Purple static (coin chill)",    "SPI.9"));
+    // this->animations.push_back(new SpiderAnimation1(this, purple,  240, 0,  int_vec{high_pos,high_pos,low_pos},  "Purple static (coin chill)",    "SPI.9"));
     // this->animations.push_back(new SpiderAnimation1(this, magenta, 0, 0,    int_vec{low_pos,high_pos,high_pos},  "Magenta static (coin chill)",   "SPI.10"));
     // this->animations.push_back(new SpiderAnimation1(this, pink,    120, 0,  int_vec{high_pos,low_pos,high_pos},  "Pink static (coin chill)",      "SPI.11"));
     // this->animations.push_back(new SpiderAnimation1(this, green,   240, 0,  int_vec{high_pos,high_pos,low_pos},  "Green static (coin chill)",     "SPI.12"));
@@ -44,51 +44,51 @@ void SpiderFixture::init(){
     // Animation TYPE 2
     // SpiderAnimation2(SpiderFixture *f, SimpleColor b_col, SimpleColor f_col, Shape f_shp, unsigned long f_len, unsigned long f_dt,int p_pos, int p_speed, int_vec t_pos, int t_per, Shape t_shp, std::string d, std::string i){
     // Slow beams
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{red},      gaussian, 2000, 3, 0, 20,  int_vec{70,120}, 10000,  "Slow rotating beams, red",      "SPI.3.1.1"));
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{sodium},   gaussian, 2000, 3, 0, 20,  int_vec{70,120}, 10000,  "Slow rotating beams, sodium",   "SPI.3.1.2"));
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{orange},   gaussian, 2000, 3, 0, 20,  int_vec{70,120}, 10000,  "Slow rotating beams, orange",   "SPI.3.1.3"));
- // this->animations.push_back(new SpiderAnimation2(this, black, color_vec{yellow},   gaussian, 2000, 3, 0, 20,  int_vec{70,120}, 10000,  "Slow rotating beams, yellow",   "SPI.3.1.4"));
- // this->animations.push_back(new SpiderAnimation2(this, black, color_vec{gold},     gaussian, 2000, 3, 0, 20,  int_vec{70,120}, 10000,  "Slow rotating beams, gold",     "SPI.3.1.5"));
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{white},    gaussian, 2000, 3, 0, 20,  int_vec{70,120}, 10000,  "Slow rotating beams, white",    "SPI.3.1.6"));
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{cyan},     gaussian, 2000, 3, 0, 20,  int_vec{70,120}, 10000,  "Slow rotating beams, cyan",     "SPI.3.1.7"));
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{blue},     gaussian, 2000, 3, 0, 20,  int_vec{70,120}, 10000,  "Slow rotating beams, blue",     "SPI.3.1.8"));
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{purple},   gaussian, 2000, 3, 0, 20,  int_vec{70,120}, 10000,  "Slow rotating beams, purple",   "SPI.3.1.9"));
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{magenta},  gaussian, 2000, 3, 0, 20,  int_vec{70,120}, 10000,  "Slow rotating beams, magenta",  "SPI.3.1.10"));
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{pink},     gaussian, 2000, 3, 0, 20,  int_vec{70,120}, 10000,  "Slow rotating beams, pink",     "SPI.3.1.11"));
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{green},    gaussian, 2000, 3, 0, 20,  int_vec{70,120}, 10000,  "Slow rotating beams, green",    "SPI.3.1.12"));
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{red},      gaussian, 2000, 3, 0, 20,  int_vec{70,120}, 10000,  "Slow rotating beams, red",      "SPI.3.1.1", backer));
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{sodium},   gaussian, 2000, 3, 0, 20,  int_vec{70,120}, 10000,  "Slow rotating beams, sodium",   "SPI.3.1.2", backer));
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{orange},   gaussian, 2000, 3, 0, 20,  int_vec{70,120}, 10000,  "Slow rotating beams, orange",   "SPI.3.1.3", backer));
+ // this->animations.push_back(new SpiderAnimation2(this, black, color_vec{yellow},   gaussian, 2000, 3, 0, 20,  int_vec{70,120}, 10000,  "Slow rotating beams, yellow",   "SPI.3.1.4", backer));
+ // this->animations.push_back(new SpiderAnimation2(this, black, color_vec{gold},     gaussian, 2000, 3, 0, 20,  int_vec{70,120}, 10000,  "Slow rotating beams, gold",     "SPI.3.1.5", backer));
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{white},    gaussian, 2000, 3, 0, 20,  int_vec{70,120}, 10000,  "Slow rotating beams, white",    "SPI.3.1.6", backer));
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{cyan},     gaussian, 2000, 3, 0, 20,  int_vec{70,120}, 10000,  "Slow rotating beams, cyan",     "SPI.3.1.7", backer));
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{blue},     gaussian, 2000, 3, 0, 20,  int_vec{70,120}, 10000,  "Slow rotating beams, blue",     "SPI.3.1.8", backer));
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{purple},   gaussian, 2000, 3, 0, 20,  int_vec{70,120}, 10000,  "Slow rotating beams, purple",   "SPI.3.1.9", backer));
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{magenta},  gaussian, 2000, 3, 0, 20,  int_vec{70,120}, 10000,  "Slow rotating beams, magenta",  "SPI.3.1.10", backer));
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{pink},     gaussian, 2000, 3, 0, 20,  int_vec{70,120}, 10000,  "Slow rotating beams, pink",     "SPI.3.1.11", backer));
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{green},    gaussian, 2000, 3, 0, 20,  int_vec{70,120}, 10000,  "Slow rotating beams, green",    "SPI.3.1.12", backer));
     
     //medium speed beams    
     this->animations.push_back(new SpiderAnimation2(this, black, color_vec{red, red, red, white},     gaussian2, 1000, 3, 0, 20,  int_vec{70,120}, 8000,  "Slow rotating beams, Red White",   "SPI.3.4"));
 
     // Quick beams
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{red},     square,    100, 0.5, 0, 20,   int_vec{80,110}, 7000,    "Quick moving beams, Red",     "SPI.3.3.1"));              
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{sodium},  square,    100, 0.5, 0, 20,   int_vec{80,110}, 7000, "Quick moving beams, Sodium",  "SPI.3.3.2"));                
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{orange},  square,    100, 0.5, 0, 20,   int_vec{80,110}, 7000, "Quick moving beams, Orange",  "SPI.3.3.3"));                
- // this->animations.push_back(new SpiderAnimation2(this, black, color_vec{yellow},  square,    100, 0.5, 0, 20,   int_vec{80,110}, 7000, "Quick moving beams, Yellow",  "SPI.3.3.4"));                
- // this->animations.push_back(new SpiderAnimation2(this, black, color_vec{gold},    square,    100, 0.5, 0, 20,   int_vec{80,110}, 7000,   "Quick moving beams, Gold",    "SPI.3.3.5"));                
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{white},   square,    100, 0.5, 0, 20,   int_vec{80,110}, 7000,  "Quick moving beams, White",   "SPI.3.3.6"));              
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{cyan},    square,    100, 0.5, 0, 20,   int_vec{80,110}, 7000,   "Quick moving beams, Cyan",    "SPI.3.3.7"));                
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{blue},    square,    100, 0.5, 0, 20,   int_vec{80,110}, 7000,   "Quick moving beams, Blue",    "SPI.3.3.8"));                
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{purple},  square,    100, 0.5, 0, 20,   int_vec{80,110}, 7000, "Quick moving beams, Purple",  "SPI.3.3.9"));                
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{magenta}, square,    100, 0.5, 0, 20,   int_vec{80,110}, 7000,"Quick moving beams, Magenta", "SPI.3.3.0"));              
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{pink},    square,    100, 0.5, 0, 20,   int_vec{80,110}, 7000,   "Quick moving beams, Pink",    "SPI.3.3.1"));                
-    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{green},   square,    100, 0.5, 0, 20,   int_vec{80,110}, 7000,  "Quick moving beams, Green",   "SPI.3.3.2"));              
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{red},     square,    100, 0.5, 0, 20,   int_vec{80,110}, 7000,    "Quick moving beams, Red",     "SPI.3.3.1", leader));              
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{sodium},  square,    100, 0.5, 0, 20,   int_vec{80,110}, 7000, "Quick moving beams, Sodium",  "SPI.3.3.2", leader));                
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{orange},  square,    100, 0.5, 0, 20,   int_vec{80,110}, 7000, "Quick moving beams, Orange",  "SPI.3.3.3", leader));                
+ // this->animations.push_back(new SpiderAnimation2(this, black, color_vec{yellow},  square,    100, 0.5, 0, 20,   int_vec{80,110}, 7000, "Quick moving beams, Yellow",  "SPI.3.3.4", leader));                
+ // this->animations.push_back(new SpiderAnimation2(this, black, color_vec{gold},    square,    100, 0.5, 0, 20,   int_vec{80,110}, 7000,   "Quick moving beams, Gold",    "SPI.3.3.5", leader));                
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{white},   square,    100, 0.5, 0, 20,   int_vec{80,110}, 7000,  "Quick moving beams, White",   "SPI.3.3.6", leader));              
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{cyan},    square,    100, 0.5, 0, 20,   int_vec{80,110}, 7000,   "Quick moving beams, Cyan",    "SPI.3.3.7", leader));                
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{blue},    square,    100, 0.5, 0, 20,   int_vec{80,110}, 7000,   "Quick moving beams, Blue",    "SPI.3.3.8", leader));                
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{purple},  square,    100, 0.5, 0, 20,   int_vec{80,110}, 7000, "Quick moving beams, Purple",  "SPI.3.3.9", leader));                
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{magenta}, square,    100, 0.5, 0, 20,   int_vec{80,110}, 7000,"Quick moving beams, Magenta", "SPI.3.3.0", leader));              
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{pink},    square,    100, 0.5, 0, 20,   int_vec{80,110}, 7000,   "Quick moving beams, Pink",    "SPI.3.3.1", leader));                
+    this->animations.push_back(new SpiderAnimation2(this, black, color_vec{green},   square,    100, 0.5, 0, 20,   int_vec{80,110}, 7000,  "Quick moving beams, Green",   "SPI.3.3.2", leader));              
 
     // Animation TYPE 3
     // Beating array of beams
     // Monochrome
-    this->animations.push_back(new SpiderAnimation3(this, color_vec{red},"Beating beams Red", "SPI.4.1.1"));
-    this->animations.push_back(new SpiderAnimation3(this, color_vec{sodium},"Beating beams Sodium", "SPI.4.1.2"));
-    this->animations.push_back(new SpiderAnimation3(this, color_vec{orange},"Beating beams Orange", "SPI.4.1.3"));
-    this->animations.push_back(new SpiderAnimation3(this, color_vec{yellow},"Beating beams Yellow", "SPI.4.1.4"));
-    this->animations.push_back(new SpiderAnimation3(this, color_vec{gold},"Beating beams Gold", "SPI.4.1.5"));
-    this->animations.push_back(new SpiderAnimation3(this, color_vec{white},"Beating beams White", "SPI.4.1.6"));
-    this->animations.push_back(new SpiderAnimation3(this, color_vec{cyan},"Beating beams Cyan", "SPI.4.1.7"));
-    this->animations.push_back(new SpiderAnimation3(this, color_vec{blue},"Beating beams Blue", "SPI.4.1.8"));
-    this->animations.push_back(new SpiderAnimation3(this, color_vec{purple},"Beating beams Purple", "SPI.4.1.9"));
-    this->animations.push_back(new SpiderAnimation3(this, color_vec{magenta},"Beating beams Magenta", "SPI.4.1.10"));
-    this->animations.push_back(new SpiderAnimation3(this, color_vec{pink},"Beating beams Pink", "SPI.4.1.11"));
-    this->animations.push_back(new SpiderAnimation3(this, color_vec{green},"Beating beams Green", "SPI.4.1.12"));
+    this->animations.push_back(new SpiderAnimation3(this, color_vec{red},      "Beating beams Red",     "SPI.4.1.1",    leader));
+    this->animations.push_back(new SpiderAnimation3(this, color_vec{sodium},   "Beating beams Sodium",  "SPI.4.1.2",    leader));
+    this->animations.push_back(new SpiderAnimation3(this, color_vec{orange},   "Beating beams Orange",  "SPI.4.1.3",    leader));
+    this->animations.push_back(new SpiderAnimation3(this, color_vec{yellow},   "Beating beams Yellow",  "SPI.4.1.4",    leader));
+    this->animations.push_back(new SpiderAnimation3(this, color_vec{gold},     "Beating beams Gold",    "SPI.4.1.5",    leader));
+    this->animations.push_back(new SpiderAnimation3(this, color_vec{white},    "Beating beams White",   "SPI.4.1.6",    leader));
+    this->animations.push_back(new SpiderAnimation3(this, color_vec{cyan},     "Beating beams Cyan",    "SPI.4.1.7",    leader));
+    this->animations.push_back(new SpiderAnimation3(this, color_vec{blue},     "Beating beams Blue",    "SPI.4.1.8",    leader));
+    this->animations.push_back(new SpiderAnimation3(this, color_vec{purple},   "Beating beams Purple",  "SPI.4.1.9",    leader));
+    this->animations.push_back(new SpiderAnimation3(this, color_vec{magenta},  "Beating beams Magenta", "SPI.4.1.10",   leader));
+    this->animations.push_back(new SpiderAnimation3(this, color_vec{pink},     "Beating beams Pink",    "SPI.4.1.11",   leader));
+    this->animations.push_back(new SpiderAnimation3(this, color_vec{green},    "Beating beams Green",   "SPI.4.1.12",   leader));
 
     
     this->animations.push_back(new SpiderAnimation3(this, color_vec{},"Beating beams ", "SPI.4.1.")); 

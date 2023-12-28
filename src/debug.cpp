@@ -190,20 +190,20 @@ void disp_output_window(){
     mvwprintw(outputw, 0,1, "OUTPUT");
     wattroff(outputw, A_BOLD);
 
-    int i=1;
-    for (auto fix : fixtures){
+    int line=1;
+    for (auto fix : fix_vec{&led, &laser, &front_rack, &spider, &back_rack}){
         ostringstream animbuf, outbuf;
         animbuf << ((fix->active_animation->type == leader) ? "(L) ":"(b) ") << fix->name << " " << fix->active_animation->id << " - " << fix->active_animation->description;
         
         DMX_vec raw_buf = fix->buffer();
         outbuf << "| " <<fcn::vec_to_str(raw_buf, ',');
 
-        mvwprintw(outputw, i, 1, animbuf.str().data());
-        mvwprintw(outputw, i, 55, outbuf.str().size()<60? outbuf.str().data() : outbuf.str().substr(0, 60).data());
-        if (i == 3 || i == 5)
-            i++;
+        mvwprintw(outputw, line, 1, animbuf.str().data());
+        mvwprintw(outputw, line, 55, outbuf.str().size()<60? outbuf.str().data() : outbuf.str().substr(0, 60).data());
+        if (line == 4)
+            line++;
         
-        i++;
+        line++;
     }
 
 

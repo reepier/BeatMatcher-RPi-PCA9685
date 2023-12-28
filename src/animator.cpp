@@ -136,10 +136,8 @@ void AnimationManager::test_update(){
         balise(__FILE__, " ", __LINE__, "animator update condition met");
 
         if (frame.first_loop){
-            balise(__FILE__, " ", __LINE__, "animator palette update");
-
             current_palette = palette_magasine.get_random_palette();
-            palette_lifespan = 5;
+            // palette_lifespan = 5;
         }
 
         if (frame.first_loop || palette_lifespan == 0){
@@ -165,18 +163,18 @@ void AnimationManager::test_update(){
         do{
             // select a leader among Led bars, Front rack, and Laser
             balise(__FILE__, " ", __LINE__, "select leader fixture");
-            lead_fix = fcn::random_pick(fix_vec{&led, &front_rack, & laser}, {4, 2, 2});
+            lead_fix = fcn::random_pick(fix_vec{&led, &front_rack, & laser, &spider}, {4,2,2,3});
             
             // activate leader animation
             balise(__FILE__, " ", __LINE__, "activate leader animation");
-            leader_OK = lead_fix->activate_by_color(current_palette, leader);
+            leader_OK = lead_fix->activate_by_color(current_palette, leader);   // returns true if an animation matching all conditions was found
         }while(!leader_OK && ++trial_cpt<10);
 
         // reference the other fixtures as "backer fixtures" in a vector (for ease of acccess & modularity)
         balise(__FILE__, " ", __LINE__, "select backer fixture");
         fix_vec backer_fix;
-        for (auto fix : fix_vec{&led, &front_rack, &laser}){
-            if (fix->name != lead_fix->name){
+        for (auto fix : fix_vec{&led, &front_rack, &laser, &spider}){
+            if (fix != lead_fix){
                 backer_fix.push_back(fix);
             }
         }
@@ -203,6 +201,7 @@ void AnimationManager::test_update(){
             else
                 backer_fix[i]->activate_none();
         }
+        
         balise(__FILE__, " ", __LINE__, "activate backstage rack  animation");
         back_rack.activate_by_color(current_palette);   // deal with the backstage rack separately
 
@@ -212,12 +211,12 @@ void AnimationManager::test_update(){
     }
 
     // Manage Lyre :
-    static time_t last_spider_switch = 0;
-    if (frame.first_loop || frame.t_current_ms - last_spider_switch > SPIDER_ANI_DURA){
-        spider.activate_random(false);
-        // log(1, "Switch Spider animation --> ", spider.active_animation->description);
-        last_spider_switch = frame.t_current_ms;
-    }
+    // static time_t last_spider_switch = 0;
+    // if (frame.first_loop || frame.t_current_ms - last_spider_switch > SPIDER_ANI_DURA){
+    //     spider.activate_random(false);
+    //     // log(1, "Switch Spider animation --> ", spider.active_animation->description);
+    //     last_spider_switch = frame.t_current_ms;
+    // }
 
 }
 
