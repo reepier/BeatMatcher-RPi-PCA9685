@@ -1,8 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
-#include <algorithm>
-#include <random>
+
 
 // #include "LED.h"
 // #include "animator.h"

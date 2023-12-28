@@ -4,6 +4,8 @@
 #include <string>
 #include <sstream>
 #include <cmath>
+#include <algorithm>
+#include <random>
 
 #include "commonTypes.h"
 #include "debug.h" 
@@ -182,6 +184,16 @@ namespace fcn{
     return (T)0;    //TODO bellec ce casting est bancale AF
   }
 
+  template<class T>
+  std::vector<T> randomized_vector(std::vector<T> v){
+    std::vector<T> out_vec = v;
+    std::random_device rd;
+    std::mt19937 rng(rd());
+
+    shuffle(v.begin(), v.end(), rng);
+    return v;
+  }
+
   // Color functions
   // check wether color palettes cp1 and cp2 have at least n color in common
   inline bool are_consistent(color_vec cp1, color_vec cp2, int n = 1){
@@ -314,6 +326,7 @@ class BaseFixture{
     bool activate_by_ID(std::string);
     virtual bool activate_by_color(color_vec, AnimationType arg_type = any); //additionnal argument to orient the activation toward a leading or backing aniation
     bool activate_by_ptr(BaseAnimation*);
+    
     //DMX output
     virtual int get_address() = 0;
     virtual int get_nCH()     = 0;
@@ -346,6 +359,7 @@ class BaseAnimation{
     int priority = 1;                  // weight on the priority list (animations with higher priority will be have higher chance of activation)
 
     bool is_monochrome(){return (color_palette.size() == 1);};
+    bool is_first_frame(){return frame_cpt==0;};
     
     virtual void new_frame(){
       this->frame_cpt++;

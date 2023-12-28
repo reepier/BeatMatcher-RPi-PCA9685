@@ -161,7 +161,6 @@ void LEDAnimation1::new_frame(){
     unsigned long t_ms = frame.t_current_ms;
     unsigned long t_last_beat_ms = sampler.t_last_new_beat;
 
-    //bool flash = animator.flash; //TOO remove variable flash --> not necessary
     bool auto_activate_flash = (sampler.state == BEAT) && (frame.t_current_ms-sampler.t_beat_tracking_start < MAX_CONT_FLASH);
 
     int backgd_color[3];

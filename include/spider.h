@@ -114,12 +114,6 @@ class SpiderAnimation1 : public SpiderAnimation{
 #     #       ####### 
 */
 // Random beams
-struct Flash{
-    simpleColor color;
-    unsigned long time;
-};
-typedef std::vector<Flash> flash_vec;
-typedef std::vector<simpleColor> color_vec;
 
 class SpiderAnimation2 : public SpiderAnimation{
   public:
@@ -144,10 +138,12 @@ class SpiderAnimation2 : public SpiderAnimation{
     // constant parameters (defining the animation)
     std::vector<flash_vec>  flashes; //for each of the 9 pixels, one vector containing prev_flash and next_flash data (color & timing).
 
-    SpiderAnimation2(SpiderFixture *f, simpleColor b_col, color_vec f_col, Shape f_shp, unsigned long f_len, unsigned long f_n,int p_pos, int p_speed, int_vec t_pos, std::string d, std::string i){
-        this->fixture     = f;
+    SpiderAnimation2(SpiderFixture *f, simpleColor b_col, color_vec f_col, Shape f_shp, unsigned long f_len, double f_n,int p_pos, int p_speed, int_vec t_pos, std::string d, std::string i, AnimationType typ=any){
+        this->fixture           = f;
         this->description       = d;
         this->id                = i;
+        this->type              = typ;
+
         this->background_color  = b_col;
         this->flash_colors      = f_col;
         this->flash_length      = f_len;
@@ -161,7 +157,7 @@ class SpiderAnimation2 : public SpiderAnimation{
         this->update_palette(b_col);
         this->update_palette(f_col);
     };
-    SpiderAnimation2(SpiderFixture *f, simpleColor b_col, color_vec f_col, Shape f_shp, unsigned long f_len, unsigned long f_n,int p_pos, int p_speed, int_vec t_minmax, int t_per, std::string d, std::string i){
+    SpiderAnimation2(SpiderFixture *f, simpleColor b_col, color_vec f_col, Shape f_shp, unsigned long f_len, double f_n,int p_pos, int p_speed, int_vec t_minmax, int t_per, std::string d, std::string i){
         this->fixture     = f;
         this->description       = d;
         this->id                = i;
@@ -201,3 +197,47 @@ class SpiderAnimation2 : public SpiderAnimation{
     void update_next_flash();
 };
 
+/*
+   #           #####  
+  # #         #     # 
+ #   #              # 
+#     # #####  #####  
+#######             # 
+#     #       #     # 
+#     #        #####  
+
+Beams flashing & disappearing on beat */
+
+class SpiderAnimation3 : public SpiderAnimation{
+  public:
+    // Animation parameters (constant or set by animation constructor)
+    const int_vec param_anim_tilt = {70,100};
+    const int param_anim_tilt_period = 5000;
+    const int param_anim_pan = 0;
+    const int param_anim_pan_spd = 20;
+
+    color_vec flash_colors;      // beam colors
+    const int fade_rate = 90;          // ms flash fade rate (time constant of an exponential decay : intensity = exp(-(t-t0)/fade_rate)
+
+
+    const int_vec index_vector = {0,1,2,3,4,5,6,7,8}; // vectr storing the idex of every spider pixel [0-8]
+
+    // Dynamic variables (updated internally at each frame)
+    int_vec rand_index_vector = index_vector;
+    color_vec rand_col_vector = color_vec(NLED, black);
+
+    // Constructor
+    SpiderAnimation3(SpiderFixture *f, color_vec f_col, std::string d, std::string i)
+    {
+        this->description = d;
+        this->id = i; 
+        this->fixture = f;
+
+        this->flash_colors = f_col;
+
+        this->update_palette(f_col);
+    }
+
+    void init() override{BaseAnimation::init();};
+    void new_frame() override;
+};

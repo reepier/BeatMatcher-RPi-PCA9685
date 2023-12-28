@@ -105,6 +105,7 @@ double tri(time_ms t, time_ms t0, time_ms period, double min, double max, double
 
 
 int main(){
+    cout << "ola_setup "<<endl;
     ola_client.Setup();
     srand(millis());
     #ifndef LINUX_PC // if compiling on raspberrypi
@@ -128,16 +129,16 @@ int main(){
     // cout << (fcn::are_consistent(cp1, cp4, 2) ? 1 : 0) << endl;
     // cout << (fcn::are_consistent(cp1, cp4, 1) ? 1 : 0) << endl;
 
-    while (true) {
-        for (int i=0; i<40; i++){
-            // cout << i << ":\t" << string((int)fcn::gaussian(i, 20, 15, 1, 80)-1, '-')<<'o' << endl;
-            // cout << i << ":\t" << string((int)fcn::gaussian2(i, 20, 15, 1, 80)-1, '-')<<'o' << endl;
-            // cout << i << ":\t" << string((int)tri(i, 20, 20, 1, 80, 0.2)-1, '-')<<'o'<< endl;
-            // cout << i << ":\t" << string((int)fcn::triangle(i, 20, 20, 1, 80, 0.8)-1, '-')<<'o'<< endl;
-            // cout << i << ":\t" << string((int)fcn::square(i, 20, 15, 1, 80, 0.2)-1, '-')<<'o'<< endl;
-            delay(100);
-        }
-    }
+    // while (true) {
+    //     for (int i=0; i<40; i++){
+    //         // cout << i << ":\t" << string((int)fcn::gaussian(i, 20, 15, 1, 80)-1, '-')<<'o' << endl;
+    //         // cout << i << ":\t" << string((int)fcn::gaussian2(i, 20, 15, 1, 80)-1, '-')<<'o' << endl;
+    //         // cout << i << ":\t" << string((int)tri(i, 20, 20, 1, 80, 0.2)-1, '-')<<'o'<< endl;
+    //         // cout << i << ":\t" << string((int)fcn::triangle(i, 20, 20, 1, 80, 0.8)-1, '-')<<'o'<< endl;
+    //         // cout << i << ":\t" << string((int)fcn::square(i, 20, 15, 1, 80, 0.2)-1, '-')<<'o'<< endl;
+    //         delay(100);
+    //     }
+    // }
 
     // double y = tri(8,10,20, 0,15, 0.2);
     // cout << y << endl;
@@ -150,4 +151,14 @@ int main(){
 
     // y = tri(30,10,20, 0,15, 0.2);
     // cout << y << endl;
+
+    cout << "start"<<endl;
+    int_vec vec = {1,2,3,4,5,6};
+    cout << "base vec created"<<endl;
+    while(true){
+        int_vec out_vec = fcn::randomized_vector(vec);
+        cout << fcn::vec_to_str(  vec, ',') << "  -->  ";
+        cout << fcn::vec_to_str(  out_vec, ',') <<endl;
+        delay(1000); 
+    }
 }
