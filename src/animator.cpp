@@ -192,7 +192,6 @@ void AnimationManager::test_update(){
         // log the results
         log(1, "Color palette ", fcn::palette_to_string(current_palette, '/')," ", fcn::num_to_str(palette_lifespan), " | Leader->", lead_fix->name, " ", fcn::num_to_str(back_fix_n), " backers");
 
-
         // activate backer animations based on the new settings
         balise(__FILE__, " ", __LINE__, "activate backer animation");
         for (int i = 0; i<backer_fix.size(); i++){
@@ -217,7 +216,6 @@ void AnimationManager::test_update(){
     //     // log(1, "Switch Spider animation --> ", spider.active_animation->description);
     //     last_spider_switch = frame.t_current_ms;
     // }
-
 }
 
 bool AnimationManager::test_animation(){
