@@ -71,6 +71,7 @@ void AnimationManager::init(){
     palette_magasine.push_back(    color_vec{blue, cyan}       ,1       );
     palette_magasine.push_back(    color_vec{purple, magenta}  ,1       );
     palette_magasine.push_back(    color_vec{red, purple}      ,2       );
+    palette_magasine.push_back(    color_vec{green, cyan}      ,1       );
 }
 
 /** Based on the musical analysis (music.state) and the current time, this function 
@@ -167,7 +168,8 @@ void AnimationManager::test_update(){
             // select a leader among Led bars, Front rack, and Laser
             balise(__FILE__, " ", __LINE__, "select leader fixture");
             // lead_fix = fcn::random_pick(fix_vec{&led, &front_rack, & laser, &spider}, {4,2,2,3});
-            lead_fix = fcn::random_pick(fix_vec{&led, &spider}, {2,2});
+            lead_fix = fcn::random_pick(fix_vec{&led, &front_rack, &laser}, {4, 2, 1});
+            // lead_fix = fcn::random_pick(fix_vec{&led, &front_rack}, {3, 1 });
             
             // activate leader animation
             balise(__FILE__, " ", __LINE__, "activate leader animation");
@@ -177,8 +179,8 @@ void AnimationManager::test_update(){
         // reference the other fixtures as "backer fixtures" in a vector (for ease of acccess & modularity)
         balise(__FILE__, " ", __LINE__, "select backer fixture");
         fix_vec backer_fix;
-        // for (auto fix : fix_vec{&led, &front_rack, &laser, &spider}){
-        for (auto fix : fix_vec{&led, &spider}){
+        for (auto fix : fix_vec{&led, &front_rack, &laser}){
+        // for (auto fix : fix_vec{&led, &front_rack}){
             if (fix != lead_fix){
                 backer_fix.push_back(fix);
             }
@@ -207,17 +209,18 @@ void AnimationManager::test_update(){
         }
         
         balise(__FILE__, " ", __LINE__, "activate backstage rack  animation");
-        // back_rack.activate_by_color(current_palette);   // deal with the backstage rack separately
+        back_rack.activate_by_color(current_palette);   // deal with the backstage rack separately
 
-        
+        spider.activate_by_color(current_palette);
+
         t_last_change_ms = frame.t_current_ms;
         palette_lifespan-- ;
     }
 
-    // Manage Lyre :
+    // // Manage Lyre :
     // static time_t last_spider_switch = 0;
     // if (frame.first_loop || frame.t_current_ms - last_spider_switch > SPIDER_ANI_DURA){
-    //     spider.activate_random(false);
+    //     spider.activate_by_color(current_palette);
     //     // log(1, "Switch Spider animation --> ", spider.active_animation->description);
     //     last_spider_switch = frame.t_current_ms;
     // }

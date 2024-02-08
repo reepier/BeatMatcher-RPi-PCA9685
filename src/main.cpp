@@ -27,7 +27,7 @@ using namespace std;
     ola::client::StreamingClient ola_client;
     ola::DmxBuffer ola_buffer;
 
-fix_vec ll_fxtrs = {&led, &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, &spot_7, &spider, &laser};
+fix_vec ll_fxtrs = {&led, &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, &spot_7,&spot_8, &spot_9, &spider, &laser};
 fix_vec fixtures = {&led, &laser, &front_rack, &back_rack, &spider};
 
 bool process_arguments(int n, char* args[]){

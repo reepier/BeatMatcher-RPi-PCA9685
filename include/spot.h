@@ -56,7 +56,7 @@ public:
     // DMX_vec RGBW(simpleColor, uint8_t intensity = 255) override {};
 
 };
-extern SpotFixture spot_7, spot_8, spot_1, spot_2, spot_3, spot_4, spot_5, spot_6;
+extern SpotFixture spot_7, spot_8, spot_1, spot_2, spot_3, spot_4, spot_5, spot_6, spot_7,spot_8,spot_9 ;
 
 /* /!\ /!\ Bullshit class --> I don't plan on coding animation for individual spots */
 class SpotAnimation : public BaseAnimation{

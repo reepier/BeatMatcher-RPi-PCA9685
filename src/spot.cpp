@@ -6,13 +6,16 @@
 
 using namespace std;
 
-SpotFixture spot_1(73,  8, "Spot 1 (74)", 1);     
-SpotFixture spot_2(81,  8, "Spot 2 (82)", 2);     
-SpotFixture spot_3(89,  8, "Spot 3 (90)", 3);     
-SpotFixture spot_4(105,  8, "Spot 4 (98)", 4);     
+SpotFixture spot_1(81,  8, "Spot 1 (82)", 1);     
+SpotFixture spot_2(105,  8, "Spot 2 (106)", 2);     
+SpotFixture spot_3(97,  8, "Spot 3 (98)", 3);     
+SpotFixture spot_4(113,  8, "Spot 4 (114)", 4);
+
 SpotFixture spot_5(121, 8, "Spot 5 (122)", 5);     
 SpotFixture spot_6(129, 8, "Spot 6 (130)", 6);     
-SpotFixture spot_7(137, 8, "Spot 7 15° (122)", 7);  
+SpotFixture spot_7(137, 8, "Spot 7 15° (138)", 7);  
+SpotFixture spot_8(89, 8, "Spot 8 (90)", 6);     
+SpotFixture spot_9(73, 8, "Spot 9 (74)", 6);     
 
 // SpotFixture spot_8(130, 8, "Spot 8 (130)");     
 
@@ -41,7 +44,9 @@ SpotFixture spot_7(137, 8, "Spot 7 15° (122)", 7);
  #####  #       #######    #       #     # #     #  #####  #    #  #####  
 
 / ----------------------------------------------------------------------- */
-SpotRack front_rack(spot_vec{&spot_1, &spot_2, &spot_3, &spot_4}, "Front Rack", 1);
+// SpotRack front_rack(spot_vec{&spot_1, &spot_2, &spot_3, &spot_4}, "Front Rack", 1);
+SpotRack front_rack(spot_vec{&spot_2, &spot_4}, "Front Rack", 1);
+// SpotRack back_rack(spot_vec{&spot_5, &spot_6, &spot_7, &spot_8, &spot_9}, "Back Rack", 2);
 SpotRack back_rack(spot_vec{&spot_5, &spot_6, &spot_7}, "Back Rack", 2);
 
 void SpotRack::init(){
@@ -283,6 +288,7 @@ void SpotRackAnimation1::init(){
     this->p_ms = vector<int>{rand_min_max(sin_min_p_ms, sin_max_p_ms),rand_min_max(sin_min_p_ms, sin_max_p_ms),rand_min_max(sin_min_p_ms, sin_max_p_ms), rand_min_max(sin_min_p_ms, sin_max_p_ms), rand_min_max(sin_min_p_ms, sin_max_p_ms)};
     
     const int n_spot = this->fixture->spots.size();
+    log(1, this->fixture->name, " : ", fcn::num_to_str(n_spot));
     this->t_next.resize(n_spot);
     this->t_prev.resize(n_spot);
     for (int i=0; i<n_spot; i++){
