@@ -71,7 +71,13 @@ void AnimationManager::init(){
     palette_magasine.push_back(    color_vec{blue, cyan}       ,1       );
     palette_magasine.push_back(    color_vec{purple, magenta}  ,1       );
     palette_magasine.push_back(    color_vec{red, purple}      ,2       );
+    
+    // Nouveau
     palette_magasine.push_back(    color_vec{green, cyan}      ,1       );
+    palette_magasine.push_back(    color_vec{blue, orange}      ,1       );
+    palette_magasine.push_back(    color_vec{blue, sodium}      ,1       );
+    palette_magasine.push_back(    color_vec{orange, blue, cyan}      ,1       );
+    
 }
 
 /** Based on the musical analysis (music.state) and the current time, this function 

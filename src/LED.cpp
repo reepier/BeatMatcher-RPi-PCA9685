@@ -27,7 +27,7 @@ void LEDFixture::init(){
     animations.push_back(new LEDAnimation1(this, black,    sodium,  "Sodium background",   "LED.2",   backer,   false));
     animations.push_back(new LEDAnimation1(this, black,    orange,  "Orange background",   "LED.3",   backer,   false));
     animations.push_back(new LEDAnimation1(this, black,    yellow,  "Yellow background",   "LED.4",   backer,   false));
-    animations.push_back(new LEDAnimation1(this, black,      gold,  "Gold background",     "LED.5",   backer,   false));
+ // animations.push_back(new LEDAnimation1(this, black,      gold,  "Gold background",     "LED.5",   backer,   false));
  // animations.push_back(new LEDAnimation1(this, black,     white,  "White background",    "LED.6",   backer,   false));
     animations.push_back(new LEDAnimation1(this, black,      cyan,  "Cyan background",     "LED.7",   backer,   false));
     animations.push_back(new LEDAnimation1(this, black,      blue,  "Blue background",     "LED.8",   backer,   false));
@@ -54,7 +54,7 @@ void LEDFixture::init(){
     animations.push_back(new LEDAnimation1(this, sodium,    sodium,    "Sodium Flashes, Sodium Background",    "LED.2.2" , leader));
     animations.push_back(new LEDAnimation1(this, orange,    orange,    "Orange Flashes, Orange Background",    "LED.2.3" , leader));
     animations.push_back(new LEDAnimation1(this, yellow,    yellow,    "Yellow Flashes, Yellow Background",    "LED.2.4" , leader));
-    animations.push_back(new LEDAnimation1(this, gold,      gold,      "Gold Flashes, Gold Background",        "LED.2.5" , leader));
+ // animations.push_back(new LEDAnimation1(this, gold,      gold,      "Gold Flashes, Gold Background",        "LED.2.5" , leader));
  // animations.push_back(new LEDAnimation1(this, white,     white,     "White Flashes, White Background",      "LED.2.6" , leader));
     animations.push_back(new LEDAnimation1(this, cyan,      cyan,      "Cyan Flashes, Cyan Background",        "LED.2.7" , leader));
     animations.push_back(new LEDAnimation1(this, blue,      blue,      "Blue Flashes, Blue Background",        "LED.2.8" , leader));
@@ -68,7 +68,7 @@ void LEDFixture::init(){
     animations.push_back(new LEDAnimation1(this, white,     sodium,  "White Flashes, Sodium background",   "LED.3.2", leader));
     animations.push_back(new LEDAnimation1(this, white,     orange,  "White Flashes, Orange background",   "LED.3.3", leader));
     animations.push_back(new LEDAnimation1(this, white,     yellow,  "White Flashes, Yellow background",   "LED.3.4", leader));
-    animations.push_back(new LEDAnimation1(this, white,     gold,    "White Flashes, Gold background",     "LED.3.5", leader));
+ // animations.push_back(new LEDAnimation1(this, white,     gold,    "White Flashes, Gold background",     "LED.3.5", leader));
  // animations.push_back(new LEDAnimation1(this, white,     white,   "White Flashes, White background",    "LED.3.6", leader));
     animations.push_back(new LEDAnimation1(this, white,     cyan,    "White Flashes, Cyan background",     "LED.3.7", leader));
     animations.push_back(new LEDAnimation1(this, white,     blue,    "White Flashes, Blue background",     "LED.3.8", leader));
@@ -101,6 +101,10 @@ void LEDFixture::init(){
     animations.push_back(new LEDAnimation1(this, cyan,     purple,    "cyan Flashes, purple background",      "LED.6.7", leader));
     animations.push_back(new LEDAnimation1(this, pink,     purple,    "pink Flashes, purple background",      "LED.6.8", leader));
     animations.push_back(new LEDAnimation1(this, cyan,     pink,      "cyan Flashes, pink background",        "LED.6.9", leader));
+    animations.push_back(new LEDAnimation1(this, cyan,     green,     "cyan Flashes, pink background",        "LED.6.10", leader));
+    animations.push_back(new LEDAnimation1(this, green,    cyan,      "cyan Flashes, pink background",        "LED.6.11", leader));
+    animations.push_back(new LEDAnimation1(this, cyan,     orange,    "cyan Flashes, pink background",        "LED.6.12", leader));
+    animations.push_back(new LEDAnimation1(this, cyan,     sodium,    "cyan Flashes, pink background",        "LED.6.13", leader));
     
     
 
