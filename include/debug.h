@@ -47,7 +47,7 @@ void log(int lvl, const Args&... args) {
     const std::string filename = "beatmatcher.log";
     const std::size_t thresholdSizeInBytes = 1000000;               //Bytes     1Mo
     std::ofstream logFile(filename, std::ios::app);
-    logFile << "[" << frame.t_current_ms/1000.0 << "] " << oss.str() << std::endl;
+    logFile << "[" << frame.t_current_ms/1000.0 << "] " << std::string(lvl, ' ') << oss.str() << std::endl;
 
     //delete log if its size exceeds a threshold
     struct stat fileInfo;

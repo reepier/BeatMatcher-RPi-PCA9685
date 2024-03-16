@@ -46,5 +46,6 @@ extern std::vector<std::string> vec_anim_id;
 #define      PAL_LIFESPAN_BICO  4
 #define      PAL_LIFESPAN_MONO  2
 
-#define     SPOTRACK_BG_INTENSITY   40
+#define     SPOTRACK_ANI1_BkG_INTENSITY_LOW   40
+#define     SPOTRACK_ANI1_BkG_INTENSITY_HIGH  100
 

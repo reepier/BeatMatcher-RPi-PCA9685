@@ -107,14 +107,6 @@ void LEDFixture::init(){
     animations.push_back(new LEDAnimation1(this, cyan,     sodium,    "cyan Flashes, pink background",        "LED.6.13", leader));
     
     
-
-
-    
-
-
-
-    
-    
     this->activate_by_index(0);
     balise("LED animations created");
 }
@@ -200,7 +192,7 @@ void LEDAnimation1::new_frame(){
 #     #  #####  ######   ## ##     #        ####  #    # 
 */
 DMX_vec LEDFixture::RGB(simpleColor c, int intensity){
-    log(4, __FILE__, " ",__LINE__, " ", __func__);
+    // log(4, __FILE__, " ",__LINE__, " ", __func__);
 
     DMX_vec temp;
     int ref_int = 255;          // reference intensity, set for each color to get a constnat luminosity trhoughtou the palette
@@ -253,6 +245,7 @@ DMX_vec LEDFixture::RGB(simpleColor c, int intensity){
             temp = fcn::RGB_norm(DMX_vec{255,37,4});
             break;
         default:
+            temp = fcn::RGB_norm(DMX_vec{0,0,0});
             break;
         }
 

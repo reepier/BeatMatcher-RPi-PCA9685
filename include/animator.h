@@ -181,7 +181,7 @@ namespace fcn{
       }
     }
 
-    return (T)0;    //TODO bellec ce casting est bancale AF
+    return (T)0;    //TODO bellec ce cast est bancale AF
   }
 
   template<class T>
@@ -295,6 +295,7 @@ class AnimationManager{
 #     # #    # #    # #         #       #  #  #    #   #    # #   #  #      
 ######  #    #  ####  ######    #       # #    #   #    ####  #    # ###### 
  --------------------------------------------------------------- */
+ //TODO : add a uint8_t MASTER attribute to base fixture class (default 255)
 // Generic (core) description of a fixture (later derived into specific classes)
 class BaseFixture{
   public:
@@ -329,7 +330,7 @@ class BaseFixture{
     //DMX output
     virtual int get_address() = 0;
     virtual int get_nCH()     = 0;
-    virtual DMX_vec buffer()  = 0;
+    virtual DMX_vec buffer()  = 0; //TODO : Set the MASTER channel value to animation_MASTER * fixture_MASTER // TODO : find a way to deal with GroupFixtures and Individual Fixtures (one master each ? master only for indiidual fixture ??)
 
     virtual DMX_vec RGBW(simpleColor, int){}; // common (but overriden) function that returns a 4 RGBW vector based on standrad color input
     virtual DMX_vec RGB(simpleColor, int){};
@@ -344,7 +345,7 @@ class BaseFixture{
 ######  #    #  ####  ######    #     # #    # # #    # #    #   #   #  ####  #    # 
 */
 
-
+//TODO : add a uint8_t MASTER attribute to base animation class (default 255)
 // Generic (core) description of an animation object
 class BaseAnimation{
   public :

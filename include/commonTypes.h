@@ -65,9 +65,9 @@ enum AnimationType{
     any
 };
 
-struct Flash{
+struct Flash{   // stores : color (simpleColor) and the timestamp (time_ms) of a flash (or any resembling event)
     simpleColor color;
-    unsigned long time;
+    time_t time;
 };
 
 // different types of commonly used vectors
@@ -76,7 +76,10 @@ typedef std::vector<uint8_t>        DMX_vec;  //a vector of 8bit int with values
 typedef std::vector<int>            int_vec;  //a vector of standard int
 typedef std::vector<unsigned long>  t_vec;
 typedef std::vector<std::string>    str_vec;
-typedef std::vector<Flash>          flash_vec;
+typedef std::vector<Flash>          flash_vec;      //a vector of n Flash
+typedef std::vector<DMX_vec>        pixel_vec;
+typedef DMX_vec                     pixel;
+
 
   // Declare all the classes before defining them
 class AnimationManager;   //TODO move this in a sceno.h and rename this module baseFixture.h & baseAnimation.h

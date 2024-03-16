@@ -187,6 +187,7 @@ DMX_vec SpiderFixture::RGBW(simpleColor c, int intensity){
         return fcn::RGBW_norm(DMX_vec{255,40,0,100}, intensity);
         break;
     default:
+        return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);
         break;
     }
 }

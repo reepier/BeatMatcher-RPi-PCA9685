@@ -170,9 +170,9 @@ int main(int argc, char* argv[]){
             }
         }
 
-        balise("Compute new frame...");
+        balise("Compute new frames...");
         for (fix_vec::iterator fixture = fixtures.begin(); fixture != fixtures.end(); fixture++){
-            balise((*fixture)->name, " : ", (*fixture)->active_animation->id.data());
+            log(4, (*fixture)->name, " : new frame for ", (*fixture)->active_animation->id.data());
             (*fixture)->active_animation->new_frame();
         }
         // led.active_animation->new_frame();

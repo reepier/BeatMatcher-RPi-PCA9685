@@ -61,6 +61,7 @@ public:
 };
 extern LEDFixture led;
 
+// void led_init();
 /**
    #    #     # ### #     #    #    ####### ### ####### #     #  #####  
   # #   ##    #  #  ##   ##   # #      #     #  #     # ##    # #     # 

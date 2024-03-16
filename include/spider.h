@@ -10,7 +10,6 @@
 class SpiderFixture;
 class SpiderAnimation;
 
-typedef std::vector<DMX_vec> pixel_vec;
 
 /**
 ####### ### #     # ####### #     # ######  ####### 
@@ -114,18 +113,16 @@ class SpiderAnimation1 : public SpiderAnimation{
 #     #       ####### 
 */
 // Random beams
-
 class SpiderAnimation2 : public SpiderAnimation{
   public:
     // constant parameters (defining the animation)
-    simpleColor background_color;
-    color_vec flash_colors;                 // stores the different fkash colors
-    int_vec flash_color_proba = {};              // stores each flash color's probability of occurence
-    unsigned long flash_dt;
-    Shape flash_shape;
-    int flash_length;
-    int pan_position;
-    int pan_speed;
+    simpleColor background_color;           // stores background color
+    color_vec flash_colors;                 // stores the different beam colors
+    int_vec flash_color_proba = {};         // stores each beam color's probability of occurence
+    unsigned long flash_dt;                 // Average time interval between 2 Beams
+    Shape flash_shape;                      // Beam shape (gaussian, square)
+    int flash_length;                       // Beam duration
+    int pan_position, pan_speed;
     int_vec tilt_position;
     int tilt_period;
 

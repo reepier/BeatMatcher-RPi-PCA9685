@@ -60,3 +60,17 @@ inline double sin_min_max(auto x, auto min, auto max){
 inline double sin2_min_max(auto x, auto min, auto max){
     return (max+min)/2.0 + (max-min)/2.0 * std::sin(x);
 }
+
+
+
+
+
+
+
+
+
+
+
+inline void crash(){
+    int i = 1/0;
+}

@@ -28,7 +28,7 @@ using namespace std;
 
 void AnimationManager::init(){
     log(4, __FILE__, " ",__func__);
-    
+    //TODO move palette definition to a dedicated funciton (for readabiliyt)
     palette_magasine.push_back(    color_vec{red}    ,2   );
  // palette_magasine.push_back(    color_vec{sodium} ,1   );
  // palette_magasine.push_back(    color_vec{orange} ,1   );
@@ -78,6 +78,12 @@ void AnimationManager::init(){
     palette_magasine.push_back(    color_vec{blue, sodium}      ,1       );
     palette_magasine.push_back(    color_vec{orange, blue, cyan}      ,1       );
     
+    front_rack_init();
+    back_rack_init();
+    global_rack_init();
+
+    
+
 }
 
 /** Based on the musical analysis (music.state) and the current time, this function 
@@ -242,6 +248,7 @@ bool AnimationManager::test_animation(){
         balise(s_anim_id.data());
 
         for (auto fix : fixtures){
+            balise(fix->name);
             success = fix->activate_by_ID(s_anim_id);
             if (success) break;
         }
@@ -297,7 +304,7 @@ void BaseFixture::blackout(bool b){
 bool BaseFixture::activate_none(){
     log(4, __FILE__, " ",__LINE__, " ", __func__);
 
-    this->active_animation = this->animations[0];
+    this->active_animation = this->animations[0]; // IMPORTANT : the first animation mut ALWAYS be a complete blackout (all color/position channels to 0)
     this->active_animation->init();
 }
 

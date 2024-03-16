@@ -64,19 +64,6 @@ public:
     SpotFixture *fixture;
 };
 
-/* /!\ /!\ Bullshit class --> I don't plan on coding animation for individual spots */
-// class SpotAnimation1 : public SpotAnimation{
-// public:
-//     uint8_t red;
-//     uint8_t green;
-//     uint8_t blue;
-//     uint8_t white;
-
-//     SpotAnimation1(SpotFixture *, uint8_t, uint8_t, uint8_t, uint8_t, std::string, std::string);
-//     void init() override {BaseAnimation::init();};
-//     void new_frame();
-// };
-
 /* --------------------------------------------------------------------
  #####  ######  ####### #######    ######     #     #####  #    #  #####  
 #     # #     # #     #    #       #     #   # #   #     # #   #  #     # 
@@ -104,9 +91,9 @@ public:
         }
     };
 
-    void init() override;     // empty function (useless)
-    void init_front(); // initialize a frontal rack of spots
-    void init_back();  // initialize a backgoround rack of spots
+    void init() override {};     // empty for now (no need)
+    // void init_front(); // initialize a frontal rack of spots
+    // void init_back();  // initialize a backgoround rack of spots
     
     int get_nCH() override { return this->nCH; };
     int get_address() override { return this->address; };
@@ -123,6 +110,10 @@ public:
 extern SpotRack front_rack;
 extern SpotRack back_rack;
 
+void front_rack_init();
+void back_rack_init();
+void global_rack_init();
+
 /**
    #    #     # ### #     #    #    ####### ### ####### #     #  #####  
   # #   ##    #  #  ##   ##   # #      #     #  #     # ##    # #     # 
@@ -132,21 +123,33 @@ extern SpotRack back_rack;
 #     # #    ##  #  #     # #     #    #     #  #     # #    ## #     # 
 #     # #     # ### #     # #     #    #    ### ####### #     #  #####  
 */
-
-class SpotRackAnimtion : public BaseAnimation
+class SpotRackAnimation : public BaseAnimation
 {
 public:
     SpotRack *fixture;
 };
+/*
+         #       
+        ##       
+       # #       
+         #       
+         #   ### 
+         #   ### 
+       ##### ### 
+*/
+// BUBBLES : background color with another color randomly apppearing
 
-/*2 Oscillating colors, with one flashing randomly and another one as fluctuating background*/
-class SpotRackAnimation1 : public SpotRackAnimtion
+class SpotRackAnimation1 : public SpotRackAnimation
 {
-public:
-    // animation parameters (set by user)
+private :
+    // animation parameters (constant, set at construction)
     bool flash_activation = true;
-    DMX_vec back_color;
-    DMX_vec flash_color;
+    // DMX_vec back_color;
+    simpleColor back_color;
+    // DMX_vec flash_color;
+    color_vec flash_colors;
+
+    Shape flash_shape = gaussian; // default setting leads to gaussian flashes (of bubbles)
     int sin_max_p_ms = 15000;
     int sin_min_p_ms = 5000;
     int rand_const_ms;
@@ -154,47 +157,93 @@ public:
     double fluct_int = 0.4;
     double fluct_col = 0.25;
 
-    // Internal variable (for storage between frames)
+    // Internal variable (updated at every new_frame call)
     std::vector<int> p_ms;             // range of periods for various sine wvaes
-    std::vector<unsigned long> t_next; // timestamp of the next rise ()
-    std::vector<unsigned long> t_prev; // timestamp of the prev rise () (memory)
+    // std::vector<unsigned long> t_next; // timestamp of the next rise ()
+    // std::vector<unsigned long> t_prev; // timestamp of the prev rise () (memory)
+    std::vector<flash_vec> flashes;     //for each spot, stores previous & next flash data (color & time) --> flashes[spot_ind][prev/next].color/time
 
+    // Internal helpful & hidden stuff (for readability)
+    const int i_prev = 0, i_next = 1;
+
+public :
     // fixture, color bckgd, color flash, oscil. period(ms)  max , min, mean time btwn flashes (ms), flash duration(ms), description, id
-    SpotRackAnimation1(SpotRack *f, simpleColor b_col, simpleColor f_col, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio){
+    // Multicolor flash constructor
+    SpotRackAnimation1(SpotRack *f, simpleColor b_col, color_vec f_cols, Shape fshape, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio){
         this->description = d;
         this->id = i;
         this->fixture = f;
         this->type = t;
         this->priority = prio;
-    
-        this->flash_color = this->fixture->RGBW(f_col);
-        if (f_col==black)
-            this->back_color = this->fixture->RGBW(b_col, 100);     // more intensity if there is no flash
-        else
-            this->back_color = this->fixture->RGBW(b_col, SPOTRACK_BG_INTENSITY);     // less intensity if there is a flash
+        
+        this->flash_colors = f_cols;
+        this->back_color = b_col;
+        this->flash_shape = fshape;
+                log(1, __func__, " ", this->id, " Palette : ", fcn::palette_to_string(this->flash_colors, '/'));
 
         // this->sin_max_p_ms = pmax;
         // this->sin_min_p_ms = pmin;
         this->rand_const_ms = prand;
         this->flash_len = flen;
 
+        this->update_palette(color_vec{b_col});
+        this->update_palette(f_cols);
+    }
+    // Base constructor
+    SpotRackAnimation1(SpotRack *f, simpleColor b_col, simpleColor f_col, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio){
+        this->description = d;
+        this->id = i;
+        this->fixture = f;
+        this->type = t;
+        this->priority = prio;
+
+        this->flash_colors.push_back(f_col);
+        this->back_color = b_col;
+        // if (f_col==black)
+        //     this->back_color = this->fixture->RGBW(b_col, SPOTRACK_ANI1_BkG_INTENSITY_HIGH);     // more intensity if there is no flash
+        // else
+        //     this->back_color = this->fixture->RGBW(b_col, SPOTRACK_ANI1_BkG_INTENSITY_LOW);     // less intensity if there is a flash
+
+        // this->sin_max_p_ms = pmax;
+        // this->sin_min_p_ms = pmin;
+        this->rand_const_ms = prand;
+        this->flash_len = flen;
+
+
         this->update_palette(color_vec{b_col, f_col});
     }
+    //overloaded constructor to add a flash shape argument
+    SpotRackAnimation1(SpotRack *f, simpleColor b_col, simpleColor f_col, Shape fshap, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio) 
+        : SpotRackAnimation1(f, b_col, b_col, prand, flen, d, i, t, prio){
+        this->flash_shape = fshap;
+    }
     // overloaded constructor to create the same animation without flash (everything else being equal)
-    SpotRackAnimation1(SpotRack *f, simpleColor b_col, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio) : SpotRackAnimation1(f, b_col, b_col, prand, flen, d, i, t, prio){
+    SpotRackAnimation1(SpotRack *f, simpleColor b_col, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio)
+        : SpotRackAnimation1(f, b_col, b_col, prand, flen, d, i, t, prio){
         this->flash_activation = false;
     }
 
     void init() override;
     void new_frame();
 };
-
+/*
+       #####      
+      #     #     
+            #     
+       #####      
+      #       ### 
+      #       ### 
+      ####### ### 
+*/
+// STROBE : Random color flashes
+// TODO add multicolor feature (change color at every new_frame)
+// TODO add multishape (exp, square)
 #define STRB_FASTEST 180
 #define STRB_FAST 80
 #define STRB_MED 30
 #define STRB_SLOW 1
 /*Strobe*/
-class SpotRackAnimation2 : public SpotRackAnimtion{
+class SpotRackAnimation2 : public SpotRackAnimation{
   public:
     simpleColor color;
     uint8_t strobe_spd;
@@ -234,4 +283,40 @@ class SpotRackAnimation2 : public SpotRackAnimtion{
 private :
     void shake();
     unsigned long t_next_shake;
+};
+/*
+       #####      
+      #     #     
+            #     
+       #####      
+            # ### 
+      #     # ### 
+       #####  ### 
+*/
+// CHASER : each spots individually lights up and stays on for a user defined duration
+
+class SpotRackAnimation3 : public SpotRackAnimation {
+public:
+    // Parameters
+    color_vec colors;
+    time_t chaser_period_ms; // duration between two turn-on
+    time_t on_time;          // duration between turn-on and turn-off
+    Shape decay;             //square, linear, exponential
+
+    // Dynamic variables (updated internally at each frame)
+
+    // Constructor
+    SpotRackAnimation3(color_vec c, time_t spd, time_t dur, SpotRack *f, std::string d, std::string i)
+    {
+        this->description = d;
+        this->id = i; 
+        this->fixture = f;
+
+        this->colors = c;
+
+        this->update_palette(c);
+    }
+
+    void init() override;
+    void new_frame() override;
 };
