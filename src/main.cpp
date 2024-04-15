@@ -26,6 +26,7 @@ using namespace std;
 // DMX output interface (OLA)
     ola::client::StreamingClient ola_client;
     ola::DmxBuffer ola_buffer;
+    ola::DmxBuffer ola_pix_buffer;
 
 fix_vec ll_fxtrs = {&led, &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, &spot_7,&spot_8, &spot_9, &spider, &laser};
 fix_vec fixtures = {&led, &laser, &front_rack, &back_rack, &spider};
@@ -86,6 +87,7 @@ void initialize() {
     balise("Init. ola...");
     ola_client.Setup();
     ola_buffer.Blackout();
+    ola_pix_buffer.Blackout();
 
     balise("Init. Sampler...");
     sampler.init();   // initialize Music lib
@@ -127,8 +129,11 @@ void send(){
         ola_buffer.SetRange((*fx)->get_address(), (*fx)->buffer().data(), (*fx)->get_nCH());
     }
 
+    ola_pix_buffer.SetRange(0, led.buffer_pix().data(), NUM_PIX*3);
+    
     balise("OLAclient.send()");
     ola_client.SendDmx(0, ola_buffer);
+    ola_client.SendDmx(1, ola_pix_buffer);
 }
 
 LoopControler frame;
