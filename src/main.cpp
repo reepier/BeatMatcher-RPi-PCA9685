@@ -128,7 +128,7 @@ void send(){
     }
 
     balise("OLAclient.send()");
-    ola_client.SendDmx(1, ola_buffer);
+    ola_client.SendDmx(0, ola_buffer);
 }
 
 LoopControler frame;

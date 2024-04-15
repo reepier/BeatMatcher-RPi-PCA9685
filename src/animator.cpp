@@ -81,9 +81,7 @@ void AnimationManager::init(){
     front_rack_init();
     back_rack_init();
     global_rack_init();
-
     
-
 }
 
 /** Based on the musical analysis (music.state) and the current time, this function 

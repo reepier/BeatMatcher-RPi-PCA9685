@@ -120,11 +120,12 @@ void front_rack_init(){
     
     // Animation 1 -> CHASER MODE (TEST)
     // SLOW
+    // TODO : fix these aniation
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    white,       square,  1000, 600,      "white chaser",       "FR.3.1", leader, 2));
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    white,       square,  200, 300,       "fast white chaser",   "FR.3.2", leader, 2));
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    white,       square,  200, 600,       "fast white chaser",   "FR.3.3", leader, 2));
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    sevika_pink, square,  100, 200,       "fast sevika_pink chaser",   "FR.3.4", leader, 2));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    sevika_pink, square,  50, 100,        "super fast sevika_pink chaser",   "FR.3.5", leader, 2));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    sevika_pink, square,  50, 50,         "super fast sevika_pink chaser",   "FR.3.5", leader, 2));
 
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    color_vec{sevika_pink,hextech_cyan}, square, 50, 50,     "super fast hextech sevika chaser",   "FR.3.6.1", leader, 2));
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    color_vec{sevika_pink,hextech_cyan}, square, 100, 200,     "fast hextech sevika chaser",   "FR.3.6", leader, 2));
