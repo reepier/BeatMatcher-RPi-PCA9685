@@ -82,8 +82,6 @@ void AnimationManager::init(){
     back_rack_init();
     global_rack_init();
 
-    
-
 }
 
 /** Based on the musical analysis (music.state) and the current time, this function 
@@ -209,7 +207,7 @@ void AnimationManager::test_update(){
         int back_fix_n = fcn::random_pick( int_vec{2,1,0}, int_vec{2,2,1} );
 
         // log the results
-        log(2, fcn::num_to_str(palette_lifespan), ") Leader->", lead_fix->name, "\t", fcn::num_to_str(back_fix_n), " backers");
+        log(2, fcn::num_to_str(palette_lifespan), ") Leader->", lead_fix->name, " + ", fcn::num_to_str(back_fix_n), " backers");
 
         // activate backer animations based on the new settings
         balise(__FILE__, " ", __LINE__, "activate backer animation");
