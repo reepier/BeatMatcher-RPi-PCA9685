@@ -1,113 +1,81 @@
 #include <iostream>
-#include <vector>
+#include <iomanip>
 #include <string>
-#include <cmath>
+#include <cstring>
+#include <wiringPi.h>
 #include <algorithm>
-#include <random>
-
-#include "wiringPi.h"
-using namespace std;
 
 #include <ola/DmxBuffer.h>
 #include <ola/client/StreamingClient.h>
 
-#include "../include/config.h"
-#include "../include/sysfcn.h"
-#include "../include/music.h"
-#include "../include/animator.h"
-#include "../include/fixtures.h"
+#include "debug.h"
+#include "fixtures.h"
+#include "music.h"
+#include "sysfcn.h"
+#include "config.h"
 
-// DMX output interface (OLA)
-  ola::client::StreamingClient ola_client;
-  ola::DmxBuffer ola_buffer;
+using namespace std;
 
 #ifndef LINUX_PC // if compiling on raspberrypi
     // I2C Hardware interface (PCA9685)
     int fd;
     int addr = 0x40;
-    unsigned int setOnVals[_PCA9685_CHANS] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    unsigned int setOnVals[_PCA9685_CHANS]  = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     unsigned int setOffVals[_PCA9685_CHANS] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 #endif
 
-fix_vec ll_fxtrs = {&led, &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, &spot_7, &spider, &laser};
-fix_vec fixtures = {&front_rack, &back_rack, &led, &spider, &laser};
+// DMX output interface (OLA)
+    ola::client::StreamingClient ola_client;
+    ola::DmxBuffer ola_buffer;
+    vector<ola::DmxBuffer> ola_pix_buffers(NUM_SUBPIX/MAX_SUBPIX_PER_UNI + ((NUM_SUBPIX%MAX_SUBPIX_PER_UNI)==0 ? 0 : 1));
 
-LoopControler frame;
+fix_vec ll_fxtrs = {&led, &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, &spot_7,&spot_8, &spot_9, &spider, &laser};
+fix_vec fixtures = {&addr_led, &led, &laser, &front_rack, &back_rack, &spider};
 
-void build_buffer(){
-    
-}
+bool process_arguments(int n, char* args[]){
+    for (int i=1; i<n; i++){
+        char* arg = args[i];
 
-void send(){
-    #ifndef LINUX_PC // if compiling on raspberrypi
-    // Send frame to the PCA9685 module
-    // Take into account the MASTER DIMMER value !! --> as late as possible, right before data is sent
-    setOffVals[LEDRed1] = led.RGBout[R] * led.MASTER_DIMMER / 255.0;
-    setOffVals[LEDGreen1] = led.RGBout[G] * led.MASTER_DIMMER / 255.0;
-    setOffVals[LEDBlue1] = led.RGBout[B] * led.MASTER_DIMMER / 255.0;
-    
-    setOffVals[LEDRed2] = led.RGBout[R] * led.MASTER_DIMMER / 255.0;
-    setOffVals[LEDGreen2] = led.RGBout[G] * led.MASTER_DIMMER / 255.0;
-    setOffVals[LEDBlue2] = led.RGBout[B] * led.MASTER_DIMMER / 255.0;
-
-    PCA9685_setPWMVals(fd, addr, setOnVals, setOffVals);
-#endif // DEBUG
-
-    // send DMX frame to OLA server.
-    balise("Construct buffer");
-    for (fix_vec::iterator fx = ll_fxtrs.begin(); fx != ll_fxtrs.end(); fx++){
-        ola_buffer.SetRange((*fx)->get_address(), (*fx)->buffer().data(), (*fx)->get_nCH());
+        if (strcmp(arg, "--help") == 0){
+            cout << "Arguments :\n--noled\n--nomusic\n--nocurses\n--animation <anim_id>" << endl;
+            exit(0);
+        }else if(strcmp(arg, "--balise") == 0){
+            b_BALISE = true;
+            // b_CURSES = false;
+        }
+        else if (strcmp(arg, "--noled") == 0){
+            b_NO_LED = true;
+        }
+        else if (strcmp(arg, "--nomusic") == 0){
+            b_NO_MUSIC = true;
+        }
+        else if(strcmp(arg, "--nocurses") == 0){
+            b_CURSES == false;
+        }
+        else if(strcmp(arg, "--animation") == 0){
+            b_test = true;
+            while ( (i<n-1) && (string(args[++i]).find('-') != 0) ) {
+                vec_anim_id.push_back(string(args[i]));
+                balise( (*(vec_anim_id.end()-1)).data() );
+            }
+        }
+        else{
+            return false;
+        }
     }
 
-    balise("OLAclient.send()");
-    ola_client.SendDmx(1, ola_buffer);
+
+    #ifdef LINUX_PC //if compiling on PC, force NO_MUSIC and NO_LED since PCA9685 and MCP3008 are not compatible
+        b_NO_MUSIC = true;
+        b_NO_LED = true;
+    #endif
+
+    return true;
 }
 
-void spit_colors(){
-  for(int c = simpleColor::black; c != simpleColor::last_color; c++){
-    // cout << colorName[c] << "\t: RGBW{" << fcn::vec_to_str(fcn::RGBW((simpleColor)c), ',') << "} \t RGB{" << fcn::vec_to_str(fcn::RGB((simpleColor)c), ',') << "}" << endl;
-  }
-}
+void initialize() {
+    srand((unsigned)time(nullptr));
 
-// Function to read vector elements in random order
-void readVectorInRandomOrder(std::vector<int>& vec) {
-    // Seed the random number generator
-    std::random_device rd;
-    std::mt19937 rng(rd());
-
-    // Shuffle the vector using the random number generator
-    std::shuffle(vec.begin(), vec.end(), rng);
-
-    // Iterate through the shuffled vector and read its elements
-    for (const int& element : vec) {
-        std::cout << element << " ";
-    }
-    std::cout << std::endl;
-}
-
-double tri(time_ms t, time_ms t0, time_ms period, double min, double max, double alpha=0.5){
-    double x = ( (int)t-(int)t0 )/ (double)period;
-    // cout << "\tt:"<<(int)t<< "\tt0:"<<(int)t0<< "\tT:"<<(int)period<< "\ta:"<<alpha<< "\tx:"<<x<<endl;
-
-    if ( -alpha <= x  &&  x <= 0  ){
-    //   std::cout<<"mark1: " << -alpha << " "<< x << " "<< 0 << " " << endl; 
-        return map(x, -alpha, 0.0, (double)min, (double)max);
-    }
-    else if (0 < x  &&  x <= 1-alpha ){
-    //   std::cout<<"mark2: " << 0 << " "<< x << " "<< 1-alpha << " " << endl;
-        return map(x, 0.0, 1.0-alpha, (double)max, (double)min);
-    }
-    else {
-    //   std::cout<<"mark3: " << endl;
-        return min;
-    }
-}
-
-
-int main(){
-    cout << "ola_setup "<<endl;
-    ola_client.Setup();
-    srand(millis());
     #ifndef LINUX_PC // if compiling on raspberrypi
         balise("Init. PCA...");
         _PCA9685_DEBUG = 0;
@@ -117,70 +85,138 @@ int main(){
         PCA9685_initPWM(fd, addr, _PCA9685_MAXFREQ);
     #endif
 
-    // color_vec cp1 = {black, white};
-    // color_vec cp2 = {red, black};
-    // color_vec cp3 = {purple, orange};
-    // color_vec cp4 = {white, black};
+    balise("Init. ola...");
+    ola_client.Setup();
+    ola_buffer.Blackout();
+    for(auto buf : ola_pix_buffers){
+        buf.Blackout();
+    }
 
-    // cout << (fcn::are_consistent(cp1, cp2) ? 1 : 0) << endl;
-    // cout << (fcn::are_consistent(cp1, cp2, 2) ? 1 : 0) << endl;
-
-    // cout << (fcn::are_consistent(cp1, cp3) ? 1 : 0) << endl;
-    // cout << (fcn::are_consistent(cp1, cp4, 2) ? 1 : 0) << endl;
-    // cout << (fcn::are_consistent(cp1, cp4, 1) ? 1 : 0) << endl;
-
-    // while (true) {
-    //     for (int i=0; i<40; i++){
-    //         // cout << i << ":\t" << string((int)fcn::gaussian(i, 20, 15, 1, 80)-1, '-')<<'o' << endl;
-    //         // cout << i << ":\t" << string((int)fcn::gaussian2(i, 20, 15, 1, 80)-1, '-')<<'o' << endl;
-    //         // cout << i << ":\t" << string((int)tri(i, 20, 20, 1, 80, 0.2)-1, '-')<<'o'<< endl;
-    //         // cout << i << ":\t" << string((int)fcn::triangle(i, 20, 20, 1, 80, 0.8)-1, '-')<<'o'<< endl;
-    //         // cout << i << ":\t" << string((int)fcn::square(i, 20, 15, 1, 80, 0.2)-1, '-')<<'o'<< endl;
-    //         delay(100);
-    //     }
-    // }
-
-    // double y = tri(8,10,20, 0,15, 0.2);
-    // cout << y << endl;
-
-    // y = tri(10,10,20, 0,15, 0.2);
-    // cout << y << endl;
-
-    // y = tri(12,10,20, 0,15, 0.2);
-    // cout << y << endl;
-
-    // y = tri(30,10,20, 0,15, 0.2);
-    // cout << y << endl;
-
-    // cout << "start"<<endl;
-    // int_vec vec = {1,2,3,4,5,6};
-    // cout << "base vec created"<<endl;
-    // while(true){
-    //     int_vec out_vec = fcn::randomized_vector(vec);
-    //     cout << fcn::vec_to_str(  vec, ',') << "  -->  ";
-    //     cout << fcn::vec_to_str(  out_vec, ',') <<endl;
-    //     delay(1000); 
-    // }
-
-    animator.init();
-    spider.init();
-
-    // cout << "Animations : " << endl;
-    // for (auto anim : spider.animations){
-    //     cout << anim->id << " : " << fcn::palette_to_string(anim->color_palette, '/') << endl;
-    // }
-
-    // for (auto pal : animator.palette_magasine.color_palettes){
-    //     cout << "Palette " << fcn::palette_to_string(pal, '/') << endl;
-    //     for (int i=0; i<5; i++){
-    //         spider.activate_by_color(pal);
-    //         cout << "Tirage : " << spider.active_animation->id << "\t" << fcn::palette_to_string(spider.active_animation->color_palette, '/') << endl;
-    //     }
-    // }
-
-    spider.activate_by_color(color_vec{blue, purple}, leader);
-    spider.activate_by_color(color_vec{blue, purple}, backer);
-    spider.activate_by_color(color_vec{blue, purple}, any);
+    balise("Init. Sampler...");
+    sampler.init();   // initialize Music lib
     
+    balise("Init Animator...");
+    animator.init();
+    
+    balise("Init. fixtures...");
+    for (fix_vec::iterator fixture = fixtures.begin(); fixture != fixtures.end(); fixture++){
+        balise("Initializing ", (*fixture)->name);
+        (*fixture)->init();
+    }
 
+    
+    if (!b_BALISE){
+        balise("Init. Debug...");
+        init_display();
+    }
+}
+
+void send(){
+    #ifndef LINUX_PC // if compiling on raspberrypi
+    // Send frame to the PCA9685 module
+    // Take into account the MASTER DIMMER value !! --> as late as possible, right before data is sent
+    setOffVals[LEDRed1] = led.RGBout[R] * led.MASTER_DIMMER / 255.0;
+    setOffVals[LEDGreen1] = led.RGBout[G] * led.MASTER_DIMMER / 255.0;
+    setOffVals[LEDBlue1] = led.RGBout[B] * led.MASTER_DIMMER / 255.0;
+    setOffVals[LEDRed2] = led.RGBout[R] * led.MASTER_DIMMER / 255.0;
+    setOffVals[LEDGreen2] = led.RGBout[G] * led.MASTER_DIMMER / 255.0;
+    setOffVals[LEDBlue2] = led.RGBout[B] * led.MASTER_DIMMER / 255.0;
+
+  
+    PCA9685_setPWMVals(fd, addr, setOnVals, setOffVals);
+    #endif // DEBUG
+
+    // construct & send DMX frame for old school fixtures (COTS DMX fixtures)
+    balise("Construct & send buffer for classical fixtures");
+    for (fix_vec::iterator fx = ll_fxtrs.begin(); fx != ll_fxtrs.end(); fx++){
+        ola_buffer.SetRange((*fx)->get_address(), (*fx)->buffer().data(), (*fx)->get_nCH());
+    }
+    ola_client.SendDmx(0, ola_buffer);
+
+    // construct & send DMX frames for addressable leds pixels values (sent through artnet)
+    balise("Construct & send buffer for artnet pixels");
+    DMX_vec sub_buffer, long_buffer = addr_led.buffer();
+    auto start = long_buffer.begin();
+    int universe_cpt = 1;
+    for(auto& pix_buf : ola_pix_buffers){
+        unsigned int length;
+        if (long_buffer.end() > start + MAX_SUBPIX_PER_UNI){
+            sub_buffer.assign(start, start + MAX_SUBPIX_PER_UNI);
+            length = MAX_SUBPIX_PER_UNI;
+            start += MAX_SUBPIX_PER_UNI;
+        }else{ 
+            sub_buffer.assign(start, long_buffer.end());
+            length = distance(start, long_buffer.end());
+        }
+
+        pix_buf.SetRange(0, sub_buffer.data(), length);
+        ola_client.SendDmx(universe_cpt++, pix_buf);
+    }
+
+}
+
+LoopControler frame;
+
+int main(int argc, char* argv[]){
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
+
+
+    balise("Initialization...");
+    if(!process_arguments(argc, argv)){
+        cout << "Initialization failed : unknown argument(s) passed" << endl;
+        return -1;
+    }
+    initialize();
+    balise("Initalisation terminated with success !");
+
+    while (true){
+        log(4, __FILE__, " ",__LINE__, " ", __func__);
+
+        // Update general counters and timers
+        balise("----------------------------Start new frame...");
+        frame.start_new_frame();
+        
+        // Record and process music sample 
+        balise("Record & process sample...");   
+        sampler.update();
+
+        balise("Run animator...");
+        if(!b_test){    // if nominal case
+            balise("Run animator normal update");
+            // animator.random_update();
+            // animator.palette_update();
+            animator.test_update();
+        }
+        else if (frame.cpt == 0){   // else activate once and for all the animations to test
+            balise("Run animator test fcn");
+            if(!animator.test_animation()){
+                // return -1;
+            }
+        }
+
+        balise("Compute new frames...");
+        for (fix_vec::iterator fixture = fixtures.begin(); fixture != fixtures.end(); fixture++){
+            log(4, (*fixture)->name, " : new frame for ", (*fixture)->active_animation->id.data());
+            (*fixture)->active_animation->new_frame();
+        }
+        // led.active_animation->new_frame();
+        // //spot_g.active_animation->new_frame();
+        // front_rack.active_animation->new_frame();
+        // spider.active_animation->new_frame();
+        
+        balise("Send frame...");
+        send();
+
+        if (true || !b_BALISE){
+            balise("Debug...");
+            if (!b_CURSES){
+                display();
+            }else{
+                display_curse();
+            }
+        }
+
+        balise("Wait next frame...");
+        frame.wait_for_next();
+    }
 }

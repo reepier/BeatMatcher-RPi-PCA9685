@@ -158,35 +158,35 @@ DMX_vec AddressableLED::RGB(simpleColor c, int intensity){
             break;
         case yellow:
             ref_int = 180;
-            temp = fcn::RGB_norm(DMX_vec{255,63,0});
+            temp = fcn::RGB_norm(DMX_vec{255,87,0});
             break;
         case orange:
-            temp = fcn::RGB_norm(DMX_vec{255,20,0});
+            temp = fcn::RGB_norm(DMX_vec{255,35,0});
             break;
         case sodium:
-            temp = fcn::RGB_norm(DMX_vec{255,9,0});
+            temp = fcn::RGB_norm(DMX_vec{255,16,0});
             break;
         case cyan:
             ref_int = 90;
-            temp = fcn::RGB_norm(DMX_vec{0,153,255});
+            temp = fcn::RGB_norm(DMX_vec{0,184,255});
             break;
         case purple:
             ref_int = 200;
-            temp = fcn::RGB_norm(DMX_vec{139,0,255});
+            temp = fcn::RGB_norm(DMX_vec{180,0,255});
             break;    
         case magenta:
             ref_int = 220;
-            temp = fcn::RGB_norm(DMX_vec{255,0,186});
+            temp = fcn::RGB_norm(DMX_vec{255,0,197});
             break;
         case pink:
             ref_int = 240;
-            temp = fcn::RGB_norm(DMX_vec{255,0,71});
+            temp = fcn::RGB_norm(DMX_vec{255,0,86});
             break;
         case white:
-            temp = fcn::RGB_norm(DMX_vec{255,78,26});
+            temp = fcn::RGB_norm(DMX_vec{255,95,17});
             break;
         case gold:
-            temp = fcn::RGB_norm(DMX_vec{255,37,4});
+            temp = fcn::RGB_norm(DMX_vec{255,50,3});
             break;
         default:
             temp = fcn::RGB_norm(DMX_vec{0,0,0});
