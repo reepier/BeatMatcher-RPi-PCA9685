@@ -6,11 +6,14 @@
 #define MAX_PIX_PER_UNI     170 //
 #define MAX_SUBPIX_PER_UNI  510 // maximum number of subpixels arried over 1 universe (1 universe can only carry complete pixels (BC-204 limitation))
 // WS2815 led strip config
-#define NUM_PIX 174         // Total number of pixels
-#define NUM_SUBPIX 3*NUM_PIX
-#define NUM_PIX_BAR 58      // number of pixels per bar
-#define NUM_BAR 3           // Number of bars
-#define NUM_SEG 9           // Number of segments (fraction of a bar)
+  // Config paramters
+  #define NUM_BAR 3             // Number of bars
+  #define NUM_SEG 3             // Number of segments
+  // Quasi constants
+  #define NUM_PIX_BAR 58        // number of pixels per bar
+  // Derivatives
+  #define NUM_PIX NUM_BAR*NUM_PIX_BAR           // Total number of pixels
+  #define NUM_SUBPIX 3*NUM_PIX  // Total number of artnet dmx datas
 
 // fixture class declaration
 class AddressableLED;
@@ -52,13 +55,13 @@ class AddressableLED : public BaseFixture{
     void set_bar_color(int bar_num, simpleColor color){};
     void set_bars_color(int_vec bar_nums, simpleColor color){};
 
-    void set_all_color(DMX_vec color){
-      for (auto pix : this->pixels){
+    void set_allpix_color(DMX_vec color){
+      for (auto& pix : this->pixels){
         pix = color;
       }
     }
-    void set_all_color(simpleColor color, uint8_t intensity = 255){
-      set_all_color(this->RGB(color, intensity));
+    void set_allpix_color(simpleColor color, uint8_t intensity = 255){
+      set_allpix_color(this->RGB(color, intensity));
     };
 
 };
@@ -88,7 +91,7 @@ class AddrLEDAnimation : public BaseAnimation{
          #   ### 
        ##### #*/
 
-// Makeover of the ORIGINAL Beatmatcher animation
+// Makeover of the ORIGINAL Beatmatcher animation --> all pixels flash at the same time, on beat
 class AddrLEDAnimation1 : public AddrLEDAnimation{
   public:
     // specific parameters
@@ -113,6 +116,6 @@ class AddrLEDAnimation1 : public AddrLEDAnimation{
     this->update_palette(color_vec{f_col, b_col});
   }
 
-    void init() override{BaseAnimation::init();};
-    void new_frame() override{BaseAnimation::new_frame();};
+    void init() override;
+    void new_frame() override;
 };

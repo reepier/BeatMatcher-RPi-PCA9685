@@ -178,7 +178,7 @@ void AnimationManager::test_update(){
             // select a leader among Led bars, Front rack, and Laser
             balise(__FILE__, " ", __LINE__, "select leader fixture");
             // lead_fix = fcn::random_pick(fix_vec{&led, &front_rack, & laser, &spider}, {4,2,2,3});
-            lead_fix = fcn::random_pick(fix_vec{&led, &front_rack, &laser}, {4, 2, 1});
+            lead_fix = fcn::random_pick(fix_vec{&addr_led, &front_rack, &laser}, {4, 2, 1});
             // lead_fix = fcn::random_pick(fix_vec{&led, &front_rack}, {3, 1 });
             
             // activate leader animation
@@ -189,7 +189,7 @@ void AnimationManager::test_update(){
         // reference the other fixtures as "backer fixtures" in a vector (for ease of acccess & modularity)
         balise(__FILE__, " ", __LINE__, "select backer fixture");
         fix_vec backer_fix;
-        for (auto fix : fix_vec{&led, &front_rack, &laser}){
+        for (auto fix : fix_vec{&addr_led, &front_rack, &laser}){
         // for (auto fix : fix_vec{&led, &front_rack}){
             if (fix != lead_fix){
                 backer_fix.push_back(fix);
@@ -248,7 +248,10 @@ bool AnimationManager::test_animation(){
         for (auto fix : fixtures){
             balise(fix->name);
             success = fix->activate_by_ID(s_anim_id);
-            if (success) break;
+            if (success) {
+                log(1, "Testing animation ", s_anim_id);
+                break;
+            }
         }
 
         if (!success){

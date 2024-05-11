@@ -3,9 +3,6 @@
 #include <fstream>
 using namespace std;
 
-// #include <ola/DmxBuffer.h>
-// #include <ola/Logging.h>
-// #include <ola/client/StreamingClient.h>
 #include <wiringPi.h>
 
 #include "LED.h"
@@ -131,18 +128,18 @@ DMX_vec LEDFixture::buffer(){
 
 }
 
-DMX_vec LEDFixture::buffer_pix(){
-    vector<uint8_t> data;
-    data.resize(3*NUM_PIX); // resize the vector to hold every subpixel data
+// DMX_vec LEDFixture::buffer_pix(){
+//     vector<uint8_t> data;
+//     data.resize(3*NUM_PIX); // resize the vector to hold every subpixel data
     
-    for (int i = 0; i<3*NUM_PIX; i+=3){
-        data[i] =   this->RGBout[R] >> 4;
-        data[i+1] = this->RGBout[G] >> 4;
-        data[i+2] = this->RGBout[B] >> 4;
-    }
+//     for (int i = 0; i<3*NUM_PIX; i+=3){
+//         data[i] =   this->RGBout[R] >> 4;
+//         data[i+1] = this->RGBout[G] >> 4;
+//         data[i+2] = this->RGBout[B] >> 4;
+//     }
 
-    return data;
-}
+//     return data;
+// }
 
 /**
    #    #     # ### #     #    #    ####### ### ####### #     #  #####                 #   
@@ -170,7 +167,7 @@ void LEDAnimation1::new_frame(){
     unsigned long t_ms = frame.t_current_ms;
     unsigned long t_last_beat_ms = sampler.t_last_new_beat;
 
-    bool auto_activate_flash = (sampler.state == BEAT) && (frame.t_current_ms-sampler.t_beat_tracking_start < MAX_CONT_FLASH);
+    bool auto_activate_flash = (sampler.state == BEAT) && (t_ms-sampler.t_beat_tracking_start < MAX_CONT_FLASH);
 
     int backgd_color[3];
 

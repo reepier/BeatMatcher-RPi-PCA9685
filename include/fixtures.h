@@ -4,6 +4,7 @@
 #include "laser.h"
 #include "spider.h"
 #include "LED.h"
+#include "addr_LED.h"
 
 
 // contains every individual (low level) fixture (1 element = 1 physical fixture with its own adress)

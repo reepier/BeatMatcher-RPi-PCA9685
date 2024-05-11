@@ -75,11 +75,13 @@ void log(int lvl, const Args&... args) {
 
 template<typename... Args>
 void balise(const Args&... args) {
-    if (b_BALISE){
+    {
         std::ostringstream oss;
         // oss << first;
         ((oss << args), ...);
-        std::cout << oss.str() << std::endl;
+        if (b_BALISE)
+            std::cout << oss.str() << std::endl;
+        log(4, "Balise : ", oss.str());
         // log_list.push_back(LogEntry(lvl, oss.str()));
     }
 }

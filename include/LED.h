@@ -23,7 +23,7 @@
 #define LEDBlue2 9
 
 // WS2815 led strip config
-#define NUM_PIX 100
+#define NUM_PIX 174
 
 // background sinewave periods parameters
 #define MAX_T 15  //s
@@ -58,7 +58,7 @@ public:
   int get_nCH() override { return this->nCH; };
   int get_address() override { return this->address; };
   DMX_vec buffer() override;
-  DMX_vec buffer_pix();
+  // DMX_vec buffer_pix();
 
   // Fixture specific Color Macros
   DMX_vec RGB(simpleColor, int intensity = 255) override;
@@ -111,5 +111,5 @@ public:
   }
 
   void init() override;      // initializes/reset what needs to be (initial and/or random values, etc.)
-  void new_frame(); // computes the new frame's RGB values
+  void new_frame() override; // computes the new frame's RGB values
 };

@@ -3,6 +3,7 @@
 #include <string>
 #include <cstring>
 #include <wiringPi.h>
+#include <algorithm>
 
 #include <ola/DmxBuffer.h>
 #include <ola/client/StreamingClient.h>
@@ -26,10 +27,10 @@ using namespace std;
 // DMX output interface (OLA)
     ola::client::StreamingClient ola_client;
     ola::DmxBuffer ola_buffer;
-    ola::DmxBuffer ola_pix_buffer;
+    vector<ola::DmxBuffer> ola_pix_buffers(NUM_SUBPIX/MAX_SUBPIX_PER_UNI + ((NUM_SUBPIX%MAX_SUBPIX_PER_UNI)==0 ? 0 : 1));
 
 fix_vec ll_fxtrs = {&led, &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, &spot_7,&spot_8, &spot_9, &spider, &laser};
-fix_vec fixtures = {&led, &laser, &front_rack, &back_rack, &spider};
+fix_vec fixtures = {&addr_led, &led, &laser, &front_rack, &back_rack, &spider};
 
 bool process_arguments(int n, char* args[]){
     for (int i=1; i<n; i++){
@@ -37,7 +38,7 @@ bool process_arguments(int n, char* args[]){
 
         if (strcmp(arg, "--help") == 0){
             cout << "Arguments :\n--noled\n--nomusic\n--nocurses\n--animation <anim_id>" << endl;
-            return false;
+            exit(0);
         }else if(strcmp(arg, "--balise") == 0){
             b_BALISE = true;
             // b_CURSES = false;
@@ -87,7 +88,9 @@ void initialize() {
     balise("Init. ola...");
     ola_client.Setup();
     ola_buffer.Blackout();
-    ola_pix_buffer.Blackout();
+    for(auto buf : ola_pix_buffers){
+        buf.Blackout();
+    }
 
     balise("Init. Sampler...");
     sampler.init();   // initialize Music lib
@@ -123,17 +126,33 @@ void send(){
     PCA9685_setPWMVals(fd, addr, setOnVals, setOffVals);
     #endif // DEBUG
 
-    // send DMX frame to OLA server.
-    balise("Construct buffer");
+    // construct & send DMX frame for old school fixtures (COTS DMX fixtures)
+    balise("Construct & send buffer for classical fixtures");
     for (fix_vec::iterator fx = ll_fxtrs.begin(); fx != ll_fxtrs.end(); fx++){
         ola_buffer.SetRange((*fx)->get_address(), (*fx)->buffer().data(), (*fx)->get_nCH());
     }
-
-    ola_pix_buffer.SetRange(0, led.buffer_pix().data(), NUM_PIX*3);
-    
-    balise("OLAclient.send()");
     ola_client.SendDmx(0, ola_buffer);
-    ola_client.SendDmx(1, ola_pix_buffer);
+
+    // construct & send DMX frames for addressable leds pixels values (sent through artnet)
+    balise("Construct & send buffer for artnet pixels");
+    DMX_vec sub_buffer, long_buffer = addr_led.buffer();
+    auto start = long_buffer.begin();
+    int universe_cpt = 1;
+    for(auto& pix_buf : ola_pix_buffers){
+        unsigned int length;
+        if (long_buffer.end() > start + MAX_SUBPIX_PER_UNI){
+            sub_buffer.assign(start, start + MAX_SUBPIX_PER_UNI);
+            length = MAX_SUBPIX_PER_UNI;
+            start += MAX_SUBPIX_PER_UNI;
+        }else{ 
+            sub_buffer.assign(start, long_buffer.end());
+            length = distance(start, long_buffer.end());
+        }
+
+        pix_buf.SetRange(0, sub_buffer.data(), length);
+        ola_client.SendDmx(universe_cpt++, pix_buf);
+    }
+
 }
 
 LoopControler frame;

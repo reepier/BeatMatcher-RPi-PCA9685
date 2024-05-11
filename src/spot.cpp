@@ -120,7 +120,7 @@ void front_rack_init(){
     
     // Animation 1 -> CHASER MODE (TEST)
     // SLOW
-    // TODO : fix these aniation
+    // TODO : fix these animation
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    white,       square,  1000, 600,      "white chaser",       "FR.3.1", leader, 2));
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    white,       square,  200, 300,       "fast white chaser",   "FR.3.2", leader, 2));
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    white,       square,  200, 600,       "fast white chaser",   "FR.3.3", leader, 2));
@@ -327,7 +327,7 @@ void SpotRackAnimation1::init(){
         flashes[i_spot][i_prev].color = black;
     }
 
-    log(1,  __FILE__, " ", __LINE__, " ",__func__, " Palette : ", fcn::palette_to_string(this->flash_colors, '/'));
+    // log(1,  __FILE__, " ", __LINE__, " ",__func__, " Palette : ", fcn::palette_to_string(this->flash_colors, '/'));
 
 }
 

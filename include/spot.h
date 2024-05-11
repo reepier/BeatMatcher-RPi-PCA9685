@@ -179,7 +179,7 @@ public :
         this->flash_colors = f_cols;
         this->back_color = b_col;
         this->flash_shape = fshape;
-                log(1, __func__, " ", this->id, " Palette : ", fcn::palette_to_string(this->flash_colors, '/'));
+                // log(1, __func__, " ", this->id, " Palette : ", fcn::palette_to_string(this->flash_colors, '/'));
 
         // this->sin_max_p_ms = pmax;
         // this->sin_min_p_ms = pmin;
