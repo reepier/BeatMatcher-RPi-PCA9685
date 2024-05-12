@@ -247,7 +247,7 @@ class ColorPaletteMagazine{
     }
 
     // TODO do not return the same colorpalette as the one passed as argument
-    //    -> worst acse, return a random animaiton to get out of the color well
+    //    -> worst case, return a random animation to get out of the color well
 };
 
 

@@ -72,3 +72,5 @@ class FixtureAnimation1 : public FixtureAnimation{
     void init() override{BaseAnimation::init();};
     void new_frame() override{BaseAnimation::new_frame();};
 };
+
+

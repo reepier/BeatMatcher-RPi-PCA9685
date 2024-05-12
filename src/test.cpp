@@ -161,11 +161,7 @@ int main(int argc, char* argv[]){
     log(4, __FILE__, " ",__LINE__, " ", __func__);
 
 
-    balise("Initialization...");
-    if(!process_arguments(argc, argv)){
-        cout << "Initialization failed : unknown argument(s) passed" << endl;
-        return -1;
-    }
+    
     initialize();
     balise("Initalisation terminated with success !");
 

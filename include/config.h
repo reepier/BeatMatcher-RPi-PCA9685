@@ -5,7 +5,7 @@
 #include "commonTypes.h"
 
 // -- CONFIG ------------------------------------------------------------
-#define FRATE   40          //Hz program main frame rate
+#define FRATE   30          //Hz program main frame rate
 
 // runtime flags for main functions -------------------------------------
 extern bool b_BALISE;       //TRUE: console displays balise (without curses) 

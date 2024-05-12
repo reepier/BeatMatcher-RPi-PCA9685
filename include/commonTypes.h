@@ -74,6 +74,7 @@ struct Flash{   // stores : color (simpleColor) and the timestamp (time_ms) of a
 typedef std::vector<simpleColor>    color_vec;
 typedef std::vector<uint8_t>        DMX_vec;  //a vector of 8bit int with values ranging from 0 to 255
 typedef std::vector<int>            int_vec;  //a vector of standard int
+typedef std::vector<uint8_t>        uint8_vec;
 typedef std::vector<unsigned long>  t_vec;
 typedef std::vector<std::string>    str_vec;
 typedef std::vector<Flash>          flash_vec;      //a vector of n Flash
@@ -88,4 +89,3 @@ class BaseAnimation;      //TODO move this in baseAnimation.h
 
 typedef std::vector<BaseFixture*> fix_vec;
 typedef std::vector<BaseAnimation*> anim_vec;
-
