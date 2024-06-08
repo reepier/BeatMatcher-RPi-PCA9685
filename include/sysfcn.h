@@ -13,7 +13,8 @@ T map(T x, T x1, T x2, T y1, T y2){
     return (T)(a*x+b);
 }
 
-inline int rand_min_max(int min, int max){
+template<typename T>
+T rand_min_max(T min, T max){
     return rand() % (max-min) + min;
 }
 

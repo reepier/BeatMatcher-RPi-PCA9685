@@ -140,7 +140,7 @@ namespace fcn{
     else                {return max;}
   }
 
-  // random generation functions
+  // RANDOM generation functions
   template<class T>
   T random_pick(std::vector<T> vals, int_vec proba_vec = {}){
     int n = vals.size();
@@ -192,6 +192,13 @@ namespace fcn{
     shuffle(v.begin(), v.end(), rng);
     return v;
   }
+
+  template<typename T>
+  T random_walk(T input, T max_incr, T floor, T roof){
+    T output = std::min(roof, std::max(floor, input + rand_min_max(-max_incr, max_incr)));
+    return output;
+  }
+ 
 
   // Color functions
   // check wether color palettes cp1 and cp2 have at least n color in common

@@ -119,12 +119,12 @@ class SpiderAnimation2 : public SpiderAnimation{
     simpleColor background_color;           // stores background color
     color_vec flash_colors;                 // stores the different beam colors
     int_vec flash_color_proba = {};         // stores each beam color's probability of occurence
-    unsigned long flash_dt;                 // Average time interval between 2 Beams
+    time_t flash_dt;                 // Average time interval between 2 Beams
     Shape flash_shape;                      // Beam shape (gaussian, square)
-    int flash_length;                       // Beam duration
+    time_t flash_length;                       // Beam duration
     int pan_position, pan_speed;
     int_vec tilt_position;
-    int tilt_period;
+    unsigned long tilt_period;
 
     // dynamic variables (to compute each frame)
     std::vector<t_vec>      flash_time; //for each of the 9 pixels, stores {time of previous flash, time of next flash} --> needs update at every frame

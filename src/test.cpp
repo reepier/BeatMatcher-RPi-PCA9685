@@ -161,58 +161,67 @@ int main(int argc, char* argv[]){
     log(4, __FILE__, " ",__LINE__, " ", __func__);
 
 
-    
-    initialize();
-    balise("Initalisation terminated with success !");
+    // MAIN PROGRAM (take what is needed and comment out the rest    
+    // initialize();
+    // balise("Initalisation terminated with success !");
 
+    // while (true){
+    //     log(4, __FILE__, " ",__LINE__, " ", __func__);
+
+    //     // Update general counters and timers
+    //     balise("----------------------------Start new frame...");
+    //     frame.start_new_frame();
+        
+    //     // Record and process music sample 
+    //     balise("Record & process sample...");   
+    //     sampler.update();
+
+    //     balise("Run animator...");
+    //     if(!b_test){    // if nominal case
+    //         balise("Run animator normal update");
+    //         // animator.random_update();
+    //         // animator.palette_update();
+    //         animator.test_update();
+    //     }
+    //     else if (frame.cpt == 0){   // else activate once and for all the animations to test
+    //         balise("Run animator test fcn");
+    //         if(!animator.test_animation()){
+    //             // return -1;
+    //         }
+    //     }
+
+    //     balise("Compute new frames...");
+    //     for (fix_vec::iterator fixture = fixtures.begin(); fixture != fixtures.end(); fixture++){
+    //         log(4, (*fixture)->name, " : new frame for ", (*fixture)->active_animation->id.data());
+    //         (*fixture)->active_animation->new_frame();
+    //     }
+    //     // led.active_animation->new_frame();
+    //     // //spot_g.active_animation->new_frame();
+    //     // front_rack.active_animation->new_frame();
+    //     // spider.active_animation->new_frame();
+        
+    //     balise("Send frame...");
+    //     send();
+
+    //     if (true || !b_BALISE){
+    //         balise("Debug...");
+    //         if (!b_CURSES){
+    //             display();
+    //         }else{
+    //             display_curse();
+    //         }
+    //     }
+
+    //     balise("Wait next frame...");
+    //     frame.wait_for_next();
+    // }
+
+
+    int random_walker = 50;
     while (true){
-        log(4, __FILE__, " ",__LINE__, " ", __func__);
-
-        // Update general counters and timers
-        balise("----------------------------Start new frame...");
-        frame.start_new_frame();
-        
-        // Record and process music sample 
-        balise("Record & process sample...");   
-        sampler.update();
-
-        balise("Run animator...");
-        if(!b_test){    // if nominal case
-            balise("Run animator normal update");
-            // animator.random_update();
-            // animator.palette_update();
-            animator.test_update();
-        }
-        else if (frame.cpt == 0){   // else activate once and for all the animations to test
-            balise("Run animator test fcn");
-            if(!animator.test_animation()){
-                // return -1;
-            }
-        }
-
-        balise("Compute new frames...");
-        for (fix_vec::iterator fixture = fixtures.begin(); fixture != fixtures.end(); fixture++){
-            log(4, (*fixture)->name, " : new frame for ", (*fixture)->active_animation->id.data());
-            (*fixture)->active_animation->new_frame();
-        }
-        // led.active_animation->new_frame();
-        // //spot_g.active_animation->new_frame();
-        // front_rack.active_animation->new_frame();
-        // spider.active_animation->new_frame();
-        
-        balise("Send frame...");
-        send();
-
-        if (true || !b_BALISE){
-            balise("Debug...");
-            if (!b_CURSES){
-                display();
-            }else{
-                display_curse();
-            }
-        }
-
-        balise("Wait next frame...");
-        frame.wait_for_next();
+        // cout << random_walker << endl;
+        random_walker = fcn::random_walk(random_walker, 5, 0, 100); 
+        cout << string(random_walker, ' ') << "|" << endl;
+        delay(100);
     }
 }

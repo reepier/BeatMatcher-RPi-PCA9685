@@ -7,8 +7,8 @@
 #define MAX_SUBPIX_PER_UNI  510 // maximum number of subpixels arried over 1 universe (1 universe can only carry complete pixels (BC-204 limitation))
 // WS2815 led strip config
   // Config paramters
-  #define NUM_BAR 6             // Total Number of bars
-  #define NUM_SEG 24            // Total number of segments (across all bars)
+  #define NUM_BAR 12             // Total Number of bars
+  #define NUM_SEG 48            // Total number of segments (across all bars)
   // Quasi constants
   #define NUM_PIX_BAR 58        // number of pixels per bar
   // Derivatives
@@ -220,7 +220,7 @@ class AddrLEDAnimation3 : public AddrLEDAnimation{
   public:
     // Animation parameters (constant or set by animation constructor)
     simpleColor color;
-    bool filter = false;
+    bool enable_filter = false;
     float param_filter_weight = 0.1;
     // Dynamic variables (updated internally at each frame)
     uint8_vec pix_intensities = uint8_vec(NUM_PIX, 0);
@@ -245,7 +245,7 @@ class AddrLEDAnimation3 : public AddrLEDAnimation{
         this->fixture = f;
 
         this->color = col;
-        this->filter = enable_filter;
+        this->enable_filter = enable_filter;
 
         this->update_palette(col);
         this->compute_atan_transfo();

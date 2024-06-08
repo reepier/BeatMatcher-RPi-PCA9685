@@ -342,13 +342,14 @@ void AddrLEDAnimation3::init() {
 void AddrLEDAnimation3::new_frame() {
     BaseAnimation::new_frame();
     
-    double f_weight = filter*param_filter_weight*!is_first_frame();
+    // double f_weight = enable_filter*param_filter_weight*!is_first_frame();
     
     for (int i = 0; i<NUM_PIX; i++){
-        if(f_weight != 0)
-            pix_intensities[i] = min(255.0, max(0.0, pix_intensities[i] + f_weight * (atan_transfo[rand_min_max(0, 256)] - 127.0) ));
-        else
-            pix_intensities[i] = atan_transfo[rand_min_max(0, 256)];
+        pix_intensities[i] = min(255, max(0, fcn::random_walk((int)pix_intensities[i], 5, 0, 255) ));
+        // if(f_weight != 0)
+        //     pix_intensities[i] = min(255.0, max(0.0, pix_intensities[i] + f_weight * (atan_transfo[rand_min_max(0, 256)] - 127.0) ));
+        // else
+        //     pix_intensities[i] = atan_transfo[rand_min_max(0, 256)];
 
         this->fixture->pixels[i] = this->fixture->RGB(color, pix_intensities[i]);
     }
