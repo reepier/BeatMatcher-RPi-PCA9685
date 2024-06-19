@@ -120,7 +120,7 @@ DMX_vec LEDFixture::buffer(){
 
     // log(1, fcn::num_to_str(this->RGBout[G]), " c:", fcn::num_to_str(RGBcoarse[G])," f:", fcn::num_to_str(RGBfine[G]>>4 )," synt:", fcn::num_to_str( ((RGBcoarse[G]) << 4) + ((RGBfine[G]) >> 4) ));
 
-    return DMX_vec{MASTER_DIMMER, 
+    return DMX_vec{master, 
         (uint8_t)(RGBcoarse[R]), (uint8_t)(RGBcoarse[G]), (uint8_t)(RGBcoarse[B]),
         (uint8_t)(RGBcoarse[R]), (uint8_t)(RGBcoarse[G]), (uint8_t)(RGBcoarse[B]),
         (uint8_t)(RGBfine[R]),(uint8_t)(RGBfine[G]),(uint8_t)(RGBfine[B]),

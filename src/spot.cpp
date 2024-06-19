@@ -31,7 +31,18 @@ SpotFixture spot_9(73, 8, "Spot 9 (74)", 6);
 
 / ----------------------------------------------------------------------- */
 
-
+DMX_vec SpotFixture::buffer(){
+    // return DMX_vec{    (uint8_t)((double)this->MASTER_DIMMER * this->active_animation->master / 255),
+    return DMX_vec{      this->master,
+                         this->RGBWout[R],
+                         this->RGBWout[G],
+                         this->RGBWout[B],
+                         this->RGBWout[W],
+                         this->prog,
+                         this->color_wheel,
+                         this->strobe
+                    };
+}
 
 
 /* --------------------------------------------------------------------
@@ -120,9 +131,9 @@ void front_rack_init(){
     
     // Animation 1 -> CHASER MODE (TEST)
     // SLOW square chaser
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    white,       square,  1000, 600,      "white chaser",       "FR.3.1", leader, 2));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    white,       square,  1000, 1000,      "white chaser",       "FR.3.2", leader, 2));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    white,       square,  1500, 1500,      "white chaser",       "FR.3.3", leader, 2));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    white,       square,  1000, 600,      "white chaser",       "FR.3.1", leader, 2, 50));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    white,       square,  1000, 1000,      "white chaser",       "FR.3.2", leader, 2, 50));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    white,       square,  1500, 1500,      "white chaser",       "FR.3.3", leader, 2, 50));
 
 
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    white,       square,  200, 300,       "fast white chaser",   "FR.3.2", leader, 2));
@@ -258,51 +269,66 @@ void back_rack_init(){
     // back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, black, pink,     3000, 1500, "Pink bubbles",    "BR.1.1.11", backer));
     // back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, black, green,    3000, 1500, "Green bubbles",   "BR.1.1.12", backer));
     // Color Bubbles on same color background
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, red,      red,      3000, 1500, "Red bubbles, Red background",         "BR.1.2.1", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, sodium,   sodium,   3000, 1500, "Sodium bubbles, Sodium background",   "BR.1.2.2", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, orange,   orange,   3000, 1500, "Orange bubbles, Orange background",   "BR.1.2.3", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, yellow,   yellow,   3000, 1500, "Yellow bubbles, Yellow background",   "BR.1.2.4", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, gold,     gold,     3000, 1500, "Gold bubbles, Gold background",       "BR.1.2.5", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, white,    white,    3000, 1500, "White bubbles, White background",     "BR.1.2.6", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, cyan,     cyan,     3000, 1500, "Cyan bubbles, Cyan background",       "BR.1.2.7", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, blue,     blue,     3000, 1500, "Blue bubbles, Blue background",       "BR.1.2.8", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, purple,   purple,   3000, 1500, "Purple bubbles, Purple background",   "BR.1.2.9", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, magenta,  magenta,  3000, 1500, "Magenta bubbles, Magenta background", "BR.1.2.10", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, pink,     pink,     3000, 1500, "Pink bubbles, Pink background",       "BR.1.2.11", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, green,    green,    3000, 1500, "Green bubbles, Green background",     "BR.1.2.12", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, red,      red,      3000, 1500, "Red bubbles, Red background",         "BR.1.1.2.1", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, sodium,   sodium,   3000, 1500, "Sodium bubbles, Sodium background",   "BR.1.1.2.2", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, orange,   orange,   3000, 1500, "Orange bubbles, Orange background",   "BR.1.1.2.3", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, yellow,   yellow,   3000, 1500, "Yellow bubbles, Yellow background",   "BR.1.1.2.4", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, gold,     gold,     3000, 1500, "Gold bubbles, Gold background",       "BR.1.1.2.5", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, white,    white,    3000, 1500, "White bubbles, White background",     "BR.1.1.2.6", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, cyan,     cyan,     3000, 1500, "Cyan bubbles, Cyan background",       "BR.1.1.2.7", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, blue,     blue,     3000, 1500, "Blue bubbles, Blue background",       "BR.1.1.2.8", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, purple,   purple,   3000, 1500, "Purple bubbles, Purple background",   "BR.1.1.2.9", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, magenta,  magenta,  3000, 1500, "Magenta bubbles, Magenta background", "BR.1.1.2.10", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, pink,     pink,     3000, 1500, "Pink bubbles, Pink background",       "BR.1.1.2.11", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, green,    green,    3000, 1500, "Green bubbles, Green background",     "BR.1.1.2.12", backer, 1));
     // White Bubbles on colored background
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, red,     white,  3000, 1500, "White bubbles, Red background",      "BR.1.3.1", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, sodium,  white,  3000, 1500, "White bubbles, Sodium background",   "BR.1.3.2", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, orange,  white,  3000, 1500, "White bubbles, Orange background",   "BR.1.3.3", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, yellow,  white,  3000, 1500, "White bubbles, Yellow background",   "BR.1.3.4", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, gold,    white,  3000, 1500, "White bubbles, Gold background",     "BR.1.3.5", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, white,   white,  3000, 1500, "White bubbles, White background",    "BR.1.3.6", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, cyan,    white,  3000, 1500, "White bubbles, Cyan background",     "BR.1.3.7", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, blue,    white,  3000, 1500, "White bubbles, Blue background",     "BR.1.3.8", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, purple,  white,  3000, 1500, "White bubbles, Purple background",   "BR.1.3.9", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, magenta, white,  3000, 1500, "White bubbles, Magenta background",  "BR.1.3.10", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, pink,    white,  3000, 1500, "White bubbles, Pink background",     "BR.1.3.11", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, green,   white,  3000, 1500, "White bubbles, Green background",    "BR.1.3.12", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, red,     white,  3000, 1500, "White bubbles, Red background",      "BR.1.1.3.1", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, sodium,  white,  3000, 1500, "White bubbles, Sodium background",   "BR.1.1.3.2", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, orange,  white,  3000, 1500, "White bubbles, Orange background",   "BR.1.1.3.3", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, yellow,  white,  3000, 1500, "White bubbles, Yellow background",   "BR.1.1.3.4", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, gold,    white,  3000, 1500, "White bubbles, Gold background",     "BR.1.1.3.5", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, white,   white,  3000, 1500, "White bubbles, White background",    "BR.1.1.3.6", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, cyan,    white,  3000, 1500, "White bubbles, Cyan background",     "BR.1.1.3.7", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, blue,    white,  3000, 1500, "White bubbles, Blue background",     "BR.1.1.3.8", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, purple,  white,  3000, 1500, "White bubbles, Purple background",   "BR.1.1.3.9", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, magenta, white,  3000, 1500, "White bubbles, Magenta background",  "BR.1.1.3.10", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, pink,    white,  3000, 1500, "White bubbles, Pink background",     "BR.1.1.3.11", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, green,   white,  3000, 1500, "White bubbles, Green background",    "BR.1.1.3.12", backer, 1));
 
     // Color Bubbles on different color background
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, red,     blue,   3000, 1500, "blue bubbles, red background",       "BR.1.4.1", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, blue,    red,    3000, 1500, "red bubbles, blue background",       "BR.1.4.2", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, red,     cyan,   3000, 1500, "cyan bubbles, red background",       "BR.1.4.3", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, magenta, cyan,   3000, 1500, "cyan bubbles, magenta background",   "BR.1.4.4", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, purple,  gold,   3000, 1500, "gold bubbles, purple background",    "BR.1.4.5", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, red,     gold,   3000, 1500, "gold bubbles, red background",       "BR.1.4.6", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, orange,  gold,   3000, 1500, "gold bubbles, orange background",    "BR.1.4.7", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, sodium,  gold,   3000, 1500, "gold bubbles, sodium background",    "BR.1.4.8", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, purple,  cyan,   3000, 1500, "cyan bubbles, purple background",    "BR.1.4.9", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, purple,  pink,   3000, 1500, "pink bubbles, purple background",    "BR.1.4.10", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, purple,  cyan,   3000, 1500, "cyan bubbles, purple background",    "BR.1.4.11", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, pink,    cyan,   3000, 1500, "cyan bubbles, pink background",      "BR.1.4.12", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, purple,  red,    3000, 1500, "purple bubbles,red background",      "BR.1.4.13", backer, 1));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, red,     purple, 3000, 1500, "red bubbles, purple background",     "BR.1.4.14", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, red,     blue,   3000, 1500, "blue bubbles, red background",       "BR.1.1.4.1", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, blue,    red,    3000, 1500, "red bubbles, blue background",       "BR.1.1.4.2", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, red,     cyan,   3000, 1500, "cyan bubbles, red background",       "BR.1.1.4.3", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, magenta, cyan,   3000, 1500, "cyan bubbles, magenta background",   "BR.1.1.4.4", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, purple,  gold,   3000, 1500, "gold bubbles, purple background",    "BR.1.1.4.5", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, red,     gold,   3000, 1500, "gold bubbles, red background",       "BR.1.1.4.6", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, orange,  gold,   3000, 1500, "gold bubbles, orange background",    "BR.1.1.4.7", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, sodium,  gold,   3000, 1500, "gold bubbles, sodium background",    "BR.1.1.4.8", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, purple,  cyan,   3000, 1500, "cyan bubbles, purple background",    "BR.1.1.4.9", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, purple,  pink,   3000, 1500, "pink bubbles, purple background",    "BR.1.1.4.10", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, purple,  cyan,   3000, 1500, "cyan bubbles, purple background",    "BR.1.1.4.11", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, pink,    cyan,   3000, 1500, "cyan bubbles, pink background",      "BR.1.1.4.12", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, purple,  red,    3000, 1500, "purple bubbles,red background",      "BR.1.1.4.13", backer, 1));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, red,     purple, 3000, 1500, "red bubbles, purple background",     "BR.1.1.4.14", backer, 1));
     
     // slow square bubbles
-    
-    
+    // Monocrhome chaser
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, red,      red,        square,  1500, 1500,      "red chaser",      "BR.1.2.1", leader, 2, 50));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, sodium,   sodium,     square,  1500, 1500,      "sodium chaser",   "BR.1.2.2", leader, 2, 50));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, orange,   orange,     square,  1500, 1500,      "orange chaser",   "BR.1.2.3", leader, 2, 50));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, yellow,   yellow,     square,  1500, 1500,      "yellow chaser",   "BR.1.2.4", leader, 2, 50));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, gold,     gold,       square,  1500, 1500,      "gold chaser",     "BR.1.2.5", leader, 2, 50));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, white,    white,      square,  1500, 1500,      "white chaser",    "BR.1.2.6", leader, 2, 50));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, cyan,     cyan,       square,  1500, 1500,      "cyan chaser",     "BR.1.2.7", leader, 2, 50));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, blue,     blue,       square,  1500, 1500,      "blue chaser",     "BR.1.2.8", leader, 2, 50));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, purple,   purple,     square,  1500, 1500,      "purple chaser",   "BR.1.2.9", leader, 2, 50));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, magenta,  magenta,    square,  1500, 1500,      "magenta chaser",  "BR.1.2.10", leader, 2, 50));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, pink,     pink,       square,  1500, 1500,      "pink chaser",     "BR.1.2.11", leader, 2, 50));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, green,    green,      square,  1500, 1500,      "green chaser",    "BR.1.2.12", leader, 2, 50));
+
+    // White Bubbles on colored background
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, red,      red,        square,  1500, 1500,      "white chaser",   "BR.1.2.1", leader, 2, 50));
+
     
     back_rack.activate_none();
 };
@@ -403,6 +429,10 @@ void SpotRackAnimation1::init(){
     log(4, __FILE__, " ", __LINE__, " ",__func__, " ", this->fixture->name, " ", this->id);
 
     BaseAnimation::init();
+    for (auto spot : this->fixture->spots){
+        spot->master = this->master;
+    }
+
     this->fixture->reset_spots();
 
     this->p_ms = vector<int>{rand_min_max(sin_min_p_ms, sin_max_p_ms),rand_min_max(sin_min_p_ms, sin_max_p_ms),rand_min_max(sin_min_p_ms, sin_max_p_ms), rand_min_max(sin_min_p_ms, sin_max_p_ms), rand_min_max(sin_min_p_ms, sin_max_p_ms)};
@@ -525,6 +555,10 @@ void SpotRackAnimation2::init(){
     log(4, __FILE__, " ", __LINE__, " ",__func__);
 
     BaseAnimation::init();
+    for (auto spot : this->fixture->spots){
+        spot->master = this->master;
+    }
+
     this->t_next_shake = frame.t_current_ms + 2000;
     this->shake();
     animator.set_timer(STROBE_ANI_DURA);
@@ -570,7 +604,9 @@ void SpotRackAnimation2::new_frame(){
 */
 void SpotRackAnimation3::init(){
     BaseAnimation::init();
-
+    for (auto spot : this->fixture->spots){
+        spot->master = this->master;
+    }
     
 }
 
@@ -591,6 +627,9 @@ void SpotRackAnimation3::new_frame(){
 */
 void SpotRackAnimation4::init(){
     BaseAnimation::init();
+    for (auto spot : this->fixture->spots){
+        spot->master = this->master;
+    }
 }
 
 void SpotRackAnimation4::new_frame(){

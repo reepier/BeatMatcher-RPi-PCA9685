@@ -311,7 +311,7 @@ class BaseFixture{
     int id;                             // unique id to differentiate between vseveral fixtres of the same type (i.e. COTS PAR spots & racks)
 
     // DMX related parameters
-    uint8_t MASTER_DIMMER;    // Master Dimmer from 0-255
+    uint8_t master = 255;           // Master Dimmer from 0-255
     int address;                    // DMX address
     bool b_blackout;
     const int nCH;
@@ -321,7 +321,7 @@ class BaseFixture{
     anim_vec animations;
 
     //constructor (adresse [0-511], number of channels, fixture's name)
-    BaseFixture(int addr,int ch, std::string nm, int i, uint8_t mast): address(addr), nCH(ch), name(nm), id(i), MASTER_DIMMER(mast){};
+    BaseFixture(int addr,int ch, std::string nm, int i, uint8_t mast): address(addr), nCH(ch), name(nm), id(i), master(mast){};
     virtual void init()=0;
 
     //animation management
@@ -363,7 +363,8 @@ class BaseAnimation{
     unsigned long frame_cpt;            // number of frame computed since activation
     color_vec color_palette;            // lists the colors used in the animation (initialized by constructor)
     int priority = 1;                  // weight on the priority list (animations with higher priority will be have higher chance of activation)
-
+    uint8_t master = 255;
+    
     bool is_monochrome(){return (color_palette.size() == 1);};
     bool is_first_frame(){return frame_cpt==0;};
     

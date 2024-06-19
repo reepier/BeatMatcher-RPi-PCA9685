@@ -129,7 +129,7 @@ DMX_vec SpiderFixture::buffer(){
     ret[3]= min(max(    map(this->tilt[1], 0, 90, 41, 207)    ,0),255);
     ret[4]= min(max(    map(this->tilt[2], 0, 90, 39, 204)    ,0),255);
     
-    ret[5]=this->MASTER_DIMMER;
+    ret[5]=this->master;
     ret[6]=this->strobe;
 
     for (int led=0; led<NLED; led++){

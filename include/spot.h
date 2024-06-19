@@ -32,7 +32,6 @@ class SpotFixture : public BaseFixture{
 public:
     // Channels :
     int nCH = 8;
-    uint8_t MASTER_DIMMER = 255;
     DMX_vec RGBWout = {0, 0, 0, 0}; // R G B W values (0-255)
     uint8_t strobe = 0;                       // strobe speed (0 none - 1 slow - 255 fast)
     uint8_t color_wheel = 0;                  // fixture preset colors (unused)
@@ -45,7 +44,7 @@ public:
     // Get Functions
     int get_nCH() override { return this->nCH; };
     int get_address() override { return this->address; };
-    DMX_vec buffer() override {return DMX_vec{this->MASTER_DIMMER, this->RGBWout[R], this->RGBWout[G],this->RGBWout[B],this->RGBWout[W], this->prog, this->color_wheel, this->strobe};};
+    DMX_vec buffer() override;
     void reset_channels(){
         this->RGBWout = {0, 0, 0, 0};
         this->strobe = 0;                       
@@ -87,7 +86,7 @@ public:
         this->rack_size = sp.size();
 
         for (auto s : spots){
-            s->MASTER_DIMMER = this->MASTER_DIMMER;
+            s->master = this->master;
         }
     };
 
@@ -212,6 +211,19 @@ public :
 
         this->update_palette(color_vec{b_col, f_col});
     }
+
+    //overloaded constructors to add a master argument
+    SpotRackAnimation1(SpotRack *f, simpleColor b_col, color_vec f_cols, Shape fshape, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio, int mast)
+        : SpotRackAnimation1(f, b_col, f_cols, fshape, prand, flen, d, i, t, prio)
+    {
+        this->master = mast;
+    }
+    SpotRackAnimation1(SpotRack *f, simpleColor b_col, simpleColor f_col, Shape fshape, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio, int mast)
+        : SpotRackAnimation1(f, b_col, f_col, fshape, prand, flen, d, i, t, prio)
+    {
+        this->master = mast;
+    }
+
     //overloaded constructor to add a flash shape argument
     SpotRackAnimation1(SpotRack *f, simpleColor b_col, simpleColor f_col, Shape fshape, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio) 
         : SpotRackAnimation1(f, b_col, f_col, prand, flen, d, i, t, prio){
