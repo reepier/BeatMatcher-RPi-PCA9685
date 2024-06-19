@@ -45,7 +45,7 @@ SpotFixture spot_9(73, 8, "Spot 9 (74)", 6);
 
 / ----------------------------------------------------------------------- */
 // SpotRack front_rack(spot_vec{&spot_1, &spot_2, &spot_3, &spot_4}, "Front Rack", 1);
-SpotRack front_rack(spot_vec{&spot_1, &spot_2, &spot_3, &spot_4, &spot_8, &spot_9}, "Front Rack", 1);
+SpotRack front_rack(spot_vec{&spot_2, &spot_3, &spot_4}, "Front Rack", 1);
 // SpotRack back_rack(spot_vec{&spot_5, &spot_6, &spot_7, &spot_8, &spot_9}, "Back Rack", 2);
 SpotRack back_rack(spot_vec{&spot_5, &spot_6, &spot_7}, "Back Rack", 2);
 
@@ -119,9 +119,12 @@ void front_rack_init(){
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    purple,      2500, 800,   "purple slow bubbles",      "FR.2.2.9", backer, 2));
     
     // Animation 1 -> CHASER MODE (TEST)
-    // SLOW
-    // TODO : fix these animation
+    // SLOW square chaser
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    white,       square,  1000, 600,      "white chaser",       "FR.3.1", leader, 2));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    white,       square,  1000, 1000,      "white chaser",       "FR.3.2", leader, 2));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    white,       square,  1500, 1500,      "white chaser",       "FR.3.3", leader, 2));
+
+
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    white,       square,  200, 300,       "fast white chaser",   "FR.3.2", leader, 2));
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    white,       square,  200, 600,       "fast white chaser",   "FR.3.3", leader, 2));
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    sevika_pink, square,  100, 200,       "fast sevika_pink chaser",   "FR.3.4", leader, 2));
@@ -133,6 +136,79 @@ void front_rack_init(){
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    color_vec{sevika_pink,hextech_cyan}, square, 500, 1000,     "slow hextech sevika chaser",  "FR.3.8", leader, 2));
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    color_vec{sevika_pink,hextech_cyan}, square, 100, 200,     "slow hextech sevika chaser",   "FR.3.7", leader, 2));
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    color_vec{sevika_pink,hextech_cyan}, square, 100, 200,     "slow hextech sevika chaser",   "FR.3.7", leader, 2));
+
+
+
+    //Animation 4 -> Original Beatmatcher
+    // Monochrome background
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, black,       red,  "Red background",      "FR.4.0.1",   backer,   false));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, black,    sodium,  "Sodium background",   "FR.4.0.2",   backer,   false));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, black,    orange,  "Orange background",   "FR.4.0.3",   backer,   false));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, black,    yellow,  "Yellow background",   "FR.4.0.4",   backer,   false));
+ // front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, black,      gold,  "Gold background",     "FR.4.0.5",   backer,   false));
+ // front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, black,     white,  "White background",    "FR.4.0.6",   backer,   false));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, black,      cyan,  "Cyan background",     "FR.4.0.7",   backer,   false));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, black,      blue,  "Blue background",     "FR.4.0.8",   backer,   false));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, black,    purple,  "Purple background",   "FR.4.0.9",   backer,   false));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, black,   magenta,  "Magenta background",  "FR.4.0.10",  backer,   false));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, black,      pink,  "Pink background",     "FR.4.0.11",  backer,   false));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, black,     green,  "Green background",    "FR.4.0.12",  backer,   false));
+    
+    // Monochrome Flash
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, red,       black,  "Red Flashes",      "FR.4.1.1", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, sodium,    black,  "Sodium Flashes",   "FR.4.1.2", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, orange,    black,  "Orange Flashes",   "FR.4.1.3", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, yellow,    black,  "Yellow Flashes",   "FR.4.1.4", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, gold,      black,  "Gold Flashes",     "FR.4.1.5", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, white,     black,  "White Flashes",    "FR.4.1.6", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, cyan,      black,  "Cyan Flashes",     "FR.4.1.7", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, blue,      black,  "Blue Flashes",     "FR.4.1.8", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, purple,    black,  "Purple Flashes",   "FR.4.1.9", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, magenta,   black,  "Magenta Flashes",  "FR.4.1.10", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, pink,      black,  "Pink Flashes",     "FR.4.1.11", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, green,     black,  "Green Flashes",    "FR.4.1.12", leader));
+
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, red,       red,       "Red Flashes, Red Background",          "FR.4.2.1" , leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, sodium,    sodium,    "Sodium Flashes, Sodium Background",    "FR.4.2.2" , leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, orange,    orange,    "Orange Flashes, Orange Background",    "FR.4.2.3" , leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, yellow,    yellow,    "Yellow Flashes, Yellow Background",    "FR.4.2.4" , leader));
+ // front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, gold,      gold,      "Gold Flashes, Gold Background",        "FR.4.2.5" , leader));
+ // front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, white,     white,     "White Flashes, White Background",      "FR.4.2.6" , leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, cyan,      cyan,      "Cyan Flashes, Cyan Background",        "FR.4.2.7" , leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, blue,      blue,      "Blue Flashes, Blue Background",        "FR.4.2.8" , leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, purple,    purple,    "Purple Flashes, Purple Background",    "FR.4.2.9" , leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, magenta,   magenta,   "Magenta Flashes, Magenta Background",  "FR.4.2.10" , leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, pink,      pink,      "Pink Flashes, Pink Background",        "FR.4.2.11" , leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, green,     green,     "Green Flashes, Green Background",      "FR.4.2.12" , leader));
+
+    // White Flash with monochrome background
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, white,     red,     "White Flashes, Red background",      "FR.4.3.1", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, white,     sodium,  "White Flashes, Sodium background",   "FR.4.3.2", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, white,     orange,  "White Flashes, Orange background",   "FR.4.3.3", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, white,     yellow,  "White Flashes, Yellow background",   "FR.4.3.4", leader));
+ // front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, white,     gold,    "White Flashes, Gold background",     "FR.4.3.5", leader));
+ // front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, white,     white,   "White Flashes, White background",    "FR.4.3.6", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, white,     cyan,    "White Flashes, Cyan background",     "FR.4.3.7", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, white,     blue,    "White Flashes, Blue background",     "FR.4.3.8", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, white,     purple,  "White Flashes, Purple background",   "FR.4.3.9", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, white,     magenta, "White Flashes, Magenta background",  "FR.4.3.10", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, white,     pink,    "White Flashes, Pink background",     "FR.4.3.11", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, white,     green,   "White Flashes, Green background",    "FR.4.3.12", leader));
+    
+    // Bicolor animation based on color palettes
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, cyan,     red,       "cyan Flashes, red background",         "FR.4.6.1", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, cyan,     magenta,   "cyan Flashes, magenta background",     "FR.4.6.2", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, gold,     purple,    "gold Flashes, purple background",      "FR.4.6.3", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, gold,     red,       "gold Flashes, red background",         "FR.4.6.4", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, gold,     orange,    "gold Flashes, orange background",      "FR.4.6.5", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, gold,     sodium,    "gold Flashes, sodium background",      "FR.4.6.6", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, cyan,     purple,    "cyan Flashes, purple background",      "FR.4.6.7", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, pink,     purple,    "pink Flashes, purple background",      "FR.4.6.8", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, cyan,     pink,      "cyan Flashes, pink background",        "FR.4.6.9", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, cyan,     green,     "cyan Flashes, green background",        "FR.4.6.10", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, green,    cyan,      "green Flashes, cyan background",        "FR.4.6.11", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, cyan,     orange,    "cyan Flashes, orange background",        "FR.4.6.12", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, cyan,     sodium,    "cyan Flashes, sodium background",        "FR.4.6.13", leader));
 
 
     front_rack.activate_none();
@@ -152,6 +228,8 @@ void front_rack_init(){
 // Define animation for the background spot rack
 void back_rack_init(){
     back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, black,         black,       100000, 1000,   " ", "BR.0", backer, 0));
+    
+    // BUBBLES
     // Monochrome Background
     back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, red,      3000, 1500, "Red background",        "BR.1", backer, 1));
     back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, sodium,   3000, 1500, "Sodium background",     "BR.2", backer, 1));
@@ -221,6 +299,11 @@ void back_rack_init(){
     back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, pink,    cyan,   3000, 1500, "cyan bubbles, pink background",      "BR.1.4.12", backer, 1));
     back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, purple,  red,    3000, 1500, "purple bubbles,red background",      "BR.1.4.13", backer, 1));
     back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, red,     purple, 3000, 1500, "red bubbles, purple background",     "BR.1.4.14", backer, 1));
+    
+    // slow square bubbles
+    
+    
+    
     back_rack.activate_none();
 };
 
@@ -297,13 +380,23 @@ DMX_vec SpotRack::RGBW(simpleColor c, int intensity){
 }
 
 /**
-   #    #     # ### #     #    #    ####### ### ####### #     #  #####                 #   
-  # #   ##    #  #  ##   ##   # #      #     #  #     # ##    # #     #               ##   
- #   #  # #   #  #  # # # #  #   #     #     #  #     # # #   # #                    # #   
-#     # #  #  #  #  #  #  # #     #    #     #  #     # #  #  #  #####     #####       #   
-####### #   # #  #  #     # #######    #     #  #     # #   # #       #                #   
-#     # #    ##  #  #     # #     #    #     #  #     # #    ## #     #                #   
-#     # #     # ### #     # #     #    #    ### ####### #     #  #####               ##### 
+   #    #     # ### #     #    #    ####### ### ####### #     #  ##### 
+  # #   ##    #  #  ##   ##   # #      #     #  #     # ##    # #     #
+ #   #  # #   #  #  # # # #  #   #     #     #  #     # # #   # #      
+#     # #  #  #  #  #  #  # #     #    #     #  #     # #  #  #  ##### 
+####### #   # #  #  #     # #######    #     #  #     # #   # #       #
+#     # #    ##  #  #     # #     #    #     #  #     # #    ## #     #
+#     # #     # ### #     # #     #    #    ### ####### #     #  ##### 
+*/
+
+/*
+   #          ######                                            
+  ##          #     # #    # #####  #####  #      ######  ####  
+ # #          #     # #    # #    # #    # #      #      #      
+   #          ######  #    # #####  #####  #      #####   ####  
+   #   ###    #     # #    # #    # #    # #      #           # 
+   #   ###    #     # #    # #    # #    # #      #      #    # 
+ ##### ###    ######   ####  #####  #####  ###### ######  ####  
 */
 // Bubbles
 void SpotRackAnimation1::init(){
@@ -408,14 +501,14 @@ void SpotRackAnimation1::new_frame(){
     }
 }
 
-/**
-   #    #     # ###               #####     
-  # #   ##    #  #               #     #    
- #   #  # #   #  #                     #    
-#     # #  #  #  #      #####     #####     
-####### #   # #  #               #          
-#     # #    ##  #               #          
-#     # #     # ###              #######    
+/*
+ #####          #####                                    
+#     #        #     # ##### #####   ####  #####  ###### 
+      #        #         #   #    # #    # #    # #      
+ #####          #####    #   #    # #    # #####  #####  
+#       ###          #   #   #####  #    # #    # #      
+#       ###    #     #   #   #   #  #    # #    # #      
+####### ###     #####    #   #    #  ####  #####  ###### 
 */
 // Stroboscope
 void SpotRackAnimation2::shake(){  //randomizes the strob speeds on request
@@ -467,13 +560,13 @@ void SpotRackAnimation2::new_frame(){
 }
 
 /*
-   #    #     # ###              #####  
-  # #   ##    #  #              #     # 
- #   #  # #   #  #                    # 
-#     # #  #  #  #     #####     #####  
-####### #   # #  #                    # 
-#     # #    ##  #              #     # 
-#     # #     # ###              #####  
+ #####          #####                                     
+#     #        #     # #    #   ##    ####  ###### #####  
+      #        #       #    #  #  #  #      #      #    # 
+ #####         #       ###### #    #  ####  #####  #    # 
+      # ###    #       #    # ######      # #      #####  
+#     # ###    #     # #    # #    # #    # #      #   #  
+ #####  ###     #####  #    # #    #  ####  ###### #    # 
 */
 void SpotRackAnimation3::init(){
     BaseAnimation::init();
@@ -485,4 +578,49 @@ void SpotRackAnimation3::new_frame(){
     BaseAnimation::new_frame();
 
 
+}
+
+/*
+#              ######                      
+#    #         #     # ######   ##   ##### 
+#    #         #     # #       #  #    #   
+#    #         ######  #####  #    #   #   
+####### ###    #     # #      ######   #   
+     #  ###    #     # #      #    #   #   
+     #  ###    ######  ###### #    #   #
+*/
+void SpotRackAnimation4::init(){
+    BaseAnimation::init();
+}
+
+void SpotRackAnimation4::new_frame(){
+    BaseAnimation::new_frame();
+
+    unsigned long t_ms = frame.t_current_ms;
+    unsigned long t_last_beat_ms = sampler.t_last_new_beat;
+
+    bool auto_activate_flash = (sampler.state == BEAT) && (t_ms-sampler.t_beat_tracking_start < MAX_CONT_FLASH);
+
+    pixel backgd_RGB = this->fixture->RGBW(back_color, 20);
+    pixel flash_RGB = this->fixture->RGBW(flash_color);
+    pixel final_RGB(4);
+
+    float coef = exp(-(double)(t_ms - t_last_beat_ms) / fade_rate);
+    if (param_activate_flash && auto_activate_flash)
+    {
+         
+        final_RGB[R] = (1-pow(coef, 0.2)) * backgd_RGB[R] + coef * flash_RGB[R];
+        final_RGB[G] = (1-pow(coef, 0.2)) * backgd_RGB[G] + coef * flash_RGB[G];
+        final_RGB[B] = (1-pow(coef, 0.2)) * backgd_RGB[B] + coef * flash_RGB[B];
+    }
+    else
+    {
+        final_RGB[R] = backgd_RGB[R];
+        final_RGB[G] = backgd_RGB[G];
+        final_RGB[B] = backgd_RGB[B];
+    }
+    
+    for (auto spot : this->fixture->spots){
+        spot->RGBWout = final_RGB;
+    }
 }

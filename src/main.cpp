@@ -185,7 +185,7 @@ int main(int argc, char* argv[]){
             balise("Run animator normal update");
             // animator.random_update();
             // animator.palette_update();
-            animator.test_update();
+            animator.show_update();
         }
         else if (frame.cpt == 0){   // else activate once and for all the animations to test
             balise("Run animator test fcn");

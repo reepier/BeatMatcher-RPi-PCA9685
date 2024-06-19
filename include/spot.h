@@ -129,13 +129,13 @@ public:
     SpotRack *fixture;
 };
 /*
-         #       
-        ##       
-       # #       
-         #       
-         #   ### 
-         #   ### 
-       ##### ### 
+   #          ######                                            
+  ##          #     # #    # #####  #####  #      ######  ####  
+ # #          #     # #    # #    # #    # #      #      #      
+   #          ######  #    # #####  #####  #      #####   ####  
+   #   ###    #     # #    # #    # #    # #      #           # 
+   #   ###    #     # #    # #    # #    # #      #      #    # 
+ ##### ###    ######   ####  #####  #####  ###### ######  ####  
 */
 // BUBBLES : background color with another color randomly apppearing
 
@@ -213,9 +213,9 @@ public :
         this->update_palette(color_vec{b_col, f_col});
     }
     //overloaded constructor to add a flash shape argument
-    SpotRackAnimation1(SpotRack *f, simpleColor b_col, simpleColor f_col, Shape fshap, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio) 
-        : SpotRackAnimation1(f, b_col, b_col, prand, flen, d, i, t, prio){
-        this->flash_shape = fshap;
+    SpotRackAnimation1(SpotRack *f, simpleColor b_col, simpleColor f_col, Shape fshape, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio) 
+        : SpotRackAnimation1(f, b_col, f_col, prand, flen, d, i, t, prio){
+        this->flash_shape = fshape;
     }
     // overloaded constructor to create the same animation without flash (everything else being equal)
     SpotRackAnimation1(SpotRack *f, simpleColor b_col, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio)
@@ -227,13 +227,13 @@ public :
     void new_frame();
 };
 /*
-       #####      
-      #     #     
-            #     
-       #####      
-      #       ### 
-      #       ### 
-      ####### ### 
+ #####          #####                                    
+#     #        #     # ##### #####   ####  #####  ###### 
+      #        #         #   #    # #    # #    # #      
+ #####          #####    #   #    # #    # #####  #####  
+#       ###          #   #   #####  #    # #    # #      
+#       ###    #     #   #   #   #  #    # #    # #      
+####### ###     #####    #   #    #  ####  #####  ###### 
 */
 // STROBE : Random color flashes
 // TODO add multicolor feature (change color at every new_frame)
@@ -285,13 +285,13 @@ private :
     unsigned long t_next_shake;
 };
 /*
-       #####      
-      #     #     
-            #     
-       #####      
-            # ### 
-      #     # ### 
-       #####  ### 
+ #####          #####                                     
+#     #        #     # #    #   ##    ####  ###### #####  
+      #        #       #    #  #  #  #      #      #    # 
+ #####         #       ###### #    #  ####  #####  #    # 
+      # ###    #       #    # ######      # #      #####  
+#     # ###    #     # #    # #    # #    # #      #   #  
+ #####  ###     #####  #    # #    #  ####  ###### #    # 
 */
 // CHASER : each spots individually lights up and stays on for a user defined duration
 
@@ -315,6 +315,48 @@ public:
         this->colors = c;
 
         this->update_palette(c);
+    }
+
+    void init() override;
+    void new_frame() override;
+};
+
+
+/*
+#              ######                      
+#    #         #     # ######   ##   ##### 
+#    #         #     # #       #  #    #   
+#    #         ######  #####  #    #   #   
+####### ###    #     # #      ######   #   
+     #  ###    #     # #      #    #   #   
+     #  ###    ######  ###### #    #   #
+*/
+
+// Flashes on beat with background color --> similar to the original LED animation
+class SpotRackAnimation4 : public SpotRackAnimation{
+  public:
+    // Animation parameters (constant or set by animation constructor)
+    bool param_activate_flash;
+    simpleColor flash_color;
+    simpleColor back_color;
+
+    int fade_rate = 60;
+    // Dynamic variables (updated internally at each frame)
+
+    // Constructor
+    SpotRackAnimation4(SpotRack *f, simpleColor f_col, simpleColor b_col, std::string d, std::string i, AnimationType typ, bool flash = true)
+    {
+        this->description = d;
+        this->id = i; 
+        this->fixture = f;
+
+        this->type = typ;
+        this->param_activate_flash = flash;
+
+        this->flash_color = f_col;
+        this->back_color = b_col;
+
+        this->update_palette(color_vec{f_col, b_col});
     }
 
     void init() override;

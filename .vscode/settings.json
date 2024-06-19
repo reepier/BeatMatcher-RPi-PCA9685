@@ -53,6 +53,16 @@
         "optional": "cpp",
         "ranges": "cpp",
         "cinttypes": "cpp",
-        "climits": "cpp"
+        "climits": "cpp",
+        "chrono": "cpp",
+        "condition_variable": "cpp",
+        "map": "cpp",
+        "set": "cpp",
+        "unordered_set": "cpp",
+        "ratio": "cpp",
+        "mutex": "cpp",
+        "semaphore": "cpp",
+        "stop_token": "cpp",
+        "thread": "cpp"
     }
 }

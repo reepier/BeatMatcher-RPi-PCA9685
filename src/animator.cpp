@@ -131,7 +131,7 @@ void AnimationManager::palette_update(){
 }
 
 // The purpose of this animation is to test ranges of animations or play with different control logics
-void AnimationManager::test_update(){
+void AnimationManager::show_update(){
     balise(__FILE__, " ", __LINE__, "animator Test update");
     log(4, __FILE__, " ",__func__);
 
@@ -178,7 +178,8 @@ void AnimationManager::test_update(){
             // select a leader among Led bars, Front rack, and Laser
             balise(__FILE__, " ", __LINE__, "select leader fixture");
             // lead_fix = fcn::random_pick(fix_vec{&led, &front_rack, & laser, &spider}, {4,2,2,3});
-            lead_fix = fcn::random_pick(fix_vec{&addr_led, &front_rack, &laser}, {4, 2, 1});
+            // lead_fix = fcn::random_pick(fix_vec{&addr_led, &front_rack, &laser}, {4, 2, 1});
+            lead_fix = &front_rack;
             // lead_fix = fcn::random_pick(fix_vec{&led, &front_rack}, {3, 1 });
             
             // activate leader animation
@@ -187,41 +188,41 @@ void AnimationManager::test_update(){
         }while(!leader_OK && ++trial_cpt<10);
 
         // reference the other fixtures as "backer fixtures" in a vector (for ease of acccess & modularity)
-        balise(__FILE__, " ", __LINE__, "select backer fixture");
-        fix_vec backer_fix;
-        for (auto fix : fix_vec{&addr_led, &front_rack, &laser}){
-        // for (auto fix : fix_vec{&led, &front_rack}){
-            if (fix != lead_fix){
-                backer_fix.push_back(fix);
-            }
-        }
+        // balise(__FILE__, " ", __LINE__, "select backer fixture");
+        // fix_vec backer_fix;
+        // for (auto fix : fix_vec{&addr_led, &front_rack, &laser}){
+        // // for (auto fix : fix_vec{&led, &front_rack}){
+        //     if (fix != lead_fix){
+        //         backer_fix.push_back(fix);
+        //     }
+        // }
         // sort the backer fixtures in a random order
-        random_device rd;
-        mt19937 rng(rd());
-        shuffle(backer_fix.begin(), backer_fix.end(), rng);
+        // random_device rd;
+        // mt19937 rng(rd());
+        // shuffle(backer_fix.begin(), backer_fix.end(), rng);
 
         /** pick randomly how many backer fixtures will light up to back the leader fixture
          *  40% of time there should be 2 backer (3 fixtures total)
          *  40% of time there should be 1 backer
          *  20% of time ther should be NO backer */
-        int back_fix_n = fcn::random_pick( int_vec{2,1,0}, int_vec{2,2,1} );
+        int back_fix_n = 1;
 
         // log the results
         log(2, fcn::num_to_str(palette_lifespan), ") Leader->", lead_fix->name, "\t", fcn::num_to_str(back_fix_n), " backers");
 
         // activate backer animations based on the new settings
-        balise(__FILE__, " ", __LINE__, "activate backer animation");
-        for (int i = 0; i<backer_fix.size(); i++){
-            if (i<back_fix_n)
-                backer_fix[i]->activate_by_color(current_palette, backer);
-            else
-                backer_fix[i]->activate_none();
-        }
+        // balise(__FILE__, " ", __LINE__, "activate backer animation");
+        // for (int i = 0; i<backer_fix.size(); i++){
+        //     if (i<back_fix_n)
+        //         backer_fix[i]->activate_by_color(current_palette, backer);
+        //     else
+        //         backer_fix[i]->activate_none();
+        // }
         
         balise(__FILE__, " ", __LINE__, "activate backstage rack  animation");
         back_rack.activate_by_color(current_palette);   // deal with the backstage rack separately
 
-        spider.activate_by_color(current_palette);
+        // spider.activate_by_color(current_palette);
 
         t_last_change_ms = frame.t_current_ms;
         palette_lifespan-- ;
