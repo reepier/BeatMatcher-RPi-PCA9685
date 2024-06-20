@@ -92,25 +92,25 @@ void front_rack_init(){
     // Animation 1 : Random Bursts of color
 #if SHOW_INTENSITY == 1
     // gaussian bursts (short & slow) --> to be used as backer animation with LED (or else)
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    white,       4000, 1500,   "white slow bubbles",       "FR.2.2.6",     leader, 2));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    gold,        4000, 1500,   "gold slow bubbles",        "FR.2.2.5",     leader, 2));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    cyan,        4000, 1500,   "cyan slow bubbles",        "FR.2.2.7",     leader, 2));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    red,         4000, 1500,   "red slow bubbles",         "FR.2.2.1",     leader, 2));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    blue,        4000, 1500,   "blue slow bubbles",        "FR.2.2.8",     leader, 2));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    pink,        4000, 1500,   "pink slow bubbles",        "FR.2.2.11",    leader, 2));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    magenta,     4000, 1500,   "magenta slow bubbles",     "FR.2.2.10",    leader, 2));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    purple,      4000, 1500,   "purple slow bubbles",      "FR.2.2.9",     leader, 2));   
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    white,       4000, 1500,   "white slow bubbles",       "FR.2.2.6",     leader, 1));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    gold,        4000, 1500,   "gold slow bubbles",        "FR.2.2.5",     leader, 1));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    cyan,        4000, 1500,   "cyan slow bubbles",        "FR.2.2.7",     leader, 1));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    red,         4000, 1500,   "red slow bubbles",         "FR.2.2.1",     leader, 1));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    blue,        4000, 1500,   "blue slow bubbles",        "FR.2.2.8",     leader, 1));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    pink,        4000, 1500,   "pink slow bubbles",        "FR.2.2.11",    leader, 1));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    magenta,     4000, 1500,   "magenta slow bubbles",     "FR.2.2.10",    leader, 1));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    purple,      4000, 1500,   "purple slow bubbles",      "FR.2.2.9",     leader, 1));   
 #endif 
-#if SHOW_INTENSITY >= 2
+#if SHOW_INTENSITY == 2
     // gaussian bursts (short & fast) --> to be used as solo animation during breaks
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    white,       1000, 600,   "white fast bubbles",       "FR.2.1.6", leader, 2));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    gold,        1000, 600,   "gold fast bubbles",        "FR.2.1.5", leader, 2));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    cyan,        1000, 600,   "cyan fast bubbles",        "FR.2.1.7", leader, 2));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    red,         1000, 600,   "red fast bubbles",         "FR.2.1.1", leader, 2));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    blue,        1000, 600,   "blue fast bubbles",        "FR.2.1.8", leader, 2));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    white,       1000, 600,   "white fast bubbles",       "FR.2.1.6", leader,  2));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    gold,        1000, 600,   "gold fast bubbles",        "FR.2.1.5", leader,  2));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    cyan,        1000, 600,   "cyan fast bubbles",        "FR.2.1.7", leader,  2));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    red,         1000, 600,   "red fast bubbles",         "FR.2.1.1", leader,  2));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    blue,        1000, 600,   "blue fast bubbles",        "FR.2.1.8", leader,  2));
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    pink,        1000, 600,   "pink fast bubbles",        "FR.2.1.11", leader, 2));
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    magenta,     1000, 600,   "magenta fast bubbles",     "FR.2.1.10", leader, 2));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    purple,      1000, 600,   "purple fast bubbles",      "FR.2.1.9", leader, 2));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    purple,      1000, 600,   "purple fast bubbles",      "FR.2.1.9", leader,  2));
 #endif 
 
     // Animation 2: Stroboscope --> To be used as LEAD animation

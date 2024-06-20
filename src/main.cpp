@@ -115,12 +115,12 @@ void send(){
     #ifndef LINUX_PC // if compiling on raspberrypi
     // Send frame to the PCA9685 module
     // Take into account the MASTER DIMMER value !! --> as late as possible, right before data is sent
-    setOffVals[LEDRed1] = led.RGBout[R] * led.MASTER_DIMMER / 255.0;
-    setOffVals[LEDGreen1] = led.RGBout[G] * led.MASTER_DIMMER / 255.0;
-    setOffVals[LEDBlue1] = led.RGBout[B] * led.MASTER_DIMMER / 255.0;
-    setOffVals[LEDRed2] = led.RGBout[R] * led.MASTER_DIMMER / 255.0;
-    setOffVals[LEDGreen2] = led.RGBout[G] * led.MASTER_DIMMER / 255.0;
-    setOffVals[LEDBlue2] = led.RGBout[B] * led.MASTER_DIMMER / 255.0;
+    setOffVals[LEDRed1] = led.RGBout[R] * led.master / 255.0;
+    setOffVals[LEDGreen1] = led.RGBout[G] * led.master / 255.0;
+    setOffVals[LEDBlue1] = led.RGBout[B] * led.master / 255.0;
+    setOffVals[LEDRed2] = led.RGBout[R] * led.master / 255.0;
+    setOffVals[LEDGreen2] = led.RGBout[G] * led.master / 255.0;
+    setOffVals[LEDBlue2] = led.RGBout[B] * led.master / 255.0;
 
   
     PCA9685_setPWMVals(fd, addr, setOnVals, setOffVals);
