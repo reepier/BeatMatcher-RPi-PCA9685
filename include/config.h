@@ -41,7 +41,7 @@ extern std::vector<std::string> vec_anim_id;
 #define     MASTERDIMMER        1.0             //fraction --> must be decimal (literal float) !!!
 
 #define     SPIDER_ANI_DURA     600000 
-#define     STROBE_ANI_DURA     45000
+#define     STROBE_ANI_DURA     100000
 
 #define      PAL_LIFESPAN_BICO  5
 #define      PAL_LIFESPAN_MONO  3
@@ -49,5 +49,5 @@ extern std::vector<std::string> vec_anim_id;
 #define     SPOTRACK_ANI1_BkG_INTENSITY_LOW   40
 #define     SPOTRACK_ANI1_BkG_INTENSITY_HIGH  100
 
-#define     SHOW_INTENSITY 1        // ranges from 1 to 3
+#define     SHOW_INTENSITY 3        // ranges from 1 to 3
 
