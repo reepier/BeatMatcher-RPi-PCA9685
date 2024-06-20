@@ -211,6 +211,15 @@ void disp_output_window(){
     wrefresh(outputw);
 }
 
+/*
+    #     #     #  ###  #     #     #     #######  #######  ######  
+   # #    ##    #   #   ##   ##    # #       #     #     #  #     # 
+  #   #   # #   #   #   # # # #   #   #      #     #     #  #     # 
+ #     #  #  #  #   #   #  #  #  #     #     #     #     #  ######  
+ #######  #   # #   #   #     #  #######     #     #     #  #   #   
+ #     #  #    ##   #   #     #  #     #     #     #     #  #    #  
+ #     #  #     #  ###  #     #  #     #     #     #######  #     # 
+*/
 void disp_animation_window(){
     log(4, __FILE__, " ",__LINE__, " ", __func__);
 
@@ -222,11 +231,14 @@ void disp_animation_window(){
     mvwprintw(animw, 0,1, "ANIMATOR");
     wattroff(animw, A_BOLD);
 
-    ostringstream anim_change_buf;
+    ostringstream anim_change_buf, show_int_buf;
     long timer =  ((long)animator.t_last_change_ms + (long)TEMPO_ANIM_CHANGE - (long)frame.t_current_ms)/1000.0;
 
     anim_change_buf << "Animation switch : " << (timer>0 ? timer : 0);
     mvwprintw(animw, 2, 1, anim_change_buf.str().c_str());
+
+    show_int_buf << "Show intensity : " << SHOW_INTENSITY;
+    mvwprintw(animw, 2, 35, show_int_buf.str().c_str());
 
     wrefresh(animw);
 }
