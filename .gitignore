@@ -4,3 +4,4 @@ bin/beatmatcher
 bin/test
 **/build
 Makefile
+beatmatcher.log
