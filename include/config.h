@@ -36,7 +36,7 @@ extern std::vector<std::string> vec_anim_id;
 #define DROPDuration  8 // beats
 
 // -- CONFIG ------------------------------------------------------------
-#define     MAX_CONT_FLASH      120000          // 120000
+#define     MAX_CONT_FLASH      120000          // 120000   //TODO remove ?
 #define     TEMPO_ANIM_CHANGE   100000          // 240000
 #define     MASTERDIMMER        1.0             //fraction --> must be decimal (literal float) !!!
 

@@ -27,7 +27,12 @@ using namespace std;
 // DMX output interface (OLA)
     ola::client::StreamingClient ola_client;
     ola::DmxBuffer ola_buffer;
-    vector<ola::DmxBuffer> ola_pix_buffers(NUM_SUBPIX/MAX_SUBPIX_PER_UNI + ((NUM_SUBPIX%MAX_SUBPIX_PER_UNI)==0 ? 0 : 1));
+    struct ola_universe{
+        int uni;
+        ola::DmxBuffer buf;
+    };
+    vector<ola_universe> ola_pix_uni(NUM_SUBPIX/MAX_SUBPIX_PER_UNI + ((NUM_SUBPIX%MAX_SUBPIX_PER_UNI)==0 ? 0 : 1));
+
 
 fix_vec ll_fxtrs = {&led, &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, &spot_7,&spot_8, &spot_9, &spider, &laser};
 fix_vec fixtures = {&addr_led, &led, &laser, &front_rack, &back_rack, &spider};
@@ -88,8 +93,8 @@ void initialize() {
     balise("Init. ola...");
     ola_client.Setup();
     ola_buffer.Blackout();
-    for(auto buf : ola_pix_buffers){
-        buf.Blackout();
+    for(auto pix_uni : ola_pix_uni){
+        pix_uni.buf.Blackout();
     }
 
     balise("Init. Sampler...");
@@ -138,7 +143,7 @@ void send(){
     DMX_vec sub_buffer, long_buffer = addr_led.buffer();
     auto start = long_buffer.begin();
     int universe_cpt = 1;
-    for(auto& pix_buf : ola_pix_buffers){
+    for(auto& pix_uni : ola_pix_uni){
         unsigned int length;
         if (long_buffer.end() > start + MAX_SUBPIX_PER_UNI){
             sub_buffer.assign(start, start + MAX_SUBPIX_PER_UNI);
@@ -149,10 +154,15 @@ void send(){
             length = distance(start, long_buffer.end());
         }
 
-        pix_buf.SetRange(0, sub_buffer.data(), length);
-        ola_client.SendDmx(universe_cpt++, pix_buf);
+        pix_uni.buf.SetRange(0, sub_buffer.data(), length);
+        pix_uni.uni = universe_cpt++;
     }
-
+    //send pixel buffers in random sequence (to avoid strange asynchronous behaviour)
+    vector<ola_universe> ola_pix_uni_rand = fcn::randomized_vector(ola_pix_uni);
+    ola::client::StreamingClientInterface::SendArgs args;
+    for(auto& pix_uni : ola_pix_uni_rand){
+        ola_client.SendDMX(pix_uni.uni, pix_uni.buf, args);
+    }
 }
 
 LoopControler frame;

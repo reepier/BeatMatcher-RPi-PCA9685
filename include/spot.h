@@ -15,9 +15,13 @@ class SpotRack;
 class SpotBack;
 
 typedef std::vector<SpotFixture*> spot_vec;
-// TODO Remove the individual spot class --> I will never need (for now) to control 1 spot individually.
-/* --------------------------------------------------------------------
+enum spot_type_t{
+    FunGeneration_12x1W,
+    Shehds_10x8W
+};
 
+// TODO Remove the individual spot class --> I will never need (for now) to control 1 spot individually.
+/*
  #####  ######  ####### ####### 
 #     # #     # #     #    #    
 #       #     # #     #    #    
@@ -25,6 +29,19 @@ typedef std::vector<SpotFixture*> spot_vec;
       # #       #     #    #    
 #     # #       #     #    #    
  #####  #       #######    #    
+*/
+
+
+
+/* --------------------------------------------------------------------
+
+ #####  ######  ####### #######    #######                #####                    
+#     # #     # #     #    #       #       #    # #    # #     # ###### #    #     
+#       #     # #     #    #       #       #    # ##   # #       #      ##   #     
+ #####  ######  #     #    #       #####   #    # # #  # #  #### #####  # #  #     
+      # #       #     #    #       #       #    # #  # # #     # #      #  # # ### 
+#     # #       #     #    #       #       #    # #   ## #     # #      #   ## ### 
+ #####  #       #######    #       #        ####  #    #  #####  ###### #    # ### 
 
 / ----------------------------------------------------------------------- */
 
@@ -38,7 +55,7 @@ public:
     uint8_t prog = 0;                         // fixture preset program (unused)
 
     // Constructor & Initializer
-    SpotFixture(int addr, int ch, std::string nm, int id, uint8_t mast=255) : BaseFixture(addr, ch, nm, id, mast){};
+    SpotFixture(int addr, int nch, std::string nm, int id, uint8_t mast=255) : BaseFixture(addr, nch, nm, id, mast){};
     void init(){};
 
     // Get Functions
@@ -62,6 +79,18 @@ class SpotAnimation : public BaseAnimation{
 public:
     SpotFixture *fixture;
 };
+
+/*
+ #####  ######  ####### #######     #####                                     
+#     # #     # #     #    #       #     # #    # ###### #    # #####   ####  
+#       #     # #     #    #       #       #    # #      #    # #    # #      
+ #####  ######  #     #    #        #####  ###### #####  ###### #    #  ####  
+      # #       #     #    #             # #    # #      #    # #    #      # 
+#     # #       #     #    #       #     # #    # #      #    # #    # #    # 
+ #####  #       #######    #        #####  #    # ###### #    # #####   ####  
+*/
+
+
 
 /* --------------------------------------------------------------------
  #####  ######  ####### #######    ######     #     #####  #    #  #####  

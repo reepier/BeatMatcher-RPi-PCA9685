@@ -15,6 +15,15 @@
   #define NUM_PIX NUM_BAR*NUM_PIX_BAR           // Total number of pixels
   #define NUM_SUBPIX 3*NUM_PIX  // Total number of artnet dmx datas
 
+
+enum strip_subdiv_t{
+  bar,  // Led bar
+  seg,  // Led segment (fraction of a bar)
+  pix   // Individual pixel
+};
+
+
+
 // fixture class declaration
 class AddressableLED;
 
@@ -119,10 +128,15 @@ class AddrLEDAnimation1 : public AddrLEDAnimation{
   public:
     // specific parameters
   bool param_activate_flash;
-  simpleColor flash_color;
-  simpleColor back_color;
+  simpleColor flash_color;            // flash color
+  simpleColor back_color;             // background color
+  double density = 1.0;               // proportion of LED's flashing (0-100%) 
+  strip_subdiv_t unit = bar;          // flash pattern subdivision (bar, segment, pixel)
   
   int fade_rate = 60;                            // ms flash fade rate (time constant of an exponential decay : intensity = exp(-(t-t0)/fade_rate)
+
+    // Dynamic variables (updated internally at each frame)
+    int_vec units_index;
 
   // Constructor
   AddrLEDAnimation1(AddressableLED* f, simpleColor f_col, simpleColor b_col, std::string d, std::string i, AnimationType typ, bool flash = true){
@@ -135,12 +149,38 @@ class AddrLEDAnimation1 : public AddrLEDAnimation{
 
     this->flash_color = f_col;
     this->back_color = b_col;
+    units_index.resize(NUM_BAR);
+    for(int i=0; i<units_index.size(); i++){
+      units_index[i] = i;
+    }
+
 
     this->update_palette(color_vec{f_col, b_col});
+  }
+  // overload to include fragmentation
+  AddrLEDAnimation1(AddressableLED* f, simpleColor f_col, simpleColor b_col, strip_subdiv_t subdiv, double dens, std::string d, std::string i, AnimationType typ, bool flash = true)
+  : AddrLEDAnimation1(f, f_col, b_col, d, i, typ, flash)
+  {
+    this->density = dens;
+    this->unit = subdiv;
+
+    switch (subdiv){
+          case bar : units_index.resize(NUM_BAR);
+            break;
+          case seg : units_index.resize(NUM_SEG);
+            break;
+          case pix : units_index.resize(NUM_PIX);
+            break;
+        }
+
+        for(int i=0; i<units_index.size(); i++){
+          units_index[i] = i;
+        }
   }
 
     void init() override;
     void new_frame() override;
+    
 };
 
 /*
@@ -157,11 +197,7 @@ class AddrLEDAnimation1 : public AddrLEDAnimation{
   - The flash turns on all segments
   - The flash Decay turns of segments one by one as intensity decreases */
 
-enum strip_subdiv_t{
-  bar,  // Led bar
-  seg,  // Led segment (fraction of a bar)
-  pix   // Individual pixel
-};
+
 
 class AddrLEDAnimation2 : public AddrLEDAnimation{
   public:

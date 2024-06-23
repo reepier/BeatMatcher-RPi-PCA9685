@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/bin/beatmatcher",
-            "args": ["--nomusic", "--animation","PIX.1.1"],
+            "args": ["--animation","PIX.1.1.1.6"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
