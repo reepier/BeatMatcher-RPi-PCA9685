@@ -6,16 +6,27 @@
 
 using namespace std;
 
-SpotFixture spot_1(81,  8, "Spot 1 (82)", 1);     
-SpotFixture spot_2(105,  8, "Spot 2 (106)", 2);     
-SpotFixture spot_3(97,  8, "Spot 3 (98)", 3);     
-SpotFixture spot_4(113,  8, "Spot 4 (114)", 4);
+SpotFixture spot_1(FunGeneration_12x1W, 81,  8, "Spot 1 (82)", 1);     
+SpotFixture spot_2(FunGeneration_12x1W, 105,  8, "Spot 2 (106)", 2);     
+SpotFixture spot_3(FunGeneration_12x1W, 97,  8, "Spot 3 (98)", 3);     
+SpotFixture spot_4(FunGeneration_12x1W, 113,  8, "Spot 4 (114)", 4);
 
-SpotFixture spot_5(121, 8, "Spot 5 (122)", 5);     
-SpotFixture spot_6(129, 8, "Spot 6 (130)", 6);     
-SpotFixture spot_7(137, 8, "Spot 7 15° (138)", 7);  
-SpotFixture spot_8(89, 8, "Spot 8 (90)", 6);     
-SpotFixture spot_9(73, 8, "Spot 9 (74)", 6);     
+SpotFixture spot_5(FunGeneration_12x1W, 121, 8, "Spot 5 (122)", 5);     
+SpotFixture spot_6(FunGeneration_12x1W, 129, 8, "Spot 6 (130)", 6);     
+SpotFixture spot_7(FunGeneration_12x1W, 137, 8, "Spot 7 15° (138)", 7);  
+SpotFixture spot_8(FunGeneration_12x1W, 89, 8, "Spot 8 (90)", 8);     
+SpotFixture spot_9(FunGeneration_12x1W, 73, 8, "Spot 9 (74)", 9);     
+
+SpotFixture spot_10(FunGeneration_12x1W, 145, 8, "Spot 10 (146)", 10);
+SpotFixture spot_11(FunGeneration_12x1W, 153, 8, "Spot 11 (154)", 11);
+SpotFixture spot_12(FunGeneration_12x1W, 161, 8, "Spot 12 (162)", 12);
+
+SpotFixture spot_13(Shehds_10x8W, 169, 8, "Spot 13 (170)", 13);
+SpotFixture spot_14(Shehds_10x8W, 177, 8, "Spot 13 (178)", 14);
+SpotFixture spot_15(Shehds_10x8W, 185, 8, "Spot 13 (186)", 15);
+SpotFixture spot_16(Shehds_10x8W, 193, 8, "Spot 13 (194)", 16);
+SpotFixture spot_17(Shehds_10x8W, 201, 8, "Spot 13 (202)", 17);
+SpotFixture spot_18(Shehds_10x8W, 209, 8, "Spot 13 (210)", 18);
 
 // SpotFixture spot_8(130, 8, "Spot 8 (130)");     
 
@@ -31,19 +42,45 @@ SpotFixture spot_9(73, 8, "Spot 9 (74)", 6);
 
 / ----------------------------------------------------------------------- */
 
-DMX_vec SpotFixture::buffer(){
+DMX_vec FunGeneration_12x1W_buffer(const SpotFixture& spot){
     // return DMX_vec{    (uint8_t)((double)this->MASTER_DIMMER * this->active_animation->master / 255),
-    return DMX_vec{      this->master,
-                         this->RGBWout[R],
-                         this->RGBWout[G],
-                         this->RGBWout[B],
-                         this->RGBWout[W],
-                         this->prog,
-                         this->color_wheel,
-                         this->strobe
+    return DMX_vec{      spot.master,
+                         spot.RGBWout[R],
+                         spot.RGBWout[G],
+                         spot.RGBWout[B],
+                         spot.RGBWout[W],
+                         spot.prog,
+                         spot.color_wheel,
+                         spot.strobe
                     };
 }
 
+DMX_vec Shehds_10x8W_buffer(const SpotFixture& spot){
+    // return DMX_vec{    (uint8_t)((double)this->MASTER_DIMMER * this->active_animation->master / 255),
+    return DMX_vec{      spot.master,
+                         spot.RGBWout[R],
+                         spot.RGBWout[G],
+                         spot.RGBWout[B],
+                         spot.RGBWout[W],
+                         spot.prog,
+                         spot.color_wheel,
+                         spot.strobe
+                    };
+}
+
+
+DMX_vec SpotFixture::buffer(){
+    switch (this->type){
+        case FunGeneration_12x1W :
+            return FunGeneration_12x1W_buffer(*this);
+        break;
+        case Shehds_10x8W :
+            return Shehds_10x8W_buffer(*this);
+        break;
+        default:
+        break;
+    }
+}
 
 /* --------------------------------------------------------------------
  #####  ######  ####### #######    ######     #     #####  #    #  #####  
@@ -382,17 +419,157 @@ void back_rack_init(){
     back_rack.activate_none();
 };
 
+
+
+
 // Define animation for the global spot rack (including both frontal and background spots);
 void global_rack_init(){};
 
+/*
+ #####  ######  ####### #######    ######   #####  ######  #     # 
+#     # #     # #     #    #       #     # #     # #     # #  #  # 
+#       #     # #     #    #       #     # #       #     # #  #  # 
+ #####  ######  #     #    #       ######  #  #### ######  #  #  # 
+      # #       #     #    #       #   #   #     # #     # #  #  # 
+#     # #       #     #    #       #    #  #     # #     # #  #  # 
+ #####  #       #######    #       #     #  #####  ######   ## ##  
+*/
+
+DMX_vec FunGeneration_12x1W_RGBW(simpleColor c, int intensity){
+    switch (c){
+    case black:
+        return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);
+        break;
+    case red:
+        return fcn::RGBW_norm(DMX_vec{255,0,0,0}, intensity);
+        break;
+    case green:
+        return fcn::RGBW_norm(DMX_vec{0,255,0,0}, 161.0/255*intensity);
+        break;
+    case blue:
+        return fcn::RGBW_norm(DMX_vec{0,0,255,0}, 190.0/255*intensity);
+        break;
+    case yellow:
+        return fcn::RGBW_norm(DMX_vec{255,90,0,0}, intensity);
+        break;
+    case orange:
+        return fcn::RGBW_norm(DMX_vec{255,40,0,0}, intensity);
+        break;
+    case sodium:
+        return fcn::RGBW_norm(DMX_vec{255,20,0,0}, intensity);
+        break;
+    case cyan:
+        return fcn::RGBW_norm(DMX_vec{0,219,255,0}, 180.0/255*intensity);
+        break;
+    case purple:
+        return fcn::RGBW_norm(DMX_vec{150,0,255,0}, intensity);
+        break;    
+    case magenta:
+        return fcn::RGBW_norm(DMX_vec{255,0,240,0}, intensity);
+        break;
+    case pink:
+        return fcn::RGBW_norm(DMX_vec{255,0,100,0}, intensity);
+        break;
+    case white:
+        return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);
+        break;
+    case gold:
+        return fcn::RGBW_norm(DMX_vec{255,40,0,100}, intensity);
+        break;
+    case sevika_pink :
+        return fcn::RGBW_norm(DMX_vec{255,0,11,0}, intensity);
+        break;
+    case hextech_cyan :
+        return fcn::RGBW_norm(DMX_vec{0,153,255,0}, intensity);
+        break;
+    case shimmer_purple :
+        return fcn::RGBW_norm(DMX_vec{245,0,255,0}, intensity);
+        break;
+    default:
+        return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);
+        break;
+    }
+}
+
+DMX_vec Shehds_10x8W_RGBW(simpleColor c, int intensity){
+    switch (c){
+        case black:
+            return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);
+            break;
+        case red:
+            return fcn::RGBW_norm(DMX_vec{255,0,0,0}, intensity);
+            break;
+        case green:
+            return fcn::RGBW_norm(DMX_vec{0,255,0,0}, 161.0/255*intensity);
+            break;
+        case blue:
+            return fcn::RGBW_norm(DMX_vec{0,0,255,0}, 190.0/255*intensity);
+            break;
+        case yellow:
+            return fcn::RGBW_norm(DMX_vec{255,90,0,0}, intensity);
+            break;
+        case orange:
+            return fcn::RGBW_norm(DMX_vec{255,40,0,0}, intensity);
+            break;
+        case sodium:
+            return fcn::RGBW_norm(DMX_vec{255,20,0,0}, intensity);
+            break;
+        case cyan:
+            return fcn::RGBW_norm(DMX_vec{0,219,255,0}, 180.0/255*intensity);
+            break;
+        case purple:
+            return fcn::RGBW_norm(DMX_vec{150,0,255,0}, intensity);
+            break;    
+        case magenta:
+            return fcn::RGBW_norm(DMX_vec{255,0,240,0}, intensity);
+            break;
+        case pink:
+            return fcn::RGBW_norm(DMX_vec{255,0,100,0}, intensity);
+            break;
+        case white:
+            return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);
+            break;
+        case gold:
+            return fcn::RGBW_norm(DMX_vec{255,40,0,100}, intensity);
+            break;
+        case sevika_pink :
+            return fcn::RGBW_norm(DMX_vec{255,0,11,0}, intensity);
+            break;
+        case hextech_cyan :
+            return fcn::RGBW_norm(DMX_vec{0,153,255,0}, intensity);
+            break;
+        case shimmer_purple :
+            return fcn::RGBW_norm(DMX_vec{245,0,255,0}, intensity);
+            break;
+        default:
+            return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);
+            break;
+    }
+}
+
+
+
+DMX_vec SpotFixture::RGBW(simpleColor c, int intensity){
+    switch (this->type){
+        case FunGeneration_12x1W :
+            return FunGeneration_12x1W_RGBW(c, intensity);
+            break;
+        case Shehds_10x8W :
+            return Shehds_10x8W_RGBW(c, intensity);
+            break;
+        default :
+            break;
+    }
+}
+
 /**
-######   #####  ######  #     #    #######               
-#     # #     # #     # #  #  #    #        ####  #    # 
-#     # #       #     # #  #  #    #       #    # ##   # 
-######  #  #### ######  #  #  #    #####   #      # #  # 
-#   #   #     # #     # #  #  #    #       #      #  # # 
-#    #  #     # #     # #  #  #    #       #    # #   ## 
-#     #  #####  ######   ## ##     #        ####  #    # 
+######                          ######   #####  ######  #     # 
+#     #   ##    ####  #    #    #     # #     # #     # #  #  # 
+#     #  #  #  #    # #   #     #     # #       #     # #  #  # 
+######  #    # #      ####      ######  #  #### ######  #  #  # 
+#   #   ###### #      #  #      #   #   #     # #     # #  #  # 
+#    #  #    # #    # #   #     #    #  #     # #     # #  #  # 
+#     # #    #  ####  #    #    #     #  #####  ######   ## ##  
 */
 
 DMX_vec SpotRack::RGBW(simpleColor c, int intensity){
@@ -531,6 +708,7 @@ void SpotRackAnimation1::new_frame(){
         const pixel     ani_backgd_RGBW = fixture->RGBW(back_color, SPOTRACK_ANI1_BkG_INTENSITY_LOW);
         pixel           frame_backgd_RGBW = {0,0,0,0};
 
+        //TODO remove fluctuation !!
         // compute fluctuating background color values :
             frame_backgd_RGBW[R] = min(max(    (int) (  (1 + fluct_int*s[(i_spot+4)%5]) * ani_backgd_RGBW[R] * (1 + fluct_col*s[(i_spot+0)%5]))  ,0),255);
             frame_backgd_RGBW[G] = min(max(    (int) (  (1 + fluct_int*s[(i_spot+4)%5]) * ani_backgd_RGBW[G] * (1 + fluct_col*s[(i_spot+1)%5]))  ,0),255);

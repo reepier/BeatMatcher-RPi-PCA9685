@@ -53,9 +53,12 @@ public:
     uint8_t strobe = 0;                       // strobe speed (0 none - 1 slow - 255 fast)
     uint8_t color_wheel = 0;                  // fixture preset colors (unused)
     uint8_t prog = 0;                         // fixture preset program (unused)
+    spot_type_t type;   // spot 
 
     // Constructor & Initializer
-    SpotFixture(int addr, int nch, std::string nm, int id, uint8_t mast=255) : BaseFixture(addr, nch, nm, id, mast){};
+    SpotFixture(spot_type_t typ, int addr, int nch, std::string nm, int id, uint8_t mast=255) : BaseFixture(addr, nch, nm, id, mast){
+        this->type = type;
+    };
     void init(){};
 
     // Get Functions
@@ -68,8 +71,8 @@ public:
         this->color_wheel = 0;                  
         this->prog = 0; 
     };
-
-    // DMX_vec RGBW(simpleColor, uint8_t intensity = 255) override {};
+    
+    DMX_vec RGBW(simpleColor c, int intensity = 255) override;
 
 };
 extern SpotFixture spot_7, spot_8, spot_1, spot_2, spot_3, spot_4, spot_5, spot_6, spot_7,spot_8,spot_9 ;
