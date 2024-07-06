@@ -348,7 +348,7 @@ public:
 class SpotRackAnimation4 : public SpotRackAnimation{
   public:
     // Animation parameters (constant or set by animation constructor)
-    bool param_activate_flash;
+    bool param_activate_flash = true;
     simpleColor flash_color;
     simpleColor back_color;
 
@@ -356,14 +356,13 @@ class SpotRackAnimation4 : public SpotRackAnimation{
     // Dynamic variables (updated internally at each frame)
 
     // Constructor
-    SpotRackAnimation4(SpotRack *f, simpleColor f_col, simpleColor b_col, std::string d, std::string i, AnimationType typ, bool flash = true)
+    SpotRackAnimation4(SpotRack *f, simpleColor f_col, simpleColor b_col, std::string d, std::string i, AnimationType typ)
     {
         this->description = d;
         this->id = i; 
         this->fixture = f;
 
         this->type = typ;
-        this->param_activate_flash = flash;
 
         this->flash_color = f_col;
         this->back_color = b_col;
@@ -371,6 +370,13 @@ class SpotRackAnimation4 : public SpotRackAnimation{
         this->update_palette(color_vec{f_col, b_col});
     }
 
+    // overoaded constructor with priority argument  
+    SpotRackAnimation4(SpotRack *f, simpleColor f_col, simpleColor b_col, std::string d, std::string i, AnimationType typ, int prio)
+        : SpotRackAnimation4(f, f_col, b_col, d, i, typ)
+    {
+        this->priority = prio;
+    }
+    
     void init() override;
     void new_frame() override;
 };
