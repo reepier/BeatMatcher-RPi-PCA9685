@@ -810,7 +810,7 @@ void SpotRackAnimation2::new_frame(){
     }
     for (int i = 0; i<n_spots; i++){
         if (sampler.state == BEAT)
-            spots[i]->RGBWout  = this->fixture->RGBW(this->color);
+            spots[i]->RGBWout  = this->fixture->RGBW(this->color); //TODO replace rack.RGBW with spot.RGBW
         else    
             spots[i]->RGBWout  = this->fixture->RGBW(black);
 
@@ -829,6 +829,7 @@ void SpotRackAnimation2::new_frame(){
 #     # ###    #     # #    # #    # #    # #      #   #  
  #####  ###     #####  #    # #    #  ####  ###### #    # 
 */
+//TODO finish
 void SpotRackAnimation3::init(){
     BaseAnimation::init();
     for (auto spot : this->fixture->spots){

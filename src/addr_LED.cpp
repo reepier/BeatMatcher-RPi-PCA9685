@@ -164,7 +164,7 @@ void AddressableLED::init(){
 
     animations.push_back(new AddrLEDAnimation2(this, white,  black,  pix,   "White flashes, black background",      "PIX.2.3.1"));
     animations.push_back(new AddrLEDAnimation2(this, gold,   black,  pix,   "Gold flashes, black background",       "PIX.2.3.2"));
-    animations.push_back(new AddrLEDAnimation2(this, red,    black,  pix,   "Red flashes, back background",         "PIX.2.3.3"));
+    animations.push_back(new AddrLEDAnimation2(this, red,    black,  pix,   "Red flashes, black background",         "PIX.2.3.3"));
     animations.push_back(new AddrLEDAnimation2(this, cyan,   red,    pix,   "Cyan flashes, red background",         "PIX.2.3.4"));
     
 // Animation 3 : Noise
@@ -289,6 +289,7 @@ void AddrLEDAnimation1::init(){
 }
 
 void AddrLEDAnimation1::new_frame(){
+    balise("Addr LED Ani1 New frames...");
     BaseAnimation::new_frame();
     
     // local variables for readability
@@ -296,7 +297,7 @@ void AddrLEDAnimation1::new_frame(){
     unsigned long t_last_beat_ms = sampler.t_last_new_beat;
     int_vec::size_type n_unit = units_index.size();
 
-
+    balise("Addr LED Ani1 New frames 1");
     // enable / disable
     bool auto_activate_flash = (sampler.state == BEAT) && (t_ms-sampler.t_beat_tracking_start < MAX_CONT_FLASH);
     
@@ -304,16 +305,19 @@ void AddrLEDAnimation1::new_frame(){
     if (sampler.new_beat)
         units_index = fcn::randomized_vector(units_index);
 
+    balise("Addr LED Ani1 New frames 1");
     // precompute pixel values
     pixel backgd_RGB = this->fixture->RGB(back_color, 20);
     pixel flash_RGB = this->fixture->RGB(flash_color);
     pixel final_mix_RGB(3);
-    
+
+    balise("Addr LED Ani1 New frames 2");
     // Compute intensity vaue based on time elapsed since last beat
     float coef = exp(-(double)(t_ms - t_last_beat_ms) / fade_rate);
     // compute number of units flashing 
     int n_unit_on = density * n_unit;
 
+    balise("Addr LED Ani1 New frames 3");
     // compute final RGB colors
     if (param_activate_flash && auto_activate_flash)
     {
@@ -329,6 +333,7 @@ void AddrLEDAnimation1::new_frame(){
         final_mix_RGB[B] = backgd_RGB[B];
     }
 
+    balise("Addr LED Ani1 New frames 4");
     // set each units color
     for (int i=0; i<n_unit; i++){
         pixel unit_i_RGB;
@@ -336,7 +341,6 @@ void AddrLEDAnimation1::new_frame(){
             unit_i_RGB = final_mix_RGB;
         else
             unit_i_RGB = backgd_RGB;
-        
         switch (unit){
                 case pix : this->fixture->pixels[units_index[i]] = unit_i_RGB;
                 break;

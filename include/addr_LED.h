@@ -7,13 +7,13 @@
 #define MAX_SUBPIX_PER_UNI  510 // maximum number of subpixels arried over 1 universe (1 universe can only carry complete pixels (BC-204 limitation))
 // WS2815 led strip config
   // Config paramters
-  #define NUM_BAR 12             // Total Number of bars
-  #define NUM_SEG 48            // Total number of segments (across all bars)
+  #define NUM_BAR 18             // Total Number of bars
+  #define NUM_SEG (3*NUM_BAR)            // Total number of segments (across all bars)
   // Quasi constants
   #define NUM_PIX_BAR 58        // number of pixels per bar
   // Derivatives
-  #define NUM_PIX NUM_BAR*NUM_PIX_BAR           // Total number of pixels
-  #define NUM_SUBPIX 3*NUM_PIX  // Total number of artnet dmx datas
+  #define NUM_PIX (NUM_BAR*NUM_PIX_BAR)           // Total number of pixels
+  #define NUM_SUBPIX (3*NUM_PIX)  // Total number of artnet dmx datas
 
 
 enum strip_subdiv_t{
@@ -138,7 +138,7 @@ class AddrLEDAnimation1 : public AddrLEDAnimation{
     // Dynamic variables (updated internally at each frame)
     int_vec units_index;
 
-  // Constructor
+  // ORIGINAL Constructor
   AddrLEDAnimation1(AddressableLED* f, simpleColor f_col, simpleColor b_col, std::string d, std::string i, AnimationType typ, bool flash = true){
     this->fixture = f;
     this->description = d;

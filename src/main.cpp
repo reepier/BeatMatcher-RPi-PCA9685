@@ -31,7 +31,7 @@ using namespace std;
         int uni;
         ola::DmxBuffer buf;
     };
-    vector<ola_universe> ola_pix_uni(NUM_SUBPIX/MAX_SUBPIX_PER_UNI + ((NUM_SUBPIX%MAX_SUBPIX_PER_UNI)==0 ? 0 : 1));
+    vector<ola_universe> ola_pix_unis(NUM_SUBPIX/MAX_SUBPIX_PER_UNI + ((NUM_SUBPIX%MAX_SUBPIX_PER_UNI)==0 ? 0 : 1));
 
 
 fix_vec ll_fxtrs = {&led, &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, &spot_7,&spot_8, &spot_9, &spider, &laser};
@@ -82,18 +82,20 @@ void initialize() {
     srand((unsigned)time(nullptr));
 
     #ifndef LINUX_PC // if compiling on raspberrypi
+    if (!b_NO_LED){
         balise("Init. PCA...");
         _PCA9685_DEBUG = 0;
         _PCA9685_TEST = 0;
 
         fd = PCA9685_openI2C(1, addr);
         PCA9685_initPWM(fd, addr, _PCA9685_MAXFREQ);
+    }
     #endif
 
     balise("Init. ola...");
     ola_client.Setup();
     ola_buffer.Blackout();
-    for(auto pix_uni : ola_pix_uni){
+    for(auto pix_uni : ola_pix_unis){
         pix_uni.buf.Blackout();
     }
 
@@ -118,17 +120,19 @@ void initialize() {
 
 void send(){
     #ifndef LINUX_PC // if compiling on raspberrypi
-    // Send frame to the PCA9685 module
-    // Take into account the MASTER DIMMER value !! --> as late as possible, right before data is sent
-    setOffVals[LEDRed1] = led.RGBout[R] * led.MASTER_DIMMER / 255.0;
-    setOffVals[LEDGreen1] = led.RGBout[G] * led.MASTER_DIMMER / 255.0;
-    setOffVals[LEDBlue1] = led.RGBout[B] * led.MASTER_DIMMER / 255.0;
-    setOffVals[LEDRed2] = led.RGBout[R] * led.MASTER_DIMMER / 255.0;
-    setOffVals[LEDGreen2] = led.RGBout[G] * led.MASTER_DIMMER / 255.0;
-    setOffVals[LEDBlue2] = led.RGBout[B] * led.MASTER_DIMMER / 255.0;
+    if (!b_NO_LED){
+        // Send frame to the PCA9685 module
+        // Take into account the MASTER DIMMER value !! --> as late as possible, right before data is sent
+        setOffVals[LEDRed1] = led.RGBout[R] * led.master / 255.0;
+        setOffVals[LEDGreen1] = led.RGBout[G] * led.master / 255.0;
+        setOffVals[LEDBlue1] = led.RGBout[B] * led.master / 255.0;
+        setOffVals[LEDRed2] = led.RGBout[R] * led.master / 255.0;
+        setOffVals[LEDGreen2] = led.RGBout[G] * led.master / 255.0;
+        setOffVals[LEDBlue2] = led.RGBout[B] * led.master / 255.0;
 
-  
-    PCA9685_setPWMVals(fd, addr, setOnVals, setOffVals);
+    
+        PCA9685_setPWMVals(fd, addr, setOnVals, setOffVals);
+    }
     #endif // DEBUG
 
     // construct & send DMX frame for old school fixtures (COTS DMX fixtures)
@@ -143,7 +147,7 @@ void send(){
     DMX_vec sub_buffer, long_buffer = addr_led.buffer();
     auto start = long_buffer.begin();
     int universe_cpt = 1;
-    for(auto& pix_uni : ola_pix_uni){
+    for(auto& pix_uni : ola_pix_unis){
         unsigned int length;
         if (long_buffer.end() > start + MAX_SUBPIX_PER_UNI){
             sub_buffer.assign(start, start + MAX_SUBPIX_PER_UNI);
@@ -158,7 +162,7 @@ void send(){
         pix_uni.uni = universe_cpt++;
     }
     //send pixel buffers in random sequence (to avoid strange asynchronous behaviour)
-    vector<ola_universe> ola_pix_uni_rand = fcn::randomized_vector(ola_pix_uni);
+    vector<ola_universe> ola_pix_uni_rand = fcn::randomized_vector(ola_pix_unis);
     ola::client::StreamingClientInterface::SendArgs args;
     for(auto& pix_uni : ola_pix_uni_rand){
         ola_client.SendDMX(pix_uni.uni, pix_uni.buf, args);
