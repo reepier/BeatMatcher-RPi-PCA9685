@@ -115,13 +115,13 @@ class AddrLEDAnimation : public BaseAnimation{
 
 
 /*
-         #       
-        ##       
-       # #       
-         #       
-         #   ### 
-         #   ### 
-       ##### #*/
+         #             #                                          ######  #######    #    #######  
+        ##            # #   #    #   ##   #       ####   ####     #     # #         # #      #     
+       # #           #   #  ##   #  #  #  #      #    # #    #    #     # #        #   #     #     
+         #          #     # # #  # #    # #      #    # #         ######  #####   #     #    #     
+         #   ###    ####### #  # # ###### #      #    # #  ###    #     # #       #######    #     
+         #   ###    #     # #   ## #    # #      #    # #    #    #     # #       #     #    #     
+       ##### ###    #     # #    # #    # ######  ####   ####     ######  ####### #     #    #    */
 
 // Makeover of the ORIGINAL Beatmatcher animation --> all pixels flash at the same time, on beat
 class AddrLEDAnimation1 : public AddrLEDAnimation{
@@ -184,13 +184,13 @@ class AddrLEDAnimation1 : public AddrLEDAnimation{
 };
 
 /*
-       #####      
-      #     #     
-            #     
-       #####      
-      #       ### 
-      #       ### 
-      ####### ### 
+       #####         ######                                    ######  #######    #    ####### 
+      #     #        #     # #  ####  # #####   ##   #         #     # #         # #      #    
+            #        #     # # #    # #   #    #  #  #         #     # #        #   #     #    
+       #####         #     # # #      #   #   #    # #         ######  #####   #     #    #    
+      #       ###    #     # # #  ### #   #   ###### #         #     # #       #######    #    
+      #       ###    #     # # #    # #   #   #    # #         #     # #       #     #    #    
+      ####### ###    ######  #  ####  #   #   #    # ######    ######  ####### #     #    #    
       
  Variant of the original beat matching animation : 
   - The strip is ivided into segments
@@ -241,13 +241,13 @@ class AddrLEDAnimation2 : public AddrLEDAnimation{
 };
 
 /*     
-       #####      
-      #     #     
-            #     
-       #####      
-            # ### 
-      #     # ### 
-       #####  ##
+       #####          #     #                        
+      #     #         ##    #  ####  #  ####  ###### 
+            #         # #   # #    # # #      #      
+       #####          #  #  # #    # #  ####  #####  
+            # ###     #   # # #    # #      # #      
+      #     # ###     #    ## #    # # #    # #      
+       #####  ###     #     #  ####  #  ####  ###### 
 
   Noise function
   Asynchronous animation (no Beat)
@@ -303,3 +303,17 @@ class AddrLEDAnimation3 : public AddrLEDAnimation{
 
     //plot (A + K * atan(Q*(x-A))) with Q = 0.05, A=255/2, K =A/atan(Q*A), x from 0 to 255
 };
+
+/*
+#              ######                                            
+#    #         #     # #    # #####  #####  #      ######  ####  
+#    #         #     # #    # #    # #    # #      #      #      
+#    #         ######  #    # #####  #####  #      #####   ####  
+####### ###    #     # #    # #    # #    # #      #           # 
+     #  ###    #     # #    # #    # #    # #      #      #    # 
+     #  ###    ######   ####  #####  #####  ###### ######  ####  
+
+Makeover of spotracks Bubblles function :
+- random bursts of colors on inidividual pixel units
+- pixel units can be LED bars, BAr segemnts or inidividual pixels.
+- bursts have different shapes (gaussian, square...).
