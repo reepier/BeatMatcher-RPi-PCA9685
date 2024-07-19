@@ -179,10 +179,19 @@ void AddressableLED::init(){
     animations.push_back(new AddrLEDAnimation3(this, red,   true, "Red noise",        "PIX.3.2.3"));
     animations.push_back(new AddrLEDAnimation3(this, pink,  true, "Pink noise",       "PIX.3.2.4"));
 
+// Animation 4 : Random bursts
+    animations.push_back(new AddrLEDAnimation4(this, red, color_vec{white}, gaussian, bar, 500, 1000, "White bubbles, Red bg", "PIX.4.1.1", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{red}, gaussian, bar, 500, 1000, "Red bubbles, Black bg", "PIX.4.1.2", leader, 1, 255));
+
+    animations.push_back(new AddrLEDAnimation4(this, red, color_vec{white}, square, bar, 50, 1000/FRATE, "White bubbles, Red bg", "PIX.4.2.1", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{red}, square, bar, 50, 1000/FRATE, "Red bubbles, Black bg", "PIX.4.2.2", leader, 1, 255));
+
+
     this->activate_none();
 }
 
 // spits out an ordered vector containing every subpixel value (0-256)
+//TODO Add support for fixture Master & Animation Master
 DMX_vec AddressableLED::buffer(){
     DMX_vec data(NUM_SUBPIX);
     
@@ -433,5 +442,103 @@ void AddrLEDAnimation3::new_frame() {
         //     pix_intensities[i] = atan_transfo[rand_min_max(0, 256)];
 
         this->fixture->pixels[i] = this->fixture->RGB(color, pix_intensities[i]);
+    }
+}
+
+/*
+#              ######                                            
+#    #         #     # #    # #####  #####  #      ######  ####  
+#    #         #     # #    # #    # #    # #      #      #      
+#    #         ######  #    # #####  #####  #      #####   ####  
+####### ###    #     # #    # #    # #    # #      #           # 
+     #  ###    #     # #    # #    # #    # #      #      #    # 
+     #  ###    ######   ####  #####  #####  ###### ######  ####  
+*/
+void AddrLEDAnimation4::init(){
+    log(4, __FILE__, " ", __LINE__, " ",__func__, " ", this->fixture->name, " ", this->id);
+
+    BaseAnimation::init();
+    
+    const int n_unit = unit==bar ? NUM_BAR : (unit==seg ? NUM_SEG : (unit==pix ? NUM_PIX : 0));
+
+    this->flashes = vector<flash_vec>(n_unit, flash_vec(2));
+
+    for (int i_unit=0; i_unit<n_unit; i_unit++){
+        flashes[i_unit][i_next].time = frame.t_current_ms + rand_min_max(rand_const_ms/5, rand_const_ms*2); 
+        flashes[i_unit][i_prev].time = 0;
+        flashes[i_unit][i_next].color = fcn::random_pick(this->flash_colors);
+        flashes[i_unit][i_prev].color = black;
+    }
+}
+
+void AddrLEDAnimation4::new_frame(){
+    log(4, __FILE__, " ", __LINE__, " ",__func__);
+
+    BaseAnimation::new_frame();
+
+    long t = frame.t_current_ms;         // for readability
+    int n_unit = this->flashes.size();   // for readability
+    
+   
+    // for each spot "i" of the rack
+    for (int i_unit=0; i_unit < n_unit; i_unit++){
+
+        // auto current_spot = this->fixture->spots[i_unit];           // for readability
+        auto &current_unit_flashes = flashes[i_unit];                  // for readability
+        auto &current_unit_next_flash = flashes[i_unit][i_next];       // for readability
+        auto &current_unit_prev_flash = flashes[i_unit][i_prev];       // for readability
+        time_t &t_next = current_unit_next_flash.time;
+        time_t &t_prev = current_unit_prev_flash.time;
+        simpleColor &c_next = current_unit_next_flash.color;
+        simpleColor &c_prev = current_unit_prev_flash.color;
+
+        // log(4, __FILE__, " ", __LINE__, " ",__func__, " Mark2 , ", fcn::num_to_str(i_spot));
+
+        const pixel     ani_backgd_RGB = fixture->RGB(back_color, SPOTRACK_ANI1_BkG_INTENSITY_LOW);
+        
+        // if flash is actviated, compute the flash --> exp( -(spd.(t-t0))²)
+            double flash_intensity; // 0 by default
+            if (flash_activation){
+                // when the flash passes, compute the next flash timestamp and update prev flash
+                if (t > t_next){
+                    
+                    t_prev = t_next;
+                    t_next = t_next + rand_min_max(this->flash_len, 2*n_unit*this->rand_const_ms);
+                    c_prev = c_next;
+                    c_next = fcn::random_pick(this->flash_colors);
+                    
+                }
+
+                // flash_intensity = exp( -pow(2.5/this->flash_len*(t - t_prev), 2)) + exp( -pow(2.5/this->flash_len*(t - t_next), 2));
+                switch (this->flash_shape){
+                    case square :
+                        flash_intensity = fcn::square(t, t_prev, flash_len, 0.0,1.0) + fcn::square(t, t_next, flash_len, 0.0,1.0);
+                        break;
+                    case gaussian2 :
+                        flash_intensity = fcn::gaussian2(t, t_prev, flash_len, 0.0,1.0) + fcn::gaussian2(t, t_next, flash_len, 0.0,1.0); //exp( -pow(2.5/this->flash_len*(t - t_prev), 2)) + exp( -pow(2.5/this->flash_len*(t - t_next), 2));
+                        break;
+                    default :
+                        flash_intensity = fcn::gaussian(t, t_prev, flash_len, 0.0,1.0) + fcn::gaussian(t, t_next, flash_len, 0.0,1.0); //exp( -pow(2.5/this->flash_len*(t - t_prev), 2)) + exp( -pow(2.5/this->flash_len*(t - t_next), 2));
+                        break;
+                }
+
+            }else{
+                flash_intensity = 0.0;
+            }
+
+            DMX_vec frame_flash_RGB = (t-t_prev > t_next-t) ? fixture->RGB(c_next) : this->fixture->RGB(c_prev);
+            DMX_vec unit_final_RGB(3, 0);
+            unit_final_RGB[R] = min(max( (int)( (1.0-pow(flash_intensity, 0.2)) * ani_backgd_RGB[R] + flash_intensity * frame_flash_RGB[R]  ),0),255); 
+            unit_final_RGB[G] = min(max( (int)( (1.0-pow(flash_intensity, 0.2)) * ani_backgd_RGB[G] + flash_intensity * frame_flash_RGB[G]  ),0),255);
+            unit_final_RGB[B] = min(max( (int)( (1.0-pow(flash_intensity, 0.2)) * ani_backgd_RGB[B] + flash_intensity * frame_flash_RGB[B]  ),0),255);
+
+            switch (this->unit){
+                case bar : this->fixture->set_bar_color(i_unit, unit_final_RGB);
+                    break;
+                case seg : this->fixture->set_segment_color(i_unit, unit_final_RGB);
+                    break;
+                case pix : this->fixture->pixels[i_unit] = unit_final_RGB;
+                    break;
+            }
     }
 }

@@ -317,3 +317,58 @@ Makeover of spotracks Bubblles function :
 - random bursts of colors on inidividual pixel units
 - pixel units can be LED bars, BAr segemnts or inidividual pixels.
 - bursts have different shapes (gaussian, square...).
+*/
+class AddrLEDAnimation4 : public AddrLEDAnimation
+{
+private :
+    // animation parameters (constant, set at construction)
+    bool flash_activation = true;
+    // DMX_vec back_color;
+    simpleColor back_color;
+    // DMX_vec flash_color;
+    color_vec flash_colors;
+
+    Shape flash_shape = gaussian; // default setting leads to gaussian flashes (of bubbles)
+    strip_subdiv_t unit = bar;
+    // int sin_max_p_ms = 15000;
+    // int sin_min_p_ms = 5000;
+    int rand_const_ms;
+    int flash_len;
+    // double fluct_int = 0.4;
+    // double fluct_col = 0.25;
+
+    // Internal variable (updated at every new_frame call)
+    int_vec p_ms;             // range of periods for various sine wvaes
+    // std::vector<unsigned long> t_next; // timestamp of the next rise ()
+    // std::vector<unsigned long> t_prev; // timestamp of the prev rise () (memory)
+    std::vector<flash_vec> flashes;     //for each spot, stores previous & next flash data (color & time) --> flashes[spot_ind][prev/next].color/time
+
+    // Internal helpful & hidden stuff (for readability)
+    const int i_prev = 0, i_next = 1;
+  public:
+    //CONSTUCTORS
+    // Base constructor
+    AddrLEDAnimation4(AddressableLED *f, simpleColor b_col, color_vec f_cols, Shape fshape, strip_subdiv_t u, int prand, int flen, std::string d, std::string i, AnimationType t, int prio, int mast=255){
+        this->description = d;
+        this->id = i;
+        this->fixture = f;
+        this->type = t;
+        this->priority = prio;
+        
+        this->flash_colors = f_cols;
+        this->back_color = b_col;
+
+        this->rand_const_ms = prand;
+        this->flash_len = flen;
+        this->flash_shape = fshape;
+
+        this->master = mast;
+
+        this->update_palette(color_vec{b_col});
+        this->update_palette(f_cols);
+    }
+
+
+    void init() override;
+    void new_frame();
+};
