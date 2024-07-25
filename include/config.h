@@ -49,5 +49,8 @@ extern std::vector<std::string> vec_anim_id;
 #define     SPOTRACK_ANI1_BkG_INTENSITY_LOW   40
 #define     SPOTRACK_ANI1_BkG_INTENSITY_HIGH  100
 
-#define     SHOW_INTENSITY 3        // ranges from 1 to 3
+#define     ADDRLED_ANI4_BkG_INTENSITY_LOW   15
+#define     DDRLED_ANI4_BkG_INTENSITY_HIGH  100
+
+#define     SHOW_INTENSITY 0        // ranges from 1 to 3 (0 for all)
 

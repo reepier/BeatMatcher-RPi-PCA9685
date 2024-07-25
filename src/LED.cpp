@@ -20,18 +20,18 @@ void LEDFixture::init(){
     animations.push_back(new LEDAnimation1(this, black,  black,  " ",    "LED.0.0", backer));
 
     // Monochrome background
-    animations.push_back(new LEDAnimation1(this, black,       red,  "Red background",      "LED.1",   backer,   false));
-    animations.push_back(new LEDAnimation1(this, black,    sodium,  "Sodium background",   "LED.2",   backer,   false));
-    animations.push_back(new LEDAnimation1(this, black,    orange,  "Orange background",   "LED.3",   backer,   false));
-    animations.push_back(new LEDAnimation1(this, black,    yellow,  "Yellow background",   "LED.4",   backer,   false));
- // animations.push_back(new LEDAnimation1(this, black,      gold,  "Gold background",     "LED.5",   backer,   false));
- // animations.push_back(new LEDAnimation1(this, black,     white,  "White background",    "LED.6",   backer,   false));
-    animations.push_back(new LEDAnimation1(this, black,      cyan,  "Cyan background",     "LED.7",   backer,   false));
-    animations.push_back(new LEDAnimation1(this, black,      blue,  "Blue background",     "LED.8",   backer,   false));
-    animations.push_back(new LEDAnimation1(this, black,    purple,  "Purple background",   "LED.9",   backer,   false));
-    animations.push_back(new LEDAnimation1(this, black,   magenta,  "Magenta background",  "LED.10",  backer,   false));
-    animations.push_back(new LEDAnimation1(this, black,      pink,  "Pink background",     "LED.11",  backer,   false));
-    animations.push_back(new LEDAnimation1(this, black,     green,  "Green background",    "LED.12",  backer,   false));
+    animations.push_back(new LEDAnimation1(this, black, red,      "Red background",      "LED.1",   backer,   false));
+    animations.push_back(new LEDAnimation1(this, black, sodium,   "Sodium background",   "LED.2",   backer,   false));
+    animations.push_back(new LEDAnimation1(this, black, orange,   "Orange background",   "LED.3",   backer,   false));
+    animations.push_back(new LEDAnimation1(this, black, yellow,   "Yellow background",   "LED.4",   backer,   false));
+ // animations.push_back(new LEDAnimation1(this, black, gold,     "Gold background",     "LED.5",   backer,   false));
+ // animations.push_back(new LEDAnimation1(this, black, w_white," White background",    "LED.6",   backer,   false));
+    animations.push_back(new LEDAnimation1(this, black, cyan,     "Cyan background",     "LED.7",   backer,   false));
+    animations.push_back(new LEDAnimation1(this, black, blue,     "Blue background",     "LED.8",   backer,   false));
+    animations.push_back(new LEDAnimation1(this, black, purple,   "Purple background",   "LED.9",   backer,   false));
+    animations.push_back(new LEDAnimation1(this, black, magenta,  "Magenta background",  "LED.10",  backer,   false));
+    animations.push_back(new LEDAnimation1(this, black, pink,     "Pink background",     "LED.11",  backer,   false));
+    animations.push_back(new LEDAnimation1(this, black, green,    "Green background",    "LED.12",  backer,   false));
     
     // Monochrome Flash
     animations.push_back(new LEDAnimation1(this, red,       black,  "Red Flashes",      "LED.1.1", leader));
@@ -39,7 +39,7 @@ void LEDFixture::init(){
     animations.push_back(new LEDAnimation1(this, orange,    black,  "Orange Flashes",   "LED.1.3", leader));
     animations.push_back(new LEDAnimation1(this, yellow,    black,  "Yellow Flashes",   "LED.1.4", leader));
     animations.push_back(new LEDAnimation1(this, gold,      black,  "Gold Flashes",     "LED.1.5", leader));
-    animations.push_back(new LEDAnimation1(this, white,     black,  "White Flashes",    "LED.1.6", leader));
+    animations.push_back(new LEDAnimation1(this, w_white,   black,  "WWhite Flashes",    "LED.1.6", leader));
     animations.push_back(new LEDAnimation1(this, cyan,      black,  "Cyan Flashes",     "LED.1.7", leader));
     animations.push_back(new LEDAnimation1(this, blue,      black,  "Blue Flashes",     "LED.1.8", leader));
     animations.push_back(new LEDAnimation1(this, purple,    black,  "Purple Flashes",   "LED.1.9", leader));
@@ -52,7 +52,7 @@ void LEDFixture::init(){
     animations.push_back(new LEDAnimation1(this, orange,    orange,    "Orange Flashes, Orange Background",    "LED.2.3" , leader));
     animations.push_back(new LEDAnimation1(this, yellow,    yellow,    "Yellow Flashes, Yellow Background",    "LED.2.4" , leader));
  // animations.push_back(new LEDAnimation1(this, gold,      gold,      "Gold Flashes, Gold Background",        "LED.2.5" , leader));
- // animations.push_back(new LEDAnimation1(this, white,     white,     "White Flashes, White Background",      "LED.2.6" , leader));
+ // animations.push_back(new LEDAnimation1(this, w_white,     white,   "WWhite Flashes, WWhite Background",      "LED.2.6" , leader));
     animations.push_back(new LEDAnimation1(this, cyan,      cyan,      "Cyan Flashes, Cyan Background",        "LED.2.7" , leader));
     animations.push_back(new LEDAnimation1(this, blue,      blue,      "Blue Flashes, Blue Background",        "LED.2.8" , leader));
     animations.push_back(new LEDAnimation1(this, purple,    purple,    "Purple Flashes, Purple Background",    "LED.2.9" , leader));
@@ -61,18 +61,18 @@ void LEDFixture::init(){
     animations.push_back(new LEDAnimation1(this, green,     green,     "Green Flashes, Green Background",      "LED.2.12" , leader));
 
     // White Flash with monochrome background
-    animations.push_back(new LEDAnimation1(this, white,     red,     "White Flashes, Red background",      "LED.3.1", leader));
-    animations.push_back(new LEDAnimation1(this, white,     sodium,  "White Flashes, Sodium background",   "LED.3.2", leader));
-    animations.push_back(new LEDAnimation1(this, white,     orange,  "White Flashes, Orange background",   "LED.3.3", leader));
-    animations.push_back(new LEDAnimation1(this, white,     yellow,  "White Flashes, Yellow background",   "LED.3.4", leader));
- // animations.push_back(new LEDAnimation1(this, white,     gold,    "White Flashes, Gold background",     "LED.3.5", leader));
- // animations.push_back(new LEDAnimation1(this, white,     white,   "White Flashes, White background",    "LED.3.6", leader));
-    animations.push_back(new LEDAnimation1(this, white,     cyan,    "White Flashes, Cyan background",     "LED.3.7", leader));
-    animations.push_back(new LEDAnimation1(this, white,     blue,    "White Flashes, Blue background",     "LED.3.8", leader));
-    animations.push_back(new LEDAnimation1(this, white,     purple,  "White Flashes, Purple background",   "LED.3.9", leader));
-    animations.push_back(new LEDAnimation1(this, white,     magenta, "White Flashes, Magenta background",  "LED.3.10", leader));
-    animations.push_back(new LEDAnimation1(this, white,     pink,    "White Flashes, Pink background",     "LED.3.11", leader));
-    animations.push_back(new LEDAnimation1(this, white,     green,   "White Flashes, Green background",    "LED.3.12", leader));
+    animations.push_back(new LEDAnimation1(this, w_white,     red,     "WWhite Flashes, Red background",      "LED.3.1", leader));
+    animations.push_back(new LEDAnimation1(this, w_white,     sodium,  "WWhite Flashes, Sodium background",   "LED.3.2", leader));
+    animations.push_back(new LEDAnimation1(this, w_white,     orange,  "WWhite Flashes, Orange background",   "LED.3.3", leader));
+    animations.push_back(new LEDAnimation1(this, w_white,     yellow,  "WWhite Flashes, Yellow background",   "LED.3.4", leader));
+ // animations.push_back(new LEDAnimation1(this, w_white,     gold,    "WWhite Flashes, Gold background",     "LED.3.5", leader));
+ // animations.push_back(new LEDAnimation1(this, w_white,     Wwhite,   "WWhite Flashes, WWhite background",    "LED.3.6", leader));
+    animations.push_back(new LEDAnimation1(this, w_white,     cyan,    "WWhite Flashes, Cyan background",     "LED.3.7", leader));
+    animations.push_back(new LEDAnimation1(this, w_white,     blue,    "WWhite Flashes, Blue background",     "LED.3.8", leader));
+    animations.push_back(new LEDAnimation1(this, w_white,     purple,  "WWhite Flashes, Purple background",   "LED.3.9", leader));
+    animations.push_back(new LEDAnimation1(this, w_white,     magenta, "WWhite Flashes, Magenta background",  "LED.3.10", leader));
+    animations.push_back(new LEDAnimation1(this, w_white,     pink,    "WWhite Flashes, Pink background",     "LED.3.11", leader));
+    animations.push_back(new LEDAnimation1(this, w_white,     green,   "WWhite Flashes, Green background",    "LED.3.12", leader));
     
     // Monochrome Flashes with white background --> Low intensity white looks like SHIT !!
     // animations.push_back(new LEDAnimation1(this, red,     white,    " Red Flashes, White background",      "LED.4.1"));
@@ -248,7 +248,7 @@ DMX_vec LEDFixture::RGB(simpleColor c, int intensity){
             ref_int = 240;
             temp = fcn::RGB_norm(DMX_vec{255,0,71});
             break;
-        case white:
+        case w_white:
             temp = fcn::RGB_norm(DMX_vec{255,78,26});
             break;
         case gold:

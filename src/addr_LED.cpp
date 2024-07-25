@@ -28,7 +28,7 @@ void AddressableLED::init(){
     animations.push_back(new AddrLEDAnimation1(this, black,    orange,  "Orange background",   "PIX.1.1.0.3",   backer,   false));
     animations.push_back(new AddrLEDAnimation1(this, black,    yellow,  "Yellow background",   "PIX.1.1.0.4",   backer,   false));
  // animations.push_back(new AddrLEDAnimation1(this, black,      gold,  "Gold background",     "PIX.1.1.0.5",   backer,   false));
- // animations.push_back(new AddrLEDAnimation1(this, black,     white,  "White background",    "PIX.1.1.0.6",   backer,   false));
+ // animations.push_back(new AddrLEDAnimation1(this, black,     w_white,  "Warm White background",    "PIX.1.1.0.6",   backer,   false));
     animations.push_back(new AddrLEDAnimation1(this, black,      cyan,  "Cyan background",     "PIX.1.1.0.7",   backer,   false));
     animations.push_back(new AddrLEDAnimation1(this, black,      blue,  "Blue background",     "PIX.1.1.0.8",   backer,   false));
     animations.push_back(new AddrLEDAnimation1(this, black,    purple,  "Purple background",   "PIX.1.1.0.9",   backer,   false));
@@ -42,7 +42,7 @@ void AddressableLED::init(){
     animations.push_back(new AddrLEDAnimation1(this, orange,    black,  "Orange Flashes",   "PIX.1.1.1.3", leader));
     animations.push_back(new AddrLEDAnimation1(this, yellow,    black,  "Yellow Flashes",   "PIX.1.1.1.4", leader));
     animations.push_back(new AddrLEDAnimation1(this, gold,      black,  "Gold Flashes",     "PIX.1.1.1.5", leader));
-    animations.push_back(new AddrLEDAnimation1(this, white,     black,  "White Flashes",    "PIX.1.1.1.6", leader));
+    animations.push_back(new AddrLEDAnimation1(this, w_white,     black,  "Warm White Flashes",    "PIX.1.1.1.6", leader));
     animations.push_back(new AddrLEDAnimation1(this, cyan,      black,  "Cyan Flashes",     "PIX.1.1.1.7", leader));
     animations.push_back(new AddrLEDAnimation1(this, blue,      black,  "Blue Flashes",     "PIX.1.1.1.8", leader));
     animations.push_back(new AddrLEDAnimation1(this, purple,    black,  "Purple Flashes",   "PIX.1.1.1.9", leader));
@@ -55,7 +55,7 @@ void AddressableLED::init(){
     animations.push_back(new AddrLEDAnimation1(this, orange,    orange,    "Orange Flashes, Orange Background",    "PIX.1.1.2.3" , leader));
     animations.push_back(new AddrLEDAnimation1(this, yellow,    yellow,    "Yellow Flashes, Yellow Background",    "PIX.1.1.2.4" , leader));
  // animations.push_back(new AddrLEDAnimation1(this, gold,      gold,      "Gold Flashes, Gold Background",        "PIX.1.1.2.5" , leader));
- // animations.push_back(new AddrLEDAnimation1(this, white,     white,     "White Flashes, White Background",      "PIX.1.1.2.6" , leader));
+ // animations.push_back(new AddrLEDAnimation1(this, white,     white,     "Warm White Flashes, White Background",      "PIX.1.1.2.6" , leader));
     animations.push_back(new AddrLEDAnimation1(this, cyan,      cyan,      "Cyan Flashes, Cyan Background",        "PIX.1.1.2.7" , leader));
     animations.push_back(new AddrLEDAnimation1(this, blue,      blue,      "Blue Flashes, Blue Background",        "PIX.1.1.2.8" , leader));
     animations.push_back(new AddrLEDAnimation1(this, purple,    purple,    "Purple Flashes, Purple Background",    "PIX.1.1.2.9" , leader));
@@ -64,32 +64,32 @@ void AddressableLED::init(){
     animations.push_back(new AddrLEDAnimation1(this, green,     green,     "Green Flashes, Green Background",      "PIX.1.1.2.12" , leader));
 
     // White Flash with monochrome background
-    animations.push_back(new AddrLEDAnimation1(this, white,     red,     "White Flashes, Red background",      "PIX.1.1.3.1", leader));
-    animations.push_back(new AddrLEDAnimation1(this, white,     sodium,  "White Flashes, Sodium background",   "PIX.1.1.3.2", leader));
-    animations.push_back(new AddrLEDAnimation1(this, white,     orange,  "White Flashes, Orange background",   "PIX.1.1.3.3", leader));
-    animations.push_back(new AddrLEDAnimation1(this, white,     yellow,  "White Flashes, Yellow background",   "PIX.1.1.3.4", leader));
- // animations.push_back(new AddrLEDAnimation1(this, white,     gold,    "White Flashes, Gold background",     "PIX.1.1.3.5", leader));
- // animations.push_back(new AddrLEDAnimation1(this, white,     white,   "White Flashes, White background",    "PIX.1.1.3.6", leader));
-    animations.push_back(new AddrLEDAnimation1(this, white,     cyan,    "White Flashes, Cyan background",     "PIX.1.1.3.7", leader));
-    animations.push_back(new AddrLEDAnimation1(this, white,     blue,    "White Flashes, Blue background",     "PIX.1.1.3.8", leader));
-    animations.push_back(new AddrLEDAnimation1(this, white,     purple,  "White Flashes, Purple background",   "PIX.1.1.3.9", leader));
-    animations.push_back(new AddrLEDAnimation1(this, white,     magenta, "White Flashes, Magenta background",  "PIX.1.1.3.10", leader));
-    animations.push_back(new AddrLEDAnimation1(this, white,     pink,    "White Flashes, Pink background",     "PIX.1.1.3.11", leader));
-    animations.push_back(new AddrLEDAnimation1(this, white,     green,   "White Flashes, Green background",    "PIX.1.1.3.12", leader));
+    animations.push_back(new AddrLEDAnimation1(this, w_white,     red,     "Warm White Flashes, Red background",      "PIX.1.1.3.1", leader));
+    animations.push_back(new AddrLEDAnimation1(this, w_white,     sodium,  "Warm White Flashes, Sodium background",   "PIX.1.1.3.2", leader));
+    animations.push_back(new AddrLEDAnimation1(this, w_white,     orange,  "Warm White Flashes, Orange background",   "PIX.1.1.3.3", leader));
+    animations.push_back(new AddrLEDAnimation1(this, w_white,     yellow,  "Warm White Flashes, Yellow background",   "PIX.1.1.3.4", leader));
+ // animations.push_back(new AddrLEDAnimation1(this, w_white,     gold,    "Warm White Flashes, Gold background",     "PIX.1.1.3.5", leader));
+ // animations.push_back(new AddrLEDAnimation1(this, w_white,     w_white, "Warm White Flashes, White background",    "PIX.1.1.3.6", leader));
+    animations.push_back(new AddrLEDAnimation1(this, w_white,     cyan,    "Warm White Flashes, Cyan background",     "PIX.1.1.3.7", leader));
+    animations.push_back(new AddrLEDAnimation1(this, w_white,     blue,    "Warm White Flashes, Blue background",     "PIX.1.1.3.8", leader));
+    animations.push_back(new AddrLEDAnimation1(this, w_white,     purple,  "Warm White Flashes, Purple background",   "PIX.1.1.3.9", leader));
+    animations.push_back(new AddrLEDAnimation1(this, w_white,     magenta, "Warm White Flashes, Magenta background",  "PIX.1.1.3.10", leader));
+    animations.push_back(new AddrLEDAnimation1(this, w_white,     pink,    "Warm White Flashes, Pink background",     "PIX.1.1.3.11", leader));
+    animations.push_back(new AddrLEDAnimation1(this, w_white,     green,   "Warm White Flashes, Green background",    "PIX.1.1.3.12", leader));
     
     // Monochrome Flashes with white background --> Low intensity white looks like SHIT !!
-    // animations.push_back(new AddrLEDAnimation1(this, red,     white,    " Red Flashes, White background",      "PIX.1.4.1"));
-    // animations.push_back(new AddrLEDAnimation1(this, sodium,  white,    " Sodium Flashes, White background",   "PIX.1.4.2"));
-    // animations.push_back(new AddrLEDAnimation1(this, orange,  white,    " Orange Flashes, White background",   "PIX.1.4.3"));
-    // animations.push_back(new AddrLEDAnimation1(this, yellow,  white,    " Yellow Flashes, White background",   "PIX.1.4.4"));
-    // animations.push_back(new AddrLEDAnimation1(this, gold,    white,    " Gold Flashes, White background",     "PIX.1.4.5"));
-    // animations.push_back(new AddrLEDAnimation1(this, white,   white,    " White Flashes, White background",    "PIX.1.4.6"));
-    // animations.push_back(new AddrLEDAnimation1(this, cyan,    white,    " Cyan Flashes, White background",     "PIX.1.4.7"));
-    // animations.push_back(new AddrLEDAnimation1(this, blue,    white,    " Blue Flashes, White background",     "PIX.1.4.8"));
-    // animations.push_back(new AddrLEDAnimation1(this, purple,  white,    " Purple Flashes, White background",   "PIX.1.4.9"));
-    // animations.push_back(new AddrLEDAnimation1(this, magenta, white,    " Magenta Flashes, White background",  "PIX.1.4.10"));
-    // animations.push_back(new AddrLEDAnimation1(this, pink,    white,    " Pink Flashes, White background",     "PIX.1.4.11"));
-    // animations.push_back(new AddrLEDAnimation1(this, green,   white,    " Green Flashes, White background",    "PIX.1.4.12"));
+    // animations.push_back(new AddrLEDAnimation1(this, red,     w_white,    "Red Flashes, White background",      "PIX.1.4.1"));
+    // animations.push_back(new AddrLEDAnimation1(this, sodium,  w_white,    "Sodium Flashes, White background",   "PIX.1.4.2"));
+    // animations.push_back(new AddrLEDAnimation1(this, orange,  w_white,    "Orange Flashes, White background",   "PIX.1.4.3"));
+    // animations.push_back(new AddrLEDAnimation1(this, yellow,  w_white,    "Yellow Flashes, White background",   "PIX.1.4.4"));
+    // animations.push_back(new AddrLEDAnimation1(this, gold,    w_white,    "Gold Flashes, White background",     "PIX.1.4.5"));
+    // animations.push_back(new AddrLEDAnimation1(this, w_white, w_white,    "White Flashes, White background",    "PIX.1.4.6"));
+    // animations.push_back(new AddrLEDAnimation1(this, cyan,    w_white,    "Cyan Flashes, White background",     "PIX.1.4.7"));
+    // animations.push_back(new AddrLEDAnimation1(this, blue,    w_white,    "Blue Flashes, White background",     "PIX.1.4.8"));
+    // animations.push_back(new AddrLEDAnimation1(this, purple,  w_white,    "Purple Flashes, White background",   "PIX.1.4.9"));
+    // animations.push_back(new AddrLEDAnimation1(this, magenta, w_white,    "Magenta Flashes, White background",  "PIX.1.4.10"));
+    // animations.push_back(new AddrLEDAnimation1(this, pink,    w_white,    "Pink Flashes, White background",     "PIX.1.4.11"));
+    // animations.push_back(new AddrLEDAnimation1(this, green,   w_white,    "Green Flashes, White background",    "PIX.1.4.12"));
 
     // Bicolor animation based on color palettes
     animations.push_back(new AddrLEDAnimation1(this, cyan,     red,       "cyan Flashes, red background",         "PIX.1.1.6.1", leader));
@@ -113,7 +113,7 @@ void AddressableLED::init(){
     animations.push_back(new AddrLEDAnimation1(this, orange,    black,  seg, 0.75,   "Orange Flashes",   "PIX.1.2.1.3", leader));
     animations.push_back(new AddrLEDAnimation1(this, yellow,    black,  seg, 0.75,   "Yellow Flashes",   "PIX.1.2.1.4", leader));
     animations.push_back(new AddrLEDAnimation1(this, gold,      black,  seg, 0.75,   "Gold Flashes",     "PIX.1.2.1.5", leader));
-    animations.push_back(new AddrLEDAnimation1(this, white,     black,  seg, 0.75,   "White Flashes",    "PIX.1.2.1.6", leader));
+    animations.push_back(new AddrLEDAnimation1(this, w_white,     black,  seg, 0.75,   "Warm White Flashes",    "PIX.1.2.1.6", leader));
     animations.push_back(new AddrLEDAnimation1(this, cyan,      black,  seg, 0.75,   "Cyan Flashes",     "PIX.1.2.1.7", leader));
     animations.push_back(new AddrLEDAnimation1(this, blue,      black,  seg, 0.75,   "Blue Flashes",     "PIX.1.2.1.8", leader));
     animations.push_back(new AddrLEDAnimation1(this, purple,    black,  seg, 0.75,   "Purple Flashes",   "PIX.1.2.1.9", leader));
@@ -128,7 +128,7 @@ void AddressableLED::init(){
     animations.push_back(new AddrLEDAnimation1(this, orange,    black,  bar, 0.6,   "Orange Flashes",   "PIX.1.3.1.3", leader));
     animations.push_back(new AddrLEDAnimation1(this, yellow,    black,  bar, 0.6,   "Yellow Flashes",   "PIX.1.3.1.4", leader));
     animations.push_back(new AddrLEDAnimation1(this, gold,      black,  bar, 0.6,   "Gold Flashes",     "PIX.1.3.1.5", leader));
-    animations.push_back(new AddrLEDAnimation1(this, white,     black,  bar, 0.6,   "White Flashes",    "PIX.1.3.1.6", leader));
+    animations.push_back(new AddrLEDAnimation1(this, w_white,   black,  bar, 0.6,   "Warm White Flashes",    "PIX.1.3.1.6", leader));
     animations.push_back(new AddrLEDAnimation1(this, cyan,      black,  bar, 0.6,   "Cyan Flashes",     "PIX.1.3.1.7", leader));
     animations.push_back(new AddrLEDAnimation1(this, blue,      black,  bar, 0.6,   "Blue Flashes",     "PIX.1.3.1.8", leader));
     animations.push_back(new AddrLEDAnimation1(this, purple,    black,  bar, 0.6,   "Purple Flashes",   "PIX.1.3.1.9", leader));
@@ -143,7 +143,7 @@ void AddressableLED::init(){
     animations.push_back(new AddrLEDAnimation1(this, orange,    black,  pix, 0.7,   "Orange Flashes",   "PIX.1.4.1.3", leader));
     animations.push_back(new AddrLEDAnimation1(this, yellow,    black,  pix, 0.7,   "Yellow Flashes",   "PIX.1.4.1.4", leader));
     animations.push_back(new AddrLEDAnimation1(this, gold,      black,  pix, 0.7,   "Gold Flashes",     "PIX.1.4.1.5", leader));
-    animations.push_back(new AddrLEDAnimation1(this, white,     black,  pix, 0.7,   "White Flashes",    "PIX.1.4.1.6", leader));
+    animations.push_back(new AddrLEDAnimation1(this, w_white,   black,  pix, 0.7,   "Warm White Flashes",    "PIX.1.4.1.6", leader));
     animations.push_back(new AddrLEDAnimation1(this, cyan,      black,  pix, 0.7,   "Cyan Flashes",     "PIX.1.4.1.7", leader));
     animations.push_back(new AddrLEDAnimation1(this, blue,      black,  pix, 0.7,   "Blue Flashes",     "PIX.1.4.1.8", leader));
     animations.push_back(new AddrLEDAnimation1(this, purple,    black,  pix, 0.7,   "Purple Flashes",   "PIX.1.4.1.9", leader));
@@ -152,39 +152,49 @@ void AddressableLED::init(){
     animations.push_back(new AddrLEDAnimation1(this, green,     black,  pix, 0.7,   "Green Flashes",    "PIX.1.4.1.12", leader));
 
 // ANIMATION 2 : Segmented flash
-    animations.push_back(new AddrLEDAnimation2(this, white,  black,  seg,   "White flashes, black background",      "PIX.2.1.1"));
+    animations.push_back(new AddrLEDAnimation2(this, w_white,  black,  seg,   "Warm White Flashes, black background",      "PIX.2.1.1"));
     animations.push_back(new AddrLEDAnimation2(this, gold,   black,  seg,   "Gold flashes, black background",       "PIX.2.1.2"));
     animations.push_back(new AddrLEDAnimation2(this, red,    black,  seg,   "Red flashes, back background",         "PIX.2.1.3"));
     animations.push_back(new AddrLEDAnimation2(this, cyan,   red,    seg,   "Cyan flashes, red background",         "PIX.2.1.4"));
     
-    animations.push_back(new AddrLEDAnimation2(this, white,  black,  bar,   "White flashes, black background",      "PIX.2.2.1"));
+    animations.push_back(new AddrLEDAnimation2(this, w_white,  black,  bar,   "Warm White Flashes, black background",      "PIX.2.2.1"));
     animations.push_back(new AddrLEDAnimation2(this, gold,   black,  bar,   "Gold flashes, black background",       "PIX.2.2.2"));
     animations.push_back(new AddrLEDAnimation2(this, red,    black,  bar,   "Red flashes, back background",         "PIX.2.2.3"));
     animations.push_back(new AddrLEDAnimation2(this, cyan,   red,    bar,   "Cyan flashes, red background",         "PIX.2.2.4"));
 
-    animations.push_back(new AddrLEDAnimation2(this, white,  black,  pix,   "White flashes, black background",      "PIX.2.3.1"));
+    animations.push_back(new AddrLEDAnimation2(this, w_white,  black,  pix,   "Warm White Flashes, black background",      "PIX.2.3.1"));
     animations.push_back(new AddrLEDAnimation2(this, gold,   black,  pix,   "Gold flashes, black background",       "PIX.2.3.2"));
     animations.push_back(new AddrLEDAnimation2(this, red,    black,  pix,   "Red flashes, black background",         "PIX.2.3.3"));
     animations.push_back(new AddrLEDAnimation2(this, cyan,   red,    pix,   "Cyan flashes, red background",         "PIX.2.3.4"));
     
 // Animation 3 : Noise
 //          (Unfiltered)
-    animations.push_back(new AddrLEDAnimation3(this, white, "White noise",      "PIX.3.1.1"));
+    animations.push_back(new AddrLEDAnimation3(this, w_white, "WarmWhite noise",      "PIX.3.1.1"));
     animations.push_back(new AddrLEDAnimation3(this, gold,  "Gold noise",       "PIX.3.1.2"));
     animations.push_back(new AddrLEDAnimation3(this, red,   "Red noise",        "PIX.3.1.3"));
     animations.push_back(new AddrLEDAnimation3(this, pink,  "Pink noise",       "PIX.3.1.4"));
 //          (Filtered)
-    animations.push_back(new AddrLEDAnimation3(this, white, true, "White noise",      "PIX.3.2.1"));
+    animations.push_back(new AddrLEDAnimation3(this, w_white, true, "WarmWhite noise",      "PIX.3.2.1"));
     animations.push_back(new AddrLEDAnimation3(this, gold,  true, "Gold noise",       "PIX.3.2.2"));
     animations.push_back(new AddrLEDAnimation3(this, red,   true, "Red noise",        "PIX.3.2.3"));
     animations.push_back(new AddrLEDAnimation3(this, pink,  true, "Pink noise",       "PIX.3.2.4"));
 
 // Animation 4 : Random bursts
-    animations.push_back(new AddrLEDAnimation4(this, red, color_vec{white}, gaussian, bar, 500, 1000, "White bubbles, Red bg", "PIX.4.1.1", leader, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{red}, gaussian, bar, 500, 1000, "Red bubbles, Black bg", "PIX.4.1.2", leader, 1, 255));
+    // bubbles (slow & round)
+    animations.push_back(new AddrLEDAnimation4(this, red, color_vec{w_white}, gaussian, bar, 500, 1000, "WarmWhite bubbles, Red bg", "PIX.4.1.1", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, red, color_vec{c_white}, gaussian, bar, 500, 1000, "ColdWhite bubbles, Red bg", "PIX.4.1.2", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{red}, gaussian, bar, 500, 1000, "Red bubbles, Black bg", "PIX.4.1.3", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, red, color_vec{red}, gaussian, bar, 500, 1000, "Red bubbles, Red bg", "PIX.4.1.4", leader, 1, 255));
 
-    animations.push_back(new AddrLEDAnimation4(this, red, color_vec{white}, square, bar, 50, 1000/FRATE, "White bubbles, Red bg", "PIX.4.2.1", leader, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{red}, square, bar, 50, 1000/FRATE, "Red bubbles, Black bg", "PIX.4.2.2", leader, 1, 255));
+    // strobes (fast & square)
+    animations.push_back(new AddrLEDAnimation4(this, red, color_vec{c_white}, square, bar, 50, 1000/FRATE, "ColdWhite strobe, Red bg", "PIX.4.2.0.1", leader, 1, 255));
+
+    animations.push_back(new AddrLEDAnimation4(this, red, color_vec{w_white}, square, bar, 50, 1000/FRATE, "WarmWhite strobe, Red bg", "PIX.4.2.1.1", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, red, color_vec{w_white}, square, bar, 20, 1000/FRATE, "WarmWhite strobe, Red bg", "PIX.4.2.1.2", leader, 1, 255));
+    
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{red}, square, bar, 50, 1000/FRATE, "Red strobe, Black bg", "PIX.4.2.2.1", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{w_white}, square, bar, 50, 1000/FRATE, "WWhite strobe, Black bg", "PIX.4.2.2.2", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{c_white}, square, bar, 50, 1000/FRATE, "CWhite strobe, Black bg", "PIX.4.2.2.3", leader, 1, 255));
 
 
     this->activate_none();
@@ -265,8 +275,12 @@ DMX_vec AddressableLED::RGB(simpleColor c, int intensity){
             ref_int = 240;
             temp = fcn::RGB_norm(DMX_vec{255,0,86});
             break;
-        case white:
-            temp = fcn::RGB_norm(DMX_vec{255,95,17});
+        case w_white:
+            temp = fcn::RGB_norm(DMX_vec{255,173,102});
+            break;
+        case c_white:
+            ref_int = 150; 
+            temp = fcn::RGB_norm(DMX_vec{255,255,255});
             break;
         case gold:
             temp = fcn::RGB_norm(DMX_vec{255,50,3});
@@ -494,7 +508,7 @@ void AddrLEDAnimation4::new_frame(){
 
         // log(4, __FILE__, " ", __LINE__, " ",__func__, " Mark2 , ", fcn::num_to_str(i_spot));
 
-        const pixel     ani_backgd_RGB = fixture->RGB(back_color, SPOTRACK_ANI1_BkG_INTENSITY_LOW);
+        const pixel     ani_backgd_RGB = fixture->RGB(back_color, ADDRLED_ANI4_BkG_INTENSITY_LOW);
         
         // if flash is actviated, compute the flash --> exp( -(spd.(t-t0))²)
             double flash_intensity; // 0 by default

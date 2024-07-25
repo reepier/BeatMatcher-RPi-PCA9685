@@ -20,8 +20,8 @@ void SpiderFixture::init(){
         log(4, __FILE__, " ", __LINE__, " ",__func__);
 
     this->animations.push_back(new SpiderAnimation1(this, black,  0, 0, int_vec{tiltMAX,tiltMAX,tiltMAX},    " ", "SPI.0.0"));
-    // this->animations.push_back(new SpiderAnimation1(this, white,     0, 30,    int_vec{0, 0, 0},    "Horizontality check",       "SPI.0.1"));
-    // this->animations.push_back(new SpiderAnimation1(this, white,     0, 30,    int_vec{90, 90, 90}, "Orthogonality check",       "SPI.0.2"));
+    // this->animations.push_back(new SpiderAnimation1(this, c_white,     0, 30,    int_vec{0, 0, 0},    "Horizontality check",       "SPI.0.1"));
+    // this->animations.push_back(new SpiderAnimation1(this, c_white,     0, 30,    int_vec{90, 90, 90}, "Orthogonality check",       "SPI.0.2"));
 
     // push the animations:
     // Animation TYPE 1 --> fixed position for chill zone @OMERTA IX
@@ -31,14 +31,14 @@ void SpiderFixture::init(){
     // this->animations.push_back(new SpiderAnimation1(this, orange,  240, 0,  int_vec{high_pos,high_pos,low_pos},  "Orange static (coin chill)",    "SPI.3"));
     // this->animations.push_back(new SpiderAnimation1(this, yellow,  0, 0,    int_vec{low_pos,high_pos,high_pos},  "Yellow static (coin chill)",    "SPI.4"));
     // this->animations.push_back(new SpiderAnimation1(this, gold,    120, 0,  int_vec{high_pos,low_pos,high_pos},  "Gold static (coin chill)",      "SPI.5"));
-    // this->animations.push_back(new SpiderAnimation1(this, white,   240, 0,  int_vec{high_pos,high_pos,low_pos},  "White static (coin chill)",     "SPI.6"));
+    // this->animations.push_back(new SpiderAnimation1(this, c_white,   240, 0,  int_vec{high_pos,high_pos,low_pos},  "White static (coin chill)",     "SPI.6"));
     // this->animations.push_back(new SpiderAnimation1(this, cyan,    0, 0,    int_vec{low_pos,high_pos,high_pos},  "Cyan static (coin chill)",      "SPI.7"));
     // this->animations.push_back(new SpiderAnimation1(this, blue,    120, 0,  int_vec{high_pos,low_pos,high_pos},  "Blue static (coin chill)",      "SPI.8"));
     // this->animations.push_back(new SpiderAnimation1(this, purple,  240, 0,  int_vec{high_pos,high_pos,low_pos},  "Purple static (coin chill)",    "SPI.9"));
     // this->animations.push_back(new SpiderAnimation1(this, magenta, 0, 0,    int_vec{low_pos,high_pos,high_pos},  "Magenta static (coin chill)",   "SPI.10"));
     // this->animations.push_back(new SpiderAnimation1(this, pink,    120, 0,  int_vec{high_pos,low_pos,high_pos},  "Pink static (coin chill)",      "SPI.11"));
     // this->animations.push_back(new SpiderAnimation1(this, green,   240, 0,  int_vec{high_pos,high_pos,low_pos},  "Green static (coin chill)",     "SPI.12"));
-    // this->animations.push_back(new SpiderAnimation1(this, white,    0, 20, int_vec{20,20,20},  "White, 20°, slow", "SPI.1.2"));
+    // this->animations.push_back(new SpiderAnimation1(this, c_white,    0, 20, int_vec{20,20,20},  "White, 20°, slow", "SPI.1.2"));
     // this->animations.push_back(new SpiderAnimation1(this, blue,    0, -20, int_vec{130,130,130},  "Blue, 130°, slow", "SPI.1.3"));
 
     // Animation TYPE 2
@@ -180,7 +180,10 @@ DMX_vec SpiderFixture::RGBW(simpleColor c, int intensity){
     case pink:
         return fcn::RGBW_norm(DMX_vec{255,0,100,0}, intensity);
         break;
-    case white:
+    case c_white:
+        return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);
+        break;
+    case w_white: //TODO tune wold & warm white !!!
         return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);
         break;
     case gold:

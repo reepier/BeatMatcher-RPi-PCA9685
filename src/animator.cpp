@@ -34,7 +34,7 @@ void AnimationManager::init(){
  // palette_magasine.push_back(    color_vec{orange} ,1   );
  // palette_magasine.push_back(    color_vec{yellow} ,1   );
     palette_magasine.push_back(    color_vec{gold}   ,1   );
-    palette_magasine.push_back(    color_vec{white}  ,1   );
+    palette_magasine.push_back(    color_vec{w_white}  ,1   );
  // palette_magasine.push_back(    color_vec{cyan}   ,1   );
     palette_magasine.push_back(    color_vec{blue}   ,2   );
     palette_magasine.push_back(    color_vec{purple} ,1   );
@@ -42,15 +42,15 @@ void AnimationManager::init(){
  // palette_magasine.push_back(    color_vec{pink}   ,1   );
  // palette_magasine.push_back(    color_vec{green}  ,1   );
     
-    palette_magasine.push_back(     color_vec{white, red}       ,1      );
+    palette_magasine.push_back(     color_vec{w_white, red}       ,1      );
  // palette_magasine.push_back(     color_vec{white, sodium}    ,1      );
  // palette_magasine.push_back(     color_vec{white, orange}    ,1      );
  // palette_magasine.push_back(     color_vec{white, yellow}    ,1      );
  // palette_magasine.push_back(     color_vec{white, gold}      ,1      );
  // palette_magasine.push_back(     color_vec{white, white}     ,1      );
  // palette_magasine.push_back(     color_vec{white, cyan}      ,1      );
-    palette_magasine.push_back(     color_vec{white, blue}      ,1      );
-    palette_magasine.push_back(     color_vec{white, purple}    ,1      );
+    palette_magasine.push_back(     color_vec{w_white, blue}      ,1      );
+    palette_magasine.push_back(     color_vec{w_white, purple}    ,1      );
  // palette_magasine.push_back(     color_vec{white, magenta}   ,1      );
  // palette_magasine.push_back(     color_vec{white, pink}      ,1      );
  // palette_magasine.push_back(     color_vec{white, green}     ,1      );
