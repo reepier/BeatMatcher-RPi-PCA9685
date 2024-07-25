@@ -162,7 +162,7 @@ int main(int argc, char* argv[]){
 
 
     // MAIN PROGRAM (take what is needed and comment out the rest    
-    // initialize();
+    initialize();
     // balise("Initalisation terminated with success !");
 
     // while (true){
@@ -217,11 +217,13 @@ int main(int argc, char* argv[]){
     // }
 
 
-    int random_walker = 50;
+
     while (true){
-        // cout << random_walker << endl;
-        random_walker = fcn::random_walk(random_walker, 5, 0, 100); 
-        cout << string(random_walker, ' ') << "|" << endl;
-        delay(100);
+        for(auto int_c = 0; int_c < colorName.size(); int_c++){
+            auto c = (simpleColor)int_c;
+            addr_led.set_allpix_color(c);
+            send();
+            delay(1000);
+        }
     }
 }

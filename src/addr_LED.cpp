@@ -101,10 +101,10 @@ void AddressableLED::init(){
     animations.push_back(new AddrLEDAnimation1(this, cyan,     purple,    "cyan Flashes, purple background",      "PIX.1.1.6.7", leader));
     animations.push_back(new AddrLEDAnimation1(this, pink,     purple,    "pink Flashes, purple background",      "PIX.1.1.6.8", leader));
     animations.push_back(new AddrLEDAnimation1(this, cyan,     pink,      "cyan Flashes, pink background",        "PIX.1.1.6.9", leader));
-    animations.push_back(new AddrLEDAnimation1(this, cyan,     green,     "cyan Flashes, pink background",        "PIX.1.1.6.10", leader));
-    animations.push_back(new AddrLEDAnimation1(this, green,    cyan,      "cyan Flashes, pink background",        "PIX.1.1.6.11", leader));
-    animations.push_back(new AddrLEDAnimation1(this, cyan,     orange,    "cyan Flashes, pink background",        "PIX.1.1.6.12", leader));
-    animations.push_back(new AddrLEDAnimation1(this, cyan,     sodium,    "cyan Flashes, pink background",        "PIX.1.1.6.13", leader));
+    animations.push_back(new AddrLEDAnimation1(this, cyan,     green,     "cyan Flashes, green background",        "PIX.1.1.6.10", leader));
+    animations.push_back(new AddrLEDAnimation1(this, green,    cyan,      "green Flashes, cyan background",        "PIX.1.1.6.11", leader));
+    animations.push_back(new AddrLEDAnimation1(this, cyan,     orange,    "cyan Flashes, orange background",        "PIX.1.1.6.12", leader));
+    animations.push_back(new AddrLEDAnimation1(this, cyan,     sodium,    "cyan Flashes, sodium background",        "PIX.1.1.6.13", leader));
     
 // ANIMATION 1.2 : Analog Flash --> random segments
     // Monochrome Flash
@@ -168,6 +168,7 @@ void AddressableLED::init(){
     animations.push_back(new AddrLEDAnimation2(this, cyan,   red,    pix,   "Cyan flashes, red background",         "PIX.2.3.4"));
     
 // Animation 3 : Noise
+// Dev & Testing
 //          (Unfiltered)
     animations.push_back(new AddrLEDAnimation3(this, w_white, "WarmWhite noise",      "PIX.3.1.1"));
     animations.push_back(new AddrLEDAnimation3(this, gold,  "Gold noise",       "PIX.3.1.2"));
@@ -180,11 +181,157 @@ void AddressableLED::init(){
     animations.push_back(new AddrLEDAnimation3(this, pink,  true, "Pink noise",       "PIX.3.2.4"));
 
 // Animation 4 : Random bursts
+    // Slow & long Bubbles
+    int flash_length = 1500, burst_period = 400;
+    // Color bubbles, black background
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{red},            gaussian, bar, burst_period, flash_length, "Red bubbles, black bkgd",            "PIX.4.1.1.1", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{sodium},         gaussian, bar, burst_period, flash_length, "Sodium bubbles, black bkgd",         "PIX.4.1.1.2", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{orange},         gaussian, bar, burst_period, flash_length, "Orange bubbles, black bkgd",         "PIX.4.1.1.3", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{yellow},         gaussian, bar, burst_period, flash_length, "Yellow bubbles, black bkgd",         "PIX.4.1.1.4", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{gold},           gaussian, bar, burst_period, flash_length, "Gold bubbles, black bkgd",           "PIX.4.1.1.5", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{w_white},        gaussian, bar, burst_period, flash_length, "Warm_White bubbles, black bkgd",     "PIX.4.1.1.6", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{c_white},        gaussian, bar, burst_period, flash_length, "Cold_White bubbles, black bkgd",     "PIX.4.1.1.7", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{cyan},           gaussian, bar, burst_period, flash_length, "Cyan bubbles, black bkgd",           "PIX.4.1.1.8", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{blue},           gaussian, bar, burst_period, flash_length, "Blue bubbles, black bkgd",           "PIX.4.1.1.9", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{purple},         gaussian, bar, burst_period, flash_length, "Purple bubbles, black bkgd",         "PIX.4.1.1.10", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{magenta},        gaussian, bar, burst_period, flash_length, "Magenta bubbles, black bkgd",        "PIX.4.1.1.11", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{pink},           gaussian, bar, burst_period, flash_length, "Pink bubbles, black bkgd",           "PIX.4.1.1.12", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{green},          gaussian, bar, burst_period, flash_length, "Green bubbles, black bkgd",          "PIX.4.1.1.13", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{sevika_pink},    gaussian, bar, burst_period, flash_length, "Sevika_Pink bubbles, black bkgd",    "PIX.4.1.1.14", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{hextech_cyan},   gaussian, bar, burst_period, flash_length, "Hextech_Cyan bubbles, black bkgd",   "PIX.4.1.1.15", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{shimmer_purple}, gaussian, bar, burst_period, flash_length, "Shimmer_Purple bubbles, black bkgd", "PIX.4.1.1.16", leader, 1, 255));
+    // Monochrome bubbles & background
+    animations.push_back(new AddrLEDAnimation4(this, red,            color_vec{red},            gaussian, bar, burst_period, flash_length, "Red bubbles, red bkgd",                "PIX.4.1.2.1", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, sodium,         color_vec{sodium},         gaussian, bar, burst_period, flash_length, "Sodium bubbles, sodium bkgd",          "PIX.4.1.2.2", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, orange,         color_vec{orange},         gaussian, bar, burst_period, flash_length, "Orange bubbles, orange bkgd",          "PIX.4.1.2.3", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, yellow,         color_vec{yellow},         gaussian, bar, burst_period, flash_length, "Yellow bubbles, yellow bkgd",          "PIX.4.1.2.4", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, gold,           color_vec{gold},           gaussian, bar, burst_period, flash_length, "Gold bubbles, gold bkgd",              "PIX.4.1.2.5", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, w_white,        color_vec{w_white},        gaussian, bar, burst_period, flash_length, "Warm_White bubbles, warm_white bkgd",  "PIX.4.1.2.6", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, c_white,        color_vec{c_white},        gaussian, bar, burst_period, flash_length, "Cold_White bubbles, cold bkgd",        "PIX.4.1.2.7", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, cyan,           color_vec{cyan},           gaussian, bar, burst_period, flash_length, "Cyan bubbles, cyan bkgd",              "PIX.4.1.2.8", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, blue,           color_vec{blue},           gaussian, bar, burst_period, flash_length, "Blue bubbles, blue bkgd",              "PIX.4.1.2.9", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, purple,         color_vec{purple},         gaussian, bar, burst_period, flash_length, "Purple bubbles, purple bkgd",          "PIX.4.1.2.10", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, magenta,        color_vec{magenta},        gaussian, bar, burst_period, flash_length, "Magenta bubbles, magenta bkgd",        "PIX.4.1.2.11", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, pink,           color_vec{pink},           gaussian, bar, burst_period, flash_length, "Pink bubbles, pink bkgd",              "PIX.4.1.2.12", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, green,          color_vec{green},          gaussian, bar, burst_period, flash_length, "Green bubbles, green bkgd",            "PIX.4.1.2.13", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, sevika_pink,    color_vec{sevika_pink},    gaussian, bar, burst_period, flash_length, "Sevika_Pink bubbles, sevika bkgd",     "PIX.4.1.2.14", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, hextech_cyan,   color_vec{hextech_cyan},   gaussian, bar, burst_period, flash_length, "Hextech_Cyan bubbles, hextech bkgd",   "PIX.4.1.2.15", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, shimmer_purple, color_vec{shimmer_purple}, gaussian, bar, burst_period, flash_length, "Shimmer_Purple bubbles, shimmer bkgd", "PIX.4.1.2.16", leader, 1, 255));
+    // Warm White bubbles & color background
+    animations.push_back(new AddrLEDAnimation4(this, red,            color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, red bkgd",           "PIX.4.1.3.1", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, sodium,         color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, sodium bkgd",        "PIX.4.1.3.2", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, orange,         color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, orange bkgd",        "PIX.4.1.3.3", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, yellow,         color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, yellow bkgd",        "PIX.4.1.3.4", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, gold,           color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, gold bkgd",          "PIX.4.1.3.5", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, w_white,        color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, warm_white bkgd",    "PIX.4.1.3.6", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, c_white,        color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, cold bkgd",          "PIX.4.1.3.7", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, cyan,           color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, cyan bkgd",          "PIX.4.1.3.8", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, blue,           color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, blue bkgd",          "PIX.4.1.3.9", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, purple,         color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, purple bkgd",        "PIX.4.1.3.10", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, magenta,        color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, magenta bkgd",       "PIX.4.1.3.11", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, pink,           color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, pink bkgd",          "PIX.4.1.3.12", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, green,          color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, green bkgd",         "PIX.4.1.3.13", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, sevika_pink,    color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, sevika bkgd",        "PIX.4.1.3.14", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, hextech_cyan,   color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, hextech bkgd",       "PIX.4.1.3.15", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, shimmer_purple, color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, shimmer bkgd",       "PIX.4.1.3.16", leader, 1, 255));
+    // Cold White bubbles & color background
+    animations.push_back(new AddrLEDAnimation4(this, red,            color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, red bkgd",           "PIX.4.1.4.1", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, sodium,         color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, sodium bkgd",        "PIX.4.1.4.2", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, orange,         color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, orange bkgd",        "PIX.4.1.4.3", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, yellow,         color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, yellow bkgd",        "PIX.4.1.4.4", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, gold,           color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, gold bkgd",          "PIX.4.1.4.5", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, w_white,        color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, warm_white bkgd",    "PIX.4.1.4.6", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, c_white,        color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, cold bkgd",          "PIX.4.1.4.7", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, cyan,           color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, cyan bkgd",          "PIX.4.1.4.8", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, blue,           color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, blue bkgd",          "PIX.4.1.4.9", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, purple,         color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, purple bkgd",        "PIX.4.1.4.10", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, magenta,        color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, magenta bkgd",       "PIX.4.1.4.11", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, pink,           color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, pink bkgd",          "PIX.4.1.4.12", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, green,          color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, green bkgd",         "PIX.4.1.4.13", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, sevika_pink,    color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, sevika bkgd",        "PIX.4.1.4.14", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, hextech_cyan,   color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, hextech bkgd",       "PIX.4.1.4.15", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, shimmer_purple, color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, shimmer bkgd",       "PIX.4.1.4.16", leader, 1, 255));
+    // Special Color combos
+
+    // Slow & short Bubbles
+    flash_length = 600, burst_period = 200;
+    // Color bubbles, black background
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{red},            gaussian, bar, burst_period, flash_length, "Red bubbles, black bkgd",            "PIX.4.2.1.1", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{sodium},         gaussian, bar, burst_period, flash_length, "Sodium bubbles, black bkgd",         "PIX.4.2.1.2", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{orange},         gaussian, bar, burst_period, flash_length, "Orange bubbles, black bkgd",         "PIX.4.2.1.3", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{yellow},         gaussian, bar, burst_period, flash_length, "Yellow bubbles, black bkgd",         "PIX.4.2.1.4", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{gold},           gaussian, bar, burst_period, flash_length, "Gold bubbles, black bkgd",           "PIX.4.2.1.5", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{w_white},        gaussian, bar, burst_period, flash_length, "Warm_White bubbles, black bkgd",     "PIX.4.2.1.6", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{c_white},        gaussian, bar, burst_period, flash_length, "Cold_White bubbles, black bkgd",     "PIX.4.2.1.7", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{cyan},           gaussian, bar, burst_period, flash_length, "Cyan bubbles, black bkgd",           "PIX.4.2.1.8", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{blue},           gaussian, bar, burst_period, flash_length, "Blue bubbles, black bkgd",           "PIX.4.2.1.9", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{purple},         gaussian, bar, burst_period, flash_length, "Purple bubbles, black bkgd",         "PIX.4.2.1.10", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{magenta},        gaussian, bar, burst_period, flash_length, "Magenta bubbles, black bkgd",        "PIX.4.2.1.11", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{pink},           gaussian, bar, burst_period, flash_length, "Pink bubbles, black bkgd",           "PIX.4.2.1.12", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{green},          gaussian, bar, burst_period, flash_length, "Green bubbles, black bkgd",          "PIX.4.2.1.13", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{sevika_pink},    gaussian, bar, burst_period, flash_length, "Sevika_Pink bubbles, black bkgd",    "PIX.4.2.1.14", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{hextech_cyan},   gaussian, bar, burst_period, flash_length, "Hextech_Cyan bubbles, black bkgd",   "PIX.4.2.1.15", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{shimmer_purple}, gaussian, bar, burst_period, flash_length, "Shimmer_Purple bubbles, black bkgd", "PIX.4.2.1.16", leader, 1, 255));
+    // Monochrome bubbles & background
+    animations.push_back(new AddrLEDAnimation4(this, red,            color_vec{red},            gaussian, bar, burst_period, flash_length, "Red bubbles, red bkgd",                "PIX.4.2.2.1", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, sodium,         color_vec{sodium},         gaussian, bar, burst_period, flash_length, "Sodium bubbles, sodium bkgd",          "PIX.4.2.2.2", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, orange,         color_vec{orange},         gaussian, bar, burst_period, flash_length, "Orange bubbles, orange bkgd",          "PIX.4.2.2.3", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, yellow,         color_vec{yellow},         gaussian, bar, burst_period, flash_length, "Yellow bubbles, yellow bkgd",          "PIX.4.2.2.4", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, gold,           color_vec{gold},           gaussian, bar, burst_period, flash_length, "Gold bubbles, gold bkgd",              "PIX.4.2.2.5", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, w_white,        color_vec{w_white},        gaussian, bar, burst_period, flash_length, "Warm_White bubbles, warm_white bkgd",  "PIX.4.2.2.6", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, c_white,        color_vec{c_white},        gaussian, bar, burst_period, flash_length, "Cold_White bubbles, cold bkgd",        "PIX.4.2.2.7", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, cyan,           color_vec{cyan},           gaussian, bar, burst_period, flash_length, "Cyan bubbles, cyan bkgd",              "PIX.4.2.2.8", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, blue,           color_vec{blue},           gaussian, bar, burst_period, flash_length, "Blue bubbles, blue bkgd",              "PIX.4.2.2.9", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, purple,         color_vec{purple},         gaussian, bar, burst_period, flash_length, "Purple bubbles, purple bkgd",          "PIX.4.2.2.10", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, magenta,        color_vec{magenta},        gaussian, bar, burst_period, flash_length, "Magenta bubbles, magenta bkgd",        "PIX.4.2.2.11", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, pink,           color_vec{pink},           gaussian, bar, burst_period, flash_length, "Pink bubbles, pink bkgd",              "PIX.4.2.2.12", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, green,          color_vec{green},          gaussian, bar, burst_period, flash_length, "Green bubbles, green bkgd",            "PIX.4.2.2.13", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, sevika_pink,    color_vec{sevika_pink},    gaussian, bar, burst_period, flash_length, "Sevika_Pink bubbles, sevika bkgd",     "PIX.4.2.2.14", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, hextech_cyan,   color_vec{hextech_cyan},   gaussian, bar, burst_period, flash_length, "Hextech_Cyan bubbles, hextech bkgd",   "PIX.4.2.2.15", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, shimmer_purple, color_vec{shimmer_purple}, gaussian, bar, burst_period, flash_length, "Shimmer_Purple bubbles, shimmer bkgd", "PIX.4.2.2.16", leader, 1, 255));
+    // Warm White bubbles & color background
+    animations.push_back(new AddrLEDAnimation4(this, red,            color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, red bkgd",           "PIX.4.2.3.1", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, sodium,         color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, sodium bkgd",        "PIX.4.2.3.2", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, orange,         color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, orange bkgd",        "PIX.4.2.3.3", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, yellow,         color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, yellow bkgd",        "PIX.4.2.3.4", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, gold,           color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, gold bkgd",          "PIX.4.2.3.5", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, w_white,        color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, warm_white bkgd",    "PIX.4.2.3.6", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, c_white,        color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, cold bkgd",          "PIX.4.2.3.7", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, cyan,           color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, cyan bkgd",          "PIX.4.2.3.8", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, blue,           color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, blue bkgd",          "PIX.4.2.3.9", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, purple,         color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, purple bkgd",        "PIX.4.2.3.10", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, magenta,        color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, magenta bkgd",       "PIX.4.2.3.11", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, pink,           color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, pink bkgd",          "PIX.4.2.3.12", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, green,          color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, green bkgd",         "PIX.4.2.3.13", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, sevika_pink,    color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, sevika bkgd",        "PIX.4.2.3.14", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, hextech_cyan,   color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, hextech bkgd",       "PIX.4.2.3.15", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, shimmer_purple, color_vec{w_white},    gaussian, bar, burst_period, flash_length, "WWhite bubbles, shimmer bkgd",       "PIX.4.2.3.16", leader, 1, 255));
+    // Cold White bubbles & color background
+    animations.push_back(new AddrLEDAnimation4(this, red,            color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, red bkgd",           "PIX.4.2.4.1", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, sodium,         color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, sodium bkgd",        "PIX.4.2.4.2", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, orange,         color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, orange bkgd",        "PIX.4.2.4.3", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, yellow,         color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, yellow bkgd",        "PIX.4.2.4.4", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, gold,           color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, gold bkgd",          "PIX.4.2.4.5", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, w_white,        color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, warm_white bkgd",    "PIX.4.2.4.6", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, c_white,        color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, cold bkgd",          "PIX.4.2.4.7", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, cyan,           color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, cyan bkgd",          "PIX.4.2.4.8", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, blue,           color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, blue bkgd",          "PIX.4.2.4.9", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, purple,         color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, purple bkgd",        "PIX.4.2.4.10", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, magenta,        color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, magenta bkgd",       "PIX.4.2.4.11", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, pink,           color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, pink bkgd",          "PIX.4.2.4.12", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, green,          color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, green bkgd",         "PIX.4.2.4.13", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, sevika_pink,    color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, sevika bkgd",        "PIX.4.2.4.14", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, hextech_cyan,   color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, hextech bkgd",       "PIX.4.2.4.15", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, shimmer_purple, color_vec{c_white},    gaussian, bar, burst_period, flash_length, "CWhite bubbles, shimmer bkgd",       "PIX.4.2.4.16", leader, 1, 255));
+
+    // DEV & TESTING
     // bubbles (slow & round)
     animations.push_back(new AddrLEDAnimation4(this, red, color_vec{w_white}, gaussian, bar, 500, 1000, "WarmWhite bubbles, Red bg", "PIX.4.1.1", leader, 1, 255));
     animations.push_back(new AddrLEDAnimation4(this, red, color_vec{c_white}, gaussian, bar, 500, 1000, "ColdWhite bubbles, Red bg", "PIX.4.1.2", leader, 1, 255));
     animations.push_back(new AddrLEDAnimation4(this, black, color_vec{red}, gaussian, bar, 500, 1000, "Red bubbles, Black bg", "PIX.4.1.3", leader, 1, 255));
     animations.push_back(new AddrLEDAnimation4(this, red, color_vec{red}, gaussian, bar, 500, 1000, "Red bubbles, Red bg", "PIX.4.1.4", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{c_white}, gaussian, bar, 500, 1000, "CWhite bubbles, Black bg", "PIX.4.1.5", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{w_white}, gaussian, bar, 500, 1000, "WWhite bubbles, Black bg", "PIX.4.1.6", leader, 1, 255));
 
     // strobes (fast & square)
     animations.push_back(new AddrLEDAnimation4(this, red, color_vec{c_white}, square, bar, 50, 1000/FRATE, "ColdWhite strobe, Red bg", "PIX.4.2.0.1", leader, 1, 255));
@@ -195,7 +342,11 @@ void AddressableLED::init(){
     animations.push_back(new AddrLEDAnimation4(this, black, color_vec{red}, square, bar, 50, 1000/FRATE, "Red strobe, Black bg", "PIX.4.2.2.1", leader, 1, 255));
     animations.push_back(new AddrLEDAnimation4(this, black, color_vec{w_white}, square, bar, 50, 1000/FRATE, "WWhite strobe, Black bg", "PIX.4.2.2.2", leader, 1, 255));
     animations.push_back(new AddrLEDAnimation4(this, black, color_vec{c_white}, square, bar, 50, 1000/FRATE, "CWhite strobe, Black bg", "PIX.4.2.2.3", leader, 1, 255));
-
+    
+    // strobe very slow
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{c_white}, square, bar, 1000, 1000/FRATE, "ColdWhite slow strobe, Black bg",   "PIX.4.10.1.1", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, red, color_vec{c_white}, square, bar, 1000, 1000/FRATE, "ColdWhite slow strobe, Red bg",       "PIX.4.10.1.2", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, red, color_vec{gold}, square, bar, 1000, 1000/FRATE, "Gold slow strobe, Red bg",       "PIX.4.10.1.3", leader, 1, 255));
 
     this->activate_none();
 }
@@ -242,15 +393,15 @@ DMX_vec AddressableLED::RGB(simpleColor c, int intensity){
             temp = fcn::RGB_norm(DMX_vec{255,0,0});
             break;
         case green:
-            ref_int = 70; 
+            ref_int = 100; 
             temp = fcn::RGB_norm(DMX_vec{0,255,0});
             break;
         case blue:
-            ref_int = 40;
+            ref_int = 220;
             temp = fcn::RGB_norm(DMX_vec{0,0,255});
             break;
         case yellow:
-            ref_int = 180;
+            ref_int = 200;
             temp = fcn::RGB_norm(DMX_vec{255,87,0});
             break;
         case orange:
@@ -260,26 +411,26 @@ DMX_vec AddressableLED::RGB(simpleColor c, int intensity){
             temp = fcn::RGB_norm(DMX_vec{255,16,0});
             break;
         case cyan:
-            ref_int = 90;
+            ref_int = 150;
             temp = fcn::RGB_norm(DMX_vec{0,184,255});
             break;
         case purple:
-            ref_int = 200;
+            ref_int = 255;
             temp = fcn::RGB_norm(DMX_vec{180,0,255});
             break;    
         case magenta:
-            ref_int = 220;
+            ref_int = 255;
             temp = fcn::RGB_norm(DMX_vec{255,0,197});
             break;
         case pink:
-            ref_int = 240;
+            ref_int = 255;
             temp = fcn::RGB_norm(DMX_vec{255,0,86});
             break;
         case w_white:
             temp = fcn::RGB_norm(DMX_vec{255,173,102});
             break;
         case c_white:
-            ref_int = 150; 
+            ref_int = 255; 
             temp = fcn::RGB_norm(DMX_vec{255,255,255});
             break;
         case gold:
@@ -300,13 +451,14 @@ DMX_vec AddressableLED::RGB(simpleColor c, int intensity){
 
 
 /*
-   #    #     # ### #     #    #    ####### ### ####### #     #              #   
-  # #   ##    #  #  ##   ##   # #      #     #  #     # ##    #             ##   
- #   #  # #   #  #  # # # #  #   #     #     #  #     # # #   #            # #   
-#     # #  #  #  #  #  #  # #     #    #     #  #     # #  #  #   #####      #   
-####### #   # #  #  #     # #######    #     #  #     # #   # #              #   
-#     # #    ##  #  #     # #     #    #     #  #     # #    ##              #   
-#     # #     # ### #     # #     #    #    ### ####### #     #            ####*/
+  #             #                                          ######  #######    #    #######
+ ##            # #   #    #   ##   #       ####   ####     #     # #         # #      #   
+# #           #   #  ##   #  #  #  #      #    # #    #    #     # #        #   #     #   
+  #          #     # # #  # #    # #      #    # #         ######  #####   #     #    #   
+  #   ###    ####### #  # # ###### #      #    # #  ###    #     # #       #######    #   
+  #   ###    #     # #   ## #    # #      #    # #    #    #     # #       #     #    #   
+##### ###    #     # #    # #    # ######  ####   ####     ######  ####### #     #    #   
+*/
 void AddrLEDAnimation1::init(){
     BaseAnimation::init();
 }
@@ -378,14 +530,14 @@ void AddrLEDAnimation1::new_frame(){
 }
 
 /*
-   #    #     # ### #     #    #    ####### ### ####### #     #             #####   
-  # #   ##    #  #  ##   ##   # #      #     #  #     # ##    #            #     #  
- #   #  # #   #  #  # # # #  #   #     #     #  #     # # #   #                  #  
-#     # #  #  #  #  #  #  # #     #    #     #  #     # #  #  #   #####     #####   
-####### #   # #  #  #     # #######    #     #  #     # #   # #            #        
-#     # #    ##  #  #     # #     #    #     #  #     # #    ##            #        
-#     # #     # ### #     # #     #    #    ### ####### #     #            #######*/
-
+ #####         ######                                    ######  #######    #    #######
+#     #        #     # #  ####  # #####   ##   #         #     # #         # #      #   
+      #        #     # # #    # #   #    #  #  #         #     # #        #   #     #   
+ #####         #     # # #      #   #   #    # #         ######  #####   #     #    #   
+#       ###    #     # # #  ### #   #   ###### #         #     # #       #######    #   
+#       ###    #     # # #    # #   #   #    # #         #     # #       #     #    #   
+####### ###    ######  #  ####  #   #   #    # ######    ######  ####### #     #    #   
+*/
 void AddrLEDAnimation2::init(){
     BaseAnimation::init();
 }
@@ -432,14 +584,14 @@ void AddrLEDAnimation2::new_frame(){
 }
 
 /*
-   #    #     # ### #     #    #    ####### ### ####### #     #             #####   
-  # #   ##    #  #  ##   ##   # #      #     #  #     # ##    #            #     #  
- #   #  # #   #  #  # # # #  #   #     #     #  #     # # #   #                  #  
-#     # #  #  #  #  #  #  # #     #    #     #  #     # #  #  #   #####     #####   
-####### #   # #  #  #     # #######    #     #  #     # #   # #                  #  
-#     # #    ##  #  #     # #     #    #     #  #     # #    ##            #     #  
-#     # #     # ### #     # #     #    #    ### ####### #     #             ##### */
-
+ #####          #     #                        
+#     #         ##    #  ####  #  ####  ###### 
+      #         # #   # #    # # #      #      
+ #####          #  #  # #    # #  ####  #####  
+      # ###     #   # # #    # #      # #      
+#     # ###     #    ## #    # # #    # #      
+ #####  ###     #     #  ####  #  ####  ###### 
+*/
 void AddrLEDAnimation3::init() {
     BaseAnimation::init();
 }
@@ -460,13 +612,13 @@ void AddrLEDAnimation3::new_frame() {
 }
 
 /*
-#              ######                                            
-#    #         #     # #    # #####  #####  #      ######  ####  
-#    #         #     # #    # #    # #    # #      #      #      
-#    #         ######  #    # #####  #####  #      #####   ####  
-####### ###    #     # #    # #    # #    # #      #           # 
-     #  ###    #     # #    # #    # #    # #      #      #    # 
-     #  ###    ######   ####  #####  #####  ###### ######  ####  
+#              ######                          ######                             
+#    #         #     #   ##   #    # #####     #     # #    # #####   ####  ##### 
+#    #         #     #  #  #  ##   # #    #    #     # #    # #    # #        #   
+#    #         ######  #    # # #  # #    #    ######  #    # #    #  ####    #   
+####### ###    #   #   ###### #  # # #    #    #     # #    # #####       #   #   
+     #  ###    #    #  #    # #   ## #    #    #     # #    # #   #  #    #   #   
+     #  ###    #     # #    # #    # #####     ######   ####  #    #  ####    #   
 */
 void AddrLEDAnimation4::init(){
     log(4, __FILE__, " ", __LINE__, " ",__func__, " ", this->fixture->name, " ", this->id);
@@ -478,7 +630,7 @@ void AddrLEDAnimation4::init(){
     this->flashes = vector<flash_vec>(n_unit, flash_vec(2));
 
     for (int i_unit=0; i_unit<n_unit; i_unit++){
-        flashes[i_unit][i_next].time = frame.t_current_ms + rand_min_max(rand_const_ms/5, rand_const_ms*2); 
+        flashes[i_unit][i_next].time = frame.t_current_ms + rand_min_max(rand_const_ms/5, rand_const_ms*2*n_unit); 
         flashes[i_unit][i_prev].time = 0;
         flashes[i_unit][i_next].color = fcn::random_pick(this->flash_colors);
         flashes[i_unit][i_prev].color = black;

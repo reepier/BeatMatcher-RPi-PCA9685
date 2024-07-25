@@ -676,7 +676,7 @@ void SpotRackAnimation1::init(){
     this->flashes = vector<flash_vec>(n_spot, flash_vec(2));
 
     for (int i_spot=0; i_spot<n_spot; i_spot++){
-        flashes[i_spot][i_next].time = frame.t_current_ms + rand_min_max(rand_const_ms/5, rand_const_ms*2); 
+        flashes[i_spot][i_next].time = frame.t_current_ms + rand_min_max(rand_const_ms/5, n_spot*rand_const_ms*2); 
         flashes[i_spot][i_prev].time = 0;
         flashes[i_spot][i_next].color = fcn::random_pick(this->flash_colors);
         flashes[i_spot][i_prev].color = black;

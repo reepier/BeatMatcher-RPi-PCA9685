@@ -4,17 +4,17 @@ sodium          Sodium        2
 orange          Orange        3
 yellow          Yellow        4
 gold            Gold          5
-white           White         6
-cyan            Cyan          7
-blue            Blue          8
-purple          Purple        9
-magenta         Magenta       10
-pink            Pink          11
-green           Green         12
-sevika_pink     Sevika        13
-hextech_cyan    Hextech       14
-shimmer_purple  Shimmer       15
-
+warm_white      Warm White    6
+cold white      Cold White    7
+cyan            Cyan          8
+blue            Blue          9
+purple          Purple        10
+magenta         Magenta       11
+pink            Pink          12
+green           Green         13
+sevika          Sevika        14
+hextech         Hextech       15
+shimmer         Shimmer       16
 
 
 red,sodium,orange,yellow,gold,white,cyan,blue,purple,magenta,pink,green,sevika_pink,hextech_cyan,shimmer_purple
