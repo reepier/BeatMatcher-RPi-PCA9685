@@ -630,19 +630,16 @@ void AddrLEDAnimation1::new_frame(){
     if (sampler.new_beat)
         units_index = fcn::randomized_vector(units_index);
 
-    balise("Addr LED Ani1 New frames 1");
     // precompute pixel values
     pixel backgd_RGB = this->fixture->RGB(back_color, 20);
     pixel flash_RGB = this->fixture->RGB(flash_color);
     pixel final_mix_RGB(3);
 
-    balise("Addr LED Ani1 New frames 2");
     // Compute intensity vaue based on time elapsed since last beat
     float coef = exp(-(double)(t_ms - t_last_beat_ms) / fade_rate);
     // compute number of units flashing 
     int n_unit_on = density * n_unit;
 
-    balise("Addr LED Ani1 New frames 3");
     // compute final RGB colors
     if (param_activate_flash && auto_activate_flash)
     {
@@ -658,7 +655,6 @@ void AddrLEDAnimation1::new_frame(){
         final_mix_RGB[B] = backgd_RGB[B];
     }
 
-    balise("Addr LED Ani1 New frames 4");
     // set each units color
     for (int i=0; i<n_unit; i++){
         pixel unit_i_RGB;
