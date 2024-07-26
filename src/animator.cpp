@@ -263,6 +263,51 @@ bool AnimationManager::test_animation(){
     return success;
 }
 
+// activates animations based on DMX data
+bool AnimationManager::controled_animator(const DMX_vec data){
+
+    // Test 1
+    //extract DMX values in variables
+    int i = 0;
+    uint8_t spot_1_DIMMER = data[0];
+    uint8_t spot_2_DIMMER = data[1];
+    uint8_t Addr_LED_DIMMER = data[2];
+
+    uint8_t spot_1_animation = 
+    front_rack.activate_by_index(data[3]);
+    back_rack.activate_by_index(data[4]);
+    addr_led.activate_by_index(data[5]);
+
+    // // Test 2 Dyamically create new animations based on what is contained in "data"
+
+    // // intialize & define variables
+    // static DMX_vec WS_memorized_data;
+    // DMX_vec WS_data(data.at(WS_DIMMER), data.at(WS_DENS)+1);
+
+    // static bool first_call = true;
+    
+    // if (first_call){
+    //     WS_memorized_data.assign(data.at(WS_DIMMER), data.at(WS_DENS)+1);
+    //     first_call = false;
+    // }
+    
+    // // for each fixtre group, update active animation if Data has changed 
+    // if (first_call || !(WS_memorized_data == WS_data)){
+    //     delete addr_led.active_animation;
+    //     addr_led.active_animation = nullptr;
+
+    //     addr_led.active_animation = Create_AddrLED_Animation(&addr_led, data); 
+    //     if (addr_led.active_animation != nullptr)
+    //         addr_led.active_animation->init();
+    // }
+
+
+
+
+    // // Last, set memorized data to current data and leave
+    // WS_memorized_data.assign(data.at(WS_DIMMER), data.at(WS_C2)+1);
+}
+
 void AnimationManager::set_timer(time_t duration_ms){
     this->timer_start_ms = frame.t_current_ms;
     this->timer_duration_ms = duration_ms;
@@ -283,6 +328,8 @@ bool AnimationManager::timer_elapsed(){
     }
     return ret;
 }
+
+
 
 AnimationManager animator;
 
@@ -313,13 +360,13 @@ bool BaseFixture::activate_none(){
 // selects and init the i_th animation within the list (i being the argument).
 // If i out of range, select the first (black) 
 bool BaseFixture::activate_by_index(int i){
-    log(4, __FILE__, " ",__LINE__, " ", __func__);
-
+    // log(4, __FILE__, " ",__LINE__, " ", __func__);
     if (i < this->animations.size())
         this->active_animation = this->animations[i];
     else
         this->active_animation = this->animations[0];
     this->active_animation->init();
+    log(1, "Activating ", active_animation->id, ":", active_animation->description);
 }
 
 // select and init an animtion randomly picked wihtin the list 

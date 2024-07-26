@@ -285,6 +285,7 @@ class AnimationManager{
     void palette_update();
     void show_update();
     bool test_animation();
+    bool controled_animator(const DMX_vec);
 
     void set_timer(time_t);
     void reset_timer();
@@ -321,6 +322,7 @@ class BaseFixture{
 
     // Animations
     BaseAnimation * active_animation = nullptr;
+
     anim_vec animations;
 
     //constructor (adresse [0-511], number of channels, fixture's name)

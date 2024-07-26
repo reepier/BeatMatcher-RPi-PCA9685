@@ -192,6 +192,7 @@ void disp_output_window(){
 
     int line=1;
     for (auto fix : fix_vec{&addr_led, &led, &laser, &front_rack, &spider, &back_rack}){
+        if (fix->active_animation != nullptr){
         ostringstream animbuf, outbuf;
         animbuf << ((fix->active_animation->type == leader) ? "(L) ":"(b) ") << fix->name << " " << fix->active_animation->id << " - " << fix->active_animation->description;
         
@@ -203,8 +204,9 @@ void disp_output_window(){
 
         mvwprintw(outputw, line, 1, animbuf.str().data());
         mvwprintw(outputw, line, 55, outbuf.str().size()<60? outbuf.str().data() : outbuf.str().substr(0, 60).data());
-        
+        }
         line++;
+
     }
 
 

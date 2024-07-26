@@ -6,17 +6,16 @@
 
 using namespace std;
 
-SpotFixture spot_1(FunGeneration_12x1W, 81,  8, "Spot 1 (82)", 1);     
-SpotFixture spot_2(FunGeneration_12x1W, 105,  8, "Spot 2 (106)", 2);     
-SpotFixture spot_3(FunGeneration_12x1W, 97,  8, "Spot 3 (98)", 3);     
-SpotFixture spot_4(FunGeneration_12x1W, 113,  8, "Spot 4 (114)", 4);
+SpotFixture spot_1(FunGeneration_12x1W, 73, 8, "Spot 9 (74)", 9);     
+SpotFixture spot_2(FunGeneration_12x1W, 81,  8, "Spot 1 (82)", 1);     
+SpotFixture spot_3(FunGeneration_12x1W, 89, 8, "Spot 8 (90)", 8);     
+SpotFixture spot_4(FunGeneration_12x1W, 97,  8, "Spot 3 (98)", 3);     
+SpotFixture spot_5(FunGeneration_12x1W, 105,  8, "Spot 2 (106)", 2);     
+SpotFixture spot_6(FunGeneration_12x1W, 113,  8, "Spot 4 (114)", 4);
 
-SpotFixture spot_5(FunGeneration_12x1W, 121, 8, "Spot 5 (122)", 5);     
-SpotFixture spot_6(FunGeneration_12x1W, 129, 8, "Spot 6 (130)", 6);     
-SpotFixture spot_7(FunGeneration_12x1W, 137, 8, "Spot 7 15° (138)", 7);  
-SpotFixture spot_8(FunGeneration_12x1W, 89, 8, "Spot 8 (90)", 8);     
-SpotFixture spot_9(FunGeneration_12x1W, 73, 8, "Spot 9 (74)", 9);     
-
+SpotFixture spot_7(FunGeneration_12x1W, 121, 8, "Spot 5 (122)", 5);     
+SpotFixture spot_8(FunGeneration_12x1W, 129, 8, "Spot 6 (130)", 6);     
+SpotFixture spot_9(FunGeneration_12x1W, 137, 8, "Spot 7 15° (138)", 7);  
 SpotFixture spot_10(FunGeneration_12x1W, 145, 8, "Spot 10 (146)", 10);
 SpotFixture spot_11(FunGeneration_12x1W, 153, 8, "Spot 11 (154)", 11);
 SpotFixture spot_12(FunGeneration_12x1W, 161, 8, "Spot 12 (162)", 12);
@@ -93,11 +92,11 @@ DMX_vec SpotFixture::buffer(){
 
 / ----------------------------------------------------------------------- */
 // SpotRack front_rack(spot_vec{&spot_1, &spot_2, &spot_3, &spot_4}, "Front Rack", 1);
-SpotRack front_rack(spot_vec{&spot_2, &spot_3, &spot_4}, "Front Rack", 1);
+SpotRack front_rack(spot_vec{&spot_7, &spot_8, &spot_9, &spot_10, &spot_11, &spot_12}, "Front Rack", 1);
 // SpotRack back_rack(spot_vec{&spot_5, &spot_6, &spot_7, &spot_8, &spot_9}, "Back Rack", 2);
-SpotRack back_rack(spot_vec{&spot_5, &spot_6, &spot_7}, "Back Rack", 2);
+SpotRack back_rack(spot_vec{&spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6}, "Back Rack", 2);
 
-SpotRack global_rack(spot_vec{&spot_1,&spot_2,&spot_3,&spot_4,&spot_5,&spot_6,&spot_7,&spot_8,&spot_9}, "Global Rack", 1);
+SpotRack global_rack(spot_vec{&spot_1,&spot_2,&spot_3,&spot_4,&spot_5,&spot_6,&spot_7,&spot_8,&spot_9,&spot_10,&spot_11,&spot_12}, "Global Rack", 1);
 
 /*
 ### #     # ### #######        #######               
@@ -140,7 +139,7 @@ void front_rack_init(){
 #endif 
 #if SHOW_INTENSITY >= 2 or SHOW_INTENSITY == 0
     // gaussian bursts (short & fast) --> to be used as solo animation during breaks
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    w_white,       1000, 600,   "white fast bubbles",       "FR.2.1.6", leader, 2));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    w_white,       1000, 600,   "WWhite fast bubbles",       "FR.2.1.6", leader, 2));
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    gold,        1000, 600,   "gold fast bubbles",        "FR.2.1.5", leader, 2));
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    cyan,        1000, 600,   "cyan fast bubbles",        "FR.2.1.7", leader, 2));
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    red,         1000, 600,   "red fast bubbles",         "FR.2.1.1", leader, 2));
@@ -153,7 +152,7 @@ void front_rack_init(){
     // Animation 2: Stroboscope --> To be used as LEAD animation
     // Very Fast
 #if SHOW_INTENSITY == 3 or SHOW_INTENSITY == 0
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, w_white,     STRB_FASTEST, "white, VFAST strobe",     "FR.1.1.6",     leader, 1));
+    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, w_white,     STRB_FASTEST, "WWhite, VFAST strobe",     "FR.1.1.6",     leader, 1));
     front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, gold,      STRB_FASTEST, "gold, VFAST strobe",      "FR.1.1.5",     leader, 1));
     front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, cyan,      STRB_FASTEST, "cyan, VFAST strobe",      "FR.1.1.7",     leader, 1));
     front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, red,       STRB_FASTEST, "red, VFAST strobe",       "FR.1.1.1",     leader, 1));
@@ -165,7 +164,7 @@ void front_rack_init(){
 #endif
     // Slow strobe
 #if SHOW_INTENSITY >= 2 or SHOW_INTENSITY == 0
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, w_white,     STRB_SLOW, "white, SLW strobe",     "FR.1.4.6",  leader, 1));
+    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, w_white,     STRB_SLOW, "WWhite, SLW strobe",     "FR.1.4.6",  leader, 1));
     front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, gold,      STRB_SLOW, "gold, SLW strobe",      "FR.1.4.5",  leader, 1));
     front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, cyan,      STRB_SLOW, "cyan, SLW strobe",      "FR.1.4.7",  leader, 1));
     front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, red,       STRB_SLOW, "red, SLW strobe",       "FR.1.4.1",  leader, 1));
@@ -198,7 +197,7 @@ void front_rack_init(){
 //     front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, black,    orange,  "Orange background",   "FR.4.0.3",   backer,   false));
 //     front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, black,    yellow,  "Yellow background",   "FR.4.0.4",   backer,   false));
 //  // front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, black,      gold,  "Gold background",     "FR.4.0.5",   backer,   false));
-//  // front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, black,     w_white,  "White background",    "FR.4.0.6",   backer,   false));
+//  // front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, black,     w_white,  "WWhite background",    "FR.4.0.6",   backer,   false));
 //     front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, black,      cyan,  "Cyan background",     "FR.4.0.7",   backer,   false));
 //     front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, black,      blue,  "Blue background",     "FR.4.0.8",   backer,   false));
 //     front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, black,    purple,  "Purple background",   "FR.4.0.9",   backer,   false));
@@ -212,7 +211,7 @@ void front_rack_init(){
     front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, orange,    black,  "Orange Flashes",   "FR.4.1.3", leader));
     front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, yellow,    black,  "Yellow Flashes",   "FR.4.1.4", leader));
     front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, gold,      black,  "Gold Flashes",     "FR.4.1.5", leader));
-    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, w_white,     black,  "White Flashes",    "FR.4.1.6", leader));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, w_white,     black,  "WWhite Flashes",    "FR.4.1.6", leader));
     front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, cyan,      black,  "Cyan Flashes",     "FR.4.1.7", leader));
     front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, blue,      black,  "Blue Flashes",     "FR.4.1.8", leader));
     front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, purple,    black,  "Purple Flashes",   "FR.4.1.9", leader));

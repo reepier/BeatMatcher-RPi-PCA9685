@@ -4,7 +4,7 @@ using namespace std;
 
 #include "addr_LED.h"
 
-AddressableLED addr_led(1, 0, 3*NUM_PIX, "Addressable LEDs", 1, 180);
+AddressableLED addr_led(1, 0, 3*NUM_PIX, "LEDs", 1, 180);
 
 /*
 #######                                     
@@ -509,7 +509,7 @@ DMX_vec AddressableLED::buffer(){
     int i_data = 0;
     for (auto pix : this->pixels){        
         for (auto sub_pix : pix){
-            data[i_data++] = sub_pix;
+            data[i_data++] = (uint8_t) (this->master/255.0*sub_pix);
         }
     }
     return data;

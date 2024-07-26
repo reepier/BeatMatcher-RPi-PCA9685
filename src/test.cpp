@@ -25,7 +25,7 @@ using namespace std;
 #endif
 
 // DMX output interface (OLA)
-    ola::client::StreamingClient ola_client;
+    ola::client::StreamingClient ola_output_client;
     ola::DmxBuffer ola_buffer;
     vector<ola::DmxBuffer> ola_pix_buffers(NUM_SUBPIX/MAX_SUBPIX_PER_UNI + ((NUM_SUBPIX%MAX_SUBPIX_PER_UNI)==0 ? 0 : 1));
 
@@ -53,7 +53,7 @@ bool process_arguments(int n, char* args[]){
             b_CURSES == false;
         }
         else if(strcmp(arg, "--animation") == 0){
-            b_test = true;
+            b_ANI_TEST = true;
             while ( (i<n-1) && (string(args[++i]).find('-') != 0) ) {
                 vec_anim_id.push_back(string(args[i]));
                 balise( (*(vec_anim_id.end()-1)).data() );
@@ -86,7 +86,7 @@ void initialize() {
     #endif
 
     balise("Init. ola...");
-    ola_client.Setup();
+    ola_output_client.Setup();
     ola_buffer.Blackout();
     for(auto buf : ola_pix_buffers){
         buf.Blackout();
@@ -131,7 +131,7 @@ void send(){
     for (fix_vec::iterator fx = ll_fxtrs.begin(); fx != ll_fxtrs.end(); fx++){
         ola_buffer.SetRange((*fx)->get_address(), (*fx)->buffer().data(), (*fx)->get_nCH());
     }
-    ola_client.SendDmx(0, ola_buffer);
+    ola_output_client.SendDmx(0, ola_buffer);
 
     // construct & send DMX frames for addressable leds pixels values (sent through artnet)
     balise("Construct & send buffer for artnet pixels");
@@ -150,7 +150,7 @@ void send(){
         }
 
         pix_buf.SetRange(0, sub_buffer.data(), length);
-        ola_client.SendDmx(universe_cpt++, pix_buf);
+        ola_output_client.SendDmx(universe_cpt++, pix_buf);
     }
 
 }

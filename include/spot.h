@@ -33,18 +33,6 @@ enum spot_type_t{
 
 
 
-/* --------------------------------------------------------------------
-
- #####  ######  ####### #######    #######                #####                    
-#     # #     # #     #    #       #       #    # #    # #     # ###### #    #     
-#       #     # #     #    #       #       #    # ##   # #       #      ##   #     
- #####  ######  #     #    #       #####   #    # # #  # #  #### #####  # #  #     
-      # #       #     #    #       #       #    # #  # # #     # #      #  # # ### 
-#     # #       #     #    #       #       #    # #   ## #     # #      #   ## ### 
- #####  #       #######    #       #        ####  #    #  #####  ###### #    # ### 
-
-/ ----------------------------------------------------------------------- */
-
 class SpotFixture : public BaseFixture{
 public:
     // Channels :
@@ -75,23 +63,13 @@ public:
     DMX_vec RGBW(simpleColor c, int intensity = 255) override;
 
 };
-extern SpotFixture spot_7, spot_8, spot_1, spot_2, spot_3, spot_4, spot_5, spot_6, spot_7,spot_8,spot_9 ;
+extern SpotFixture spot_1, spot_2, spot_3, spot_4, spot_5, spot_6, spot_7, spot_8, spot_9, spot_10, spot_11, spot_12;
 
 /* /!\ /!\ Bullshit class --> I don't plan on coding animation for individual spots */
 class SpotAnimation : public BaseAnimation{
 public:
     SpotFixture *fixture;
 };
-
-/*
- #####  ######  ####### #######     #####                                     
-#     # #     # #     #    #       #     # #    # ###### #    # #####   ####  
-#       #     # #     #    #       #       #    # #      #    # #    # #      
- #####  ######  #     #    #        #####  ###### #####  ###### #    #  ####  
-      # #       #     #    #             # #    # #      #    # #    #      # 
-#     # #       #     #    #       #     # #    # #      #    # #    # #    # 
- #####  #       #######    #        #####  #    # ###### #    # #####   ####  
-*/
 
 
 
@@ -154,11 +132,13 @@ void global_rack_init();
 #     # #    ##  #  #     # #     #    #     #  #     # #    ## #     # 
 #     # #     # ### #     # #     #    #    ### ####### #     #  #####  
 */
+
 class SpotRackAnimation : public BaseAnimation
 {
 public:
     SpotRack *fixture;
 };
+
 /*
    #          ######                                            
   ##          #     # #    # #####  #####  #      ######  ####  

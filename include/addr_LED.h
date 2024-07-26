@@ -372,3 +372,52 @@ private :
     void init() override;
     void new_frame();
 };
+
+
+#define min(x,y) std::min(x,y)
+#define max(x,y) std::max(x,y)
+
+// Dynamic Animation Creation
+inline BaseAnimation * Create_AddrLED_Animation(AddressableLED* f, DMX_vec ani_data){
+  log(1, "New animation: ", fcn::vec_to_str(ani_data, ','));
+  
+  // Verify arguments
+  if (f == nullptr)
+    log(1, "Error, wrong arguments! ", __FILE__, " ", __LINE__, " ",__func__);
+    return nullptr;
+
+  // extract & ceil/floor arguments
+  int dimmer =                       (int)ani_data[WS_DIMMER];        //
+  int type = min(1, max(0,           (int)ani_data[WS_ANI_TYPE]));    //  
+  int unit = min(6, max(0,           (int)ani_data[WS_ANI_UNIT]));    // 
+  int lead_color = min(14, max(0,    (int)ani_data[WS_C1]));          // color (flash, Chaser...)
+  int back_color = min(14, max(0,    (int)ani_data[WS_C2]));          // background color
+  int speed_1 =                      (int)ani_data[WS_S1];            // speed-time parmater 2
+  int speed_2 =                      (int)ani_data[WS_S2];            // speed-time parameter 1
+  int density =                      (int)ani_data[WS_DENS];          // density parameter
+
+
+  f->master = dimmer; // set dimmer
+
+  switch (type){
+    case 0 : // Background
+      return new AddrLEDAnimation1(f, black,  (simpleColor)back_color,  "Background",    " ", backer, false);
+      break;
+    case 1 : // Analog Beat
+      return new AddrLEDAnimation1(f, (simpleColor)lead_color, (simpleColor)back_color, (strip_subdiv_t)unit, map((double)density, 0.0, 255.0, 0.0, 1.0), "Test 1", "PIX.TST", any);
+      break;
+    case 2 : // Digital Beat
+      return  nullptr;
+      break;
+    case 3 : // Bubbles
+      return  nullptr;
+      break;
+    case 4 : // Chaser
+      return  nullptr;
+      break;
+    default:  // default to case 4
+      return  nullptr;
+      break;
+  }
+  
+}

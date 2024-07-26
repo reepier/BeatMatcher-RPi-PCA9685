@@ -4,8 +4,10 @@
 #include <cstring>
 #include <wiringPi.h>
 #include <algorithm>
+#include <thread>
 
 #include <ola/DmxBuffer.h>
+#include <ola/client/ClientWrapper.h>
 #include <ola/client/StreamingClient.h>
 
 #include "debug.h"
@@ -25,7 +27,7 @@ using namespace std;
 #endif
 
 // DMX output interface (OLA)
-    ola::client::StreamingClient ola_client;
+    ola::client::StreamingClient ola_output_client;
     ola::DmxBuffer ola_buffer;
     struct ola_universe{
         int uni;
@@ -33,8 +35,77 @@ using namespace std;
     };
     vector<ola_universe> ola_pix_unis(NUM_SUBPIX/MAX_SUBPIX_PER_UNI + ((NUM_SUBPIX%MAX_SUBPIX_PER_UNI)==0 ? 0 : 1));
 
+// DMX Input interface
+    static const unsigned int UNIVERSE = 10;
+    ola::client::OlaClientWrapper wrapper;
+    ola::client::OlaClient *ola_input_client;
 
-fix_vec ll_fxtrs = {&led, &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, &spot_7,&spot_8, &spot_9, &spider, &laser};
+    // Functio Called when universe registration completes.
+    void RegisterComplete(const ola::client::Result& result) {
+        if (!result.Success()) {
+            //  OLA_WARN << "Failed to register universe: " << result.Error();
+        }
+    }
+    // Function Called when new DMX data arrives. --> could be at 44Hz, even if data hasn't changed
+    void NewDmx(const ola::client::DMXMetadata &metadata, const ola::DmxBuffer &data) {
+        // std::cout << "Received " << data.Size() << " channels for universe " << metadata.universe << ", priority " << static_cast<int>(metadata.priority) << std::endl;
+        // for (auto i = 0; i < 20 && i<data.Size(); i++){
+        //     std::cout << (int)data.Get(i)<< ", ";
+        // }
+        // std::cout << std::endl;
+
+        static ola::DmxBuffer memorized_buffer;
+        bool first_call;
+        if (memorized_buffer.Size()==0){ //at initialisation 
+            first_call = true;              // set a flag to indicate the first call
+            memorized_buffer = data;        // initialise memory to current data
+        }else{
+            first_call = false;
+            //memorized_data was sete during the previous call 
+        }
+
+        //check wether datat has chagend or not
+        bool data_change = false;
+        if (!(data == memorized_buffer)){
+            data_change = true;
+            balise("Data has changed");
+        }
+
+        // if data change, call special animator function & pass it the input data array
+        if (data_change && b_EXT_CONTROL){
+            balise("Running controled animator");
+            DMX_vec data_vec(data.GetRaw(), data.GetRaw()+data.Size());
+            balise("Running controled animator");
+            animator.controled_animator(data_vec);
+        }
+
+        memorized_buffer = data;
+    }
+
+    void setup_DMX_input(){
+        if (!wrapper.Setup())
+            exit(1);
+        ola_input_client = wrapper.GetClient();
+        // Set the callback and register our interest in this universe
+        ola_input_client->SetDMXCallback(ola::NewCallback(&NewDmx));
+        ola_input_client->RegisterUniverse(UNIVERSE, ola::client::REGISTER, ola::NewSingleCallback(&RegisterComplete));
+        
+        // // option 1 : without thread --> halts the rest of the application execution !!! NOPE !!!
+        // wrapper.GetSelectServer()->Run();
+
+        //option 2 : with thread --> allows the rest of the application to execute in parallel !! YUP !!!
+        // Create a new thread to run the select server
+        std::thread select_server_thread([]() {
+            wrapper.GetSelectServer()->Run();
+        });
+        // Detach the thread to let it run independently
+        select_server_thread.detach();
+    }
+
+
+fix_vec ll_fxtrs = {    &led, &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, 
+                        &spot_7, &spot_8, &spot_9, &spot_10, &spot_11, &spot_12,
+                        &spider, &laser};
 fix_vec fixtures = {&addr_led, &led, &laser, &front_rack, &back_rack, &spider};
 
 bool process_arguments(int n, char* args[]){
@@ -58,11 +129,14 @@ bool process_arguments(int n, char* args[]){
             b_CURSES == false;
         }
         else if(strcmp(arg, "--animation") == 0){
-            b_test = true;
+            b_ANI_TEST = true;
             while ( (i<n-1) && (string(args[++i]).find('-') != 0) ) {
                 vec_anim_id.push_back(string(args[i]));
                 balise( (*(vec_anim_id.end()-1)).data() );
             }
+        }
+        else if(strcmp(arg, "--controled") == 0){
+            b_EXT_CONTROL = true;
         }
         else{
             return false;
@@ -93,11 +167,12 @@ void initialize() {
     #endif
 
     balise("Init. ola...");
-    ola_client.Setup();
+    ola_output_client.Setup();
     ola_buffer.Blackout();
     for(auto pix_uni : ola_pix_unis){
         pix_uni.buf.Blackout();
     }
+    
 
     balise("Init. Sampler...");
     sampler.init();   // initialize Music lib
@@ -111,7 +186,9 @@ void initialize() {
         (*fixture)->init();
     }
 
-    
+    if (b_EXT_CONTROL) // very important to start DMX input code AFTER initializing Fixtures
+        setup_DMX_input();
+
     if (!b_BALISE){
         balise("Init. Debug...");
         init_display();
@@ -140,7 +217,7 @@ void send(){
     for (fix_vec::iterator fx = ll_fxtrs.begin(); fx != ll_fxtrs.end(); fx++){
         ola_buffer.SetRange((*fx)->get_address(), (*fx)->buffer().data(), (*fx)->get_nCH());
     }
-    ola_client.SendDmx(0, ola_buffer);
+    ola_output_client.SendDmx(0, ola_buffer);
 
     // construct & send DMX frames for addressable leds pixels values (sent through artnet)
     balise("Construct & send buffer for artnet pixels");
@@ -165,7 +242,7 @@ void send(){
     vector<ola_universe> ola_pix_uni_rand = fcn::randomized_vector(ola_pix_unis);
     ola::client::StreamingClientInterface::SendArgs args;
     for(auto& pix_uni : ola_pix_uni_rand){
-        ola_client.SendDMX(pix_uni.uni, pix_uni.buf, args);
+        ola_output_client.SendDMX(pix_uni.uni, pix_uni.buf, args);
     }
 }
 
@@ -195,13 +272,13 @@ int main(int argc, char* argv[]){
         sampler.update();
 
         balise("Run animator...");
-        if(!b_test){    // if nominal case
+        if(!b_ANI_TEST && !b_EXT_CONTROL){    // if nominal case
             balise("Run animator normal update");
             // animator.random_update();
             // animator.palette_update();
             animator.show_update();
         }
-        else if (frame.cpt == 0){   // else activate once and for all the animations to test
+        else if (!b_EXT_CONTROL && b_ANI_TEST && frame.cpt == 0){   // else activate once and for all the animations to test
             balise("Run animator test fcn");
             if(!animator.test_animation()){
                 // return -1;
@@ -210,8 +287,10 @@ int main(int argc, char* argv[]){
 
         balise("Compute new frames...");
         for (fix_vec::iterator fixture = fixtures.begin(); fixture != fixtures.end(); fixture++){
-            log(4, (*fixture)->name, " : new frame for ", (*fixture)->active_animation->id.data());
-            (*fixture)->active_animation->new_frame();
+            if((*fixture)->active_animation != nullptr){
+                log(4, (*fixture)->name, " : new frame for ", (*fixture)->active_animation->id.data());
+                (*fixture)->active_animation->new_frame();
+            }
         }
         // led.active_animation->new_frame();
         // //spot_g.active_animation->new_frame();
