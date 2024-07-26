@@ -47,9 +47,9 @@ const std::vector<std::string> colorName = {
     "Magenta",
     "Pink",
     "Green",
-    "Sevika Pink",
-    "Hextech Cyan",
-    "Shimmer Purple"};
+    "Sevika_Pink",
+    "Hextech_Cyan",
+    "Shimmer_Purple"};
 
 enum Shape{
     square,

@@ -291,6 +291,9 @@ class AnimationManager{
     bool timer_elapsed();
 };
 
+extern AnimationManager animator;
+
+
 
 /** ----------------------------------------------------------
 ######                          #######                                     
@@ -395,7 +398,6 @@ class BaseAnimation{
     }
 };
 
-extern AnimationManager animator;
 
 
 

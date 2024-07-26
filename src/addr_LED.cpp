@@ -493,6 +493,11 @@ void AddressableLED::init(){
     animations.push_back(new AddrLEDAnimation4(this, red, color_vec{c_white}, square, bar, 1000, 1000/FRATE, "ColdWhite slow strobe, Red bg",       "PIX.4.10.1.2", leader, 1, 255));
     animations.push_back(new AddrLEDAnimation4(this, red, color_vec{gold}, square, bar, 1000, 1000/FRATE, "Gold slow strobe, Red bg",       "PIX.4.10.1.3", leader, 1, 255));
 
+    // Fast chaser
+    animations.push_back(new AddrLEDAnimation4(this, purple,            color_vec{gold},            square, bar, burst_period, flash_length, "fast gold chaser, purple bkgd",                "PIX.4.2.2.2.100", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, red,            color_vec{cyan},            square, bar, burst_period, flash_length, "fast cyan chaser, red bkgd",                "PIX.4.2.2.2.101", leader, 1, 255));
+
+
     this->activate_none();
 }
 

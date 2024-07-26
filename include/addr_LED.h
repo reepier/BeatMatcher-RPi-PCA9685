@@ -305,14 +305,14 @@ class AddrLEDAnimation3 : public AddrLEDAnimation{
 };
 
 /*
-#              ######                                            
-#    #         #     # #    # #####  #####  #      ######  ####  
-#    #         #     # #    # #    # #    # #      #      #      
-#    #         ######  #    # #####  #####  #      #####   ####  
-####### ###    #     # #    # #    # #    # #      #           # 
-     #  ###    #     # #    # #    # #    # #      #      #    # 
-     #  ###    ######   ####  #####  #####  ###### ######  ####  
-
+#              ######                          ######                             
+#    #         #     #   ##   #    # #####     #     # #    # #####   ####  ##### 
+#    #         #     #  #  #  ##   # #    #    #     # #    # #    # #        #   
+#    #         ######  #    # # #  # #    #    ######  #    # #    #  ####    #   
+####### ###    #   #   ###### #  # # #    #    #     # #    # #####       #   #   
+     #  ###    #    #  #    # #   ## #    #    #     # #    # #   #  #    #   #   
+     #  ###    #     # #    # #    # #####     ######   ####  #    #  ####    #   
+     
 Makeover of spotracks Bubblles function :
 - random bursts of colors on inidividual pixel units
 - pixel units can be LED bars, BAr segemnts or inidividual pixels.
