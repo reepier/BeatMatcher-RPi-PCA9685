@@ -660,11 +660,12 @@ void SpotRackAnimation1::init(){
     log(4, __FILE__, " ", __LINE__, " ",__func__, " ", this->fixture->name, " ", this->id);
 
     BaseAnimation::init();
+    
+    this->fixture->reset_spots();
+    
     for (auto spot : this->fixture->spots){
         spot->master = this->master;
     }
-
-    this->fixture->reset_spots();
 
     this->p_ms = vector<int>{rand_min_max(sin_min_p_ms, sin_max_p_ms),rand_min_max(sin_min_p_ms, sin_max_p_ms),rand_min_max(sin_min_p_ms, sin_max_p_ms), rand_min_max(sin_min_p_ms, sin_max_p_ms), rand_min_max(sin_min_p_ms, sin_max_p_ms)};
     
@@ -787,6 +788,7 @@ void SpotRackAnimation2::init(){
     log(4, __FILE__, " ", __LINE__, " ",__func__);
 
     BaseAnimation::init();
+    this->fixture->reset_spots();
     for (auto spot : this->fixture->spots){
         spot->master = this->master;
     }
@@ -837,6 +839,7 @@ void SpotRackAnimation2::new_frame(){
 //TODO finish
 void SpotRackAnimation3::init(){
     BaseAnimation::init();
+    this->fixture->reset_spots();
     for (auto spot : this->fixture->spots){
         spot->master = this->master;
     }
@@ -860,6 +863,7 @@ void SpotRackAnimation3::new_frame(){
 */
 void SpotRackAnimation4::init(){
     BaseAnimation::init();
+    this->fixture->reset_spots();
     for (auto spot : this->fixture->spots){
         spot->master = this->master;
     }
