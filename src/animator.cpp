@@ -274,10 +274,14 @@ bool AnimationManager::controled_animator(const DMX_vec data){
     uint8_t spot_2_DIMMER = data[1];
     uint8_t Addr_LED_DIMMER = data[2];
 
-    uint8_t spot_1_animation = 
     front_rack.activate_by_index(data[3]);
+    front_rack.set_master(data[0]);
+
     back_rack.activate_by_index(data[4]);
+    front_rack.set_master(data[1]);
+
     addr_led.activate_by_index(data[5]);
+    addr_led.master = data[2];
 
     // // Test 2 Dyamically create new animations based on what is contained in "data"
 

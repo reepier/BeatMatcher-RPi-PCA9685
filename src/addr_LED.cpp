@@ -509,7 +509,7 @@ DMX_vec AddressableLED::buffer(){
     int i_data = 0;
     for (auto pix : this->pixels){        
         for (auto sub_pix : pix){
-            data[i_data++] = (uint8_t) (this->master/255.0*sub_pix);
+            data[i_data++] = (uint8_t) (this->master/255.0 * this->active_animation->master/255.0 * sub_pix);
         }
     }
     return data;

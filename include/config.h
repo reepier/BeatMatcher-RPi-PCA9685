@@ -56,21 +56,21 @@ extern std::vector<std::string> vec_anim_id;
 #define     SHOW_INTENSITY 0        // ranges from 1 to 3 (0 for all)
 
 // External Controler SETTING
-#define SR1_DIMMER      0
-#define SR1_ANI_TYPE    1
-#define SR1_C1          2
-#define SR1_C2          3
+// #define SR1_DIMMER      0
+// #define SR1_ANI_TYPE    1
+// #define SR1_C1          2
+// #define SR1_C2          3
 
-#define SR2_DIMMER      4
-#define SR2_ANI_TYPE    5
-#define SR2_C1          6
-#define SR2_C2          7
+// #define SR2_DIMMER      4
+// #define SR2_ANI_TYPE    5
+// #define SR2_C1          6
+// #define SR2_C2          7
 
-#define WS_DIMMER      8
-#define WS_ANI_TYPE    9
-#define WS_ANI_UNIT    10
-#define WS_C1          11
-#define WS_C2          12
-#define WS_S1          13
-#define WS_S2          14
-#define WS_DENS        15
+// #define WS_DIMMER      8
+// #define WS_ANI_TYPE    9
+// #define WS_ANI_UNIT    10
+// #define WS_C1          11
+// #define WS_C2          12
+// #define WS_S1          13
+// #define WS_S2          14
+// #define WS_DENS        15

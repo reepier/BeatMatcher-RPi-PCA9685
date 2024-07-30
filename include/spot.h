@@ -43,6 +43,8 @@ public:
     uint8_t prog = 0;                         // fixture preset program (unused)
     spot_type_t type;   // spot 
 
+    SpotRack * rack;
+
     // Constructor & Initializer
     SpotFixture(spot_type_t typ, int addr, int nch, std::string nm, int id, uint8_t mast=255) : BaseFixture(addr, nch, nm, id, mast){
         this->type = type;
@@ -96,6 +98,7 @@ public:
         this->rack_size = sp.size();
 
         for (auto s : spots){
+            s->rack = this;
             s->master = this->master;
         }
     };
@@ -112,6 +115,11 @@ public:
             (*spot)->reset_channels();
         }
     };
+    void set_master(int mast){
+        for(auto spot : spots){
+            spot->master = mast;
+        }
+    }
 
     DMX_vec RGBW(simpleColor, int intensity = 255) override;
 };

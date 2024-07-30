@@ -43,7 +43,7 @@ SpotFixture spot_18(Shehds_10x8W, 209, 8, "Spot 13 (210)", 18);
 
 DMX_vec FunGeneration_12x1W_buffer(const SpotFixture& spot){
     // return DMX_vec{    (uint8_t)((double)this->MASTER_DIMMER * this->active_animation->master / 255),
-    return DMX_vec{      spot.master,
+    return DMX_vec{      (uint8_t) (spot.master/255.0 * spot.rack->active_animation->master),
                          spot.RGBWout[R],
                          spot.RGBWout[G],
                          spot.RGBWout[B],
@@ -96,7 +96,7 @@ SpotRack front_rack(spot_vec{&spot_7, &spot_8, &spot_9, &spot_10, &spot_11, &spo
 // SpotRack back_rack(spot_vec{&spot_5, &spot_6, &spot_7, &spot_8, &spot_9}, "Back Rack", 2);
 SpotRack back_rack(spot_vec{&spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6}, "Back Rack", 2);
 
-SpotRack global_rack(spot_vec{&spot_1,&spot_2,&spot_3,&spot_4,&spot_5,&spot_6,&spot_7,&spot_8,&spot_9,&spot_10,&spot_11,&spot_12}, "Global Rack", 1);
+// SpotRack global_rack(spot_vec{&spot_1,&spot_2,&spot_3,&spot_4,&spot_5,&spot_6,&spot_7,&spot_8,&spot_9,&spot_10,&spot_11,&spot_12}, "Global Rack", 1);
 
 /*
 ### #     # ### #######        #######               
@@ -663,9 +663,9 @@ void SpotRackAnimation1::init(){
     
     this->fixture->reset_spots();
     
-    for (auto spot : this->fixture->spots){
-        spot->master = this->master;
-    }
+    // for (auto spot : this->fixture->spots){
+    //     spot->master = this->master;
+    // }
 
     this->p_ms = vector<int>{rand_min_max(sin_min_p_ms, sin_max_p_ms),rand_min_max(sin_min_p_ms, sin_max_p_ms),rand_min_max(sin_min_p_ms, sin_max_p_ms), rand_min_max(sin_min_p_ms, sin_max_p_ms), rand_min_max(sin_min_p_ms, sin_max_p_ms)};
     
@@ -789,9 +789,9 @@ void SpotRackAnimation2::init(){
 
     BaseAnimation::init();
     this->fixture->reset_spots();
-    for (auto spot : this->fixture->spots){
-        spot->master = this->master;
-    }
+    // for (auto spot : this->fixture->spots){
+    //     spot->master = this->master;
+    // }
 
     this->t_next_shake = frame.t_current_ms + 2000;
     this->shake();
@@ -840,9 +840,9 @@ void SpotRackAnimation2::new_frame(){
 void SpotRackAnimation3::init(){
     BaseAnimation::init();
     this->fixture->reset_spots();
-    for (auto spot : this->fixture->spots){
-        spot->master = this->master;
-    }
+    // for (auto spot : this->fixture->spots){
+    //     spot->master = this->master;
+    // }
     
 }
 
