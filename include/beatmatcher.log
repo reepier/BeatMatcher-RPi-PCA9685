@@ -1,0 +1,953 @@
+[25654.6]     src/LED.cpp 112 buffer
+[25654.6]     src/spider.cpp 113 buffer
+[25654.6]     src/laser.cpp 16 buffer
+[25654.6]     Balise : Construct & send buffer for artnet pixels
+[25654.6]     Balise : Debug...
+[25654.6]     src/debug.cpp 315 display_curse
+[25654.6]     src/debug.cpp 77 disp_music_window
+[25654.6]     src/debug.cpp 226 disp_animation_window
+[25654.6]     src/debug.cpp 183 disp_output_window
+[25654.6]     src/LED.cpp 112 buffer
+[25654.6]     src/laser.cpp 16 buffer
+[25654.6]     src/spider.cpp 113 buffer
+[25654.6]     src/debug.cpp 257 disp_general_window
+[25654.6]     src/debug.cpp 289 disp_console_window
+[25654.6]     Balise : Wait next frame...
+[25654.6]     src/main.cpp 262 main
+[25654.6]     Balise : ----------------------------Start new frame...
+[25654.6]     Balise : Record & process sample...
+[25654.6]     src/music.cpp 34 update
+[25654.6]     src/music.cpp 103 _update_beats
+[25654.6]     src/music.cpp 131 _update_state
+[25654.6]     src/music.cpp 189 _update_beat_threshold
+[25654.6]     Balise : Run animator...
+[25654.6]     Balise : Compute new frames...
+[25654.6]     LEDs : new frame for PIX.0.0
+[25654.6]     Balise : Addr LED Ani1 New frames...
+[25654.6]     Balise : Addr LED Ani1 New frames 1
+[25654.6]     Balise : Addr LED Ani1 New frames 1
+[25654.6]     Balise : Addr LED Ani1 New frames 2
+[25654.6]     Balise : Addr LED Ani1 New frames 3
+[25654.6]     Balise : Addr LED Ani1 New frames 4
+[25654.6]     Led Bars : new frame for LED.0.0
+[25654.6]     src/LED.cpp 165 new_frame
+[25654.6]     Laser : new frame for LAS.0
+[25654.6]     src/laser.cpp 145 new_frame
+[25654.6]     Front Rack : new frame for FR.0
+[25654.6]     src/spot.cpp 690 new_frame
+[25654.6]     Back Rack : new frame for BR.0
+[25654.6]     src/spot.cpp 690 new_frame
+[25654.6]     Spider : new frame for SPI.0.0
+[25654.6]     src/spider.cpp 209 new_frame
+[25654.6]     Balise : Compute new spider1 frame
+[25654.6]     Balise : Send frame...
+[25654.6]     Balise : Construct & send buffer for classical fixtures
+[25654.6]     src/LED.cpp 112 buffer
+[25654.6]     src/spider.cpp 113 buffer
+[25654.6]     src/laser.cpp 16 buffer
+[25654.6]     Balise : Construct & send buffer for artnet pixels
+[25654.6]     Balise : Debug...
+[25654.6]     src/debug.cpp 315 display_curse
+[25654.6]     src/debug.cpp 77 disp_music_window
+[25654.6]     src/debug.cpp 226 disp_animation_window
+[25654.6]     src/debug.cpp 183 disp_output_window
+[25654.6]     src/LED.cpp 112 buffer
+[25654.6]     src/laser.cpp 16 buffer
+[25654.6]     src/spider.cpp 113 buffer
+[25654.6]     src/debug.cpp 257 disp_general_window
+[25654.6]     src/debug.cpp 289 disp_console_window
+[25654.6]     Balise : Wait next frame...
+[25654.6]     src/main.cpp 262 main
+[25654.6]     Balise : ----------------------------Start new frame...
+[25654.7]     Balise : Record & process sample...
+[25654.7]     src/music.cpp 34 update
+[25654.7]     src/music.cpp 103 _update_beats
+[25654.7]     src/music.cpp 131 _update_state
+[25654.7]     src/music.cpp 189 _update_beat_threshold
+[25654.7]     Balise : Run animator...
+[25654.7]     Balise : Compute new frames...
+[25654.7]     LEDs : new frame for PIX.0.0
+[25654.7]     Balise : Addr LED Ani1 New frames...
+[25654.7]     Balise : Addr LED Ani1 New frames 1
+[25654.7]     Balise : Addr LED Ani1 New frames 1
+[25654.7]     Balise : Addr LED Ani1 New frames 2
+[25654.7]     Balise : Addr LED Ani1 New frames 3
+[25654.7]     Balise : Addr LED Ani1 New frames 4
+[25654.7]     Led Bars : new frame for LED.0.0
+[25654.7]     src/LED.cpp 165 new_frame
+[25654.7]     Laser : new frame for LAS.0
+[25654.7]     src/laser.cpp 145 new_frame
+[25654.7]     Front Rack : new frame for FR.0
+[25654.7]     src/spot.cpp 690 new_frame
+[25654.7]     Back Rack : new frame for BR.0
+[25654.7]     src/spot.cpp 690 new_frame
+[25654.7]     Spider : new frame for SPI.0.0
+[25654.7]     src/spider.cpp 209 new_frame
+[25654.7]     Balise : Compute new spider1 frame
+[25654.7]     Balise : Send frame...
+[25654.7]     Balise : Construct & send buffer for classical fixtures
+[25654.7]     src/LED.cpp 112 buffer
+[25654.7]     src/spider.cpp 113 buffer
+[25654.7]     src/laser.cpp 16 buffer
+[25654.7]     Balise : Construct & send buffer for artnet pixels
+[25654.7]     Balise : Debug...
+[25654.7]     src/debug.cpp 315 display_curse
+[25654.7]     src/debug.cpp 77 disp_music_window
+[25654.7]     src/debug.cpp 226 disp_animation_window
+[25654.7]     src/debug.cpp 183 disp_output_window
+[25654.7]     src/LED.cpp 112 buffer
+[25654.7]     src/laser.cpp 16 buffer
+[25654.7]     src/spider.cpp 113 buffer
+[25654.7]     src/debug.cpp 257 disp_general_window
+[25654.7]     src/debug.cpp 289 disp_console_window
+[25654.7]     Balise : Wait next frame...
+[25654.7]     src/main.cpp 262 main
+[25654.7]     Balise : ----------------------------Start new frame...
+[25654.7]     Balise : Record & process sample...
+[25654.7]     src/music.cpp 34 update
+[25654.7]     src/music.cpp 103 _update_beats
+[25654.7]     src/music.cpp 131 _update_state
+[25654.7]     src/music.cpp 189 _update_beat_threshold
+[25654.7]     Balise : Run animator...
+[25654.7]     Balise : Compute new frames...
+[25654.7]     LEDs : new frame for PIX.0.0
+[25654.7]     Balise : Addr LED Ani1 New frames...
+[25654.7]     Balise : Addr LED Ani1 New frames 1
+[25654.7]     Balise : Addr LED Ani1 New frames 1
+[25654.7]     Balise : Addr LED Ani1 New frames 2
+[25654.7]     Balise : Addr LED Ani1 New frames 3
+[25654.7]     Balise : Addr LED Ani1 New frames 4
+[25654.7]     Led Bars : new frame for LED.0.0
+[25654.7]     src/LED.cpp 165 new_frame
+[25654.7]     Laser : new frame for LAS.0
+[25654.7]     src/laser.cpp 145 new_frame
+[25654.7]     Front Rack : new frame for FR.0
+[25654.7]     src/spot.cpp 690 new_frame
+[25654.7]     Back Rack : new frame for BR.0
+[25654.7]     src/spot.cpp 690 new_frame
+[25654.7]     Spider : new frame for SPI.0.0
+[25654.7]     src/spider.cpp 209 new_frame
+[25654.7]     Balise : Compute new spider1 frame
+[25654.7]     Balise : Send frame...
+[25654.7]     Balise : Construct & send buffer for classical fixtures
+[25654.7]     src/LED.cpp 112 buffer
+[25654.7]     src/spider.cpp 113 buffer
+[25654.7]     src/laser.cpp 16 buffer
+[25654.7]     Balise : Construct & send buffer for artnet pixels
+[25654.7]     Balise : Debug...
+[25654.7]     src/debug.cpp 315 display_curse
+[25654.7]     src/debug.cpp 77 disp_music_window
+[25654.7]     src/debug.cpp 226 disp_animation_window
+[25654.7]     src/debug.cpp 183 disp_output_window
+[25654.7]     src/LED.cpp 112 buffer
+[25654.7]     src/laser.cpp 16 buffer
+[25654.7]     src/spider.cpp 113 buffer
+[25654.7]     src/debug.cpp 257 disp_general_window
+[25654.7]     src/debug.cpp 289 disp_console_window
+[25654.7]     Balise : Wait next frame...
+[25654.7]     src/main.cpp 262 main
+[25654.7]     Balise : ----------------------------Start new frame...
+[25654.7]     Balise : Record & process sample...
+[25654.7]     src/music.cpp 34 update
+[25654.7]     src/music.cpp 103 _update_beats
+[25654.7]     src/music.cpp 131 _update_state
+[25654.7]     src/music.cpp 189 _update_beat_threshold
+[25654.7]     Balise : Run animator...
+[25654.7]     Balise : Compute new frames...
+[25654.7]     LEDs : new frame for PIX.0.0
+[25654.7]     Balise : Addr LED Ani1 New frames...
+[25654.7]     Balise : Addr LED Ani1 New frames 1
+[25654.7]     Balise : Addr LED Ani1 New frames 1
+[25654.7]     Balise : Addr LED Ani1 New frames 2
+[25654.7]     Balise : Addr LED Ani1 New frames 3
+[25654.7]     Balise : Addr LED Ani1 New frames 4
+[25654.7]     Led Bars : new frame for LED.0.0
+[25654.7]     src/LED.cpp 165 new_frame
+[25654.7]     Laser : new frame for LAS.0
+[25654.7]     src/laser.cpp 145 new_frame
+[25654.7]     Front Rack : new frame for FR.0
+[25654.7]     src/spot.cpp 690 new_frame
+[25654.7]     Back Rack : new frame for BR.0
+[25654.7]     src/spot.cpp 690 new_frame
+[25654.7]     Spider : new frame for SPI.0.0
+[25654.7]     src/spider.cpp 209 new_frame
+[25654.7]     Balise : Compute new spider1 frame
+[25654.7]     Balise : Send frame...
+[25654.7]     Balise : Construct & send buffer for classical fixtures
+[25654.7]     src/LED.cpp 112 buffer
+[25654.7]     src/spider.cpp 113 buffer
+[25654.7]     src/laser.cpp 16 buffer
+[25654.7]     Balise : Construct & send buffer for artnet pixels
+[25654.7]     Balise : Debug...
+[25654.7]     src/debug.cpp 315 display_curse
+[25654.7]     src/debug.cpp 77 disp_music_window
+[25654.7]     src/debug.cpp 226 disp_animation_window
+[25654.7]     src/debug.cpp 183 disp_output_window
+[25654.7]     src/LED.cpp 112 buffer
+[25654.7]     src/laser.cpp 16 buffer
+[25654.7]     src/spider.cpp 113 buffer
+[25654.7]     src/debug.cpp 257 disp_general_window
+[25654.7]     src/debug.cpp 289 disp_console_window
+[25654.7]     Balise : Wait next frame...
+[25654.7]     src/main.cpp 262 main
+[25654.7]     Balise : ----------------------------Start new frame...
+[25654.7]     Balise : Record & process sample...
+[25654.7]     src/music.cpp 34 update
+[25654.7]     src/music.cpp 103 _update_beats
+[25654.7]     src/music.cpp 131 _update_state
+[25654.7]     src/music.cpp 189 _update_beat_threshold
+[25654.7]     Balise : Run animator...
+[25654.7]     Balise : Compute new frames...
+[25654.7]     LEDs : new frame for PIX.0.0
+[25654.7]     Balise : Addr LED Ani1 New frames...
+[25654.7]     Balise : Addr LED Ani1 New frames 1
+[25654.7]     Balise : Addr LED Ani1 New frames 1
+[25654.7]     Balise : Addr LED Ani1 New frames 2
+[25654.7]     Balise : Addr LED Ani1 New frames 3
+[25654.7]     Balise : Addr LED Ani1 New frames 4
+[25654.7]     Led Bars : new frame for LED.0.0
+[25654.7]     src/LED.cpp 165 new_frame
+[25654.7]     Laser : new frame for LAS.0
+[25654.7]     src/laser.cpp 145 new_frame
+[25654.7]     Front Rack : new frame for FR.0
+[25654.7]     src/spot.cpp 690 new_frame
+[25654.7]     Back Rack : new frame for BR.0
+[25654.7]     src/spot.cpp 690 new_frame
+[25654.7]     Spider : new frame for SPI.0.0
+[25654.7]     src/spider.cpp 209 new_frame
+[25654.7]     Balise : Compute new spider1 frame
+[25654.7]     Balise : Send frame...
+[25654.7]     Balise : Construct & send buffer for classical fixtures
+[25654.7]     src/LED.cpp 112 buffer
+[25654.7]     src/spider.cpp 113 buffer
+[25654.7]     src/laser.cpp 16 buffer
+[25654.7]     Balise : Construct & send buffer for artnet pixels
+[25654.7]     Balise : Debug...
+[25654.7]     src/debug.cpp 315 display_curse
+[25654.7]     src/debug.cpp 77 disp_music_window
+[25654.7]     src/debug.cpp 226 disp_animation_window
+[25654.7]     src/debug.cpp 183 disp_output_window
+[25654.7]     src/LED.cpp 112 buffer
+[25654.7]     src/laser.cpp 16 buffer
+[25654.7]     src/spider.cpp 113 buffer
+[25654.7]     src/debug.cpp 257 disp_general_window
+[25654.7]     src/debug.cpp 289 disp_console_window
+[25654.7]     Balise : Wait next frame...
+[25654.7]     src/main.cpp 262 main
+[25654.7]     Balise : ----------------------------Start new frame...
+[25654.8]     Balise : Record & process sample...
+[25654.8]     src/music.cpp 34 update
+[25654.8]     src/music.cpp 103 _update_beats
+[25654.8]     src/music.cpp 131 _update_state
+[25654.8]     src/music.cpp 189 _update_beat_threshold
+[25654.8]     Balise : Run animator...
+[25654.8]     Balise : Compute new frames...
+[25654.8]     LEDs : new frame for PIX.0.0
+[25654.8]     Balise : Addr LED Ani1 New frames...
+[25654.8]     Balise : Addr LED Ani1 New frames 1
+[25654.8]     Balise : Addr LED Ani1 New frames 1
+[25654.8]     Balise : Addr LED Ani1 New frames 2
+[25654.8]     Balise : Addr LED Ani1 New frames 3
+[25654.8]     Balise : Addr LED Ani1 New frames 4
+[25654.8]     Led Bars : new frame for LED.0.0
+[25654.8]     src/LED.cpp 165 new_frame
+[25654.8]     Laser : new frame for LAS.0
+[25654.8]     src/laser.cpp 145 new_frame
+[25654.8]     Front Rack : new frame for FR.0
+[25654.8]     src/spot.cpp 690 new_frame
+[25654.8]     Back Rack : new frame for BR.0
+[25654.8]     src/spot.cpp 690 new_frame
+[25654.8]     Spider : new frame for SPI.0.0
+[25654.8]     src/spider.cpp 209 new_frame
+[25654.8]     Balise : Compute new spider1 frame
+[25654.8]     Balise : Send frame...
+[25654.8]     Balise : Construct & send buffer for classical fixtures
+[25654.8]     src/LED.cpp 112 buffer
+[25654.8]     src/spider.cpp 113 buffer
+[25654.8]     src/laser.cpp 16 buffer
+[25654.8]     Balise : Construct & send buffer for artnet pixels
+[25654.8]     Balise : Debug...
+[25654.8]     src/debug.cpp 315 display_curse
+[25654.8]     src/debug.cpp 77 disp_music_window
+[25654.8]     src/debug.cpp 226 disp_animation_window
+[25654.8]     src/debug.cpp 183 disp_output_window
+[25654.8]     src/LED.cpp 112 buffer
+[25654.8]     src/laser.cpp 16 buffer
+[25654.8]     src/spider.cpp 113 buffer
+[25654.8]     src/debug.cpp 257 disp_general_window
+[25654.8]     src/debug.cpp 289 disp_console_window
+[25654.8]     Balise : Wait next frame...
+[25654.8]     src/main.cpp 262 main
+[25654.8]     Balise : ----------------------------Start new frame...
+[25654.8]     Balise : Record & process sample...
+[25654.8]     src/music.cpp 34 update
+[25654.8]     src/music.cpp 103 _update_beats
+[25654.8]     src/music.cpp 131 _update_state
+[25654.8]     src/music.cpp 189 _update_beat_threshold
+[25654.8]     Balise : Run animator...
+[25654.8]     Balise : Compute new frames...
+[25654.8]     LEDs : new frame for PIX.0.0
+[25654.8]     Balise : Addr LED Ani1 New frames...
+[25654.8]     Balise : Addr LED Ani1 New frames 1
+[25654.8]     Balise : Addr LED Ani1 New frames 1
+[25654.8]     Balise : Addr LED Ani1 New frames 2
+[25654.8]     Balise : Addr LED Ani1 New frames 3
+[25654.8]     Balise : Addr LED Ani1 New frames 4
+[25654.8]     Led Bars : new frame for LED.0.0
+[25654.8]     src/LED.cpp 165 new_frame
+[25654.8]     Laser : new frame for LAS.0
+[25654.8]     src/laser.cpp 145 new_frame
+[25654.8]     Front Rack : new frame for FR.0
+[25654.8]     src/spot.cpp 690 new_frame
+[25654.8]     Back Rack : new frame for BR.0
+[25654.8]     src/spot.cpp 690 new_frame
+[25654.8]     Spider : new frame for SPI.0.0
+[25654.8]     src/spider.cpp 209 new_frame
+[25654.8]     Balise : Compute new spider1 frame
+[25654.8]     Balise : Send frame...
+[25654.8]     Balise : Construct & send buffer for classical fixtures
+[25654.8]     src/LED.cpp 112 buffer
+[25654.8]     src/spider.cpp 113 buffer
+[25654.8]     src/laser.cpp 16 buffer
+[25654.8]     Balise : Construct & send buffer for artnet pixels
+[25654.8]     Balise : Debug...
+[25654.8]     src/debug.cpp 315 display_curse
+[25654.8]     src/debug.cpp 77 disp_music_window
+[25654.8]     src/debug.cpp 226 disp_animation_window
+[25654.8]     src/debug.cpp 183 disp_output_window
+[25654.8]     src/LED.cpp 112 buffer
+[25654.8]     src/laser.cpp 16 buffer
+[25654.8]     src/spider.cpp 113 buffer
+[25654.8]     src/debug.cpp 257 disp_general_window
+[25654.8]     src/debug.cpp 289 disp_console_window
+[25654.8]     Balise : Wait next frame...
+[25654.8]     src/main.cpp 262 main
+[25654.8]     Balise : ----------------------------Start new frame...
+[25654.8]     Balise : Record & process sample...
+[25654.8]     src/music.cpp 34 update
+[25654.8]     src/music.cpp 103 _update_beats
+[25654.8]     src/music.cpp 131 _update_state
+[25654.8]     src/music.cpp 189 _update_beat_threshold
+[25654.8]     Balise : Run animator...
+[25654.8]     Balise : Compute new frames...
+[25654.8]     LEDs : new frame for PIX.0.0
+[25654.8]     Balise : Addr LED Ani1 New frames...
+[25654.8]     Balise : Addr LED Ani1 New frames 1
+[25654.8]     Balise : Addr LED Ani1 New frames 1
+[25654.8]     Balise : Addr LED Ani1 New frames 2
+[25654.8]     Balise : Addr LED Ani1 New frames 3
+[25654.8]     Balise : Addr LED Ani1 New frames 4
+[25654.8]     Led Bars : new frame for LED.0.0
+[25654.8]     src/LED.cpp 165 new_frame
+[25654.8]     Laser : new frame for LAS.0
+[25654.8]     src/laser.cpp 145 new_frame
+[25654.8]     Front Rack : new frame for FR.0
+[25654.8]     src/spot.cpp 690 new_frame
+[25654.8]     Back Rack : new frame for BR.0
+[25654.8]     src/spot.cpp 690 new_frame
+[25654.8]     Spider : new frame for SPI.0.0
+[25654.8]     src/spider.cpp 209 new_frame
+[25654.8]     Balise : Compute new spider1 frame
+[25654.8]     Balise : Send frame...
+[25654.8]     Balise : Construct & send buffer for classical fixtures
+[25654.8]     src/LED.cpp 112 buffer
+[25654.8]     src/spider.cpp 113 buffer
+[25654.8]     src/laser.cpp 16 buffer
+[25654.8]     Balise : Construct & send buffer for artnet pixels
+[25654.8]     Balise : Debug...
+[25654.8]     src/debug.cpp 315 display_curse
+[25654.8]     src/debug.cpp 77 disp_music_window
+[25654.8]     src/debug.cpp 226 disp_animation_window
+[25654.8]     src/debug.cpp 183 disp_output_window
+[25654.8]     src/LED.cpp 112 buffer
+[25654.8]     src/laser.cpp 16 buffer
+[25654.8]     src/spider.cpp 113 buffer
+[25654.8]     src/debug.cpp 257 disp_general_window
+[25654.8]     src/debug.cpp 289 disp_console_window
+[25654.8]     Balise : Wait next frame...
+[25654.8]     src/main.cpp 262 main
+[25654.8]     Balise : ----------------------------Start new frame...
+[25654.8]     Balise : Record & process sample...
+[25654.8]     src/music.cpp 34 update
+[25654.8]     src/music.cpp 103 _update_beats
+[25654.8]     src/music.cpp 131 _update_state
+[25654.8]     src/music.cpp 189 _update_beat_threshold
+[25654.8]     Balise : Run animator...
+[25654.8]     Balise : Compute new frames...
+[25654.8]     LEDs : new frame for PIX.0.0
+[25654.8]     Balise : Addr LED Ani1 New frames...
+[25654.8]     Balise : Addr LED Ani1 New frames 1
+[25654.8]     Balise : Addr LED Ani1 New frames 1
+[25654.8]     Balise : Addr LED Ani1 New frames 2
+[25654.8]     Balise : Addr LED Ani1 New frames 3
+[25654.8]     Balise : Addr LED Ani1 New frames 4
+[25654.8]     Led Bars : new frame for LED.0.0
+[25654.8]     src/LED.cpp 165 new_frame
+[25654.8]     Laser : new frame for LAS.0
+[25654.8]     src/laser.cpp 145 new_frame
+[25654.8]     Front Rack : new frame for FR.0
+[25654.8]     src/spot.cpp 690 new_frame
+[25654.8]     Back Rack : new frame for BR.0
+[25654.8]     src/spot.cpp 690 new_frame
+[25654.8]     Spider : new frame for SPI.0.0
+[25654.8]     src/spider.cpp 209 new_frame
+[25654.8]     Balise : Compute new spider1 frame
+[25654.8]     Balise : Send frame...
+[25654.8]     Balise : Construct & send buffer for classical fixtures
+[25654.8]     src/LED.cpp 112 buffer
+[25654.8]     src/spider.cpp 113 buffer
+[25654.8]     src/laser.cpp 16 buffer
+[25654.8]     Balise : Construct & send buffer for artnet pixels
+[25654.8]     Balise : Debug...
+[25654.8]     src/debug.cpp 315 display_curse
+[25654.8]     src/debug.cpp 77 disp_music_window
+[25654.8]     src/debug.cpp 226 disp_animation_window
+[25654.8]     src/debug.cpp 183 disp_output_window
+[25654.8]     src/LED.cpp 112 buffer
+[25654.8]     src/laser.cpp 16 buffer
+[25654.8]     src/spider.cpp 113 buffer
+[25654.8]     src/debug.cpp 257 disp_general_window
+[25654.8]     src/debug.cpp 289 disp_console_window
+[25654.8]     Balise : Wait next frame...
+[25654.8]     src/main.cpp 262 main
+[25654.8]     Balise : ----------------------------Start new frame...
+[25654.9]     Balise : Record & process sample...
+[25654.9]     src/music.cpp 34 update
+[25654.9]     src/music.cpp 103 _update_beats
+[25654.9]     src/music.cpp 131 _update_state
+[25654.9]     src/music.cpp 189 _update_beat_threshold
+[25654.9]     Balise : Run animator...
+[25654.9]     Balise : Compute new frames...
+[25654.9]     LEDs : new frame for PIX.0.0
+[25654.9]     Balise : Addr LED Ani1 New frames...
+[25654.9]     Balise : Addr LED Ani1 New frames 1
+[25654.9]     Balise : Addr LED Ani1 New frames 1
+[25654.9]     Balise : Addr LED Ani1 New frames 2
+[25654.9]     Balise : Addr LED Ani1 New frames 3
+[25654.9]     Balise : Addr LED Ani1 New frames 4
+[25654.9]     Led Bars : new frame for LED.0.0
+[25654.9]     src/LED.cpp 165 new_frame
+[25654.9]     Laser : new frame for LAS.0
+[25654.9]     src/laser.cpp 145 new_frame
+[25654.9]     Front Rack : new frame for FR.0
+[25654.9]     src/spot.cpp 690 new_frame
+[25654.9]     Back Rack : new frame for BR.0
+[25654.9]     src/spot.cpp 690 new_frame
+[25654.9]     Spider : new frame for SPI.0.0
+[25654.9]     src/spider.cpp 209 new_frame
+[25654.9]     Balise : Compute new spider1 frame
+[25654.9]     Balise : Send frame...
+[25654.9]     Balise : Construct & send buffer for classical fixtures
+[25654.9]     src/LED.cpp 112 buffer
+[25654.9]     src/spider.cpp 113 buffer
+[25654.9]     src/laser.cpp 16 buffer
+[25654.9]     Balise : Construct & send buffer for artnet pixels
+[25654.9]     Balise : Debug...
+[25654.9]     src/debug.cpp 315 display_curse
+[25654.9]     src/debug.cpp 77 disp_music_window
+[25654.9]     src/debug.cpp 226 disp_animation_window
+[25654.9]     src/debug.cpp 183 disp_output_window
+[25654.9]     src/LED.cpp 112 buffer
+[25654.9]     src/laser.cpp 16 buffer
+[25654.9]     src/spider.cpp 113 buffer
+[25654.9]     src/debug.cpp 257 disp_general_window
+[25654.9]     src/debug.cpp 289 disp_console_window
+[25654.9]     Balise : Wait next frame...
+[25654.9]     src/main.cpp 262 main
+[25654.9]     Balise : ----------------------------Start new frame...
+[25654.9]     Balise : Record & process sample...
+[25654.9]     src/music.cpp 34 update
+[25654.9]     src/music.cpp 103 _update_beats
+[25654.9]     src/music.cpp 131 _update_state
+[25654.9]     src/music.cpp 189 _update_beat_threshold
+[25654.9]     Balise : Run animator...
+[25654.9]     Balise : Compute new frames...
+[25654.9]     LEDs : new frame for PIX.0.0
+[25654.9]     Balise : Addr LED Ani1 New frames...
+[25654.9]     Balise : Addr LED Ani1 New frames 1
+[25654.9]     Balise : Addr LED Ani1 New frames 1
+[25654.9]     Balise : Addr LED Ani1 New frames 2
+[25654.9]     Balise : Addr LED Ani1 New frames 3
+[25654.9]     Balise : Addr LED Ani1 New frames 4
+[25654.9]     Led Bars : new frame for LED.0.0
+[25654.9]     src/LED.cpp 165 new_frame
+[25654.9]     Laser : new frame for LAS.0
+[25654.9]     src/laser.cpp 145 new_frame
+[25654.9]     Front Rack : new frame for FR.0
+[25654.9]     src/spot.cpp 690 new_frame
+[25654.9]     Back Rack : new frame for BR.0
+[25654.9]     src/spot.cpp 690 new_frame
+[25654.9]     Spider : new frame for SPI.0.0
+[25654.9]     src/spider.cpp 209 new_frame
+[25654.9]     Balise : Compute new spider1 frame
+[25654.9]     Balise : Send frame...
+[25654.9]     Balise : Construct & send buffer for classical fixtures
+[25654.9]     src/LED.cpp 112 buffer
+[25654.9]     src/spider.cpp 113 buffer
+[25654.9]     src/laser.cpp 16 buffer
+[25654.9]     Balise : Construct & send buffer for artnet pixels
+[25654.9]     Balise : Debug...
+[25654.9]     src/debug.cpp 315 display_curse
+[25654.9]     src/debug.cpp 77 disp_music_window
+[25654.9]     src/debug.cpp 226 disp_animation_window
+[25654.9]     src/debug.cpp 183 disp_output_window
+[25654.9]     src/LED.cpp 112 buffer
+[25654.9]     src/laser.cpp 16 buffer
+[25654.9]     src/spider.cpp 113 buffer
+[25654.9]     src/debug.cpp 257 disp_general_window
+[25654.9]     src/debug.cpp 289 disp_console_window
+[25654.9]     Balise : Wait next frame...
+[25654.9]     src/main.cpp 262 main
+[25654.9]     Balise : ----------------------------Start new frame...
+[25654.9]     Balise : Record & process sample...
+[25654.9]     src/music.cpp 34 update
+[25654.9]     src/music.cpp 103 _update_beats
+[25654.9]     src/music.cpp 131 _update_state
+[25654.9]     src/music.cpp 189 _update_beat_threshold
+[25654.9]     Balise : Run animator...
+[25654.9]     Balise : Compute new frames...
+[25654.9]     LEDs : new frame for PIX.0.0
+[25654.9]     Balise : Addr LED Ani1 New frames...
+[25654.9]     Balise : Addr LED Ani1 New frames 1
+[25654.9]     Balise : Addr LED Ani1 New frames 1
+[25654.9]     Balise : Addr LED Ani1 New frames 2
+[25654.9]     Balise : Addr LED Ani1 New frames 3
+[25654.9]     Balise : Addr LED Ani1 New frames 4
+[25654.9]     Led Bars : new frame for LED.0.0
+[25654.9]     src/LED.cpp 165 new_frame
+[25654.9]     Laser : new frame for LAS.0
+[25654.9]     src/laser.cpp 145 new_frame
+[25654.9]     Front Rack : new frame for FR.0
+[25654.9]     src/spot.cpp 690 new_frame
+[25654.9]     Back Rack : new frame for BR.0
+[25654.9]     src/spot.cpp 690 new_frame
+[25654.9]     Spider : new frame for SPI.0.0
+[25654.9]     src/spider.cpp 209 new_frame
+[25654.9]     Balise : Compute new spider1 frame
+[25654.9]     Balise : Send frame...
+[25654.9]     Balise : Construct & send buffer for classical fixtures
+[25654.9]     src/LED.cpp 112 buffer
+[25654.9]     src/spider.cpp 113 buffer
+[25654.9]     src/laser.cpp 16 buffer
+[25654.9]     Balise : Construct & send buffer for artnet pixels
+[25654.9]     Balise : Debug...
+[25654.9]     src/debug.cpp 315 display_curse
+[25654.9]     src/debug.cpp 77 disp_music_window
+[25654.9]     src/debug.cpp 226 disp_animation_window
+[25654.9]     src/debug.cpp 183 disp_output_window
+[25654.9]     src/LED.cpp 112 buffer
+[25654.9]     src/laser.cpp 16 buffer
+[25654.9]     src/spider.cpp 113 buffer
+[25654.9]     src/debug.cpp 257 disp_general_window
+[25654.9]     src/debug.cpp 289 disp_console_window
+[25654.9]     Balise : Wait next frame...
+[25654.9]     src/main.cpp 262 main
+[25654.9]     Balise : ----------------------------Start new frame...
+[25654.9]     Balise : Record & process sample...
+[25654.9]     src/music.cpp 34 update
+[25654.9]     src/music.cpp 103 _update_beats
+[25654.9]     src/music.cpp 131 _update_state
+[25654.9]     src/music.cpp 189 _update_beat_threshold
+[25654.9]     Balise : Run animator...
+[25654.9]     Balise : Compute new frames...
+[25654.9]     LEDs : new frame for PIX.0.0
+[25654.9]     Balise : Addr LED Ani1 New frames...
+[25654.9]     Balise : Addr LED Ani1 New frames 1
+[25654.9]     Balise : Addr LED Ani1 New frames 1
+[25654.9]     Balise : Addr LED Ani1 New frames 2
+[25654.9]     Balise : Addr LED Ani1 New frames 3
+[25654.9]     Balise : Addr LED Ani1 New frames 4
+[25654.9]     Led Bars : new frame for LED.0.0
+[25654.9]     src/LED.cpp 165 new_frame
+[25654.9]     Laser : new frame for LAS.0
+[25654.9]     src/laser.cpp 145 new_frame
+[25654.9]     Front Rack : new frame for FR.0
+[25654.9]     src/spot.cpp 690 new_frame
+[25654.9]     Back Rack : new frame for BR.0
+[25654.9]     src/spot.cpp 690 new_frame
+[25654.9]     Spider : new frame for SPI.0.0
+[25654.9]     src/spider.cpp 209 new_frame
+[25654.9]     Balise : Compute new spider1 frame
+[25654.9]     Balise : Send frame...
+[25654.9]     Balise : Construct & send buffer for classical fixtures
+[25654.9]     src/LED.cpp 112 buffer
+[25654.9]     src/spider.cpp 113 buffer
+[25654.9]     src/laser.cpp 16 buffer
+[25654.9]     Balise : Construct & send buffer for artnet pixels
+[25654.9]     Balise : Debug...
+[25654.9]     src/debug.cpp 315 display_curse
+[25654.9]     src/debug.cpp 77 disp_music_window
+[25654.9]     src/debug.cpp 226 disp_animation_window
+[25654.9]     src/debug.cpp 183 disp_output_window
+[25654.9]     src/LED.cpp 112 buffer
+[25654.9]     src/laser.cpp 16 buffer
+[25654.9]     src/spider.cpp 113 buffer
+[25654.9]     src/debug.cpp 257 disp_general_window
+[25654.9]     src/debug.cpp 289 disp_console_window
+[25654.9]     Balise : Wait next frame...
+[25654.9]     src/main.cpp 262 main
+[25654.9]     Balise : ----------------------------Start new frame...
+[25655]     Balise : Record & process sample...
+[25655]     src/music.cpp 34 update
+[25655]     src/music.cpp 103 _update_beats
+[25655]     src/music.cpp 131 _update_state
+[25655]     src/music.cpp 189 _update_beat_threshold
+[25655]     Balise : Run animator...
+[25655]     Balise : Compute new frames...
+[25655]     LEDs : new frame for PIX.0.0
+[25655]     Balise : Addr LED Ani1 New frames...
+[25655]     Balise : Addr LED Ani1 New frames 1
+[25655]     Balise : Addr LED Ani1 New frames 1
+[25655]     Balise : Addr LED Ani1 New frames 2
+[25655]     Balise : Addr LED Ani1 New frames 3
+[25655]     Balise : Addr LED Ani1 New frames 4
+[25655]     Led Bars : new frame for LED.0.0
+[25655]     src/LED.cpp 165 new_frame
+[25655]     Laser : new frame for LAS.0
+[25655]     src/laser.cpp 145 new_frame
+[25655]     Front Rack : new frame for FR.0
+[25655]     src/spot.cpp 690 new_frame
+[25655]     Back Rack : new frame for BR.0
+[25655]     src/spot.cpp 690 new_frame
+[25655]     Spider : new frame for SPI.0.0
+[25655]     src/spider.cpp 209 new_frame
+[25655]     Balise : Compute new spider1 frame
+[25655]     Balise : Send frame...
+[25655]     Balise : Construct & send buffer for classical fixtures
+[25655]     src/LED.cpp 112 buffer
+[25655]     src/spider.cpp 113 buffer
+[25655]     src/laser.cpp 16 buffer
+[25655]     Balise : Construct & send buffer for artnet pixels
+[25655]     Balise : Debug...
+[25655]     src/debug.cpp 315 display_curse
+[25655]     src/debug.cpp 77 disp_music_window
+[25655]     src/debug.cpp 226 disp_animation_window
+[25655]     src/debug.cpp 183 disp_output_window
+[25655]     src/LED.cpp 112 buffer
+[25655]     src/laser.cpp 16 buffer
+[25655]     src/spider.cpp 113 buffer
+[25655]     src/debug.cpp 257 disp_general_window
+[25655]     src/debug.cpp 289 disp_console_window
+[25655]     Balise : Wait next frame...
+[25655]     src/main.cpp 262 main
+[25655]     Balise : ----------------------------Start new frame...
+[25655]     Balise : Record & process sample...
+[25655]     src/music.cpp 34 update
+[25655]     src/music.cpp 103 _update_beats
+[25655]     src/music.cpp 131 _update_state
+[25655]     src/music.cpp 189 _update_beat_threshold
+[25655]     Balise : Run animator...
+[25655]     Balise : Compute new frames...
+[25655]     LEDs : new frame for PIX.0.0
+[25655]     Balise : Addr LED Ani1 New frames...
+[25655]     Balise : Addr LED Ani1 New frames 1
+[25655]     Balise : Addr LED Ani1 New frames 1
+[25655]     Balise : Addr LED Ani1 New frames 2
+[25655]     Balise : Addr LED Ani1 New frames 3
+[25655]     Balise : Addr LED Ani1 New frames 4
+[25655]     Led Bars : new frame for LED.0.0
+[25655]     src/LED.cpp 165 new_frame
+[25655]     Laser : new frame for LAS.0
+[25655]     src/laser.cpp 145 new_frame
+[25655]     Front Rack : new frame for FR.0
+[25655]     src/spot.cpp 690 new_frame
+[25655]     Back Rack : new frame for BR.0
+[25655]     src/spot.cpp 690 new_frame
+[25655]     Spider : new frame for SPI.0.0
+[25655]     src/spider.cpp 209 new_frame
+[25655]     Balise : Compute new spider1 frame
+[25655]     Balise : Send frame...
+[25655]     Balise : Construct & send buffer for classical fixtures
+[25655]     src/LED.cpp 112 buffer
+[25655]     src/spider.cpp 113 buffer
+[25655]     src/laser.cpp 16 buffer
+[25655]     Balise : Construct & send buffer for artnet pixels
+[25655]     Balise : Debug...
+[25655]     src/debug.cpp 315 display_curse
+[25655]     src/debug.cpp 77 disp_music_window
+[25655]     src/debug.cpp 226 disp_animation_window
+[25655]     src/debug.cpp 183 disp_output_window
+[25655]     src/LED.cpp 112 buffer
+[25655]     src/laser.cpp 16 buffer
+[25655]     src/spider.cpp 113 buffer
+[25655]     src/debug.cpp 257 disp_general_window
+[25655]     src/debug.cpp 289 disp_console_window
+[25655]     Balise : Wait next frame...
+[25655]     src/main.cpp 262 main
+[25655]     Balise : ----------------------------Start new frame...
+[25655]     Balise : Record & process sample...
+[25655]     src/music.cpp 34 update
+[25655]     src/music.cpp 103 _update_beats
+[25655]     src/music.cpp 131 _update_state
+[25655]     src/music.cpp 189 _update_beat_threshold
+[25655]     Balise : Run animator...
+[25655]     Balise : Compute new frames...
+[25655]     LEDs : new frame for PIX.0.0
+[25655]     Balise : Addr LED Ani1 New frames...
+[25655]     Balise : Addr LED Ani1 New frames 1
+[25655]     Balise : Addr LED Ani1 New frames 1
+[25655]     Balise : Addr LED Ani1 New frames 2
+[25655]     Balise : Addr LED Ani1 New frames 3
+[25655]     Balise : Addr LED Ani1 New frames 4
+[25655]     Led Bars : new frame for LED.0.0
+[25655]     src/LED.cpp 165 new_frame
+[25655]     Laser : new frame for LAS.0
+[25655]     src/laser.cpp 145 new_frame
+[25655]     Front Rack : new frame for FR.0
+[25655]     src/spot.cpp 690 new_frame
+[25655]     Back Rack : new frame for BR.0
+[25655]     src/spot.cpp 690 new_frame
+[25655]     Spider : new frame for SPI.0.0
+[25655]     src/spider.cpp 209 new_frame
+[25655]     Balise : Compute new spider1 frame
+[25655]     Balise : Send frame...
+[25655]     Balise : Construct & send buffer for classical fixtures
+[25655]     src/LED.cpp 112 buffer
+[25655]     src/spider.cpp 113 buffer
+[25655]     src/laser.cpp 16 buffer
+[25655]     Balise : Construct & send buffer for artnet pixels
+[25655]     Balise : Debug...
+[25655]     src/debug.cpp 315 display_curse
+[25655]     src/debug.cpp 77 disp_music_window
+[25655]     src/debug.cpp 226 disp_animation_window
+[25655]     src/debug.cpp 183 disp_output_window
+[25655]     src/LED.cpp 112 buffer
+[25655]     src/laser.cpp 16 buffer
+[25655]     src/spider.cpp 113 buffer
+[25655]     src/debug.cpp 257 disp_general_window
+[25655]     src/debug.cpp 289 disp_console_window
+[25655]     Balise : Wait next frame...
+[25655]     src/main.cpp 262 main
+[25655]     Balise : ----------------------------Start new frame...
+[25655]     Balise : Record & process sample...
+[25655]     src/music.cpp 34 update
+[25655]     src/music.cpp 103 _update_beats
+[25655]     src/music.cpp 131 _update_state
+[25655]     src/music.cpp 189 _update_beat_threshold
+[25655]     Balise : Run animator...
+[25655]     Balise : Compute new frames...
+[25655]     LEDs : new frame for PIX.0.0
+[25655]     Balise : Addr LED Ani1 New frames...
+[25655]     Balise : Addr LED Ani1 New frames 1
+[25655]     Balise : Addr LED Ani1 New frames 1
+[25655]     Balise : Addr LED Ani1 New frames 2
+[25655]     Balise : Addr LED Ani1 New frames 3
+[25655]     Balise : Addr LED Ani1 New frames 4
+[25655]     Led Bars : new frame for LED.0.0
+[25655]     src/LED.cpp 165 new_frame
+[25655]     Laser : new frame for LAS.0
+[25655]     src/laser.cpp 145 new_frame
+[25655]     Front Rack : new frame for FR.0
+[25655]     src/spot.cpp 690 new_frame
+[25655]     Back Rack : new frame for BR.0
+[25655]     src/spot.cpp 690 new_frame
+[25655]     Spider : new frame for SPI.0.0
+[25655]     src/spider.cpp 209 new_frame
+[25655]     Balise : Compute new spider1 frame
+[25655]     Balise : Send frame...
+[25655]     Balise : Construct & send buffer for classical fixtures
+[25655]     src/LED.cpp 112 buffer
+[25655]     src/spider.cpp 113 buffer
+[25655]     src/laser.cpp 16 buffer
+[25655]     Balise : Construct & send buffer for artnet pixels
+[25655]     Balise : Debug...
+[25655]     src/debug.cpp 315 display_curse
+[25655]     src/debug.cpp 77 disp_music_window
+[25655]     src/debug.cpp 226 disp_animation_window
+[25655]     src/debug.cpp 183 disp_output_window
+[25655]     src/LED.cpp 112 buffer
+[25655]     src/laser.cpp 16 buffer
+[25655]     src/spider.cpp 113 buffer
+[25655]     src/debug.cpp 257 disp_general_window
+[25655]     src/debug.cpp 289 disp_console_window
+[25655]     Balise : Wait next frame...
+[25655]     src/main.cpp 262 main
+[25655]     Balise : ----------------------------Start new frame...
+[25655.1]     Balise : Record & process sample...
+[25655.1]     src/music.cpp 34 update
+[25655.1]     src/music.cpp 103 _update_beats
+[25655.1]     src/music.cpp 131 _update_state
+[25655.1]     src/music.cpp 189 _update_beat_threshold
+[25655.1]     Balise : Run animator...
+[25655.1]     Balise : Compute new frames...
+[25655.1]     LEDs : new frame for PIX.0.0
+[25655.1]     Balise : Addr LED Ani1 New frames...
+[25655.1]     Balise : Addr LED Ani1 New frames 1
+[25655.1]     Balise : Addr LED Ani1 New frames 1
+[25655.1]     Balise : Addr LED Ani1 New frames 2
+[25655.1]     Balise : Addr LED Ani1 New frames 3
+[25655.1]     Balise : Addr LED Ani1 New frames 4
+[25655.1]     Led Bars : new frame for LED.0.0
+[25655.1]     src/LED.cpp 165 new_frame
+[25655.1]     Laser : new frame for LAS.0
+[25655.1]     src/laser.cpp 145 new_frame
+[25655.1]     Front Rack : new frame for FR.0
+[25655.1]     src/spot.cpp 690 new_frame
+[25655.1]     Back Rack : new frame for BR.0
+[25655.1]     src/spot.cpp 690 new_frame
+[25655.1]     Spider : new frame for SPI.0.0
+[25655.1]     src/spider.cpp 209 new_frame
+[25655.1]     Balise : Compute new spider1 frame
+[25655.1]     Balise : Send frame...
+[25655.1]     Balise : Construct & send buffer for classical fixtures
+[25655.1]     src/LED.cpp 112 buffer
+[25655.1]     src/spider.cpp 113 buffer
+[25655.1]     src/laser.cpp 16 buffer
+[25655.1]     Balise : Construct & send buffer for artnet pixels
+[25655.1]     Balise : Debug...
+[25655.1]     src/debug.cpp 315 display_curse
+[25655.1]     src/debug.cpp 77 disp_music_window
+[25655.1]     src/debug.cpp 226 disp_animation_window
+[25655.1]     src/debug.cpp 183 disp_output_window
+[25655.1]     src/LED.cpp 112 buffer
+[25655.1]     src/laser.cpp 16 buffer
+[25655.1]     src/spider.cpp 113 buffer
+[25655.1]     src/debug.cpp 257 disp_general_window
+[25655.1]     src/debug.cpp 289 disp_console_window
+[25655.1]     Balise : Wait next frame...
+[25655.1]     src/main.cpp 262 main
+[25655.1]     Balise : ----------------------------Start new frame...
+[25655.1]     Balise : Record & process sample...
+[25655.1]     src/music.cpp 34 update
+[25655.1]     src/music.cpp 103 _update_beats
+[25655.1]     src/music.cpp 131 _update_state
+[25655.1]     src/music.cpp 189 _update_beat_threshold
+[25655.1]     Balise : Run animator...
+[25655.1]     Balise : Compute new frames...
+[25655.1]     LEDs : new frame for PIX.0.0
+[25655.1]     Balise : Addr LED Ani1 New frames...
+[25655.1]     Balise : Addr LED Ani1 New frames 1
+[25655.1]     Balise : Addr LED Ani1 New frames 1
+[25655.1]     Balise : Addr LED Ani1 New frames 2
+[25655.1]     Balise : Addr LED Ani1 New frames 3
+[25655.1]     Balise : Addr LED Ani1 New frames 4
+[25655.1]     Led Bars : new frame for LED.0.0
+[25655.1]     src/LED.cpp 165 new_frame
+[25655.1]     Laser : new frame for LAS.0
+[25655.1]     src/laser.cpp 145 new_frame
+[25655.1]     Front Rack : new frame for FR.0
+[25655.1]     src/spot.cpp 690 new_frame
+[25655.1]     Back Rack : new frame for BR.0
+[25655.1]     src/spot.cpp 690 new_frame
+[25655.1]     Spider : new frame for SPI.0.0
+[25655.1]     src/spider.cpp 209 new_frame
+[25655.1]     Balise : Compute new spider1 frame
+[25655.1]     Balise : Send frame...
+[25655.1]     Balise : Construct & send buffer for classical fixtures
+[25655.1]     src/LED.cpp 112 buffer
+[25655.1]     src/spider.cpp 113 buffer
+[25655.1]     src/laser.cpp 16 buffer
+[25655.1]     Balise : Construct & send buffer for artnet pixels
+[25655.1]     Balise : Debug...
+[25655.1]     src/debug.cpp 315 display_curse
+[25655.1]     src/debug.cpp 77 disp_music_window
+[25655.1]     src/debug.cpp 226 disp_animation_window
+[25655.1]     src/debug.cpp 183 disp_output_window
+[25655.1]     src/LED.cpp 112 buffer
+[25655.1]     src/laser.cpp 16 buffer
+[25655.1]     src/spider.cpp 113 buffer
+[25655.1]     src/debug.cpp 257 disp_general_window
+[25655.1]     src/debug.cpp 289 disp_console_window
+[25655.1]     Balise : Wait next frame...
+[25655.1]     Balise : Data has changed
+[25655.1]     Balise : Running controled animator
+[25655.1]     Balise : Running controled animator
+[25655.1]     src/main.cpp 262 main
+[25655.1]     Balise : ----------------------------Start new frame...
+[25657.5]     Balise : Record & process sample...
+[25657.5]     src/music.cpp 34 update
+[25657.5]     src/music.cpp 103 _update_beats
+[25657.5]     src/music.cpp 131 _update_state
+[25657.5]     src/music.cpp 189 _update_beat_threshold
+[25657.5]     Balise : Run animator...
+[25657.5]     Balise : Compute new frames...
+[25657.5]     LEDs : new frame for PIX.0.0
+[25657.5]  New animation: 170, 76,  0,  0,  0,  0,  0,  0,255,  2,  0, 13, 39, 34,  0,255,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
+[9219.4]     src/main.cpp 252 main
+[9219.4]     Balise : Initialization...
+[9219.4]     Balise : Init. ola...
+[9219.4]     Balise : Init. Sampler...
+[9219.4]     src/music.cpp 22 init
+[9219.4]     Balise : Init Animator...
+[9219.4]     src/animator.cpp init
+[9219.4]     src/animator.cpp 359 activate_none
+[9219.4]     src/spot.cpp 660 init Front Rack FR.0
+[9219.4]     src/animator.cpp 359 activate_none
+[9219.4]     src/spot.cpp 660 init Back Rack BR.0
+[9219.4]     Balise : Init. fixtures...
+[9219.4]     Balise : Initializing LEDs
+[9219.4]     src/animator.cpp 359 activate_none
+[9219.4]     Balise : Initializing Led Bars
+[9219.4]     src/LED.cpp 18 init
+[9219.4]     src/LED.cpp 155 init
+[9219.4]  Activating LED.0.0: 
+[9219.4]     Balise : LED animations created
+[9219.4]     Balise : Initializing Laser
+[9219.4]     src/laser.cpp 22 init
+[9219.4]  Activating LAS.0: 
+[9219.4]     Balise : Initializing Front Rack
+[9219.4]     Balise : Initializing Back Rack
+[9219.4]     Balise : Initializing Spider
+[9219.4]     src/spider.cpp 20 init
+[9219.4]     src/spider.cpp 146 RGBW
+[9219.4]  Activating SPI.0.0: 
+[9219.4]     Balise : Initializing Redray laser
+[9282.27]     src/main.cpp 252 main
+[9282.27]     Balise : Initialization...
+[9282.27]     Balise : Init. ola...
+[9282.27]     Balise : Init. Sampler...
+[9282.27]     src/music.cpp 22 init
+[9282.27]     Balise : Init Animator...
+[9282.27]     src/animator.cpp init
+[9282.27]     src/animator.cpp 359 activate_none
+[9282.27]     src/spot.cpp 660 init Front Rack FR.0
+[9282.27]     src/animator.cpp 359 activate_none
+[9282.27]     src/spot.cpp 660 init Back Rack BR.0
+[9282.27]     Balise : Init. fixtures...
+[9282.27]     Balise : Initializing LEDs
+[9282.27]     src/animator.cpp 359 activate_none
+[9282.27]     Balise : Initializing Led Bars
+[9282.27]     src/LED.cpp 18 init
+[9282.27]     src/LED.cpp 155 init
+[9282.27]  Activating LED.0.0: 
+[9282.27]     Balise : LED animations created
+[9282.27]     Balise : Initializing Laser
+[9282.27]     src/laser.cpp 22 init
+[9282.27]  Activating LAS.0: 
+[9282.27]     Balise : Initializing Front Rack
+[9282.27]     Balise : Initializing Back Rack
+[9282.27]     Balise : Initializing Spider
+[9282.27]     src/spider.cpp 20 init
+[9282.27]     src/spider.cpp 146 RGBW
+[9282.27]  Activating SPI.0.0: 
+[9282.27]     Balise : Initializing Redray laser
+[9823.29]     src/main.cpp 252 main
+[9823.29]     Balise : Initialization...
+[9823.29]     Balise : Init. ola...
+[9823.29]     Balise : Init. Sampler...
+[9823.29]     src/music.cpp 22 init
+[9823.29]     Balise : Init Animator...
+[9823.29]     src/animator.cpp init
+[9823.29]     src/animator.cpp 359 activate_none
+[9823.29]     src/spot.cpp 660 init Front Rack FR.0
+[9823.29]     src/animator.cpp 359 activate_none
+[9823.29]     src/spot.cpp 660 init Back Rack BR.0
+[9823.29]     Balise : Init. fixtures...
+[9823.29]     Balise : Initializing LEDs
+[9823.29]     src/animator.cpp 359 activate_none
+[9823.29]     Balise : Initializing Led Bars
+[9823.29]     src/LED.cpp 18 init
+[9823.29]     src/LED.cpp 155 init
+[9823.29]  Activating LED.0.0: 
+[9823.29]     Balise : LED animations created
+[9823.29]     Balise : Initializing Laser
+[9823.29]     src/laser.cpp 22 init
+[9823.29]  Activating LAS.0: 
+[9823.29]     Balise : Initializing Front Rack
+[9823.29]     Balise : Initializing Back Rack
+[9823.29]     Balise : Initializing Spider
+[9823.29]     src/spider.cpp 20 init
+[9823.29]     src/spider.cpp 146 RGBW
+[9823.29]  Activating SPI.0.0: 
+[9823.29]     Balise : Initializing Redray laser
+[9823.29]     src/animator.cpp 359 activate_none

@@ -163,9 +163,7 @@ class SpotRackAnimation1 : public SpotRackAnimation
 private :
     // animation parameters (constant, set at construction)
     bool flash_activation = true;
-    // DMX_vec back_color;
     simpleColor back_color;
-    // DMX_vec flash_color;
     color_vec flash_colors;
 
     Shape flash_shape = gaussian; // default setting leads to gaussian flashes (of bubbles)
@@ -178,8 +176,6 @@ private :
 
     // Internal variable (updated at every new_frame call)
     std::vector<int> p_ms;             // range of periods for various sine wvaes
-    // std::vector<unsigned long> t_next; // timestamp of the next rise ()
-    // std::vector<unsigned long> t_prev; // timestamp of the prev rise () (memory)
     std::vector<flash_vec> flashes;     //for each spot, stores previous & next flash data (color & time) --> flashes[spot_ind][prev/next].color/time
 
     // Internal helpful & hidden stuff (for readability)
@@ -200,8 +196,6 @@ public :
         this->flash_shape = fshape;
                 // log(1, __func__, " ", this->id, " Palette : ", fcn::palette_to_string(this->flash_colors, '/'));
 
-        // this->sin_max_p_ms = pmax;
-        // this->sin_min_p_ms = pmin;
         this->rand_const_ms = prand;
         this->flash_len = flen;
 

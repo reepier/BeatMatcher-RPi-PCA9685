@@ -20646,3 +20646,156 @@
 [34243.8]     src/debug.cpp 257 disp_general_window
 [34243.8]     src/debug.cpp 289 disp_console_window
 [34243.8]     Balise : Wait next frame...
+[8860.5]     src/main.cpp 252 main
+[8860.5]     Balise : Initialization...
+[8860.5]     Balise : RED.1.1
+[8860.5]     Balise : Init. ola...
+[8860.5]     Balise : Init. Sampler...
+[8860.5]     src/music.cpp 22 init
+[8860.5]     Balise : Init Animator...
+[8860.5]     src/animator.cpp init
+[8860.5]     src/animator.cpp 359 activate_none
+[8860.5]     src/spot.cpp 660 init Front Rack FR.0
+[8860.5]     src/animator.cpp 359 activate_none
+[8860.5]     src/spot.cpp 660 init Back Rack BR.0
+[8860.5]     Balise : Init. fixtures...
+[8860.5]     Balise : Initializing LEDs
+[8860.5]     src/animator.cpp 359 activate_none
+[8860.5]     Balise : Initializing Led Bars
+[8860.5]     src/LED.cpp 18 init
+[8860.5]     src/LED.cpp 155 init
+[8860.5]  Activating LED.0.0: 
+[8860.5]     Balise : LED animations created
+[8860.5]     Balise : Initializing Laser
+[8860.5]     src/laser.cpp 22 init
+[8860.5]  Activating LAS.0: 
+[8860.5]     Balise : Initializing Front Rack
+[8860.5]     Balise : Initializing Back Rack
+[8860.5]     Balise : Initializing Spider
+[8860.5]     src/spider.cpp 20 init
+[8860.5]     src/spider.cpp 146 RGBW
+[8860.5]  Activating SPI.0.0: 
+[8860.5]     Balise : Initializing Redray laser
+[8916.03]     src/main.cpp 252 main
+[8916.03]     Balise : Initialization...
+[8916.03]     Balise : RED.1.1
+[8916.03]     Balise : Init. ola...
+[8916.03]     Balise : Init. Sampler...
+[8916.03]     src/music.cpp 22 init
+[8916.03]     Balise : Init Animator...
+[8916.03]     src/animator.cpp init
+[8916.03]     src/animator.cpp 359 activate_none
+[8916.03]     src/spot.cpp 660 init Front Rack FR.0
+[8916.03]     src/animator.cpp 359 activate_none
+[8916.03]     src/spot.cpp 660 init Back Rack BR.0
+[8916.03]     Balise : Init. fixtures...
+[8916.03]     Balise : Initializing LEDs
+[8916.03]     src/animator.cpp 359 activate_none
+[8916.03]     Balise : Initializing Led Bars
+[8916.03]     src/LED.cpp 18 init
+[8916.03]     src/LED.cpp 155 init
+[8916.03]  Activating LED.0.0: 
+[8916.03]     Balise : LED animations created
+[8916.03]     Balise : Initializing Laser
+[8916.03]     src/laser.cpp 22 init
+[8916.03]  Activating LAS.0: 
+[8916.03]     Balise : Initializing Front Rack
+[8916.03]     Balise : Initializing Back Rack
+[8916.03]     Balise : Initializing Spider
+[8916.03]     src/spider.cpp 20 init
+[8916.03]     src/spider.cpp 146 RGBW
+[8916.03]  Activating SPI.0.0: 
+[8916.03]     Balise : Initializing Redray laser
+[8921.59]     src/main.cpp 252 main
+[8921.59]     Balise : Initialization...
+[8930.81]     src/main.cpp 252 main
+[8930.81]     Balise : Initialization...
+[8930.81]     Balise : RED.1.1
+[8930.81]     Balise : Init. ola...
+[8930.81]     Balise : Init. Sampler...
+[8930.81]     src/music.cpp 22 init
+[8930.81]     Balise : Init Animator...
+[8930.81]     src/animator.cpp init
+[8930.81]     src/animator.cpp 359 activate_none
+[8930.81]     src/spot.cpp 660 init Front Rack FR.0
+[8930.81]     src/animator.cpp 359 activate_none
+[8930.81]     src/spot.cpp 660 init Back Rack BR.0
+[8930.81]     Balise : Init. fixtures...
+[8930.81]     Balise : Initializing LEDs
+[8930.81]     src/animator.cpp 359 activate_none
+[8930.81]     Balise : Initializing Led Bars
+[8930.81]     src/LED.cpp 18 init
+[8930.81]     src/LED.cpp 155 init
+[8930.81]  Activating LED.0.0: 
+[8930.81]     Balise : LED animations created
+[8930.81]     Balise : Initializing Laser
+[8930.81]     src/laser.cpp 22 init
+[8930.81]  Activating LAS.0: 
+[8930.81]     Balise : Initializing Front Rack
+[8930.81]     Balise : Initializing Back Rack
+[8930.81]     Balise : Initializing Spider
+[8930.81]     src/spider.cpp 20 init
+[8930.81]     src/spider.cpp 146 RGBW
+[8930.81]  Activating SPI.0.0: 
+[8930.81]     Balise : Initializing Redray laser
+[9149.64]     src/main.cpp 252 main
+[9149.64]     Balise : Initialization...
+[9149.64]     Balise : RED.1.1
+[9149.64]     Balise : Init. ola...
+[9149.64]     Balise : Init. Sampler...
+[9149.64]     src/music.cpp 22 init
+[9149.64]     Balise : Init Animator...
+[9149.64]     src/animator.cpp init
+[9149.64]     src/animator.cpp 359 activate_none
+[9149.64]     src/spot.cpp 660 init Front Rack FR.0
+[9149.64]     src/animator.cpp 359 activate_none
+[9149.64]     src/spot.cpp 660 init Back Rack BR.0
+[9149.64]     Balise : Init. fixtures...
+[9149.64]     Balise : Initializing LEDs
+[9149.64]     src/animator.cpp 359 activate_none
+[9149.64]     Balise : Initializing Led Bars
+[9149.64]     src/LED.cpp 18 init
+[9149.64]     src/LED.cpp 155 init
+[9149.64]  Activating LED.0.0: 
+[9149.64]     Balise : LED animations created
+[9149.64]     Balise : Initializing Laser
+[9149.64]     src/laser.cpp 22 init
+[9149.64]  Activating LAS.0: 
+[9149.64]     Balise : Initializing Front Rack
+[9149.64]     Balise : Initializing Back Rack
+[9149.64]     Balise : Initializing Spider
+[9149.64]     src/spider.cpp 20 init
+[9149.64]     src/spider.cpp 146 RGBW
+[9149.64]  Activating SPI.0.0: 
+[9149.64]     Balise : Initializing Redray laser
+[9737.17]     src/main.cpp 252 main
+[9737.17]     Balise : Initialization...
+[9737.17]     Balise : RED.1.1
+[9737.17]     Balise : Init. ola...
+[9737.17]     Balise : Init. Sampler...
+[9737.17]     src/music.cpp 22 init
+[9737.17]     Balise : Init Animator...
+[9737.17]     src/animator.cpp init
+[9737.17]     src/animator.cpp 359 activate_none
+[9737.17]     src/spot.cpp 660 init Front Rack FR.0
+[9737.17]     src/animator.cpp 359 activate_none
+[9737.17]     src/spot.cpp 660 init Back Rack BR.0
+[9737.17]     Balise : Init. fixtures...
+[9737.17]     Balise : Initializing LEDs
+[9737.17]     src/animator.cpp 359 activate_none
+[9737.17]     Balise : Initializing Led Bars
+[9737.17]     src/LED.cpp 18 init
+[9737.17]     src/LED.cpp 155 init
+[9737.17]  Activating LED.0.0: 
+[9737.17]     Balise : LED animations created
+[9737.17]     Balise : Initializing Laser
+[9737.17]     src/laser.cpp 22 init
+[9737.17]  Activating LAS.0: 
+[9737.17]     Balise : Initializing Front Rack
+[9737.17]     Balise : Initializing Back Rack
+[9737.17]     Balise : Initializing Spider
+[9737.17]     src/spider.cpp 20 init
+[9737.17]     src/spider.cpp 146 RGBW
+[9737.17]  Activating SPI.0.0: 
+[9737.17]     Balise : Initializing Redray laser
+[9737.17]     src/animator.cpp 359 activate_none
