@@ -70,6 +70,11 @@ class RedrayzAnimation : public BaseAnimation{
     DMX_vec values;
 
     RedrayzAnimation1(RedrayLaser *f, uint8_t val, std::string d, std::string i, AnimationType t){
+        this->fixture = f;
+        this->description = d;
+        this->id = i;
+        this->type = t;
+        
         this->values = DMX_vec(NUM_LAS, val);
     }
     

@@ -103,10 +103,11 @@ using namespace std;
     }
 
 
-fix_vec ll_fxtrs = {    &led, &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, 
+fix_vec ll_fxtrs = {    /*&led,*/ &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, 
                         &spot_7, &spot_8, &spot_9, &spot_10, &spot_11, &spot_12,
                         &spider, &laser, &redrayz};
-fix_vec fixtures = {&addr_led, &led, &laser, &front_rack, &back_rack, &spider, &redrayz};
+
+fix_vec fixtures = {&addr_led, /*&led,*/ &laser, &front_rack, &back_rack, &spider, &redrayz};
 
 bool process_arguments(int n, char* args[]){
     for (int i=1; i<n; i++){
