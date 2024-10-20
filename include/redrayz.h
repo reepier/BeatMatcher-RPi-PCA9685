@@ -76,6 +76,8 @@ class RedrayzAnimation : public BaseAnimation{
         this->type = t;
         
         this->values = DMX_vec(NUM_LAS, val);
+        
+        if (val!= 0) this->update_palette(red);
     }
     
     void init() override;
@@ -100,6 +102,7 @@ Makeover of Bubbles Animation for red ray lasers
 class RedrayzAnimation2 : public RedrayzAnimation{
   public:
     // Animation parameters (constant or set by animation constructor)
+    bool flash_activation = true;
     Shape flash_shape = gaussian; // default setting leads to gaussian flashes (of bubbles)
     int rand_const_ms;
     int flash_len;  //TODO rename burst_length
@@ -107,25 +110,28 @@ class RedrayzAnimation2 : public RedrayzAnimation{
     // Dynamic variables (updated internally at each frame)
     std::vector<flash_vec> flashes;     //for each spot, stores previous & next flash data (color & time) --> flashes[spot_ind][prev/next].color/time
 
+    // Internal helpful & hidden stuff (for readability)
+    const int i_prev = 0, i_next = 1;
+
     // Constructor
     RedrayzAnimation2(RedrayLaser *f, Shape fshape,  time_t flen, time_t prand, std::string d, std::string i, AnimationType t, int prio, int mast=255)
     {
-        this->description = d;
-        this->id = i; 
-        this->fixture = f;
-        this->type = t;
-        this->priority = prio;
-        this->master = mast;
+      this->description = d;
+      this->id = i; 
+      this->fixture = f;
+      this->type = t;
+      this->priority = prio;
+      this->master = mast;
 
-        this->flash_shape = flash_shape;
-        this->flash_len = flen;
-        this->rand_const_ms = prand;
+      this->flash_shape = fshape;
+      this->flash_len = flen;
+      this->rand_const_ms = prand;
 
-        this->update_palette(red);
+      this->update_palette(red);
     }
 
-    void init() override{BaseAnimation::init();};
-    void new_frame() override{BaseAnimation::new_frame();};
+    void init() override;
+    void new_frame() override;
 };
 
 

@@ -72,6 +72,11 @@ namespace fcn{
   /*shape functions*/
 
   // SINGLE BURSTS
+  //exponential decay
+  inline double exp_decay(time_ms t, time_ms t0, time_ms period, double min, double max){
+    return min + (max-min)*std::exp((t0-t)/(double)period);
+  }
+
   // pure gaussian shape -> exp(-x²/2)
   inline double gaussian(time_ms t, time_ms t0, time_ms period, double min, double max){
       double sigma = period/3.0;

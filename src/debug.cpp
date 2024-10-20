@@ -191,7 +191,7 @@ void disp_output_window(){
     wattroff(outputw, A_BOLD);
 
     int line=1;
-    for (auto fix : fix_vec{&addr_led, &led, &laser, &front_rack, &spider, &back_rack}){
+    for (auto fix : fix_vec{&addr_led, /*&led,*/ &laser, &front_rack, &spider, &redrayz, &back_rack}){
         if (fix->active_animation != nullptr){
         ostringstream animbuf, outbuf;
         animbuf << ((fix->active_animation->type == leader) ? "(L) ":"(b) ") << fix->name << " " << fix->active_animation->id << " - " << fix->active_animation->description;

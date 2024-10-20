@@ -218,12 +218,28 @@ int main(int argc, char* argv[]){
 
 
 
-    while (true){
-        for(auto int_c = 0; int_c < colorName.size(); int_c++){
-            auto c = (simpleColor)int_c;
-            addr_led.set_allpix_color(c);
-            send();
-            delay(1000);
+    // while (true){
+    //     for(auto int_c = 0; int_c < colorName.size(); int_c++){
+    //         auto c = (simpleColor)int_c;
+    //         addr_led.set_allpix_color(c);
+    //         send();
+    //         delay(1000);
+    //     }
+    // }
+
+
+
+    while(true){
+        auto start = millis();
+        auto t=start;
+        while(t<(start+2000)){
+            int val = min(255, max(0, (int)fcn::exp_decay(t, start, 1000, 0, 100) ));
+            
+            cout<<string(val, '-')<<endl;
+            // cout<<(t-start)/1000.0<< " : " << val <<endl;
+            
+            delay(50);
+            t=millis();
         }
     }
 }

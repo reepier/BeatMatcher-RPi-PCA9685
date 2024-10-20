@@ -19706,3 +19706,71 @@
 [23242.1]     src/music.cpp 189 _update_beat_threshold
 [23242.1]     Balise : Run animator...
 [23242.1]     Balise : Compute new frames...
+[2763.27]     src/main.cpp 253 main
+[2763.27]     Balise : Initialization...
+[2763.27]     Balise : RED.2.1.1
+[2763.27]     Balise : Init. ola...
+[2763.27]     Balise : Init. Sampler...
+[2763.27]     src/music.cpp 22 init
+[2763.27]     Balise : Init Animator...
+[2763.27]     src/animator.cpp init
+[2763.27]     src/animator.cpp 359 activate_none
+[2763.27]     src/spot.cpp 660 init Front Rack FR.0
+[2763.27]     src/animator.cpp 359 activate_none
+[2763.27]     src/spot.cpp 660 init Back Rack BR.0
+[2763.27]     Balise : Init. fixtures...
+[2763.27]     Balise : Initializing LEDs
+[2763.27]     src/animator.cpp 359 activate_none
+[2763.27]     Balise : Initializing Laser
+[2763.27]     src/laser.cpp 22 init
+[2763.27]  Activating LAS.0: 
+[2763.27]     Balise : Initializing Front Rack
+[2763.27]     Balise : Initializing Back Rack
+[2763.27]     Balise : Initializing Spider
+[2763.27]     src/spider.cpp 20 init
+[2763.27]     src/spider.cpp 146 RGBW
+[2763.27]  Activating SPI.0.0: 
+[2763.27]     Balise : Initializing Redray laser
+[2763.27]     src/animator.cpp 359 activate_none
+[2763.27]     Balise : Init. Debug...
+[2763.27]     src/debug.cpp 40 init_display
+[2763.27]     Balise : Initalisation terminated with success !
+[2763.27]     src/main.cpp 265 main
+[2763.27]     Balise : ----------------------------Start new frame...
+[2763.37]     Balise : Record & process sample...
+[2763.37]     src/music.cpp 34 update
+[2763.37]     src/music.cpp 103 _update_beats
+[2763.37]     src/music.cpp 131 _update_state
+[2763.37]     src/music.cpp 189 _update_beat_threshold
+[2763.37]     Balise : Run animator...
+[2763.37]     Balise : Run animator test fcn
+[2763.37]     src/animator.cpp test_animation
+[2763.37]     Balise : 1
+[2763.37]     Balise : RED.2.1.1
+[2763.37]     Balise : LEDs
+[2763.37]     src/animator.cpp 389 activate_by_ID
+[2763.37]     Balise : Laser
+[2763.37]     src/animator.cpp 389 activate_by_ID
+[2763.37]     Balise : Front Rack
+[2763.37]     src/animator.cpp 389 activate_by_ID
+[2763.37]     Balise : Back Rack
+[2763.37]     src/animator.cpp 389 activate_by_ID
+[2763.37]     Balise : Spider
+[2763.37]     src/animator.cpp 389 activate_by_ID
+[2763.37]     Balise : Redray laser
+[2763.37]     src/animator.cpp 389 activate_by_ID
+[2763.37]  Testing animation RED.2.1.1
+[2763.37]     Balise : Compute new frames...
+[2763.37]     LEDs : new frame for PIX.0.0
+[2763.37]     Balise : Addr LED Ani1 New frames...
+[2763.37]     Balise : Addr LED Ani1 New frames 1
+[2763.37]     Laser : new frame for LAS.0
+[2763.37]     src/laser.cpp 145 new_frame
+[2763.37]     Front Rack : new frame for FR.0
+[2763.37]     src/spot.cpp 690 new_frame
+[2763.37]     Back Rack : new frame for BR.0
+[2763.37]     src/spot.cpp 690 new_frame
+[2763.37]     Spider : new frame for SPI.0.0
+[2763.37]     src/spider.cpp 209 new_frame
+[2763.37]     Balise : Compute new spider1 frame
+[2763.37]     Redray laser : new frame for RED.2.1.1

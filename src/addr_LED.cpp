@@ -806,7 +806,7 @@ void AddrLEDAnimation4::new_frame(){
 
         // log(4, __FILE__, " ", __LINE__, " ",__func__, " Mark2 , ", fcn::num_to_str(i_spot));
 
-        const pixel     ani_backgd_RGB = fixture->RGB(back_color, ADDRLED_ANI4_BkG_INTENSITY_LOW);
+        const pixel ani_backgd_RGB = fixture->RGB(back_color, ADDRLED_ANI4_BkG_INTENSITY_LOW);
         
         // if flash is actviated, compute the flash --> exp( -(spd.(t-t0))²)
             double flash_intensity; // 0 by default

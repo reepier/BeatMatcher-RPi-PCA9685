@@ -10,7 +10,7 @@
 #define W 3
 
 // Common Datatypes
-typedef unsigned long time_ms;
+typedef time_t time_ms;
 
 enum simpleColor{
     black=0,
@@ -58,6 +58,7 @@ enum Shape{
     triangle,
     gaussian,
     gaussian2,
+    expdecay,
     saw       
 };
 
