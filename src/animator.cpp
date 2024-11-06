@@ -73,19 +73,15 @@ void AnimationManager::init(){
     palette_magasine.push_back(    color_vec{red, purple}      ,2       );
     
     // Nouveau
-    palette_magasine.push_back(    color_vec{green, cyan}      ,1       );
-    palette_magasine.push_back(    color_vec{blue, orange}      ,1       );
-    palette_magasine.push_back(    color_vec{blue, sodium}      ,1       );
-    palette_magasine.push_back(    color_vec{orange, blue, cyan}      ,1       );
+    palette_magasine.push_back(    color_vec{green, cyan}           ,1       );
+    palette_magasine.push_back(    color_vec{blue, orange}          ,1       );
+    palette_magasine.push_back(    color_vec{blue, sodium}          ,1       );
+    palette_magasine.push_back(    color_vec{orange, blue, cyan}    ,1       );
     
     front_rack_init();
     back_rack_init();
+    back_rack2_init();
     global_rack_init();
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> cbc095d6ea98bf87febc032c12168897a5e7c81b
 }
 
 /** Based on the musical analysis (music.state) and the current time, this function 

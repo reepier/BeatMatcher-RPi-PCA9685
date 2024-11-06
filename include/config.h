@@ -41,13 +41,8 @@ extern std::vector<std::string> vec_anim_id;
 #define     TEMPO_ANIM_CHANGE   5000          // 240000
 #define     MASTERDIMMER        1.0             //fraction --> must be decimal (literal float) !!!
 
-<<<<<<< HEAD
 #define     SPIDER_ANI_DURA     600000 
 #define     STROBE_ANI_DURA     100000
-=======
-#define     SPIDER_ANI_DURA     600000
-#define     STROBE_ANI_DURA     45000
->>>>>>> cbc095d6ea98bf87febc032c12168897a5e7c81b
 
 #define      PAL_LIFESPAN_BICO  5
 #define      PAL_LIFESPAN_MONO  3

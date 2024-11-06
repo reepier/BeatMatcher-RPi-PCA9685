@@ -16,8 +16,9 @@ class SpotBack;
 
 typedef std::vector<SpotFixture*> spot_vec;
 enum spot_type_t{
-    FunGeneration_12x1W,
-    Shehds_10x8W
+    FunGeneration_RGBW_12x1W,
+    Shehds_RGBWAU_10x8W,
+    Shehds_RGBWAU_7x18W
 };
 
 // TODO Remove the individual spot class --> I will never need (for now) to control 1 spot individually.
@@ -65,7 +66,9 @@ public:
     DMX_vec RGBW(simpleColor c, int intensity = 255) override;
 
 };
-extern SpotFixture spot_1, spot_2, spot_3, spot_4, spot_5, spot_6, spot_7, spot_8, spot_9, spot_10, spot_11, spot_12;
+extern SpotFixture spot_1, spot_2, spot_3, spot_4, spot_5, spot_6; 
+extern SpotFixture spot_7, spot_8, spot_9, spot_10, spot_11, spot_12;
+extern SpotFixture spot_13, spot_14, spot_15, spot_16, spot_17, spot_18, spot_19, spot_20;  // New Shehds spots
 
 /* /!\ /!\ Bullshit class --> I don't plan on coding animation for individual spots */
 class SpotAnimation : public BaseAnimation{
@@ -126,9 +129,11 @@ public:
 
 extern SpotRack front_rack;
 extern SpotRack back_rack;
+extern SpotRack back_rack2;
 
 void front_rack_init();
 void back_rack_init();
+void back_rack2_init();
 void global_rack_init();
 
 /**

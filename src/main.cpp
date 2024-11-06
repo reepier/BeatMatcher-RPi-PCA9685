@@ -104,10 +104,11 @@ using namespace std;
 
 
 fix_vec ll_fxtrs = {    /*&led,*/ &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, 
-                        &spot_7, &spot_8, &spot_9, &spot_10, &spot_11, &spot_12,
+                        &spot_7, &spot_8, &spot_9, &spot_10, &spot_11, &spot_12, 
+                        &spot_13, &spot_14, &spot_15, &spot_16, &spot_17, &spot_18, &spot_19, &spot_20,
                         &spider, &laser, &redrayz};
 
-fix_vec fixtures = {&addr_led, /*&led,*/ &laser, &front_rack, &back_rack, &spider, &redrayz};
+fix_vec fixtures = {&addr_led, /*&led,*/ &laser, &front_rack, &back_rack, &back_rack2, &spider, &redrayz};
 
 bool process_arguments(int n, char* args[]){
     for (int i=1; i<n; i++){
@@ -185,6 +186,7 @@ void initialize() {
     for (fix_vec::iterator fixture = fixtures.begin(); fixture != fixtures.end(); fixture++){
         balise("Initializing ", (*fixture)->name);
         (*fixture)->init();
+        (*fixture)->activate_none();
     }
 
     if (b_EXT_CONTROL) // very important to start DMX input code AFTER initializing Fixtures
@@ -220,7 +222,6 @@ void send(){
     }
     ola_output_client.SendDmx(0, ola_buffer);
 
-<<<<<<< HEAD
     // construct & send DMX frames for addressable leds pixels values (sent through artnet)
     balise("Construct & send buffer for artnet pixels");
     DMX_vec sub_buffer, long_buffer = addr_led.buffer();
@@ -246,10 +247,6 @@ void send(){
     for(auto& pix_uni : ola_pix_uni_rand){
         ola_output_client.SendDMX(pix_uni.uni, pix_uni.buf, args);
     }
-=======
-    balise("OLAclient.send()");
-    ola_client.SendDmx(0, ola_buffer);
->>>>>>> cbc095d6ea98bf87febc032c12168897a5e7c81b
 }
 
 LoopControler frame;
