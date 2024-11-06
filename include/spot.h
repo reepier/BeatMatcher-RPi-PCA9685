@@ -172,7 +172,7 @@ private :
     int rand_const_ms;
     int flash_len;
     double fluct_int = 0.4;
-    double fluct_col = 0.25;
+    double fluct_col = 0.0;
 
     // Internal variable (updated at every new_frame call)
     std::vector<int> p_ms;             // range of periods for various sine wvaes

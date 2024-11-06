@@ -25,7 +25,7 @@ void RedrayLaser::init(){
     //
     animations.push_back(new RedrayzAnimation2(this, gaussian, 600,   400,      "Fast gaussian bursts",        "RED.2.1.1", any, 1));
     animations.push_back(new RedrayzAnimation2(this, gaussian, 1500,  500,      "Slow gaussian bursts",        "RED.2.1.2", any, 1));
-    animations.push_back(new RedrayzAnimation2(this, gaussian2, 8000,  1000,    "Very Slow gaussian bursts",   "RED.2.1.3", any, 1));
+    animations.push_back(new RedrayzAnimation2(this, gaussian2, 8000,  1000,    "Very Sl2w gaussian bursts",   "RED.2.1.3", any, 1));
     animations.push_back(new RedrayzAnimation2(this, gaussian2, 1500,  4000,    "Scarce gaussian bursts",      "RED.2.1.4", any, 1));
     
     animations.push_back(new RedrayzAnimation2(this, square, 600,   400,      "Fast square bursts",          "RED.2.2.1", any, 1));

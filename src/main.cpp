@@ -220,6 +220,7 @@ void send(){
     }
     ola_output_client.SendDmx(0, ola_buffer);
 
+<<<<<<< HEAD
     // construct & send DMX frames for addressable leds pixels values (sent through artnet)
     balise("Construct & send buffer for artnet pixels");
     DMX_vec sub_buffer, long_buffer = addr_led.buffer();
@@ -245,6 +246,10 @@ void send(){
     for(auto& pix_uni : ola_pix_uni_rand){
         ola_output_client.SendDMX(pix_uni.uni, pix_uni.buf, args);
     }
+=======
+    balise("OLAclient.send()");
+    ola_client.SendDmx(0, ola_buffer);
+>>>>>>> cbc095d6ea98bf87febc032c12168897a5e7c81b
 }
 
 LoopControler frame;
