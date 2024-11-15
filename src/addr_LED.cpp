@@ -854,3 +854,16 @@ void AddrLEDAnimation4::new_frame(){
             }
     }
 }
+
+
+/* 4 - HiVE*/
+void AddrLEDAnimation5::init() {BaseAnimation::init();
+    for (int i = 0; i<NUM_GROUP; i++){
+        this->blot_groups[i] = blot_vec(    (int)(this->density_factor * groups_size[i] * 6)    );
+    }
+};
+
+void AddrLEDAnimation5::new_frame() {BaseAnimation::new_frame();
+    //update blot kinematics (position)
+
+};

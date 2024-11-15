@@ -52,6 +52,7 @@ class SoundAnalyzer{
 
     public :    bool clipping; // true if _record() detects ADC saturation
     public :    int volume;
+    public :    double lagging_volume;
     
     public :    std::vector<int> v_memory;          // time serie of the measured volume
     public :    std::vector<int> v_memory_sorted;   // sorted serie of the measured volume
@@ -97,6 +98,7 @@ class SoundAnalyzer{
     private :   bool _memory_overflow();
     private :   bool _memory_full();
     private :   bool _condition_for_analyis();
+    private :   void _filter_volume();
 
     private :   void _switch_to_state(states);
 

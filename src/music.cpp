@@ -44,7 +44,8 @@ void SoundAnalyzer::update(){
     #else
         sampler.process_record_fake();
     #endif // LINUX_PC
-    
+    this->_filter_volume();
+
     this->_update_beats();
     this->_update_state();
     this->_update_beat_threshold();
@@ -85,7 +86,7 @@ void SoundAnalyzer::_process_record(){
     _remove_DC_value();
     _compute_FFT();
       
-    // extract current volume (measure in FFT frequency band "FREQ_BAND")
+    // extract current volume (measure in FFT frequency band "FREQ_BAND") and
     volume = sample_spectrum[FREQ_BAND][AMPL]*2/SAMPLE_SIZE;
     
     // save the current volume sample in moving memory
@@ -191,6 +192,17 @@ void SoundAnalyzer::_update_beat_threshold(){
     if (_condition_for_analyis() && state != BREAK){
           beat_threshold = volume_percentile(90) * (float)1/10 + beat_threshold*(float)9/10;
         }
+}
+
+// compute filtered volume : the filtered is asymetrical, when volume goes up, the filter is more responsive than when volue goes down
+void SoundAnalyzer::_filter_volume(){
+    const double filter_weight_up = 0.02;
+    const double filter_weight_down = 0.6;
+    if (volume>lagging_volume){
+        lagging_volume = filter_weight_up*lagging_volume + (1.0-filter_weight_up)*volume;
+    }else{
+        lagging_volume = filter_weight_down*lagging_volume + (1.0-filter_weight_down)*volume;
+    }
 }
 
 /**Function that returns the volume value for the given percentile

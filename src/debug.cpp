@@ -85,19 +85,22 @@ void disp_music_window(){
     mvwprintw(musicw, 0,1, "MUSIC");
     wattroff(musicw, A_BOLD);
 
-    ostringstream volbuf, thrbuf, maxminbuf, clipbuf, beatbuf, statebuf ,nbt, nbk, ndrop;
-    // Volume
+    ostringstream volbuf, lagvolbuf, thrbuf, maxminbuf, clipbuf, beatbuf, statebuf ,nbt, nbk, ndrop;
+    // print Volume vumeter
     #define MAXVOL 400.0    //max volume value (approx.)   
     #define MAXVOLPX 60     //number of pixel allocated to volume bar
     // double vol_unit = max(min(100/MAXVOL, 1.0),0.0);    //unitary volume value [0;1]
-    double vol_unit = max(min(sampler.volume/MAXVOL, 1.0),0.0);    //unitary volume value [0;1]
-    
+    double vol_unit     = max(min(sampler.volume/MAXVOL, 1.0),0.0);    //unitary volume value [0;1]
+    double lagvol_unit  = max(min(sampler.lagging_volume/MAXVOL, 1.0),0.0);
     int vol_px = pow(vol_unit, 0.5) * MAXVOLPX;
+    int lagvolpix = pow(lagvol_unit, 0.5) * MAXVOLPX;
     volbuf << string(vol_px, 'o');
+    lagvolbuf << 
     
     mvwprintw(musicw, 1,1, "Volume");
     mvwprintw(musicw, 1,C1,"|");
     mvwprintw(musicw, 1,C1 + 1, volbuf.str().c_str());
+    mvwprintw(musicw, 1,C1 + 1 + lagvolpix, "0");
     mvwprintw(musicw, 1,C2, "|");
     mvwprintw(musicw, 1,C2+1, to_string(sampler.recent_maximum(1000)).c_str());
     mvwprintw(musicw, 1,C3, "|");
@@ -107,10 +110,10 @@ void disp_music_window(){
     double thr_unit = max(min(   sampler.beat_threshold/MAXVOL  ,1.0),0.0);  //unitary threshold value [0;1]
     int thr_px = pow(thr_unit, 0.5) * MAXVOLPX;
     thrbuf << "Threshold | " << string(thr_px-1, ' ') << '|' << string(MAXVOLPX-thr_px, ' ') << " | " << (int)sampler.beat_threshold;
-    mvwprintw(musicw, 2,1, "Threshold");
-    mvwprintw(musicw, 2,1, thrbuf.str().c_str());
-    mvwprintw(musicw, 1,80, "|");
-    mvwprintw(musicw, 2,80, "|");
+    // mvwprintw(musicw, 2,1, "Threshold");
+    // mvwprintw(musicw, 2,1, thrbuf.str().c_str());
+    // mvwprintw(musicw, 1,80, "|");
+    // mvwprintw(musicw, 2,80, "|");
 
     mvwprintw(musicw, 1, C1 + thr_px, "|");    //test
 

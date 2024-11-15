@@ -7,8 +7,11 @@
 #define MAX_SUBPIX_PER_UNI  510 // maximum number of subpixels arried over 1 universe (1 universe can only carry complete pixels (BC-204 limitation))
 // WS2815 led strip config
   // Config paramters
-  #define NUM_BAR 18             // Total Number of bars
-  #define NUM_SEG (3*NUM_BAR)            // Total number of segments (across all bars)
+  #define NUM_BAR 3                       // Total Number of bars
+  #define NUM_SEG (3*NUM_BAR)             // Total number of segments (across all bars)
+  const int_vec groups_size = {3};        // Number of bars for each group
+  #define NUM_GROUP  groups_size.size()   // Number of groups
+
   // Quasi constants
   #define NUM_PIX_BAR 58        // number of pixels per bar
   // Derivatives
@@ -373,51 +376,68 @@ private :
     void new_frame();
 };
 
-
+//TODO remove  ??
 #define min(x,y) std::min(x,y)
-#define max(x,y) std::max(x,y)
+#define max(x,y) std::max(x,y) 
 
-// // Dynamic Animation Creation
-// inline BaseAnimation * Create_AddrLED_Animation(AddressableLED* f, DMX_vec ani_data){
-//   log(1, "New animation: ", fcn::vec_to_str(ani_data, ','));
+/* 5 - HiVE 
+On each group of led bars, a certain number of spots move in a smooth motion. On each beat, they 
+get a all get a sudden push and then slowly go back to their initial velocity
+Each group of led bar is considered a continuous track, when a spot overshoots the end of the
+track, it pops up at the beginning
+
+TO BE TESTED AND APPROVED :
+Spots vary in color, initial "rest" velocities, direction of motion, width, intensity
+ 
+*/
+enum Motion_dir : int{
+  FWD = 1,
+  BWD = -1
+};
+
+class Blot{
+public:
+  //constant parameters
+  const double width = 6;           // [pix] 
+  const double rest_velocity = 3;   // [pix/s]
+  const Motion_dir direction = FWD;   // -1 or 1 
+  const simpleColor color = red;          //
+  const double luminosity = 1.0;    // 0.0 to 1.0
   
-//   // Verify arguments
-//   if (f == nullptr)
-//     log(1, "Error, wrong arguments! ", __FILE__, " ", __LINE__, " ",__func__);
-//     return nullptr;
+  //dynamic attributes
+  double position;      //[pix] linear position of the spot along the track of pixels
 
-//   // extract & ceil/floor arguments
-//   int dimmer =                       (int)ani_data[WS_DIMMER];        //
-//   int type = min(1, max(0,           (int)ani_data[WS_ANI_TYPE]));    //  
-//   int unit = min(6, max(0,           (int)ani_data[WS_ANI_UNIT]));    // 
-//   int lead_color = min(14, max(0,    (int)ani_data[WS_C1]));          // color (flash, Chaser...)
-//   int back_color = min(14, max(0,    (int)ani_data[WS_C2]));          // background color
-//   int speed_1 =                      (int)ani_data[WS_S1];            // speed-time parmater 2
-//   int speed_2 =                      (int)ani_data[WS_S2];            // speed-time parameter 1
-//   int density =                      (int)ani_data[WS_DENS];          // density parameter
+  // Blot(double wid, double vel, Motion_dir dir, simpleColor col, double lum){} 
+};
+
+typedef std::vector<Blot> blot_vec;
+
+class AddrLEDAnimation5 : public AddrLEDAnimation{
+private :
+  // Animation parameters (constant or set by animation constructor)
+  color_vec colors;
+  double density_factor;      // 0 to 1
+  double width_factor;        // 0 to 1
+  double velocity_factor;     // 0 to 1
+  double direction_ratio;     // 0 to 1
 
 
-//   f->master = dimmer; // set dimmer
+  // Dynamic variables (updated internally at each frame)
+  std::vector<blot_vec> blot_groups;  // one blot vector for each LED bar roup
 
-//   switch (type){
-//     case 0 : // Background
-//       return new AddrLEDAnimation1(f, black,  (simpleColor)back_color,  "Background",    " ", backer, false);
-//       break;
-//     case 1 : // Analog Beat
-//       return new AddrLEDAnimation1(f, (simpleColor)lead_color, (simpleColor)back_color, (strip_subdiv_t)unit, map((double)density, 0.0, 255.0, 0.0, 1.0), "Test 1", "PIX.TST", any);
-//       break;
-//     case 2 : // Digital Beat
-//       return  nullptr;
-//       break;
-//     case 3 : // Bubbles
-//       return  nullptr;
-//       break;
-//     case 4 : // Chaser
-//       return  nullptr;
-//       break;
-//     default:  // default to case 4
-//       return  nullptr;
-//       break;
-//   }
-  
-// }
+  // Constructor
+public :
+  AddrLEDAnimation5(AddressableLED *f, simpleColor col, double wid_f, double vel_f, double dir_f, std::string d, std::string i, AnimationType t=any){
+    this->description = d;
+    this->id = i;
+    this->fixture = f;
+    this->type = t;
+    this->update_palette(col);
+
+    this->colors.push_back(col);
+    this->blot_groups.resize(NUM_GROUP);
+    }
+
+  void init() override ;
+  void new_frame() override ;
+};
