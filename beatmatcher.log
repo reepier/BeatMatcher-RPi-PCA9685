@@ -10841,3 +10841,77 @@
 [13820.1]     src/debug.cpp 260 disp_general_window
 [13820.1]     src/debug.cpp 292 disp_console_window
 [13820.1]     Balise : Wait next frame...
+[5099.08]     src/main.cpp 255 main
+[5099.08]     Balise : Initialization...
+[5099.08]     Balise : PIX.10.1
+[5099.08]     Balise : Init. ola...
+[5099.08]     Balise : Init. Sampler...
+[5099.08]     src/music.cpp 22 init
+[5099.08]     Balise : Init Animator...
+[5099.08]     src/animator.cpp init
+[5099.08]     src/animator.cpp 359 activate_none
+[5099.08]     src/spot.cpp 770 init Front Rack FR.0
+[5099.08]     src/animator.cpp 359 activate_none
+[5099.08]     src/spot.cpp 770 init Back Rack BR.0
+[5099.08]     Balise : Init. fixtures...
+[5099.08]     Balise : Initializing LEDs
+[5099.08]     src/animator.cpp 359 activate_none
+[5099.08]     src/animator.cpp 359 activate_none
+[5099.08]     Balise : Initializing Laser
+[5099.08]     src/laser.cpp 22 init
+[5099.08]  Activating LAS.0: 
+[5099.08]     src/animator.cpp 359 activate_none
+[5099.08]     Balise : Initializing Front Rack
+[5099.08]     src/animator.cpp 359 activate_none
+[5099.08]     src/spot.cpp 770 init Front Rack FR.0
+[5099.08]     Balise : Initializing Back Rack
+[5099.08]     src/animator.cpp 359 activate_none
+[5099.08]     src/spot.cpp 770 init Back Rack BR.0
+[5099.08]     Balise : Initializing SHEHDS Rack 2
+[5099.08]     src/animator.cpp 359 activate_none
+[5099.08]     src/spot.cpp 770 init SHEHDS Rack 2 BR.0
+[5099.08]     Balise : Initializing Spider
+[5099.08]     src/spider.cpp 20 init
+[5099.08]     src/spider.cpp 146 RGBW
+[5099.08]  Activating SPI.0.0: 
+[5099.08]     src/animator.cpp 359 activate_none
+[5099.08]     Balise : Initializing Redray laser
+[5099.08]     src/animator.cpp 359 activate_none
+[5099.08]     src/animator.cpp 359 activate_none
+[5099.08]     Balise : Init. Debug...
+[5099.08]     src/debug.cpp 40 init_display
+[5099.08]     Balise : Initalisation terminated with success !
+[5099.08]     src/main.cpp 267 main
+[5099.08]     Balise : ----------------------------Start new frame...
+[5099.08]     Balise : Record & process sample...
+[5099.08]     src/music.cpp 34 update
+[5099.08]     src/music.cpp 104 _update_beats
+[5099.08]     src/music.cpp 132 _update_state
+[5099.08]     src/music.cpp 190 _update_beat_threshold
+[5099.08]     Balise : Run animator...
+[5099.08]     Balise : Run animator test fcn
+[5099.08]     src/animator.cpp test_animation
+[5099.08]     Balise : 1
+[5099.08]     Balise : PIX.10.1
+[5099.08]     Balise : LEDs
+[5099.08]     src/animator.cpp 389 activate_by_ID
+[5099.08]  Testing animation PIX.10.1
+[5099.08]     Balise : Compute new frames...
+[5099.08]     LEDs : new frame for PIX.10.1
+[5099.08]     Laser : new frame for LAS.0
+[5099.08]     src/laser.cpp 145 new_frame
+[5099.08]     Front Rack : new frame for FR.0
+[5099.08]     src/spot.cpp 800 new_frame
+[5099.08]     Back Rack : new frame for BR.0
+[5099.08]     src/spot.cpp 800 new_frame
+[5099.08]     SHEHDS Rack 2 : new frame for BR.0
+[5099.08]     src/spot.cpp 800 new_frame
+[5099.08]     Spider : new frame for SPI.0.0
+[5099.08]     src/spider.cpp 209 new_frame
+[5099.08]     Balise : Compute new spider1 frame
+[5099.08]     Redray laser : new frame for RED.0
+[5099.08]     Balise : Send frame...
+[5099.08]     Balise : Construct & send buffer for classical fixtures
+[5099.08]     src/spider.cpp 113 buffer
+[5099.08]     src/laser.cpp 16 buffer
+[5099.08]     Balise : Construct & send buffer for artnet pixels

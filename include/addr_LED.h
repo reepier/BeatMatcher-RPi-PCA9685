@@ -398,11 +398,11 @@ enum Motion_dir : int{
 class Blot{
 public:
   //constant parameters
-  const double width = 6;           // [pix] 
-  const double rest_velocity = 3;   // [pix/s]
-  const Motion_dir direction = FWD;   // -1 or 1 
-  const simpleColor color = red;          //
-  const double luminosity = 1.0;    // 0.0 to 1.0
+  double width = 6;           // [pix] 
+  double rest_velocity = 3;   // [pix/s]
+  Motion_dir direction = FWD;   // -1 or 1 
+  simpleColor color = red;          //
+  double luminosity = 1.0;    // 0.0 to 1.0
   
   //dynamic attributes
   double position;      //[pix] linear position of the spot along the track of pixels
@@ -416,10 +416,10 @@ class AddrLEDAnimation5 : public AddrLEDAnimation{
 private :
   // Animation parameters (constant or set by animation constructor)
   color_vec colors;
-  double density_factor;      // 0 to 1
-  double width_factor;        // 0 to 1
-  double velocity_factor;     // 0 to 1
-  double direction_ratio;     // 0 to 1
+  double density_factor = 1.0;      // 0 to 1
+  double width_factor = 1.0;        // 0 to 1
+  double velocity_factor = 1.0;     // 0 to 1
+  double direction_ratio = 1.0;     // 0 to 1 (proportion of FWD over FWD+BWD)
 
 
   // Dynamic variables (updated internally at each frame)
@@ -432,10 +432,12 @@ public :
     this->id = i;
     this->fixture = f;
     this->type = t;
-    this->update_palette(col);
 
     this->colors.push_back(col);
     this->blot_groups.resize(NUM_GROUP);
+
+    this->update_palette(col);
+
     }
 
   void init() override ;
