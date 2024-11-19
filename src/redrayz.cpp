@@ -24,8 +24,8 @@ void RedrayLaser::init(){
     // RANDOM BURST
     //
     animations.push_back(new RedrayzAnimation2(this, gaussian, 600,   400,      "Fast gaussian bursts",        "RED.2.1.1", any, 1));
-    animations.push_back(new RedrayzAnimation2(this, gaussian, 1500,  500,      "Slow gaussian bursts",        "RED.2.1.2", any, 1));
-    animations.push_back(new RedrayzAnimation2(this, gaussian2, 8000,  1000,    "Very Sl2w gaussian bursts",   "RED.2.1.3", any, 1));
+    animations.push_back(new RedrayzAnimation2(this, gaussian, 1500,  800,      "Slow gaussian bursts",        "RED.2.1.2", any, 1));
+    animations.push_back(new RedrayzAnimation2(this, gaussian2, 8000,  2500,    "Very slow gaussian bursts",   "RED.2.1.3", any, 1));
     animations.push_back(new RedrayzAnimation2(this, gaussian2, 1500,  4000,    "Scarce gaussian bursts",      "RED.2.1.4", any, 1));
     
     animations.push_back(new RedrayzAnimation2(this, square, 600,   400,      "Fast square bursts",          "RED.2.2.1", any, 1));
@@ -35,9 +35,11 @@ void RedrayLaser::init(){
     animations.push_back(new RedrayzAnimation2(this, square, 50,   100,   "VF Strob square bursts",   "RED.2.3.1", any, 1));
     animations.push_back(new RedrayzAnimation2(this, square, 50,   500,   "F strobe square bursts",   "RED.2.3.2", any, 1));
     animations.push_back(new RedrayzAnimation2(this, square, 50,   1000,  "S strobe bursts",          "RED.2.3.3", any, 1));
+    animations.push_back(new RedrayzAnimation2(this, square, 50,   2000,  "VS strobe bursts",          "RED.2.3.4", any, 1));
 
-    animations.push_back(new RedrayzAnimation2(this, expdecay, 500, 1500,  "Vslow exponential burst",   "RED.2.4.1", any, 1));
-    animations.push_back(new RedrayzAnimation2(this, expdecay, 400, 700,   "Slow exponential burst",    "RED.2.4.2", any, 1));
+
+    animations.push_back(new RedrayzAnimation2(this, expdecay, 1500, 1500,  "Vslow exponential burst",   "RED.2.4.1", any, 1));
+    animations.push_back(new RedrayzAnimation2(this, expdecay, 600, 700,   "Slow exponential burst",    "RED.2.4.2", any, 1));
     animations.push_back(new RedrayzAnimation2(this, expdecay, 200, 300,   "Fast exponential burst",    "RED.2.4.3", any, 1));
     animations.push_back(new RedrayzAnimation2(this, expdecay, 700, 4000,  "Scarce slow exponential burst",  "RED.2.4.4", any, 1));
     animations.push_back(new RedrayzAnimation2(this, expdecay, 200, 2000,  "Scarce fast exponential burst",  "RED.2.4.5", any, 1));
@@ -121,8 +123,8 @@ void RedrayzAnimation2::new_frame(){
         case gaussian2 :
           flash_intensity = fcn::gaussian2(t, t_prev, flash_len, 0.0,1.0) + fcn::gaussian2(t, t_next, flash_len, 0.0,1.0); //exp( -pow(2.5/this->flash_len*(t - t_prev), 2)) + exp( -pow(2.5/this->flash_len*(t - t_next), 2));
           break;
-        case expdecay :
-          flash_intensity = fcn::exp_decay(t, t_prev, flash_len, 0.0, 1.0);
+        case expdecay : // with an exponent of 3 instead of 1 to compensate for the diode non linearity
+          flash_intensity = pow(fcn::exp_decay(t, t_prev, flash_len, 0.0, 1.0), 3.0);
           break;
         default :
           flash_intensity = fcn::gaussian(t, t_prev, flash_len, 0.0,1.0) + fcn::gaussian(t, t_next, flash_len, 0.0,1.0); //exp( -pow(2.5/this->flash_len*(t - t_prev), 2)) + exp( -pow(2.5/this->flash_len*(t - t_next), 2));

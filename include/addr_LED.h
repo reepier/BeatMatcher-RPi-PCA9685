@@ -380,66 +380,66 @@ private :
 #define min(x,y) std::min(x,y)
 #define max(x,y) std::max(x,y) 
 
-/* 5 - HiVE 
-On each group of led bars, a certain number of spots move in a smooth motion. On each beat, they 
-get a all get a sudden push and then slowly go back to their initial velocity
-Each group of led bar is considered a continuous track, when a spot overshoots the end of the
-track, it pops up at the beginning
+// /* 5 - HiVE 
+// On each group of led bars, a certain number of spots move in a smooth motion. On each beat, they 
+// get a all get a sudden push and then slowly go back to their initial velocity
+// Each group of led bar is considered a continuous track, when a spot overshoots the end of the
+// track, it pops up at the beginning
 
-TO BE TESTED AND APPROVED :
-Spots vary in color, initial "rest" velocities, direction of motion, width, intensity
+// TO BE TESTED AND APPROVED :
+// Spots vary in color, initial "rest" velocities, direction of motion, width, intensity
  
-*/
-enum Motion_dir : int{
-  FWD = 1,
-  BWD = -1
-};
+// */
+// enum Motion_dir : int{
+//   FWD = 1,
+//   BWD = -1
+// };
 
-class Blot{
-public:
-  //constant parameters
-  double width = 6;           // [pix] 
-  double rest_velocity = 3;   // [pix/s]
-  Motion_dir direction = FWD;   // -1 or 1 
-  simpleColor color = red;          //
-  double luminosity = 1.0;    // 0.0 to 1.0
+// class Blot{
+// public:
+//   //constant parameters
+//   double width = 6;           // [pix] 
+//   double rest_velocity = 3;   // [pix/s]
+//   Motion_dir direction = FWD;   // -1 or 1 
+//   simpleColor color = red;          //
+//   double luminosity = 1.0;    // 0.0 to 1.0
   
-  //dynamic attributes
-  double position;      //[pix] linear position of the spot along the track of pixels
+//   //dynamic attributes
+//   double position;      //[pix] linear position of the spot along the track of pixels
 
-  // Blot(double wid, double vel, Motion_dir dir, simpleColor col, double lum){} 
-};
+//   // Blot(double wid, double vel, Motion_dir dir, simpleColor col, double lum){} 
+// };
 
-typedef std::vector<Blot> blot_vec;
+// typedef std::vector<Blot> blot_vec;
 
-class AddrLEDAnimation5 : public AddrLEDAnimation{
-private :
-  // Animation parameters (constant or set by animation constructor)
-  color_vec colors;
-  double density_factor = 1.0;      // 0 to 1
-  double width_factor = 1.0;        // 0 to 1
-  double velocity_factor = 1.0;     // 0 to 1
-  double direction_ratio = 1.0;     // 0 to 1 (proportion of FWD over FWD+BWD)
+// class AddrLEDAnimation5 : public AddrLEDAnimation{
+// private :
+//   // Animation parameters (constant or set by animation constructor)
+//   color_vec colors;
+//   double density_factor = 1.0;      // 0 to 1
+//   double width_factor = 1.0;        // 0 to 1
+//   double velocity_factor = 1.0;     // 0 to 1
+//   double direction_ratio = 1.0;     // 0 to 1 (proportion of FWD over FWD+BWD)
 
 
-  // Dynamic variables (updated internally at each frame)
-  std::vector<blot_vec> blot_groups;  // one blot vector for each LED bar roup
+//   // Dynamic variables (updated internally at each frame)
+//   std::vector<blot_vec> blot_groups;  // one blot vector for each LED bar roup
 
-  // Constructor
-public :
-  AddrLEDAnimation5(AddressableLED *f, simpleColor col, double wid_f, double vel_f, double dir_f, std::string d, std::string i, AnimationType t=any){
-    this->description = d;
-    this->id = i;
-    this->fixture = f;
-    this->type = t;
+//   // Constructor
+// public :
+//   AddrLEDAnimation5(AddressableLED *f, simpleColor col, double wid_f, double vel_f, double dir_f, std::string d, std::string i, AnimationType t=any){
+//     this->description = d;
+//     this->id = i;
+//     this->fixture = f;
+//     this->type = t;
 
-    this->colors.push_back(col);
-    this->blot_groups.resize(NUM_GROUP);
+//     this->colors.push_back(col);
+//     this->blot_groups.resize(NUM_GROUP);
 
-    this->update_palette(col);
+//     this->update_palette(col);
 
-    }
+//     }
 
-  void init() override ;
-  void new_frame() override ;
-};
+//   void init() override ;
+//   void new_frame() override ;
+// };
