@@ -16,12 +16,11 @@ class SpotBack;
 
 typedef std::vector<SpotFixture*> spot_vec;
 enum spot_type_t{
-    FunGeneration_RGBW_12x1W,
+    FunGen_RGBW_12x1W,
     Shehds_RGBWAU_10x8W,
     Shehds_RGBWAU_7x18W
 };
 
-// TODO Remove the individual spot class --> I will never need (for now) to control 1 spot individually.
 /*
  #####  ######  ####### ####### 
 #     # #     # #     #    #    
@@ -38,7 +37,7 @@ class SpotFixture : public BaseFixture{
 public:
     // Channels :
     int nCH = 8;
-    DMX_vec RGBWout = {0, 0, 0, 0}; // R G B W values (0-255)
+    DMX_vec RGBWout;// = {0, 0, 0, 0}; // R G B W... values (0-255)    //TODO renam pixel to make it model - agnostic
     uint8_t strobe = 0;                       // strobe speed (0 none - 1 slow - 255 fast)
     uint8_t color_wheel = 0;                  // fixture preset colors (unused)
     uint8_t prog = 0;                         // fixture preset program (unused)
@@ -48,7 +47,11 @@ public:
 
     // Constructor & Initializer
     SpotFixture(spot_type_t typ, int addr, int nch, std::string nm, int id, uint8_t mast=255) : BaseFixture(addr, nch, nm, id, mast){
-        this->type = type;
+        this->type = typ;
+
+        this->RGBWout = this->RGBW(black); // resize & initialise RGBWout vector
+
+        log(1, "Init. of ", this->name, " / Pixel size : ", this->RGBWout.size());
     };
     void init(){};
 
@@ -57,7 +60,7 @@ public:
     int get_address() override { return this->address; };
     DMX_vec buffer() override;
     void reset_channels(){
-        this->RGBWout = {0, 0, 0, 0};
+        this->RGBWout = this->RGBW(black);
         this->strobe = 0;                       
         this->color_wheel = 0;                  
         this->prog = 0; 
@@ -176,7 +179,7 @@ private :
     int sin_min_p_ms = 5000;
     int rand_const_ms;
     int flash_len;
-    double fluct_int = 0.4;
+    double fluct_int = 0.0;//0.4;
     double fluct_col = 0.0;
 
     // Internal variable (updated at every new_frame call)

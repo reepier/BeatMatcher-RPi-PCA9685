@@ -8,6 +8,8 @@
 #define G 1
 #define B 2
 #define W 3
+#define Amb 4
+#define UV 5
 
 // Common Datatypes
 typedef time_t time_ms;

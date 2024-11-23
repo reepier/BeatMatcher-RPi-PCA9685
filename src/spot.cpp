@@ -7,29 +7,29 @@
 using namespace std;
 
 // Original Fun Generation spots
-SpotFixture spot_1(FunGeneration_RGBW_12x1W, 73, 8,       "Spot 9 (74)",     1);     
-SpotFixture spot_2(FunGeneration_RGBW_12x1W, 81,  8,      "Spot 1 (82)",     2);     
-SpotFixture spot_3(FunGeneration_RGBW_12x1W, 89, 8,       "Spot 8 (90)",     3);     
-SpotFixture spot_4(FunGeneration_RGBW_12x1W, 97,  8,      "Spot 3 (98)",     4);     
-SpotFixture spot_5(FunGeneration_RGBW_12x1W, 105,  8,     "Spot 2 (106)",    5);     
-SpotFixture spot_6(FunGeneration_RGBW_12x1W, 113,  8,     "Spot 4 (114)",    6);
+SpotFixture spot_1(FunGen_RGBW_12x1W, 73, 8,       "Spot 9 (@74)",     1);     
+SpotFixture spot_2(FunGen_RGBW_12x1W, 81,  8,      "Spot 1 (@82)",     2);     
+SpotFixture spot_3(FunGen_RGBW_12x1W, 89, 8,       "Spot 8 (@90)",     3);     
+SpotFixture spot_4(FunGen_RGBW_12x1W, 97,  8,      "Spot 3 (@98)",     4);     
+SpotFixture spot_5(FunGen_RGBW_12x1W, 105,  8,     "Spot 2 (@106)",    5);     
+SpotFixture spot_6(FunGen_RGBW_12x1W, 113,  8,     "Spot 4 (@114)",    6);
 
-SpotFixture spot_7(FunGeneration_RGBW_12x1W, 121, 8,  "Spot 5 (122)",    7);     
-SpotFixture spot_8(FunGeneration_RGBW_12x1W, 129, 8,  "Spot 6 (130)",    8);     
-SpotFixture spot_9(FunGeneration_RGBW_12x1W, 137, 8,  "Spot 7 (138)",    9);  
-SpotFixture spot_10(FunGeneration_RGBW_12x1W, 145, 8, "Spot 10 (146)",   10);
-SpotFixture spot_11(FunGeneration_RGBW_12x1W, 153, 8, "Spot 11 (154)",   11);
-SpotFixture spot_12(FunGeneration_RGBW_12x1W, 161, 8, "Spot 12 (162)",   12);
+SpotFixture spot_7(FunGen_RGBW_12x1W, 121, 8,  "Spot 5 (@122)",    7);     
+SpotFixture spot_8(FunGen_RGBW_12x1W, 129, 8,  "Spot 6 (@130)",    8);     
+SpotFixture spot_9(FunGen_RGBW_12x1W, 137, 8,  "Spot 7 (@138)",    9);  
+SpotFixture spot_10(FunGen_RGBW_12x1W, 145, 8, "Spot 10 (@146)",   10);
+SpotFixture spot_11(FunGen_RGBW_12x1W, 153, 8, "Spot 11 (@154)",   11);
+SpotFixture spot_12(FunGen_RGBW_12x1W, 161, 8, "Spot 12 (@162)",   12);
 
 // New Shehds spots
-SpotFixture spot_13(Shehds_RGBWAU_7x18W, 169, 10, "Spot 13 (170)", 13);
-SpotFixture spot_14(Shehds_RGBWAU_7x18W, 179, 10, "Spot 14 (180)", 14);
-SpotFixture spot_15(Shehds_RGBWAU_7x18W, 189, 10, "Spot 15 (190)", 15);
-SpotFixture spot_16(Shehds_RGBWAU_7x18W, 199, 10, "Spot 16 (200)", 16);
-SpotFixture spot_17(Shehds_RGBWAU_7x18W, 209, 10, "Spot 17 (210)", 17);
-SpotFixture spot_18(Shehds_RGBWAU_7x18W, 219, 10, "Spot 18 (220)", 18);
-SpotFixture spot_19(Shehds_RGBWAU_7x18W, 229, 10, "Spot 19 (230)", 19);
-SpotFixture spot_20(Shehds_RGBWAU_7x18W, 239, 10, "Spot 20 (240)", 20);
+SpotFixture spot_13(Shehds_RGBWAU_7x18W, 169, 10, "Spot 13 (@170)", 13);
+SpotFixture spot_14(Shehds_RGBWAU_7x18W, 179, 10, "Spot 14 (@180)", 14);
+SpotFixture spot_15(Shehds_RGBWAU_7x18W, 189, 10, "Spot 15 (@190)", 15);
+SpotFixture spot_16(Shehds_RGBWAU_7x18W, 199, 10, "Spot 16 (@200)", 16);
+SpotFixture spot_17(Shehds_RGBWAU_7x18W, 209, 10, "Spot 17 (@210)", 17);
+SpotFixture spot_18(Shehds_RGBWAU_7x18W, 219, 10, "Spot 18 (@220)", 18);
+SpotFixture spot_19(Shehds_RGBWAU_7x18W, 229, 10, "Spot 19 (@230)", 19);
+SpotFixture spot_20(Shehds_RGBWAU_7x18W, 239, 10, "Spot 20 (@240)", 20);
 
 // SpotFixture spot_8(130, 8, "Spot 8 (130)");     
 
@@ -77,8 +77,8 @@ DMX_vec Shehds_7x18W_buffer(const SpotFixture& spot){
                    spot.RGBWout[G],
                    spot.RGBWout[B],
                    spot.RGBWout[W],
-                   0,
-                   0,
+                   spot.RGBWout[Amb],
+                   spot.RGBWout[UV],
                    spot.strobe,
                    0,
                    0};
@@ -86,7 +86,7 @@ DMX_vec Shehds_7x18W_buffer(const SpotFixture& spot){
 
 DMX_vec SpotFixture::buffer(){
     switch (this->type){
-        case FunGeneration_RGBW_12x1W :
+        case FunGen_RGBW_12x1W :
             return FunGeneration_12x1W_buffer(*this);
             break;
         case Shehds_RGBWAU_10x8W :
@@ -436,20 +436,22 @@ void back_rack_init(){
     back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, green,    w_white,        square,  3000, 3000,      "white chaser, green background",   "BR.1.2.3.12", backer, 2, 100));
 
     // Color chaser on different color background
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack,   blue,   red,      square, 3000, 3000, "blue chaser, red background",       "BR.1.2.4.1", backer, 1, 100));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack,   red,    blue,     square, 3000, 3000, "red chaser, blue background",       "BR.1.2.4.2", backer, 1, 100));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack,   cyan,   red,      square, 3000, 3000, "cyan chaser, red background",       "BR.1.2.4.3", backer, 1, 100));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack,   cyan,   magenta,  square, 3000, 3000, "cyan chaser, magenta background",   "BR.1.2.4.4", backer, 1, 100));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack,   gold,   purple,   square, 3000, 3000, "gold chaser, purple background",    "BR.1.2.4.5", backer, 1, 100));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack,   gold,   red,      square, 3000, 3000, "gold chaser, red background",       "BR.1.2.4.6", backer, 1, 100));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack,   gold,   orange,   square, 3000, 3000, "gold chaser, orange background",    "BR.1.2.4.7", backer, 1, 100));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack,   gold,   sodium,   square, 3000, 3000, "gold chaser, sodium background",    "BR.1.2.4.8", backer, 1, 100));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack,   cyan,   purple,   square, 3000, 3000, "cyan chaser, purple background",    "BR.1.2.4.9", backer, 1, 100));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack,   pink,   purple,   square, 3000, 3000, "pink chaser, purple background",    "BR.1.2.4.10", backer, 1, 100));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack,   cyan,   purple,   square, 3000, 3000, "cyan chaser, purple background",    "BR.1.2.4.11", backer, 1, 100));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack,   cyan,   pink,     square, 3000, 3000, "cyan chaser, pink background",      "BR.1.2.4.12", backer, 1, 100));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack,   red,    purple,   square, 3000, 3000, "purple chaser, red background",     "BR.1.2.4.13", backer, 1, 100));
-    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack,   purple, red,      square, 3000, 3000, "red chaser, purple background",     "BR.1.2.4.14", backer, 1, 100));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, red,      blue,      square, 3000, 3000, "blue chaser, red background",       "BR.1.2.4.1", backer, 1, 100));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, blue,     red,       square, 3000, 3000, "red chaser, blue background",       "BR.1.2.4.2", backer, 1, 100));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, red,      cyan,      square, 3000, 3000, "cyan chaser, red background",       "BR.1.2.4.3", backer, 1, 100));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, magenta,  cyan,      square, 3000, 3000, "cyan chaser, magenta background",   "BR.1.2.4.4", backer, 1, 100));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, purple,   gold,      square, 3000, 3000, "gold chaser, purple background",    "BR.1.2.4.5", backer, 1, 100));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, red,      gold,      square, 3000, 3000, "gold chaser, red background",       "BR.1.2.4.6", backer, 1, 100));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, orange,   gold,      square, 3000, 3000, "gold chaser, orange background",    "BR.1.2.4.7", backer, 1, 100));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, sodium,   gold,      square, 3000, 3000, "gold chaser, sodium background",    "BR.1.2.4.8", backer, 1, 100));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, purple,   cyan,      square, 3000, 3000, "cyan chaser, purple background",    "BR.1.2.4.9", backer, 1, 100));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, purple,   pink,      square, 3000, 3000, "pink chaser, purple background",    "BR.1.2.4.10", backer, 1, 100));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, purple,   cyan,      square, 3000, 3000, "cyan chaser, purple background",    "BR.1.2.4.11", backer, 1, 100));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, pink,     cyan,      square, 3000, 3000, "cyan chaser, pink background",      "BR.1.2.4.12", backer, 1, 100));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, purple,   red,       square, 3000, 3000, "purple chaser, red background",     "BR.1.2.4.13", backer, 1, 100));
+    back_rack.animations.push_back(new SpotRackAnimation1(&back_rack, red,      purple,    square, 3000, 3000, "red chaser, purple background",     "BR.1.2.4.14", backer, 1, 100));
+
+    
 #endif
 
     back_rack.activate_none();
@@ -465,8 +467,35 @@ void back_rack_init(){
         ######  #     #  #####  #    #    ####### ###
         */
 void back_rack2_init(){
-    back_rack2.animations.push_back(new SpotRackAnimation1(&back_rack2, black,  black,       100000, 1000,   " ", "BR.0", backer, 0));
-        
+    back_rack2.animations.push_back(new SpotRackAnimation1(&back_rack2, black,  black,       100000, 1000,   " ", "BR2.0", backer, 0));
+
+    back_rack2.animations.push_back(new SpotRackAnimation1(&back_rack2, red,       blue,      square, 500, 1000, "blue chaser, red background",       "BR2.1.1", backer, 1));
+    back_rack2.animations.push_back(new SpotRackAnimation1(&back_rack2, blue,      red,       square, 500, 1000, "red chaser, blue background",       "BR2.1.2", backer, 1));
+    back_rack2.animations.push_back(new SpotRackAnimation1(&back_rack2, red,       cyan,      square, 500, 1000, "cyan chaser, red background",       "BR2.1.3", backer, 1));
+    back_rack2.animations.push_back(new SpotRackAnimation1(&back_rack2, magenta,   cyan,      square, 500, 1000, "cyan chaser, magenta background",   "BR2.1.4", backer, 1));
+    back_rack2.animations.push_back(new SpotRackAnimation1(&back_rack2, purple,    gold,      square, 500, 1000, "gold chaser, purple background",    "BR2.1.5", backer, 1));
+    back_rack2.animations.push_back(new SpotRackAnimation1(&back_rack2, red,       gold,      square, 500, 1000, "gold chaser, red background",       "BR2.1.6", backer, 1));
+    back_rack2.animations.push_back(new SpotRackAnimation1(&back_rack2, orange,    gold,      square, 500, 1000, "gold chaser, orange background",    "BR2.1.7", backer, 1));
+    back_rack2.animations.push_back(new SpotRackAnimation1(&back_rack2, sodium,    gold,      square, 500, 1000, "gold chaser, sodium background",    "BR2.1.8", backer, 1));
+    back_rack2.animations.push_back(new SpotRackAnimation1(&back_rack2, purple,    cyan,      square, 500, 1000, "cyan chaser, purple background",    "BR2.1.9", backer, 1));
+    back_rack2.animations.push_back(new SpotRackAnimation1(&back_rack2, purple,    pink,      square, 500, 1000, "pink chaser, purple background",    "BR2.1.10", backer, 1));
+    back_rack2.animations.push_back(new SpotRackAnimation1(&back_rack2, purple,    cyan,      square, 500, 1000, "cyan chaser, purple background",    "BR2.1.11", backer, 1));
+    back_rack2.animations.push_back(new SpotRackAnimation1(&back_rack2, pink,      cyan,      square, 500, 1000, "cyan chaser, pink background",      "BR2.1.12", backer, 1));
+    back_rack2.animations.push_back(new SpotRackAnimation1(&back_rack2, purple,    red,       square, 500, 1000, "purple chaser, red background",     "BR2.1.13", backer, 1));
+    back_rack2.animations.push_back(new SpotRackAnimation1(&back_rack2, red,       purple,    square, 500, 1000, "red chaser, purple background",     "BR2.1.14", backer, 1));
+    
+    back_rack2.animations.push_back(new SpotRackAnimation1(&back_rack2, black, red,      square,  500, 1000,      "red chaser",     "BR2.2.1",  backer, 2));
+    back_rack2.animations.push_back(new SpotRackAnimation1(&back_rack2, black, sodium,   square,  500, 1000,      "sodium chaser",  "BR2.2.2",  backer, 2));
+    back_rack2.animations.push_back(new SpotRackAnimation1(&back_rack2, black, orange,   square,  500, 1000,      "orange chaser",  "BR2.2.3",  backer, 2));
+    back_rack2.animations.push_back(new SpotRackAnimation1(&back_rack2, black, yellow,   square,  500, 1000,      "yellow chaser",  "BR2.2.4",  backer, 2));
+    back_rack2.animations.push_back(new SpotRackAnimation1(&back_rack2, black, gold,     square,  500, 1000,      "gold chaser",    "BR2.2.5",  backer, 2));
+    back_rack2.animations.push_back(new SpotRackAnimation1(&back_rack2, black, w_white,  square,  500, 1000,      "white chaser",   "BR2.2.6",  backer, 2));
+    back_rack2.animations.push_back(new SpotRackAnimation1(&back_rack2, black, cyan,     square,  500, 1000,      "cyan chaser",    "BR2.2.7",  backer, 2));
+    back_rack2.animations.push_back(new SpotRackAnimation1(&back_rack2, black, blue,     square,  500, 1000,      "blue chaser",    "BR2.2.8",  backer, 2));
+    back_rack2.animations.push_back(new SpotRackAnimation1(&back_rack2, black, purple,   square,  500, 1000,      "purple chaser",  "BR2.2.9",  backer, 2));
+    back_rack2.animations.push_back(new SpotRackAnimation1(&back_rack2, black, magenta,  square,  500, 1000,      "magenta chaser", "BR2.2.10", backer, 2));
+    back_rack2.animations.push_back(new SpotRackAnimation1(&back_rack2, black, pink,     square,  500, 1000,      "pink chaser",    "BR2.2.11", backer, 2));
+    back_rack2.animations.push_back(new SpotRackAnimation1(&back_rack2, black, green,    square,  500, 1000,      "green chaser",   "BR2.2.12", backer, 2));
 }
 
 // Define animation for the global spot rack (including both frontal and background spots);
@@ -600,61 +629,61 @@ DMX_vec Shehds_10x8W_RGBW(simpleColor c, int intensity){
     }
 }
 
-DMX_vec Shehds_7x18W_RGBW(simpleColor c, int intensity){
+DMX_vec Shehds_7x18W_RGBWAU(simpleColor c, int intensity){
     switch (c){
         case black:
-            return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);
+            return fcn::RGBW_norm(DMX_vec{0,0,0,0,0,0}, -1);
             break;
         case red:
-            return fcn::RGBW_norm(DMX_vec{255,0,0,0}, intensity);
+            return fcn::RGBW_norm(DMX_vec{255,0,0,0,0,0}, -1);
             break;
         case green:
-            return fcn::RGBW_norm(DMX_vec{0,255,0,0}, 161.0/255*intensity);
+            return fcn::RGBW_norm(DMX_vec{4,255,0,0,0,0}, -1);
             break;
         case blue:
-            return fcn::RGBW_norm(DMX_vec{0,0,255,0}, 190.0/255*intensity);
+            return fcn::RGBW_norm(DMX_vec{0,5,255,0,0,0}, -1);
             break;
         case yellow:
-            return fcn::RGBW_norm(DMX_vec{255,90,0,0}, intensity);
+            return fcn::RGBW_norm(DMX_vec{255,126,0,0,70,0}, -1);
             break;
         case orange:
-            return fcn::RGBW_norm(DMX_vec{255,40,0,0}, intensity);
+            return fcn::RGBW_norm(DMX_vec{255,47,0,0,255,0}, -1);
             break;
         case sodium:
-            return fcn::RGBW_norm(DMX_vec{255,20,0,0}, intensity);
+            return fcn::RGBW_norm(DMX_vec{255,20,0,0,255,0}, -1);
             break;
         case cyan:
-            return fcn::RGBW_norm(DMX_vec{0,219,255,0}, 180.0/255*intensity);
+            return fcn::RGBW_norm(DMX_vec{0,233,255,0,0,0}, -1);
             break;
         case purple:
-            return fcn::RGBW_norm(DMX_vec{150,0,255,0}, intensity);
+            return fcn::RGBW_norm(DMX_vec{96,0,255,0,0,255}, -1);
             break;    
         case magenta:
-            return fcn::RGBW_norm(DMX_vec{255,0,240,0}, intensity);
+            return fcn::RGBW_norm(DMX_vec{159,0,255,0,0,255}, -1);
             break;
         case pink:
-            return fcn::RGBW_norm(DMX_vec{255,0,100,0}, intensity);
+            return fcn::RGBW_norm(DMX_vec{255,0,137,0,0,0}, -1);
             break;
         case w_white:
-            return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);
+            return fcn::RGBW_norm(DMX_vec{221,104,0,255,167,0}, -1);
             break;
         case c_white:
-        return fcn::RGBW_norm(DMX_vec{255,230,213,255}, 180.0/255*intensity);
-        break;
+        return fcn::RGBW_norm(DMX_vec{255,227,200,255,0,0}, -1);
+            break;
         case gold:
-            return fcn::RGBW_norm(DMX_vec{255,40,0,100}, intensity);
+            return fcn::RGBW_norm(DMX_vec{255,58,0,49,134,0}, -1);
             break;
         case sevika_pink :
-            return fcn::RGBW_norm(DMX_vec{255,0,11,0}, intensity);
+            return fcn::RGBW_norm(DMX_vec{255,0,27,0,0,0}, -1);
             break;
         case hextech_cyan :
-            return fcn::RGBW_norm(DMX_vec{0,153,255,0}, intensity);
+            return fcn::RGBW_norm(DMX_vec{0,153,255,0,0,0}, -1);
             break;
         case shimmer_purple :
-            return fcn::RGBW_norm(DMX_vec{245,0,255,0}, intensity);
+            return fcn::RGBW_norm(DMX_vec{190,0,255,0,0,0}, -1);
             break;
         default:
-            return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);
+            return fcn::RGBW_norm(DMX_vec{0,0,0,0,0,0}, -1);
             break;
     }
 }
@@ -662,14 +691,14 @@ DMX_vec Shehds_7x18W_RGBW(simpleColor c, int intensity){
 
 DMX_vec SpotFixture::RGBW(simpleColor c, int intensity){
     switch (this->type){
-        case FunGeneration_RGBW_12x1W :
+        case FunGen_RGBW_12x1W :
             return FunGeneration_12x1W_RGBW(c, intensity);
             break;
         case Shehds_RGBWAU_10x8W :
             return Shehds_10x8W_RGBW(c, intensity);
             break;
         case Shehds_RGBWAU_7x18W :
-            return Shehds_7x18W_RGBW(c, intensity);
+            return Shehds_7x18W_RGBWAU(c, intensity);
             break;
         
         default :
@@ -814,6 +843,7 @@ void SpotRackAnimation1::new_frame(){
         auto &current_spot_flashes = flashes[i_spot];                  // for readability
         auto &current_spot_next_flash = flashes[i_spot][i_next];       // for readability
         auto &current_spot_prev_flash = flashes[i_spot][i_prev];       // for readability
+        auto pixel_size = current_spot->RGBWout.size();
         time_t &t_next = current_spot_next_flash.time;
         time_t &t_prev = current_spot_prev_flash.time;
         simpleColor &c_next = current_spot_next_flash.color;
@@ -821,15 +851,19 @@ void SpotRackAnimation1::new_frame(){
 
         // log(4, __FILE__, " ", __LINE__, " ",__func__, " Mark2 , ", fcn::num_to_str(i_spot));
 
-        const pixel     ani_backgd_RGBW = fixture->RGBW(back_color, SPOTRACK_ANI1_BkG_INTENSITY_LOW);
-        pixel           frame_backgd_RGBW = {0,0,0,0};
+        const pixel     ani_backgd_RGBW = current_spot->RGBW(back_color, SPOTRACK_ANI1_BkG_INTENSITY_LOW);
+        pixel           frame_backgd_RGBW = current_spot->RGBW(black);
+        // log(1, "Pixel size : ", fcn::num_to_str((int)pixel_size));
 
         //TODO remove fluctuation !!
         // compute fluctuating background color values :
-            frame_backgd_RGBW[R] = min(max(    (int) (  (1 + fluct_int*s[(i_spot+4)%5]) * ani_backgd_RGBW[R] * (1 + fluct_col*s[(i_spot+0)%5]))  ,0),255);
-            frame_backgd_RGBW[G] = min(max(    (int) (  (1 + fluct_int*s[(i_spot+4)%5]) * ani_backgd_RGBW[G] * (1 + fluct_col*s[(i_spot+1)%5]))  ,0),255);
-            frame_backgd_RGBW[B] = min(max(    (int) (  (1 + fluct_int*s[(i_spot+4)%5]) * ani_backgd_RGBW[B] * (1 + fluct_col*s[(i_spot+2)%5]))  ,0),255);
-            frame_backgd_RGBW[W] = min(max(    (int) (  (1 + fluct_int*s[(i_spot+4)%5]) * ani_backgd_RGBW[W] * (1 + fluct_col*s[(i_spot+3)%5]))  ,0),255);
+            // frame_backgd_RGBW[R] = min(max(    (int) (  (1 + fluct_int*s[(i_spot+4)%5]) * ani_backgd_RGBW[R] * (1 + fluct_col*s[(i_spot+0)%5]))  ,0),255);
+            // frame_backgd_RGBW[G] = min(max(    (int) (  (1 + fluct_int*s[(i_spot+4)%5]) * ani_backgd_RGBW[G] * (1 + fluct_col*s[(i_spot+1)%5]))  ,0),255);
+            // frame_backgd_RGBW[B] = min(max(    (int) (  (1 + fluct_int*s[(i_spot+4)%5]) * ani_backgd_RGBW[B] * (1 + fluct_col*s[(i_spot+2)%5]))  ,0),255);
+            // frame_backgd_RGBW[W] = min(max(    (int) (  (1 + fluct_int*s[(i_spot+4)%5]) * ani_backgd_RGBW[W] * (1 + fluct_col*s[(i_spot+3)%5]))  ,0),255);
+            for (auto i_subpix = 0; i_subpix<pixel_size; i_subpix++){
+                frame_backgd_RGBW[i_subpix] = min(max(    (int) (  (1 + fluct_int*s[(i_spot+4)%s.size()]) * ani_backgd_RGBW[i_subpix] * (1 + fluct_col*s[(i_spot+i_subpix)%s.size()]))  ,0),255);
+            }
         // ------------------------------- limit to 0-255 ---------------- Spot Intensity    *  RGBW pixel intensity                            ;
         
         // if flash is actviated, compute the flash --> exp( -(spd.(t-t0))²)
@@ -866,11 +900,14 @@ void SpotRackAnimation1::new_frame(){
                 flash_intensity = 0.0;
             }
 
-            DMX_vec frame_flash_RGBW = (t-t_prev > t_next-t) ? fixture->RGBW(c_next) : this->fixture->RGBW(c_prev);
-            current_spot->RGBWout[R] = min(max( (int)( (1.0-pow(flash_intensity, 0.2)) * frame_backgd_RGBW[R] + flash_intensity * frame_flash_RGBW[R]  ),0),255); 
-            current_spot->RGBWout[G] = min(max( (int)( (1.0-pow(flash_intensity, 0.2)) * frame_backgd_RGBW[G] + flash_intensity * frame_flash_RGBW[G]  ),0),255);
-            current_spot->RGBWout[B] = min(max( (int)( (1.0-pow(flash_intensity, 0.2)) * frame_backgd_RGBW[B] + flash_intensity * frame_flash_RGBW[B]  ),0),255);
-            current_spot->RGBWout[W] = min(max( (int)( (1.0-pow(flash_intensity, 0.2)) * frame_backgd_RGBW[W] + flash_intensity * frame_flash_RGBW[W]  ),0),255);
+            DMX_vec frame_flash_RGBW = (t-t_prev > t_next-t) ? current_spot->RGBW(c_next) : current_spot->RGBW(c_prev);
+            // current_spot->RGBWout[R] = min(max( (int)( (1.0-pow(flash_intensity, 0.2)) * frame_backgd_RGBW[R] + flash_intensity * frame_flash_RGBW[R]  ),0),255); 
+            // current_spot->RGBWout[G] = min(max( (int)( (1.0-pow(flash_intensity, 0.2)) * frame_backgd_RGBW[G] + flash_intensity * frame_flash_RGBW[G]  ),0),255);
+            // current_spot->RGBWout[B] = min(max( (int)( (1.0-pow(flash_intensity, 0.2)) * frame_backgd_RGBW[B] + flash_intensity * frame_flash_RGBW[B]  ),0),255);
+            // current_spot->RGBWout[W] = min(max( (int)( (1.0-pow(flash_intensity, 0.2)) * frame_backgd_RGBW[W] + flash_intensity * frame_flash_RGBW[W]  ),0),255);
+            for (auto i_subpix = 0 ; i_subpix<pixel_size; i_subpix++){
+                 current_spot->RGBWout[i_subpix] = min(max( (int)( (1.0-pow(flash_intensity, 0.2)) * frame_backgd_RGBW[i_subpix] + flash_intensity * frame_flash_RGBW[i_subpix]  ),0),255); 
+            }
     }
 }
 
