@@ -238,6 +238,11 @@ class ColorPaletteMagazine{
     
     // returns a palette with at least 1 common color with the palette passed as argument (wweighed by prba if several candidates exist)
     color_vec get_similar_palette(color_vec current_palette){
+      
+      if (current_palette.size()==0){
+        return this->get_random_palette();
+      }else{
+
         //list candidates
         ColorPaletteMagazine candidates;
         for (int i = 0; i<this->size(); i++){
@@ -252,6 +257,7 @@ class ColorPaletteMagazine{
           log(1, "No similar color palette exist... ", fcn::palette_to_string(current_palette, '/'));
           return this->get_random_palette();
         }
+      }
     }
 
     color_vec get_similar_palette(){
@@ -282,13 +288,14 @@ class AnimationManager{
     bool flash = true;
     time_t timer_start_ms = 0, timer_end_ms=0, timer_duration_ms = 0;
     unsigned long t_last_change_ms = millis();   //timestamp of last switch between aniamtions
-    ColorPaletteMagazine palette_magasine;
+    ColorPaletteMagazine palette_magasine, palette_magasine_2;
 
     void init();
 
     void random_update();
     void palette_update();
     void show_update();
+    void nov30_maximum_update();
     bool test_animation();
     bool controled_animator(const DMX_vec);
 
