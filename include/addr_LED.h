@@ -213,11 +213,14 @@ class AddrLEDAnimation2 : public AddrLEDAnimation{
     // Dynamic variables (updated internally at each frame)
     int_vec units_index;
     // Constructor
-    AddrLEDAnimation2(AddressableLED *f, simpleColor f_col, simpleColor b_col, strip_subdiv_t u, std::string d, std::string i)
+    AddrLEDAnimation2(AddressableLED *f, simpleColor f_col, simpleColor b_col, strip_subdiv_t u, std::string d, std::string i, AnimationType typ=any, int prio=1, int mast=255)
     {
         this->description = d;
         this->id = i;
         this->fixture = f;
+        this->type = typ;
+        this->master = mast;
+        this->priority=prio;
 
         this->flash_RGB = this->fixture->RGB(f_col);
         this->backgd_RGB = this->fixture->RGB(b_col, 20);

@@ -280,7 +280,8 @@ int main(int argc, char* argv[]){
             balise("Run animator normal update");
             // animator.random_update();
             // animator.palette_update();
-            // animator.show_update();
+            // // animator.show_update();
+            //animator.nov30_maximum_update();
             animator.autocolor_update();
         }
         else if (!b_EXT_CONTROL && b_ANI_TEST && frame.cpt == 0){   // else activate once and for all the animations to test

@@ -41,45 +41,94 @@ void AnimationManager::init(){
  // palette_magasine.push_back(    color_vec{pink}   ,1   );
  // palette_magasine.push_back(    color_vec{green}  ,1   );
     
-    palette_magasine.push_back(     color_vec{w_white, red}       ,1      );
- // palette_magasine.push_back(     color_vec{white, sodium}    ,1      );
- // palette_magasine.push_back(     color_vec{white, orange}    ,1      );
- // palette_magasine.push_back(     color_vec{white, yellow}    ,1      );
- // palette_magasine.push_back(     color_vec{white, gold}      ,1      );
- // palette_magasine.push_back(     color_vec{white, white}     ,1      );
- // palette_magasine.push_back(     color_vec{white, cyan}      ,1      );
-    palette_magasine.push_back(     color_vec{w_white, blue}      ,1      );
-    palette_magasine.push_back(     color_vec{w_white, purple}    ,1      );
- // palette_magasine.push_back(     color_vec{white, magenta}   ,1      );
- // palette_magasine.push_back(     color_vec{white, pink}      ,1      );
- // palette_magasine.push_back(     color_vec{white, green}     ,1      );
+//     palette_magasine.push_back(     color_vec{w_white, red}       ,1      );
+//  // palette_magasine.push_back(     color_vec{white, sodium}    ,1      );
+//  // palette_magasine.push_back(     color_vec{white, orange}    ,1      );
+//  // palette_magasine.push_back(     color_vec{white, yellow}    ,1      );
+//  // palette_magasine.push_back(     color_vec{white, gold}      ,1      );
+//  // palette_magasine.push_back(     color_vec{white, white}     ,1      );
+//  // palette_magasine.push_back(     color_vec{white, cyan}      ,1      );
+//     palette_magasine.push_back(     color_vec{w_white, blue}      ,1      );
+//     palette_magasine.push_back(     color_vec{w_white, purple}    ,1      );
+//  // palette_magasine.push_back(     color_vec{white, magenta}   ,1      );
+//  // palette_magasine.push_back(     color_vec{white, pink}      ,1      );
+//  // palette_magasine.push_back(     color_vec{white, green}     ,1      );
 
 
-    palette_magasine.push_back(    color_vec{cyan, magenta}    ,1       );
-    palette_magasine.push_back(    color_vec{gold, red}        ,3       );
-    palette_magasine.push_back(    color_vec{gold, orange}     ,1       );
-    palette_magasine.push_back(    color_vec{gold, sodium}     ,1       );
-    palette_magasine.push_back(    color_vec{gold, blue}       ,1       );
-    palette_magasine.push_back(    color_vec{red, blue}        ,3       );
-    palette_magasine.push_back(    color_vec{magenta, blue}    ,3       );
-    palette_magasine.push_back(    color_vec{red, purple}      ,3       );
-    palette_magasine.push_back(    color_vec{gold, purple}     ,2       );
-    palette_magasine.push_back(    color_vec{blue, purple}     ,1       );
-    palette_magasine.push_back(    color_vec{cyan, purple}     ,1       );
-    palette_magasine.push_back(    color_vec{cyan, red}        ,3       );
-    palette_magasine.push_back(    color_vec{blue, cyan}       ,1       );
-    palette_magasine.push_back(    color_vec{purple, magenta}  ,1       );
-    palette_magasine.push_back(    color_vec{red, purple}      ,2       );
+//     palette_magasine.push_back(    color_vec{cyan, magenta}    ,1       );
+//     palette_magasine.push_back(    color_vec{gold, red}        ,3       );
+//     palette_magasine.push_back(    color_vec{gold, orange}     ,1       );
+//     palette_magasine.push_back(    color_vec{gold, sodium}     ,1       );
+//     palette_magasine.push_back(    color_vec{gold, blue}       ,1       );
+//     palette_magasine.push_back(    color_vec{red, blue}        ,3       );
+//     palette_magasine.push_back(    color_vec{magenta, blue}    ,3       );
+//     palette_magasine.push_back(    color_vec{red, purple}      ,3       );
+//     palette_magasine.push_back(    color_vec{gold, purple}     ,2       );
+//     palette_magasine.push_back(    color_vec{blue, purple}     ,1       );
+//     palette_magasine.push_back(    color_vec{cyan, purple}     ,1       );
+//     palette_magasine.push_back(    color_vec{cyan, red}        ,3       );
+//     palette_magasine.push_back(    color_vec{blue, cyan}       ,1       );
+//     palette_magasine.push_back(    color_vec{purple, magenta}  ,1       );
+//     palette_magasine.push_back(    color_vec{red, purple}      ,2       );
     
-    // Nouveau
-    palette_magasine.push_back(    color_vec{green, cyan}           ,1       );
-    palette_magasine.push_back(    color_vec{blue, orange}          ,1       );
-    palette_magasine.push_back(    color_vec{blue, sodium}          ,1       );
-    palette_magasine.push_back(    color_vec{orange, blue, cyan}    ,1       );
+//     // Nouveau
+//     palette_magasine.push_back(    color_vec{green, cyan}           ,1       );
+//     palette_magasine.push_back(    color_vec{blue, orange}          ,1       );
+//     palette_magasine.push_back(    color_vec{blue, sodium}          ,1       );
+//     palette_magasine.push_back(    color_vec{orange, blue, cyan}    ,1       );
+
+//--------------------------------------------------------------------------------
+// Warehouse color palette
+// Flames (red to hot colors)
+    palette_magasine.push_back( color_vec{red},             1);
+    palette_magasine.push_back( color_vec{gold, red},       1);
+    palette_magasine.push_back( color_vec{sodium, red},     1);
+    palette_magasine.push_back( color_vec{w_white, red},    1);
+// Wabi colors
+    palette_magasine.push_back(color_vec{purple, red},      1);
+    palette_magasine.push_back(color_vec{gold, purple},     1);
+    palette_magasine.push_back(color_vec{gold, purple},     1);
+    palette_magasine.push_back(color_vec{sodium, purple},   1);
+
+    palette_magasine.push_back(color_vec{cyan, red},        1);
+    palette_magasine.push_back(color_vec{cyan, purple},     1);
+// Tricolor
+    palette_magasine.push_back(color_vec{gold, purple, red},        1);
+    palette_magasine.push_back(color_vec{purple, sodium, red},      1);
+    palette_magasine.push_back(color_vec{gold, cyan, red},          1);
+    palette_magasine.push_back(color_vec{gold, cyan, purple},       1);
+
+//--------------------------------------------------------------------------------
+// Dasncefloor color palette
+// Flames (red to hot colors)
+    palette_magasine_2.push_back( color_vec{red},             1);
+    palette_magasine_2.push_back( color_vec{gold, red},       1);
+    palette_magasine_2.push_back( color_vec{sodium, red},     1);
+    palette_magasine_2.push_back( color_vec{w_white, red},    1);
+    palette_magasine_2.push_back( color_vec{c_white, red},    1);
+// Wabi colors
+    palette_magasine_2.push_back(color_vec{purple, red},      1);
+    palette_magasine_2.push_back(color_vec{gold, purple},     1);
+    palette_magasine_2.push_back(color_vec{gold, purple},     1);
+    palette_magasine_2.push_back(color_vec{sodium, purple},   1);
+
+    palette_magasine_2.push_back(color_vec{cyan, red},        1);
+    palette_magasine_2.push_back(color_vec{cyan, purple},     1);
+// Other color
+    palette_magasine_2.push_back(color_vec{blue},           1);
+    palette_magasine_2.push_back(color_vec{blue, red},      1);
+    palette_magasine_2.push_back(color_vec{blue, cyan},     1);
+    palette_magasine_2.push_back(color_vec{blue, c_white},  1);
+    palette_magasine_2.push_back(color_vec{blue, w_white},  1);
+    palette_magasine_2.push_back(color_vec{blue, purple},   1);
+    palette_magasine_2.push_back(color_vec{purple, c_white},  1);
+    palette_magasine_2.push_back(color_vec{purple, w_white},  1);
+
     
     front_rack_init();
-    back_rack_init();
-    back_rack2_init();
+    rack_15_init();
+    rack_40_init();
+    shehds_rack_init();
     global_rack_init();
 }
 
@@ -221,7 +270,7 @@ void AnimationManager::show_update(){
         }
         
         balise(__FILE__, " ", __LINE__, "activate backstage rack  animation");
-        back_rack.activate_by_color(current_palette);   // deal with the backstage rack separately
+        rack_15.activate_by_color(current_palette);   // deal with the backstage rack separately
 
         // spider.activate_by_color(current_palette);
 
@@ -236,6 +285,49 @@ void AnimationManager::show_update(){
     //     // log(1, "Switch Spider animation --> ", spider.active_animation->description);
     //     last_spider_switch = frame.t_current_ms;
     // }
+}
+
+void AnimationManager::nov30_maximum_update(){
+    time_ms t = frame.t_current_ms;
+
+// Dancefloor LIGHTING --------------------------------------------------------------------------------
+    //same as usual
+    // Change on beat & timer, 3-5 animation change before changing palette
+    // use palette_magasine_2
+
+// WareHouse LIGHTING ---------------------------------------------------------------------------------
+    // Racks of spots
+    // change each fixture's active animation when a timer expires. timers are initialized on a constant +- random value
+    // use palette_magasine
+    
+    // update Warehouse palette
+    static color_vec warehouse_palette;
+    static time_ms last_wh_palette_chg_ms;
+    if (warehouse_palette.size()==0 || t-last_wh_palette_chg_ms > WAREH_TEMPO_PALETTE){ // if palette is empty or palette timer elapsed
+        warehouse_palette = palette_magasine.get_similar_palette(warehouse_palette);    // 
+        last_wh_palette_chg_ms = t;
+        log(1, "New warehouse color palette : ", fcn::palette_to_string(warehouse_palette, '/'));
+    }
+
+    // update Warehouse fixture animation
+    fix_vec warehouse_fixtures = {&shehds_rack, &rack_15, &rack_40, &redrayz};
+    const int n_wareh_fix =  warehouse_fixtures.size();
+    static vector<time_t> warehouse_timestp(n_wareh_fix, 0);
+
+    for(auto i_fix = 0; i_fix<n_wareh_fix; i_fix++){
+        if(t - warehouse_timestp[i_fix] > 0){
+            warehouse_fixtures[i_fix]->activate_by_color(warehouse_palette);    // activate a new animation
+            warehouse_timestp[i_fix] = t + rand_min_max(2*WAREH_TEMPO_ANI/3, 4*WAREH_TEMPO_ANI/3);                                       // store current time as timestamp
+            log(2, warehouse_fixtures[i_fix]->name, " : ", warehouse_fixtures[i_fix]->active_animation->id, " - ", warehouse_fixtures[i_fix]->active_animation->description);
+        }
+    }
+    
+    // RED Rayz
+    // update randomly every 30 seconds
+    // if (t - redrayz.active_animation->t_animation_start_ms > 30000){
+    //     redrayz.activate_random();
+    // }
+
 }
 
 void AnimationManager::autocolor_update(){
@@ -301,7 +393,7 @@ bool AnimationManager::controled_animator(const DMX_vec data){
     front_rack.activate_by_index(data[3]);
     front_rack.set_master(data[0]);
 
-    back_rack.activate_by_index(data[4]);
+    rack_15.activate_by_index(data[4]);
     front_rack.set_master(data[1]);
 
     addr_led.activate_by_index(data[5]);

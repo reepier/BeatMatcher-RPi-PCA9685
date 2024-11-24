@@ -47,13 +47,17 @@ extern std::vector<std::string> vec_anim_id;
 #define      PAL_LIFESPAN_BICO  5
 #define      PAL_LIFESPAN_MONO  3
 
-#define     SPOTRACK_ANI1_BkG_INTENSITY_LOW   40
+#define     SPOTRACK_ANI1_BkG_INTENSITY_LOW   150
 #define     SPOTRACK_ANI1_BkG_INTENSITY_HIGH  100
 
 #define     ADDRLED_ANI4_BkG_INTENSITY_LOW   15
 #define     DDRLED_ANI4_BkG_INTENSITY_HIGH  100
 
 #define     SHOW_INTENSITY 0        // ranges from 1 to 3 (0 for all)
+
+// -- CONFIG MAXIMUM --------------------------------------------------
+#define     WAREH_TEMPO_ANI         30000
+#define     WAREH_TEMPO_PALETTE     100000
 
 // External Controler SETTING
 // #define SR1_DIMMER      0
