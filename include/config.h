@@ -30,10 +30,11 @@ extern std::vector<std::string> vec_anim_id;
     #define THD_BTtoBS 3            // Threshold to go from BEAT TRACKING to BAD SIGNAL mode
     #define THD_BStoBT 5            // Threshold to go from  BAD SIGNAL to BEAT TRACKING mode
     #define TEMPO_BEAT_BREAK 1000   // duration after which state goes FROM to BREAK when no BEAT is detected  
+    #define TEMPO_SUSTAINED_BREAK 3000  //[ms] Duration after which BREAK becomes SUSTAINED BREAK
 
 // Music Emulator
-#define BPM 120          // BPM
-#define BREAKDuration 4  // beats
+#define BPM 100          // BPM
+#define BREAKDuration 8  // beats
 #define DROPDuration  8 // beats
 
 // -- CONFIG ------------------------------------------------------------

@@ -32,9 +32,10 @@
 
 //TODO major find & reintegrate state machine update : Meatmatcher maximum - branch "update_music_state_machine"
 enum states{
-    BEAT        = 1,    // volume is high and beat is clear
-    BREAK       = 2,    // volume is low (indicates a break)
-    BAD_SIGNAL  = 3     // volume is high but the beat is not perceptible
+    BEAT        = 1,       // volume is high and beat is clear
+    BREAK       = 2,       // volume is low (indicates a break)
+    BAD_SIGNAL  = 3,       // volume is high but the beat is not perceptible
+    SUSTAINED_BREAK = 4    // no beat is discernible for more than X s
 };
 
 class SoundAnalyzer{
@@ -71,7 +72,9 @@ class SoundAnalyzer{
     // state machine
     private :   int BS_buff = 0, BT_buff = 0;     // counters used to filter out transents in states estimation
     public :    states state = BEAT, previous_state = BEAT;
-    public :    bool state_changed = false;    
+    public :    bool state_changed = false;
+    public :    time_t t_last_state_change = 0; //[ms]
+
 
     // Main functions (entry points)
     public :    void init();
