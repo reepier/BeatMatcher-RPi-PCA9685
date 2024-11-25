@@ -318,6 +318,7 @@ void AnimationManager::nov30_maximum_update(){
 
     // On musical condition, update active Animation for one, or more fixtures
     fix_vec dancefloor_fixtures = {&addr_led, &front_rack};
+    
 
 
 
