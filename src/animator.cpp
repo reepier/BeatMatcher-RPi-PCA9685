@@ -302,26 +302,7 @@ void AnimationManager::nov30_maximum_update(){
     time_ms t = frame.t_current_ms;                             // for code readability
     static color_vec warehouse_palette, dancefloor_palette;     // color palette for each zone
 
-
-// Dancefloor LIGHTING --------------------------------------------------------------------------------
-    //same as usual
-    // Change on beat & timer, 3-5 animation change before changing palette
-    // use palette_magasine_2
-
-    // Update Dancefloor color palette periodically
-    static time_ms last_dc_palette_chg_ms;
-    if (dancefloor_palette.size()==0 || t-last_dc_palette_chg_ms > DANCEFL_TEMPO_ANI){ // if palette is empty or palette timer elapsed
-        dancefloor_palette = palette_magasine.get_similar_palette(warehouse_palette);    // gt a new palette, close to the one used in the warehouse
-        last_dc_palette_chg_ms = t;
-        log(1, "New dancefloor color palette : ", fcn::palette_to_string(dancefloor_palette, '/'));
-    }
-
-    // On musical condition, update active Animation for one, or more fixtures
-    fix_vec dancefloor_fixtures = {&addr_led, &front_rack};
-    
-
-
-
+// -------------------------------------------------------------------------------------------------
 // WareHouse LIGHTING ---------------------------------------------------------------------------------
     // Racks of spots
     // change each fixture's active animation when a timer expires. timers are initialized on a constant +- random value
@@ -353,6 +334,67 @@ void AnimationManager::nov30_maximum_update(){
     // if (t - redrayz.active_animation->t_animation_start_ms > 30000){
     //     redrayz.activate_random();
     // }
+
+// -------------------------------------------------------------------------------------------------
+// Dancefloor LIGHTING --------------------------------------------------------------------------------
+/** RULES
+ *  - Change color palette WHEN palette timer has elapsed AND music transitions to BEAT --> t-last_dc_palette_chg_ms > DANCEFL_TEMPO_PALETTE
+ *  - Major Change in animation (pick leader & update all active ani) WHEN 
+ *          palette just changed OR a long musical BREAK just reached its DROP
+ *  - Minor change in animation (change 1 fixture active ani without changing leader/backer config) WHEN 
+ *          timer elapsed since last transition AND music transitions to BEAT
+ *  - Major change has priority over minor change  
+ */
+
+
+    // Update Dancefloor color palette periodically (but wait for music transition still)
+    static time_ms last_dc_palette_chg_ms;
+    static bool FORCE_full_ani_update = false;
+    if (dancefloor_palette.size()==0 || (t-last_dc_palette_chg_ms > DANCEFL_TEMPO_PALETTE) && (sampler.state_changed && sampler.state == BEAT)){ // if palette is empty or palette timer elapsed
+        FORCE_full_ani_update == true;  // set FLAG
+        dancefloor_palette = palette_magasine_2.get_similar_palette(warehouse_palette);    // gt a new palette, close to the one used in the warehouse
+        last_dc_palette_chg_ms = t;
+        log(1, "New dancefloor color palette : ", fcn::palette_to_string(dancefloor_palette, '/'));
+    }
+
+    // On musical condition, update active Animation for one, or more fixtures
+    fix_vec dancefloor_fixtures = {&addr_led, &front_rack};                 // define list of fixtures
+    static BaseFixture * leader = fcn::random_pick(dancefloor_fixtures);    // leading fixtures (initialization just in case)
+    static time_ms t_last_df_ani_change = 0;
+
+    // MAJOR UPDATE
+    // when music goes from SUSTAINED BREAK to BEAT or when palette changes, update all fixtures (also when palette just change)
+    if (frame.first_loop || (sampler.state == BEAT && sampler.previous_state==SUSTAINED_BREAK)
+                         || FORCE_full_ani_update){
+        FORCE_full_ani_update = false; // reset flag
+        bool pick_success;
+        int trial_cpt = 1;
+        do{
+            pick_success = true;    //initial value
+            if (trial_cpt > 10) {   // if too many fails, log incident & CHANGE palette
+                log(1, "Error trying to find a match for ", fcn::palette_to_string(dancefloor_palette, '/'));
+                dancefloor_palette = palette_magasine_2.get_similar_palette(warehouse_palette);
+            }
+            
+            leader = fcn::random_pick(dancefloor_fixtures, int_vec{3,1});
+            for (auto fix : dancefloor_fixtures){
+                AnimationType ani_type = fix == leader ? AnimationType::leader : AnimationType::backer;
+                fix->activate_by_color(dancefloor_palette, ani_type);
+            }
+
+            trial_cpt++;
+        }while(!pick_success); // pick_success is true if working colorplaette / leader / backer combination works, false otherwise
+        t_last_df_ani_change = t;
+   
+    // MINOR UPDATE    -- only if no major update has occured during cycle
+    // if enough time has elapsed since last change, when music transition to BEAT, update some fixtures without changing leader
+    }else if(((t-t_last_df_ani_change > DANCEFL_TEMPO_ANI) && (sampler.state_changed && sampler.state==BEAT))){
+        BaseFixture *fix = fcn::random_pick(dancefloor_fixtures, int_vec{1,2}); // pick a fixture (backer spots have more chance to be picked)
+        AnimationType ani_type = fix == leader ? AnimationType::leader : AnimationType::backer;
+        fix->activate_by_color(dancefloor_palette, ani_type);
+
+        t_last_df_ani_change = t;
+    }
 
 }
 
