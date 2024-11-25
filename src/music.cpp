@@ -137,11 +137,10 @@ void SoundAnalyzer::_update_state(){
         case BEAT:
             if (_condition_for_analyis()){
                 
-                // If volume drops below threshold, go to BREAK
-                // if (volume_percentile(95) < THD_toBK){
+                // switch to break when last beat since 1000 ms
                 if (frame.t_current_ms - t_last_beat > TEMPO_BEAT_BREAK){
-                  state = BREAK;
-                }   //TODO switch to break when last beat since 1000 ms --> might be more reactive and less susceptible to lock the state in beat when break music is too loud
+                  _switch_to_state(BREAK);
+                }
 
                 // If no beat is discernible 
                 else if (volume_ratio(95, 25) < THD_BTtoBS){
@@ -158,8 +157,15 @@ void SoundAnalyzer::_update_state(){
         // If Break
         case BREAK:
             if(raw_beat){
-                state = BEAT;
-                t_beat_tracking_start = millis();
+                _switch_to_state(BEAT);
+            }else if(frame.t_current_ms - t_last_state_change > TEMPO_SUSTAINED_BREAK){
+                _switch_to_state(SUSTAINED_BREAK);
+            }
+        break;
+
+        case SUSTAINED_BREAK:
+            if(raw_beat){
+                _switch_to_state(BEAT);
             }
         break;
 
@@ -189,7 +195,7 @@ void SoundAnalyzer::_update_state(){
 void SoundAnalyzer::_update_beat_threshold(){
     log(4, __FILE__, " ",__LINE__, " ", __func__);
 
-    if (_condition_for_analyis() && state != BREAK){
+    if (_condition_for_analyis() && state == BEAT){
           beat_threshold = volume_percentile(90) * (float)1/10 + beat_threshold*(float)9/10;
         }
 }
@@ -282,10 +288,13 @@ bool SoundAnalyzer::_condition_for_analyis(){
 }
 
 void SoundAnalyzer::_switch_to_state(states s){
+    // Common actions
+    t_last_state_change = frame.t_current_ms;
+    // Transition specifi
     switch(s){
         case BEAT:
             state = BEAT;
-            t_beat_tracking_start = millis();
+            t_beat_tracking_start = frame.t_current_ms;
         break;
 
         case BREAK:
@@ -296,6 +305,10 @@ void SoundAnalyzer::_switch_to_state(states s){
             state = BAD_SIGNAL;
             BS_buff = 0;    // reset buffer
         break;
+
+        case SUSTAINED_BREAK:
+            state = SUSTAINED_BREAK;
+            break;
 
         default:
         break; 
