@@ -56,8 +56,8 @@ extern std::vector<std::string> vec_anim_id;
 #define     SHOW_INTENSITY 0        // ranges from 1 to 3 (0 for all)
 
 // -- CONFIG MAXIMUM --------------------------------------------------
-#define     WAREH_TEMPO_ANI         30000
-#define     WAREH_TEMPO_PALETTE     100000
+#define     WAREH_TEMPO_ANI         30000       // average animation duration in the warehouse
+#define     WAREH_TEMPO_PALETTE     100000      // average palette duration in the warehouse
 
 // External Controler SETTING
 // #define SR1_DIMMER      0

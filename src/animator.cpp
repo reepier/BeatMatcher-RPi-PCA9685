@@ -121,6 +121,7 @@ void AnimationManager::init(){
     palette_magasine_2.push_back(color_vec{blue, cyan},     1);
     palette_magasine_2.push_back(color_vec{blue, c_white},  1);
     palette_magasine_2.push_back(color_vec{blue, w_white},  1);
+    palette_magasine_2.push_back(color_vec{blue, gold},  1);
     palette_magasine_2.push_back(color_vec{blue, purple},   1);
     palette_magasine_2.push_back(color_vec{purple, c_white},  1);
     palette_magasine_2.push_back(color_vec{purple, w_white},  1);
@@ -318,7 +319,7 @@ void AnimationManager::nov30_maximum_update(){
         if(t - warehouse_timestp[i_fix] > 0){
             warehouse_fixtures[i_fix]->activate_by_color(warehouse_palette);    // activate a new animation
             warehouse_timestp[i_fix] = t + rand_min_max(2*WAREH_TEMPO_ANI/3, 4*WAREH_TEMPO_ANI/3);                                       // store current time as timestamp
-            log(2, warehouse_fixtures[i_fix]->name, " : ", warehouse_fixtures[i_fix]->active_animation->id, " - ", warehouse_fixtures[i_fix]->active_animation->description);
+            // log(2, warehouse_fixtures[i_fix]->name, " : ", warehouse_fixtures[i_fix]->active_animation->id, " - ", warehouse_fixtures[i_fix]->active_animation->description);
         }
     }
     
