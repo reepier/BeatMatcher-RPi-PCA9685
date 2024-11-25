@@ -288,13 +288,38 @@ void AnimationManager::show_update(){
     // }
 }
 
+/*
+#     #                                          #####                       
+##   ##   ##   #    # # #    # #    # #    #    #     # #    #  ####  #    # 
+# # # #  #  #   #  #  # ##  ## #    # ##  ##    #       #    # #    # #    # 
+#  #  # #    #   ##   # # ## # #    # # ## #     #####  ###### #    # #    # 
+#     # ######   ##   # #    # #    # #    #          # #    # #    # # ## # 
+#     # #    #  #  #  # #    # #    # #    #    #     # #    # #    # ##  ## 
+#     # #    # #    # # #    #  ####  #    #     #####  #    #  ####  #    #
+*/
 void AnimationManager::nov30_maximum_update(){
-    time_ms t = frame.t_current_ms;
+
+    time_ms t = frame.t_current_ms;                             // for code readability
+    static color_vec warehouse_palette, dancefloor_palette;     // color palette for each zone
+
 
 // Dancefloor LIGHTING --------------------------------------------------------------------------------
     //same as usual
     // Change on beat & timer, 3-5 animation change before changing palette
     // use palette_magasine_2
+
+    // Update Dancefloor color palette periodically
+    static time_ms last_dc_palette_chg_ms;
+    if (dancefloor_palette.size()==0 || t-last_dc_palette_chg_ms > DANCEFL_TEMPO_ANI){ // if palette is empty or palette timer elapsed
+        dancefloor_palette = palette_magasine.get_similar_palette(warehouse_palette);    // gt a new palette, close to the one used in the warehouse
+        last_dc_palette_chg_ms = t;
+        log(1, "New dancefloor color palette : ", fcn::palette_to_string(dancefloor_palette, '/'));
+    }
+
+    // On musical condition, update active Animation for one, or more fixtures
+    fix_vec dancefloor_fixtures = {&addr_led, &front_rack};
+
+
 
 // WareHouse LIGHTING ---------------------------------------------------------------------------------
     // Racks of spots
@@ -302,7 +327,6 @@ void AnimationManager::nov30_maximum_update(){
     // use palette_magasine
     
     // update Warehouse palette
-    static color_vec warehouse_palette;
     static time_ms last_wh_palette_chg_ms;
     if (warehouse_palette.size()==0 || t-last_wh_palette_chg_ms > WAREH_TEMPO_PALETTE){ // if palette is empty or palette timer elapsed
         warehouse_palette = palette_magasine.get_similar_palette(warehouse_palette);    // 
@@ -311,9 +335,9 @@ void AnimationManager::nov30_maximum_update(){
     }
 
     // update Warehouse fixture animation
-    fix_vec warehouse_fixtures = {&shehds_rack, &rack_15, &rack_40, &redrayz};
-    const int n_wareh_fix =  warehouse_fixtures.size();
-    static vector<time_t> warehouse_timestp(n_wareh_fix, 0);
+    fix_vec warehouse_fixtures = {&shehds_rack, &rack_15, &rack_40, &redrayz};  // list of fixtures in the warehouse
+    const int n_wareh_fix =  warehouse_fixtures.size();                         // number of fixtures
+    static vector<time_t> warehouse_timestp(n_wareh_fix, 0);                    // for each fixture, stores the timestamp of the next animation change
 
     for(auto i_fix = 0; i_fix<n_wareh_fix; i_fix++){
         if(t - warehouse_timestp[i_fix] > 0){
