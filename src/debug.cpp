@@ -135,15 +135,19 @@ void disp_music_window(){
     switch(sampler.state){
         case BEAT :
             statebuf << "BEAT";
-        break;
+            break;
         case BREAK :
             statebuf << "        BREAK";
-        break;
+            break;
+        case SUSTAINED_BREAK :
+            statebuf << "        BREAK +";
+            break;
+
         case BAD_SIGNAL :
             statebuf << "                   BAD_SIGNAL";
-        break;
+            break;
         default :
-        break;
+            break;
     }
     mvwprintw(musicw, 4,1, statebuf.str().c_str());
 
