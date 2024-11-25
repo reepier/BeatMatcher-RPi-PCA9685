@@ -132,6 +132,7 @@ void SoundAnalyzer::_update_state(){
     log(4, __FILE__, " ",__LINE__, " ", __func__);
 
     // update system state 
+    previous_state = state; //save current state as "previous" value
     switch (state){     
         // If Beat Tracking
         case BEAT:
@@ -182,10 +183,9 @@ void SoundAnalyzer::_update_state(){
         break;
         }
 
-        // update state change flag
+        // update state change flag & previous state
         if (state != previous_state){
             state_changed = true;
-            previous_state = state;
         }
         else{
             state_changed = false;
@@ -316,9 +316,14 @@ void SoundAnalyzer::_switch_to_state(states s){
 }
 
 
-/**---------------------------------------------------------------
- * FAKE FUNCTIONS to emulate the music input
-   ---------------------------------------------------------------*/
+
+/*#####    #    #    # #######    #######                                                   
+#         # #   #   #  #          #       #    # #    #  ####  ##### #  ####  #    #  ####  
+#        #   #  #  #   #          #       #    # ##   # #    #   #   # #    # ##   # #      
+#####   #     # ###    #####      #####   #    # # #  # #        #   # #    # # #  #  ####  
+#       ####### #  #   #          #       #    # #  # # #        #   # #    # #  # #      # 
+#       #     # #   #  #          #       #    # #   ## #    #   #   # #    # #   ## #    # 
+#       #     # #    # #######    #        ####  #    #  ####    #   #  ####  #    #  ###*/
 
 
 

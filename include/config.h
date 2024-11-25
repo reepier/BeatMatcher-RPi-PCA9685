@@ -29,8 +29,8 @@ extern std::vector<std::string> vec_anim_id;
     #define THD_toBK 30             // Volume Threshold to go from state X to BREAK  mode
     #define THD_BTtoBS 3            // Threshold to go from BEAT TRACKING to BAD SIGNAL mode
     #define THD_BStoBT 5            // Threshold to go from  BAD SIGNAL to BEAT TRACKING mode
-    #define TEMPO_BEAT_BREAK 1000   // duration after which state goes FROM to BREAK when no BEAT is detected  
-    #define TEMPO_SUSTAINED_BREAK 3000  //[ms] Duration after which BREAK becomes SUSTAINED BREAK
+    #define TEMPO_BEAT_BREAK 1600   // duration after which state goes FROM to BREAK when no BEAT is detected  
+    #define TEMPO_SUSTAINED_BREAK 4000  //[ms] Duration after which BREAK becomes SUSTAINED BREAK
 
 // Music Emulator
 #define BPM 100          // BPM
@@ -54,13 +54,13 @@ extern std::vector<std::string> vec_anim_id;
 #define     ADDRLED_ANI4_BkG_INTENSITY_LOW   15
 #define     DDRLED_ANI4_BkG_INTENSITY_HIGH  100
 
-#define     SHOW_INTENSITY 0        // ranges from 1 to 3 (0 for all)
+#define     SHOW_INTENSITY 1        // ranges from 1 to 3 (0 for all)
 
 // -- CONFIG MAXIMUM --------------------------------------------------
-#define     WAREH_TEMPO_ANI         40000      // average animation duration in the warehouse
-#define     WAREH_TEMPO_PALETTE     100000     // average palette duration in the warehouse
-#define     DANCEFL_TEMPO_ANI       20000      // average animation duration in the warehouse
-#define     DANCEFL_TEMPO_PALETTE   100000     // average palette duration in the warehouse
+#define     WAREH_TEMPO_ANI         20000      // average animation duration in the warehouse
+#define     WAREH_TEMPO_PALETTE     60000     // average palette duration in the warehouse
+#define     DANCEFL_TEMPO_ANI       2000      // average animation duration in the warehouse
+#define     DANCEFL_TEMPO_PALETTE   60000     // average palette duration in the warehouse
 
 // External Controler SETTING
 // #define SR1_DIMMER      0

@@ -146,6 +146,7 @@ void front_rack_init(){
     
     // 1. Strobes
     // Slow frequency
+#if SHOW_INTENSITY==0 or SHOW_INTENSITY<=2
     front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, red,      STRB_SLOW, "S red strobe",      "PIX.1.1.1", backer, 1));
     front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, blue,     STRB_SLOW, "S blue strobe",     "PIX.1.1.2", backer, 1));
     front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, purple,   STRB_SLOW, "S purple strobe",   "PIX.1.1.3", backer, 1));
@@ -154,7 +155,9 @@ void front_rack_init(){
     front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, cyan,     STRB_SLOW, "S cyan strobe",     "PIX.1.1.6", backer, 1));
     front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, w_white,  STRB_SLOW, "S w_white strobe",  "PIX.1.1.7", backer, 1));
     front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, c_white,  STRB_SLOW, "S c_white strobe",  "PIX.1.1.8", backer, 1));
+#endif
     // Fast frquency
+#if SHOW_INTENSITY==0 or SHOW_INTENSITY>=2
     front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, red,      STRB_FAST, "S red strobe",      "PIX.1.2.1",  leader, 1));
     front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, blue,     STRB_FAST, "S blue strobe",     "PIX.1.2.2",  leader, 1));
     front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, purple,   STRB_FAST, "S purple strobe",   "PIX.1.2.3",  leader, 1));
@@ -163,9 +166,11 @@ void front_rack_init(){
     front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, cyan,     STRB_FAST, "S cyan strobe",     "PIX.1.2.6",  leader, 1));
     front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, w_white,  STRB_FAST, "S w_white strobe",  "PIX.1.2.7",  leader, 1));
     front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, c_white,  STRB_FAST, "S c_white strobe",  "PIX.1.2.8",  leader, 1));
- 
+#endif
+
     // 2. BUBBLES
     //Slow
+#if SHOW_INTENSITY==0 or SHOW_INTENSITY<=2
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, red,     1500, 4000, "S red bubbles",      "FR.2.1.1", backer, 1));
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, blue,    1500, 4000, "S blue bubbles",     "FR.2.1.2", backer, 1));
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, purple,  1500, 4000, "S purple bubbles",   "FR.2.1.3", backer, 1));
@@ -174,6 +179,8 @@ void front_rack_init(){
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, c_white, 1500, 4000, "S c_white bubbles",  "FR.2.1.6", backer, 1));
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, gold,    1500, 4000, "S gold bubbles",     "FR.2.1.7", backer, 1));
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, sodium,  1500, 4000, "S sodium bubbles",   "FR.2.1.8", backer, 1));
+#endif
+#if SHOW_INTENSITY==0 or SHOW_INTENSITY>=1
     //Medium
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, red,     700, 2000, "S red bubbles",      "FR.2.2.1", any, 1));
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, blue,    700, 2000, "S blue bubbles",     "FR.2.2.2", any, 1));
@@ -183,9 +190,10 @@ void front_rack_init(){
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, c_white, 700, 2000, "S c_white bubbles",  "FR.2.2.6", any, 1));
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, gold,    700, 2000, "S gold bubbles",     "FR.2.2.7", any, 1));
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, sodium,  700, 2000, "S sodium bubbles",   "FR.2.2.8", any, 1));
-    
-    
+#endif
+
     // 3. BEAT
+#if SHOW_INTENSITY==0 or SHOW_INTENSITY>=2
     //Monochrome flashes, no background
     front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, red,        black,  "red beat",      "FR.3.1.1", leader));
     front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, blue,       black,  "blue beat",     "FR.3.1.2", leader));
@@ -204,7 +212,7 @@ void front_rack_init(){
     front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, gold,       purple,     "Gold beat, purple backgd",       "FR.3.2.6", leader));
     front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, cyan,       red,        "Cyan beat, red backgd",          "FR.3.2.7", leader));
     front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, cyan,       purple,     "Cyan beat, purple backgd",       "FR.3.2.8", leader));
-
+#endif
 
 
     front_rack.activate_none();

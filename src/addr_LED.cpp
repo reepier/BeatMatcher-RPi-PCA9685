@@ -22,8 +22,28 @@ void AddressableLED::init(){
 
 // ---MAXIMUM CONFIGURATION------------------
 
+// 0. Constant background color
+#if SHOW_INTENSITY==0 or SHOW_INTENSITY==1
+    animations.push_back(new AddrLEDAnimation1(this, red,    red,     "red background",    "PIX.0.1", backer, false));
+    animations.push_back(new AddrLEDAnimation1(this, blue,   blue,    "blue background",   "PIX.0.1", backer, false));
+    animations.push_back(new AddrLEDAnimation1(this, purple, purple,  "purple background", "PIX.0.1", backer, false));
+    animations.push_back(new AddrLEDAnimation1(this, cyan,   cyan,    "cyan background",   "PIX.0.1", backer, false));
+#endif
 // 1. FLASH ON BEAT
-    // Analog flashes (exponential decay), 75% of bars
+    // Original BEATMATCHER Flashes (all bar flashing)
+#if SHOW_INTENSITY==0 or SHOW_INTENSITY==1
+    animations.push_back(new AddrLEDAnimation1(this, red,      black, "red flashes",      "PIX.1.0.1", leader, 1));
+    animations.push_back(new AddrLEDAnimation1(this, blue,     black, "blue flashes",     "PIX.1.0.1", leader, 1));
+    animations.push_back(new AddrLEDAnimation1(this, purple,   black, "purple flashes",   "PIX.1.0.1", leader, 1));
+    animations.push_back(new AddrLEDAnimation1(this, gold,     black, "gold flashes",     "PIX.1.0.1", leader, 1));
+    animations.push_back(new AddrLEDAnimation1(this, sodium,   black, "sodium flashes",   "PIX.1.0.1", leader, 1));
+    animations.push_back(new AddrLEDAnimation1(this, cyan,     black, "cyan flashes",     "PIX.1.0.1", leader, 1));
+    animations.push_back(new AddrLEDAnimation1(this, w_white,  black, "w_white flashes",  "PIX.1.0.1", leader, 1));
+    animations.push_back(new AddrLEDAnimation1(this, c_white,  black, "c_white flashes",  "PIX.1.0.1", leader, 1));
+#endif
+
+    // Randomized Analog flashes (exponential decay), 75% of bars
+#if SHOW_INTENSITY==0 or SHOW_INTENSITY >= 2
     // Flashes, no backgound
     animations.push_back(new AddrLEDAnimation1(this, red,     black,  bar, 0.6,   "red Flashes",     "PIX.1.1.1", leader));
     animations.push_back(new AddrLEDAnimation1(this, blue,    black,  bar, 0.6,   "blue Flashes",    "PIX.1.1.2", leader));
@@ -47,8 +67,10 @@ void AddressableLED::init(){
     animations.push_back(new AddrLEDAnimation1(this, cyan,     blue,    bar, 0.6,   "cyan Flashes, blue backgd",        "PIX.1.1.19",  leader));
     animations.push_back(new AddrLEDAnimation1(this, red,      blue,    bar, 0.6,   "red Flashes, blue backgd",         "PIX.1.1.20",  leader));    
     animations.push_back(new AddrLEDAnimation1(this, blue,     red,     bar, 0.6,   "blue Flashes, red backgd",         "PIX.1.1.21",  leader));    
-    
-    // Digital Beat with led bars
+#endif
+
+    // Randomized Digital Beat with led bars
+#if SHOW_INTENSITY==0 or SHOW_INTENSITY >= 3
     // Flashes, no backgound
     animations.push_back(new AddrLEDAnimation2(this, red,     black,  bar,   "red Flashes",     "PIX.1.2.1", leader, 1));
     animations.push_back(new AddrLEDAnimation2(this, blue,    black,  bar,   "blue Flashes",    "PIX.1.2.2", leader, 1));
@@ -72,9 +94,11 @@ void AddressableLED::init(){
     animations.push_back(new AddrLEDAnimation2(this, cyan,     blue,     bar,   "cyan Flashes, blue backgd",      "PIX.1.2.19", leader, 1));
     animations.push_back(new AddrLEDAnimation2(this, red,      blue,     bar,   "red Flashes, blue backgd",       "PIX.1.2.20", leader, 1));
     animations.push_back(new AddrLEDAnimation2(this, blue,     red,      bar,   "blue Flashes, red backgd",       "PIX.1.2.21", leader, 1));
+#endif
 
     // Digital Beat with led pixels
-// Flashes, no backgound
+#if SHOW_INTENSITY==0 or SHOW_INTENSITY >= 3
+    // Flashes, no backgound
     animations.push_back(new AddrLEDAnimation2(this, red,     black,  pix,   "red Flashes",     "PIX.1.3.1", leader, 1));
     animations.push_back(new AddrLEDAnimation2(this, blue,    black,  pix,   "blue Flashes",    "PIX.1.3.2", leader, 1));
     animations.push_back(new AddrLEDAnimation2(this, purple,  black,  pix,   "purple Flashes",  "PIX.1.3.3", leader, 1));
@@ -97,11 +121,12 @@ void AddressableLED::init(){
     animations.push_back(new AddrLEDAnimation2(this, cyan,     blue,     pix,   "cyan Flashes, blue backgd",      "PIX.1.3.19", leader, 1));
     animations.push_back(new AddrLEDAnimation2(this, red,      blue,     pix,   "red Flashes, blue backgd",       "PIX.1.3.20", leader, 1));
     animations.push_back(new AddrLEDAnimation2(this, blue,     red,      pix,   "blue Flashes, red backgd",       "PIX.1.3.21", leader, 1));
-
+#endif
 
 
 // 2. BUBBLES
     // Slow & long Bubbles
+#if SHOW_INTENSITY==0 or SHOW_INTENSITY <= 2
     // Dark background
     int flash_length = 1500, burst_period = 400;
     animations.push_back(new AddrLEDAnimation4(this, black, color_vec{red},       gaussian, bar, burst_period, flash_length, "slow red bubbles",      "PIX.2.1.1", backer, 1, 255));
@@ -126,9 +151,12 @@ void AddressableLED::init(){
     animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{cyan},    gaussian, bar, burst_period, flash_length, "S cyan bubbles, blue backgd",      "PIX.2.1.19", backer, 1, 255));
     animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{red},     gaussian, bar, burst_period, flash_length, "S red bubbles, blue backgd",       "PIX.2.1.20", backer, 1, 255));
     animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{blue},    gaussian, bar, burst_period, flash_length, "S blue bubbles, red backgd",       "PIX.2.1.21", backer, 1, 255));
+#endif
 
     // Fast & short Bubbles
+#if SHOW_INTENSITY==0 or SHOW_INTENSITY >= 2
     flash_length = 600, burst_period = 200;
+    // Dark background
     animations.push_back(new AddrLEDAnimation4(this, black, color_vec{red},       gaussian, bar, burst_period, flash_length, "fast red bubbles",      "PIX.2.2.1", any, 1, 255));
     animations.push_back(new AddrLEDAnimation4(this, black, color_vec{blue},      gaussian, bar, burst_period, flash_length, "fast blue bubbles",     "PIX.2.2.2", any, 1, 255));
     animations.push_back(new AddrLEDAnimation4(this, black, color_vec{purple},    gaussian, bar, burst_period, flash_length, "fast purple bubbles",   "PIX.2.2.3", any, 1, 255));
@@ -151,10 +179,13 @@ void AddressableLED::init(){
     animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{cyan},    gaussian, bar, burst_period, flash_length, "F cyan bubbles, blue backgd",      "PIX.2.1.19", any, 1, 255));
     animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{red},     gaussian, bar, burst_period, flash_length, "F red bubbles, blue backgd",       "PIX.2.1.20", any, 1, 255));
     animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{blue},    gaussian, bar, burst_period, flash_length, "F blue bubbles, red backgd",       "PIX.2.1.21", any, 1, 255));
+#endif
 
 // 3. ChASER
     //Slow Chaser
+#if SHOW_INTENSITY==0 or SHOW_INTENSITY >= 2
     flash_length = 1500, burst_period = 300;
+    // Dark background
     animations.push_back(new AddrLEDAnimation4(this, black, color_vec{red},       square, bar, burst_period, flash_length, "Slow red chaser",      "PIX.3.1.1", backer, 1, 255));
     animations.push_back(new AddrLEDAnimation4(this, black, color_vec{blue},      square, bar, burst_period, flash_length, "Slow blue chaser",     "PIX.3.1.2", backer, 1, 255));
     animations.push_back(new AddrLEDAnimation4(this, black, color_vec{purple},    square, bar, burst_period, flash_length, "Slow purple chaser",   "PIX.3.1.3", backer, 1, 255));
@@ -177,8 +208,11 @@ void AddressableLED::init(){
     animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{cyan},    square, bar, burst_period, flash_length, "S cyan chaser, blue backgd",      "PIX.3.1.19", backer, 1, 255));
     animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{red},     square, bar, burst_period, flash_length, "S red chaser, blue backgd",       "PIX.3.1.20", backer, 1, 255));
     animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{blue},    square, bar, burst_period, flash_length, "S blue chaser, red backgd",       "PIX.3.1.21", backer, 1, 255));    
+#endif
     // Fast Chaser
+#if SHOW_INTENSITY==0 or SHOW_INTENSITY >= 3
     flash_length = 600, burst_period = 200;
+    // Dark background
     animations.push_back(new AddrLEDAnimation4(this, black, color_vec{red},       square, bar, burst_period, flash_length, "Fast red chaser",      "PIX.3.2.1", backer, 1, 255));
     animations.push_back(new AddrLEDAnimation4(this, black, color_vec{blue},      square, bar, burst_period, flash_length, "Fast blue chaser",     "PIX.3.2.2", backer, 1, 255));
     animations.push_back(new AddrLEDAnimation4(this, black, color_vec{purple},    square, bar, burst_period, flash_length, "Fast purple chaser",   "PIX.3.2.3", backer, 1, 255));
@@ -201,17 +235,21 @@ void AddressableLED::init(){
     animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{cyan},    square, bar, burst_period, flash_length, "F cyan chaser, blue backgd",      "PIX.3.2.19", backer, 1, 255));
     animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{red},     square, bar, burst_period, flash_length, "F red chaser, blue backgd",       "PIX.3.2.20", backer, 1, 255));
     animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{blue},    square, bar, burst_period, flash_length, "F blue chaser, red backgd",       "PIX.3.2.21", backer, 1, 255));   
+#endif
 
-// 4. Strobe
+// 4. Strobe (Short pulses, no background)
     //Very Fast
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{red},     square, bar, 50, 1000/FRATE, "red VF strobe, Black bg",     "PIX.4.1.1", any, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{blue},    square, bar, 50, 1000/FRATE, "blue VF strobe, Black bg",    "PIX.4.1.2", any, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{purple},  square, bar, 50, 1000/FRATE, "purple VF strobe, Black bg",  "PIX.4.1.3", any, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{gold},    square, bar, 50, 1000/FRATE, "gold VF strobe, Black bg",    "PIX.4.1.4", any, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{sodium},  square, bar, 50, 1000/FRATE, "sodium VF strobe, Black bg",  "PIX.4.1.5", any, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{cyan},    square, bar, 50, 1000/FRATE, "cyan VF strobe, Black bg",    "PIX.4.1.6", any, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{w_white}, square, bar, 50, 1000/FRATE, "w_white VF strobe, Black bg", "PIX.4.1.7", any, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{c_white}, square, bar, 50, 1000/FRATE, "c_white VF strobe, Black bg", "PIX.4.1.8", any, 1, 255));
+#if SHOW_INTENSITY==0 or SHOW_INTENSITY >= 3
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{red},     square, bar, 50, 1000/FRATE, "red VF strobe, Black bg",     "PIX.4.1.1", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{blue},    square, bar, 50, 1000/FRATE, "blue VF strobe, Black bg",    "PIX.4.1.2", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{purple},  square, bar, 50, 1000/FRATE, "purple VF strobe, Black bg",  "PIX.4.1.3", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{gold},    square, bar, 50, 1000/FRATE, "gold VF strobe, Black bg",    "PIX.4.1.4", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{sodium},  square, bar, 50, 1000/FRATE, "sodium VF strobe, Black bg",  "PIX.4.1.5", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{cyan},    square, bar, 50, 1000/FRATE, "cyan VF strobe, Black bg",    "PIX.4.1.6", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{w_white}, square, bar, 50, 1000/FRATE, "w_white VF strobe, Black bg", "PIX.4.1.7", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{c_white}, square, bar, 50, 1000/FRATE, "c_white VF strobe, Black bg", "PIX.4.1.8", leader, 1, 255));
+#endif
+#if SHOW_INTENSITY==0 or SHOW_INTENSITY >= 2
     // Scarce
     animations.push_back(new AddrLEDAnimation4(this, black, color_vec{red},      square, bar, 1000, 1000/FRATE,  "red slow strobe, Black bg",      "PIX.4.2.1", backer, 1, 255));
     animations.push_back(new AddrLEDAnimation4(this, black, color_vec{blue},     square, bar, 1000, 1000/FRATE,  "blue slow strobe, Black bg",     "PIX.4.2.2", backer, 1, 255));
@@ -221,6 +259,7 @@ void AddressableLED::init(){
     animations.push_back(new AddrLEDAnimation4(this, black, color_vec{cyan},     square, bar, 1000, 1000/FRATE,  "cyan slow strobe, Black bg",     "PIX.4.2.6", backer, 1, 255));
     animations.push_back(new AddrLEDAnimation4(this, black, color_vec{w_white},  square, bar, 1000, 1000/FRATE,  "w_white slow strobe, Black bg",  "PIX.4.2.7", backer, 1, 255));
     animations.push_back(new AddrLEDAnimation4(this, black, color_vec{c_white},  square, bar, 1000, 1000/FRATE,  "c_white slow strobe, Black bg",  "PIX.4.2.8", backer, 1, 255));
+#endif
 
     this->activate_none();
 }
