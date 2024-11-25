@@ -111,7 +111,7 @@ DMX_vec SpotFixture::buffer(){
  #####  #       #######    #       #     # #     #  #####  #    #  #####  
 
 / ----------------------------------------------------------------------- */
-SpotRack front_rack(spot_vec{&spot_7, &spot_8}, "DancFloor spots", 1);
+SpotRack front_rack(spot_vec{&spot_7, &spot_8}, "DanceFloor spots", 1);
 SpotRack rack_15(spot_vec{&spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6}, "Vert. Beams", 2);
 SpotRack rack_40(spot_vec{&spot_9, &spot_10, &spot_11, &spot_12}, "Rack 2", 3);
 SpotRack shehds_rack(spot_vec{&spot_13, &spot_14, &spot_15, &spot_16, &spot_17, &spot_18, &spot_19, &spot_20}, "SHEHDS Rack", 4);
