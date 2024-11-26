@@ -54,7 +54,7 @@ extern std::vector<std::string> vec_anim_id;
 #define     ADDRLED_ANI4_BkG_INTENSITY_LOW   15
 #define     DDRLED_ANI4_BkG_INTENSITY_HIGH  100
 
-#define     SHOW_INTENSITY 1        // ranges from 1 to 3 (0 for all)
+#define     SHOW_INTENSITY 0        // ranges from 1 to 3 (0 for all)
 
 // -- CONFIG MAXIMUM --------------------------------------------------
 #define     WAREH_TEMPO_ANI         20000      // average animation duration in the warehouse

@@ -837,25 +837,31 @@ void SpotRackAnimation4::new_frame(){
     unsigned long t_last_beat_ms = sampler.t_last_new_beat;
 
     bool auto_activate_flash = (sampler.state == BEAT) && (t_ms-sampler.t_beat_tracking_start < MAX_CONT_FLASH);
+    
+    for (auto spot : this->fixture->spots){
+        pixel backgd_RGB    = spot->RGBW(back_color, 20);
+        pixel flash_RGB     = spot->RGBW(flash_color);
+        pixel final_RGB     = spot->RGBW(black);
 
-    pixel backgd_RGB = this->fixture->RGBW(back_color, 20);
-    pixel flash_RGB = this->fixture->RGBW(flash_color);
-    pixel final_RGB(4);
-
-    float coef = exp(-(double)(t_ms - t_last_beat_ms) / fade_rate);
-    if (param_activate_flash && auto_activate_flash)
-    {
-         
-        final_RGB[R] = (1-pow(coef, 0.2)) * backgd_RGB[R] + coef * flash_RGB[R];
-        final_RGB[G] = (1-pow(coef, 0.2)) * backgd_RGB[G] + coef * flash_RGB[G];
-        final_RGB[B] = (1-pow(coef, 0.2)) * backgd_RGB[B] + coef * flash_RGB[B];
-    }
-    else
-    {
-        final_RGB[R] = backgd_RGB[R];
-        final_RGB[G] = backgd_RGB[G];
-        final_RGB[B] = backgd_RGB[B];
-    }
+        float coef = exp(-(double)(t_ms - t_last_beat_ms) / fade_rate);
+        if (param_activate_flash && auto_activate_flash)
+        {
+            for(auto i_subpix = 0; i_subpix<final_RGB.size(); i_subpix++){
+                final_RGB[i_subpix] = (1-pow(coef, 0.2)) * backgd_RGB[i_subpix] + coef * flash_RGB[i_subpix];
+            }
+            // final_RGB[R] = (1-pow(coef, 0.2)) * backgd_RGB[R] + coef * flash_RGB[R];
+            // final_RGB[G] = (1-pow(coef, 0.2)) * backgd_RGB[G] + coef * flash_RGB[G];
+            // final_RGB[B] = (1-pow(coef, 0.2)) * backgd_RGB[B] + coef * flash_RGB[B];
+        }
+        else
+        {
+            for(auto i_subpix = 0; i_subpix<final_RGB.size(); i_subpix++){
+                final_RGB[i_subpix] = backgd_RGB[i_subpix];
+            }
+            // final_RGB[R] = backgd_RGB[R];
+            // final_RGB[G] = backgd_RGB[G];
+            // final_RGB[B] = backgd_RGB[B];
+        }
     
     for (auto spot : this->fixture->spots){
         spot->pixel = final_RGB;

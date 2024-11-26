@@ -22,8 +22,8 @@ enum simpleColor{ //TODO : create a desaturated (lighter) version of each color
     orange,
     yellow,
     gold,
-    w_white,     // warm white (defined by the spots)
-    c_white,     // cold white
+    w_white,
+    c_white,
     cyan,       
     blue,
     purple,
