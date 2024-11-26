@@ -147,49 +147,49 @@ void front_rack_init(){
     // 1. Strobes
     // Slow frequency
 #if SHOW_INTENSITY==0 or SHOW_INTENSITY<=2
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, red,      STRB_SLOW, "S red strobe",      "PIX.1.1.1", backer, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, blue,     STRB_SLOW, "S blue strobe",     "PIX.1.1.2", backer, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, purple,   STRB_SLOW, "S purple strobe",   "PIX.1.1.3", backer, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, gold,     STRB_SLOW, "S gold strobe",     "PIX.1.1.4", backer, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, sodium,   STRB_SLOW, "S sodium strobe",   "PIX.1.1.5", backer, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, cyan,     STRB_SLOW, "S cyan strobe",     "PIX.1.1.6", backer, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, w_white,  STRB_SLOW, "S w_white strobe",  "PIX.1.1.7", backer, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, c_white,  STRB_SLOW, "S c_white strobe",  "PIX.1.1.8", backer, 1));
+    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, red,      STRB_SLOW, "S red strobe",      "FR.1.1.1", backer, 1));
+    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, blue,     STRB_SLOW, "S blue strobe",     "FR.1.1.2", backer, 1));
+    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, purple,   STRB_SLOW, "S purple strobe",   "FR.1.1.3", backer, 1));
+    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, gold,     STRB_SLOW, "S gold strobe",     "FR.1.1.4", backer, 1));
+    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, sodium,   STRB_SLOW, "S sodium strobe",   "FR.1.1.5", backer, 1));
+    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, cyan,     STRB_SLOW, "S cyan strobe",     "FR.1.1.6", backer, 1));
+    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, w_white,  STRB_SLOW, "S w_white strobe",  "FR.1.1.7", backer, 1));
+    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, c_white,  STRB_SLOW, "S c_white strobe",  "FR.1.1.8", backer, 1));
 #endif
     // Fast frquency
 #if SHOW_INTENSITY==0 or SHOW_INTENSITY>=2
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, red,      STRB_FAST, "S red strobe",      "PIX.1.2.1",  leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, blue,     STRB_FAST, "S blue strobe",     "PIX.1.2.2",  leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, purple,   STRB_FAST, "S purple strobe",   "PIX.1.2.3",  leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, gold,     STRB_FAST, "S gold strobe",     "PIX.1.2.4",  leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, sodium,   STRB_FAST, "S sodium strobe",   "PIX.1.2.5",  leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, cyan,     STRB_FAST, "S cyan strobe",     "PIX.1.2.6",  leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, w_white,  STRB_FAST, "S w_white strobe",  "PIX.1.2.7",  leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, c_white,  STRB_FAST, "S c_white strobe",  "PIX.1.2.8",  leader, 1));
+    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, red,      STRB_FAST, "S red strobe",      "FR.1.2.1",  leader, 1));
+    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, blue,     STRB_FAST, "S blue strobe",     "FR.1.2.2",  leader, 1));
+    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, purple,   STRB_FAST, "S purple strobe",   "FR.1.2.3",  leader, 1));
+    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, gold,     STRB_FAST, "S gold strobe",     "FR.1.2.4",  leader, 1));
+    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, sodium,   STRB_FAST, "S sodium strobe",   "FR.1.2.5",  leader, 1));
+    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, cyan,     STRB_FAST, "S cyan strobe",     "FR.1.2.6",  leader, 1));
+    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, w_white,  STRB_FAST, "S w_white strobe",  "FR.1.2.7",  leader, 1));
+    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, c_white,  STRB_FAST, "S c_white strobe",  "FR.1.2.8",  leader, 1));
 #endif
 
     // 2. BUBBLES
     //Slow
 #if SHOW_INTENSITY==0 or SHOW_INTENSITY<=2
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, red,     1500, 4000, "S red bubbles",      "FR.2.1.1", backer, 1));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, blue,    1500, 4000, "S blue bubbles",     "FR.2.1.2", backer, 1));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, purple,  1500, 4000, "S purple bubbles",   "FR.2.1.3", backer, 1));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, cyan,    1500, 4000, "S cyan bubbles",     "FR.2.1.4", backer, 1));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, w_white, 1500, 4000, "S w_white bubbles",  "FR.2.1.5", backer, 1));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, c_white, 1500, 4000, "S c_white bubbles",  "FR.2.1.6", backer, 1));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, gold,    1500, 4000, "S gold bubbles",     "FR.2.1.7", backer, 1));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, sodium,  1500, 4000, "S sodium bubbles",   "FR.2.1.8", backer, 1));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, red,     4000, 1500,  "S red bubbles",      "FR.2.1.1", backer, 1));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, blue,    4000, 1500,  "S blue bubbles",     "FR.2.1.2", backer, 1));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, purple,  4000, 1500,  "S purple bubbles",   "FR.2.1.3", backer, 1));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, cyan,    4000, 1500,  "S cyan bubbles",     "FR.2.1.4", backer, 1));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, w_white, 4000, 1500,  "S w_white bubbles",  "FR.2.1.5", backer, 1));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, c_white, 4000, 1500,  "S c_white bubbles",  "FR.2.1.6", backer, 1));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, gold,    4000, 1500,  "S gold bubbles",     "FR.2.1.7", backer, 1));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, sodium,  4000, 1500,  "S sodium bubbles",   "FR.2.1.8", backer, 1));
 #endif
 #if SHOW_INTENSITY==0 or SHOW_INTENSITY>=1
     //Medium
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, red,     700, 2000, "S red bubbles",      "FR.2.2.1", any, 1));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, blue,    700, 2000, "S blue bubbles",     "FR.2.2.2", any, 1));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, purple,  700, 2000, "S purple bubbles",   "FR.2.2.3", any, 1));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, cyan,    700, 2000, "S cyan bubbles",     "FR.2.2.4", any, 1));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, w_white, 700, 2000, "S w_white bubbles",  "FR.2.2.5", any, 1));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, c_white, 700, 2000, "S c_white bubbles",  "FR.2.2.6", any, 1));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, gold,    700, 2000, "S gold bubbles",     "FR.2.2.7", any, 1));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, sodium,  700, 2000, "S sodium bubbles",   "FR.2.2.8", any, 1));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, red,     2000, 700,  "S red bubbles",      "FR.2.2.1", any, 1));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, blue,    2000, 700,  "S blue bubbles",     "FR.2.2.2", any, 1));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, purple,  2000, 700,  "S purple bubbles",   "FR.2.2.3", any, 1));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, cyan,    2000, 700,  "S cyan bubbles",     "FR.2.2.4", any, 1));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, w_white, 2000, 700,  "S w_white bubbles",  "FR.2.2.5", any, 1));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, c_white, 2000, 700,  "S c_white bubbles",  "FR.2.2.6", any, 1));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, gold,    2000, 700,  "S gold bubbles",     "FR.2.2.7", any, 1));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, sodium,  2000, 700,  "S sodium bubbles",   "FR.2.2.8", any, 1));
 #endif
 
     // 3. BEAT
@@ -881,27 +881,32 @@ void SpotRackAnimation4::new_frame(){
     unsigned long t_last_beat_ms = sampler.t_last_new_beat;
 
     bool auto_activate_flash = (sampler.state == BEAT) && (t_ms-sampler.t_beat_tracking_start < MAX_CONT_FLASH);
-
-    pixel backgd_RGB = this->fixture->RGBW(back_color, 20);
-    pixel flash_RGB = this->fixture->RGBW(flash_color);
-    pixel final_RGB(4);
-
-    float coef = exp(-(double)(t_ms - t_last_beat_ms) / fade_rate);
-    if (param_activate_flash && auto_activate_flash)
-    {
-         
-        final_RGB[R] = (1-pow(coef, 0.2)) * backgd_RGB[R] + coef * flash_RGB[R];
-        final_RGB[G] = (1-pow(coef, 0.2)) * backgd_RGB[G] + coef * flash_RGB[G];
-        final_RGB[B] = (1-pow(coef, 0.2)) * backgd_RGB[B] + coef * flash_RGB[B];
-    }
-    else
-    {
-        final_RGB[R] = backgd_RGB[R];
-        final_RGB[G] = backgd_RGB[G];
-        final_RGB[B] = backgd_RGB[B];
-    }
     
     for (auto spot : this->fixture->spots){
+        pixel backgd_RGB    = spot->RGBW(back_color, 20);
+        pixel flash_RGB     = spot->RGBW(flash_color);
+        pixel final_RGB     = spot->RGBW(black);
+
+        float coef = exp(-(double)(t_ms - t_last_beat_ms) / fade_rate);
+        if (param_activate_flash && auto_activate_flash)
+        {
+            for(auto i_subpix = 0; i_subpix<final_RGB.size(); i_subpix++){
+                final_RGB[i_subpix] = (1-pow(coef, 0.2)) * backgd_RGB[i_subpix] + coef * flash_RGB[i_subpix];
+            }
+            // final_RGB[R] = (1-pow(coef, 0.2)) * backgd_RGB[R] + coef * flash_RGB[R];
+            // final_RGB[G] = (1-pow(coef, 0.2)) * backgd_RGB[G] + coef * flash_RGB[G];
+            // final_RGB[B] = (1-pow(coef, 0.2)) * backgd_RGB[B] + coef * flash_RGB[B];
+        }
+        else
+        {
+            for(auto i_subpix = 0; i_subpix<final_RGB.size(); i_subpix++){
+                final_RGB[i_subpix] = backgd_RGB[i_subpix];
+            }
+            // final_RGB[R] = backgd_RGB[R];
+            // final_RGB[G] = backgd_RGB[G];
+            // final_RGB[B] = backgd_RGB[B];
+        }
+    
         spot->RGBWout = final_RGB;
     }
 }

@@ -25,21 +25,21 @@ void AddressableLED::init(){
 // 0. Constant background color
 #if SHOW_INTENSITY==0 or SHOW_INTENSITY==1
     animations.push_back(new AddrLEDAnimation1(this, red,    red,     "red background",    "PIX.0.1", backer, false));
-    animations.push_back(new AddrLEDAnimation1(this, blue,   blue,    "blue background",   "PIX.0.1", backer, false));
-    animations.push_back(new AddrLEDAnimation1(this, purple, purple,  "purple background", "PIX.0.1", backer, false));
-    animations.push_back(new AddrLEDAnimation1(this, cyan,   cyan,    "cyan background",   "PIX.0.1", backer, false));
+    animations.push_back(new AddrLEDAnimation1(this, blue,   blue,    "blue background",   "PIX.0.2", backer, false));
+    animations.push_back(new AddrLEDAnimation1(this, purple, purple,  "purple background", "PIX.0.3", backer, false));
+    animations.push_back(new AddrLEDAnimation1(this, cyan,   cyan,    "cyan background",   "PIX.0.4", backer, false));
 #endif
 // 1. FLASH ON BEAT
     // Original BEATMATCHER Flashes (all bar flashing)
 #if SHOW_INTENSITY==0 or SHOW_INTENSITY==1
     animations.push_back(new AddrLEDAnimation1(this, red,      black, "red flashes",      "PIX.1.0.1", leader, 1));
-    animations.push_back(new AddrLEDAnimation1(this, blue,     black, "blue flashes",     "PIX.1.0.1", leader, 1));
-    animations.push_back(new AddrLEDAnimation1(this, purple,   black, "purple flashes",   "PIX.1.0.1", leader, 1));
-    animations.push_back(new AddrLEDAnimation1(this, gold,     black, "gold flashes",     "PIX.1.0.1", leader, 1));
-    animations.push_back(new AddrLEDAnimation1(this, sodium,   black, "sodium flashes",   "PIX.1.0.1", leader, 1));
-    animations.push_back(new AddrLEDAnimation1(this, cyan,     black, "cyan flashes",     "PIX.1.0.1", leader, 1));
-    animations.push_back(new AddrLEDAnimation1(this, w_white,  black, "w_white flashes",  "PIX.1.0.1", leader, 1));
-    animations.push_back(new AddrLEDAnimation1(this, c_white,  black, "c_white flashes",  "PIX.1.0.1", leader, 1));
+    animations.push_back(new AddrLEDAnimation1(this, blue,     black, "blue flashes",     "PIX.1.0.2", leader, 1));
+    animations.push_back(new AddrLEDAnimation1(this, purple,   black, "purple flashes",   "PIX.1.0.3", leader, 1));
+    animations.push_back(new AddrLEDAnimation1(this, gold,     black, "gold flashes",     "PIX.1.0.4", leader, 1));
+    animations.push_back(new AddrLEDAnimation1(this, sodium,   black, "sodium flashes",   "PIX.1.0.5", leader, 1));
+    animations.push_back(new AddrLEDAnimation1(this, cyan,     black, "cyan flashes",     "PIX.1.0.6", leader, 1));
+    animations.push_back(new AddrLEDAnimation1(this, w_white,  black, "w_white flashes",  "PIX.1.0.7", leader, 1));
+    animations.push_back(new AddrLEDAnimation1(this, c_white,  black, "c_white flashes",  "PIX.1.0.8", leader, 1));
 #endif
 
     // Randomized Analog flashes (exponential decay), 75% of bars
