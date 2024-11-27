@@ -51,7 +51,7 @@ public:
 
         this->RGBWout = this->RGBW(black); // resize & initialise RGBWout vector
 
-        log(1, "Init. of ", this->name, " / Pixel size : ", this->RGBWout.size());
+        // log(1, "Init. of ", this->name, " / Pixel size : ", this->RGBWout.size());
     };
     void init(){};
 
