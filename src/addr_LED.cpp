@@ -183,58 +183,58 @@ void AddressableLED::init(){
 // Animation 4 : Random bursts
     // Slow & long Bubbles
 #if SHOW_INTENSITY==0 or SHOW_INTENSITY <= 2
+    flash_length = 1500, burst_period = 400;
     // Dark background
-    int flash_length = 1500, burst_period = 400;
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{red},       gaussian, bar, burst_period, flash_length, "slow red bubbles",      "PIX.2.1.1", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{blue},      gaussian, bar, burst_period, flash_length, "slow blue bubbles",     "PIX.2.1.2", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{purple},    gaussian, bar, burst_period, flash_length, "slow purple bubbles",   "PIX.2.1.3", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{gold},      gaussian, bar, burst_period, flash_length, "slow gold bubbles",     "PIX.2.1.4", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{sodium},    gaussian, bar, burst_period, flash_length, "slow sodium bubbles",   "PIX.2.1.5", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{cyan},      gaussian, bar, burst_period, flash_length, "slow cyan bubbles",     "PIX.2.1.6", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{w_white},   gaussian, bar, burst_period, flash_length, "slow w_white bubbles",  "PIX.2.1.7", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{c_white},   gaussian, bar, burst_period, flash_length, "slow c_white bubbles",  "PIX.2.1.8", backer, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{red},       gaussian, bar, burst_period, flash_length, "slow red bubbles",      "PIX.2.1.1", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{blue},      gaussian, bar, burst_period, flash_length, "slow blue bubbles",     "PIX.2.1.2", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{purple},    gaussian, bar, burst_period, flash_length, "slow purple bubbles",   "PIX.2.1.3", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{gold},      gaussian, bar, burst_period, flash_length, "slow gold bubbles",     "PIX.2.1.4", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{sodium},    gaussian, bar, burst_period, flash_length, "slow sodium bubbles",   "PIX.2.1.5", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{cyan},      gaussian, bar, burst_period, flash_length, "slow cyan bubbles",     "PIX.2.1.6", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{w_white},   gaussian, bar, burst_period, flash_length, "slow w_white bubbles",  "PIX.2.1.7", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{c_white},   gaussian, bar, burst_period, flash_length, "slow c_white bubbles",  "PIX.2.1.8", backer, 2, 255));
     // color Background
-    animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{gold},    gaussian, bar, burst_period, flash_length, "S gold bubbles, red backgd",       "PIX.2.1.9",  backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{w_white}, gaussian, bar, burst_period, flash_length, "S w_white bubbles, red backgd",    "PIX.2.1.10", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{c_white}, gaussian, bar, burst_period, flash_length, "S c_white bubbles, red backgd",    "PIX.2.1.11", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, purple,  color_vec{gold},    gaussian, bar, burst_period, flash_length, "S gold bubbles, purple backgd",    "PIX.2.1.12", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, purple,  color_vec{w_white}, gaussian, bar, burst_period, flash_length, "S w_white bubbles, purple backgd", "PIX.2.1.13", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, purple,  color_vec{c_white}, gaussian, bar, burst_period, flash_length, "S c_white bubbles, purple backgd", "PIX.2.1.14", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{cyan},    gaussian, bar, burst_period, flash_length, "S cyan bubbles, red backgd",       "PIX.2.1.15", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, purple,  color_vec{cyan},    gaussian, bar, burst_period, flash_length, "S cyan bubbles, purple backgd",    "PIX.2.1.16", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{w_white}, gaussian, bar, burst_period, flash_length, "S w_white bubbles, blue backgd",   "PIX.2.1.17", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{c_white}, gaussian, bar, burst_period, flash_length, "S c_white bubbles, blue backgd",   "PIX.2.1.18", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{cyan},    gaussian, bar, burst_period, flash_length, "S cyan bubbles, blue backgd",      "PIX.2.1.19", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{red},     gaussian, bar, burst_period, flash_length, "S red bubbles, blue backgd",       "PIX.2.1.20", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{blue},    gaussian, bar, burst_period, flash_length, "S blue bubbles, red backgd",       "PIX.2.1.21", backer, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{gold},    gaussian, bar, burst_period, flash_length, "S gold bubbles, red backgd",       "PIX.2.1.9",  backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{w_white}, gaussian, bar, burst_period, flash_length, "S w_white bubbles, red backgd",    "PIX.2.1.10", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{c_white}, gaussian, bar, burst_period, flash_length, "S c_white bubbles, red backgd",    "PIX.2.1.11", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, purple,  color_vec{gold},    gaussian, bar, burst_period, flash_length, "S gold bubbles, purple backgd",    "PIX.2.1.12", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, purple,  color_vec{w_white}, gaussian, bar, burst_period, flash_length, "S w_white bubbles, purple backgd", "PIX.2.1.13", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, purple,  color_vec{c_white}, gaussian, bar, burst_period, flash_length, "S c_white bubbles, purple backgd", "PIX.2.1.14", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{cyan},    gaussian, bar, burst_period, flash_length, "S cyan bubbles, red backgd",       "PIX.2.1.15", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, purple,  color_vec{cyan},    gaussian, bar, burst_period, flash_length, "S cyan bubbles, purple backgd",    "PIX.2.1.16", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{w_white}, gaussian, bar, burst_period, flash_length, "S w_white bubbles, blue backgd",   "PIX.2.1.17", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{c_white}, gaussian, bar, burst_period, flash_length, "S c_white bubbles, blue backgd",   "PIX.2.1.18", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{cyan},    gaussian, bar, burst_period, flash_length, "S cyan bubbles, blue backgd",      "PIX.2.1.19", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{red},     gaussian, bar, burst_period, flash_length, "S red bubbles, blue backgd",       "PIX.2.1.20", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{blue},    gaussian, bar, burst_period, flash_length, "S blue bubbles, red backgd",       "PIX.2.1.21", backer, 2, 255));
 #endif
 
     // Fast & short Bubbles
 #if SHOW_INTENSITY==0 or SHOW_INTENSITY >= 2
     flash_length = 600, burst_period = 200;
     // Dark background
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{red},       gaussian, bar, burst_period, flash_length, "fast red bubbles",      "PIX.2.2.1", any, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{blue},      gaussian, bar, burst_period, flash_length, "fast blue bubbles",     "PIX.2.2.2", any, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{purple},    gaussian, bar, burst_period, flash_length, "fast purple bubbles",   "PIX.2.2.3", any, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{gold},      gaussian, bar, burst_period, flash_length, "fast gold bubbles",     "PIX.2.2.4", any, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{sodium},    gaussian, bar, burst_period, flash_length, "fast sodium bubbles",   "PIX.2.2.5", any, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{cyan},      gaussian, bar, burst_period, flash_length, "fast cyan bubbles",     "PIX.2.2.6", any, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{w_white},   gaussian, bar, burst_period, flash_length, "fast w_white bubbles",  "PIX.2.2.7", any, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{c_white},   gaussian, bar, burst_period, flash_length, "fast c_white bubbles",  "PIX.2.2.8", any, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{red},       gaussian, bar, burst_period, flash_length, "fast red bubbles",      "PIX.2.2.1", any, 3, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{blue},      gaussian, bar, burst_period, flash_length, "fast blue bubbles",     "PIX.2.2.2", any, 3, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{purple},    gaussian, bar, burst_period, flash_length, "fast purple bubbles",   "PIX.2.2.3", any, 3, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{gold},      gaussian, bar, burst_period, flash_length, "fast gold bubbles",     "PIX.2.2.4", any, 3, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{sodium},    gaussian, bar, burst_period, flash_length, "fast sodium bubbles",   "PIX.2.2.5", any, 3, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{cyan},      gaussian, bar, burst_period, flash_length, "fast cyan bubbles",     "PIX.2.2.6", any, 3, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{w_white},   gaussian, bar, burst_period, flash_length, "fast w_white bubbles",  "PIX.2.2.7", any, 3, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{c_white},   gaussian, bar, burst_period, flash_length, "fast c_white bubbles",  "PIX.2.2.8", any, 3, 255));
     // color Background
-    animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{gold},    gaussian, bar, burst_period, flash_length, "F gold bubbles, red backgd",       "PIX.2.1.9",  any, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{w_white}, gaussian, bar, burst_period, flash_length, "F w_white bubbles, red backgd",    "PIX.2.1.10", any, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{c_white}, gaussian, bar, burst_period, flash_length, "F c_white bubbles, red backgd",    "PIX.2.1.11", any, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, purple,  color_vec{gold},    gaussian, bar, burst_period, flash_length, "F gold bubbles, purple backgd",    "PIX.2.1.12", any, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, purple,  color_vec{w_white}, gaussian, bar, burst_period, flash_length, "F w_white bubbles, purple backgd", "PIX.2.1.13", any, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, purple,  color_vec{c_white}, gaussian, bar, burst_period, flash_length, "F c_white bubbles, purple backgd", "PIX.2.1.14", any, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{cyan},    gaussian, bar, burst_period, flash_length, "F cyan bubbles, red backgd",       "PIX.2.1.15", any, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, purple,  color_vec{cyan},    gaussian, bar, burst_period, flash_length, "F cyan bubbles, purple backgd",    "PIX.2.1.16", any, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{w_white}, gaussian, bar, burst_period, flash_length, "F w_white bubbles, blue backgd",   "PIX.2.1.17", any, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{c_white}, gaussian, bar, burst_period, flash_length, "F c_white bubbles, blue backgd",   "PIX.2.1.18", any, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{cyan},    gaussian, bar, burst_period, flash_length, "F cyan bubbles, blue backgd",      "PIX.2.1.19", any, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{red},     gaussian, bar, burst_period, flash_length, "F red bubbles, blue backgd",       "PIX.2.1.20", any, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{blue},    gaussian, bar, burst_period, flash_length, "F blue bubbles, red backgd",       "PIX.2.1.21", any, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{gold},    gaussian, bar, burst_period, flash_length, "F gold bubbles, red backgd",       "PIX.2.1.9",  any, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{w_white}, gaussian, bar, burst_period, flash_length, "F w_white bubbles, red backgd",    "PIX.2.1.10", any, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{c_white}, gaussian, bar, burst_period, flash_length, "F c_white bubbles, red backgd",    "PIX.2.1.11", any, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, purple,  color_vec{gold},    gaussian, bar, burst_period, flash_length, "F gold bubbles, purple backgd",    "PIX.2.1.12", any, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, purple,  color_vec{w_white}, gaussian, bar, burst_period, flash_length, "F w_white bubbles, purple backgd", "PIX.2.1.13", any, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, purple,  color_vec{c_white}, gaussian, bar, burst_period, flash_length, "F c_white bubbles, purple backgd", "PIX.2.1.14", any, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{cyan},    gaussian, bar, burst_period, flash_length, "F cyan bubbles, red backgd",       "PIX.2.1.15", any, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, purple,  color_vec{cyan},    gaussian, bar, burst_period, flash_length, "F cyan bubbles, purple backgd",    "PIX.2.1.16", any, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{w_white}, gaussian, bar, burst_period, flash_length, "F w_white bubbles, blue backgd",   "PIX.2.1.17", any, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{c_white}, gaussian, bar, burst_period, flash_length, "F c_white bubbles, blue backgd",   "PIX.2.1.18", any, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{cyan},    gaussian, bar, burst_period, flash_length, "F cyan bubbles, blue backgd",      "PIX.2.1.19", any, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{red},     gaussian, bar, burst_period, flash_length, "F red bubbles, blue backgd",       "PIX.2.1.20", any, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{blue},    gaussian, bar, burst_period, flash_length, "F blue bubbles, red backgd",       "PIX.2.1.21", any, 2, 255));
 #endif
 
 // 3. ChASER
@@ -242,28 +242,28 @@ void AddressableLED::init(){
 #if SHOW_INTENSITY==0 or SHOW_INTENSITY >= 2
     flash_length = 1500, burst_period = 300;
     // Dark background
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{red},       square, bar, burst_period, flash_length, "Slow red chaser",      "PIX.3.1.1", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{blue},      square, bar, burst_period, flash_length, "Slow blue chaser",     "PIX.3.1.2", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{purple},    square, bar, burst_period, flash_length, "Slow purple chaser",   "PIX.3.1.3", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{gold},      square, bar, burst_period, flash_length, "Slow gold chaser",     "PIX.3.1.4", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{sodium},    square, bar, burst_period, flash_length, "Slow sodium chaser",   "PIX.3.1.5", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{cyan},      square, bar, burst_period, flash_length, "Slow cyan chaser",     "PIX.3.1.6", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{w_white},   square, bar, burst_period, flash_length, "Slow w_white chaser",  "PIX.3.1.7", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{c_white},   square, bar, burst_period, flash_length, "Slow c_white chaser",  "PIX.3.1.8", backer, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{red},       square, bar, burst_period, flash_length, "Slow red chaser",      "PIX.3.1.1", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{blue},      square, bar, burst_period, flash_length, "Slow blue chaser",     "PIX.3.1.2", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{purple},    square, bar, burst_period, flash_length, "Slow purple chaser",   "PIX.3.1.3", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{gold},      square, bar, burst_period, flash_length, "Slow gold chaser",     "PIX.3.1.4", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{sodium},    square, bar, burst_period, flash_length, "Slow sodium chaser",   "PIX.3.1.5", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{cyan},      square, bar, burst_period, flash_length, "Slow cyan chaser",     "PIX.3.1.6", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{w_white},   square, bar, burst_period, flash_length, "Slow w_white chaser",  "PIX.3.1.7", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, black, color_vec{c_white},   square, bar, burst_period, flash_length, "Slow c_white chaser",  "PIX.3.1.8", backer, 2, 255));
     // color Background
-    animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{gold},    square, bar, burst_period, flash_length, "S gold chaser, red backgd",       "PIX.3.1.9",  backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{w_white}, square, bar, burst_period, flash_length, "S w_white chaser, red backgd",    "PIX.3.1.10", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{c_white}, square, bar, burst_period, flash_length, "S c_white chaser, red backgd",    "PIX.3.1.11", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, purple,  color_vec{gold},    square, bar, burst_period, flash_length, "S gold chaser, purple backgd",    "PIX.3.1.12", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, purple,  color_vec{w_white}, square, bar, burst_period, flash_length, "S w_white chaser, purple backgd", "PIX.3.1.13", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, purple,  color_vec{c_white}, square, bar, burst_period, flash_length, "S c_white chaser, purple backgd", "PIX.3.1.14", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{cyan},    square, bar, burst_period, flash_length, "S cyan chaser, red backgd",       "PIX.3.1.15", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, purple,  color_vec{cyan},    square, bar, burst_period, flash_length, "S cyan chaser, purple backgd",    "PIX.3.1.16", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{w_white}, square, bar, burst_period, flash_length, "S w_white chaser, blue backgd",   "PIX.3.1.17", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{c_white}, square, bar, burst_period, flash_length, "S c_white chaser, blue backgd",   "PIX.3.1.18", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{cyan},    square, bar, burst_period, flash_length, "S cyan chaser, blue backgd",      "PIX.3.1.19", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{red},     square, bar, burst_period, flash_length, "S red chaser, blue backgd",       "PIX.3.1.20", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{blue},    square, bar, burst_period, flash_length, "S blue chaser, red backgd",       "PIX.3.1.21", backer, 1, 255));    
+    animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{gold},    square, bar, burst_period, flash_length, "S gold chaser, red backgd",       "PIX.3.1.9",  backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{w_white}, square, bar, burst_period, flash_length, "S w_white chaser, red backgd",    "PIX.3.1.10", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{c_white}, square, bar, burst_period, flash_length, "S c_white chaser, red backgd",    "PIX.3.1.11", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, purple,  color_vec{gold},    square, bar, burst_period, flash_length, "S gold chaser, purple backgd",    "PIX.3.1.12", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, purple,  color_vec{w_white}, square, bar, burst_period, flash_length, "S w_white chaser, purple backgd", "PIX.3.1.13", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, purple,  color_vec{c_white}, square, bar, burst_period, flash_length, "S c_white chaser, purple backgd", "PIX.3.1.14", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{cyan},    square, bar, burst_period, flash_length, "S cyan chaser, red backgd",       "PIX.3.1.15", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, purple,  color_vec{cyan},    square, bar, burst_period, flash_length, "S cyan chaser, purple backgd",    "PIX.3.1.16", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{w_white}, square, bar, burst_period, flash_length, "S w_white chaser, blue backgd",   "PIX.3.1.17", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{c_white}, square, bar, burst_period, flash_length, "S c_white chaser, blue backgd",   "PIX.3.1.18", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{cyan},    square, bar, burst_period, flash_length, "S cyan chaser, blue backgd",      "PIX.3.1.19", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, blue,    color_vec{red},     square, bar, burst_period, flash_length, "S red chaser, blue backgd",       "PIX.3.1.20", backer, 2, 255));
+    animations.push_back(new AddrLEDAnimation4(this, red,     color_vec{blue},    square, bar, burst_period, flash_length, "S blue chaser, red backgd",       "PIX.3.1.21", backer, 2, 255));    
 #endif
     // Fast Chaser
 #if SHOW_INTENSITY==0 or SHOW_INTENSITY >= 3

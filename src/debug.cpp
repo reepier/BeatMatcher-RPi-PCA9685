@@ -200,7 +200,8 @@ void disp_output_window(){
     for (auto fix : fix_vec{&addr_led, /*&led,*/ &laser, &front_rack, &spider, &rack_15, &rack_40, &shehds_rack, &redrayz}){
         if (fix->active_animation != nullptr){
             ostringstream animbuf, outbuf;
-            animbuf << ((fix->active_animation->type == leader) ? "(L) ":"(b) ") << fix->name << " " << fix->active_animation->id << " - " << fix->active_animation->description;
+            
+            animbuf << ((fix->active_animation->type == leader) ? "(L) ":((fix->active_animation->type == backer) ? "(b) " : "(a) ")) << fix->name << " " << fix->active_animation->id << " - " << fix->active_animation->description;
             
             DMX_vec raw_buf = fix->buffer();
             outbuf << "| " <<fcn::vec_to_str(raw_buf, ',');

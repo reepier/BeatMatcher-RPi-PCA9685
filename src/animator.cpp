@@ -81,13 +81,13 @@ void AnimationManager::init(){
 // Warehouse color palette
 // Flames (red to hot colors)
     palette_magasine.push_back( color_vec{red},             1);
-    palette_magasine.push_back( color_vec{gold, red},       1);
+    palette_magasine.push_back( color_vec{gold, red},       2);
     palette_magasine.push_back( color_vec{sodium, red},     1);
     palette_magasine.push_back( color_vec{w_white, red},    1);
 // Wabi colors
     palette_magasine.push_back(color_vec{purple, red},      1);
     palette_magasine.push_back(color_vec{gold, purple},     1);
-    palette_magasine.push_back(color_vec{gold, purple},     1);
+    palette_magasine.push_back(color_vec{gold, purple},     2);
     palette_magasine.push_back(color_vec{sodium, purple},   1);
 
     palette_magasine.push_back(color_vec{cyan, red},        1);
