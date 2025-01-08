@@ -37,6 +37,7 @@ class LoopControler{
     time_us t_next_us = 0;
     time_ms loop_duration_ms = 0;
     time_us loop_duration_us = 0;
+    long int loop_overhead_us = 0; //calculation time margin (OK if > 0 , KO if < 0)
 
 
     void start_new_frame(){
@@ -50,18 +51,21 @@ class LoopControler{
         t_next_ms = t_current_ms + 1000/FRATE;
         t_next_us = t_current_us + 1000000/FRATE;
 
-        loop_duration_ms = t_current_ms - t_previous_ms;
-        loop_duration_us = t_current_us - t_previous_us;
+        // loop_duration_ms = t_current_ms - t_previous_ms;
+        // loop_duration_us = t_current_us - t_previous_us;
 
     }
 
 
     void wait_for_next(){
-        loop_overhead = false;
+        loop_duration_us = micros() - t_current_us;
+        loop_duration_ms = loop_duration_us/1000;
+        loop_overhead_us = 1000000/FRATE - (long)loop_duration_us;
+        if (loop_overhead_us<0) loop_overhead = false;
+        
         while(micros() < t_next_us) {
             // std::cout << t_current_ms << " / " << micros()/1000 << " / " << t_next_ms  << std::endl;
             delayMicroseconds(100);
-            loop_overhead = true;
         } // wait for the next frame
 
         if (first_loop) first_loop = false;

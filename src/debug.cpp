@@ -279,7 +279,7 @@ void disp_general_window(){
     char * statement;
     if (frame.loop_overhead) statement = "YES";
     else statement = "FALSE";
-    oheadbuf << "Calc Overhead : " << statement << " " << 1000/FRATE - frame.loop_duration_ms << "ms";
+    oheadbuf << "Calc Overhead : " << statement << " " << frame.loop_overhead_us/1000 << "ms";
     mvwprintw(generalw, 1, 50, oheadbuf.str().c_str());
 
 
