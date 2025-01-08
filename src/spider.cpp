@@ -185,9 +185,6 @@ DMX_vec SpiderFixture::RGBW(simpleColor c, int intensity){
     case c_white:
         return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);
         break;
-    case w_white:
-        return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);
-        break;
     case gold:
         return fcn::RGBW_norm(DMX_vec{255,40,0,100}, intensity);
         break;
