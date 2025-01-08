@@ -48,10 +48,10 @@ SpotFixture spot_20(Shehds_RGBWAU_7x18W, 239, 10, "Spot 20 (@240)", 20);
 DMX_vec FunGeneration_12x1W_buffer(const SpotFixture& spot){
     // return DMX_vec{    (uint8_t)((double)this->MASTER_DIMMER * this->active_animation->master / 255),
     return DMX_vec{      (uint8_t) (spot.master/255.0 * spot.rack->active_animation->master),
-                         spot.RGBWout[R],
-                         spot.RGBWout[G],
-                         spot.RGBWout[B],
-                         spot.RGBWout[W],
+                         spot.pixel[R],
+                         spot.pixel[G],
+                         spot.pixel[B],
+                         spot.pixel[W],
                          spot.prog,
                          spot.color_wheel,
                          spot.strobe
@@ -60,11 +60,11 @@ DMX_vec FunGeneration_12x1W_buffer(const SpotFixture& spot){
 
 DMX_vec Shehds_10x8W_buffer(const SpotFixture& spot){
     // return DMX_vec{    (uint8_t)((double)this->MASTER_DIMMER * this->active_animation->master / 255),
-    return DMX_vec{      spot.master,
-                         spot.RGBWout[R],
-                         spot.RGBWout[G],
-                         spot.RGBWout[B],
-                         spot.RGBWout[W],
+    return DMX_vec{      (uint8_t) (spot.master/255.0 * spot.rack->active_animation->master),
+                         spot.pixel[R],
+                         spot.pixel[G],
+                         spot.pixel[B],
+                         spot.pixel[W],
                          spot.prog,
                          spot.color_wheel,
                          spot.strobe
@@ -72,13 +72,13 @@ DMX_vec Shehds_10x8W_buffer(const SpotFixture& spot){
 }
 
 DMX_vec Shehds_7x18W_buffer(const SpotFixture& spot){
-    return DMX_vec{spot.master,
-                   spot.RGBWout[R],
-                   spot.RGBWout[G],
-                   spot.RGBWout[B],
-                   spot.RGBWout[W],
-                   spot.RGBWout[Amb],
-                   spot.RGBWout[UV],
+    return DMX_vec{(uint8_t) (spot.master/255.0 * spot.rack->active_animation->master),
+                   spot.pixel[R],
+                   spot.pixel[G],
+                   spot.pixel[B],
+                   spot.pixel[W],
+                   spot.pixel[Amb],
+                   spot.pixel[UV],
                    spot.strobe,
                    0,
                    0};
@@ -298,7 +298,6 @@ void front_rack_init(){
     // front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    color_vec{sevika_pink,hextech_cyan}, square, 100, 200,     "slow hextech sevika chaser",   "FR.3.7", leader, 2));
     // front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    color_vec{sevika_pink,hextech_cyan}, square, 100, 200,     "slow hextech sevika chaser",   "FR.3.7", leader, 2));
 
-    //TODO add fast Chaser flashes (square parameter)
     front_rack.activate_none();
 };
 
@@ -843,7 +842,7 @@ void SpotRackAnimation1::new_frame(){
         auto &current_spot_flashes = flashes[i_spot];                  // for readability
         auto &current_spot_next_flash = flashes[i_spot][i_next];       // for readability
         auto &current_spot_prev_flash = flashes[i_spot][i_prev];       // for readability
-        auto pixel_size = current_spot->RGBWout.size();
+        auto pixel_size = current_spot->pixel.size();
         time_t &t_next = current_spot_next_flash.time;
         time_t &t_prev = current_spot_prev_flash.time;
         simpleColor &c_next = current_spot_next_flash.color;
@@ -855,7 +854,6 @@ void SpotRackAnimation1::new_frame(){
         pixel           frame_backgd_RGBW = current_spot->RGBW(black);
         // log(1, "Pixel size : ", fcn::num_to_str((int)pixel_size));
 
-        //TODO remove fluctuation !!
         // compute fluctuating background color values :
             // frame_backgd_RGBW[R] = min(max(    (int) (  (1 + fluct_int*s[(i_spot+4)%5]) * ani_backgd_RGBW[R] * (1 + fluct_col*s[(i_spot+0)%5]))  ,0),255);
             // frame_backgd_RGBW[G] = min(max(    (int) (  (1 + fluct_int*s[(i_spot+4)%5]) * ani_backgd_RGBW[G] * (1 + fluct_col*s[(i_spot+1)%5]))  ,0),255);
@@ -906,7 +904,7 @@ void SpotRackAnimation1::new_frame(){
             // current_spot->RGBWout[B] = min(max( (int)( (1.0-pow(flash_intensity, 0.2)) * frame_backgd_RGBW[B] + flash_intensity * frame_flash_RGBW[B]  ),0),255);
             // current_spot->RGBWout[W] = min(max( (int)( (1.0-pow(flash_intensity, 0.2)) * frame_backgd_RGBW[W] + flash_intensity * frame_flash_RGBW[W]  ),0),255);
             for (auto i_subpix = 0 ; i_subpix<pixel_size; i_subpix++){
-                 current_spot->RGBWout[i_subpix] = min(max( (int)( (1.0-pow(flash_intensity, 0.2)) * frame_backgd_RGBW[i_subpix] + flash_intensity * frame_flash_RGBW[i_subpix]  ),0),255); 
+                 current_spot->pixel[i_subpix] = min(max( (int)( (1.0-pow(flash_intensity, 0.2)) * frame_backgd_RGBW[i_subpix] + flash_intensity * frame_flash_RGBW[i_subpix]  ),0),255); 
             }
     }
 }
@@ -964,9 +962,9 @@ void SpotRackAnimation2::new_frame(){
     }
     for (int i = 0; i<n_spots; i++){
         if (sampler.state == BEAT)
-            spots[i]->RGBWout  = this->fixture->RGBW(this->color); //TODO replace rack.RGBW with spot.RGBW
+            spots[i]->pixel  = this->fixture->spots[i]->RGBW(this->color);
         else    
-            spots[i]->RGBWout  = this->fixture->RGBW(black);
+            spots[i]->pixel  = this->fixture->spots[i]->RGBW(black);
 
 
         spots[i]->strobe = (int)(this->strobe_spds[i]); // min(max( (int)(this->strobe_spds[i] * (1 + delta*sin(i*M_PI/3 + 2*M_PI*t/3000)))  ,0),255);
@@ -983,7 +981,7 @@ void SpotRackAnimation2::new_frame(){
 #     # ###    #     # #    # #    # #    # #      #   #  
  #####  ###     #####  #    # #    #  ####  ###### #    # 
 */
-//TODO finish
+//TODO finish or delete
 void SpotRackAnimation3::init(){
     BaseAnimation::init();
     this->fixture->reset_spots();
@@ -1044,6 +1042,6 @@ void SpotRackAnimation4::new_frame(){
     }
     
     for (auto spot : this->fixture->spots){
-        spot->RGBWout = final_RGB;
+        spot->pixel = final_RGB;
     }
 }

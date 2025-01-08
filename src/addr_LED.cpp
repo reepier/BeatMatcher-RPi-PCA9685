@@ -509,10 +509,12 @@ void AddressableLED::init(){
 DMX_vec AddressableLED::buffer(){
     DMX_vec data(NUM_SUBPIX);
     
+    double final_master =  this->master/255.0 * this->active_animation->master/255.0;  // from 0.0 to 1.0
+
     int i_data = 0;
     for (auto pix : this->pixels){        
         for (auto sub_pix : pix){
-            data[i_data++] = (uint8_t) (this->master/255.0 * this->active_animation->master/255.0 * sub_pix);
+            data[i_data++] = (uint8_t) (final_master * sub_pix);
         }
     }
     return data;

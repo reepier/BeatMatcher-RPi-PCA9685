@@ -48,7 +48,7 @@ class SoundAnalyzer{
     private : fftw_plan fft_plan;
 
     // FFT results storage structure
-    public  : float sample_spectrum[SAMPLE_SIZE][2];    // stores AMPL x FREQ array;
+    public  : float sample_spectrum[BUF_LENGTH][2];    // stores AMPL x FREQ array;
 
     public :    bool clipping; // true if _record() detects ADC saturation
     public :    int volume;

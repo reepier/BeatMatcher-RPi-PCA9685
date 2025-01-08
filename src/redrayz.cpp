@@ -112,22 +112,22 @@ void RedrayzAnimation2::new_frame(){
       if (t > t_next){
           
         t_prev = t_next;
-        t_next = t_next + rand_min_max(this->flash_len, 2*n_unit*this->rand_const_ms);
+        t_next = t_next + rand_min_max(this->burst_length, 2*n_unit*this->rand_const_ms);
       }
 
       // Compute pixel intensity
       switch (this->flash_shape){
         case square :
-          flash_intensity = fcn::square(t, t_prev, flash_len, 0.0,1.0) + fcn::square(t, t_next, flash_len, 0.0,1.0);
+          flash_intensity = fcn::square(t, t_prev, burst_length, 0.0,1.0) + fcn::square(t, t_next, burst_length, 0.0,1.0);
           break;
         case gaussian2 :
-          flash_intensity = fcn::gaussian2(t, t_prev, flash_len, 0.0,1.0) + fcn::gaussian2(t, t_next, flash_len, 0.0,1.0); //exp( -pow(2.5/this->flash_len*(t - t_prev), 2)) + exp( -pow(2.5/this->flash_len*(t - t_next), 2));
+          flash_intensity = fcn::gaussian2(t, t_prev, burst_length, 0.0,1.0) + fcn::gaussian2(t, t_next, burst_length, 0.0,1.0); //exp( -pow(2.5/this->flash_len*(t - t_prev), 2)) + exp( -pow(2.5/this->flash_len*(t - t_next), 2));
           break;
         case expdecay : // with an exponent of 3 instead of 1 to compensate for the diode non linearity
-          flash_intensity = pow(fcn::exp_decay(t, t_prev, flash_len, 0.0, 1.0), 3.0);
+          flash_intensity = pow(fcn::exp_decay(t, t_prev, burst_length, 0.0, 1.0), 3.0);
           break;
         default :
-          flash_intensity = fcn::gaussian(t, t_prev, flash_len, 0.0,1.0) + fcn::gaussian(t, t_next, flash_len, 0.0,1.0); //exp( -pow(2.5/this->flash_len*(t - t_prev), 2)) + exp( -pow(2.5/this->flash_len*(t - t_next), 2));
+          flash_intensity = fcn::gaussian(t, t_prev, burst_length, 0.0,1.0) + fcn::gaussian(t, t_next, burst_length, 0.0,1.0); //exp( -pow(2.5/this->flash_len*(t - t_prev), 2)) + exp( -pow(2.5/this->flash_len*(t - t_next), 2));
           break;
       }
     }else{

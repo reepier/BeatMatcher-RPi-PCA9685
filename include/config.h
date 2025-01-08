@@ -19,7 +19,7 @@ extern std::vector<std::string> vec_anim_id;
 
 
 // Music sampler
-    #define SAMPLE_SIZE 256      // record length (number of individual samples) //TODO rename BUFFER_LENGTH (a "sample" is an individual value within a Buffer)
+    #define BUF_LENGTH 256       // audio buffer length (number of individual samples)
     #define SAMPLING_FREQ 8000   // sampling frequency
     #define FREQ_BAND 3          // frequency band used to evaluate volume (low value for bass / high value for treble)
 
@@ -37,7 +37,7 @@ extern std::vector<std::string> vec_anim_id;
 #define DROPDuration  8 // beats
 
 // -- CONFIG ------------------------------------------------------------
-#define     MAX_CONT_FLASH      120000          // 120000   //TODO remove ?
+#define     MAX_CONT_FLASH      120000          // 120000 
 #define     TEMPO_ANIM_CHANGE   5000          // 240000
 #define     MASTERDIMMER        1.0             //fraction --> must be decimal (literal float) !!!
 

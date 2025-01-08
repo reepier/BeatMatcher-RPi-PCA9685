@@ -38,7 +38,7 @@ int rtaudio_callback_fcn(void * /*outputBuffer*/, void *inputBuffer, unsigned in
     
     // extract the buffer & format it like the old one (double from 0 to 1023)
     // store the N newest sample in a data structure accessible to the rest of the program
-    for (int i=0; i<SAMPLE_SIZE; i++){
+    for (int i=0; i<BUF_LENGTH; i++){
         double sample_i =  map(iBuffer[i], -1.0, 1.0, 0.0, 1023.0); // use only 1 channel --> TODO use averaged Left & Right
         sampler.fft_signal[i][REAL] = sample_i;
         sampler.fft_signal[i][IMAG] = 0;
@@ -55,8 +55,8 @@ void SoundAnalyzer::init(){
     log(4, __FILE__, " ",__LINE__, " ", __func__);
 
      // allocate memory fot the fft_signal & fft out storage structures (arrays of doubles)
-    fft_signal = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*SAMPLE_SIZE);
-    fft_out = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*SAMPLE_SIZE);
+    fft_signal = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*BUF_LENGTH);
+    fft_out = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*BUF_LENGTH);
     
     // initializa connection with MCP3008 ADC
     #ifndef LINUX_PC
@@ -69,7 +69,7 @@ void SoundAnalyzer::init(){
             
         }
         
-        unsigned int channels = 2, fs = SAMPLING_FREQ, bufferFrames = SAMPLE_SIZE, device = 0, offset = 0;
+        unsigned int channels = 2, fs = SAMPLING_FREQ, bufferFrames = BUF_LENGTH, device = 0, offset = 0;
         RtAudio::StreamParameters iParams;
         iParams.nChannels = 2;
         iParams.firstChannel = 0;
@@ -161,7 +161,7 @@ void SoundAnalyzer::_process_record(){
     _compute_FFT();
       
     // extract current volume (measure in FFT frequency band "FREQ_BAND") and
-    volume = sample_spectrum[FREQ_BAND][AMPL]*2/SAMPLE_SIZE;
+    volume = sample_spectrum[FREQ_BAND][AMPL]*2/BUF_LENGTH;
     
     // save the current volume sample in moving memory
     // when the memory is full, overwrite the first records
@@ -314,23 +314,23 @@ int SoundAnalyzer::recent_maximum(int period){
 
 void SoundAnalyzer::_remove_DC_value(){
     double sum = 0.0;
-    for (int i=0; i<SAMPLE_SIZE; i++){
+    for (int i=0; i<BUF_LENGTH; i++){
         sum += fft_signal[i][REAL];
     }
-    double mean = sum/SAMPLE_SIZE;
-    for (int i=0; i<SAMPLE_SIZE; i++){
+    double mean = sum/BUF_LENGTH;
+    for (int i=0; i<BUF_LENGTH; i++){
         fft_signal[i][REAL] -= mean;
     }
 }
 
 void SoundAnalyzer::_compute_FFT(){
   // Compute FFT
-  fft_plan = fftw_plan_dft_1d(SAMPLE_SIZE, fft_signal, fft_out, FFTW_FORWARD, FFTW_ESTIMATE);
+  fft_plan = fftw_plan_dft_1d(BUF_LENGTH, fft_signal, fft_out, FFTW_FORWARD, FFTW_ESTIMATE);
   fftw_execute(fft_plan);
 
   // Reshape results 
-  for (int i=0; i<SAMPLE_SIZE; i++){
-      sample_spectrum[i][FREQ] = i * SAMPLING_FREQ/SAMPLE_SIZE;
+  for (int i=0; i<BUF_LENGTH; i++){
+      sample_spectrum[i][FREQ] = i * SAMPLING_FREQ/BUF_LENGTH;
       sample_spectrum[i][AMPL] = (pow(fft_out[i][REAL], 2) + pow(fft_out[i][IMAG],2)) * 7E-5; // compute magnitude + normalize (empirical)
   }  
 }

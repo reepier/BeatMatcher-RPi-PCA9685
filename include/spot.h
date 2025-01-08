@@ -37,7 +37,7 @@ class SpotFixture : public BaseFixture{
 public:
     // Channels :
     int nCH = 8;
-    DMX_vec RGBWout;// = {0, 0, 0, 0}; // R G B W... values (0-255)    //TODO renam pixel to make it model - agnostic
+    DMX_vec pixel;// = {0, 0, 0, 0}; // R G B W... values (0-255)
     uint8_t strobe = 0;                       // strobe speed (0 none - 1 slow - 255 fast)
     uint8_t color_wheel = 0;                  // fixture preset colors (unused)
     uint8_t prog = 0;                         // fixture preset program (unused)
@@ -49,9 +49,9 @@ public:
     SpotFixture(spot_type_t typ, int addr, int nch, std::string nm, int id, uint8_t mast=255) : BaseFixture(addr, nch, nm, id, mast){
         this->type = typ;
 
-        this->RGBWout = this->RGBW(black); // resize & initialise RGBWout vector
+        this->pixel = this->RGBW(black); // resize & initialise RGBWout vector
 
-        log(1, "Init. of ", this->name, " / Pixel size : ", this->RGBWout.size());
+        log(1, "Init. of ", this->name, " / Pixel size : ", this->pixel.size());
     };
     void init(){};
 
@@ -60,7 +60,7 @@ public:
     int get_address() override { return this->address; };
     DMX_vec buffer() override;
     void reset_channels(){
-        this->RGBWout = this->RGBW(black);
+        this->pixel = this->RGBW(black);
         this->strobe = 0;                       
         this->color_wheel = 0;                  
         this->prog = 0; 

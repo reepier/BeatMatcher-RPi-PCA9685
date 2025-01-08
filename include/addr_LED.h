@@ -376,10 +376,6 @@ private :
     void new_frame();
 };
 
-//TODO remove  ??
-#define min(x,y) std::min(x,y)
-#define max(x,y) std::max(x,y) 
-
 // /* 5 - HiVE 
 // On each group of led bars, a certain number of spots move in a smooth motion. On each beat, they 
 // get a all get a sudden push and then slowly go back to their initial velocity

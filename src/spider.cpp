@@ -125,6 +125,7 @@ DMX_vec SpiderFixture::buffer(){
     // ret[3]= min(max(    map(this->tilt[1], tiltMIN, tiltMAX, 0, 255)    ,0),255);
     // ret[4]= min(max(    map(this->tilt[2], tiltMIN, tiltMAX, 0, 255)    ,0),255);
     // Empirical channel by channel calibration
+
     ret[2]= min(max(    map(this->tilt[0], 0, 90, 52, 215)    ,0),255);
     ret[3]= min(max(    map(this->tilt[1], 0, 90, 41, 207)    ,0),255);
     ret[4]= min(max(    map(this->tilt[2], 0, 90, 39, 204)    ,0),255);
@@ -132,9 +133,10 @@ DMX_vec SpiderFixture::buffer(){
     ret[5]=this->master;
     ret[6]=this->strobe;
 
+    double animation_master = this->active_animation->master/255.0; // from 0.0 to 1.0
     for (int led=0; led<NLED; led++){
         for (int pix=0; pix<NCOL; pix++){
-            ret[7+led*NCOL+pix] = this->pixels[led][pix];
+            ret[7+led*NCOL+pix] = (uint8_t) animation_master * this->pixels[led][pix];
         }
     }
     ret[nCH-1] = prog;
@@ -183,7 +185,7 @@ DMX_vec SpiderFixture::RGBW(simpleColor c, int intensity){
     case c_white:
         return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);
         break;
-    case w_white: //TODO tune cold & warm white !!!
+    case w_white:
         return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);
         break;
     case gold:

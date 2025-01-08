@@ -105,7 +105,7 @@ class RedrayzAnimation2 : public RedrayzAnimation{
     bool flash_activation = true;
     Shape flash_shape = gaussian; // default setting leads to gaussian flashes (of bubbles)
     int rand_const_ms;
-    int flash_len;  //TODO rename burst_length
+    int burst_length;
 
     // Dynamic variables (updated internally at each frame)
     std::vector<flash_vec> flashes;     //for each spot, stores previous & next flash data (color & time) --> flashes[spot_ind][prev/next].color/time
@@ -124,7 +124,7 @@ class RedrayzAnimation2 : public RedrayzAnimation{
       this->master = mast;
 
       this->flash_shape = fshape;
-      this->flash_len = flen;
+      this->burst_length = flen;
       this->rand_const_ms = prand;
 
       this->update_palette(red);
