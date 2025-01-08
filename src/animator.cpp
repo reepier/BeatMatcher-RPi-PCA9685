@@ -28,7 +28,6 @@ using namespace std;
 
 void AnimationManager::init(){
     log(4, __FILE__, " ",__func__);
-    //TODO move palette definition to a dedicated funciton (for readabiliyt)
     palette_magasine.push_back(    color_vec{red}    ,2   );
  // palette_magasine.push_back(    color_vec{sodium} ,1   );
  // palette_magasine.push_back(    color_vec{orange} ,1   );

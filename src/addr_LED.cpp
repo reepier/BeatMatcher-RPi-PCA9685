@@ -505,7 +505,6 @@ void AddressableLED::init(){
 }
 
 // spits out an ordered vector containing every subpixel value (0-256)
-//TODO Add support for fixture Master & Animation Master
 DMX_vec AddressableLED::buffer(){
     DMX_vec data(NUM_SUBPIX);
     
@@ -533,7 +532,6 @@ DMX_vec AddressableLED::buffer(){
 #    #  #     # #     # #  #  #    #       #    # #   ## 
 #     #  #####  ######   ## ##     #        ####  #    # 
 */
-//TODO calibrate colors
 DMX_vec AddressableLED::RGB(simpleColor c, int intensity){
     // log(4, __FILE__, " ",__LINE__, " ", __func__);
 
@@ -875,7 +873,6 @@ void AddrLEDAnimation4::new_frame(){
 //             // position (pixels as a uint) is randomly picked along the length of the bars' group 
 //             blot.position = rand_min_max(0, group_size * NUM_PIX_BAR);
 //             //nothing else for now, all blots are created equal (see class definition)
-//             // TODO update
 //         }
 //     }
 // };
@@ -899,7 +896,6 @@ void AddrLEDAnimation4::new_frame(){
 //             auto closest_blot = blots[0];
 //             for (auto blot : blots){
 //                 if (abs(blot.position-pix_position) < abs(closest_blot.position-pix_position)){
-//                     //TODO replace with a operator= overload
 //                     closest_blot.position = blot.position;
 //                     closest_blot.luminosity = blot.luminosity;
 //                     closest_blot.color = blot.color;

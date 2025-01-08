@@ -271,7 +271,6 @@ public :
 */
 // STROBE : Random color flashes
 // TODO add multicolor feature (change color at every new_frame)
-// TODO add multishape (exp, square)
 #define STRB_FASTEST 180
 #define STRB_FAST 80
 #define STRB_MED 30
