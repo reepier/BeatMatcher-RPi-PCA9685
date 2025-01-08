@@ -360,7 +360,6 @@ class BaseFixture{
 ######  #    #  ####  ######    #     # #    # # #    # #    #   #   #  ####  #    # 
 */
 
-//TODO : add a uint8_t MASTER attribute to base animation class (default 255)
 // Generic (core) description of an animation object
 class BaseAnimation{
   public :

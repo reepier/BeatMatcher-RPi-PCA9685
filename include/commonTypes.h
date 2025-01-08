@@ -89,9 +89,9 @@ typedef DMX_vec                     pixel;
 
 
   // Declare all the classes before defining them
-class AnimationManager;   //TODO move this in a sceno.h and rename this module baseFixture.h & baseAnimation.h
-class BaseFixture;        //TODO move this in baseFixture.h
-class BaseAnimation;      //TODO move this in baseAnimation.h
+class AnimationManager;
+class BaseFixture;        
+class BaseAnimation;      
 
 typedef std::vector<BaseFixture*> fix_vec;
 typedef std::vector<BaseAnimation*> anim_vec;
