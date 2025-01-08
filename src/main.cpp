@@ -147,7 +147,7 @@ bool process_arguments(int n, char* args[]){
 
 
     #ifdef LINUX_PC //if compiling on PC, force NO_MUSIC and NO_LED since PCA9685 and MCP3008 are not compatible
-        b_NO_MUSIC = true;
+        // b_NO_MUSIC = true;
         b_NO_LED = true;
     #endif
 
@@ -274,6 +274,7 @@ int main(int argc, char* argv[]){
         balise("Record & process sample...");   
         sampler.update();
 
+        // Run animator
         balise("Run animator...");
         if(!b_ANI_TEST && !b_EXT_CONTROL){    // if nominal case
             balise("Run animator normal update");
@@ -295,6 +296,7 @@ int main(int argc, char* argv[]){
                 (*fixture)->active_animation->new_frame();
             }
         }
+
         // led.active_animation->new_frame();
         // //spot_g.active_animation->new_frame();
         // front_rack.active_animation->new_frame();

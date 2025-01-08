@@ -273,7 +273,15 @@ void disp_general_window(){
 
     ostringstream timbuf;
     timbuf << "Clock : " << frame.t_current_ms/1000.0 << "s";
-    mvwprintw(generalw, 1, 35, timbuf.str().c_str());
+    mvwprintw(generalw, 1, 25, timbuf.str().c_str());
+
+    ostringstream oheadbuf;
+    char * statement;
+    if (frame.loop_overhead) statement = "YES";
+    else statement = "FALSE";
+    oheadbuf << "Calc Overhead : " << statement << " " << 1000/FRATE - frame.loop_duration_ms << "ms";
+    mvwprintw(generalw, 1, 50, oheadbuf.str().c_str());
+
 
     wrefresh(generalw);
 }

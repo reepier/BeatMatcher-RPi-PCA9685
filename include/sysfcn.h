@@ -28,24 +28,41 @@ class LoopControler{
     public :
     unsigned long cpt = 0;
     bool first_loop = true;
-    unsigned long t_previous_ms = 0;
-    unsigned long t_current_ms = millis();
-    unsigned long t_next_ms = 0;
-    unsigned long loop_duration_ms = 0;
+    bool loop_overhead = true; // Flag : turns false if calculations are too heavy to fit in the specified frequency
+    time_ms t_previous_ms = 0;
+    time_us t_previous_us = 0;
+    time_ms t_current_ms = millis();
+    time_us t_current_us = micros();
+    time_ms t_next_ms = 0;
+    time_us t_next_us = 0;
+    time_ms loop_duration_ms = 0;
+    time_us loop_duration_us = 0;
+
 
     void start_new_frame(){
+        // save last loop timestamp
         t_previous_ms = t_current_ms;
-        t_current_ms = millis();
+        t_previous_us = t_current_us;
+        // update current loop timestamp
+        t_current_us = micros();
+        t_current_ms = t_current_us/1000;
+        // compute next loop timestamp
         t_next_ms = t_current_ms + 1000/FRATE;
+        t_next_us = t_current_us + 1000000/FRATE;
 
         loop_duration_ms = t_current_ms - t_previous_ms;
+        loop_duration_us = t_current_us - t_previous_us;
+
     }
 
 
     void wait_for_next(){
-        while(micros() < 1000*t_next_ms) {
+        loop_overhead = false;
+        while(micros() < t_next_us) {
             // std::cout << t_current_ms << " / " << micros()/1000 << " / " << t_next_ms  << std::endl;
-            delayMicroseconds(100); } // wait for the next frame
+            delayMicroseconds(100);
+            loop_overhead = true;
+        } // wait for the next frame
 
         if (first_loop) first_loop = false;
         cpt++;

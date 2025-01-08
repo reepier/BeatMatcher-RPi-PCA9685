@@ -10,24 +10,94 @@
 #include <cmath>
 #include <climits>
 
+#include "rtaudio/RtAudio.h"
+
 #include "config.h"
 #include "debug.h"
 #include "music.h"
 #include "sysfcn.h"
 #include <wiringPi.h>
 
+
+#ifdef LINUX_PC // RT Audio -----------------------------------------------------------------
+typedef double SAMPLE_TYPE;
+#define FORMAT RTAUDIO_FLOAT64
+
+
+/** This function is called automatically every time rtaudio records a new sample buffer (the frequency depends on sample 
+ * size and sampling frequency). It is asynchronous with the rest of the program that runs on a constant 40Hz "main loop". if the sampling
+ * runs at a higher rate, some samples will get lost in between executions of the "main loop" but every time the "main loop" executes, it
+ * will access the newest sample buffer. 
+ */
+int rtaudio_callback_fcn(void * /*outputBuffer*/, void *inputBuffer, unsigned int nBufferFrames,
+                        double /*streamTime*/, RtAudioStreamStatus /*status*/, void * /*data*/){
+    
+    // recast rtaudio std arguments :
+    SAMPLE_TYPE *iBuffer = (SAMPLE_TYPE *) inputBuffer;
+
+    
+    // extract the buffer & format it like the old one (double from 0 to 1023)
+    // store the N newest sample in a data structure accessible to the rest of the program
+    for (int i=0; i<SAMPLE_SIZE; i++){
+        double sample_i =  map(iBuffer[i], -1.0, 1.0, 0.0, 1023.0); // use only 1 channel --> TODO use averaged Left & Right
+        sampler.fft_signal[i][REAL] = sample_i;
+        sampler.fft_signal[i][IMAG] = 0;
+    }
+}
+#endif
+
 SoundAnalyzer sampler;
+#ifdef LINUX_PC
+    RtAudio adc;
+#endif
 
 void SoundAnalyzer::init(){
     log(4, __FILE__, " ",__LINE__, " ", __func__);
 
+     // allocate memory fot the fft_signal & fft out storage structures (arrays of doubles)
+    fft_signal = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*SAMPLE_SIZE);
+    fft_out = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*SAMPLE_SIZE);
+    
     // initializa connection with MCP3008 ADC
     #ifndef LINUX_PC
         adc.connect();
+    // initialise connection to Audio interface on PC (RtAudio Library)
+    #else
+    if (b_NO_MUSIC == false){
+        std::vector<unsigned int> deviceIds = adc.getDeviceIds();
+        if ( deviceIds.size() < 1 ) {
+            
+        }
+        
+        unsigned int channels = 2, fs = SAMPLING_FREQ, bufferFrames = SAMPLE_SIZE, device = 0, offset = 0;
+        RtAudio::StreamParameters iParams;
+        iParams.nChannels = 2;
+        iParams.firstChannel = 0;
+        iParams.deviceId = adc.getDefaultInputDevice(); // default device is used //TODO implemnt choixe if required
+
+        // adc.setErrorCallback( define a callback function to handle error ) // TODO integrate errors to the program's log console
+
+        //open Stream
+        if ( adc.openStream( NULL, &iParams, RTAUDIO_FLOAT64, fs, &bufferFrames, &rtaudio_callback_fcn/*, (void *)&data*/) ){
+            balise("\nRtAudio : Failed to open Stream!\n");
+            exit( 1 );
+        }
+        balise("Rt Audio Stream open!");
+        // check stream is open
+        if ( adc.isStreamOpen() == false ){
+            balise("RtAudio : Stream not open!");
+            exit( 1 );
+        }
+        balise("Rt Audio Stream confirmed open !");
+
+        //Start Stream
+        if ( adc.startStream() ){
+            balise("RtAudio : Failed to start Stream!");
+            exit(1);
+        }
+        balise("Rt Audio Stream started!");
+    }
     #endif
-    // allocate memory fot the fft_signal & fft out storage structures (arrays of doubles)
-    fft_signal = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*SAMPLE_SIZE);
-    fft_out = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*SAMPLE_SIZE);
 }
 
 void SoundAnalyzer::update(){
@@ -42,7 +112,11 @@ void SoundAnalyzer::update(){
         sampler.process_record_fake();
     }
     #else
-        sampler.process_record_fake();
+        if(b_NO_MUSIC){
+            sampler.process_record_fake(); // If NOMUSIC flag is true use fake music signal
+        }else{
+            sampler._process_record();  //else use analog recording
+        }
     #endif // LINUX_PC
     this->_filter_volume();
 
@@ -137,11 +211,9 @@ void SoundAnalyzer::_update_state(){
         case BEAT:
             if (_condition_for_analyis()){
                 
-                // If volume drops below threshold, go to BREAK
-                // if (volume_percentile(95) < THD_toBK){
                 if (frame.t_current_ms - t_last_beat > TEMPO_BEAT_BREAK){
                   state = BREAK;
-                }   //TODO switch to break when last beat since 1000 ms --> might be more reactive and less susceptible to lock the state in beat when break music is too loud
+                }
 
                 // If no beat is discernible 
                 else if (volume_ratio(95, 25) < THD_BTtoBS){
@@ -432,6 +504,4 @@ void SoundAnalyzer::fake_analysis(){
     }
 }
 
-/* TODO BETTER
-- wrap the FFT & read process to work with VECTORS !!!
-*/
+

@@ -13,6 +13,7 @@
 
 // Common Datatypes
 typedef time_t time_ms;
+typedef time_t time_us;
 
 enum simpleColor{
     black=0,

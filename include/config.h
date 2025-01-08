@@ -19,7 +19,7 @@ extern std::vector<std::string> vec_anim_id;
 
 
 // Music sampler
-    #define SAMPLE_SIZE 128      // record length (number of individual samples)
+    #define SAMPLE_SIZE 128      // record length (number of individual samples) //TODO rename BUFFER_LENGTH (a "sample" is an individual value within a Buffer)
     #define SAMPLING_FREQ 8000     // sampling frequency
     #define FREQ_BAND 2     // frequency band used to evaluate volume (low value for bass / high value for treble)
 
