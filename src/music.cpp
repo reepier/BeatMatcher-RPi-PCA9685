@@ -19,10 +19,13 @@
 #include <wiringPi.h>
 
 
+SoundAnalyzer sampler;
+
 #ifdef LINUX_PC // RT Audio -----------------------------------------------------------------
 typedef double SAMPLE_TYPE;
 #define FORMAT RTAUDIO_FLOAT64
 
+RtAudio adc;
 
 /** This function is called automatically every time rtaudio records a new sample buffer (the frequency depends on sample 
  * size and sampling frequency). It is asynchronous with the rest of the program that runs on a constant 40Hz "main loop". if the sampling
@@ -43,13 +46,14 @@ int rtaudio_callback_fcn(void * /*outputBuffer*/, void *inputBuffer, unsigned in
         sampler.fft_signal[i][REAL] = sample_i;
         sampler.fft_signal[i][IMAG] = 0;
     }
+
+    //TODO execute FFT here ?? 
+    sampler._process_record();  //else use analog recording
+
 }
 #endif
 
-SoundAnalyzer sampler;
-#ifdef LINUX_PC
-    RtAudio adc;
-#endif
+
 
 void SoundAnalyzer::init(){
     log(4, __FILE__, " ",__LINE__, " ", __func__);
@@ -115,7 +119,6 @@ void SoundAnalyzer::update(){
         if(b_NO_MUSIC){
             sampler.process_record_fake(); // If NOMUSIC flag is true use fake music signal
         }else{
-            sampler._process_record();  //else use analog recording
         }
     #endif // LINUX_PC
     this->_filter_volume();
