@@ -47,14 +47,24 @@ int rtaudio_callback_fcn(void * /*outputBuffer*/, void *inputBuffer, unsigned in
         sampler.fft_signal[i][IMAG] = 0;
     }
 
-    //TODO execute FFT here ?? 
+    //TODO mix together high sampling frequency with longer total buffer : each callback appends a small "subbuffer"
+    //  to the head of the total buffer (while removing a tail of the same length). Gaol is to have both a fast refresh rate + a better low frequency resolution (longer total sample)
+    // the higher bass resolution will comm with an induced delay though... to be tried & tetsed
+    
+    //TODO execute FFT here ??
     sampler._process_record();  //else use analog recording
 
 }
 #endif
 
 
-
+/**
+ * This function initializes the music-input module of this project :
+ * - allocates memory for the music samples
+ * - connects to the external ADCs (rasperrypi configuration)
+ * - connects to the intenal audio interface (PC configuration) & set it up
+ * - adapts its behavior to the platform & hardware configuration
+ * */
 void SoundAnalyzer::init(){
     log(4, __FILE__, " ",__LINE__, " ", __func__);
 
@@ -104,6 +114,9 @@ void SoundAnalyzer::init(){
     #endif
 }
 
+/**
+ * This function is the sequencer all the major subtasks of real time sound-analysis 
+ */
 void SoundAnalyzer::update(){
     log(4, __FILE__, " ",__LINE__, " ", __func__);
 
@@ -157,6 +170,13 @@ void SoundAnalyzer::_record(){
 }
 #endif
 
+/**
+ * This function : 
+ * - Removes DC component
+ * - Computes FFT
+ * - Extract the current volume for the desired frequency band
+ * - Update volume history 
+ */
 void SoundAnalyzer::_process_record(){
     log(4, __FILE__, " ",__LINE__, " ", __func__);
 
@@ -177,6 +197,10 @@ void SoundAnalyzer::_process_record(){
     }
 }
 
+/**
+ * This function :
+ * - uses the updated & processed audio record to detect Beats
+ */
 void SoundAnalyzer::_update_beats(){
     log(4, __FILE__, " ",__LINE__, " ", __func__);
 
@@ -201,10 +225,9 @@ void SoundAnalyzer::_update_beats(){
     }
 }
 
-    // activate phrase analyis enable flag every 32 samples (VOL_BUFF_SIZE/4) 
-
-    // if phrase analysis enable flag is TRUE, analyze & compute statistics
-
+/** 
+ * This function detects phrasing (Beat, Break...)
+*/
 void SoundAnalyzer::_update_state(){
     log(4, __FILE__, " ",__LINE__, " ", __func__);
 
@@ -212,7 +235,7 @@ void SoundAnalyzer::_update_state(){
     switch (state){     
         // If Beat Tracking
         case BEAT:
-            if (_condition_for_analyis()){
+            if (_condition_for_analyis()){ //TODO : update the analysis at every frame 
                 
                 if (frame.t_current_ms - t_last_beat > TEMPO_BEAT_BREAK){
                   state = BREAK;
@@ -261,6 +284,10 @@ void SoundAnalyzer::_update_state(){
         }
 }
 
+/**
+ * This function changes the beat threshold based on current averaged volume in order
+ * to adapt to a changing volume or frequency structure 
+ */
 void SoundAnalyzer::_update_beat_threshold(){
     log(4, __FILE__, " ",__LINE__, " ", __func__);
 
@@ -269,7 +296,12 @@ void SoundAnalyzer::_update_beat_threshold(){
         }
 }
 
-// compute filtered volume : the filtered is asymetrical, when volume goes up, the filter is more responsive than when volue goes down
+/**
+ * This funciton derivates a filtered volume (introduces a lag).
+ * The filter is asymetrical, when volume goes up, the filter is more responsive than when volue goes down. 
+ * It is designed to reduce the random noise in volume signal & create a decaying effect after each beat
+ * Without introducing to much delay delay in beat detection
+ * */ 
 void SoundAnalyzer::_filter_volume(){
     const double filter_weight_up = 0.02;
     const double filter_weight_down = 0.6;
@@ -297,7 +329,7 @@ float SoundAnalyzer::volume_percentile(int percentile){
 float SoundAnalyzer::volume_ratio(int num_percentile, int denom_percentile){
     return volume_percentile(num_percentile) / volume_percentile(denom_percentile);
 }
-/**Funciton that extract the maximum volume reached within the last <period> ms*/
+/**Function that extract the maximum volume reached within the last <period> ms*/
 int SoundAnalyzer::recent_maximum(int period){
     static const float max = VOL_BUFF_SIZE*1000.0/FRATE;    // memory is finit in size
     static const float min = 0;                             // cannot accept negative duration
@@ -352,6 +384,8 @@ bool SoundAnalyzer::_memory_overflow(){
 bool SoundAnalyzer::_memory_full(){
     return (v_memory.size() == VOL_BUFF_SIZE);
 }
+
+// TODO Analyze data at each frame rather than when thesse condiutions are met
 bool SoundAnalyzer::_condition_for_analyis(){
     return (_memory_full() && (cpt%(VOL_BUFF_SIZE/4) == 0));
 }
@@ -381,9 +415,6 @@ void SoundAnalyzer::_switch_to_state(states s){
 /**---------------------------------------------------------------
  * FAKE FUNCTIONS to emulate the music input
    ---------------------------------------------------------------*/
-
-
-
 
 const int beat_duration_ms = 60000/BPM;
 const int break_duration_ms = BREAKDuration * beat_duration_ms;
