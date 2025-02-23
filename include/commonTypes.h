@@ -15,15 +15,15 @@
 typedef time_t time_ms;
 typedef time_t time_us;
 
-enum simpleColor{
+enum simpleColor{ //TODO : create a desaturated version of each color
     black=0,
     red,
-    sodium,    //RGBW(255,10??,0,0)  --> deep orange, very red
+    sodium,    // very warm orange, very red
     orange,
     yellow,
     gold,
-    w_white,      // warmish white (defined by the spots)
-    c_white,     // cold flat white
+    w_white,     // warm white (defined by the spots)
+    c_white,     // cold white
     cyan,       
     blue,
     purple,
@@ -33,6 +33,14 @@ enum simpleColor{
     sevika_pink,
     hextech_cyan,
     shimmer_purple,
+    light_red,
+    light_cyan,
+    light_blue,
+    light_purple,
+    light_magenta,
+    light_pink,
+    light_green,
+
     last_color
 };
 const std::vector<std::string> colorName = {

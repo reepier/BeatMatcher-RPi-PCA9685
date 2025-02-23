@@ -87,17 +87,13 @@ DMX_vec Shehds_7x18W_buffer(const SpotFixture& spot){
 DMX_vec SpotFixture::buffer(){
     switch (this->type){
         case FunGen_RGBW_12x1W :
-            return FunGeneration_12x1W_buffer(*this);
-            break;
+            return FunGeneration_12x1W_buffer(*this);break;
         case Shehds_RGBWAU_10x8W :
-            return Shehds_10x8W_buffer(*this);
-            break;
+            return Shehds_10x8W_buffer(*this);break;
         case Shehds_RGBWAU_7x18W :
-            return Shehds_7x18W_buffer(*this);
-            break;
+            return Shehds_7x18W_buffer(*this);break;
         default:    // return a black vector
-            return DMX_vec(this->nCH, 0);
-            break;
+            return DMX_vec(this->nCH, 0);break;
     }
 }
 
@@ -512,196 +508,81 @@ void global_rack_init(){};
 
 DMX_vec FunGeneration_12x1W_RGBW(simpleColor c, int intensity){
     switch (c){
-    case black:
-        return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);
-        break;
-    case red:
-        return fcn::RGBW_norm(DMX_vec{255,0,0,0}, intensity);
-        break;
-    case green:
-        return fcn::RGBW_norm(DMX_vec{0,255,0,0}, 161.0/255*intensity);
-        break;
-    case blue:
-        return fcn::RGBW_norm(DMX_vec{0,0,255,0}, 190.0/255*intensity);
-        break;
-    case yellow:
-        return fcn::RGBW_norm(DMX_vec{255,90,0,0}, intensity);
-        break;
-    case orange:
-        return fcn::RGBW_norm(DMX_vec{255,40,0,0}, intensity);
-        break;
-    case sodium:
-        return fcn::RGBW_norm(DMX_vec{255,20,0,0}, intensity);
-        break;
-    case cyan:
-        return fcn::RGBW_norm(DMX_vec{0,219,255,0}, 180.0/255*intensity);
-        break;
-    case purple:
-        return fcn::RGBW_norm(DMX_vec{150,0,255,0}, intensity);
-        break;    
-    case magenta:
-        return fcn::RGBW_norm(DMX_vec{255,0,240,0}, intensity);
-        break;
-    case pink:
-        return fcn::RGBW_norm(DMX_vec{255,0,100,0}, intensity);
-        break;
-    case w_white:
-        return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);
-        break;
-    case c_white:
-        return fcn::RGBW_norm(DMX_vec{255,230,213,255}, 180.0/255*intensity);
-        break;
-    case gold:
-        return fcn::RGBW_norm(DMX_vec{255,40,0,100}, intensity);
-        break;
-    case sevika_pink :
-        return fcn::RGBW_norm(DMX_vec{255,0,11,0}, intensity);
-        break;
-    case hextech_cyan :
-        return fcn::RGBW_norm(DMX_vec{0,153,255,0}, intensity);
-        break;
-    case shimmer_purple :
-        return fcn::RGBW_norm(DMX_vec{245,0,255,0}, intensity);
-        break;
-    default:
-        return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);
-        break;
+    case black:           return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);break;
+    case red:             return fcn::RGBW_norm(DMX_vec{255,0,0,0}, intensity);break;
+    case green:           return fcn::RGBW_norm(DMX_vec{0,255,0,0}, 161.0/255*intensity);break;
+    case blue:            return fcn::RGBW_norm(DMX_vec{0,0,255,0}, 190.0/255*intensity);break;
+    case yellow:          return fcn::RGBW_norm(DMX_vec{255,90,0,0}, intensity);break;
+    case orange:          return fcn::RGBW_norm(DMX_vec{255,40,0,0}, intensity);break;
+    case sodium:          return fcn::RGBW_norm(DMX_vec{255,20,0,0}, intensity);break;
+    case cyan:            return fcn::RGBW_norm(DMX_vec{0,219,255,0}, 180.0/255*intensity);break;
+    case purple:          return fcn::RGBW_norm(DMX_vec{150,0,255,0}, intensity);break;    
+    case magenta:         return fcn::RGBW_norm(DMX_vec{255,0,240,0}, intensity);break;
+    case pink:            return fcn::RGBW_norm(DMX_vec{255,0,100,0}, intensity);break;
+    case w_white:         return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);break;
+    case c_white:         return fcn::RGBW_norm(DMX_vec{255,230,213,255}, 180.0/255*intensity);break;
+    case gold:            return fcn::RGBW_norm(DMX_vec{255,40,0,100}, intensity);break;
+    case sevika_pink:     return fcn::RGBW_norm(DMX_vec{255,0,11,0}, intensity);break;
+    case hextech_cyan:    return fcn::RGBW_norm(DMX_vec{0,153,255,0}, intensity);break;
+    case shimmer_purple:  return fcn::RGBW_norm(DMX_vec{245,0,255,0}, intensity);break;
+    default:              return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);break;
     }
 }
 
 DMX_vec Shehds_10x8W_RGBW(simpleColor c, int intensity){
     switch (c){
-        case black:
-            return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);
-            break;
-        case red:
-            return fcn::RGBW_norm(DMX_vec{255,0,0,0}, intensity);
-            break;
-        case green:
-            return fcn::RGBW_norm(DMX_vec{0,255,0,0}, 161.0/255*intensity);
-            break;
-        case blue:
-            return fcn::RGBW_norm(DMX_vec{0,0,255,0}, 190.0/255*intensity);
-            break;
-        case yellow:
-            return fcn::RGBW_norm(DMX_vec{255,90,0,0}, intensity);
-            break;
-        case orange:
-            return fcn::RGBW_norm(DMX_vec{255,40,0,0}, intensity);
-            break;
-        case sodium:
-            return fcn::RGBW_norm(DMX_vec{255,20,0,0}, intensity);
-            break;
-        case cyan:
-            return fcn::RGBW_norm(DMX_vec{0,219,255,0}, 180.0/255*intensity);
-            break;
-        case purple:
-            return fcn::RGBW_norm(DMX_vec{150,0,255,0}, intensity);
-            break;    
-        case magenta:
-            return fcn::RGBW_norm(DMX_vec{255,0,240,0}, intensity);
-            break;
-        case pink:
-            return fcn::RGBW_norm(DMX_vec{255,0,100,0}, intensity);
-            break;
-        case w_white:
-            return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);
-            break;
-        case c_white:
-        return fcn::RGBW_norm(DMX_vec{255,230,213,255}, 180.0/255*intensity);
-        break;
-        case gold:
-            return fcn::RGBW_norm(DMX_vec{255,40,0,100}, intensity);
-            break;
-        case sevika_pink :
-            return fcn::RGBW_norm(DMX_vec{255,0,11,0}, intensity);
-            break;
-        case hextech_cyan :
-            return fcn::RGBW_norm(DMX_vec{0,153,255,0}, intensity);
-            break;
-        case shimmer_purple :
-            return fcn::RGBW_norm(DMX_vec{245,0,255,0}, intensity);
-            break;
-        default:
-            return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);
-            break;
+        case black:             return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);break;
+        case red:               return fcn::RGBW_norm(DMX_vec{255,0,0,0}, intensity);break;
+        case green:             return fcn::RGBW_norm(DMX_vec{0,255,0,0}, 161.0/255*intensity);break;
+        case blue:              return fcn::RGBW_norm(DMX_vec{0,0,255,0}, 190.0/255*intensity);break;
+        case yellow:            return fcn::RGBW_norm(DMX_vec{255,90,0,0}, intensity);break;
+        case orange:            return fcn::RGBW_norm(DMX_vec{255,40,0,0}, intensity);break;
+        case sodium:            return fcn::RGBW_norm(DMX_vec{255,20,0,0}, intensity);break;
+        case cyan:              return fcn::RGBW_norm(DMX_vec{0,219,255,0}, 180.0/255*intensity);break;
+        case purple:            return fcn::RGBW_norm(DMX_vec{150,0,255,0}, intensity);break;    
+        case magenta:           return fcn::RGBW_norm(DMX_vec{255,0,240,0}, intensity);break;
+        case pink:              return fcn::RGBW_norm(DMX_vec{255,0,100,0}, intensity);break;
+        case w_white:           return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);break;
+        case c_white:           return fcn::RGBW_norm(DMX_vec{255,230,213,255}, 180.0/255*intensity);break;
+        case gold:              return fcn::RGBW_norm(DMX_vec{255,40,0,100}, intensity);break;
+        case sevika_pink:       return fcn::RGBW_norm(DMX_vec{255,0,11,0}, intensity);break;
+        case hextech_cyan:      return fcn::RGBW_norm(DMX_vec{0,153,255,0}, intensity);break;
+        case shimmer_purple:    return fcn::RGBW_norm(DMX_vec{245,0,255,0}, intensity);break;
+        default:                return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);break;
     }
 }
 
 DMX_vec Shehds_7x18W_RGBWAU(simpleColor c, int intensity){
     switch (c){
-        case black:
-            return fcn::RGBW_norm(DMX_vec{0,0,0,0,0,0}, -1);
-            break;
-        case red:
-            return fcn::RGBW_norm(DMX_vec{255,0,0,0,0,0}, -1);
-            break;
-        case green:
-            return fcn::RGBW_norm(DMX_vec{4,255,0,0,0,0}, -1);
-            break;
-        case blue:
-            return fcn::RGBW_norm(DMX_vec{0,5,255,0,0,0}, -1);
-            break;
-        case yellow:
-            return fcn::RGBW_norm(DMX_vec{255,126,0,0,70,0}, -1);
-            break;
-        case orange:
-            return fcn::RGBW_norm(DMX_vec{255,47,0,0,255,0}, -1);
-            break;
-        case sodium:
-            return fcn::RGBW_norm(DMX_vec{255,20,0,0,255,0}, -1);
-            break;
-        case cyan:
-            return fcn::RGBW_norm(DMX_vec{0,233,255,0,0,0}, -1);
-            break;
-        case purple:
-            return fcn::RGBW_norm(DMX_vec{96,0,255,0,0,255}, -1);
-            break;    
-        case magenta:
-            return fcn::RGBW_norm(DMX_vec{159,0,255,0,0,255}, -1);
-            break;
-        case pink:
-            return fcn::RGBW_norm(DMX_vec{255,0,137,0,0,0}, -1);
-            break;
-        case w_white:
-            return fcn::RGBW_norm(DMX_vec{221,104,0,255,167,0}, -1);
-            break;
-        case c_white:
-        return fcn::RGBW_norm(DMX_vec{255,227,200,255,0,0}, -1);
-            break;
-        case gold:
-            return fcn::RGBW_norm(DMX_vec{255,58,0,49,134,0}, -1);
-            break;
-        case sevika_pink :
-            return fcn::RGBW_norm(DMX_vec{255,0,27,0,0,0}, -1);
-            break;
-        case hextech_cyan :
-            return fcn::RGBW_norm(DMX_vec{0,153,255,0,0,0}, -1);
-            break;
-        case shimmer_purple :
-            return fcn::RGBW_norm(DMX_vec{190,0,255,0,0,0}, -1);
-            break;
-        default:
-            return fcn::RGBW_norm(DMX_vec{0,0,0,0,0,0}, -1);
-            break;
+        case black:          return fcn::RGBW_norm(DMX_vec{0,0,0,0,0,0}, -1);break;
+        case red:            return fcn::RGBW_norm(DMX_vec{255,0,0,0,0,0}, -1);break;
+        case green:          return fcn::RGBW_norm(DMX_vec{4,255,0,0,0,0}, -1);break;
+        case blue:           return fcn::RGBW_norm(DMX_vec{0,5,255,0,0,0}, -1); break;
+        case yellow:         return fcn::RGBW_norm(DMX_vec{255,126,0,0,70,0}, -1);break;
+        case orange:         return fcn::RGBW_norm(DMX_vec{255,47,0,0,255,0}, -1);break;
+        case sodium:         return fcn::RGBW_norm(DMX_vec{255,20,0,0,255,0}, -1);break;
+        case cyan:           return fcn::RGBW_norm(DMX_vec{0,233,255,0,0,0}, -1);break;
+        case purple:         return fcn::RGBW_norm(DMX_vec{96,0,255,0,0,255}, -1);break;    
+        case magenta:        return fcn::RGBW_norm(DMX_vec{159,0,255,0,0,255}, -1);break;
+        case pink:           return fcn::RGBW_norm(DMX_vec{255,0,137,0,0,0}, -1);break;
+        case w_white:        return fcn::RGBW_norm(DMX_vec{221,104,0,255,167,0}, -1);break;
+        case c_white:        return fcn::RGBW_norm(DMX_vec{255,227,200,255,0,0}, -1);break;
+        case gold:           return fcn::RGBW_norm(DMX_vec{255,58,0,49,134,0}, -1);break;
+        case sevika_pink:    return fcn::RGBW_norm(DMX_vec{255,0,27,0,0,0}, -1);break;
+        case hextech_cyan:   return fcn::RGBW_norm(DMX_vec{0,153,255,0,0,0}, -1);break;
+        case shimmer_purple: return fcn::RGBW_norm(DMX_vec{190,0,255,0,0,0}, -1);break;
+        default:             return fcn::RGBW_norm(DMX_vec{0,0,0,0,0,0}, -1);break;
     }
 }
 
 
 DMX_vec SpotFixture::RGBW(simpleColor c, int intensity){
     switch (this->type){
-        case FunGen_RGBW_12x1W :
-            return FunGeneration_12x1W_RGBW(c, intensity);
-            break;
-        case Shehds_RGBWAU_10x8W :
-            return Shehds_10x8W_RGBW(c, intensity);
-            break;
-        case Shehds_RGBWAU_7x18W :
-            return Shehds_7x18W_RGBWAU(c, intensity);
-            break;
+        case FunGen_RGBW_12x1W :    return FunGeneration_12x1W_RGBW(c, intensity);break;
+        case Shehds_RGBWAU_10x8W :  return Shehds_10x8W_RGBW(c, intensity);break;
+        case Shehds_RGBWAU_7x18W :  return Shehds_7x18W_RGBWAU(c, intensity);break;
         
-        default :
-            break;
+        default :    break;
     }
 }
 
@@ -720,57 +601,23 @@ DMX_vec SpotRack::RGBW(simpleColor c, int intensity){
 
     switch (c)
     {
-    case black:
-        return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);
-        break;
-    case red:
-        return fcn::RGBW_norm(DMX_vec{255,0,0,0}, intensity);
-        break;
-    case green:
-        return fcn::RGBW_norm(DMX_vec{0,255,0,0}, 161.0/255*intensity);
-        break;
-    case blue:
-        return fcn::RGBW_norm(DMX_vec{0,0,255,0}, 190.0/255*intensity);
-        break;
-    case yellow:
-        return fcn::RGBW_norm(DMX_vec{255,90,0,0}, intensity);
-        break;
-    case orange:
-        return fcn::RGBW_norm(DMX_vec{255,40,0,0}, intensity);
-        break;
-    case sodium:
-        return fcn::RGBW_norm(DMX_vec{255,20,0,0}, intensity);
-        break;
-    case cyan:
-        return fcn::RGBW_norm(DMX_vec{0,219,255,0}, 180.0/255*intensity);
-        break;
-    case purple:
-        return fcn::RGBW_norm(DMX_vec{150,0,255,0}, intensity);
-        break;    
-    case magenta:
-        return fcn::RGBW_norm(DMX_vec{255,0,240,0}, intensity);
-        break;
-    case pink:
-        return fcn::RGBW_norm(DMX_vec{255,0,100,0}, intensity);
-        break;
-    case w_white:
-        return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);
-        break;
-    case gold:
-        return fcn::RGBW_norm(DMX_vec{255,40,0,100}, intensity);
-        break;
-    case sevika_pink :
-        return fcn::RGBW_norm(DMX_vec{255,0,11,0}, intensity);
-        break;
-    case hextech_cyan :
-        return fcn::RGBW_norm(DMX_vec{0,153,255,0}, intensity);
-        break;
-    case shimmer_purple :
-        return fcn::RGBW_norm(DMX_vec{245,0,255,0}, intensity);
-        break;
-    default:
-        return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);
-        break;
+    case black:           return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);break;
+    case red:             return fcn::RGBW_norm(DMX_vec{255,0,0,0}, intensity);break;
+    case green:           return fcn::RGBW_norm(DMX_vec{0,255,0,0}, 161.0/255*intensity);break;
+    case blue:            return fcn::RGBW_norm(DMX_vec{0,0,255,0}, 190.0/255*intensity);break;
+    case yellow:          return fcn::RGBW_norm(DMX_vec{255,90,0,0}, intensity);break;
+    case orange:          return fcn::RGBW_norm(DMX_vec{255,40,0,0}, intensity);break;
+    case sodium:          return fcn::RGBW_norm(DMX_vec{255,20,0,0}, intensity);break;
+    case cyan:            return fcn::RGBW_norm(DMX_vec{0,219,255,0}, 180.0/255*intensity);break;
+    case purple:          return fcn::RGBW_norm(DMX_vec{150,0,255,0}, intensity);break;    
+    case magenta:         return fcn::RGBW_norm(DMX_vec{255,0,240,0}, intensity);break;
+    case pink:            return fcn::RGBW_norm(DMX_vec{255,0,100,0}, intensity);break;
+    case w_white:         return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);break;
+    case gold:            return fcn::RGBW_norm(DMX_vec{255,40,0,100}, intensity);break;
+    case sevika_pink :    return fcn::RGBW_norm(DMX_vec{255,0,11,0}, intensity);break;
+    case hextech_cyan :   return fcn::RGBW_norm(DMX_vec{0,153,255,0}, intensity);break;
+    case shimmer_purple:  return fcn::RGBW_norm(DMX_vec{245,0,255,0}, intensity);break;
+    default:              return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);break;
     }
 }
 
