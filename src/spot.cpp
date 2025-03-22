@@ -13,7 +13,19 @@ SpotFixture spot_3(FunGen_RGBW_12x1W, 89, 8,       "Spot 3 (@90)",     3);
 SpotFixture spot_4(FunGen_RGBW_12x1W, 97,  8,      "Spot 4 (@98)",     4);     
 SpotFixture spot_5(FunGen_RGBW_12x1W, 105,  8,     "Spot 5 (@106)",    5);     //Salon
 SpotFixture spot_6(FunGen_RGBW_12x1W, 113,  8,     "Spot 6 (@114)",    6);
+SpotFixture spot_1(FunGen_RGBW_12x1W, 73, 8,       "Spot 1 (@74)",     1);     
+SpotFixture spot_2(FunGen_RGBW_12x1W, 81,  8,      "Spot 2 (@82)",     2);     //Salon
+SpotFixture spot_3(FunGen_RGBW_12x1W, 89, 8,       "Spot 3 (@90)",     3);     
+SpotFixture spot_4(FunGen_RGBW_12x1W, 97,  8,      "Spot 4 (@98)",     4);     
+SpotFixture spot_5(FunGen_RGBW_12x1W, 105,  8,     "Spot 5 (@106)",    5);     //Salon
+SpotFixture spot_6(FunGen_RGBW_12x1W, 113,  8,     "Spot 6 (@114)",    6);
 
+SpotFixture spot_7(FunGen_RGBW_12x1W, 121, 8,  "Spot 7 (@122)",    7);     //Salon
+SpotFixture spot_8(FunGen_RGBW_12x1W, 129, 8,  "Spot 8 (@130)",    8);     //Salon
+SpotFixture spot_9(FunGen_RGBW_12x1W, 137, 8,  "Spot 9 (@138)",    9);  
+SpotFixture spot_10(FunGen_RGBW_12x1W, 145, 8, "Spot 10 (@146)",   10);
+SpotFixture spot_11(FunGen_RGBW_12x1W, 153, 8, "Spot 11 (@154)",   11);
+SpotFixture spot_12(FunGen_RGBW_12x1W, 161, 8, "Spot 12 (@162)",   12);
 SpotFixture spot_7(FunGen_RGBW_12x1W, 121, 8,  "Spot 7 (@122)",    7);     //Salon
 SpotFixture spot_8(FunGen_RGBW_12x1W, 129, 8,  "Spot 8 (@130)",    8);     //Salon
 SpotFixture spot_9(FunGen_RGBW_12x1W, 137, 8,  "Spot 9 (@138)",    9);  
