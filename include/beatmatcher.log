@@ -1231,3 +1231,73 @@
 [13576.7]  Init. of Spot 10 (@146) / Pixel size : 4
 [13576.7]  Init. of Spot 11 (@154) / Pixel size : 4
 [13576.7]  Init. of Spot 12 (@162) / Pixel size : 4
+[8646.49]     src/main.cpp 255 main
+[8646.49]     Balise : Initialization...
+[8646.49]     Balise : Init. ola...
+[8646.49]     Balise : Init. Sampler...
+[8646.49]     src/music.cpp 69 init
+[8646.49]     Balise : Init Animator...
+[8646.49]     src/animator.cpp init
+[8646.49]     src/animator.cpp 349 activate_none
+[8646.49]     src/spot.cpp 659 init Front Rack FR.0
+[8646.49]     src/animator.cpp 349 activate_none
+[8646.49]     src/spot.cpp 659 init Back Rack BR.0
+[8646.49]     Balise : Init. fixtures...
+[8646.49]     Balise : Initializing Front Rack
+[8646.49]     src/animator.cpp 349 activate_none
+[8646.49]     src/spot.cpp 659 init Front Rack FR.0
+[8646.49]     Balise : Init. Debug...
+[8646.49]     src/debug.cpp 40 init_display
+[8646.49]     Balise : Initalisation terminated with success !
+[8646.49]     src/main.cpp 267 main
+[8646.49]     Balise : ----------------------------Start new frame...
+[8650.05]     Balise : Record & process sample...
+[8650.05]     src/music.cpp 121 update
+[8650.05]     src/music.cpp 205 _update_beats
+[8650.05]     src/music.cpp 232 _update_state
+[8650.05]     src/music.cpp 292 _update_beat_threshold
+[8650.05]     Balise : Run animator...
+[8650.05]     Balise : Run animator normal update
+[8650.05]     Balise : src/animator.cpp 245animator palette update
+[8650.05]  Front Rack activate_autocolor
+[8650.05]     src/animator.cpp 349 activate_none
+[8650.05]     src/spot.cpp 659 init Front Rack FR.0
+[8650.05]   Candidates listed 
+[8808.19]     src/main.cpp 255 main
+[8808.19]     Balise : Initialization...
+[8808.19]     Balise : Init. ola...
+[8808.19]     Balise : Init. Sampler...
+[8808.19]     src/music.cpp 69 init
+[8808.19]     Balise : Init Animator...
+[8808.19]     src/animator.cpp init
+[8808.19]     src/animator.cpp 349 activate_none
+[8808.19]     src/spot.cpp 659 init Front Rack FR.0
+[8808.19]     src/animator.cpp 349 activate_none
+[8808.19]     src/spot.cpp 659 init Back Rack BR.0
+[8808.19]     Balise : Init. fixtures...
+[8808.19]     Balise : Initializing Front Rack
+[8808.19]     src/animator.cpp 349 activate_none
+[8808.19]     src/spot.cpp 659 init Front Rack FR.0
+[8808.19]     Balise : Init. Debug...
+[8808.19]     src/debug.cpp 40 init_display
+[8808.19]     Balise : Initalisation terminated with success !
+[8808.19]     src/main.cpp 267 main
+[8808.19]     Balise : ----------------------------Start new frame...
+[8810.07]     Balise : Record & process sample...
+[8810.07]     src/music.cpp 121 update
+[8810.07]     src/music.cpp 205 _update_beats
+[8810.07]     src/music.cpp 232 _update_state
+[8810.07]     src/music.cpp 292 _update_beat_threshold
+[8810.07]     Balise : Run animator...
+[8810.07]     Balise : Run animator normal update
+[8810.07]     Balise : src/animator.cpp 245animator palette update
+[8810.07]  Front Rack activate_autocolor
+[8810.07]     src/animator.cpp 349 activate_none
+[8810.07]     src/spot.cpp 659 init Front Rack FR.0
+[8901.07]     src/main.cpp 255 main
+[8901.07]     Balise : Initialization...
+[8901.07]     Balise : Init. ola...
+[8901.07]     Balise : Init. Sampler...
+[8901.07]     src/music.cpp 69 init
+[8901.07]     Balise : Init Animator...
+[8901.07]     src/animator.cpp init

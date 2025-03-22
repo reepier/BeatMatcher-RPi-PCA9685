@@ -288,6 +288,7 @@ class AnimationManager{
 
     void random_update();
     void palette_update();
+    void autocolor_update();
     void show_update();
     bool test_animation();
     bool controled_animator(const DMX_vec);
@@ -298,7 +299,6 @@ class AnimationManager{
 };
 
 extern AnimationManager animator;
-
 
 
 /** ----------------------------------------------------------
@@ -339,8 +339,10 @@ class BaseFixture{
     bool activate_by_index(int);
     bool activate_random(bool include_black = true);
     bool activate_by_ID(std::string);
+    bool activate_autocolor(color_vec&);
     virtual bool activate_by_color(color_vec, AnimationType arg_type = any); //additionnal argument to orient the activation toward a leading or backing aniation
     bool activate_by_ptr(BaseAnimation*);
+    bool activate_by_ptr(BaseAnimation*, const color_vec&);
     
     //DMX output
     virtual int get_address() = 0;
@@ -372,17 +374,77 @@ class BaseAnimation{
     color_vec color_palette;            // lists the colors used in the animation (initialized by constructor)
     int priority = 1;                  // weight on the priority list (animations with higher priority will be have higher chance of activation)
     uint8_t master = 255;
-    
+
+    bool autocolor = false;                       // defines wether the animation has predefiend color or autocolor
+    color_vec authorized_color = {};              // list of authorized colors for autocolor (empty means all color OK==authorized)
+    color_vec unauthorized_color = {};            // list of unauthorized colors for autocolor (empty means al color OK==authorized)
+    color_vec* auto_color_palette = nullptr;      //pointer to the color palette used for automatic color definition (allows the use of multiple color palettes in the program) 
+
+    //Base constructor
+    BaseAnimation(){};
+    BaseAnimation(std::string d, std::string i, AnimationType typ) : description(d),  id(i), type(typ) {};
+
     bool is_monochrome(){return (color_palette.size() == 1);};
     bool is_first_frame(){return frame_cpt==0;};
+
+    //determines whether or not the animation is compatible with autocolor & a specific color palette
+    /*The criteria shall be simple / generic enough to be applicable to every fixture / animations :
+      - is autocolor true ? 
+      - do authorized color include all? some? of the passed color palette
+      - are there any? too many? unauthorized color in the palette */
+    virtual bool is_autocolor_compatible(const color_vec& palette){return this->autocolor;} 
     
+
     virtual void new_frame(){
       this->frame_cpt++;
     }
     virtual void init(){
       this->t_animation_start_ms = frame.t_current_ms;
       this->frame_cpt = 0;
-    };
+    }
+     
+     
+    /** //TODO :
+     * until now, every animation must be defined with a (very) specific set of (color, shape, time...) arguments. 
+     * Basically every (interesting) parameter of the animation must be defined at construction. This is very time
+     * consuming & inefficient since color are also defined in the color palette...
+     * 
+     * GOAL : use the current color palette (a selection of 1,2 or 3 matching colors) to set the animation colors at initialization.
+     * This way,  the animation declaration only sets the cinematic & dynamic parameters (speed, shape, periods...), which will drastically 
+     * reduce the volume of objects to declare
+     * The main goal here is to simplify the configuraiton process. Indeed the current solution presents drawbacks :
+     * - Show configuration is lengthy (creating new color means adding many lines to every fixture ini fcn)
+     * - Multicolor animations are even more time consuming (more color combinations available)
+     * -  
+     * 
+     * Limits :
+     * The correct color finding algorithm must be found to avoid undiesrable effects :
+     * - Bad color rendering when using complex colors for low intensity (i.e. Gold color for PAR LED background illumination)
+     * 
+     * Functionalities :
+     * - the color definition happens in the Animation::init() function
+     * - the color definition is based on the current color palette (a global variable ?)
+     * - authorized colors can be defined manually (or not) 
+     * - the color palette will then be defined with the following rules in mind :
+     *    - color order matters : the first color will be used for dynamic/flash/bursts elements while the next for background/fix/slow elements
+     * 
+     * - display the init colors in the output display instead of Animation.descr or update animation.descr at animation.init() (simpler ?)
+     * 
+     * Options :
+     * - The nummber of color (1, 2 more?) or a range of color number could be set at animation construction (to allow or restrict
+     *  multicolor mode animation per animation)
+     * - Could be an opportunity to upgrade the color palette : instead of just declaring an array of colors, colors could be assigned for $
+     * particular roles (flash, background, both, or else...)   
+     *
+     * 
+     * */
+
+
+    virtual void init(const color_vec&){};
+
+  
+ 
+
     
     void update_palette(color_vec colors){
       for (color_vec::iterator new_c = colors.begin(); new_c != colors.end(); new_c++){

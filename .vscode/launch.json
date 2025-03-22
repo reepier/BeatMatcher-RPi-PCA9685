@@ -10,6 +10,7 @@
             "request": "launch",
             "program": "${workspaceFolder}/bin/beatmatcher",
             // "program": "${workspaceFolder}/bin/test",
+            "args": ["--nomusic"],
             // "args": ["--animation","BR2.1.8"],
             // "args" : ["--animation", "RED.2.1.1"],
             // "args" : ["--balise"],

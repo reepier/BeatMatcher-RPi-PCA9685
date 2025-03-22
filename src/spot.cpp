@@ -7,16 +7,16 @@
 using namespace std;
 
 // Original Fun Generation spots
-SpotFixture spot_1(FunGen_RGBW_12x1W, 73, 8,       "Spot 9 (@74)",     1);     
-SpotFixture spot_2(FunGen_RGBW_12x1W, 81,  8,      "Spot 1 (@82)",     2);     
-SpotFixture spot_3(FunGen_RGBW_12x1W, 89, 8,       "Spot 8 (@90)",     3);     
-SpotFixture spot_4(FunGen_RGBW_12x1W, 97,  8,      "Spot 3 (@98)",     4);     
-SpotFixture spot_5(FunGen_RGBW_12x1W, 105,  8,     "Spot 2 (@106)",    5);     
-SpotFixture spot_6(FunGen_RGBW_12x1W, 113,  8,     "Spot 4 (@114)",    6);
+SpotFixture spot_1(FunGen_RGBW_12x1W, 73, 8,       "Spot 1 (@74)",     1);     
+SpotFixture spot_2(FunGen_RGBW_12x1W, 81,  8,      "Spot 2 (@82)",     2);     //Salon
+SpotFixture spot_3(FunGen_RGBW_12x1W, 89, 8,       "Spot 3 (@90)",     3);     
+SpotFixture spot_4(FunGen_RGBW_12x1W, 97,  8,      "Spot 4 (@98)",     4);     
+SpotFixture spot_5(FunGen_RGBW_12x1W, 105,  8,     "Spot 5 (@106)",    5);     //Salon
+SpotFixture spot_6(FunGen_RGBW_12x1W, 113,  8,     "Spot 6 (@114)",    6);
 
-SpotFixture spot_7(FunGen_RGBW_12x1W, 121, 8,  "Spot 5 (@122)",    7);     
-SpotFixture spot_8(FunGen_RGBW_12x1W, 129, 8,  "Spot 6 (@130)",    8);     
-SpotFixture spot_9(FunGen_RGBW_12x1W, 137, 8,  "Spot 7 (@138)",    9);  
+SpotFixture spot_7(FunGen_RGBW_12x1W, 121, 8,  "Spot 7 (@122)",    7);     //Salon
+SpotFixture spot_8(FunGen_RGBW_12x1W, 129, 8,  "Spot 8 (@130)",    8);     //Salon
+SpotFixture spot_9(FunGen_RGBW_12x1W, 137, 8,  "Spot 9 (@138)",    9);  
 SpotFixture spot_10(FunGen_RGBW_12x1W, 145, 8, "Spot 10 (@146)",   10);
 SpotFixture spot_11(FunGen_RGBW_12x1W, 153, 8, "Spot 11 (@154)",   11);
 SpotFixture spot_12(FunGen_RGBW_12x1W, 161, 8, "Spot 12 (@162)",   12);
@@ -46,8 +46,10 @@ SpotFixture spot_20(Shehds_RGBWAU_7x18W, 239, 10, "Spot 20 (@240)", 20);
 / ----------------------------------------------------------------------- */
 
 DMX_vec FunGeneration_12x1W_buffer(const SpotFixture& spot){
-    // return DMX_vec{    (uint8_t)((double)this->MASTER_DIMMER * this->active_animation->master / 255),
-    return DMX_vec{      (uint8_t) (spot.master/255.0 * spot.rack->active_animation->master),
+    //TODO protect every fixture.buffer function from null active_animation pointer
+    uint8_t active_animation_master = 255; //default value
+    if (spot.rack != nullptr && spot.rack->active_animation != nullptr){active_animation_master = spot.rack->active_animation->master;}
+    return DMX_vec{      (uint8_t) (spot.master/255.0 * active_animation_master),
                          spot.pixel[R],
                          spot.pixel[G],
                          spot.pixel[B],
@@ -59,8 +61,9 @@ DMX_vec FunGeneration_12x1W_buffer(const SpotFixture& spot){
 }
 
 DMX_vec Shehds_10x8W_buffer(const SpotFixture& spot){
-    // return DMX_vec{    (uint8_t)((double)this->MASTER_DIMMER * this->active_animation->master / 255),
-    return DMX_vec{      (uint8_t) (spot.master/255.0 * spot.rack->active_animation->master),
+    uint8_t active_animation_master = 255; //default value
+    if (spot.rack != nullptr && spot.rack->active_animation != nullptr){active_animation_master = spot.rack->active_animation->master;}
+    return DMX_vec{      (uint8_t) (spot.master/255.0 * active_animation_master),
                          spot.pixel[R],
                          spot.pixel[G],
                          spot.pixel[B],
@@ -72,7 +75,9 @@ DMX_vec Shehds_10x8W_buffer(const SpotFixture& spot){
 }
 
 DMX_vec Shehds_7x18W_buffer(const SpotFixture& spot){
-    return DMX_vec{(uint8_t) (spot.master/255.0 * spot.rack->active_animation->master),
+    uint8_t active_animation_master = 255; //default value
+    if (spot.rack != nullptr && spot.rack->active_animation != nullptr){active_animation_master = spot.rack->active_animation->master;}
+    return DMX_vec{(uint8_t) (spot.master/255.0 * active_animation_master),
                    spot.pixel[R],
                    spot.pixel[G],
                    spot.pixel[B],
@@ -108,10 +113,15 @@ DMX_vec SpotFixture::buffer(){
 
 / ----------------------------------------------------------------------- */
 // SpotRack front_rack(spot_vec{&spot_1, &spot_2, &spot_3, &spot_4}, "Front Rack", 1);
-SpotRack front_rack(spot_vec{&spot_7, &spot_8, &spot_9, &spot_10, &spot_11, &spot_12}, "Front Rack", 1);
+// SpotRack front_rack(spot_vec{&spot_7, &spot_8, &spot_9, &spot_10, &spot_11, &spot_12}, "Front Rack", 1);
 // SpotRack back_rack(spot_vec{&spot_5, &spot_6, &spot_7, &spot_8, &spot_9}, "Back Rack", 2);
-SpotRack back_rack(spot_vec{&spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6}, "Back Rack", 2);
+// SpotRack back_rack(spot_vec{&spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6}, "Back Rack", 2);
 SpotRack back_rack2(spot_vec{&spot_13, &spot_14, &spot_15, &spot_16, &spot_17, &spot_18, &spot_19, &spot_20}, "SHEHDS Rack 2", 3);
+
+/** Config Salon */
+SpotRack front_rack(spot_vec{&spot_2, &spot_5, &spot_7, &spot_8}, "Front Rack", 1);
+SpotRack back_rack(spot_vec{&spot_1, &spot_3, &spot_4, &spot_6}, "Back Rack", 2);
+
 
 // SpotRack global_rack(spot_vec{&spot_1,&spot_2,&spot_3,&spot_4,&spot_5,&spot_6,&spot_7,&spot_8,&spot_9,&spot_10,&spot_11,&spot_12}, "Global Rack", 1);
 
@@ -141,7 +151,7 @@ void front_rack_init(){
     // Animation 1 : Backgrnd color + random soft flashes
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,         black,       8000, 1000,   " ", "FR.0", backer, 0));
     
-
+/*
     // Animation 1 : Random Bursts of color
 #if SHOW_INTENSITY == 1 or SHOW_INTENSITY == 0 
     // gaussian bursts (short & slow) --> to be used as backer animation with LED (or else)
@@ -293,6 +303,10 @@ void front_rack_init(){
     // front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    color_vec{sevika_pink,hextech_cyan}, square, 500, 1000,     "slow hextech sevika chaser",  "FR.3.8", leader, 2));
     // front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    color_vec{sevika_pink,hextech_cyan}, square, 100, 200,     "slow hextech sevika chaser",   "FR.3.7", leader, 2));
     // front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    color_vec{sevika_pink,hextech_cyan}, square, 100, 200,     "slow hextech sevika chaser",   "FR.3.7", leader, 2));
+
+
+/** TESTS & DEV */
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, "Flash animation with Autocolor", "FR.0.0.1", any));
 
     front_rack.activate_none();
 };
@@ -855,10 +869,26 @@ void SpotRackAnimation3::new_frame(){
 */
 void SpotRackAnimation4::init(){
     BaseAnimation::init();
+    // Resets spots values (pixel & master) to clear any remainder of the previous active animation
     this->fixture->reset_spots();
-    for (auto spot : this->fixture->spots){
-        spot->master = this->master;
+    SpotRackAnimation4::init();
+
+}
+
+// Special init() function for automatic color definition
+void SpotRackAnimation4::init(const color_vec& palette){
+    BaseAnimation::init();
+
+    // assign front & back color based on passed color palette color_vec&
+    color_vec color_palette = palette;
+    
+    this->flash_color = color_palette[0];       // first palette color is the flash color
+    if (color_palette.size()>1){
+        this->back_color = color_palette[1];    // second color (if exists) is the back color
+    }else{      
+        this-> back_color = black;              // back color is  black otherwise
     }
+
 }
 
 void SpotRackAnimation4::new_frame(){
