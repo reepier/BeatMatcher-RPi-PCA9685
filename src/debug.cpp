@@ -316,8 +316,8 @@ void disp_console_window(){
     }else{
         int i = 19;
         for (LogList::reverse_iterator log = log_list.rbegin(); log != log_list.rend(); log++){
-            mvwprintw(consolew, i, 1, fcn::num_to_str((*log).timestamp/1000.0).c_str());
-            mvwprintw(consolew, i--, 1+(*log).level-1+10, (*log).message.c_str());
+            mvwprintw(consolew, i, 1, fcn::ms_to_hhmmssms((*log).timestamp).c_str());
+            mvwprintw(consolew, i--, 1+(*log).level-1+15, (*log).message.c_str());
             if (i==0){
                 break;
             }

@@ -550,7 +550,7 @@ DMX_vec SpotFixture::RGBW(simpleColor c, int intensity){
 #     # #    #  ####  #    #    #     #  #####  ######   ## ##  
 */
 
-DMX_vec SpotRack::RGBW(simpleColor c, int intensity){
+DMX_vec SpotRack::RGBW(simpleColor c, int intensity){ //TODO delete
     // log(4, __FILE__, " ", __LINE__, " ",__func__);
 
     switch (c)
@@ -643,6 +643,7 @@ void SpotRackAnimation1::new_frame(){
         auto &current_spot_flashes = flashes[i_spot];                  // for readability
         auto &current_spot_next_flash = flashes[i_spot][i_next];       // for readability
         auto &current_spot_prev_flash = flashes[i_spot][i_prev];       // for readability
+        auto pixel_size = current_spot->pixel.size();
         auto pixel_size = current_spot->pixel.size();
         time_t &t_next = current_spot_next_flash.time;
         time_t &t_prev = current_spot_prev_flash.time;
@@ -863,7 +864,6 @@ void SpotRackAnimation4::new_frame(){
             // final_RGB[B] = backgd_RGB[B];
         }
     
-    for (auto spot : this->fixture->spots){
         spot->pixel = final_RGB;
     }
 }
