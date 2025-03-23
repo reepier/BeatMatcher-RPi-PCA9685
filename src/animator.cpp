@@ -29,54 +29,6 @@ using namespace std;
 void AnimationManager::init(){
     log(4, __FILE__, " ",__func__);
     //TODO move palette definition to a dedicated funciton (for readabiliyt)
-//     palette_magasine.push_back(    color_vec{red}    ,2   );
-//  // palette_magasine.push_back(    color_vec{sodium} ,1   );
-//  // palette_magasine.push_back(    color_vec{orange} ,1   );
-//  // palette_magasine.push_back(    color_vec{yellow} ,1   );
-//     palette_magasine.push_back(    color_vec{gold}   ,1   );
-//     palette_magasine.push_back(    color_vec{w_white}  ,1   );
-//  // palette_magasine.push_back(    color_vec{cyan}   ,1   );
-//     palette_magasine.push_back(    color_vec{blue}   ,2   );
-//     palette_magasine.push_back(    color_vec{purple} ,1   );
-//  // palette_magasine.push_back(    color_vec{magenta},1   );
-//  // palette_magasine.push_back(    color_vec{pink}   ,1   );
-//  // palette_magasine.push_back(    color_vec{green}  ,1   );
-    
-//     palette_magasine.push_back(     color_vec{w_white, red}       ,1      );
-//  // palette_magasine.push_back(     color_vec{white, sodium}    ,1      );
-//  // palette_magasine.push_back(     color_vec{white, orange}    ,1      );
-//  // palette_magasine.push_back(     color_vec{white, yellow}    ,1      );
-//  // palette_magasine.push_back(     color_vec{white, gold}      ,1      );
-//  // palette_magasine.push_back(     color_vec{white, white}     ,1      );
-//  // palette_magasine.push_back(     color_vec{white, cyan}      ,1      );
-//     palette_magasine.push_back(     color_vec{w_white, blue}      ,1      );
-//     palette_magasine.push_back(     color_vec{w_white, purple}    ,1      );
-//  // palette_magasine.push_back(     color_vec{white, magenta}   ,1      );
-//  // palette_magasine.push_back(     color_vec{white, pink}      ,1      );
-//  // palette_magasine.push_back(     color_vec{white, green}     ,1      );
-
-
-//     palette_magasine.push_back(    color_vec{cyan, magenta}    ,1       );
-//     palette_magasine.push_back(    color_vec{gold, red}        ,3       );
-//     palette_magasine.push_back(    color_vec{gold, orange}     ,1       );
-//     palette_magasine.push_back(    color_vec{gold, sodium}     ,1       );
-//     palette_magasine.push_back(    color_vec{gold, blue}       ,1       );
-//     palette_magasine.push_back(    color_vec{red, blue}        ,3       );
-//     palette_magasine.push_back(    color_vec{magenta, blue}    ,3       );
-//     palette_magasine.push_back(    color_vec{red, purple}      ,3       );
-//     palette_magasine.push_back(    color_vec{gold, purple}     ,2       );
-//     palette_magasine.push_back(    color_vec{blue, purple}     ,1       );
-//     palette_magasine.push_back(    color_vec{cyan, purple}     ,1       );
-//     palette_magasine.push_back(    color_vec{cyan, red}        ,3       );
-//     palette_magasine.push_back(    color_vec{blue, cyan}       ,1       );
-//     palette_magasine.push_back(    color_vec{purple, magenta}  ,1       );
-//     palette_magasine.push_back(    color_vec{red, purple}      ,2       );
-    
-//     // Nouveau
-//     palette_magasine.push_back(    color_vec{green, cyan}           ,1       );
-//     palette_magasine.push_back(    color_vec{blue, orange}          ,1       );
-//     palette_magasine.push_back(    color_vec{blue, sodium}          ,1       );
-//     palette_magasine.push_back(    color_vec{orange, blue, cyan}    ,1       );
 
 //--------------------------------------------------------------------------------
 // Warehouse color palette
@@ -727,6 +679,25 @@ std::string fcn::num_to_str(uint8_t val){
 std::string fcn::num_to_str(double val){
     ostringstream oss;
     oss<<val;
+    return oss.str();
+}
+
+std::string fcn::ms_to_hhmmssms(time_ms input_ms){
+    ostringstream oss;
+    int hou = input_ms/1000/60/60;
+    int min = (input_ms-hou*60*60*1000)/1000/60;
+    int sec = (input_ms-hou*60*60*1000-min*60*1000)/1000;
+    int ms = (input_ms-hou*60*60*1000-min*60*1000-sec*1000);
+    oss << hou << ":" << min << ":" << sec << ":" << ms;
+    return oss.str();
+}
+std::string fcn::ms_to_hhmmss(time_ms input_ms){
+    ostringstream oss;
+    int hou = input_ms/1000/60/60;
+    int min = (input_ms-hou*60*60*1000)/1000/60;
+    int sec = (input_ms-hou*60*60*1000-min*60*1000)/1000;
+    int ms = (input_ms-hou*60*60*1000-min*60*1000-sec*1000);
+    oss << hou << ":" << min << ":" << sec;
     return oss.str();
 }
 

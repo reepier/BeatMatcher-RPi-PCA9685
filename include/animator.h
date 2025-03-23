@@ -16,7 +16,7 @@
 /** -----------------------------------
 #######                                                   
 #       #    # #    #  ####  ##### #  ####  #    #  ####  
-#       #    # ##   # #    #   #   # #    # ##   # #      
+#       #    # ##   # #    #   #   # #    # ##   # #     
 #####   #    # # #  # #        #   # #    # # #  #  ####  
 #       #    # #  # # #        #   # #    # #  # #      # 
 #       #    # #   ## #    #   #   # #    # #   ## #    # 
@@ -65,6 +65,8 @@ namespace fcn{
   std::string num_to_str(time_t);
   std::string num_to_str(uint8_t);
   std::string num_to_str(double);
+  std::string ms_to_hhmmss(time_ms);
+  std::string ms_to_hhmmssms(time_ms);
 
   
   int_vec convert_8_to_12bits(DMX_vec);
