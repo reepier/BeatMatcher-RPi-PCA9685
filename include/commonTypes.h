@@ -15,7 +15,7 @@
 typedef time_t time_ms;
 typedef time_t time_us;
 
-enum simpleColor{ //TODO : create a desaturated version of each color
+enum simpleColor{ //TODO : create a desaturated (lighter) version of each color
     black=0,
     red,
     sodium,    // very warm orange, very red
