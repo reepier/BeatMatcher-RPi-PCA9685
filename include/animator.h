@@ -387,11 +387,12 @@ class BaseAnimation{
     bool is_monochrome(){return (color_palette.size() == 1);};
     bool is_first_frame(){return frame_cpt==0;};
 
-    //determines whether or not the animation is compatible with autocolor & a specific color palette
-    /*The criteria shall be simple / generic enough to be applicable to every fixture / animations :
+    /*Determines whether or not the animation is compatible with autocolor & a specific color palette
+    The criteria shall be simple / generic enough to be applicable to every fixture / animations :
       - is autocolor true ? 
       - do authorized color include all? some? of the passed color palette
-      - are there any? too many? unauthorized color in the palette */
+      - are there any? too many? unauthorized color in the palette
+      --> to start simple, only use the first criteria, //TODO improve later */
     virtual bool is_autocolor_compatible(const color_vec& palette){return this->autocolor;} 
     
 

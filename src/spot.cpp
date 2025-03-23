@@ -868,20 +868,17 @@ void SpotRackAnimation3::new_frame(){
      #  ###    ######  ###### #    #   #
 */
 void SpotRackAnimation4::init(){
-    BaseAnimation::init();
+    BaseAnimation::init(); //TODO check with debug if this really works ??
     // Resets spots values (pixel & master) to clear any remainder of the previous active animation
     this->fixture->reset_spots();
-    SpotRackAnimation4::init();
 
 }
 
-// Special init() function for automatic color definition
+// Special init() function for automatic color definition (in addition to standard init() function)
 void SpotRackAnimation4::init(const color_vec& palette){
-    BaseAnimation::init();
-
-    // assign front & back color based on passed color palette color_vec&
-    color_vec color_palette = palette;
-    
+    // AUTOCOLOR init : assign front & back color based on passed color palette color_vec&
+    color_vec color_palette = palette;  //useless ?
+    //TODO protect against empty palette --> set all black in this case
     this->flash_color = color_palette[0];       // first palette color is the flash color
     if (color_palette.size()>1){
         this->back_color = color_palette[1];    // second color (if exists) is the back color
@@ -889,6 +886,8 @@ void SpotRackAnimation4::init(const color_vec& palette){
         this-> back_color = black;              // back color is  black otherwise
     }
 
+    // then call the "STANDARD" init() function for stuff unrelated to autocolor
+    SpotRackAnimation4::init();
 }
 
 void SpotRackAnimation4::new_frame(){

@@ -352,31 +352,39 @@ private :
     //CONSTUCTORS
     // Base constructor
     AddrLEDAnimation4(AddressableLED *f, simpleColor b_col, color_vec f_cols, Shape fshape, strip_subdiv_t u, int prand, int flen, std::string d, std::string i, AnimationType t, int prio, int mast=255){
-        this->description = d;
-        this->id = i;
-        this->fixture = f;
-        this->type = t;
-        this->priority = prio;
-        
+        //set Base parameters
+        this->description = d,this->id = i,this->fixture = f,this->type = t,this->priority = prio,this->master = mast;
+        //set cinematic parameters
         this->flash_colors = f_cols;
         this->back_color = b_col;
-
         this->rand_const_ms = prand;
         this->flash_len = flen;
-        this->flash_shape = fshape;
-
-        this->master = mast;
+        this->flash_shape = fshape;        
 
         this->update_palette(color_vec{b_col});
         this->update_palette(f_cols);
     }
+    // autocolor constructor
+    AddrLEDAnimation4(AddressableLED *f, Shape fshape, strip_subdiv_t u, int prand, int flen, std::string d, std::string i, AnimationType t, int prio, int mast=255){
+      //set Base paramters
+      this->description = d, this->id = i, this->fixture = f; // set base parameters
+      this->autocolor = true;
+      this->master=mast;
+
+      //set cinematic parameters
+      this->flash_shape = fshape;
+      this->unit = u;
+      this->rand_const_ms=prand;
+      this->flash_len = flen;
+    }
 
 
     void init() override;
+    void init(const color_vec&) override;
     void new_frame();
 };
 
-// /* 5 - HiVE 
+// /* TODO 5 - HiVE 
 // On each group of led bars, a certain number of spots move in a smooth motion. On each beat, they 
 // get a all get a sudden push and then slowly go back to their initial velocity
 // Each group of led bar is considered a continuous track, when a spot overshoots the end of the

@@ -375,10 +375,11 @@ class SpotRackAnimation4 : public SpotRackAnimation{
     int fade_rate = 60;                 //[ms] rate of exponential flash decay
 
 
-    //TODO autocolor : 
-    /*The following parameters are only accessible at SpotRackAnimation4 level, they must have 
+
+    /* TODO The following parameters are only accessible at SpotRackAnimation4 level, they must have 
     a (simplified) counterpart at BaseAnimation level. Autocolor constructor shall convert these into
-    BaseAnimation member paramters */
+    BaseAnimation member paramters. might even be worth it to set the followong params at construction ? 
+    (easier maintenance if everything is set at construction rather than in many different code modules & blocks) */
     color_vec auth_flash_colors = {};   //list of authorized colors for flash_color parameter (empty == all colors authorized)
     color_vec auth_back_colors = {};    //list of authorized colors for back_color parameter (empty == all colors authorized)
     color_vec unauth_flash_colors = {}; //list of unauthorized colors for flash_color parameter (empty == no colors unauthorized)
@@ -402,15 +403,15 @@ class SpotRackAnimation4 : public SpotRackAnimation{
         this->update_palette(color_vec{f_col, b_col});
     }
     
-    //overloaded constructor autocolor
+    /*overloaded constructor autocolor
+    TODO add a parameter to set at construction the number of colors ? or assign this parameter (random pick) at init()*/
     SpotRackAnimation4(SpotRack *f, std::string d, std::string i, AnimationType typ, bool flash = true){
         this->description = d, this->id = i, this->fixture = f; // set base parameters
-
         this->autocolor = true;             // animation relying on autocolor must be taggued as such
         
         this->param_activate_flash = flash;
         /*The real color assignement is done at animation initialisation / activation (baseanimation.init()) 
-        for safety purpose, at construction, colors are set to black*/
+        for safety purpose, at construction (or class definition), colors are set to black*/
     }
 
 

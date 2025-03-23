@@ -257,6 +257,7 @@ void AnimationManager::autocolor_update(){
 
         //activate an animation using autocolor
         front_rack.activate_autocolor(palette);
+        addr_led.activate_autocolor(palette);
         palette_lifespan--; //decrease palette lifespan
     }
 }
@@ -482,6 +483,7 @@ bool BaseFixture::activate_autocolor(color_vec& palette){
         
 
     }
+
     log(2, "Candidates listed ");
     if (candidates.size()>0){
         BaseAnimation* anim = fcn::random_pick(candidates, prios);

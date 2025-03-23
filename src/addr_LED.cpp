@@ -20,7 +20,7 @@ void AddressableLED::init(){
     // declare animations here
     animations.push_back(new AddrLEDAnimation1(this, black,  black,  " ",    "PIX.0.0", backer));
 
-
+/*
 // ANIMATION 1 : Analog Flash on Beat (Original Beatmatcher animation)
     // Monochrome background
     animations.push_back(new AddrLEDAnimation1(this, black,       red,  "Red background",      "PIX.1.1.0.1",   backer,   false));
@@ -496,10 +496,10 @@ void AddressableLED::init(){
     // Fast chaser
     animations.push_back(new AddrLEDAnimation4(this, purple,            color_vec{gold},            square, bar, burst_period, flash_length, "fast gold chaser, purple bkgd",                "PIX.4.2.2.2.100", leader, 1, 255));
     animations.push_back(new AddrLEDAnimation4(this, red,            color_vec{cyan},            square, bar, burst_period, flash_length, "fast cyan chaser, red bkgd",                "PIX.4.2.2.2.101", leader, 1, 255));
-
-
-
-
+*/
+    animations.push_back(new AddrLEDAnimation4(this, gaussian, bar, 1000, 1000, "Slow bubbles by bar", "PIX.5.0.1", any, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, gaussian, bar, 600,  500,  "Fast bubbles by bar", "PIX.5.0.2", any, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, square,   bar, 1000, 1000, "Slow chaser by bar",  "PIX.5.0.3", any, 1, 255));
 
     this->activate_none();
 }
@@ -786,6 +786,31 @@ void AddrLEDAnimation4::init(){
         flashes[i_unit][i_next].color = fcn::random_pick(this->flash_colors);
         flashes[i_unit][i_prev].color = black;
     }
+}
+void AddrLEDAnimation4::init(const color_vec& palette){
+    // AUTOCOLOR init : assign flash colors & back color based on passed color palette :
+    const int palette_size = palette.size();
+    switch (palette_size)
+    {
+    case 0:
+        this->flash_colors = color_vec{black};
+        this->back_color = black;
+        break;
+    case 1:
+        this->flash_colors = color_vec{palette[0]};
+        this->back_color = fcn::random_pick(color_vec{black, palette[0]}, int_vec{3, 1});
+        break;
+    case 2: 
+        this->flash_colors = color_vec{palette[0]};
+        this->back_color = fcn::random_pick( color_vec{palette[1], black}, int_vec{2,1});
+    default:
+        flash_colors = color_vec{fcn::random_pick(palette)};
+        back_color = fcn::random_pick(palette);
+        break;
+    }
+
+    //call STANDARD init()
+    AddrLEDAnimation4::init();
 }
 
 void AddrLEDAnimation4::new_frame(){
