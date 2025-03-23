@@ -259,6 +259,7 @@ void AnimationManager::autocolor_update(){
 
         //activate an animation using autocolor
         front_rack.activate_autocolor(palette);
+        addr_led.activate_autocolor(palette);
         palette_lifespan--; //decrease palette lifespan
     }
 }
