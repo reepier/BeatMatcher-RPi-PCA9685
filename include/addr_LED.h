@@ -7,9 +7,9 @@
 #define MAX_SUBPIX_PER_UNI  510 // maximum number of subpixels arried over 1 universe (1 universe can only carry complete pixels (BC-204 limitation))
 // WS2815 led strip config
   // Config paramters
-  #define NUM_BAR 3                       // Total Number of bars
+  #define NUM_BAR 18                       // Total Number of bars
   #define NUM_SEG (3*NUM_BAR)             // Total number of segments (across all bars)
-  const int_vec groups_size = {3};        // Number of bars for each group
+  const int_vec groups_size = {3, 3, 3, 3, 3, 3};        // Number of bars for each group
   #define NUM_GROUP  groups_size.size()   // Number of groups
 
   // Quasi constants
@@ -213,11 +213,14 @@ class AddrLEDAnimation2 : public AddrLEDAnimation{
     // Dynamic variables (updated internally at each frame)
     int_vec units_index;
     // Constructor
-    AddrLEDAnimation2(AddressableLED *f, simpleColor f_col, simpleColor b_col, strip_subdiv_t u, std::string d, std::string i)
+    AddrLEDAnimation2(AddressableLED *f, simpleColor f_col, simpleColor b_col, strip_subdiv_t u, std::string d, std::string i, AnimationType typ=any, int prio=1, int mast=255)
     {
         this->description = d;
         this->id = i;
         this->fixture = f;
+        this->type = typ;
+        this->master = mast;
+        this->priority=prio;
 
         this->flash_RGB = this->fixture->RGB(f_col);
         this->backgd_RGB = this->fixture->RGB(b_col, 20);

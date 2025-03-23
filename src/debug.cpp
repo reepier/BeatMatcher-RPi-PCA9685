@@ -135,15 +135,19 @@ void disp_music_window(){
     switch(sampler.state){
         case BEAT :
             statebuf << "BEAT";
-        break;
+            break;
         case BREAK :
             statebuf << "        BREAK";
-        break;
+            break;
+        case SUSTAINED_BREAK :
+            statebuf << "        BREAK +";
+            break;
+
         case BAD_SIGNAL :
             statebuf << "                   BAD_SIGNAL";
-        break;
+            break;
         default :
-        break;
+            break;
     }
     mvwprintw(musicw, 4,1, statebuf.str().c_str());
 
@@ -193,21 +197,23 @@ void disp_output_window(){
     wattroff(outputw, A_BOLD);
 
     int line=1;
-    for (auto fix : fix_vec{&addr_led, /*&led,*/ &laser, &front_rack, &spider, &redrayz, &back_rack, &back_rack2}){
+    for (auto fix : fix_vec{&addr_led, /*&led,*/ &laser, &front_rack, &spider, &rack_15, &rack_40, &shehds_rack, &redrayz}){
         if (fix->active_animation != nullptr){
-        ostringstream animbuf, outbuf;
-        animbuf << ((fix->active_animation->type == leader) ? "(L) ":"(b) ") << fix->name << " " << fix->active_animation->id << " - " << fix->active_animation->description;
-        
-        DMX_vec raw_buf = fix->buffer();
-        outbuf << "| " <<fcn::vec_to_str(raw_buf, ',');
+            ostringstream animbuf, outbuf;
+            
+            animbuf << ((fix->active_animation->type == leader) ? "(L) ":((fix->active_animation->type == backer) ? "(b) " : "(a) ")) << fix->name << " " << fix->active_animation->id << " - " << fix->active_animation->description;
+            
+            DMX_vec raw_buf = fix->buffer();
+            outbuf << "| " <<fcn::vec_to_str(raw_buf, ',');
 
-        if (fix == &back_rack)
-            line++;
 
-        mvwprintw(outputw, line, 1, animbuf.str().data());
-        mvwprintw(outputw, line, 55, outbuf.str().size()<60? outbuf.str().data() : outbuf.str().substr(0, 60).data());
+            mvwprintw(outputw, line, 1, animbuf.str().data());
+            mvwprintw(outputw, line, 55, outbuf.str().size()<60? outbuf.str().data() : outbuf.str().substr(0, 60).data());
+            
+            if((fix == &front_rack) || fix == &shehds_rack)  line+=2;
+            else line += 1;
         }
-        line++;
+
 
     }
 
@@ -310,8 +316,8 @@ void disp_console_window(){
     }else{
         int i = 19;
         for (LogList::reverse_iterator log = log_list.rbegin(); log != log_list.rend(); log++){
-            mvwprintw(consolew, i, 1, fcn::num_to_str((*log).timestamp/1000.0).c_str());
-            mvwprintw(consolew, i--, 1+(*log).level-1+10, (*log).message.c_str());
+            mvwprintw(consolew, i, 1, fcn::ms_to_hhmmssms((*log).timestamp).c_str());
+            mvwprintw(consolew, i--, 1+(*log).level-1+15, (*log).message.c_str());
             if (i==0){
                 break;
             }

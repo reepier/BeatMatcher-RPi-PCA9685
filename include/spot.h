@@ -51,7 +51,7 @@ public:
 
         this->pixel = this->RGBW(black); // resize & initialise RGBWout vector
 
-        log(1, "Init. of ", this->name, " / Pixel size : ", this->pixel.size());
+        // log(1, "Init. of ", this->name, " / Pixel size : ", this->RGBWout.size());
     };
     void init(){};
 
@@ -131,12 +131,14 @@ public:
 };
 
 extern SpotRack front_rack;
-extern SpotRack back_rack;
-extern SpotRack back_rack2;
+extern SpotRack rack_15;
+extern SpotRack shehds_rack;
+extern SpotRack rack_40;
 
 void front_rack_init();
-void back_rack_init();
-void back_rack2_init();
+void rack_15_init();
+void rack_40_init();
+void shehds_rack_init();
 void global_rack_init();
 
 /**

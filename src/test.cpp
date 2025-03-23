@@ -30,7 +30,7 @@ using namespace std;
     vector<ola::DmxBuffer> ola_pix_buffers(NUM_SUBPIX/MAX_SUBPIX_PER_UNI + ((NUM_SUBPIX%MAX_SUBPIX_PER_UNI)==0 ? 0 : 1));
 
 fix_vec ll_fxtrs = {&led, &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, &spot_7,&spot_8, &spot_9, &spider, &laser};
-fix_vec fixtures = {&addr_led, &led, &laser, &front_rack, &back_rack, &spider};
+fix_vec fixtures = {&addr_led, &led, &laser, &front_rack, &rack_15, &spider};
 
 bool process_arguments(int n, char* args[]){
     for (int i=1; i<n; i++){
@@ -115,12 +115,12 @@ void send(){
     #ifndef LINUX_PC // if compiling on raspberrypi
     // Send frame to the PCA9685 module
     // Take into account the MASTER DIMMER value !! --> as late as possible, right before data is sent
-    setOffVals[LEDRed1] = led.RGBout[R] * led.MASTER_DIMMER / 255.0;
-    setOffVals[LEDGreen1] = led.RGBout[G] * led.MASTER_DIMMER / 255.0;
-    setOffVals[LEDBlue1] = led.RGBout[B] * led.MASTER_DIMMER / 255.0;
-    setOffVals[LEDRed2] = led.RGBout[R] * led.MASTER_DIMMER / 255.0;
-    setOffVals[LEDGreen2] = led.RGBout[G] * led.MASTER_DIMMER / 255.0;
-    setOffVals[LEDBlue2] = led.RGBout[B] * led.MASTER_DIMMER / 255.0;
+    setOffVals[LEDRed1] = led.RGBout[R] * led.master / 255.0;
+    setOffVals[LEDGreen1] = led.RGBout[G] * led.master/ 255.0;
+    setOffVals[LEDBlue1] = led.RGBout[B] * led.master/ 255.0;
+    setOffVals[LEDRed2] = led.RGBout[R] * led.master/ 255.0;
+    setOffVals[LEDGreen2] = led.RGBout[G] * led.master/ 255.0;
+    setOffVals[LEDBlue2] = led.RGBout[B] * led.master/ 255.0;
 
   
     PCA9685_setPWMVals(fd, addr, setOnVals, setOffVals);
@@ -229,17 +229,23 @@ int main(int argc, char* argv[]){
 
 
 
+    // while(true){
+    //     auto start = millis();
+    //     auto t=start;
+    //     while(t<(start+2000)){
+    //         int val = min(255, max(0, (int)fcn::exp_decay(t, start, 1000, 0, 100) ));
+            
+    //         cout<<string(val, '-')<<endl;
+    //         // cout<<(t-start)/1000.0<< " : " << val <<endl;
+            
+    //         delay(50);
+    //         t=millis();
+    //     }
+    // }
+
     while(true){
-        auto start = millis();
-        auto t=start;
-        while(t<(start+2000)){
-            int val = min(255, max(0, (int)fcn::exp_decay(t, start, 1000, 0, 100) ));
-            
-            cout<<string(val, '-')<<endl;
-            // cout<<(t-start)/1000.0<< " : " << val <<endl;
-            
-            delay(50);
-            t=millis();
-        }
+        auto t = millis();
+        cout << t << " -> " << fcn::ms_to_hhmmss(t) << " or " << fcn::ms_to_hhmmssms(t) << endl;;
+        delay(100);
     }
 }

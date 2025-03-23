@@ -2,7 +2,7 @@ using namespace std;
 
 #include "redrayz.h"
 
-RedrayLaser redrayz(1, 6, "Redray laser", 1);
+RedrayLaser redrayz(0, 6, "Redray laser", 1);
 
 /*
 #######                                     
@@ -23,26 +23,29 @@ void RedrayLaser::init(){
 
     // RANDOM BURST
     //
-    animations.push_back(new RedrayzAnimation2(this, gaussian, 600,   400,      "Fast gaussian bursts",        "RED.2.1.1", any, 1));
-    animations.push_back(new RedrayzAnimation2(this, gaussian, 1500,  800,      "Slow gaussian bursts",        "RED.2.1.2", any, 1));
-    animations.push_back(new RedrayzAnimation2(this, gaussian2, 8000,  2500,    "Very slow gaussian bursts",   "RED.2.1.3", any, 1));
-    animations.push_back(new RedrayzAnimation2(this, gaussian2, 1500,  4000,    "Scarce gaussian bursts",      "RED.2.1.4", any, 1));
+//  animations.push_back(new RedrayzAnimation2(this, gaussian,   600,   400,   "Fasr bubbles",            "RED.2.1.1", any, 1));
+    animations.push_back(new RedrayzAnimation2(this, gaussian,   1500,  800,   "Slow bubbles",            "RED.2.1.2", any, 1));
+ // animations.push_back(new RedrayzAnimation2(this, gaussian2,  8000,  2500,  "Very slow bubbles",       "RED.2.1.3", any, 1));
+    animations.push_back(new RedrayzAnimation2(this, gaussian2,  1500,  4000,  "Scarce bubbles",          "RED.2.1.4", any, 1));
+    animations.push_back(new RedrayzAnimation2(this, gaussian,   10000,  3000, "VS overlapping bubbles",  "RED.2.1.5", any, 1));
     
-    animations.push_back(new RedrayzAnimation2(this, square, 600,   400,      "Fast square bursts",          "RED.2.2.1", any, 1));
-    animations.push_back(new RedrayzAnimation2(this, square, 1500,  500,      "Slow square bursts",          "RED.2.2.2", any, 1));
-    animations.push_back(new RedrayzAnimation2(this, square, 5000,  1000,     "Very slow square bursts",     "RED.2.2.3", any, 1));
+    // animations.push_back(new RedrayzAnimation2(this, square, 600,   400,      "Fast chaser",              "RED.2.2.1", any, 1));
+    // animations.push_back(new RedrayzAnimation2(this, square, 1500,  500,      "Slow chaser",              "RED.2.2.2", any, 1));
+    // animations.push_back(new RedrayzAnimation2(this, square, 5000,  1000,     "Very slow chaser",         "RED.2.2.3", any, 1));
+    animations.push_back(new RedrayzAnimation2(this, square, 10000,  3000,    "VS, overlapping chaser",   "RED.2.2.4", any, 1));
 
-    animations.push_back(new RedrayzAnimation2(this, square, 50,   100,   "VF Strob square bursts",   "RED.2.3.1", any, 1));
-    animations.push_back(new RedrayzAnimation2(this, square, 50,   500,   "F strobe square bursts",   "RED.2.3.2", any, 1));
-    animations.push_back(new RedrayzAnimation2(this, square, 50,   1000,  "S strobe bursts",          "RED.2.3.3", any, 1));
-    animations.push_back(new RedrayzAnimation2(this, square, 50,   2000,  "VS strobe bursts",          "RED.2.3.4", any, 1));
+    // animations.push_back(new RedrayzAnimation2(this, square, 50,   100,   "VF Strobe",  "RED.2.3.1", any, 1));
+    // animations.push_back(new RedrayzAnimation2(this, square, 50,   500,   "F pulses",   "RED.2.3.2", any, 1));
+    // animations.push_back(new RedrayzAnimation2(this, square, 50,   1000,  "S pulses",   "RED.2.3.3", any, 1));
+    // animations.push_back(new RedrayzAnimation2(this, square, 50,   2000,  "VS pulses",  "RED.2.3.4", any, 1));
 
+    // animations.push_back(new RedrayzAnimation2(this, expdecay, 1500, 1500,  "VS decaying rayz",   "RED.2.4.1", any, 1));
+    animations.push_back(new RedrayzAnimation2(this, expdecay, 600, 700,    "S decaying rayz",    "RED.2.4.2", any, 1));
+    // animations.push_back(new RedrayzAnimation2(this, expdecay, 200, 300,    "F decaying rayz",    "RED.2.4.3", any, 1));
+    animations.push_back(new RedrayzAnimation2(this, expdecay, 700, 4000,   "Scarce S decaying rayz",  "RED.2.4.4", any, 1));
+    animations.push_back(new RedrayzAnimation2(this, expdecay, 200, 2000,   "Scarce F decaying rayz",  "RED.2.4.5", any, 1));
+    animations.push_back(new RedrayzAnimation2(this, expdecay, 4000, 1000,  "VS overlapping decaying rayz",   "RED.2.4.6", any, 1));
 
-    animations.push_back(new RedrayzAnimation2(this, expdecay, 1500, 1500,  "Vslow exponential burst",   "RED.2.4.1", any, 1));
-    animations.push_back(new RedrayzAnimation2(this, expdecay, 600, 700,   "Slow exponential burst",    "RED.2.4.2", any, 1));
-    animations.push_back(new RedrayzAnimation2(this, expdecay, 200, 300,   "Fast exponential burst",    "RED.2.4.3", any, 1));
-    animations.push_back(new RedrayzAnimation2(this, expdecay, 700, 4000,  "Scarce slow exponential burst",  "RED.2.4.4", any, 1));
-    animations.push_back(new RedrayzAnimation2(this, expdecay, 200, 2000,  "Scarce fast exponential burst",  "RED.2.4.5", any, 1));
 
     this->activate_none();
 }

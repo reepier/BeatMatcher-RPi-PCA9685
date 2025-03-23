@@ -22,8 +22,8 @@ enum simpleColor{
     orange,
     yellow,
     gold,
-    w_white,      // warmish white (defined by the spots)
-    c_white,     // cold flat white
+    w_white,
+    c_white,
     cyan,       
     blue,
     purple,
