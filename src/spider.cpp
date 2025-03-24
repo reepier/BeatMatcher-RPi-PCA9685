@@ -133,7 +133,9 @@ DMX_vec SpiderFixture::buffer(){
     ret[5]=this->master;
     ret[6]=this->strobe;
 
-    double animation_master = this->active_animation->master/255.0; // from 0.0 to 1.0
+    double animation_master = this->active_animation != nullptr ? 
+                                         this->active_animation->master/255.0 
+                                        :1.0; // from 0.0 to 1.0
     for (int led=0; led<NLED; led++){
         for (int pix=0; pix<NCOL; pix++){
             ret[7+led*NCOL+pix] = (uint8_t) animation_master * this->pixels[led][pix];
