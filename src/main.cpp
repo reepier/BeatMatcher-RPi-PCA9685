@@ -40,7 +40,7 @@ using namespace std;
     ola::client::OlaClientWrapper wrapper;
     ola::client::OlaClient *ola_input_client;
 
-    // Functio Called when universe registration completes.
+    // Function Called when universe registration completes.
     void RegisterComplete(const ola::client::Result& result) {
         if (!result.Success()) {
             //  OLA_WARN << "Failed to register universe: " << result.Error();
