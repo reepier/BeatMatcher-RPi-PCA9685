@@ -240,30 +240,6 @@ void AnimationManager::show_update(){
     // }
 }
 
-void AnimationManager::autocolor_update(){
-    static color_vec palette;
-    static int palette_lifespan = 2;
-    
-    //when time to change animation
-    if (frame.first_loop
-        || (sampler.state_changed && (frame.t_current_ms-t_last_change_ms > TEMPO_ANIM_CHANGE))
-        || this->timer_elapsed()){
-
-        // when time to change color palette
-        if (frame.first_loop || palette_lifespan == 0){
-            // pick a random palette from the mag
-            palette = palette_magasine.get_random_palette();
-            palette_lifespan = 2; //reset palette lifespan
-            log(1, __FILE__, " ",__func__, " ", fcn::palette_to_string(palette, '/'));
-        }
-
-        //activate an animation using autocolor
-        front_rack.activate_autocolor(palette);
-        addr_led.activate_autocolor(palette);
-        palette_lifespan--; //decrease palette lifespan
-    }
-}
-
 /*
 #     #                                          #####                       
 ##   ##   ##   #    # # #    # #    # #    #    #     # #    #  ####  #    # 
@@ -575,19 +551,13 @@ bool BaseFixture::activate_by_color(color_vec arg_palette, AnimationType arg_typ
                 prios.push_back(each_animation->priority); // store the animation probability setting in other vector
             }
         }
-                candidates.push_back(each_animation);       // store the animation in vector
-                prios.push_back(each_animation->priority); // store the animation probability setting in other vector
-            }
-        }
 
 
-    balise(__FILE__, " ", __LINE__, "candidate animations listed");
     balise(__FILE__, " ", __LINE__, "candidate animations listed");
     if (candidates.size()>0){
         BaseAnimation* anim = fcn::random_pick(candidates, prios);
         this->activate_by_ptr(anim);
         found_it=true;
-        
     }
 
     return found_it;

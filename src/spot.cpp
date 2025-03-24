@@ -13,19 +13,7 @@ SpotFixture spot_3(FunGen_RGBW_12x1W, 89, 8,       "Spot 3 (@90)",     3);
 SpotFixture spot_4(FunGen_RGBW_12x1W, 97,  8,      "Spot 4 (@98)",     4);     
 SpotFixture spot_5(FunGen_RGBW_12x1W, 105,  8,     "Spot 5 (@106)",    5);     //Salon
 SpotFixture spot_6(FunGen_RGBW_12x1W, 113,  8,     "Spot 6 (@114)",    6);
-SpotFixture spot_1(FunGen_RGBW_12x1W, 73, 8,       "Spot 1 (@74)",     1);     
-SpotFixture spot_2(FunGen_RGBW_12x1W, 81,  8,      "Spot 2 (@82)",     2);     //Salon
-SpotFixture spot_3(FunGen_RGBW_12x1W, 89, 8,       "Spot 3 (@90)",     3);     
-SpotFixture spot_4(FunGen_RGBW_12x1W, 97,  8,      "Spot 4 (@98)",     4);     
-SpotFixture spot_5(FunGen_RGBW_12x1W, 105,  8,     "Spot 5 (@106)",    5);     //Salon
-SpotFixture spot_6(FunGen_RGBW_12x1W, 113,  8,     "Spot 6 (@114)",    6);
 
-SpotFixture spot_7(FunGen_RGBW_12x1W, 121, 8,  "Spot 7 (@122)",    7);     //Salon
-SpotFixture spot_8(FunGen_RGBW_12x1W, 129, 8,  "Spot 8 (@130)",    8);     //Salon
-SpotFixture spot_9(FunGen_RGBW_12x1W, 137, 8,  "Spot 9 (@138)",    9);  
-SpotFixture spot_10(FunGen_RGBW_12x1W, 145, 8, "Spot 10 (@146)",   10);
-SpotFixture spot_11(FunGen_RGBW_12x1W, 153, 8, "Spot 11 (@154)",   11);
-SpotFixture spot_12(FunGen_RGBW_12x1W, 161, 8, "Spot 12 (@162)",   12);
 SpotFixture spot_7(FunGen_RGBW_12x1W, 121, 8,  "Spot 7 (@122)",    7);     //Salon
 SpotFixture spot_8(FunGen_RGBW_12x1W, 129, 8,  "Spot 8 (@130)",    8);     //Salon
 SpotFixture spot_9(FunGen_RGBW_12x1W, 137, 8,  "Spot 9 (@138)",    9);  
@@ -125,9 +113,9 @@ DMX_vec SpotFixture::buffer(){
 
 / ----------------------------------------------------------------------- */
 SpotRack front_rack(spot_vec{&spot_2, &spot_5, &spot_7, &spot_8}, "Front Rack", 1);
-// SpotRack rack_15(spot_vec{&spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6}, "Vert. Beams", 2);
+SpotRack rack_15(spot_vec{&spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6}, "Vert. Beams", 2);
 SpotRack rack_40(spot_vec{&spot_9, &spot_10, &spot_11, &spot_12}, "Rack 2", 3);
-// SpotRack shehds_rack(spot_vec{&spot_13, &spot_14, &spot_15, &spot_16, &spot_17, &spot_18, &spot_19, &spot_20}, "SHEHDS Rack", 4);
+SpotRack shehds_rack(spot_vec{&spot_13, &spot_14, &spot_15, &spot_16, &spot_17, &spot_18, &spot_19, &spot_20}, "SHEHDS Rack", 4);
 
 /** Config Salon */
 SpotRack back_rack(spot_vec{&spot_1, &spot_3, &spot_4, &spot_6}, "Back Rack", 2);
@@ -655,7 +643,6 @@ void SpotRackAnimation1::new_frame(){
         auto &current_spot_flashes = flashes[i_spot];                  // for readability
         auto &current_spot_next_flash = flashes[i_spot][i_next];       // for readability
         auto &current_spot_prev_flash = flashes[i_spot][i_prev];       // for readability
-        auto pixel_size = current_spot->pixel.size();
         auto pixel_size = current_spot->pixel.size();
         time_t &t_next = current_spot_next_flash.time;
         time_t &t_prev = current_spot_prev_flash.time;
