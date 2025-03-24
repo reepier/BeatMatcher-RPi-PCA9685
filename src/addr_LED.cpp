@@ -367,6 +367,12 @@ void AddressableLED::init(){
     animations.push_back(new AddrLEDAnimation4(this, purple,            color_vec{gold},            square, bar, burst_period, flash_length, "fast gold chaser, purple bkgd",                "PIX.4.2.2.2.100", leader, 1, 255));
     animations.push_back(new AddrLEDAnimation4(this, red,            color_vec{cyan},            square, bar, burst_period, flash_length, "fast cyan chaser, red bkgd",                "PIX.4.2.2.2.101", leader, 1, 255));
 */
+    //AUTOCOLOR with Animation type 1
+    animations.push_back(new AddrLEDAnimation1(this, bar, 0.7, "Bar Analog Beat (autocolor)", "PIX.6.0.1", any, true, 255));     
+    //AUTOCOLOR with Animation type 2
+    animations.push_back(new AddrLEDAnimation2(this, bar, "Bar Digital Beat (autocolor)",     "PIX.7.0.1", any, true, 255));     
+    animations.push_back(new AddrLEDAnimation2(this, pix, "Pixels Digital Beat (autocolor)",  "PIX.7.0.2", any, true, 255));     
+    //AUTOCOLOR with Animation type 4
     animations.push_back(new AddrLEDAnimation4(this, gaussian, bar, 1000, 1000, "Slow bubbles by bar", "PIX.5.0.1", any, 1, 255));
     animations.push_back(new AddrLEDAnimation4(this, gaussian, bar, 600,  500,  "Fast bubbles by bar", "PIX.5.0.2", any, 1, 255));
     animations.push_back(new AddrLEDAnimation4(this, square,   bar, 1000, 1000, "Slow chaser by bar",  "PIX.5.0.3", any, 1, 255));
@@ -487,6 +493,22 @@ DMX_vec AddressableLED::RGB(simpleColor c, int intensity){
 void AddrLEDAnimation1::init(){
     BaseAnimation::init();
 }
+void AddrLEDAnimation1::init(const color_vec& palette){
+    // AUTOCOLOR init
+    switch (palette.size())
+    {
+    case 0:     this->flash_color=black,        this->back_color=black;
+        break;
+    case 1:     this->flash_color=palette[0];   this->back_color=fcn::random_pick( color_vec{black,palette[0]}, int_vec{2,1} );
+        break;
+    case 2:     this->flash_color=palette[0],   this->back_color=palette[1];
+        break;
+    default:    this->flash_color=black,        this->back_color=black;
+        break;
+    }
+    //STANDARD init
+    AddrLEDAnimation1::init();
+}
 
 void AddrLEDAnimation1::new_frame(){
     balise("Addr LED Ani1 New frames...");
@@ -562,6 +584,23 @@ void AddrLEDAnimation1::new_frame(){
 void AddrLEDAnimation2::init(){
     BaseAnimation::init();
 }
+void AddrLEDAnimation2::init(const color_vec& palette){
+    //AUTOCOLOR init
+    switch (palette.size())
+    {
+    case 0:     this->flash_color=black,        this->back_color=black;
+        break;
+    case 1:     this->flash_color=palette[0];   this->back_color=fcn::random_pick( color_vec{black,palette[0]}, int_vec{2,1} );
+        break;
+    case 2:     this->flash_color=palette[0],   this->back_color=palette[1];
+        break;
+    default:    this->flash_color=black,        this->back_color=black;
+        break;
+    }
+
+    //Standard init
+    AddrLEDAnimation2::init();
+}
 
 void AddrLEDAnimation2::new_frame(){
     BaseAnimation::new_frame();
@@ -569,8 +608,10 @@ void AddrLEDAnimation2::new_frame(){
     unsigned long t_ms = frame.t_current_ms;
     unsigned long t_last_beat_ms = sampler.t_last_new_beat;
     int_vec::size_type n_unit = units_index.size();
+    pixel flash_RGB = this->fixture->RGB(this->flash_color);
+    pixel backgd_RGB = this->fixture->RGB(this->back_color, 20);
 
-    bool auto_activate_flash = (sampler.state == BEAT) && (t_ms-sampler.t_beat_tracking_start < MAX_CONT_FLASH);
+    bool auto_activate_flash = (sampler.state == BEAT) && (t_ms-sampler.t_beat_tracking_start < MAX_CONT_FLASH); //TODO useless ?
 
     // for each new beat, sort segments in random order
     if (sampler.new_beat)

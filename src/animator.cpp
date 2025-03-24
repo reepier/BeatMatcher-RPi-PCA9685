@@ -352,11 +352,11 @@ void AnimationManager::nov30_maximum_update(){
 
 void AnimationManager::autocolor_update(){
     static color_vec palette;
-    static int palette_lifespan = 2;
+    static int palette_lifespan = 3;
     
     //when time to change animation
     if (frame.first_loop
-        || (sampler.state_changed && (frame.t_current_ms-t_last_change_ms > TEMPO_ANIM_CHANGE))
+        || (sampler.state_changed && sampler.state == BEAT) && (frame.t_current_ms-t_last_change_ms > TEMPO_ANIM_CHANGE)
         || this->timer_elapsed()){
 
         // when time to change color palette
@@ -565,7 +565,7 @@ bool BaseFixture::activate_by_color(color_vec arg_palette, AnimationType arg_typ
 
 /*Activates an animation using autocolor feature. */
 bool BaseFixture::activate_autocolor(color_vec& palette){
-    log(1, this->name, " ", __func__);
+    // log(1, this->name, " ", __func__);
     int n_anim = this->animations.size(); //for readability
     anim_vec candidates;                    // contains candidate animations (animations that match criterias)
     int_vec prios;                          // contains the priorities of such animations
@@ -595,14 +595,14 @@ bool BaseFixture::activate_autocolor(color_vec& palette){
 
     }
 
-    log(2, "Candidates listed ");
+    // log(2, "Candidates listed ");
     if (candidates.size()>0){
         BaseAnimation* anim = fcn::random_pick(candidates, prios);
         this->activate_by_ptr(anim, palette);
         found_it=true;
-        log(2, "Selected : ", anim->id);
+        // log(2, "Selected : ", anim->id);
     }else{
-        log(2, "no candidates");
+        // log(2, "no candidates");
     }
 
     return found_it;

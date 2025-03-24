@@ -34,8 +34,8 @@ extern std::vector<std::string> vec_anim_id;
 
 // Music Emulator
 #define BPM 100          // BPM
-#define BREAKDuration 8  // beats
-#define DROPDuration  8 // beats
+#define BREAKDuration 16  // beats
+#define DROPDuration  16 // beats
 
 // -- CONFIG ------------------------------------------------------------
 #define     MAX_CONT_FLASH      120000          // 120000 

@@ -391,7 +391,7 @@ class BaseAnimation{
 
     //Base constructor
     BaseAnimation(){};
-    BaseAnimation(std::string d, std::string i, AnimationType typ) : description(d),  id(i), type(typ) {};
+    BaseAnimation(std::string d, std::string i, AnimationType typ, uint8_t mast) : description(d),  id(i), type(typ), master(mast) {};
 
     bool is_monochrome(){return (color_palette.size() == 1);};
     bool is_first_frame(){return frame_cpt==0;};

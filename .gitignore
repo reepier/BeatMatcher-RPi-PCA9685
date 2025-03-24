@@ -1,5 +1,6 @@
 .o
 .txt
+.log
 bin/beatmatcher
 bin/test
 **/build

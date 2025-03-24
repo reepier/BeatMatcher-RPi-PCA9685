@@ -131,8 +131,8 @@ class AddrLEDAnimation1 : public AddrLEDAnimation{
   public:
     // specific parameters
   bool param_activate_flash;
-  simpleColor flash_color;            // flash color
-  simpleColor back_color;             // background color
+  simpleColor flash_color = black;            // flash color
+  simpleColor back_color = black;             // background color
   double density = 1.0;               // proportion of LED's flashing (0-100%) 
   strip_subdiv_t unit = bar;          // flash pattern subdivision (bar, segment, pixel)
   
@@ -180,8 +180,30 @@ class AddrLEDAnimation1 : public AddrLEDAnimation{
           units_index[i] = i;
         }
   }
+  //AUTOCOLOR constructor 
+  AddrLEDAnimation1(AddressableLED* f, strip_subdiv_t subdiv, double dens, std::string d, std::string i, AnimationType typ, bool flash = true, uint8_t mast = 255){
+    //set Base params 
+    this->fixture = f,this->description = d,this->id = i, this->type = typ;
+    this->autocolor=true;
+    //set cinematic params
+    this->density = dens;
+    this->unit = subdiv;
+    switch (subdiv){
+      case bar : units_index.resize(NUM_BAR);
+        break;
+      case seg : units_index.resize(NUM_SEG);
+        break;
+      case pix : units_index.resize(NUM_PIX);
+        break;
+      }
+    for(int i=0; i<units_index.size(); i++){
+      units_index[i] = i;
+    }
+
+  }
 
     void init() override;
+    void init(const color_vec&) override;
     void new_frame() override;
     
 };
@@ -205,8 +227,8 @@ class AddrLEDAnimation1 : public AddrLEDAnimation{
 class AddrLEDAnimation2 : public AddrLEDAnimation{
   public:
     // Animation parameters (constant or set by animation constructor)
-    pixel backgd_RGB;
-    pixel flash_RGB;
+    simpleColor back_color; //TODO replace with simplecolor
+    simpleColor flash_color;  //TODO replace with simplecolor
     strip_subdiv_t unit;
     int fade_rate = 80;                            // ms flash fade rate (time constant of an exponential decay : intensity = exp(-(t-t0)/fade_rate)
 
@@ -215,34 +237,49 @@ class AddrLEDAnimation2 : public AddrLEDAnimation{
     // Constructor
     AddrLEDAnimation2(AddressableLED *f, simpleColor f_col, simpleColor b_col, strip_subdiv_t u, std::string d, std::string i, AnimationType typ=any, int prio=1, int mast=255)
     {
-        this->description = d;
-        this->id = i;
-        this->fixture = f;
-        this->type = typ;
-        this->master = mast;
-        this->priority=prio;
+      //set BAse params
+      this->description = d,this->id = i,this->fixture = f,this->type = typ,this->master = mast,this->priority=prio;
+      //set cinematic params
+      this->flash_color = f_col;
+      this->back_color = b_col;
+      this->unit = u;
 
-        this->flash_RGB = this->fixture->RGB(f_col);
-        this->backgd_RGB = this->fixture->RGB(b_col, 20);
-        this->unit = u;
+      switch (u){
+        case bar : units_index.resize(NUM_BAR);
+          break;
+        case seg : units_index.resize(NUM_SEG);
+          break;
+        case pix : units_index.resize(NUM_PIX);
+          break;
+      }
 
-        switch (u){
-          case bar : units_index.resize(NUM_BAR);
-            break;
-          case seg : units_index.resize(NUM_SEG);
-            break;
-          case pix : units_index.resize(NUM_PIX);
-            break;
-        }
+      for(int i=0; i<units_index.size(); i++){
+        units_index[i] = i;
+      }
 
-        for(int i=0; i<units_index.size(); i++){
-          units_index[i] = i;
-        }
-
-        this->update_palette(color_vec{f_col, b_col});
+      this->update_palette(color_vec{f_col, b_col});
     }
-
+    // AUTOCOLOR Constructor
+    AddrLEDAnimation2(AddressableLED *f, strip_subdiv_t u, std::string d, std::string i, AnimationType typ=any, int prio=1, int mast=255){
+      //set BAse params
+      this->description = d,this->id = i,this->fixture = f,this->type = typ,this->master = mast,this->priority=prio;
+      this->autocolor=true;
+      //set cinematic params
+      this->unit = u;
+      switch (u){
+        case bar : units_index.resize(NUM_BAR);
+          break;
+        case seg : units_index.resize(NUM_SEG);
+          break;
+        case pix : units_index.resize(NUM_PIX);
+          break;
+      }
+      for(int i=0; i<units_index.size(); i++){
+        units_index[i] = i;
+      }
+    }
     void init() override;
+    void init(const color_vec&) override;
     void new_frame() override;
 };
 
@@ -355,25 +392,23 @@ private :
     //CONSTUCTORS
     // Base constructor
     AddrLEDAnimation4(AddressableLED *f, simpleColor b_col, color_vec f_cols, Shape fshape, strip_subdiv_t u, int prand, int flen, std::string d, std::string i, AnimationType t, int prio, int mast=255){
-        //set Base parameters
-        this->description = d,this->id = i,this->fixture = f,this->type = t,this->priority = prio,this->master = mast;
-        //set cinematic parameters
-        this->flash_colors = f_cols;
-        this->back_color = b_col;
-        this->rand_const_ms = prand;
-        this->flash_len = flen;
-        this->flash_shape = fshape;        
+      //set Base parameters
+      this->description = d,this->id = i,this->fixture = f,this->type = t,this->priority = prio,this->master = mast;
+      //set cinematic parameters
+      this->flash_colors = f_cols;
+      this->back_color = b_col;
+      this->rand_const_ms = prand;
+      this->flash_len = flen;
+      this->flash_shape = fshape;        
 
-        this->update_palette(color_vec{b_col});
-        this->update_palette(f_cols);
+      this->update_palette(color_vec{b_col});
+      this->update_palette(f_cols);
     }
-    // autocolor constructor
+    // AUTOCOLOR constructor
     AddrLEDAnimation4(AddressableLED *f, Shape fshape, strip_subdiv_t u, int prand, int flen, std::string d, std::string i, AnimationType t, int prio, int mast=255){
       //set Base paramters
-      this->description = d, this->id = i, this->fixture = f; // set base parameters
+      this->description = d,this->id = i,this->fixture = f,this->type = t,this->priority = prio,this->master = mast;
       this->autocolor = true;
-      this->master=mast;
-
       //set cinematic parameters
       this->flash_shape = fshape;
       this->unit = u;
