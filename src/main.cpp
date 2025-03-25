@@ -101,7 +101,35 @@ using namespace std;
         // Detach the thread to let it run independently
         select_server_thread.detach();
     }
+/*TODO DMX Commande interface
+Pour faciliter l'integration du systeme Beatmatcher avec d'autre éléments, la necessité d'une IHM de pilotage en temps réel
+s'impose.
+Afin de maximiser les cas d'usage possible, les exigences sont les suivantes : 
 
+Lorsqu'il est exécuté et sans interruption d'exécution / recompilation :
+    - le programme doit etre capable de fonctionner en automatisme intégral lorsque l'opérateur le souhaite ou lorsqu'il
+     n'y a pas d'opérateur (c'est la seule capacité du Beatmatcher aujourd'hui)
+    - le programme doit etre capable de receptionner des ordres de commande via DMX sur 1 univers(Artnet) permettant de piloter
+    au choix un ou plusieurs des éléments suivants :
+        - la palette de couleur général (2 ou 3 couleurs)
+        - la palette de couleur de chaque fixture (1 à 3 couleurs)
+        - l'animation jouée par chaque fixture (choisie dans une liste prédéfinie et préconfigurée)
+        - le dimmer de chaque fixture
+        L'opérateur peut ainsi prendre ou rendre la main sur chacun de ces paramètres individuellement permettant une grande
+        flexibilité dans le degré d'automatisme. Par exemple, il est possible à partir d'une configuration tout automatique de 
+        simplement forcer l'animation et/ou la couleur d'un seul fixture parmi l'ensemble
+        
+    - Afin de faciliter la gestion de l'ensemble et d'éviter les changements d'animation / couleur intempestifs et donc 
+    (disgracieux), l'opérateur doit pouvoir toucher aux commandes pour préparer la scene suivante SANS que le Beatmatcher
+    ne prenne en compte les commandes immédiatement. On introduira donc un système de déclencheur (1 canal DMX) qui par un
+    front montant, commande au beatmatcher la prise en compte des nouveaux réglages. Ce déclencheur peut n'agir que sur 
+    quelques canaux de commmande particulièrement dangereux (choix animation, choix couleur) et pas sur d'autres (Dimmers).
+    Ce déclencheur doit pouvoir etre inhibé en le positionnant à sa valeur MAX (les changemets de paramétrages sont alors
+    prise en compte en continu) 
+    - pour rendre la main sur un canal de type choix animation ou choix couleur, l'opérateur le positionne à la valeur minimum
+    soit ZERO. Dans cette configuration, c'est le beatmatcher qui fait automatiquement les choix d'animation et de couleur. 
+         */
+    
 
 fix_vec ll_fxtrs = {    /*&led,*/ &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, 
                         &spot_7, &spot_8, &spot_9, &spot_10, &spot_11, &spot_12, 

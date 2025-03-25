@@ -368,25 +368,25 @@ void AddressableLED::init(){
     animations.push_back(new AddrLEDAnimation4(this, red,            color_vec{cyan},            square, bar, burst_period, flash_length, "fast cyan chaser, red bkgd",                "PIX.4.2.2.2.101", leader, 1, 255));
 */
     //AUTOCOLOR with Animation type 1 : Analog Beat all pixels ()Beatmatcher original animation)------------------------------
-    animations.push_back(new AddrLEDAnimation1(this, bar, 1, "Analog Beat", "PIX.6.1", any, true, 255));     
+    animations.push_back(new AddrLEDAnimation1(this, bar, 1, "Analog Beat", "PIX.6.1", leader, true, 255));     
 
     //AUTOCOLOR with Animation type 1 : Analog Beat with random fragments ----------------------------------------------------
-    animations.push_back(new AddrLEDAnimation1(this, bar, 0.7,  "Bar Analog Beat",      "PIX.6.2.1", any, true, 255));     
-    animations.push_back(new AddrLEDAnimation1(this, seg, 0.7,  "Segments Analog Beat", "PIX.6.2.2", any, true, 255));    //TODO Fix this one 
-    animations.push_back(new AddrLEDAnimation1(this, pix, 0.7,  "Pixels Analog Beat",   "PIX.6.2.3", any, true, 255));     
+    animations.push_back(new AddrLEDAnimation1(this, bar, 0.7,  "Bar Analog Beat",      "PIX.6.2.1", leader, true, 255));     
+    animations.push_back(new AddrLEDAnimation1(this, seg, 0.7,  "Segments Analog Beat", "PIX.6.2.2", leader, true, 255));    //TODO Fix this one 
+    animations.push_back(new AddrLEDAnimation1(this, pix, 0.7,  "Pixels Analog Beat",   "PIX.6.2.3", leader, true, 255));     
     
     //AUTOCOLOR with Animation type 2 : Digital Beat -------------------------------------------------------------------------
-    animations.push_back(new AddrLEDAnimation2(this, bar, "Bar Digital Beat (autocolor)",       "PIX.7.1", any, true, 255));     
-    animations.push_back(new AddrLEDAnimation2(this, seg, "Segments Digital Beat (autocolor)",  "PIX.7.2", any, true, 255));     
-    animations.push_back(new AddrLEDAnimation2(this, pix, "Segments Digital Beat (autocolor)",  "PIX.7.3", any, true, 255));     
+    animations.push_back(new AddrLEDAnimation2(this, bar, "Bar Digital Beat (autocolor)",       "PIX.7.1", leader, true, 255));     
+    animations.push_back(new AddrLEDAnimation2(this, seg, "Segments Digital Beat (autocolor)",  "PIX.7.2", leader, true, 255));     
+    animations.push_back(new AddrLEDAnimation2(this, pix, "Pixel Digital Beat (autocolor)",     "PIX.7.3", leader, true, 255));     
     
     //AUTOCOLOR with Animation type 4 ----------------------------------------------------------------------------------------
     //Slow & long bubbles
-    animations.push_back(new AddrLEDAnimation4(this, gaussian, bar, 400, 1500, "Slow Bubbles", "PIX.8.1", any, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, gaussian, bar, 400, 1500, "Slow Bubbles", "PIX.8.1", backer, 1, 255));
     // Fast & short Bubbles
     animations.push_back(new AddrLEDAnimation4(this, gaussian, bar, 200, 600, "Fast Bubbles ", "PIX.8.2", any, 1, 255));
     // Slow Random Chaser 
-    animations.push_back(new AddrLEDAnimation4(this, square,   bar, 300, 1500, "Slow Chaser",  "PIX.8.3", any, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, square,   bar, 300, 1500, "Slow Chaser",  "PIX.8.3", backer, 1, 255));
     // Fast Random Chaser 
     animations.push_back(new AddrLEDAnimation4(this, square,   bar, 200, 600, "Fast Chaser",  "PIX.8.4", any, 1, 255));
 

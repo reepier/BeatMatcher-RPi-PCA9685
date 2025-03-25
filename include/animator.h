@@ -477,12 +477,12 @@ class BaseAnimation{
      * 
      * Functionalities :
      * - the color definition happens in the Animation::init() function
-     * - the color definition is based on the current color palette (a global variable ?)
-     * - authorized colors can be defined manually (or not) 
+     * - the color definition is based on a color palette 
+     * - authorized & unauthorized colors can be defined manually (or not) 
      * - the color palette will then be defined with the following rules in mind :
      *    - color order matters : the first color will be used for dynamic/flash/bursts elements while the next for background/fix/slow elements
      * 
-     * - display the init colors in the output display instead of Animation.descr or update animation.descr at animation.init() (simpler ?)
+     * - display the palette (for each fixture ? globally ?) in the output console
      * 
      * Options :
      * - The nummber of color (1, 2 more?) or a range of color number could be set at animation construction (to allow or restrict
@@ -492,10 +492,6 @@ class BaseAnimation{
      *
      * 
      * */
-  
- 
-
-    
     void update_palette(color_vec colors){
       for (color_vec::iterator new_c = colors.begin(); new_c != colors.end(); new_c++){
         // check if new color is not already stored in color_palette
