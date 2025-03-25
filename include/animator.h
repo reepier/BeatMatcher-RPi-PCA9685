@@ -331,7 +331,7 @@ class AnimationManager{
     bool flash = true;
     time_t timer_start_ms = 0, timer_end_ms=0, timer_duration_ms = 0;
     unsigned long t_last_change_ms = millis();   //timestamp of last switch between aniamtions
-    ColorPaletteMagazine palette_magasine, palette_magasine_2;
+    ColorPaletteMagazine palette_magasine, palette_magasine_2, test_palette;
 
     void init();
 
@@ -455,6 +455,7 @@ class BaseAnimation{
       this->t_animation_start_ms = frame.t_current_ms;
       this->frame_cpt = 0;
     }
+    virtual void init(const color_vec&){}; //special init() for AUTOCOLOR feature
      
      
     /** //TODO :
@@ -491,10 +492,6 @@ class BaseAnimation{
      *
      * 
      * */
-
-
-    virtual void init(const color_vec&){};
-
   
  
 

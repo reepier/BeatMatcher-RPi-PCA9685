@@ -55,8 +55,8 @@ bool process_arguments(int n, char* args[]){
         else if(strcmp(arg, "--animation") == 0){
             b_ANI_TEST = true;
             while ( (i<n-1) && (string(args[++i]).find('-') != 0) ) {
-                vec_anim_id.push_back(string(args[i]));
-                balise( (*(vec_anim_id.end()-1)).data() );
+                cli_anim_id.push_back(string(args[i]));
+                balise( (*(cli_anim_id.end()-1)).data() );
             }
         }
         else{

@@ -7,9 +7,9 @@
 #define MAX_SUBPIX_PER_UNI  510 // maximum number of subpixels arried over 1 universe (1 universe can only carry complete pixels (BC-204 limitation))
 // WS2815 led strip config
   // Config paramters
-  #define NUM_BAR 18                       // Total Number of bars
+  #define NUM_BAR 3                       // Total Number of bars
   #define NUM_SEG (3*NUM_BAR)             // Total number of segments (across all bars)
-  const int_vec groups_size = {3, 3, 3, 3, 3, 3};        // Number of bars for each group
+  const int_vec groups_size = {3, 3, 3, 3, 3, 3};        // Number of bars for each group //TODO implement "GROUP" sudivision 
   #define NUM_GROUP  groups_size.size()   // Number of groups
 
   // Quasi constants
@@ -347,6 +347,10 @@ class AddrLEDAnimation3 : public AddrLEDAnimation{
     //plot (A + K * atan(Q*(x-A))) with Q = 0.05, A=255/2, K =A/atan(Q*A), x from 0 to 255
 };
 
+
+/*TODO major add a choice between random & sequential bursts : sequential mode allows for clean, standard, chasers
+      sequential mode setting shall include time constraints (burst length & period) AND spatial constraint (pixel 
+      or pixel group sequencing : {1,2,3,4,5,6}, {6,5,4,3,2,1}, {{1,2,3}{6,5,4}}, etc.);
 /*
 #              ######                          ######                             
 #    #         #     #   ##   #    # #####     #     # #    # #####   ####  ##### 

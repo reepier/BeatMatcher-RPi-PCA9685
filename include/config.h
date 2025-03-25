@@ -15,7 +15,7 @@ extern bool b_CURSES;       //TRUE : use curses HMI ; FALSE : use simple console
 extern bool b_EXT_CONTROL;
 
 extern bool b_ANI_TEST;
-extern std::vector<std::string> vec_anim_id;
+extern std::vector<std::string> cli_anim_id;
 
 
 // Music sampler

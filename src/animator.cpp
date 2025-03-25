@@ -78,7 +78,18 @@ void AnimationManager::init(){
     palette_magasine_2.push_back(color_vec{purple, c_white},  1);
     palette_magasine_2.push_back(color_vec{purple, w_white},  1);
 
-    
+
+//---------------------------------------------------------------------------------
+    //TEST Palette
+    test_palette.push_back( color_vec{red},                 1);
+    // test_palette.push_back( color_vec{blue},                1);
+    // test_palette.push_back( color_vec{purple},              1);
+    // test_palette.push_back( color_vec{gold},                1);
+    // test_palette.push_back( color_vec{w_white,  red},       1);
+    // test_palette.push_back( color_vec{c_white,  blue},      1);
+    // test_palette.push_back( color_vec{gold,     purple},    1);
+    // test_palette.push_back( color_vec{gold,     red},       1);
+
     front_rack_init();
     rack_15_init();
     rack_40_init();
@@ -378,8 +389,9 @@ bool AnimationManager::test_animation(){
     log(4, __FILE__, " ",__func__);
 
     bool success = false;
-    balise(fcn::num_to_str((int)vec_anim_id.size()).data());
-    for(vector<string>::iterator anim_id_it = vec_anim_id.begin(); anim_id_it != vec_anim_id.end(); anim_id_it++){
+    balise(fcn::num_to_str((int)cli_anim_id.size()).data());
+    
+    for(vector<string>::iterator anim_id_it = cli_anim_id.begin(); anim_id_it != cli_anim_id.end(); anim_id_it++){
         string s_anim_id = (*anim_id_it);
         balise(s_anim_id.data());
 
@@ -488,7 +500,12 @@ bool BaseFixture::activate_random(bool include_black){
         this->active_animation = this->animations[ rand()%(this->animations.size())];
     else
         this->active_animation = this->animations[ rand()%(this->animations.size()-1) +1];
-    this->active_animation->init();
+    
+    if(this->active_animation->autocolor){
+        this->active_animation->init(animator.test_palette.get_random_palette()); //Quick n Dirty fix to animation testing to support AUTOCOLOR
+    }else{
+        this->active_animation->init();
+    }
 }
 
 // select and init an animation with its ID. If the ID cannot be found within the existing animations, does nothing.
@@ -501,7 +518,11 @@ bool BaseFixture::activate_by_ID(string id){
         if ((*anim_it)->id == id){
             found_it = true;
             this->active_animation = (*anim_it);
-            this->active_animation->init();
+            if(this->active_animation->autocolor){
+                this->active_animation->init(animator.test_palette.get_random_palette()); //Quick n Dirty fix to animation testing to support AUTOCOLOR
+            }else{
+                this->active_animation->init();
+            }
             return found_it;
         }
     }
@@ -511,7 +532,9 @@ bool BaseFixture::activate_by_ID(string id){
 
 /* Activates an animation whose colors match the ones in palette passed as an argument.
    All of the selected animations color must be listed in the palette, but all the palette's 
-   color do not have to be listed in the animation's colors */
+   color do not have to be listed in the animation's colors
+   
+   ATTENTION !! AUTOCOLOR shall make this function & feature obsolete --> do not use both*/
 bool BaseFixture::activate_by_color(color_vec arg_palette, AnimationType arg_type){
     log(4, __FILE__, " ",__LINE__, " ", __func__);
 
