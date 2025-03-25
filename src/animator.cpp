@@ -373,7 +373,7 @@ void AnimationManager::autocolor_update(){
         palette_lifespan--; //decrease palette lifespan
     }
 }
-
+//TODO update to support AUTOCOLOR
 bool AnimationManager::test_animation(){
     log(4, __FILE__, " ",__func__);
 
@@ -738,5 +738,6 @@ int_vec fcn::convert_8_to_12bits(DMX_vec in_vec){
     }
     return ret;
 }
+
 
 

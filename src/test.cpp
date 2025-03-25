@@ -162,7 +162,7 @@ int main(int argc, char* argv[]){
 
 
     // MAIN PROGRAM (take what is needed and comment out the rest    
-    initialize();
+    // initialize();
     // balise("Initalisation terminated with success !");
 
     // while (true){
@@ -243,9 +243,19 @@ int main(int argc, char* argv[]){
     //     }
     // }
 
-    while(true){
-        auto t = millis();
-        cout << t << " -> " << fcn::ms_to_hhmmss(t) << " or " << fcn::ms_to_hhmmssms(t) << endl;;
-        delay(100);
-    }
+    // while(true){
+    //     auto t = millis();
+    //     cout << t << " -> " << fcn::ms_to_hhmmss(t) << " or " << fcn::ms_to_hhmmssms(t) << endl;;
+    //     delay(100);
+    // }
+
+    color_vec palette = {red, green, blue};
+    color_vec authorized = {red, blue, orange, gold};
+    color_vec unauthorized = {green, cyan};
+    cout << "palette : " << fcn::palette_to_string(palette) <<endl;
+    cout << "auth. : " << fcn::palette_to_string(authorized) <<endl<<endl;
+    cout << "unauth. : " << fcn::palette_to_string(unauthorized) <<endl;
+    cout << "palette <Inter.> authrozed : " << fcn::palette_to_string( fcn::get_vector_intersection(palette, authorized) , '/') << endl;
+    cout << "palette - unauthorized : " << fcn::palette_to_string( fcn::get_vector_exclusion(palette, unauthorized) , '/') << endl;
+
 }

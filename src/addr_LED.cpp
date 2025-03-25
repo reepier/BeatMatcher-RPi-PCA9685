@@ -367,15 +367,28 @@ void AddressableLED::init(){
     animations.push_back(new AddrLEDAnimation4(this, purple,            color_vec{gold},            square, bar, burst_period, flash_length, "fast gold chaser, purple bkgd",                "PIX.4.2.2.2.100", leader, 1, 255));
     animations.push_back(new AddrLEDAnimation4(this, red,            color_vec{cyan},            square, bar, burst_period, flash_length, "fast cyan chaser, red bkgd",                "PIX.4.2.2.2.101", leader, 1, 255));
 */
-    //AUTOCOLOR with Animation type 1
-    animations.push_back(new AddrLEDAnimation1(this, bar, 0.7, "Bar Analog Beat (autocolor)", "PIX.6.0.1", any, true, 255));     
-    //AUTOCOLOR with Animation type 2
-    animations.push_back(new AddrLEDAnimation2(this, bar, "Bar Digital Beat (autocolor)",     "PIX.7.0.1", any, true, 255));     
-    animations.push_back(new AddrLEDAnimation2(this, pix, "Pixels Digital Beat (autocolor)",  "PIX.7.0.2", any, true, 255));     
-    //AUTOCOLOR with Animation type 4
-    animations.push_back(new AddrLEDAnimation4(this, gaussian, bar, 1000, 1000, "Slow bubbles by bar", "PIX.5.0.1", any, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, gaussian, bar, 600,  500,  "Fast bubbles by bar", "PIX.5.0.2", any, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, square,   bar, 1000, 1000, "Slow chaser by bar",  "PIX.5.0.3", any, 1, 255));
+    //AUTOCOLOR with Animation type 1 : Analog Beat all pixels ()Beatmatcher original animation)------------------------------
+    animations.push_back(new AddrLEDAnimation1(this, bar, 1, "Analog Beat", "PIX.6.1", any, true, 255));     
+
+    //AUTOCOLOR with Animation type 1 : Analog Beat with random fragments ----------------------------------------------------
+    animations.push_back(new AddrLEDAnimation1(this, bar, 0.7,  "Bar Analog Beat",      "PIX.6.2.1", any, true, 255));     
+    animations.push_back(new AddrLEDAnimation1(this, seg, 0.7,  "Segments Analog Beat", "PIX.6.2.2", any, true, 255));     
+    animations.push_back(new AddrLEDAnimation1(this, pix, 0.7,  "Pixels Analog Beat",   "PIX.6.2.3", any, true, 255));     
+    
+    //AUTOCOLOR with Animation type 2 : Digital Beat -------------------------------------------------------------------------
+    animations.push_back(new AddrLEDAnimation2(this, bar, "Bar Digital Beat (autocolor)",       "PIX.7.1.1", any, true, 255));     
+    animations.push_back(new AddrLEDAnimation2(this, seg, "Segments Digital Beat (autocolor)",  "PIX.7.1.2", any, true, 255));     
+    animations.push_back(new AddrLEDAnimation2(this, pix, "Segments Digital Beat (autocolor)",  "PIX.7.1.2", any, true, 255));     
+    
+    //AUTOCOLOR with Animation type 4 ----------------------------------------------------------------------------------------
+    //Slow & long bubbles
+    animations.push_back(new AddrLEDAnimation4(this, gaussian, bar, 400, 1500, "Slow Bubbles", "PIX.8.1", any, 1, 255));
+    // Fast & short Bubbles
+    animations.push_back(new AddrLEDAnimation4(this, gaussian, bar, 200, 600, "Fast Bubbles ", "PIX.8.2", any, 1, 255));
+    // Slow Random Chaser 
+    animations.push_back(new AddrLEDAnimation4(this, square,   bar, 300, 1500, "Slow Chaser",  "PIX.8.3", any, 1, 255));
+    // Fast Random Chaser 
+    animations.push_back(new AddrLEDAnimation4(this, square,   bar, 200, 600, "Fast Chaser",  "PIX.8.4", any, 1, 255));
 
     this->activate_none();
 }
@@ -417,59 +430,21 @@ DMX_vec AddressableLED::RGB(simpleColor c, int intensity){
     int ref_int = 255;          // reference intensity, set for each color to get a constnat luminosity trhoughtou the palette
     // store in vector temp the color vector of norm 255
     switch (c){
-        case black:
-            temp = fcn::RGB_norm(DMX_vec{0,0,0});
-            break;
-        case red:
-            temp = fcn::RGB_norm(DMX_vec{255,0,0});
-            break;
-        case green:
-            ref_int = 100; 
-            temp = fcn::RGB_norm(DMX_vec{0,255,0});
-            break;
-        case blue:
-            ref_int = 220;
-            temp = fcn::RGB_norm(DMX_vec{0,0,255});
-            break;
-        case yellow:
-            ref_int = 200;
-            temp = fcn::RGB_norm(DMX_vec{255,87,0});
-            break;
-        case orange:
-            temp = fcn::RGB_norm(DMX_vec{255,35,0});
-            break;
-        case sodium:
-            temp = fcn::RGB_norm(DMX_vec{255,16,0});
-            break;
-        case cyan:
-            ref_int = 150;
-            temp = fcn::RGB_norm(DMX_vec{0,184,255});
-            break;
-        case purple:
-            ref_int = 255;
-            temp = fcn::RGB_norm(DMX_vec{180,0,255});
-            break;    
-        case magenta:
-            ref_int = 255;
-            temp = fcn::RGB_norm(DMX_vec{255,0,197});
-            break;
-        case pink:
-            ref_int = 255;
-            temp = fcn::RGB_norm(DMX_vec{255,0,86});
-            break;
-        case w_white:
-            temp = fcn::RGB_norm(DMX_vec{255,173,102});
-            break;
-        case c_white:
-            ref_int = 255; 
-            temp = fcn::RGB_norm(DMX_vec{255,255,255});
-            break;
-        case gold:
-            temp = fcn::RGB_norm(DMX_vec{255,50,3});
-            break;
-        default:
-            temp = fcn::RGB_norm(DMX_vec{0,0,0});
-            break;
+        case black      :                   temp = fcn::RGB_norm(DMX_vec{0,0,0});       break;
+        case red        :                   temp = fcn::RGB_norm(DMX_vec{255,0,0});     break;
+        case green      :ref_int = 100,     temp = fcn::RGB_norm(DMX_vec{0,255,0});     break;
+        case blue       :ref_int = 220,     temp = fcn::RGB_norm(DMX_vec{0,0,255});     break;
+        case yellow     :ref_int = 200,     temp = fcn::RGB_norm(DMX_vec{255,87,0});    break;
+        case orange     :                   temp = fcn::RGB_norm(DMX_vec{255,35,0});    break;
+        case sodium     :                   temp = fcn::RGB_norm(DMX_vec{255,16,0});    break;
+        case cyan       :ref_int = 150;     temp = fcn::RGB_norm(DMX_vec{0,184,255});   break;
+        case purple     :ref_int = 255;     temp = fcn::RGB_norm(DMX_vec{180,0,255});   break;    
+        case magenta    :ref_int = 255;     temp = fcn::RGB_norm(DMX_vec{255,0,197});   break;
+        case pink       :ref_int = 255;     temp = fcn::RGB_norm(DMX_vec{255,0,86});    break;
+        case w_white    :                   temp = fcn::RGB_norm(DMX_vec{255,173,102}); break;
+        case c_white    :ref_int = 255;     temp = fcn::RGB_norm(DMX_vec{255,255,255}); break;
+        case gold       :                   temp = fcn::RGB_norm(DMX_vec{255,50,3});    break;
+        default         :                   temp = fcn::RGB_norm(DMX_vec{0,0,0});       break;
         }
 
         /* return a color vector with the same tint as temp but normalized according to a color specific 

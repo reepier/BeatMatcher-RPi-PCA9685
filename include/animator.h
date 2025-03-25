@@ -6,6 +6,7 @@
 #include <cmath>
 #include <algorithm>
 #include <random>
+#include <unordered_set>
 
 #include "commonTypes.h"
 #include "debug.h" 
@@ -59,7 +60,7 @@ namespace fcn{
   std::string vec_to_str(int_vec, char);
   std::string vec_to_str(str_vec, char);
 
-  std::string palette_to_string(color_vec, char);
+  std::string palette_to_string(color_vec, char sep='/');
 
   std::string num_to_str(int);
   std::string num_to_str(time_t);
@@ -221,7 +222,47 @@ namespace fcn{
     return common_col>=n;
   }
 
-} 
+
+
+  //TODO define function that takes in 2 vectors and combine them using different rules (intersection, exclusion, etc.)
+  /* returns a vector containing only the common elements between v1 and v2 */
+template<class T>
+std::vector<T> get_vector_intersection(const std::vector<T>& v1, const std::vector<T>& v2) {
+    // Special case: If v2 is empty, return an empty vector
+    if (v2.empty()) {
+        return v1;
+    }
+
+    // Use an unordered_set for fast lookup (O(1) average time complexity)
+    std::unordered_set<T> v2_set(v2.begin(), v2.end());
+    std::vector<T> vres;
+
+    // Find common elements
+    for (const auto& item : v1) {
+        if (v2_set.count(item)) {
+            vres.push_back(item);
+            v2_set.erase(item); // Ensure uniqueness in the output
+        }
+    }
+
+    return vres;
+}
+
+  /*returns a vetor containings every elements from v1 except those present in v2 (purges v1 from elements of v2)*/
+template<class T>
+std::vector<T> get_vector_exclusion(const std::vector<T>& v1, const std::vector<T>& v2) {
+    std::unordered_set<T> v2_set(v2.begin(), v2.end()); // Store v2 for fast lookup
+    std::vector<T> vres = v1;
+
+    std::erase_if(vres, [&v2_set](const T& item) {
+        return v2_set.contains(item); // Remove if item is in v2
+    });
+
+    return vres;
+}
+
+
+} /*End of namespace fcn*/
 
 class ColorPaletteMagazine{
   public:
@@ -401,7 +442,9 @@ class BaseAnimation{
       - is autocolor true ? 
       - do authorized color include all? some? of the passed color palette
       - are there any? too many? unauthorized color in the palette
-      --> to start simple, only use the first criteria, //TODO improve later */
+      --> to start simple, only use the first criteria, //TODO improve later
+      
+    virtual function override might allow to refine this function for each individual animation*/
     virtual bool is_autocolor_compatible(const color_vec& palette){return this->autocolor;} 
     
 
