@@ -152,48 +152,20 @@ DMX_vec SpiderFixture::RGBW(simpleColor c, int intensity){
 
     switch (c)
     {
-    case black:
-        return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);
-        break;
-    case red:
-        return fcn::RGBW_norm(DMX_vec{255,0,0,0}, intensity);
-        break;
-    case green:
-        return fcn::RGBW_norm(DMX_vec{0,255,0,0}, 160.0/255*intensity);
-        break;
-    case blue:
-        return fcn::RGBW_norm(DMX_vec{0,0,255,0}, 190.0/255*intensity);
-        break;
-    case yellow:
-        return fcn::RGBW_norm(DMX_vec{255,90,0,0}, intensity);
-        break;
-    case orange:
-        return fcn::RGBW_norm(DMX_vec{255,40,0,0}, intensity);
-        break;
-    case sodium:
-        return fcn::RGBW_norm(DMX_vec{255,20,0,0}, intensity);
-        break;
-    case cyan:
-        return fcn::RGBW_norm(DMX_vec{0,219,255,0}, 180.0/255*intensity);
-        break;
-    case purple:
-        return fcn::RGBW_norm(DMX_vec{150,0,255,0}, intensity);
-        break;    
-    case magenta:
-        return fcn::RGBW_norm(DMX_vec{255,0,240,0}, intensity);
-        break;
-    case pink:
-        return fcn::RGBW_norm(DMX_vec{255,0,100,0}, intensity);
-        break;
-    case c_white:
-        return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);
-        break;
-    case gold:
-        return fcn::RGBW_norm(DMX_vec{255,40,0,100}, intensity);
-        break;
-    default:
-        return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);
-        break;
+    case black:     return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);                  break;
+    case red:       return fcn::RGBW_norm(DMX_vec{255,0,0,0}, intensity);                break;
+    case green:     return fcn::RGBW_norm(DMX_vec{0,255,0,0}, 160.0 /255*intensity);     break;
+    case blue:      return fcn::RGBW_norm(DMX_vec{0,0,255,0}, 190.0 /255*intensity);     break;
+    case yellow:    return fcn::RGBW_norm(DMX_vec{255,90,0,0}, intensity);               break;
+    case orange:    return fcn::RGBW_norm(DMX_vec{255,40,0,0}, intensity);               break;
+    case sodium:    return fcn::RGBW_norm(DMX_vec{255,20,0,0}, intensity);               break;
+    case cyan:      return fcn::RGBW_norm(DMX_vec{0,219,255,0}, 180.0   /255*intensity); break;
+    case purple:    return fcn::RGBW_norm(DMX_vec{150,0,255,0}, intensity);              break;    
+    case magenta:   return fcn::RGBW_norm(DMX_vec{255,0,240,0}, intensity);              break;
+    case pink:      return fcn::RGBW_norm(DMX_vec{255,0,100,0}, intensity);              break;
+    case c_white:   return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0 /255*intensity);     break;
+    case gold:      return fcn::RGBW_norm(DMX_vec{255,40,0,100}, intensity);             break;
+    default:        return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);                  break;
     }
 }
 

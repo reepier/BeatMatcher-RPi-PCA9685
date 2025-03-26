@@ -476,9 +476,9 @@ DMX_vec FunGeneration_12x1W_RGBW(simpleColor c, int intensity){
     case w_white:         return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);break;
     case c_white:         return fcn::RGBW_norm(DMX_vec{255,230,213,255}, 180.0/255*intensity);break;
     case gold:            return fcn::RGBW_norm(DMX_vec{255,40,0,100}, intensity);break;
-    case sevika_pink:     return fcn::RGBW_norm(DMX_vec{255,0,11,0}, intensity);break;
-    case hextech_cyan:    return fcn::RGBW_norm(DMX_vec{0,153,255,0}, intensity);break;
-    case shimmer_purple:  return fcn::RGBW_norm(DMX_vec{245,0,255,0}, intensity);break;
+    // case sevika_pink:     return fcn::RGBW_norm(DMX_vec{255,0,11,0}, intensity);break;
+    // case hextech_cyan:    return fcn::RGBW_norm(DMX_vec{0,153,255,0}, intensity);break;
+    // case shimmer_purple:  return fcn::RGBW_norm(DMX_vec{245,0,255,0}, intensity);break;
     default:              return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);break;
     }
 }
@@ -499,9 +499,9 @@ DMX_vec Shehds_10x8W_RGBW(simpleColor c, int intensity){
         case w_white:           return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);break;
         case c_white:           return fcn::RGBW_norm(DMX_vec{255,230,213,255}, 180.0/255*intensity);break;
         case gold:              return fcn::RGBW_norm(DMX_vec{255,40,0,100}, intensity);break;
-        case sevika_pink:       return fcn::RGBW_norm(DMX_vec{255,0,11,0}, intensity);break;
-        case hextech_cyan:      return fcn::RGBW_norm(DMX_vec{0,153,255,0}, intensity);break;
-        case shimmer_purple:    return fcn::RGBW_norm(DMX_vec{245,0,255,0}, intensity);break;
+        // case sevika_pink:       return fcn::RGBW_norm(DMX_vec{255,0,11,0}, intensity);break;
+        // case hextech_cyan:      return fcn::RGBW_norm(DMX_vec{0,153,255,0}, intensity);break;
+        // case shimmer_purple:    return fcn::RGBW_norm(DMX_vec{245,0,255,0}, intensity);break;
         default:                return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);break;
     }
 }
@@ -522,9 +522,9 @@ DMX_vec Shehds_7x18W_RGBWAU(simpleColor c, int intensity){
         case w_white:        return fcn::RGBW_norm(DMX_vec{221,104,0,255,167,0}, -1);break;
         case c_white:        return fcn::RGBW_norm(DMX_vec{255,227,200,255,0,0}, -1);break;
         case gold:           return fcn::RGBW_norm(DMX_vec{255,58,0,49,134,0}, -1);break;
-        case sevika_pink:    return fcn::RGBW_norm(DMX_vec{255,0,27,0,0,0}, -1);break;
-        case hextech_cyan:   return fcn::RGBW_norm(DMX_vec{0,153,255,0,0,0}, -1);break;
-        case shimmer_purple: return fcn::RGBW_norm(DMX_vec{190,0,255,0,0,0}, -1);break;
+        // case sevika_pink:    return fcn::RGBW_norm(DMX_vec{255,0,27,0,0,0}, -1);break;
+        // case hextech_cyan:   return fcn::RGBW_norm(DMX_vec{0,153,255,0,0,0}, -1);break;
+        // case shimmer_purple: return fcn::RGBW_norm(DMX_vec{190,0,255,0,0,0}, -1);break;
         default:             return fcn::RGBW_norm(DMX_vec{0,0,0,0,0,0}, -1);break;
     }
 }
@@ -568,9 +568,9 @@ DMX_vec SpotRack::RGBW(simpleColor c, int intensity){ //TODO delete
     case pink:            return fcn::RGBW_norm(DMX_vec{255,0,100,0}, intensity);break;
     case w_white:         return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);break;
     case gold:            return fcn::RGBW_norm(DMX_vec{255,40,0,100}, intensity);break;
-    case sevika_pink :    return fcn::RGBW_norm(DMX_vec{255,0,11,0}, intensity);break;
-    case hextech_cyan :   return fcn::RGBW_norm(DMX_vec{0,153,255,0}, intensity);break;
-    case shimmer_purple:  return fcn::RGBW_norm(DMX_vec{245,0,255,0}, intensity);break;
+    // case sevika_pink :    return fcn::RGBW_norm(DMX_vec{255,0,11,0}, intensity);break;
+    // case hextech_cyan :   return fcn::RGBW_norm(DMX_vec{0,153,255,0}, intensity);break;
+    // case shimmer_purple:  return fcn::RGBW_norm(DMX_vec{245,0,255,0}, intensity);break;
     default:              return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);break;
     }
 }

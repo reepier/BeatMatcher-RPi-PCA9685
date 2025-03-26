@@ -22,7 +22,7 @@ public:
     std::string message;
     time_t timestamp;
 
-    LogEntry(int lvl, std::string msg) : level(lvl), message(msg), timestamp(frame.t_current_ms) {};
+    LogEntry(int lvl, std::string msg, time_t tstamp) : level(lvl), message(msg), timestamp(tstamp) {};
 };
 typedef std::vector<LogEntry> LogList;
 
@@ -38,8 +38,8 @@ void log(int lvl, const Args&... args) {
     // oss << first;
     ((oss << args), ...);
 
-    if (lvl < 4){
-        log_list.push_back(LogEntry(lvl, oss.str()));
+    if (lvl < 4){ // higher priority log (1 is highest, 4 lowest) are sotred separately to be printed on console later 
+        log_list.push_back(LogEntry(lvl, oss.str(), frame.t_current_ms));
     }
 
 

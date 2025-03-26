@@ -332,6 +332,7 @@ class AnimationManager{
     time_t timer_start_ms = 0, timer_end_ms=0, timer_duration_ms = 0;
     unsigned long t_last_change_ms = millis();   //timestamp of last switch between aniamtions
     ColorPaletteMagazine palette_magasine, palette_magasine_2, test_palette;
+    color_vec controler_main_palette = color_vec{}; 
 
     void init();
 
@@ -342,7 +343,7 @@ class AnimationManager{
     void nov30_maximum_update();
     bool test_animation();
     bool controled_animator(const DMX_vec);
-
+  
     void set_timer(time_t);
     void reset_timer();
     bool timer_elapsed();
@@ -374,6 +375,9 @@ class BaseFixture{
     bool b_blackout;
     const int nCH;
 
+    // DMX Controler parameters
+    color_vec external_palette;     // this color palette is defined (or not) by the external controler 
+    int       external_animation;   // stores external animation commands
     // Animations
     BaseAnimation * active_animation = nullptr;
 

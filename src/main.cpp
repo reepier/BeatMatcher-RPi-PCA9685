@@ -6,13 +6,12 @@
 #include <algorithm>
 #include <thread>
 
-#include <ola/DmxBuffer.h>
-#include <ola/client/ClientWrapper.h>
-#include <ola/client/StreamingClient.h>
 
 #include "debug.h"
 #include "fixtures.h"
 #include "music.h"
+#include "animator.h"
+#include "DMXio.h"
 #include "sysfcn.h"
 #include "config.h"
 
@@ -26,109 +25,6 @@ using namespace std;
     unsigned int setOffVals[_PCA9685_CHANS] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 #endif
 
-// DMX output interface (OLA)
-    ola::client::StreamingClient ola_output_client;
-    ola::DmxBuffer ola_buffer;
-    struct ola_universe{
-        int uni;
-        ola::DmxBuffer buf;
-    };
-    vector<ola_universe> ola_pix_unis(NUM_SUBPIX/MAX_SUBPIX_PER_UNI + ((NUM_SUBPIX%MAX_SUBPIX_PER_UNI)==0 ? 0 : 1));
-
-// DMX Input interface
-    static const unsigned int UNIVERSE = 10;
-    ola::client::OlaClientWrapper wrapper;
-    ola::client::OlaClient *ola_input_client;
-
-    // Functio Called when universe registration completes.
-    void RegisterComplete(const ola::client::Result& result) {
-        if (!result.Success()) {
-            //  OLA_WARN << "Failed to register universe: " << result.Error();
-        }
-    }
-    // Function Called when new DMX data arrives. --> could be at 44Hz, even if data hasn't changed
-    void NewDmx(const ola::client::DMXMetadata &metadata, const ola::DmxBuffer &data) {
-        // std::cout << "Received " << data.Size() << " channels for universe " << metadata.universe << ", priority " << static_cast<int>(metadata.priority) << std::endl;
-        // for (auto i = 0; i < 20 && i<data.Size(); i++){
-        //     std::cout << (int)data.Get(i)<< ", ";
-        // }
-        // std::cout << std::endl;
-
-        static ola::DmxBuffer memorized_buffer;
-        bool first_call;
-        if (memorized_buffer.Size()==0){ //at initialisation 
-            first_call = true;              // set a flag to indicate the first call
-            memorized_buffer = data;        // initialise memory to current data
-        }else{
-            first_call = false;
-            //memorized_data was sete during the previous call 
-        }
-
-        //check wether datat has chagend or not
-        bool data_change = false;
-        if (!(data == memorized_buffer)){
-            data_change = true;
-            balise("Data has changed");
-        }
-
-        // if data change, call special animator function & pass it the input data array
-        if (data_change && b_EXT_CONTROL){
-            balise("Running controled animator");
-            DMX_vec data_vec(data.GetRaw(), data.GetRaw()+data.Size());
-            balise("Running controled animator");
-            animator.controled_animator(data_vec);
-        }
-
-        memorized_buffer = data;
-    }
-
-    void setup_DMX_input(){
-        if (!wrapper.Setup())
-            exit(1);
-        ola_input_client = wrapper.GetClient();
-        // Set the callback and register our interest in this universe
-        ola_input_client->SetDMXCallback(ola::NewCallback(&NewDmx));
-        ola_input_client->RegisterUniverse(UNIVERSE, ola::client::REGISTER, ola::NewSingleCallback(&RegisterComplete));
-        
-        // // option 1 : without thread --> halts the rest of the application execution !!! NOPE !!!
-        // wrapper.GetSelectServer()->Run();
-
-        //option 2 : with thread --> allows the rest of the application to execute in parallel !! YUP !!!
-        // Create a new thread to run the select server
-        std::thread select_server_thread([]() {
-            wrapper.GetSelectServer()->Run();
-        });
-        // Detach the thread to let it run independently
-        select_server_thread.detach();
-    }
-/*TODO DMX Commande interface
-Pour faciliter l'integration du systeme Beatmatcher avec d'autre éléments, la necessité d'une IHM de pilotage en temps réel
-s'impose.
-Afin de maximiser les cas d'usage possible, les exigences sont les suivantes : 
-
-Lorsqu'il est exécuté et sans interruption d'exécution / recompilation :
-    - le programme doit etre capable de fonctionner en automatisme intégral lorsque l'opérateur le souhaite ou lorsqu'il
-     n'y a pas d'opérateur (c'est la seule capacité du Beatmatcher aujourd'hui)
-    - le programme doit etre capable de receptionner des ordres de commande via DMX sur 1 univers(Artnet) permettant de piloter
-    au choix un ou plusieurs des éléments suivants :
-        - la palette de couleur général (2 ou 3 couleurs)
-        - la palette de couleur de chaque fixture (1 à 3 couleurs)
-        - l'animation jouée par chaque fixture (choisie dans une liste prédéfinie et préconfigurée)
-        - le dimmer de chaque fixture
-        L'opérateur peut ainsi prendre ou rendre la main sur chacun de ces paramètres individuellement permettant une grande
-        flexibilité dans le degré d'automatisme. Par exemple, il est possible à partir d'une configuration tout automatique de 
-        simplement forcer l'animation et/ou la couleur d'un seul fixture parmi l'ensemble
-        
-    - Afin de faciliter la gestion de l'ensemble et d'éviter les changements d'animation / couleur intempestifs et donc 
-    (disgracieux), l'opérateur doit pouvoir toucher aux commandes pour préparer la scene suivante SANS que le Beatmatcher
-    ne prenne en compte les commandes immédiatement. On introduira donc un système de déclencheur (1 canal DMX) qui par un
-    front montant, commande au beatmatcher la prise en compte des nouveaux réglages. Ce déclencheur peut n'agir que sur 
-    quelques canaux de commmande particulièrement dangereux (choix animation, choix couleur) et pas sur d'autres (Dimmers).
-    Ce déclencheur doit pouvoir etre inhibé en le positionnant à sa valeur MAX (les changemets de paramétrages sont alors
-    prise en compte en continu) 
-    - pour rendre la main sur un canal de type choix animation ou choix couleur, l'opérateur le positionne à la valeur minimum
-    soit ZERO. Dans cette configuration, c'est le beatmatcher qui fait automatiquement les choix d'animation et de couleur. 
-         */
     
 
 fix_vec ll_fxtrs = {    /*&led,*/ &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, 
@@ -223,57 +119,6 @@ void initialize() {
     if (!b_BALISE){
         balise("Init. Debug...");
         init_display();
-    }
-}
-
-void send(){
-    #ifndef LINUX_PC // if compiling on raspberrypi
-    if (!b_NO_LED){
-        // Send frame to the PCA9685 module
-        // Take into account the MASTER DIMMER value !! --> as late as possible, right before data is sent
-        setOffVals[LEDRed1] = led.RGBout[R] * led.master / 255.0;
-        setOffVals[LEDGreen1] = led.RGBout[G] * led.master / 255.0;
-        setOffVals[LEDBlue1] = led.RGBout[B] * led.master / 255.0;
-        setOffVals[LEDRed2] = led.RGBout[R] * led.master / 255.0;
-        setOffVals[LEDGreen2] = led.RGBout[G] * led.master / 255.0;
-        setOffVals[LEDBlue2] = led.RGBout[B] * led.master / 255.0;
-
-    
-        PCA9685_setPWMVals(fd, addr, setOnVals, setOffVals);
-    }
-    #endif // DEBUG
-
-    // construct & send DMX frame for old school fixtures (COTS DMX fixtures)
-    balise("Construct & send buffer for classical fixtures");
-    for (fix_vec::iterator fx = ll_fxtrs.begin(); fx != ll_fxtrs.end(); fx++){
-        ola_buffer.SetRange((*fx)->get_address(), (*fx)->buffer().data(), (*fx)->get_nCH());
-    }
-    ola_output_client.SendDmx(0, ola_buffer);
-
-    // construct & send DMX frames for addressable leds pixels values (sent through artnet)
-    balise("Construct & send buffer for artnet pixels");
-    DMX_vec sub_buffer, long_buffer = addr_led.buffer();
-    auto start = long_buffer.begin();
-    int universe_cpt = 1;
-    for(auto& pix_uni : ola_pix_unis){
-        unsigned int length;
-        if (long_buffer.end() > start + MAX_SUBPIX_PER_UNI){
-            sub_buffer.assign(start, start + MAX_SUBPIX_PER_UNI);
-            length = MAX_SUBPIX_PER_UNI;
-            start += MAX_SUBPIX_PER_UNI;
-        }else{ 
-            sub_buffer.assign(start, long_buffer.end());
-            length = distance(start, long_buffer.end());
-        }
-
-        pix_uni.buf.SetRange(0, sub_buffer.data(), length);
-        pix_uni.uni = universe_cpt++;
-    }
-    //send pixel buffers in random sequence (to avoid strange asynchronous behaviour)
-    vector<ola_universe> ola_pix_uni_rand = fcn::randomized_vector(ola_pix_unis);
-    ola::client::StreamingClientInterface::SendArgs args;
-    for(auto& pix_uni : ola_pix_uni_rand){
-        ola_output_client.SendDMX(pix_uni.uni, pix_uni.buf, args);
     }
 }
 

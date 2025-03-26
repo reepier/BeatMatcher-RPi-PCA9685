@@ -43,7 +43,10 @@ class AddressableLED;
 // fixture class definition
 class AddressableLED : public BaseFixture{
   public:
+    //each individual led pixel RGB value is stored in this vector
     pixel_vec pixels;
+
+    // Fixture Controler :
 
 
     //custom constructor (also calls base constructor)
