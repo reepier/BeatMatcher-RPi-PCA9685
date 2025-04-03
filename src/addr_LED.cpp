@@ -385,10 +385,12 @@ void AddressableLED::init(){
     animations.push_back(new AddrLEDAnimation4(this, gaussian, bar, 400, 1500, "Slow Bubbles", "PIX.8.1", backer, 1, 255));
     // Fast & short Bubbles
     animations.push_back(new AddrLEDAnimation4(this, gaussian, bar, 200, 600, "Fast Bubbles ", "PIX.8.2", any, 1, 255));
-    // Slow Random Chaser 
+    // Slow Random Chaser
     animations.push_back(new AddrLEDAnimation4(this, square,   bar, 300, 1500, "Slow Chaser",  "PIX.8.3", backer, 1, 255));
     // Fast Random Chaser 
     animations.push_back(new AddrLEDAnimation4(this, square,   bar, 200, 600, "Fast Chaser",  "PIX.8.4", any, 1, 255));
+    //TODO add random strobes
+    animations.push_back(new AddrLEDAnimation4(this, square, bar, 50, 1000/FRATE, "Random Strobe", "PIX.8.5", any, 1, 255));
 
     this->activate_none();
 }

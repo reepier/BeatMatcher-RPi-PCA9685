@@ -342,7 +342,7 @@ class AnimationManager{
     void show_update();
     void nov30_maximum_update();
     bool test_animation();
-    bool controled_animator(const DMX_vec);
+    bool controled_update();
   
     void set_timer(time_t);
     void reset_timer();
@@ -378,7 +378,8 @@ class BaseFixture{
     // DMX Controler parameters
     color_vec external_palette;     // this color palette is defined (or not) by the external controler 
     int       external_animation;   // stores external animation commands
-    // Animations
+    
+    // Animations catalog
     BaseAnimation * active_animation = nullptr;
 
     anim_vec animations;
@@ -387,16 +388,15 @@ class BaseFixture{
     BaseFixture(int addr,int ch, std::string nm, int i, uint8_t mast): address(addr), nCH(ch), name(nm), id(i), master(mast){};
     virtual void init()=0;
 
-    //animation management
+    //animation activation & management
     void blackout(bool);
     bool activate_none();
-    bool activate_by_index(int);
-    bool activate_random(bool include_black = true);
+    bool activate_by_index(int), activate_by_index(int, const color_vec&);
+    bool activate_random(bool include_black = true), activate_random(const color_vec&, bool include_black = true);
     bool activate_by_ID(std::string);
     bool activate_autocolor(color_vec&);
     virtual bool activate_by_color(color_vec, AnimationType arg_type = any); //additionnal argument to orient the activation toward a leading or backing aniation
-    bool activate_by_ptr(BaseAnimation*);
-    bool activate_by_ptr(BaseAnimation*, const color_vec&);
+    bool activate_by_ptr(BaseAnimation*), activate_by_ptr(BaseAnimation*, const color_vec&);
     
     //DMX output
     virtual int get_address() = 0;

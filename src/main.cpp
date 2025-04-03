@@ -162,6 +162,8 @@ int main(int argc, char* argv[]){
             if(!animator.test_animation()){
                 // return -1;
             }
+        }else if(b_EXT_CONTROL){
+            animator.controled_update();
         }
 
         balise("Compute new frames...");

@@ -101,42 +101,42 @@ ola::client::OlaClient *ola_input_client;
 #define LED_COL2_CH     6
 
 // Function Called when new DMX buffer is received. --> could be at 44Hz, even if data hasn't changed
-void NewDmx(const ola::client::DMXMetadata &metadata, const ola::DmxBuffer &data) {
-    // std::cout << "Received " << data.Size() << " channels for universe " << metadata.universe << ", priority " << static_cast<int>(metadata.priority) << std::endl;
-    // for (auto i = 0; i < 20 && i<data.Size(); i++){
-    //     std::cout << (int)data.Get(i)<< ", ";
-    // }
-    // std::cout << std::endl;
+// void NewDmx(const ola::client::DMXMetadata &metadata, const ola::DmxBuffer &data) {
+//     // std::cout << "Received " << data.Size() << " channels for universe " << metadata.universe << ", priority " << static_cast<int>(metadata.priority) << std::endl;
+//     // for (auto i = 0; i < 20 && i<data.Size(); i++){
+//     //     std::cout << (int)data.Get(i)<< ", ";
+//     // }
+//     // std::cout << std::endl;
     
 
-    static ola::DmxBuffer memorized_buffer;
-    bool first_call;
-    if (memorized_buffer.Size()==0){ //at initialisation 
-        first_call = true;              // set a flag to indicate the first call
-        memorized_buffer = data;        // initialise memory to current data
-    }else{
-        first_call = false;
-        //memorized_data was sete during the previous call 
-    }
+//     static ola::DmxBuffer memorized_buffer;
+//     bool first_call;
+//     if (memorized_buffer.Size()==0){ //at initialisation 
+//         first_call = true;              // set a flag to indicate the first call
+//         memorized_buffer = data;        // initialise memory to current data
+//     }else{
+//         first_call = false;
+//         //memorized_data was sete during the previous call 
+//     }
 
-    //check wether datat has chagend or not
-    bool data_change = false;
-    if (!(data == memorized_buffer)){
-        data_change = true;
-        balise("Data has changed");
-        log(3, "New DMX Data received");
-    }
+//     //check wether datat has chagend or not
+//     bool data_change = false;
+//     if (!(data == memorized_buffer)){
+//         data_change = true;
+//         balise("Data has changed");
+//         log(3, "New DMX Data received");
+//     }
 
-    // if data change, call special animator function & pass it the input data array
-    if (data_change && b_EXT_CONTROL){
-        balise("Running controled animator");
-        DMX_vec data_vec(data.GetRaw(), data.GetRaw()+data.Size());
-        balise("Running controled animator");
-        animator.controled_animator(data_vec);
-    }
+//     // if data change, call special animator function & pass it the input data array
+//     if (data_change && b_EXT_CONTROL){
+//         balise("Running controled animator");
+//         DMX_vec data_vec(data.GetRaw(), data.GetRaw()+data.Size());
+//         balise("Running controled animator");
+//         animator.controled_update(data_vec);
+//     }
 
-    memorized_buffer = data;
-}
+//     memorized_buffer = data;
+// }
 
 
 /** Control logic & code structure :
@@ -188,56 +188,69 @@ void processDMXinput(const ola::client::DMXMetadata &metadata, const ola::DmxBuf
             // update animator main palette if there is a change
             if (animator.controler_main_palette != main_palette){
                 animator.controler_main_palette = main_palette;
-                log(2, "New main palette : ", fcn::num_to_str(main_col1_val), "/", fcn::num_to_str(main_col2_val), " -> ", fcn::palette_to_string(animator.controler_main_palette));
+                log(1, "New main palette : ", fcn::palette_to_string(animator.controler_main_palette));
             }
+        // if input data are in DEFAULT position
         }else{
-            log(2, "Back to automatic main palette");
+            if ( !animator.controler_main_palette.empty()){       //if not already empty 
+                animator.controler_main_palette = color_vec{};    //reset to empty palette (meaning auto palette or fixture palette will apply to leds)
+                log(1, "Back to automatic main palette");
+            }
         }
     }else{/*Do nothing*/}
-    
+
+    //PROCESS ADRESSABLE LED DIMMER
+    if (true){ // process dimmer input as a continuous stream (& not only on trigger)
+        // get & rewrap raw data
+        addr_led.master = data.Get(LED_DIM_CH); // already a 0-255 dmx data, no conversion/rewrap needed
+    }
+
+    //PROCESS ADDRESSABLE LEDs Animation
+    if (trigger){
+        //get & rewrap raw data
+        int led_ani_val = data.Get(LED_ANI_CH);
+        // if input data is not in DEFAULT positions (automatic mode)
+        if ( led_ani_val!=0) { 
+            // update led animation if there is a change
+            if (addr_led.external_animation != led_ani_val){
+                addr_led.external_animation = led_ani_val;
+                log(2, "New led animation : ", fcn::num_to_str(addr_led.external_animation));
+            }
+        // if input data is DEFAULT (0) 
+        }else{
+            if (addr_led.external_animation != 0){  //if not already reset to 0
+                addr_led.external_animation = 0;    //reset to 0
+                log(2, "Back to automatic led animation");
+            }
+        }
+    }else{/*Do nothing*/}
+
     //PROCESS ADDRESSABLE LEDs COLORS
     if (trigger){
         // get & rewrap raw data
         int led_col1_val = min(max((uint8_t)0,  data.Get(LED_COL1_CH)) , (uint8_t)(simpleColor::last_color));
         int led_col2_val = min(max((uint8_t)0,  data.Get(LED_COL2_CH)) , (uint8_t)(simpleColor::last_color));
         //create output structrue
-        color_vec main_palette = color_vec{};   //start with empty palette
+        color_vec led_palette = color_vec{};   //start with empty palette
         // if input data are not in DEFAULT positions (automatic mode)
         if ( led_col1_val!=0 || led_col2_val!=0 ) {
-            // create a palette based on input data
-            if (led_col1_val > 0)  main_palette.push_back((simpleColor)(led_col1_val-1));
-            if (led_col2_val > 0)  main_palette.push_back((simpleColor)(led_col2_val-1));
+            // create a palette based on (non zero) input data
+            if (led_col1_val > 0)  led_palette.push_back((simpleColor)(led_col1_val-1));
+            if (led_col2_val > 0)  led_palette.push_back((simpleColor)(led_col2_val-1));
             // update led palette if there is a change
-            if (addr_led.external_palette != main_palette){
-                addr_led.external_palette = main_palette;
+            if (addr_led.external_palette != led_palette){
+                addr_led.external_palette = led_palette;
                 log(2, "New led palette : ", fcn::num_to_str(led_col1_val), "/", fcn::num_to_str(led_col2_val), " -> ", fcn::palette_to_string(addr_led.external_palette));
             }
         }else{
-            log(2, "Back to automatic led palette");
-        }
-    }else{/*Do nothing*/}
-
-    //PROCESS ADRESSABLE LED DIMMER
-
-
-    //PROCESS ADDRESSABLE LEDs Animation
-    if (trigger){
-        //get & rewrap raw data
-        int led_animation = data.Get(LED_ANI_CH);
-        // if input data is not in DEFAULT positions (automatic mode)
-        if ( led_animation!=0 && ) { 
-            // create a palette based on input data
-            if (led_col1_val > 0)  main_palette.push_back((simpleColor)(led_col1_val-1));
-            if (led_col2_val > 0)  main_palette.push_back((simpleColor)(led_col2_val-1));
-            // update animator main palette if there is a change
-            if (addr_led.external_palette != main_palette){
-                addr_led.external_palette = main_palette;
-                log(2, "New led palette : ", fcn::num_to_str(led_col1_val), "/", fcn::num_to_str(led_col2_val), " -> ", fcn::palette_to_string(addr_led.external_palette));
+            if ( !addr_led.external_palette.empty()){  //if not already empty 
+                addr_led.external_palette = color_vec{};    //reset to empty palette (meaning main palette or auto palette will apply to leds)
+                log(2, "Back to automatic led palette");
             }
-        }else{
-            log(2, "Back to automatic led palette");
         }
     }else{/*Do nothing*/}
+
+
 
 
     memorized_buffer = data;    // memorize current buffer for the next function call

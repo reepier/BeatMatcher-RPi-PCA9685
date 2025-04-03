@@ -59,8 +59,8 @@ extern std::vector<std::string> cli_anim_id;
 // -- CONFIG MAXIMUM --------------------------------------------------
 #define     WAREH_TEMPO_ANI         5*60000      // average animation duration in the warehouse
 #define     WAREH_TEMPO_PALETTE     20*60000     // average palette duration in the warehouse
-#define     DANCEFL_TEMPO_ANI       60000      // average animation duration in the warehouse
-#define     DANCEFL_TEMPO_PALETTE   10*60000     // average palette duration in the warehouse
+#define     DANCEFL_TEMPO_ANI       60000      // average animation duration in the dancefloor
+#define     DANCEFL_TEMPO_PALETTE   5000 //10*60000     // average palette duration in the dancefloor
 
 #define     MAX_FASH_ANI
 // External Controler SETTING
