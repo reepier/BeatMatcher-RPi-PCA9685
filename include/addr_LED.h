@@ -7,23 +7,34 @@
 #define MAX_SUBPIX_PER_UNI  510 // maximum number of subpixels arried over 1 universe (1 universe can only carry complete pixels (BC-204 limitation))
 // WS2815 led strip config
   // Config paramters
-  #define NUM_BAR 3                       // Total Number of bars
-  #define NUM_SEG (3*NUM_BAR)             // Total number of segments (across all bars)
+  constexpr int NUM_BAR = 18;                       // Total Number of bars
+  constexpr int NUM_SEG = 3*NUM_BAR;             // Total number of segments (across all bars)
   const int_vec groups_size = {3, 3, 3, 3, 3, 3};        // Number of bars for each group //TODO implement "GROUP" sudivision 
-  #define NUM_GROUP  groups_size.size()   // Number of groups
 
   // Quasi constants
-  #define NUM_PIX_BAR 58        // number of pixels per bar
+  constexpr int NUM_PIX_BAR = 58;        // number of pixels per bar
   // Derivatives
-  #define NUM_PIX (NUM_BAR*NUM_PIX_BAR)           // Total number of pixels
-  #define NUM_SUBPIX (3*NUM_PIX)  // Total number of artnet dmx datas
+  constexpr int NUM_PIX = NUM_BAR*NUM_PIX_BAR;           // Total number of pixels
+  constexpr int NUM_SUBPIX = 3*NUM_PIX;  // Total number of artnet dmx datas
+  const size_t NUM_GROUP = groups_size.size();   // Number of groups
 
+  /* Artnet Controler configuraiton : 
+  Channel 1 : 
+    Start Universe : 2 (corresponds to ola universe 1 while Start uni 2 correspond to ola universe 0)
+    CHannel start : 1 
+    Num pixel : 680 (MAX)
+  Channel 2 : 
+    Start Universe : 2 (corresponds to ola universe 1 while Start uni 2 correspond to ola universe 0)
+    CHannel start : 1 
+    Num pixel : 680 (MAX)*/
 
 enum strip_subdiv_t{
   bar,  // Led bar
   seg,  // Led segment (fraction of a bar)
   pix   // Individual pixel
 };
+
+
 
 
 

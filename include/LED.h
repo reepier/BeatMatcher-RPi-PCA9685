@@ -22,8 +22,6 @@
 #define LEDGreen2 10
 #define LEDBlue2 9
 
-// WS2815 led strip config
-#define NUM_PIX 174
 
 // background sinewave periods parameters
 #define MAX_T 15  //s

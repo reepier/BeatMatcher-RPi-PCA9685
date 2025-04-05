@@ -431,7 +431,7 @@ DMX_vec AddressableLED::RGB(simpleColor c, int intensity){
     DMX_vec temp;
     int ref_int = 255;          // reference intensity, set for each color to get a constnat luminosity trhoughtou the palette
     // store in vector temp the color vector of norm 255
-    switch (c){
+    switch (c){ //TODO : remove ref_int and simply pass base lumo in RGB_norm argument
         case black      :                   temp = fcn::RGB_norm(DMX_vec{0,0,0});       break;
         case red        :                   temp = fcn::RGB_norm(DMX_vec{255,0,0});     break;
         case green      :ref_int = 100,     temp = fcn::RGB_norm(DMX_vec{0,255,0});     break;
@@ -440,12 +440,19 @@ DMX_vec AddressableLED::RGB(simpleColor c, int intensity){
         case orange     :                   temp = fcn::RGB_norm(DMX_vec{255,35,0});    break;
         case sodium     :                   temp = fcn::RGB_norm(DMX_vec{255,16,0});    break;
         case cyan       :ref_int = 150;     temp = fcn::RGB_norm(DMX_vec{0,184,255});   break;
-        case purple     :ref_int = 255;     temp = fcn::RGB_norm(DMX_vec{180,0,255});   break;    
-        case magenta    :ref_int = 255;     temp = fcn::RGB_norm(DMX_vec{255,0,197});   break;
-        case pink       :ref_int = 255;     temp = fcn::RGB_norm(DMX_vec{255,0,86});    break;
+        case purple     :                   temp = fcn::RGB_norm(DMX_vec{180,0,255});   break;    
+        case magenta    :                   temp = fcn::RGB_norm(DMX_vec{255,0,197});   break;
+        case pink       :                   temp = fcn::RGB_norm(DMX_vec{255,0,86});    break;
         case w_white    :                   temp = fcn::RGB_norm(DMX_vec{255,173,102}); break;
-        case c_white    :ref_int = 255;     temp = fcn::RGB_norm(DMX_vec{255,255,255}); break;
+        case c_white    :                   temp = fcn::RGB_norm(DMX_vec{255,255,255}); break;
         case gold       :                   temp = fcn::RGB_norm(DMX_vec{255,50,3});    break;
+        case light_red      :               temp = fcn::RGB_norm(DMX_vec{255,50,18});   break;
+        case light_cyan     :ref_int = 220; temp = fcn::RGB_norm(DMX_vec{70,200,255});   break;
+        case light_blue     :               temp = fcn::RGB_norm(DMX_vec{52,74,255});   break;
+        case light_purple   :               temp = fcn::RGB_norm(DMX_vec{206,89,255});   break;
+        case light_magenta  :               temp = fcn::RGB_norm(DMX_vec{255,75,231});   break;
+        case light_pink     :               temp = fcn::RGB_norm(DMX_vec{255,58,114});   break;
+        case light_green    :ref_int = 180, temp = fcn::RGB_norm(DMX_vec{50,255,50});   break;
         default         :                   temp = fcn::RGB_norm(DMX_vec{0,0,0});       break;
         }
 
@@ -476,7 +483,7 @@ void AddrLEDAnimation1::init(const color_vec& palette){
     {
     case 0:     this->flash_color=black,        this->back_color=black;
         break;
-    case 1:     this->flash_color=palette[0];   this->back_color=fcn::random_pick( color_vec{black,palette[0]}, int_vec{2,1} );
+    case 1:     this->flash_color=palette[0];   this->back_color=palette[0];
         break;
     case 2:     this->flash_color=palette[0],   this->back_color=palette[1];
         break;
@@ -567,7 +574,7 @@ void AddrLEDAnimation2::init(const color_vec& palette){
     {
     case 0:     this->flash_color=black,        this->back_color=black;
         break;
-    case 1:     this->flash_color=palette[0];   this->back_color=fcn::random_pick( color_vec{black,palette[0]}, int_vec{2,1} );
+    case 1:     this->flash_color=palette[0];   this->back_color=palette[0];
         break;
     case 2:     this->flash_color=palette[0],   this->back_color=palette[1];
         break;
@@ -681,20 +688,13 @@ void AddrLEDAnimation4::init(const color_vec& palette){
     switch (palette_size)
     {
     case 0:
-        this->flash_colors = color_vec{black};
-        this->back_color = black;
-        break;
+        this->flash_colors = color_vec{black}, this->back_color = black;            break;
     case 1:
-        this->flash_colors = color_vec{palette[0]};
-        this->back_color = fcn::random_pick(color_vec{black, palette[0]}, int_vec{3, 1});
-        break;
+        this->flash_colors = color_vec{palette[0]}, this->back_color = palette[0];  break;
     case 2: 
-        this->flash_colors = color_vec{palette[0]};
-        this->back_color = fcn::random_pick( color_vec{palette[1], black}, int_vec{2,1});
+        this->flash_colors = color_vec{palette[0]}, this->back_color = palette[1];  break;
     default:
-        flash_colors = color_vec{fcn::random_pick(palette)};
-        back_color = fcn::random_pick(palette);
-        break;
+        flash_colors = color_vec{fcn::random_pick(palette)},    back_color = fcn::random_pick(palette);     break;
     }
 
     //call STANDARD init()

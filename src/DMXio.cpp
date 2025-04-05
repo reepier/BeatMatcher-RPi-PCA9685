@@ -240,7 +240,7 @@ void processDMXinput(const ola::client::DMXMetadata &metadata, const ola::DmxBuf
             // update led palette if there is a change
             if (addr_led.external_palette != led_palette){
                 addr_led.external_palette = led_palette;
-                log(2, "New led palette : ", fcn::num_to_str(led_col1_val), "/", fcn::num_to_str(led_col2_val), " -> ", fcn::palette_to_string(addr_led.external_palette));
+                log(2, "New led palette : ", fcn::palette_to_string(addr_led.external_palette));
             }
         }else{
             if ( !addr_led.external_palette.empty()){  //if not already empty 

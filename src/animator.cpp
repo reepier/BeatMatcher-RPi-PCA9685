@@ -46,10 +46,10 @@ void AnimationManager::init(){
     palette_magasine.push_back(color_vec{cyan, red},        1);
     palette_magasine.push_back(color_vec{cyan, purple},     1);
 // Tricolor
-    palette_magasine.push_back(color_vec{gold, purple, red},        1);
-    palette_magasine.push_back(color_vec{purple, sodium, red},      1);
-    palette_magasine.push_back(color_vec{gold, cyan, red},          1);
-    palette_magasine.push_back(color_vec{gold, cyan, purple},       1);
+    // palette_magasine.push_back(color_vec{gold, purple, red},        1);
+    // palette_magasine.push_back(color_vec{purple, sodium, red},      1);
+    // palette_magasine.push_back(color_vec{gold, cyan, red},          1);
+    // palette_magasine.push_back(color_vec{gold, cyan, purple},       1);
 
 //--------------------------------------------------------------------------------
 // Dasncefloor color palette
@@ -416,9 +416,11 @@ bool AnimationManager::test_animation(){
 /** Activates animations based on received DMX data or automatic sequence 
  * limitations : only works for addressable LED for now but support can easily be extended to other fixtures */
 bool AnimationManager::controled_update(){
-// automatic sequencing :  -------------------------------------------------------------------------
-    //define When the time is right to change animation base on music analysis & different timers
-
+/* automatic sequencer :  -------------------------------------------------------------------------
+    Define When the time is right to change animation base on music analysis & different timers
+    This sewuencer runs constantly in parallel with  the input commands system
+    WHen external settings are set to "manual", the automatic sequencer keeps doing its job in the background in case
+     external setting goes back to "automatic" */
 // update automatic palette when required
     static color_vec auto_palette;              //contains automatic colors
     bool auto_palette_update = false;           //
@@ -428,14 +430,14 @@ bool AnimationManager::controled_update(){
         auto_palette = palette_magasine.get_random_palette();
         last_palette_update_ms = frame.t_current_ms;
         auto_palette_update = true;
-        if (!animator.controler_main_palette.empty())
+        if (animator.controler_main_palette.empty()) //only display the update if external setting is set to "automatic main palette"
             log(1, "Automatic palette update : ", fcn::palette_to_string(auto_palette));
     // Then update palette every time a timer elapses AND a long break ends
-    }else if((sampler.state_changed && sampler.previous_state == SUSTAINED_BREAK) || frame.t_current_ms - last_palette_update_ms > DANCEFL_TEMPO_PALETTE){
+    }else if((sampler.state_changed && sampler.previous_state == SUSTAINED_BREAK) && (frame.t_current_ms - last_palette_update_ms > DANCEFL_TEMPO_PALETTE)){
         auto_palette = palette_magasine.get_similar_palette(auto_palette);
         last_palette_update_ms = frame.t_current_ms;
         auto_palette_update = true;
-        if (!animator.controler_main_palette.empty())
+        if (animator.controler_main_palette.empty()) //only display the update if external setting is set to "automatic main palette"
             log(1, "Automatic palette update : ", fcn::palette_to_string(auto_palette));
     }
 
@@ -448,7 +450,6 @@ bool AnimationManager::controled_update(){
         auto_ani_update = true;
         last_ani_update_ms = true;
     }
-
 
 //update animation manually when required
     bool manual_update = false;
@@ -464,26 +465,37 @@ bool AnimationManager::controled_update(){
         last_external_ani = addr_led.external_animation;
     }
 
+// determines which setting is manual & whichis automatic
+    bool automatic_main_palette = animator.controler_main_palette.empty();
+    bool automatic_led_palette = addr_led.external_palette.empty() && animator.controler_main_palette.empty();
+    bool automatic_led_ani = addr_led.external_animation==0;
 
-// APPLY UPDATE : //TODO fix this messy shit !! combinatoire foireuse !!
-    // if input command is received or automatic settings change, change animation
-    if(manual_update || auto_ani_update || auto_palette_update){
+// APPLY UPDATE to addressable LEDs: //TODO fix this messy shit !! combinatoire foireuse !!
+    // if input command is received or automatic settings change (palette or animation), change animation
+    if(manual_update || auto_ani_update && automatic_led_ani || auto_palette_update && automatic_led_palette){
         color_vec final_palette;
         // choose color palette by order of priority : manual fixture palette > manual main palette > automatic palette
-        if(addr_led.external_palette.empty() == false){ //use external fixture's palette
+        if(addr_led.external_palette.empty() == false){ //use external fixture's palette if available
             final_palette = addr_led.external_palette;
-        }else if(animator.controler_main_palette.empty() == false){   // use external main palette
+        }else if(animator.controler_main_palette.empty() == false){   // else use external main palette if available
             final_palette = animator.controler_main_palette;
-        }else{      // Use auto palette
+        }else{      // else use auto palette (if both main & fixture palette are set to AUTO in the external controler)
             final_palette = auto_palette;
         }
         // choose animation by order of priority (external animation > automatic animation)
-        if(addr_led.external_animation != 0 && manual_update){       // use external animation
+        if(addr_led.external_animation != 0){       // use external animation if available
             addr_led.activate_by_index(addr_led.external_animation, final_palette);
-        }else {          // choose random animation
+        }else{          // choose random animation
             addr_led.activate_random(final_palette);
         }
-    }    
+    }
+
+    /*Observed bugs :
+        - when program is launched, with all external control to 0, there is no activae animation until first break
+            *->might just be bad luck (random animation selection sometimes returns the BLACK animation)
+        - When led palette is set to MANUAL, the automatic palette update triggers an animation change. It should not. The new
+         animation keeps the led manual palette.
+        - When led animation is set to MANUAL, the automatic palette update triggers an animation change. It should not. */
 }
 
 void AnimationManager::set_timer(time_t duration_ms){
@@ -553,7 +565,7 @@ bool BaseFixture::activate_by_index(int i, const color_vec& palette){ //autocolo
     else
         this->active_animation = this->animations[0];
     this->active_animation->init(palette);
-    log(2, "Activating ", active_animation->id, ":", active_animation->description);
+    log(2, "Activating ", active_animation->id, ":", active_animation->description, '\t', fcn::palette_to_string(palette));
 }
 
 // select and init an animtion randomly picked wihtin the list 
@@ -582,7 +594,7 @@ bool BaseFixture::activate_random(const color_vec& palette, bool include_black){
     }else{
         this->active_animation->init();
     }
-    log(2, "Activating ", active_animation->id, ":", active_animation->description);
+    log(2, "Activating ", active_animation->id, ":", active_animation->description, '\t', fcn::palette_to_string(palette));
 }
 
 // select and init an animation with its ID. If the ID cannot be found within the existing animations, does nothing.
