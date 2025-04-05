@@ -5,3 +5,4 @@
 bin/beatmatcher
 bin/test
 **/build
+beatmatcher.log
