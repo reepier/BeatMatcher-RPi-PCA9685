@@ -22,7 +22,6 @@
 #define LEDGreen2 10
 #define LEDBlue2 9
 
-
 // background sinewave periods parameters
 #define MAX_T 15  //s
 #define MIN_T 2   //s
