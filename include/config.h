@@ -15,7 +15,7 @@ extern bool b_CURSES;       //TRUE : use curses HMI ; FALSE : use simple console
 extern bool b_EXT_CONTROL;
 
 extern bool b_ANI_TEST;
-extern std::vector<std::string> vec_anim_id;
+extern std::vector<std::string> cli_anim_id;
 
 
 // Music sampler
@@ -34,8 +34,8 @@ extern std::vector<std::string> vec_anim_id;
 
 // Music Emulator
 #define BPM 100          // BPM
-#define BREAKDuration 8  // beats
-#define DROPDuration  8 // beats
+#define BREAKDuration 16  // beats
+#define DROPDuration  16 // beats
 
 // -- CONFIG ------------------------------------------------------------
 #define     MAX_CONT_FLASH      120000          // 120000 
@@ -59,8 +59,8 @@ extern std::vector<std::string> vec_anim_id;
 // -- CONFIG MAXIMUM --------------------------------------------------
 #define     WAREH_TEMPO_ANI         5*60000      // average animation duration in the warehouse
 #define     WAREH_TEMPO_PALETTE     20*60000     // average palette duration in the warehouse
-#define     DANCEFL_TEMPO_ANI       60000      // average animation duration in the warehouse
-#define     DANCEFL_TEMPO_PALETTE   10*60000     // average palette duration in the warehouse
+#define     DANCEFL_TEMPO_ANI       20000      // average animation duration in the dancefloor
+#define     DANCEFL_TEMPO_PALETTE   60000 //10*60000     // average palette duration in the dancefloor
 
 #define     MAX_FASH_ANI
 // External Controler SETTING

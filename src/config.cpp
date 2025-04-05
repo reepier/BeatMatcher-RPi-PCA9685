@@ -8,4 +8,4 @@ bool b_NO_LED = true;
 bool b_EXT_CONTROL = false;
 
 bool b_ANI_TEST = false;
-std::vector<std::string> vec_anim_id;
+std::vector<std::string> cli_anim_id;

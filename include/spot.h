@@ -51,7 +51,7 @@ public:
 
         this->pixel = this->RGBW(black); // resize & initialise RGBWout vector
 
-        // log(1, "Init. of ", this->name, " / Pixel size : ", this->RGBWout.size());
+        // log(1, "Init. of ", this->name, " / Pixel size : ", this->pixel.size());
     };
     void init(){};
 
@@ -64,6 +64,7 @@ public:
         this->strobe = 0;                       
         this->color_wheel = 0;                  
         this->prog = 0; 
+        this->master = 255;
     };
     
     DMX_vec RGBW(simpleColor c, int intensity = 255) override;
@@ -91,7 +92,6 @@ public:
  #####  #       #######    #       #     # #     #  #####  #    #  #####  
 
 / ----------------------------------------------------------------------- */
-/* frontal rack*/
 class SpotRack : public BaseFixture{
 public:
     spot_vec spots;        // pointers to spotFixture object
@@ -372,10 +372,21 @@ class SpotRackAnimation4 : public SpotRackAnimation{
   public:
     // Animation parameters (constant or set by animation constructor)
     bool param_activate_flash;
-    simpleColor flash_color;
-    simpleColor back_color;
+    simpleColor flash_color = black;            // color used for flashes
+    simpleColor back_color = black;             // background color displayed inbetween flashes
+    int fade_rate = 60;                 //[ms] rate of exponential flash decay
 
-    int fade_rate = 60;
+
+
+    /* TODO The following parameters are only accessible at SpotRackAnimation4 level, they must have 
+    a (simplified) counterpart at BaseAnimation level. Autocolor constructor shall convert these into
+    BaseAnimation member paramters. might even be worth it to set the followong params at construction ? 
+    (easier maintenance if everything is set at construction rather than in many different code modules & blocks) */
+    color_vec auth_flash_colors = {};   //list of authorized colors for flash_color parameter (empty == all colors authorized)
+    color_vec auth_back_colors = {};    //list of authorized colors for back_color parameter (empty == all colors authorized)
+    color_vec unauth_flash_colors = {}; //list of unauthorized colors for flash_color parameter (empty == no colors unauthorized)
+    color_vec unauth_back_colors = {};  //list of unauthorized colors for flash_color parameter (empty == no colors unauthorized)
+    
     // Dynamic variables (updated internally at each frame)
 
     // Constructor
@@ -393,7 +404,20 @@ class SpotRackAnimation4 : public SpotRackAnimation{
 
         this->update_palette(color_vec{f_col, b_col});
     }
+    
+    /*overloaded constructor autocolor
+    TODO add a parameter to set at construction the number of colors ? or assign this parameter (random pick) at init()*/
+    SpotRackAnimation4(SpotRack *f, std::string d, std::string i, AnimationType typ, bool flash = true){
+        this->description = d, this->id = i, this->fixture = f; // set base parameters
+        this->autocolor = true;             // animation relying on autocolor must be taggued as such
+        
+        this->param_activate_flash = flash;
+        /*The real color assignement is done at animation initialisation / activation (baseanimation.init()) 
+        for safety purpose, at construction (or class definition), colors are set to black*/
+    }
 
-    void init() override;
+
+    void init() override;                   // does not much
+    void init(const color_vec&) override;   // does same as init() + assigns color automatically
     void new_frame() override;
 };

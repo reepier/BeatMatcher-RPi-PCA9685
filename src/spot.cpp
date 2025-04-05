@@ -7,19 +7,19 @@
 using namespace std;
 
 // Original Fun Generation spots
-SpotFixture spot_1(FunGen_RGBW_12x1W, 73, 8,       "Spot 1 (@74) : FunGen 15°",     1);     
-SpotFixture spot_2(FunGen_RGBW_12x1W, 81,  8,      "Spot 2 (@82) : FunGen 15°",     2);     
-SpotFixture spot_3(FunGen_RGBW_12x1W, 89, 8,       "Spot 3 (@90) : FunGen 15°",     3);     
-SpotFixture spot_4(FunGen_RGBW_12x1W, 97,  8,      "Spot 4 (@98) : FunGen 15°",     4);     
-SpotFixture spot_5(FunGen_RGBW_12x1W, 105,  8,     "Spot 5 (@106) : FunGen 15°",    5);     
-SpotFixture spot_6(FunGen_RGBW_12x1W, 113,  8,     "Spot 6 (@114) : FunGen 15°",    6);
+SpotFixture spot_1(FunGen_RGBW_12x1W, 73, 8,       "Spot 1 (@74)",     1);     
+SpotFixture spot_2(FunGen_RGBW_12x1W, 81,  8,      "Spot 2 (@82)",     2);     //Salon
+SpotFixture spot_3(FunGen_RGBW_12x1W, 89, 8,       "Spot 3 (@90)",     3);     
+SpotFixture spot_4(FunGen_RGBW_12x1W, 97,  8,      "Spot 4 (@98)",     4);     
+SpotFixture spot_5(FunGen_RGBW_12x1W, 105,  8,     "Spot 5 (@106)",    5);     //Salon
+SpotFixture spot_6(FunGen_RGBW_12x1W, 113,  8,     "Spot 6 (@114)",    6);
 
-SpotFixture spot_7(FunGen_RGBW_12x1W, 121, 8,  "Spot 7 (@122) : FunGen 40°",    7);     
-SpotFixture spot_8(FunGen_RGBW_12x1W, 129, 8,  "Spot 8 (@130) : FunGen 40°",    8);     
-SpotFixture spot_9(FunGen_RGBW_12x1W, 137, 8,  "Spot 9 (@138) : FunGen 40°",    9);  
-SpotFixture spot_10(FunGen_RGBW_12x1W, 145, 8, "Spot 10 (@146) : FunGen 40°",   10);
-SpotFixture spot_11(FunGen_RGBW_12x1W, 153, 8, "Spot 11 (@154) : FunGen 40°",   11);
-SpotFixture spot_12(FunGen_RGBW_12x1W, 161, 8, "Spot 12 (@162) : FunGen 40°",   12);
+SpotFixture spot_7(FunGen_RGBW_12x1W, 121, 8,  "Spot 7 (@122)",    7);     //Salon
+SpotFixture spot_8(FunGen_RGBW_12x1W, 129, 8,  "Spot 8 (@130)",    8);     //Salon
+SpotFixture spot_9(FunGen_RGBW_12x1W, 137, 8,  "Spot 9 (@138)",    9);  
+SpotFixture spot_10(FunGen_RGBW_12x1W, 145, 8, "Spot 10 (@146)",   10);
+SpotFixture spot_11(FunGen_RGBW_12x1W, 153, 8, "Spot 11 (@154)",   11);
+SpotFixture spot_12(FunGen_RGBW_12x1W, 161, 8, "Spot 12 (@162)",   12);
 
 // New Shehds spots
 SpotFixture spot_13(Shehds_RGBWAU_7x18W, 169, 10, "Spot 13 (@170) : SHEHDS RGBWAU", 13);
@@ -46,8 +46,10 @@ SpotFixture spot_20(Shehds_RGBWAU_7x18W, 239, 10, "Spot 20 (@240) : SHEHDS RGBWA
 / ----------------------------------------------------------------------- */
 
 DMX_vec FunGeneration_12x1W_buffer(const SpotFixture& spot){
-    // return DMX_vec{    (uint8_t)((double)this->MASTER_DIMMER * this->active_animation->master / 255),
-    return DMX_vec{      (uint8_t) (spot.master/255.0 * spot.rack->active_animation->master),
+    //TODO protect every fixture.buffer function from null active_animation pointer
+    uint8_t active_animation_master = 255; //default value
+    if (spot.rack != nullptr && spot.rack->active_animation != nullptr){active_animation_master = spot.rack->active_animation->master;}
+    return DMX_vec{      (uint8_t) (spot.master/255.0 * active_animation_master),
                          spot.pixel[R],
                          spot.pixel[G],
                          spot.pixel[B],
@@ -59,8 +61,9 @@ DMX_vec FunGeneration_12x1W_buffer(const SpotFixture& spot){
 }
 
 DMX_vec Shehds_10x8W_buffer(const SpotFixture& spot){
-    // return DMX_vec{    (uint8_t)((double)this->MASTER_DIMMER * this->active_animation->master / 255),
-    return DMX_vec{      (uint8_t) (spot.master/255.0 * spot.rack->active_animation->master),
+    uint8_t active_animation_master = 255; //default value
+    if (spot.rack != nullptr && spot.rack->active_animation != nullptr){active_animation_master = spot.rack->active_animation->master;}
+    return DMX_vec{      (uint8_t) (spot.master/255.0 * active_animation_master),
                          spot.pixel[R],
                          spot.pixel[G],
                          spot.pixel[B],
@@ -72,7 +75,9 @@ DMX_vec Shehds_10x8W_buffer(const SpotFixture& spot){
 }
 
 DMX_vec Shehds_7x18W_buffer(const SpotFixture& spot){
-    return DMX_vec{(uint8_t) (spot.master/255.0 * spot.rack->active_animation->master),
+    uint8_t active_animation_master = 255; //default value
+    if (spot.rack != nullptr && spot.rack->active_animation != nullptr){active_animation_master = spot.rack->active_animation->master;}
+    return DMX_vec{(uint8_t) (spot.master/255.0 * active_animation_master),
                    spot.pixel[R],
                    spot.pixel[G],
                    spot.pixel[B],
@@ -87,17 +92,13 @@ DMX_vec Shehds_7x18W_buffer(const SpotFixture& spot){
 DMX_vec SpotFixture::buffer(){
     switch (this->type){
         case FunGen_RGBW_12x1W :
-            return FunGeneration_12x1W_buffer(*this);
-            break;
+            return FunGeneration_12x1W_buffer(*this);break;
         case Shehds_RGBWAU_10x8W :
-            return Shehds_10x8W_buffer(*this);
-            break;
+            return Shehds_10x8W_buffer(*this);break;
         case Shehds_RGBWAU_7x18W :
-            return Shehds_7x18W_buffer(*this);
-            break;
+            return Shehds_7x18W_buffer(*this);break;
         default:    // return a black vector
-            return DMX_vec(this->nCH, 0);
-            break;
+            return DMX_vec(this->nCH, 0);break;
     }
 }
 
@@ -111,10 +112,14 @@ DMX_vec SpotFixture::buffer(){
  #####  #       #######    #       #     # #     #  #####  #    #  #####  
 
 / ----------------------------------------------------------------------- */
-SpotRack front_rack(spot_vec{&spot_7, &spot_8}, "DanceFloor spots", 1);
+SpotRack front_rack(spot_vec{&spot_2, &spot_5, &spot_7, &spot_8}, "Front Rack", 1);
 SpotRack rack_15(spot_vec{&spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6}, "Vert. Beams", 2);
 SpotRack rack_40(spot_vec{&spot_9, &spot_10, &spot_11, &spot_12}, "Rack 2", 3);
 SpotRack shehds_rack(spot_vec{&spot_13, &spot_14, &spot_15, &spot_16, &spot_17, &spot_18, &spot_19, &spot_20}, "SHEHDS Rack", 4);
+
+/** Config Salon */
+SpotRack back_rack(spot_vec{&spot_1, &spot_3, &spot_4, &spot_6}, "Back Rack", 2);
+
 
 // SpotRack global_rack(spot_vec{&spot_1,&spot_2,&spot_3,&spot_4,&spot_5,&spot_6,&spot_7,&spot_8,&spot_9,&spot_10,&spot_11,&spot_12}, "Global Rack", 1);
 
@@ -144,17 +149,43 @@ void front_rack_init(){
     // Animation 1 : Backgrnd color + random soft flashes
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,         black,       8000, 1000,   " ", "FR.0", backer, 0));
     
-    // 1. Strobes
-    // Slow frequency
-#if SHOW_INTENSITY==0 or SHOW_INTENSITY<=2
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, red,      STRB_SLOW, "S red strobe",      "FR.1.1.1", backer, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, blue,     STRB_SLOW, "S blue strobe",     "FR.1.1.2", backer, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, purple,   STRB_SLOW, "S purple strobe",   "FR.1.1.3", backer, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, gold,     STRB_SLOW, "S gold strobe",     "FR.1.1.4", backer, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, sodium,   STRB_SLOW, "S sodium strobe",   "FR.1.1.5", backer, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, cyan,     STRB_SLOW, "S cyan strobe",     "FR.1.1.6", backer, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, w_white,  STRB_SLOW, "S w_white strobe",  "FR.1.1.7", backer, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, c_white,  STRB_SLOW, "S c_white strobe",  "FR.1.1.8", backer, 1));
+/*
+    // Animation 1 : Random Bursts of color
+#if SHOW_INTENSITY == 1 or SHOW_INTENSITY == 0 
+    // gaussian bursts (short & slow) --> to be used as backer animation with LED (or else)
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    w_white,       4000, 1500,   "white slow bubbles",       "FR.2.2.6",     leader, 2));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    gold,        4000, 1500,   "gold slow bubbles",        "FR.2.2.5",     leader, 2));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    cyan,        4000, 1500,   "cyan slow bubbles",        "FR.2.2.7",     leader, 2));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    red,         4000, 1500,   "red slow bubbles",         "FR.2.2.1",     leader, 2));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    blue,        4000, 1500,   "blue slow bubbles",        "FR.2.2.8",     leader, 2));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    pink,        4000, 1500,   "pink slow bubbles",        "FR.2.2.11",    leader, 2));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    magenta,     4000, 1500,   "magenta slow bubbles",     "FR.2.2.10",    leader, 2));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    purple,      4000, 1500,   "purple slow bubbles",      "FR.2.2.9",     leader, 2));   
+#endif 
+#if SHOW_INTENSITY >= 2 or SHOW_INTENSITY == 0
+    // gaussian bursts (short & fast) --> to be used as solo animation during breaks
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    w_white,       1000, 600,   "WWhite fast bubbles",       "FR.2.1.6", leader, 2));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    gold,        1000, 600,   "gold fast bubbles",        "FR.2.1.5", leader, 2));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    cyan,        1000, 600,   "cyan fast bubbles",        "FR.2.1.7", leader, 2));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    red,         1000, 600,   "red fast bubbles",         "FR.2.1.1", leader, 2));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    blue,        1000, 600,   "blue fast bubbles",        "FR.2.1.8", leader, 2));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    pink,        1000, 600,   "pink fast bubbles",        "FR.2.1.11", leader, 2));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    magenta,     1000, 600,   "magenta fast bubbles",     "FR.2.1.10", leader, 2));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    purple,      1000, 600,   "purple fast bubbles",      "FR.2.1.9", leader, 2));
+#endif 
+
+    // Animation 2: Stroboscope --> To be used as LEAD animation
+    // Very Fast
+#if SHOW_INTENSITY == 3 or SHOW_INTENSITY == 0
+    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, w_white,     STRB_FASTEST, "WWhite, VFAST strobe",     "FR.1.1.6",     leader, 1));
+    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, gold,      STRB_FASTEST, "gold, VFAST strobe",      "FR.1.1.5",     leader, 1));
+    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, cyan,      STRB_FASTEST, "cyan, VFAST strobe",      "FR.1.1.7",     leader, 1));
+    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, red,       STRB_FASTEST, "red, VFAST strobe",       "FR.1.1.1",     leader, 1));
+    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, blue,      STRB_FASTEST, "blue, 8 strobe",          "FR.1.1.8",     leader, 1));
+    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, pink,      STRB_FASTEST, "pink, VFAST strobe",      "FR.1.1.11",    leader, 1));
+    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, magenta,   STRB_FASTEST, "magenta, VFAST strobe",   "FR.1.1.10",    leader, 1));
+    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, purple,    STRB_FASTEST, "purple, VFAST strobe",    "FR.1.1.9",     leader, 1));
+    
 #endif
     // Fast frquency
 #if SHOW_INTENSITY==0 or SHOW_INTENSITY>=2
@@ -228,6 +259,10 @@ void front_rack_init(){
     // front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    color_vec{sevika_pink,hextech_cyan}, square, 500, 1000,     "slow hextech sevika chaser",  "FR.3.8", leader, 2));
     // front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    color_vec{sevika_pink,hextech_cyan}, square, 100, 200,     "slow hextech sevika chaser",   "FR.3.7", leader, 2));
     // front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    color_vec{sevika_pink,hextech_cyan}, square, 100, 200,     "slow hextech sevika chaser",   "FR.3.7", leader, 2));
+
+
+/** TESTS & DEV */
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, "Flash animation with Autocolor", "FR.0.0.1", any));
 
     front_rack.activate_none();
 };
@@ -385,142 +420,81 @@ void global_rack_init(){};
 
 DMX_vec FunGeneration_12x1W_RGBW(simpleColor c, int intensity){
     switch (c){
-    case black:return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);
-        break;
-    case red:return fcn::RGBW_norm(DMX_vec{255,0,0,0}, intensity);
-        break;
-    case green:return fcn::RGBW_norm(DMX_vec{0,255,0,0}, 161.0/255*intensity);
-        break;
-    case blue:return fcn::RGBW_norm(DMX_vec{0,0,255,0}, 190.0/255*intensity);
-        break;
-    case yellow:return fcn::RGBW_norm(DMX_vec{255,90,0,0}, intensity);
-        break;
-    case orange:return fcn::RGBW_norm(DMX_vec{255,40,0,0}, intensity);
-        break;
-    case sodium:return fcn::RGBW_norm(DMX_vec{255,20,0,0}, intensity);
-        break;
-    case cyan:return fcn::RGBW_norm(DMX_vec{0,219,255,0}, 180.0/255*intensity);
-        break;
-    case purple:return fcn::RGBW_norm(DMX_vec{150,0,255,0}, intensity);
-        break;    
-    case magenta:return fcn::RGBW_norm(DMX_vec{255,0,240,0}, intensity);
-        break;
-    case pink:return fcn::RGBW_norm(DMX_vec{255,0,100,0}, intensity);
-        break;
-    case w_white:return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);
-        break;
-    case c_white:return fcn::RGBW_norm(DMX_vec{255,230,213,255}, 180.0/255*intensity);
-        break;
-    case gold:return fcn::RGBW_norm(DMX_vec{255,40,0,100}, intensity);
-        break;
-    case sevika_pink:return fcn::RGBW_norm(DMX_vec{255,0,11,0}, intensity);
-        break;
-    case hextech_cyan:return fcn::RGBW_norm(DMX_vec{0,153,255,0}, intensity);
-        break;
-    case shimmer_purple:return fcn::RGBW_norm(DMX_vec{245,0,255,0}, intensity);
-        break;
-    default:return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);
-        break;
+    case black:           return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);break;
+    case red:             return fcn::RGBW_norm(DMX_vec{255,0,0,0}, intensity);break;
+    case green:           return fcn::RGBW_norm(DMX_vec{0,255,0,0}, 161.0/255*intensity);break;
+    case blue:            return fcn::RGBW_norm(DMX_vec{0,0,255,0}, 190.0/255*intensity);break;
+    case yellow:          return fcn::RGBW_norm(DMX_vec{255,90,0,0}, intensity);break;
+    case orange:          return fcn::RGBW_norm(DMX_vec{255,40,0,0}, intensity);break;
+    case sodium:          return fcn::RGBW_norm(DMX_vec{255,20,0,0}, intensity);break;
+    case cyan:            return fcn::RGBW_norm(DMX_vec{0,219,255,0}, 180.0/255*intensity);break;
+    case purple:          return fcn::RGBW_norm(DMX_vec{150,0,255,0}, intensity);break;    
+    case magenta:         return fcn::RGBW_norm(DMX_vec{255,0,240,0}, intensity);break;
+    case pink:            return fcn::RGBW_norm(DMX_vec{255,0,100,0}, intensity);break;
+    case w_white:         return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);break;
+    case c_white:         return fcn::RGBW_norm(DMX_vec{255,230,213,255}, 180.0/255*intensity);break;
+    case gold:            return fcn::RGBW_norm(DMX_vec{255,40,0,100}, intensity);break;
+    // case sevika_pink:     return fcn::RGBW_norm(DMX_vec{255,0,11,0}, intensity);break;
+    // case hextech_cyan:    return fcn::RGBW_norm(DMX_vec{0,153,255,0}, intensity);break;
+    // case shimmer_purple:  return fcn::RGBW_norm(DMX_vec{245,0,255,0}, intensity);break;
+    default:              return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);break;
     }
 }
 
 DMX_vec Shehds_10x8W_RGBW(simpleColor c, int intensity){
     switch (c){
-        case black:return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);
-            break;
-        case red:return fcn::RGBW_norm(DMX_vec{255,0,0,0}, intensity);
-            break;
-        case green:return fcn::RGBW_norm(DMX_vec{0,255,0,0}, 161.0/255*intensity);
-            break;
-        case blue:return fcn::RGBW_norm(DMX_vec{0,0,255,0}, 190.0/255*intensity);
-            break;
-        case yellow:return fcn::RGBW_norm(DMX_vec{255,90,0,0}, intensity);
-            break;
-        case orange:return fcn::RGBW_norm(DMX_vec{255,40,0,0}, intensity);
-            break;
-        case sodium:return fcn::RGBW_norm(DMX_vec{255,20,0,0}, intensity);
-            break;
-        case cyan:return fcn::RGBW_norm(DMX_vec{0,219,255,0}, 180.0/255*intensity);
-            break;
-        case purple:return fcn::RGBW_norm(DMX_vec{150,0,255,0}, intensity);
-            break;    
-        case magenta:return fcn::RGBW_norm(DMX_vec{255,0,240,0}, intensity);
-            break;
-        case pink:return fcn::RGBW_norm(DMX_vec{255,0,100,0}, intensity);
-            break;
-        case w_white:return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);
-            break;
-        case c_white:return fcn::RGBW_norm(DMX_vec{255,230,213,255}, 180.0/255*intensity);
-        break;
-        case gold:return fcn::RGBW_norm(DMX_vec{255,40,0,100}, intensity);
-            break;
-        case sevika_pink:return fcn::RGBW_norm(DMX_vec{255,0,11,0}, intensity);
-            break;
-        case hextech_cyan:return fcn::RGBW_norm(DMX_vec{0,153,255,0}, intensity);
-            break;
-        case shimmer_purple:return fcn::RGBW_norm(DMX_vec{245,0,255,0}, intensity);
-            break;
-        default:return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);
-            break;
+        case black:             return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);break;
+        case red:               return fcn::RGBW_norm(DMX_vec{255,0,0,0}, intensity);break;
+        case green:             return fcn::RGBW_norm(DMX_vec{0,255,0,0}, 161.0/255*intensity);break;
+        case blue:              return fcn::RGBW_norm(DMX_vec{0,0,255,0}, 190.0/255*intensity);break;
+        case yellow:            return fcn::RGBW_norm(DMX_vec{255,90,0,0}, intensity);break;
+        case orange:            return fcn::RGBW_norm(DMX_vec{255,40,0,0}, intensity);break;
+        case sodium:            return fcn::RGBW_norm(DMX_vec{255,20,0,0}, intensity);break;
+        case cyan:              return fcn::RGBW_norm(DMX_vec{0,219,255,0}, 180.0/255*intensity);break;
+        case purple:            return fcn::RGBW_norm(DMX_vec{150,0,255,0}, intensity);break;    
+        case magenta:           return fcn::RGBW_norm(DMX_vec{255,0,240,0}, intensity);break;
+        case pink:              return fcn::RGBW_norm(DMX_vec{255,0,100,0}, intensity);break;
+        case w_white:           return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);break;
+        case c_white:           return fcn::RGBW_norm(DMX_vec{255,230,213,255}, 180.0/255*intensity);break;
+        case gold:              return fcn::RGBW_norm(DMX_vec{255,40,0,100}, intensity);break;
+        // case sevika_pink:       return fcn::RGBW_norm(DMX_vec{255,0,11,0}, intensity);break;
+        // case hextech_cyan:      return fcn::RGBW_norm(DMX_vec{0,153,255,0}, intensity);break;
+        // case shimmer_purple:    return fcn::RGBW_norm(DMX_vec{245,0,255,0}, intensity);break;
+        default:                return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);break;
     }
 }
 
 DMX_vec Shehds_7x18W_RGBWAU(simpleColor c, int intensity){
     switch (c){
-        case black:return fcn::RGBW_norm(DMX_vec{0,0,0,0,0,0}, -1);
-            break;
-        case red:return fcn::RGBW_norm(DMX_vec{255,0,0,0,0,0}, -1);
-            break;
-        case green:return fcn::RGBW_norm(DMX_vec{4,255,0,0,0,0}, -1);
-            break;
-        case blue:return fcn::RGBW_norm(DMX_vec{0,5,255,0,0,0}, -1);
-            break;
-        case yellow:return fcn::RGBW_norm(DMX_vec{255,126,0,0,70,0}, -1);
-            break;
-        case orange:return fcn::RGBW_norm(DMX_vec{255,47,0,0,255,0}, -1);
-            break;
-        case sodium:return fcn::RGBW_norm(DMX_vec{255,20,0,0,255,0}, -1);
-            break;
-        case cyan:return fcn::RGBW_norm(DMX_vec{0,233,255,0,0,0}, -1);
-            break;
-        case purple:return fcn::RGBW_norm(DMX_vec{96,0,255,0,0,255}, -1);
-            break;    
-        case magenta:return fcn::RGBW_norm(DMX_vec{159,0,255,0,0,255}, -1);
-            break;
-        case pink:return fcn::RGBW_norm(DMX_vec{255,0,137,0,0,0}, -1);
-            break;
-        case w_white:return fcn::RGBW_norm(DMX_vec{221,104,0,255,167,0}, -1);
-            break;
-        case c_white:return fcn::RGBW_norm(DMX_vec{255,227,200,255,0,0}, -1);
-            break;
-        case gold:return fcn::RGBW_norm(DMX_vec{255,58,0,49,134,0}, -1);
-            break;
-        case sevika_pink:return fcn::RGBW_norm(DMX_vec{255,0,27,0,0,0}, -1);
-            break;
-        case hextech_cyan:return fcn::RGBW_norm(DMX_vec{0,153,255,0,0,0}, -1);
-            break;
-        case shimmer_purple:return fcn::RGBW_norm(DMX_vec{190,0,255,0,0,0}, -1);
-            break;
-        default:return fcn::RGBW_norm(DMX_vec{0,0,0,0,0,0}, -1);
-            break;
+        case black:          return fcn::RGBW_norm(DMX_vec{0,0,0,0,0,0}, -1);break;
+        case red:            return fcn::RGBW_norm(DMX_vec{255,0,0,0,0,0}, -1);break;
+        case green:          return fcn::RGBW_norm(DMX_vec{4,255,0,0,0,0}, -1);break;
+        case blue:           return fcn::RGBW_norm(DMX_vec{0,5,255,0,0,0}, -1); break;
+        case yellow:         return fcn::RGBW_norm(DMX_vec{255,126,0,0,70,0}, -1);break;
+        case orange:         return fcn::RGBW_norm(DMX_vec{255,47,0,0,255,0}, -1);break;
+        case sodium:         return fcn::RGBW_norm(DMX_vec{255,20,0,0,255,0}, -1);break;
+        case cyan:           return fcn::RGBW_norm(DMX_vec{0,233,255,0,0,0}, -1);break;
+        case purple:         return fcn::RGBW_norm(DMX_vec{96,0,255,0,0,255}, -1);break;    
+        case magenta:        return fcn::RGBW_norm(DMX_vec{159,0,255,0,0,255}, -1);break;
+        case pink:           return fcn::RGBW_norm(DMX_vec{255,0,137,0,0,0}, -1);break;
+        case w_white:        return fcn::RGBW_norm(DMX_vec{221,104,0,255,167,0}, -1);break;
+        case c_white:        return fcn::RGBW_norm(DMX_vec{255,227,200,255,0,0}, -1);break;
+        case gold:           return fcn::RGBW_norm(DMX_vec{255,58,0,49,134,0}, -1);break;
+        // case sevika_pink:    return fcn::RGBW_norm(DMX_vec{255,0,27,0,0,0}, -1);break;
+        // case hextech_cyan:   return fcn::RGBW_norm(DMX_vec{0,153,255,0,0,0}, -1);break;
+        // case shimmer_purple: return fcn::RGBW_norm(DMX_vec{190,0,255,0,0,0}, -1);break;
+        default:             return fcn::RGBW_norm(DMX_vec{0,0,0,0,0,0}, -1);break;
     }
 }
 
 
 DMX_vec SpotFixture::RGBW(simpleColor c, int intensity){
     switch (this->type){
-        case FunGen_RGBW_12x1W :
-            return FunGeneration_12x1W_RGBW(c, intensity);
-            break;
-        case Shehds_RGBWAU_10x8W :
-            return Shehds_10x8W_RGBW(c, intensity);
-            break;
-        case Shehds_RGBWAU_7x18W :
-            return Shehds_7x18W_RGBWAU(c, intensity);
-            break;
+        case FunGen_RGBW_12x1W :    return FunGeneration_12x1W_RGBW(c, intensity);break;
+        case Shehds_RGBWAU_10x8W :  return Shehds_10x8W_RGBW(c, intensity);break;
+        case Shehds_RGBWAU_7x18W :  return Shehds_7x18W_RGBWAU(c, intensity);break;
         
-        default :
-            break;
+        default :    break;
     }
 }
 
@@ -539,57 +513,23 @@ DMX_vec SpotRack::RGBW(simpleColor c, int intensity){ //TODO delete
 
     switch (c)
     {
-    case black:
-        return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);
-        break;
-    case red:
-        return fcn::RGBW_norm(DMX_vec{255,0,0,0}, intensity);
-        break;
-    case green:
-        return fcn::RGBW_norm(DMX_vec{0,255,0,0}, 161.0/255*intensity);
-        break;
-    case blue:
-        return fcn::RGBW_norm(DMX_vec{0,0,255,0}, 190.0/255*intensity);
-        break;
-    case yellow:
-        return fcn::RGBW_norm(DMX_vec{255,90,0,0}, intensity);
-        break;
-    case orange:
-        return fcn::RGBW_norm(DMX_vec{255,40,0,0}, intensity);
-        break;
-    case sodium:
-        return fcn::RGBW_norm(DMX_vec{255,20,0,0}, intensity);
-        break;
-    case cyan:
-        return fcn::RGBW_norm(DMX_vec{0,219,255,0}, 180.0/255*intensity);
-        break;
-    case purple:
-        return fcn::RGBW_norm(DMX_vec{150,0,255,0}, intensity);
-        break;    
-    case magenta:
-        return fcn::RGBW_norm(DMX_vec{255,0,240,0}, intensity);
-        break;
-    case pink:
-        return fcn::RGBW_norm(DMX_vec{255,0,100,0}, intensity);
-        break;
-    case w_white:
-        return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);
-        break;
-    case gold:
-        return fcn::RGBW_norm(DMX_vec{255,40,0,100}, intensity);
-        break;
-    case sevika_pink :
-        return fcn::RGBW_norm(DMX_vec{255,0,11,0}, intensity);
-        break;
-    case hextech_cyan :
-        return fcn::RGBW_norm(DMX_vec{0,153,255,0}, intensity);
-        break;
-    case shimmer_purple :
-        return fcn::RGBW_norm(DMX_vec{245,0,255,0}, intensity);
-        break;
-    default:
-        return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);
-        break;
+    case black:           return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);break;
+    case red:             return fcn::RGBW_norm(DMX_vec{255,0,0,0}, intensity);break;
+    case green:           return fcn::RGBW_norm(DMX_vec{0,255,0,0}, 161.0/255*intensity);break;
+    case blue:            return fcn::RGBW_norm(DMX_vec{0,0,255,0}, 190.0/255*intensity);break;
+    case yellow:          return fcn::RGBW_norm(DMX_vec{255,90,0,0}, intensity);break;
+    case orange:          return fcn::RGBW_norm(DMX_vec{255,40,0,0}, intensity);break;
+    case sodium:          return fcn::RGBW_norm(DMX_vec{255,20,0,0}, intensity);break;
+    case cyan:            return fcn::RGBW_norm(DMX_vec{0,219,255,0}, 180.0/255*intensity);break;
+    case purple:          return fcn::RGBW_norm(DMX_vec{150,0,255,0}, intensity);break;    
+    case magenta:         return fcn::RGBW_norm(DMX_vec{255,0,240,0}, intensity);break;
+    case pink:            return fcn::RGBW_norm(DMX_vec{255,0,100,0}, intensity);break;
+    case w_white:         return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);break;
+    case gold:            return fcn::RGBW_norm(DMX_vec{255,40,0,100}, intensity);break;
+    // case sevika_pink :    return fcn::RGBW_norm(DMX_vec{255,0,11,0}, intensity);break;
+    // case hextech_cyan :   return fcn::RGBW_norm(DMX_vec{0,153,255,0}, intensity);break;
+    // case shimmer_purple:  return fcn::RGBW_norm(DMX_vec{245,0,255,0}, intensity);break;
+    default:              return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);break;
     }
 }
 
@@ -826,11 +766,26 @@ void SpotRackAnimation3::new_frame(){
      #  ###    ######  ###### #    #   #
 */
 void SpotRackAnimation4::init(){
-    BaseAnimation::init();
+    BaseAnimation::init(); //TODO check with debug if this really works ??
+    // Resets spots values (pixel & master) to clear any remainder of the previous active animation
     this->fixture->reset_spots();
-    for (auto spot : this->fixture->spots){
-        spot->master = this->master;
+
+}
+
+// Special init() function for automatic color definition (in addition to standard init() function)
+void SpotRackAnimation4::init(const color_vec& palette){
+    // AUTOCOLOR init : assign front & back color based on passed color palette color_vec&
+    color_vec color_palette = palette;  //useless ?
+    //TODO protect against empty palette --> set all black in this case
+    this->flash_color = color_palette[0];       // first palette color is the flash color
+    if (color_palette.size()>1){
+        this->back_color = color_palette[1];    // second color (if exists) is the back color
+    }else{      
+        this-> back_color = black;              // back color is  black otherwise
     }
+
+    // then call the "STANDARD" init() function for stuff unrelated to autocolor
+    SpotRackAnimation4::init();
 }
 
 void SpotRackAnimation4::new_frame(){

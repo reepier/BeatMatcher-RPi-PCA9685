@@ -30,6 +30,7 @@
 #define FREQ 0
 #define AMPL 1
 
+//TODO major find & reintegrate state machine update : Meatmatcher maximum - branch "update_music_state_machine"
 enum states{
     BEAT        = 1,       // volume is high and beat is clear
     BREAK       = 2,       // volume is low (indicates a break)

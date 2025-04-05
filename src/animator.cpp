@@ -46,6 +46,54 @@ void AnimationManager::init(){
     palette_magasine.push_back(color_vec{cyan, red},        1);
     palette_magasine.push_back(color_vec{cyan, purple},     1);
 // Tricolor
+    // palette_magasine.push_back(color_vec{gold, purple, red},        1);
+    // palette_magasine.push_back(color_vec{purple, sodium, red},      1);
+    // palette_magasine.push_back(color_vec{gold, cyan, red},          1);
+    // palette_magasine.push_back(color_vec{gold, cyan, purple},       1);
+
+//--------------------------------------------------------------------------------
+// Dasncefloor color palette
+// Flames (red to hot colors)
+    palette_magasine_2.push_back( color_vec{red},             1);
+    palette_magasine_2.push_back( color_vec{gold, red},       1);
+    palette_magasine_2.push_back( color_vec{sodium, red},     1);
+    palette_magasine_2.push_back( color_vec{w_white, red},    1);
+    palette_magasine_2.push_back( color_vec{c_white, red},    1);
+// Wabi colors
+    palette_magasine_2.push_back(color_vec{purple, red},      1);
+    palette_magasine_2.push_back(color_vec{gold, purple},     1);
+    palette_magasine_2.push_back(color_vec{gold, purple},     1);
+    palette_magasine_2.push_back(color_vec{sodium, purple},   1);
+
+    palette_magasine_2.push_back(color_vec{cyan, red},        1);
+    palette_magasine_2.push_back(color_vec{cyan, purple},     1);
+// Other color
+    palette_magasine_2.push_back(color_vec{blue},           1);
+    palette_magasine_2.push_back(color_vec{blue, red},      1);
+    palette_magasine_2.push_back(color_vec{blue, cyan},     1);
+    palette_magasine_2.push_back(color_vec{blue, c_white},  1);
+    palette_magasine_2.push_back(color_vec{blue, w_white},  1);
+    palette_magasine_2.push_back(color_vec{blue, gold},  1);
+    palette_magasine_2.push_back(color_vec{blue, purple},   1);
+    palette_magasine_2.push_back(color_vec{purple, c_white},  1);
+    palette_magasine_2.push_back(color_vec{purple, w_white},  1);
+
+//--------------------------------------------------------------------------------
+// Warehouse color palette
+// Flames (red to hot colors)
+    palette_magasine.push_back( color_vec{red},             1);
+    palette_magasine.push_back( color_vec{gold, red},       2);
+    palette_magasine.push_back( color_vec{sodium, red},     1);
+    palette_magasine.push_back( color_vec{w_white, red},    1);
+// Wabi colors
+    palette_magasine.push_back(color_vec{purple, red},      1);
+    palette_magasine.push_back(color_vec{gold, purple},     1);
+    palette_magasine.push_back(color_vec{gold, purple},     2);
+    palette_magasine.push_back(color_vec{sodium, purple},   1);
+
+    palette_magasine.push_back(color_vec{cyan, red},        1);
+    palette_magasine.push_back(color_vec{cyan, purple},     1);
+// Tricolor
     palette_magasine.push_back(color_vec{gold, purple, red},        1);
     palette_magasine.push_back(color_vec{purple, sodium, red},      1);
     palette_magasine.push_back(color_vec{gold, cyan, red},          1);
@@ -78,7 +126,17 @@ void AnimationManager::init(){
     palette_magasine_2.push_back(color_vec{purple, c_white},  1);
     palette_magasine_2.push_back(color_vec{purple, w_white},  1);
 
-    
+//---------------------------------------------------------------------------------
+    //TEST Palette
+    test_palette.push_back( color_vec{red},                 1);
+    // test_palette.push_back( color_vec{blue},                1);
+    // test_palette.push_back( color_vec{purple},              1);
+    // test_palette.push_back( color_vec{gold},                1);
+    // test_palette.push_back( color_vec{w_white,  red},       1);
+    // test_palette.push_back( color_vec{c_white,  blue},      1);
+    // test_palette.push_back( color_vec{gold,     purple},    1);
+    // test_palette.push_back( color_vec{gold,     red},       1);
+
     front_rack_init();
     rack_15_init();
     rack_40_init();
@@ -350,12 +408,38 @@ void AnimationManager::nov30_maximum_update(){
 
 }
 
+void AnimationManager::autocolor_update(){ // test function to develop the AUTOCOLOR feature
+    static color_vec palette;
+    static int palette_lifespan = 3;
+    
+    //when time to change animation
+    if (frame.first_loop
+        || (sampler.state_changed && sampler.state == BEAT) && (frame.t_current_ms-t_last_change_ms > TEMPO_ANIM_CHANGE)
+        || this->timer_elapsed()){
+
+        // when time to change color palette
+        if (frame.first_loop || palette_lifespan == 0){
+            // pick a random palette from the mag
+            palette = palette_magasine.get_random_palette();
+            palette_lifespan = 2; //reset palette lifespan
+            log(1, __FILE__, " ",__func__, " ", fcn::palette_to_string(palette, '/'));
+        }
+
+        //activate an animation using autocolor
+        front_rack.activate_autocolor(palette);
+        addr_led.activate_autocolor(palette);
+        palette_lifespan--; //decrease palette lifespan
+    }
+}
+
+//TODO update to support AUTOCOLOR
 bool AnimationManager::test_animation(){
     log(4, __FILE__, " ",__func__);
 
     bool success = false;
-    balise(fcn::num_to_str((int)vec_anim_id.size()).data());
-    for(vector<string>::iterator anim_id_it = vec_anim_id.begin(); anim_id_it != vec_anim_id.end(); anim_id_it++){
+    balise(fcn::num_to_str((int)cli_anim_id.size()).data());
+    
+    for(vector<string>::iterator anim_id_it = cli_anim_id.begin(); anim_id_it != cli_anim_id.end(); anim_id_it++){
         string s_anim_id = (*anim_id_it);
         balise(s_anim_id.data());
 
@@ -376,53 +460,89 @@ bool AnimationManager::test_animation(){
     return success;
 }
 
-// activates animations based on DMX data
-bool AnimationManager::controled_animator(const DMX_vec data){
+/** Activates animations based on received DMX data or automatic sequence 
+ * limitations : only works for addressable LED for now but support can easily be extended to other fixtures */
+bool AnimationManager::controled_update(){
+/* automatic sequencer :  -------------------------------------------------------------------------
+    Define When the time is right to change animation base on music analysis & different timers
+    This sewuencer runs constantly in parallel with  the input commands system
+    WHen external settings are set to "manual", the automatic sequencer keeps doing its job in the background in case
+     external setting goes back to "automatic" */
+// update automatic palette when required
+    static color_vec auto_palette;              //contains automatic colors
+    bool auto_palette_update = false;           //
+    static time_t last_palette_update_ms = 0;   //
+    // choose a palette randomly at first
+    if(frame.first_loop){
+        auto_palette = palette_magasine.get_random_palette();
+        last_palette_update_ms = frame.t_current_ms;
+        auto_palette_update = true;
+        if (animator.controler_main_palette.empty()) //only display the update if external setting is set to "automatic main palette"
+            log(1, "Automatic palette update : ", fcn::palette_to_string(auto_palette));
+    // Then update palette every time a timer elapses AND a long break ends
+    }else if((sampler.state_changed && sampler.previous_state == SUSTAINED_BREAK) && (frame.t_current_ms - last_palette_update_ms > DANCEFL_TEMPO_PALETTE)){
+        auto_palette = palette_magasine.get_similar_palette(auto_palette);
+        last_palette_update_ms = frame.t_current_ms;
+        auto_palette_update = true;
+        if (animator.controler_main_palette.empty()) //only display the update if external setting is set to "automatic main palette"
+            log(1, "Automatic palette update : ", fcn::palette_to_string(auto_palette));
+    }
 
-    // Test 1
-    //extract DMX values in variables
-    int i = 0;
-    uint8_t spot_1_DIMMER = data[0];
-    uint8_t spot_2_DIMMER = data[1];
-    uint8_t Addr_LED_DIMMER = data[2];
+/**/
+//update animation automaticaaly when required
+    bool auto_ani_update = false;
+    static time_t last_ani_update_ms = 0;
+    //choose an animation randomly at first & change whenever Beat stat changes & a timer elapses
+    if(frame.first_loop || sampler.state_changed && sampler.state == BEAT && frame.t_current_ms-last_ani_update_ms > DANCEFL_TEMPO_ANI){
+        auto_ani_update = true;
+        last_ani_update_ms = true;
+    }
 
-    front_rack.activate_by_index(data[3]);
-    front_rack.set_master(data[0]);
-
-    rack_15.activate_by_index(data[4]);
-    front_rack.set_master(data[1]);
-
-    addr_led.activate_by_index(data[5]);
-    addr_led.master = data[2];
-
-    // // Test 2 Dyamically create new animations based on what is contained in "data"
-
-    // // intialize & define variables
-    // static DMX_vec WS_memorized_data;
-    // DMX_vec WS_data(data.at(WS_DIMMER), data.at(WS_DENS)+1);
-
-    // static bool first_call = true;
+//update animation manually when required
+    bool manual_update = false;
+    static color_vec last_external_fixture_palette = addr_led.external_palette;
+    static color_vec last_external_main_palette = animator.controler_main_palette;
+    static int last_external_ani = addr_led.external_animation;
     
-    // if (first_call){
-    //     WS_memorized_data.assign(data.at(WS_DIMMER), data.at(WS_DENS)+1);
-    //     first_call = false;
-    // }
-    
-    // // for each fixtre group, update active animation if Data has changed 
-    // if (first_call || !(WS_memorized_data == WS_data)){
-    //     delete addr_led.active_animation;
-    //     addr_led.active_animation = nullptr;
+    // update animation manually when manual input parameters (palette, animation) change
+    if (animator.controler_main_palette != last_external_main_palette || addr_led.external_palette != last_external_fixture_palette || addr_led.external_animation != last_external_ani){
+        manual_update = true;
+        last_external_main_palette = animator.controler_main_palette;
+        last_external_fixture_palette = addr_led.external_palette;
+        last_external_ani = addr_led.external_animation;
+    }
 
-    //     addr_led.active_animation = Create_AddrLED_Animation(&addr_led, data); 
-    //     if (addr_led.active_animation != nullptr)
-    //         addr_led.active_animation->init();
-    // }
+// determines which setting is manual & whichis automatic
+    bool automatic_main_palette = animator.controler_main_palette.empty();
+    bool automatic_led_palette = addr_led.external_palette.empty() && animator.controler_main_palette.empty();
+    bool automatic_led_ani = addr_led.external_animation==0;
 
+// APPLY UPDATE to addressable LEDs: //TODO fix this messy shit !! combinatoire foireuse !!
+    // if input command is received or automatic settings change (palette or animation), change animation
+    if(manual_update || auto_ani_update && automatic_led_ani || auto_palette_update && automatic_led_palette){
+        color_vec final_palette;
+        // choose color palette by order of priority : manual fixture palette > manual main palette > automatic palette
+        if(addr_led.external_palette.empty() == false){ //use external fixture's palette if available
+            final_palette = addr_led.external_palette;
+        }else if(animator.controler_main_palette.empty() == false){   // else use external main palette if available
+            final_palette = animator.controler_main_palette;
+        }else{      // else use auto palette (if both main & fixture palette are set to AUTO in the external controler)
+            final_palette = auto_palette;
+        }
+        // choose animation by order of priority (external animation > automatic animation)
+        if(addr_led.external_animation != 0){       // use external animation if available
+            addr_led.activate_by_index(addr_led.external_animation, final_palette);
+        }else{          // choose random animation
+            addr_led.activate_random(final_palette);
+        }
+    }
 
-
-
-    // // Last, set memorized data to current data and leave
-    // WS_memorized_data.assign(data.at(WS_DIMMER), data.at(WS_C2)+1);
+    /*Observed bugs :
+        - when program is launched, with all external control to 0, there is no activae animation until first break
+            *->might just be bad luck (random animation selection sometimes returns the BLACK animation)
+        - When led palette is set to MANUAL, the automatic palette update triggers an animation change. It should not. The new
+         animation keeps the led manual palette.
+        - When led animation is set to MANUAL, the automatic palette update triggers an animation change. It should not. */
 }
 
 void AnimationManager::set_timer(time_t duration_ms){
@@ -433,9 +553,9 @@ void AnimationManager::set_timer(time_t duration_ms){
 void AnimationManager::reset_timer(){
     this->timer_start_ms = 0;
     this->timer_duration_ms = 0;
-    this-> timer_end_ms = 0;
+    this->timer_end_ms = 0;
 }
-bool AnimationManager::timer_elapsed(){
+bool AnimationManager::timer_elapsed(){ 
     bool ret = this->timer_start_ms == 0 && this->timer_duration_ms == 0 && this->timer_end_ms == 0 ? false : 
              frame.t_current_ms - this->timer_start_ms > this->timer_duration_ms ? true : false;
 
@@ -476,14 +596,23 @@ bool BaseFixture::activate_none(){
 
 // selects and init the i_th animation within the list (i being the argument).
 // If i out of range, select the first (black) 
-bool BaseFixture::activate_by_index(int i){
+bool BaseFixture::activate_by_index(int i){ //obsolete with autocolor
     // log(4, __FILE__, " ",__LINE__, " ", __func__);
     if (i < this->animations.size())
         this->active_animation = this->animations[i];
     else
         this->active_animation = this->animations[0];
     this->active_animation->init();
-    log(1, "Activating ", active_animation->id, ":", active_animation->description);
+    log(2, "Activating ", active_animation->id, ":", active_animation->description);
+}
+bool BaseFixture::activate_by_index(int i, const color_vec& palette){ //autocolor variant
+    // log(4, __FILE__, " ",__LINE__, " ", __func__);
+    if (i < this->animations.size())
+        this->active_animation = this->animations[i];
+    else
+        this->active_animation = this->animations[0];
+    this->active_animation->init(palette);
+    log(2, "Activating ", active_animation->id, ":", active_animation->description, '\t', fcn::palette_to_string(palette));
 }
 
 // select and init an animtion randomly picked wihtin the list 
@@ -493,7 +622,26 @@ bool BaseFixture::activate_random(bool include_black){
         this->active_animation = this->animations[ rand()%(this->animations.size())];
     else
         this->active_animation = this->animations[ rand()%(this->animations.size()-1) +1];
-    this->active_animation->init();
+    
+    if(this->active_animation->autocolor){
+        this->active_animation->init(animator.test_palette.get_random_palette()); //Quick n Dirty fix to animation testing to support AUTOCOLOR
+    }else{
+        this->active_animation->init();
+    }
+}
+bool BaseFixture::activate_random(const color_vec& palette, bool include_black){  //autocolor variant 
+    log(4, __FILE__, " ",__LINE__, " ", __func__);
+    if (include_black)
+        this->active_animation = this->animations[ rand()%(this->animations.size())];
+    else
+        this->active_animation = this->animations[ rand()%(this->animations.size()-1) +1];
+    
+    if(this->active_animation->autocolor){
+        this->active_animation->init(palette);
+    }else{
+        this->active_animation->init();
+    }
+    log(2, "Activating ", active_animation->id, ":", active_animation->description, '\t', fcn::palette_to_string(palette));
 }
 
 // select and init an animation with its ID. If the ID cannot be found within the existing animations, does nothing.
@@ -506,7 +654,11 @@ bool BaseFixture::activate_by_ID(string id){
         if ((*anim_it)->id == id){
             found_it = true;
             this->active_animation = (*anim_it);
-            this->active_animation->init();
+            if(this->active_animation->autocolor){
+                this->active_animation->init(animator.test_palette.get_random_palette()); //Quick n Dirty fix to animation testing to support AUTOCOLOR
+            }else{
+                this->active_animation->init();
+            }
             return found_it;
         }
     }
@@ -516,19 +668,22 @@ bool BaseFixture::activate_by_ID(string id){
 
 /* Activates an animation whose colors match the ones in palette passed as an argument.
    All of the selected animations color must be listed in the palette, but all the palette's 
-   color do not have to be listed in the animation's colors */
+   color do not have to be listed in the animation's colors
+   
+   ATTENTION !! AUTOCOLOR shall make this function & feature obsolete --> do not use both*/
 bool BaseFixture::activate_by_color(color_vec arg_palette, AnimationType arg_type){
     log(4, __FILE__, " ",__LINE__, " ", __func__);
 
-    int n_anim = this->animations.size();
-    anim_vec candidates;
-    int_vec probas;
+    int n_anim = this->animations.size(); //for readability
+    anim_vec candidates;                    // contains candidate animations (animations that match criterias)
+    int_vec prios;                          // contains the priorities of such animations
+    
     // copy the fixture's animation list
-        anim_vec fixtures_anim_list = this->animations;
-        fixtures_anim_list.erase(fixtures_anim_list.begin());    // avoid black (first) animation
+    anim_vec fixtures_anim_list = this->animations;
+    fixtures_anim_list.erase(fixtures_anim_list.begin());    // avoid black (first) animation
 
-    bool found_it = false;
-    this->activate_none(); // start by resetting the fixture to the black animation
+    bool found_it = false;  //flag that turns true when final animation is found
+    this->activate_none(); // start by resetting the fixture to the black animation in case no match is found
 
     // Parse through the animations'list (in a random order) and select the first anim that matches the palette
     // All the animation's color must be listed int h
@@ -551,41 +706,74 @@ bool BaseFixture::activate_by_color(color_vec arg_palette, AnimationType arg_typ
 
             // if the animation is a match, activate it and exit the for loop and return true, else deactivate the fixture (by activating the black animation)
             if (animation_match){
-
-                candidates.push_back(each_animation);
-                probas.push_back(each_animation->priority);
-
-                // found_it = true;
-                // this->activate_by_ID(each_animation->id);
-                // break;
+                candidates.push_back(each_animation);       // store the animation in vector
+                prios.push_back(each_animation->priority); // store the animation probability setting in other vector
             }
         }
 
-        // cout << "Candidates : " << endl; 
-        // for (auto anim : candidates){
-        //     cout << anim->id << " : " << fcn::palette_to_string(anim->color_palette, '/') << "\t";
-        //     cout << ((anim->type == leader) ? "  (lead.)" : (anim->type == backer) ? "  (back.)" : "  (any)")  <<  endl;
 
-        // }
-
-
-    balise(__FILE__, " ", __LINE__, "candidat animations found");
+    balise(__FILE__, " ", __LINE__, "candidate animations listed");
     if (candidates.size()>0){
-        BaseAnimation* anim = fcn::random_pick(candidates, probas);
+        BaseAnimation* anim = fcn::random_pick(candidates, prios);
         this->activate_by_ptr(anim);
         found_it=true;
-
-        // cout << "Winner : " << endl; 
-        // cout << anim->id << " : " << fcn::palette_to_string(anim->color_palette, '/') << endl;
-        
     }
 
     return found_it;
 }   
 
+/*Activates an animation using autocolor feature. */
+bool BaseFixture::activate_autocolor(color_vec& palette){
+    // log(1, this->name, " ", __func__);
+    int n_anim = this->animations.size(); //for readability
+    anim_vec candidates;                    // contains candidate animations (animations that match criterias)
+    int_vec prios;                          // contains the priorities of such animations
+
+    // copy the fixture's animation list
+    anim_vec fixtures_anim_list = this->animations;
+    fixtures_anim_list.erase(fixtures_anim_list.begin());    // avoid black (first) animation
+    
+    bool found_it = false;  //flag that turns true when final animation is found
+    this->activate_none(); // start by resetting the fixture to the black animation in case no match is found
+
+    // Parse the fixture's animation list
+        /* pick animation matching the following criteria :
+            - autocolor = true
+            - authorised color*/
+    for(auto each_animation : fixtures_anim_list){
+        bool animation_match;
+        // check the compatibility between the current animation's & the argument type
+        animation_match = each_animation->is_autocolor_compatible(palette);
+
+        // if the animation is a match, activate it and exit the for loop and return true, else deactivate the fixture (by activating the black animation)
+        if (animation_match){
+            candidates.push_back(each_animation);      // store the animation in vector
+            prios.push_back(each_animation->priority); // store the animation probability setting in other vector
+        }
+        
+
+    }
+
+    // log(2, "Candidates listed ");
+    if (candidates.size()>0){
+        BaseAnimation* anim = fcn::random_pick(candidates, prios);
+        this->activate_by_ptr(anim, palette);
+        found_it=true;
+        // log(2, "Selected : ", anim->id);
+    }else{
+        // log(2, "no candidates");
+    }
+
+    return found_it;
+}
+
 bool BaseFixture::activate_by_ptr(BaseAnimation * anim_ptr){
     this->active_animation = anim_ptr;
     this->active_animation->init();
+}
+bool BaseFixture::activate_by_ptr(BaseAnimation * anim_ptr, const color_vec& palette){
+    this->active_animation = anim_ptr;
+    this->active_animation->init(palette);
 }
 
 
@@ -709,5 +897,6 @@ int_vec fcn::convert_8_to_12bits(DMX_vec in_vec){
     }
     return ret;
 }
+
 
 

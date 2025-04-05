@@ -1,7 +1,8 @@
 .o
 .txt
 .log
+*/*.log
 bin/beatmatcher
 bin/test
 **/build
-Makefile
+beatmatcher.log

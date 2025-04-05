@@ -7,23 +7,34 @@
 #define MAX_SUBPIX_PER_UNI  510 // maximum number of subpixels arried over 1 universe (1 universe can only carry complete pixels (BC-204 limitation))
 // WS2815 led strip config
   // Config paramters
-  #define NUM_BAR 18                       // Total Number of bars
-  #define NUM_SEG (3*NUM_BAR)             // Total number of segments (across all bars)
-  const int_vec groups_size = {3, 3, 3, 3, 3, 3};        // Number of bars for each group
-  #define NUM_GROUP  groups_size.size()   // Number of groups
+  constexpr int NUM_BAR = 18;                       // Total Number of bars
+  constexpr int NUM_SEG = 3*NUM_BAR;             // Total number of segments (across all bars)
+  const int_vec groups_size = {3, 3, 3, 3, 3, 3};        // Number of bars for each group //TODO implement "GROUP" sudivision 
 
   // Quasi constants
-  #define NUM_PIX_BAR 58        // number of pixels per bar
+  constexpr int NUM_PIX_BAR = 58;        // number of pixels per bar
   // Derivatives
-  #define NUM_PIX (NUM_BAR*NUM_PIX_BAR)           // Total number of pixels
-  #define NUM_SUBPIX (3*NUM_PIX)  // Total number of artnet dmx datas
+  constexpr int NUM_PIX = NUM_BAR*NUM_PIX_BAR;           // Total number of pixels
+  constexpr int NUM_SUBPIX = 3*NUM_PIX;  // Total number of artnet dmx datas
+  const size_t NUM_GROUP = groups_size.size();   // Number of groups
 
+  /* Artnet Controler configuraiton : 
+  Channel 1 : 
+    Start Universe : 2 (corresponds to ola universe 1 while Start uni 2 correspond to ola universe 0)
+    CHannel start : 1 
+    Num pixel : 680 (MAX)
+  Channel 2 : 
+    Start Universe : 2 (corresponds to ola universe 1 while Start uni 2 correspond to ola universe 0)
+    CHannel start : 1 
+    Num pixel : 680 (MAX)*/
 
 enum strip_subdiv_t{
   bar,  // Led bar
   seg,  // Led segment (fraction of a bar)
   pix   // Individual pixel
 };
+
+
 
 
 
@@ -43,7 +54,10 @@ class AddressableLED;
 // fixture class definition
 class AddressableLED : public BaseFixture{
   public:
+    //each individual led pixel RGB value is stored in this vector
     pixel_vec pixels;
+
+    // Fixture Controler :
 
 
     //custom constructor (also calls base constructor)
@@ -131,8 +145,8 @@ class AddrLEDAnimation1 : public AddrLEDAnimation{
   public:
     // specific parameters
   bool param_activate_flash;
-  simpleColor flash_color;            // flash color
-  simpleColor back_color;             // background color
+  simpleColor flash_color = black;            // flash color
+  simpleColor back_color = black;             // background color
   double density = 1.0;               // proportion of LED's flashing (0-100%) 
   strip_subdiv_t unit = bar;          // flash pattern subdivision (bar, segment, pixel)
   
@@ -180,8 +194,30 @@ class AddrLEDAnimation1 : public AddrLEDAnimation{
           units_index[i] = i;
         }
   }
+  //AUTOCOLOR constructor 
+  AddrLEDAnimation1(AddressableLED* f, strip_subdiv_t subdiv, double dens, std::string d, std::string i, AnimationType typ, bool flash = true, uint8_t mast = 255){
+    //set Base params 
+    this->fixture = f,this->description = d,this->id = i, this->type = typ;
+    this->autocolor=true;
+    //set cinematic params
+    this->density = dens;
+    this->unit = subdiv;
+    switch (subdiv){
+      case bar : units_index.resize(NUM_BAR);
+        break;
+      case seg : units_index.resize(NUM_SEG);
+        break;
+      case pix : units_index.resize(NUM_PIX);
+        break;
+      }
+    for(int i=0; i<units_index.size(); i++){
+      units_index[i] = i;
+    }
+
+  }
 
     void init() override;
+    void init(const color_vec&) override;
     void new_frame() override;
     
 };
@@ -205,8 +241,8 @@ class AddrLEDAnimation1 : public AddrLEDAnimation{
 class AddrLEDAnimation2 : public AddrLEDAnimation{
   public:
     // Animation parameters (constant or set by animation constructor)
-    pixel backgd_RGB;
-    pixel flash_RGB;
+    simpleColor back_color; //TODO replace with simplecolor
+    simpleColor flash_color;  //TODO replace with simplecolor
     strip_subdiv_t unit;
     int fade_rate = 80;                            // ms flash fade rate (time constant of an exponential decay : intensity = exp(-(t-t0)/fade_rate)
 
@@ -215,34 +251,49 @@ class AddrLEDAnimation2 : public AddrLEDAnimation{
     // Constructor
     AddrLEDAnimation2(AddressableLED *f, simpleColor f_col, simpleColor b_col, strip_subdiv_t u, std::string d, std::string i, AnimationType typ=any, int prio=1, int mast=255)
     {
-        this->description = d;
-        this->id = i;
-        this->fixture = f;
-        this->type = typ;
-        this->master = mast;
-        this->priority=prio;
+      //set BAse params
+      this->description = d,this->id = i,this->fixture = f,this->type = typ,this->master = mast,this->priority=prio;
+      //set cinematic params
+      this->flash_color = f_col;
+      this->back_color = b_col;
+      this->unit = u;
 
-        this->flash_RGB = this->fixture->RGB(f_col);
-        this->backgd_RGB = this->fixture->RGB(b_col, 20);
-        this->unit = u;
+      switch (u){
+        case bar : units_index.resize(NUM_BAR);
+          break;
+        case seg : units_index.resize(NUM_SEG);
+          break;
+        case pix : units_index.resize(NUM_PIX);
+          break;
+      }
 
-        switch (u){
-          case bar : units_index.resize(NUM_BAR);
-            break;
-          case seg : units_index.resize(NUM_SEG);
-            break;
-          case pix : units_index.resize(NUM_PIX);
-            break;
-        }
+      for(int i=0; i<units_index.size(); i++){
+        units_index[i] = i;
+      }
 
-        for(int i=0; i<units_index.size(); i++){
-          units_index[i] = i;
-        }
-
-        this->update_palette(color_vec{f_col, b_col});
+      this->update_palette(color_vec{f_col, b_col});
     }
-
+    // AUTOCOLOR Constructor
+    AddrLEDAnimation2(AddressableLED *f, strip_subdiv_t u, std::string d, std::string i, AnimationType typ=any, int prio=1, int mast=255){
+      //set BAse params
+      this->description = d,this->id = i,this->fixture = f,this->type = typ,this->master = mast,this->priority=prio;
+      this->autocolor=true;
+      //set cinematic params
+      this->unit = u;
+      switch (u){
+        case bar : units_index.resize(NUM_BAR);
+          break;
+        case seg : units_index.resize(NUM_SEG);
+          break;
+        case pix : units_index.resize(NUM_PIX);
+          break;
+      }
+      for(int i=0; i<units_index.size(); i++){
+        units_index[i] = i;
+      }
+    }
     void init() override;
+    void init(const color_vec&) override;
     void new_frame() override;
 };
 
@@ -310,6 +361,10 @@ class AddrLEDAnimation3 : public AddrLEDAnimation{
     //plot (A + K * atan(Q*(x-A))) with Q = 0.05, A=255/2, K =A/atan(Q*A), x from 0 to 255
 };
 
+
+/*TODO major add a choice between random & sequential bursts : sequential mode allows for clean, standard, chasers
+      sequential mode setting shall include time constraints (burst length & period) AND spatial constraint (pixel 
+      or pixel group sequencing : {1,2,3,4,5,6}, {6,5,4,3,2,1}, {{1,2,3}{6,5,4}}, etc.);
 /*
 #              ######                          ######                             
 #    #         #     #   ##   #    # #####     #     # #    # #####   ####  ##### 
@@ -355,31 +410,37 @@ private :
     //CONSTUCTORS
     // Base constructor
     AddrLEDAnimation4(AddressableLED *f, simpleColor b_col, color_vec f_cols, Shape fshape, strip_subdiv_t u, int prand, int flen, std::string d, std::string i, AnimationType t, int prio, int mast=255){
-        this->description = d;
-        this->id = i;
-        this->fixture = f;
-        this->type = t;
-        this->priority = prio;
-        
-        this->flash_colors = f_cols;
-        this->back_color = b_col;
+      //set Base parameters
+      this->description = d,this->id = i,this->fixture = f,this->type = t,this->priority = prio,this->master = mast;
+      //set cinematic parameters
+      this->flash_colors = f_cols;
+      this->back_color = b_col;
+      this->rand_const_ms = prand;
+      this->flash_len = flen;
+      this->flash_shape = fshape;        
 
-        this->rand_const_ms = prand;
-        this->flash_len = flen;
-        this->flash_shape = fshape;
-
-        this->master = mast;
-
-        this->update_palette(color_vec{b_col});
-        this->update_palette(f_cols);
+      this->update_palette(color_vec{b_col});
+      this->update_palette(f_cols);
+    }
+    // AUTOCOLOR constructor
+    AddrLEDAnimation4(AddressableLED *f, Shape fshape, strip_subdiv_t u, int prand, int flen, std::string d, std::string i, AnimationType t, int prio, int mast=255){
+      //set Base paramters
+      this->description = d,this->id = i,this->fixture = f,this->type = t,this->priority = prio,this->master = mast;
+      this->autocolor = true;
+      //set cinematic parameters
+      this->flash_shape = fshape;
+      this->unit = u;
+      this->rand_const_ms=prand;
+      this->flash_len = flen;
     }
 
 
     void init() override;
+    void init(const color_vec&) override;
     void new_frame();
 };
 
-// /* 5 - HiVE 
+// /* TODO 5 - HiVE 
 // On each group of led bars, a certain number of spots move in a smooth motion. On each beat, they 
 // get a all get a sudden push and then slowly go back to their initial velocity
 // Each group of led bar is considered a continuous track, when a spot overshoots the end of the

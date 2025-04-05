@@ -1,3 +1,41 @@
+black           Black           0              
+red             Red             1      
+sodium          Sodium          2              
+orange          Orange          3             
+yellow          Yellow          4             
+gold            Gold            5             
+w_white         Warm white      6                       
+c_white         Cold white      7                      
+cyan            Cyan            8                  
+blue            Blue            9                  
+purple          Purple          10                 
+magenta         Magenta         11                 
+pink            Pink            12                 
+green           Green           13                 
+light_red       Light red       14                         
+light_cyan      Light cyan      15                          
+light_blue      Light blue      16                          
+light_purple    Light purple    17                                
+light_magenta   Light magenta   18                                 
+light_pink      Light pink      19                   
+light_green     Light green     20                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 black           Black         0
 red             Red           1
 sodium          Sodium        2

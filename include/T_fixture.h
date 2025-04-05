@@ -56,20 +56,34 @@ class FixtureAnimation : public BaseAnimation{
 class FixtureAnimation1 : public FixtureAnimation{
   public:
     // Animation parameters (constant or set by animation constructor)
-
+    int param1, param2;
     // Dynamic variables (updated internally at each frame)
-
+    int var1, var2;
+    
     // Constructor
-    FixtureAnimation1(Fixture *f, std::string d, std::string i)
+    FixtureAnimation1(Fixture *f, /* specific args */ std::string d, std::string i, AnimationType t, int prio, int mast=255)
     {
-        this->description = d;
-        this->id = i; 
-        this->fixture = f;
-
-        this->update_palette(...);
+        //set BAse parameters
+        this->description = d, this->id = i, this->fixture = f, this->type=typ, this->priority=prio, this->master=mast;
+        //Set cinematic parameters
+        this->param1 /* = arg1 */;
+        this->param2 /* = arg2 */;
+        this->update_palette(/*argx*/);
+    }
+    //AUTOCOLOR Constructor
+    FixtureAnimation1(Fixture *f, ..., std::string d, std::string i, AnimationType t, int prio, int mast=255)
+    {
+        //set BAse parameters
+        this->description = d, this->id = i, this->fixture = f, this->type=typ, this->priority=prio, this->master=mast;
+        this->autocolor = true;
+        //Set cinematic parameters (except for colors)
+        this->param1 /* = arg1 */;
+        this->param2 /* = arg2 */;
+        this->update_palette(/*argx*/);
     }
 
-    void init() override{BaseAnimation::init();};
+    void init() override; //Standard init fcn
+    void init(const color_vec&) override{BaseAnimation::init();}; //AUTOCOLOR init fcn
     void new_frame() override{BaseAnimation::new_frame();};
 };
 

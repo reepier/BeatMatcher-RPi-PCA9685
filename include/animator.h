@@ -6,6 +6,7 @@
 #include <cmath>
 #include <algorithm>
 #include <random>
+#include <unordered_set>
 
 #include "commonTypes.h"
 #include "debug.h" 
@@ -59,7 +60,7 @@ namespace fcn{
   std::string vec_to_str(int_vec, char);
   std::string vec_to_str(str_vec, char);
 
-  std::string palette_to_string(color_vec, char);
+  std::string palette_to_string(color_vec, char sep='/');
 
   std::string num_to_str(int);
   std::string num_to_str(time_t);
@@ -221,7 +222,47 @@ namespace fcn{
     return common_col>=n;
   }
 
-} 
+
+
+  //TODO define function that takes in 2 vectors and combine them using different rules (intersection, exclusion, etc.)
+  /* returns a vector containing only the common elements between v1 and v2 */
+template<class T>
+std::vector<T> get_vector_intersection(const std::vector<T>& v1, const std::vector<T>& v2) {
+    // Special case: If v2 is empty, return an empty vector
+    if (v2.empty()) {
+        return v1;
+    }
+
+    // Use an unordered_set for fast lookup (O(1) average time complexity)
+    std::unordered_set<T> v2_set(v2.begin(), v2.end());
+    std::vector<T> vres;
+
+    // Find common elements
+    for (const auto& item : v1) {
+        if (v2_set.count(item)) {
+            vres.push_back(item);
+            v2_set.erase(item); // Ensure uniqueness in the output
+        }
+    }
+
+    return vres;
+}
+
+  /*returns a vetor containings every elements from v1 except those present in v2 (purges v1 from elements of v2)*/
+template<class T>
+std::vector<T> get_vector_exclusion(const std::vector<T>& v1, const std::vector<T>& v2) {
+    std::unordered_set<T> v2_set(v2.begin(), v2.end()); // Store v2 for fast lookup
+    std::vector<T> vres = v1;
+
+    std::erase_if(vres, [&v2_set](const T& item) {
+        return v2_set.contains(item); // Remove if item is in v2
+    });
+
+    return vres;
+}
+
+
+} /*End of namespace fcn*/
 
 class ColorPaletteMagazine{
   public:
@@ -290,24 +331,25 @@ class AnimationManager{
     bool flash = true;
     time_t timer_start_ms = 0, timer_end_ms=0, timer_duration_ms = 0;
     unsigned long t_last_change_ms = millis();   //timestamp of last switch between aniamtions
-    ColorPaletteMagazine palette_magasine, palette_magasine_2;
+    ColorPaletteMagazine palette_magasine, palette_magasine_2, test_palette;
+    color_vec controler_main_palette = color_vec{}; 
 
     void init();
 
     void random_update();
     void palette_update();
+    void autocolor_update();
     void show_update();
     void nov30_maximum_update();
     bool test_animation();
-    bool controled_animator(const DMX_vec);
-
+    bool controled_update();
+  
     void set_timer(time_t);
     void reset_timer();
     bool timer_elapsed();
 };
 
 extern AnimationManager animator;
-
 
 
 /** ----------------------------------------------------------
@@ -333,7 +375,11 @@ class BaseFixture{
     bool b_blackout;
     const int nCH;
 
-    // Animations
+    // DMX Controler parameters
+    color_vec external_palette;     // this color palette is defined (or not) by the external controler 
+    int       external_animation;   // stores external animation commands
+    
+    // Animations catalog
     BaseAnimation * active_animation = nullptr;
 
     anim_vec animations;
@@ -342,14 +388,15 @@ class BaseFixture{
     BaseFixture(int addr,int ch, std::string nm, int i, uint8_t mast): address(addr), nCH(ch), name(nm), id(i), master(mast){};
     virtual void init()=0;
 
-    //animation management
+    //animation activation & management
     void blackout(bool);
     bool activate_none();
-    bool activate_by_index(int);
-    bool activate_random(bool include_black = true);
+    bool activate_by_index(int), activate_by_index(int, const color_vec&);
+    bool activate_random(bool include_black = true), activate_random(const color_vec&, bool include_black = true);
     bool activate_by_ID(std::string);
+    bool activate_autocolor(color_vec&);
     virtual bool activate_by_color(color_vec, AnimationType arg_type = any); //additionnal argument to orient the activation toward a leading or backing aniation
-    bool activate_by_ptr(BaseAnimation*);
+    bool activate_by_ptr(BaseAnimation*), activate_by_ptr(BaseAnimation*, const color_vec&);
     
     //DMX output
     virtual int get_address() = 0;
@@ -381,18 +428,74 @@ class BaseAnimation{
     color_vec color_palette;            // lists the colors used in the animation (initialized by constructor)
     int priority = 1;                  // weight on the priority list (animations with higher priority will be have higher chance of activation)
     uint8_t master = 255;
-    
+
+    bool autocolor = false;                       // defines wether the animation has predefiend color or autocolor
+    color_vec authorized_color = {};              // list of authorized colors for autocolor (empty means all color OK==authorized)
+    color_vec unauthorized_color = {};            // list of unauthorized colors for autocolor (empty means al color OK==authorized)
+    color_vec* auto_color_palette = nullptr;      //pointer to the color palette used for automatic color definition (allows the use of multiple color palettes in the program) 
+
+    //Base constructor
+    BaseAnimation(){};
+    BaseAnimation(std::string d, std::string i, AnimationType typ, uint8_t mast) : description(d),  id(i), type(typ), master(mast) {};
+
     bool is_monochrome(){return (color_palette.size() == 1);};
     bool is_first_frame(){return frame_cpt==0;};
+
+    /*Determines whether or not the animation is compatible with autocolor & a specific color palette
+    The criteria shall be simple / generic enough to be applicable to every fixture / animations :
+      - is autocolor true ? 
+      - do authorized color include all? some? of the passed color palette
+      - are there any? too many? unauthorized color in the palette
+      --> to start simple, only use the first criteria, //TODO improve later
+      
+    virtual function override might allow to refine this function for each individual animation*/
+    virtual bool is_autocolor_compatible(const color_vec& palette){return this->autocolor;} 
     
+
     virtual void new_frame(){
       this->frame_cpt++;
     }
     virtual void init(){
       this->t_animation_start_ms = frame.t_current_ms;
       this->frame_cpt = 0;
-    };
-    
+    }
+    virtual void init(const color_vec&){}; //special init() for AUTOCOLOR feature
+     
+     
+    /** //TODO :
+     * until now, every animation must be defined with a (very) specific set of (color, shape, time...) arguments. 
+     * Basically every (interesting) parameter of the animation must be defined at construction. This is very time
+     * consuming & inefficient since color are also defined in the color palette...
+     * 
+     * GOAL : use the current color palette (a selection of 1,2 or 3 matching colors) to set the animation colors at initialization.
+     * This way,  the animation declaration only sets the cinematic & dynamic parameters (speed, shape, periods...), which will drastically 
+     * reduce the volume of objects to declare
+     * The main goal here is to simplify the configuraiton process. Indeed the current solution presents drawbacks :
+     * - Show configuration is lengthy (creating new color means adding many lines to every fixture ini fcn)
+     * - Multicolor animations are even more time consuming (more color combinations available)
+     * -  
+     * 
+     * Limits :
+     * The correct color finding algorithm must be found to avoid undiesrable effects :
+     * - Bad color rendering when using complex colors for low intensity (i.e. Gold color for PAR LED background illumination)
+     * 
+     * Functionalities :
+     * - the color definition happens in the Animation::init() function
+     * - the color definition is based on a color palette 
+     * - authorized & unauthorized colors can be defined manually (or not) 
+     * - the color palette will then be defined with the following rules in mind :
+     *    - color order matters : the first color will be used for dynamic/flash/bursts elements while the next for background/fix/slow elements
+     * 
+     * - display the palette (for each fixture ? globally ?) in the output console
+     * 
+     * Options :
+     * - The nummber of color (1, 2 more?) or a range of color number could be set at animation construction (to allow or restrict
+     *  multicolor mode animation per animation)
+     * - Could be an opportunity to upgrade the color palette : instead of just declaring an array of colors, colors could be assigned for $
+     * particular roles (flash, background, both, or else...)   
+     *
+     * 
+     * */
     void update_palette(color_vec colors){
       for (color_vec::iterator new_c = colors.begin(); new_c != colors.end(); new_c++){
         // check if new color is not already stored in color_palette
