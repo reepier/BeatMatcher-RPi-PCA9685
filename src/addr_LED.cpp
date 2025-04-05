@@ -458,7 +458,7 @@ void AddrLEDAnimation1::new_frame(){
 
     balise("Addr LED Ani1 New frames 1");
     // enable / disable
-    bool auto_activate_flash = (sampler.state == BEAT) && (t_ms-sampler.t_beat_tracking_start < MAX_CONT_FLASH);
+    bool auto_activate_flash = (sampler.state == BEAT) /*&& (t_ms-sampler.t_beat_tracking_start < MAX_CONT_FLASH)*/;
     
     // for each new beat, sort segments in random order
     if (sampler.new_beat)
@@ -548,7 +548,7 @@ void AddrLEDAnimation2::new_frame(){
     pixel flash_RGB = this->fixture->RGB(this->flash_color);
     pixel backgd_RGB = this->fixture->RGB(this->back_color, 20);
 
-    bool auto_activate_flash = (sampler.state == BEAT) && (t_ms-sampler.t_beat_tracking_start < MAX_CONT_FLASH); //TODO useless ?
+    bool auto_activate_flash = (sampler.state == BEAT) /*&& (t_ms-sampler.t_beat_tracking_start < MAX_CONT_FLASH)*/; //TODO useless ?
 
     // for each new beat, sort segments in random order
     if (sampler.new_beat)

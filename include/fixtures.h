@@ -3,7 +3,6 @@
 #include "spot.h"
 #include "laser.h"
 #include "spider.h"
-#include "LED.h"
 #include "addr_LED.h"
 #include "redrayz.h"
 

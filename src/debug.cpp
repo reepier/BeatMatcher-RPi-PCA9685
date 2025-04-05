@@ -9,7 +9,6 @@
 #include "debug.h"
 #include "animator.h"
 #include "music.h"
-#include "LED.h"
 #include "fixtures.h" 
 
 using namespace std;
@@ -352,46 +351,6 @@ void display_curse(){
     
     
     refresh();
-}
-/** Displays Critical variables in real time on the console */
-void display(){
-    log(4, __FILE__, " ",__LINE__, " ", __func__);
-
-    
-    cout << "\x1B[2J\x1B[H";// << flush;
-    cout << "//// MUSIQUE /////\n";
-    cout << "Volume : " << string((int)(sampler.volume/1000.0*50), '█') << '\n'; //sampler.volume << endl;
-    cout << "Threshold : " << sampler.beat_threshold << '\n';
-    cout << "ratio V/T : " << (float)sampler.volume/sampler.beat_threshold << '\n';
-    cout << "sample Max/Min : " << sampler.deb_max << "/" << sampler.deb_min << '\n';
-    
-    cout << "Clip : ";
-        if (sampler.clipping) cout << "███"; 
-        cout << '\n';
-    cout << "Beat : ";
-        if  (sampler.raw_beat) cout << "████";  
-        cout << '\n';
-    cout << "State: " << sampler.state  << '\n';
-
-    #ifdef FAKEMUSIC
-        cout << "Next beat : " << (sampler.t_next_beat_ms - millis())/1000.0  << "s\n";
-        cout << "Next break : " << (sampler.t_next_break_ms - millis())/1000.0  << "s\n";
-        cout << "Next drop : " << (sampler.t_next_drop_ms - millis())/1000.0  << "s\n";
-    #endif 
-    
-    
-    cout << '\n' << "//// ANIMATOR /////" << '\n';
-    cout << "Animation : " << led.active_animation->id << " -> " << led.active_animation->description << '\n';
-    cout << "Flash : " << animator.flash << '\n';
-    cout << "Last change " << (frame.t_current_ms - animator.t_last_change_ms)/1000 << "s\n";
-
-    cout << "\n//// OUTPUT /////" << '\n';
-    cout << "R/G/B : " << led.RGBout[R] << " / " << led.RGBout[G] << " / " << led.RGBout[B] << endl;
-
-    cout << "\n//// GENERAL /////" << '\n';
-    cout << "FPS : " << 1.0/frame.loop_duration_ms*1000.0 << "Hz\n";
-    cout << "Elapsed time : " << millis()/1000.0 << " s\n";
-
 }
 
 /* The main program interface looks as follows : 

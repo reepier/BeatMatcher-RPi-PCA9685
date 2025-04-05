@@ -5,7 +5,7 @@ build_dir = build/
 includeDir = include/
 main = src/main.cpp
 test = src/test.cpp
-objects = build/MCP3008.o build/animator.o build/config.o build/debug.o build/laser.o build/LED.o build/music.o build/spider.o build/spot.o build/addr_LED.o build/redrayz.o build/DMXio.o
+objects = build/MCP3008.o build/animator.o build/config.o build/debug.o build/laser.o build/music.o build/spider.o build/spot.o build/addr_LED.o build/redrayz.o build/DMXio.o
 libs = -lola -lolacommon -lcurses  -lfftw3 -lwiringPi -lprotobuf -lrtaudio #-lgpio -lPCA9685 
 flags = -w -g -std=c++20
 includePaths = -I. -I.. -Iinclude
@@ -33,8 +33,6 @@ build/debug.o: src/debug.cpp include/debug.h $(genericInclude)
 	g++ $(flags) -c src/debug.cpp $(includePaths) -o build/debug.o -lcurses
 build/laser.o: src/laser.cpp include/laser.h $(genericInclude)
 	g++ $(flags) -c src/laser.cpp $(includePaths) -o build/laser.o
-build/LED.o: src/LED.cpp include/LED.h $(genericInclude)
-	g++ $(flags) -c src/LED.cpp $(includePaths) -o build/LED.o
 build/music.o: src/music.cpp include/music.h $(genericInclude)
 	g++ $(flags) -c src/music.cpp $(includePaths) -o build/music.o
 build/spider.o: src/spider.cpp include/spider.h $(genericInclude)
