@@ -24,6 +24,7 @@ WINDOW *animw;
 WINDOW *outputw;
 WINDOW *generalw;
 WINDOW *consolew;
+WINDOW *spectrumw;
 
 #define WHITEred    3 // WHITE font / red background
 #define WHITEgreen  4
@@ -35,6 +36,9 @@ WINDOW *consolew;
 #define C2 74
 #define C3 80
 
+const int spectrumw_height = 48;
+const int spectrumw_width = 40;
+
 void init_display(){
     log(4, __FILE__, " ",__LINE__, " ", __func__);
 
@@ -43,11 +47,12 @@ void init_display(){
     // noecho();
     // refresh();
     // curs_set(0);
-    musicw      = newwin(10, 120, 0,0);
-    animw       = newwin(5,120,10,0);
-    outputw     = newwin(10,120,15,0);
-    generalw    = newwin(3,120,25,0);
-    consolew    = newwin(20,120,28,0);
+    musicw      = newwin(10,90, 0,0);
+    animw       = newwin(5,90,10,0);
+    outputw     = newwin(10,90,15,0);
+    generalw    = newwin(3,90,25,0);
+    consolew    = newwin(20,90,28,0);
+    spectrumw   = newwin(spectrumw_height,spectrumw_width,0,90);
 
 
     if (!has_colors()){
@@ -205,9 +210,9 @@ void disp_output_window(){
             DMX_vec raw_buf = fix->buffer();
             outbuf << "| " <<fcn::vec_to_str(raw_buf, ',');
 
-
+            int max_length = 30;
             mvwprintw(outputw, line, 1, animbuf.str().data());
-            mvwprintw(outputw, line, 55, outbuf.str().size()<60? outbuf.str().data() : outbuf.str().substr(0, 60).data());
+            mvwprintw(outputw, line, 55, outbuf.str().size()<max_length? outbuf.str().data() : outbuf.str().substr(0, max_length).data());
             
             if((fix == &front_rack) || fix == &shehds_rack)  line+=2;
             else line += 1;
@@ -235,7 +240,7 @@ void disp_animation_window(){
 //initialize
     curs_set(0);
     werase(animw);
-    box(animw, ACS_VLINE, ACS_HLINE);
+    // box(animw, ACS_VLINE, ACS_HLINE);
     wattron(animw, A_BOLD);
     mvwprintw(animw, 0,1, "ANIMATOR");
     wattroff(animw, A_BOLD);
@@ -266,7 +271,7 @@ void disp_general_window(){
 //initialize
     curs_set(0);
     werase(generalw);
-    box(generalw, ACS_VLINE, ACS_HLINE);
+    // box(generalw, ACS_VLINE, ACS_HLINE);
     wattron(generalw, A_BOLD);
     mvwprintw(generalw, 0,1, "GENERAL");
     wattroff(generalw, A_BOLD);
@@ -326,6 +331,38 @@ void disp_console_window(){
     wrefresh(consolew);
 }
 
+/*
+ #####  ######  #######  #####  ####### ######  #     # #     # 
+#     # #     # #       #     #    #    #     # #     # ##   ## 
+#       #     # #       #          #    #     # #     # # # # # 
+ #####  ######  #####   #          #    ######  #     # #  #  # 
+      # #       #       #          #    #   #   #     # #     # 
+#     # #       #       #     #    #    #    #  #     # #     # 
+ #####  #       #######  #####     #    #     #  #####  #     # 
+ */
+
+ 
+void disp_spectrum_window(){
+    curs_set(0);
+    werase(spectrumw);
+    box(spectrumw, ACS_VLINE, ACS_HLINE);
+    wattron(spectrumw, A_BOLD);
+    mvwprintw(spectrumw, 0,1, "SPECTRUM");
+    wattroff(spectrumw, A_BOLD);
+
+    for (int i=0 ; i<BUF_LENGTH && i<spectrumw_height-2; i++){
+        mvwprintw(spectrumw, i+1, 1, fcn::num_to_str(sampler.sample_spectrum[i][FREQ]).c_str());
+        double val_log = max(0.0, (double)20*log10(sampler.sample_spectrum[i][AMPL]));
+        double val_unit = val_log/100;
+        int val_pix = min((double)(spectrumw_width-7), val_unit * (spectrumw_width-7));
+        mvwprintw(spectrumw, i+1, 1+4+1, string(val_pix, '|').c_str());
+    }
+
+/* DO stuff */
+
+    wrefresh(spectrumw);
+}
+
 void display_curse(){
     log(4, __FILE__, " ",__LINE__, " ", __func__);
 
@@ -340,6 +377,8 @@ void display_curse(){
     disp_general_window();
     // balise("*********console window");
     disp_console_window();
+
+    disp_spectrum_window();
     
     // werase(animw);
     // box(animw, ACS_VLINE, ACS_HLINE);

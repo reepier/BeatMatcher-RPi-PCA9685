@@ -460,7 +460,16 @@ bool AnimationManager::test_animation(){
     return success;
 }
 
-/** Activates animations based on received DMX data or automatic sequence 
+
+/*####  #     #    #    #          #     # ####### ######  ####### 
+#     # #     #   # #   #          ##   ## #     # #     # #       
+#     # #     #  #   #  #          # # # # #     # #     # #       
+#     # #     # #     # #          #  #  # #     # #     # #####   
+#     # #     # ####### #          #     # #     # #     # #       
+#     # #     # #     # #          #     # #     # #     # #       
+######   #####  #     # #######    #     # ####### ######  ####### */
+
+/** Activates animations based on received DMX control data or automatic sequence 
  * limitations : only works for addressable LED for now but support can easily be extended to other fixtures */
 bool AnimationManager::controled_update(){
 /* automatic sequencer :  -------------------------------------------------------------------------
@@ -512,7 +521,7 @@ bool AnimationManager::controled_update(){
         last_external_ani = addr_led.external_animation;
     }
 
-// determines which setting is manual & whichis automatic
+// determines which setting is manual & which is automatic
     bool automatic_main_palette = animator.controler_main_palette.empty();
     bool automatic_led_palette = addr_led.external_palette.empty() && animator.controler_main_palette.empty();
     bool automatic_led_ani = addr_led.external_animation==0;
