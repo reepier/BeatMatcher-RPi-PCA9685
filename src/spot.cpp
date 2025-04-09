@@ -7,19 +7,19 @@
 using namespace std;
 
 // Original Fun Generation spots
-SpotFixture spot_1(FunGen_RGBW_12x1W, 73, 8,       "Spot 1 (@74)",     1);     
-SpotFixture spot_2(FunGen_RGBW_12x1W, 81,  8,      "Spot 2 (@82)",     2);     //Salon
-SpotFixture spot_3(FunGen_RGBW_12x1W, 89, 8,       "Spot 3 (@90)",     3);     
-SpotFixture spot_4(FunGen_RGBW_12x1W, 97,  8,      "Spot 4 (@98)",     4);     
-SpotFixture spot_5(FunGen_RGBW_12x1W, 105,  8,     "Spot 5 (@106)",    5);     //Salon
-SpotFixture spot_6(FunGen_RGBW_12x1W, 113,  8,     "Spot 6 (@114)",    6);
+SpotFixture spot_1(FunGen_RGBW_12x1W, 73,    8,  "Spot 1 (@74)",    1);     
+SpotFixture spot_2(FunGen_RGBW_12x1W, 81,    8,  "Spot 2 (@82)",    2);     //Salon
+SpotFixture spot_3(FunGen_RGBW_12x1W, 89,    8,  "Spot 3 (@90)",    3);     
+SpotFixture spot_4(FunGen_RGBW_12x1W, 97,    8,  "Spot 4 (@98)",    4);     
+SpotFixture spot_5(FunGen_RGBW_12x1W, 105,   8,  "Spot 5 (@106)",   5);     //Salon
+SpotFixture spot_6(FunGen_RGBW_12x1W, 113,   8,  "Spot 6 (@114)",   6);
 
-SpotFixture spot_7(FunGen_RGBW_12x1W, 121, 8,  "Spot 7 (@122)",    7);     //Salon
-SpotFixture spot_8(FunGen_RGBW_12x1W, 129, 8,  "Spot 8 (@130)",    8);     //Salon
-SpotFixture spot_9(FunGen_RGBW_12x1W, 137, 8,  "Spot 9 (@138)",    9);  
-SpotFixture spot_10(FunGen_RGBW_12x1W, 145, 8, "Spot 10 (@146)",   10);
-SpotFixture spot_11(FunGen_RGBW_12x1W, 153, 8, "Spot 11 (@154)",   11);
-SpotFixture spot_12(FunGen_RGBW_12x1W, 161, 8, "Spot 12 (@162)",   12);
+SpotFixture spot_7(FunGen_RGBW_12x1W,   121, 8,   "Spot 7 (@122)",    7);     //Salon
+SpotFixture spot_8(FunGen_RGBW_12x1W,   129, 8,   "Spot 8 (@130)",    8);     //Salon
+SpotFixture spot_9(FunGen_RGBW_12x1W,   137, 8,   "Spot 9 (@138)",    9);  
+SpotFixture spot_10(FunGen_RGBW_12x1W,  145, 8,   "Spot 10 (@146)",   10);
+SpotFixture spot_11(FunGen_RGBW_12x1W,  153, 8,   "Spot 11 (@154)",   11);
+SpotFixture spot_12(FunGen_RGBW_12x1W,  161, 8,   "Spot 12 (@162)",   12);
 
 // New Shehds spots
 SpotFixture spot_13(Shehds_RGBWAU_7x18W, 169, 10, "Spot 13 (@170) : SHEHDS RGBWAU", 13);
@@ -110,10 +110,9 @@ DMX_vec SpotFixture::buffer(){
       # #       #     #    #       #   #   ####### #       #  #         # 
 #     # #       #     #    #       #    #  #     # #     # #   #  #     # 
  #####  #       #######    #       #     # #     #  #####  #    #  #####  
-
 / ----------------------------------------------------------------------- */
 SpotRack front_rack(spot_vec{&spot_2, &spot_5, &spot_7, &spot_8}, "Front Rack", 1);
-SpotRack rack_15(spot_vec{&spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6}, "Vert. Beams", 2);
+SpotRack rack_15(spot_vec{&spot_1, &spot_3, &spot_4, &spot_6}, "Vert. Beams", 2);
 SpotRack rack_40(spot_vec{&spot_9, &spot_10, &spot_11, &spot_12}, "Rack 2", 3);
 SpotRack shehds_rack(spot_vec{&spot_13, &spot_14, &spot_15, &spot_16, &spot_17, &spot_18, &spot_19, &spot_20}, "SHEHDS Rack", 4);
 
@@ -262,8 +261,9 @@ void front_rack_init(){
 
 
 /** TESTS & DEV */
-    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, "Flash animation with Autocolor", "FR.0.0.1", any));
-
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, "Flash animation with Autocolor", "FR.4", any));
+    front_rack.animations.push_back(new SpotRackAnimation5(&front_rack, "Digital Flash", "FR.5", leader, 1, 255));
+    
     front_rack.activate_none();
 };
 
@@ -757,13 +757,13 @@ void SpotRackAnimation3::new_frame(){
 }
 
 /*
-#              ######                      
-#    #         #     # ######   ##   ##### 
-#    #         #     # #       #  #    #   
-#    #         ######  #####  #    #   #   
-####### ###    #     # #      ######   #   
-     #  ###    #     # #      #    #   #   
-     #  ###    ######  ###### #    #   #
+#                 #                                          ######                      
+#    #           # #   #    #   ##   #       ####   ####     #     # ######   ##   ##### 
+#    #          #   #  ##   #  #  #  #      #    # #    #    #     # #       #  #    #   
+#    #         #     # # #  # #    # #      #    # #         ######  #####  #    #   #   
+####### ###    ####### #  # # ###### #      #    # #  ###    #     # #      ######   #   
+     #  ###    #     # #   ## #    # #      #    # #    #    #     # #      #    #   #   
+     #  ###    #     # #    # #    # ######  ####   ####     ######  ###### #    #   #
 */
 void SpotRackAnimation4::init(){
     BaseAnimation::init(); //TODO check with debug if this really works ??
@@ -807,20 +807,82 @@ void SpotRackAnimation4::new_frame(){
             for(auto i_subpix = 0; i_subpix<final_RGB.size(); i_subpix++){
                 final_RGB[i_subpix] = (1-pow(coef, 0.2)) * backgd_RGB[i_subpix] + coef * flash_RGB[i_subpix];
             }
-            // final_RGB[R] = (1-pow(coef, 0.2)) * backgd_RGB[R] + coef * flash_RGB[R];
-            // final_RGB[G] = (1-pow(coef, 0.2)) * backgd_RGB[G] + coef * flash_RGB[G];
-            // final_RGB[B] = (1-pow(coef, 0.2)) * backgd_RGB[B] + coef * flash_RGB[B];
         }
         else
         {
             for(auto i_subpix = 0; i_subpix<final_RGB.size(); i_subpix++){
                 final_RGB[i_subpix] = backgd_RGB[i_subpix];
             }
-            // final_RGB[R] = backgd_RGB[R];
-            // final_RGB[G] = backgd_RGB[G];
-            // final_RGB[B] = backgd_RGB[B];
         }
     
         spot->pixel = final_RGB;
+    }
+}
+
+/*
+#######        ######                                    ######                      
+#              #     # #  ####  # #####   ##   #         #     # ######   ##   ##### 
+#              #     # # #    # #   #    #  #  #         #     # #       #  #    #   
+######         #     # # #      #   #   #    # #         ######  #####  #    #   #   
+      # ###    #     # # #  ### #   #   ###### #         #     # #      ######   #   
+#     # ###    #     # # #    # #   #   #    # #         #     # #      #    #   #   
+ #####  ###    ######  #  ####  #   #   #    # ######    ######  ###### #    #   #   
+*/
+void SpotRackAnimation5::init(){
+    BaseAnimation::init();
+}
+void SpotRackAnimation5::init(const color_vec& palette){
+    //AUTOCOLOR init
+    switch (palette.size())
+    {
+    case 0:     this->flash_color=black,        this->back_color=black;
+        break;
+    case 1:     this->flash_color=palette[0];   this->back_color=palette[0];
+        break;
+    case 2:     this->flash_color=palette[0],   this->back_color=palette[1];
+        break;
+    default:    this->flash_color=black,        this->back_color=black;
+        break;
+    }
+
+    //Standard init
+    SpotRackAnimation5::init();
+}
+
+void SpotRackAnimation5::new_frame(){
+    BaseAnimation::new_frame();
+
+    unsigned long t_ms = frame.t_current_ms;
+    unsigned long t_last_beat_ms = sampler.t_last_new_beat;
+    int_vec::size_type n_unit = units_index.size();
+    
+
+    bool auto_activate_flash = (sampler.state == BEAT) /*&& (t_ms-sampler.t_beat_tracking_start < MAX_CONT_FLASH)*/; //TODO useless ?
+
+    // for each new beat, sort segments in random order
+    if (sampler.new_beat){
+        units_index = fcn::randomized_vector(units_index);
+        log(2, "BEAT");
+    }
+
+    // compute intensity value
+    float coef = exp(-(double)(t_ms - t_last_beat_ms) / fade_rate);
+    //derive number of segments to turn on
+    int n_unit_on = coef * n_unit;
+    n_unit_on = max(1, n_unit_on);    // keep at least one random spot on between beats
+    // log(3, "N spot ON : ", fcn::num_to_str(n_unit_on));
+
+    //chose which segments to turn on
+    for (int i=0; i<n_unit; i++){
+        SpotFixture *current_spot = this->fixture->spots[units_index[i]];   //for readability
+
+        pixel flash_RGB  = current_spot->RGBW(this->flash_color);
+        pixel backgd_RGB = current_spot->RGBW(this->back_color, 20);
+        
+        if (i<n_unit_on){
+            current_spot->pixel = flash_RGB;
+        }else{
+            current_spot->pixel = backgd_RGB;
+        }
     }
 }

@@ -241,8 +241,8 @@ class AddrLEDAnimation1 : public AddrLEDAnimation{
 class AddrLEDAnimation2 : public AddrLEDAnimation{
   public:
     // Animation parameters (constant or set by animation constructor)
-    simpleColor back_color; //TODO replace with simplecolor
-    simpleColor flash_color;  //TODO replace with simplecolor
+    simpleColor back_color;
+    simpleColor flash_color;
     strip_subdiv_t unit;
     int fade_rate = 80;                            // ms flash fade rate (time constant of an exponential decay : intensity = exp(-(t-t0)/fade_rate)
 

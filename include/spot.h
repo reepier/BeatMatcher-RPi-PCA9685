@@ -167,7 +167,7 @@ public:
  ##### ###    ######   ####  #####  #####  ###### ######  ####  
 */
 // BUBBLES : background color with another color randomly apppearing
-
+//TODO : whether in this animation or in a new one, add the possibility to chose a non-random sequence (traditional chaser)
 class SpotRackAnimation1 : public SpotRackAnimation
 {
 private :
@@ -366,7 +366,7 @@ public:
      #  ###    #     # #      #    #   #   
      #  ###    ######  ###### #    #   #
 */
-
+// TODO update to something similar to AdressableLED::AnalogBeat
 // Flashes on beat with background color --> similar to the original LED animation
 class SpotRackAnimation4 : public SpotRackAnimation{
   public:
@@ -420,4 +420,54 @@ class SpotRackAnimation4 : public SpotRackAnimation{
     void init() override;                   // does not much
     void init(const color_vec&) override;   // does same as init() + assigns color automatically
     void new_frame() override;
+};
+
+
+
+// TODO add something similar to AdressableLED::DigitalBeat
+/*
+#######        ######                                    ######                      
+#              #     # #  ####  # #####   ##   #         #     # ######   ##   ##### 
+#              #     # # #    # #   #    #  #  #         #     # #       #  #    #   
+######         #     # # #      #   #   #    # #         ######  #####  #    #   #   
+      # ###    #     # # #  ### #   #   ###### #         #     # #      ######   #   
+#     # ###    #     # # #    # #   #   #    # #         #     # #      #    #   #   
+ #####  ###    ######  #  ####  #   #   #    # ######    ######  ###### #    #   #   
+*/
+class SpotRackAnimation5 : public SpotRackAnimation{
+  public:
+    // Animation parameters (constant or set by animation constructor, init)
+    simpleColor back_color;
+    simpleColor flash_color;
+    int fade_rate = 110;                            // ms flash fade rate (time constant of an exponential decay : intensity = exp(-(t-t0)/fade_rate)
+    
+    /* TODO The following parameters are only accessible at SpotRackAnimation5 level, they must have 
+    a (simplified) counterpart at BaseAnimation level. Autocolor constructor shall convert these into
+    BaseAnimation member paramters. might even be worth it to set the followong params at construction ? 
+    (easier maintenance if everything is set at construction rather than in many different code modules & blocks) */
+    color_vec auth_flash_colors = {};   //list of authorized colors for flash_color parameter (empty == all colors authorized)
+    color_vec auth_back_colors = {};    //list of authorized colors for back_color parameter (empty == all colors authorized)
+    color_vec unauth_flash_colors = {}; //list of unauthorized colors for flash_color parameter (empty == no colors unauthorized)
+    color_vec unauth_back_colors = {};  //list of unauthorized colors for flash_color parameter (empty == no colors unauthorized)
+
+    // Dynamic variables (updated internally at each frame)
+    int_vec units_index;
+
+    // AUTOCOLOR Constructor
+    SpotRackAnimation5(SpotRack *f, std::string d, std::string i, AnimationType typ=any, int prio=1, int mast=255){
+        //set BAse params
+        this->description = d,this->id = i,this->fixture = f,this->type = typ,this->master = mast,this->priority=prio;
+        this->autocolor=true;
+        //set cinematic params
+        units_index.resize(this->fixture->spots.size());
+        
+        for(int i=0; i<units_index.size(); i++){
+          units_index[i] = i;
+        }
+    }
+
+    void init() override;
+    void init(const color_vec&) override;
+    void new_frame() override;
+  
 };

@@ -128,7 +128,7 @@ void AnimationManager::init(){
 
 //---------------------------------------------------------------------------------
     //TEST Palette
-    test_palette.push_back( color_vec{red},                 1);
+    test_palette.push_back( color_vec{w_white, black},                 1);
     // test_palette.push_back( color_vec{blue},                1);
     // test_palette.push_back( color_vec{purple},              1);
     // test_palette.push_back( color_vec{gold},                1);

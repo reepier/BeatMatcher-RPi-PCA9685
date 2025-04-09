@@ -33,9 +33,9 @@ extern std::vector<std::string> cli_anim_id;
     #define TEMPO_SUSTAINED_BREAK 4000  //[ms] Duration after which BREAK becomes SUSTAINED BREAK
 
 // Music Emulator
-#define BPM 100          // BPM
+#define BPM 100           // BPM
 #define BREAKDuration 16  // beats
-#define DROPDuration  16 // beats
+#define DROPDuration  8   // beats
 
 // -- CONFIG ------------------------------------------------------------
 #define     MAX_CONT_FLASH      120000          // 120000 
