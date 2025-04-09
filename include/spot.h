@@ -358,13 +358,13 @@ public:
 
 
 /*
-#              ######                      
-#    #         #     # ######   ##   ##### 
-#    #         #     # #       #  #    #   
-#    #         ######  #####  #    #   #   
-####### ###    #     # #      ######   #   
-     #  ###    #     # #      #    #   #   
-     #  ###    ######  ###### #    #   #
+#                 #                                          ######                      
+#    #           # #   #    #   ##   #       ####   ####     #     # ######   ##   ##### 
+#    #          #   #  ##   #  #  #  #      #    # #    #    #     # #       #  #    #   
+#    #         #     # # #  # #    # #      #    # #         ######  #####  #    #   #   
+####### ###    ####### #  # # ###### #      #    # #  ###    #     # #      ######   #   
+     #  ###    #     # #   ## #    # #      #    # #    #    #     # #      #    #   #   
+     #  ###    #     # #    # #    # ######  ####   ####     ######  ###### #    #   #
 */
 // TODO update to something similar to AdressableLED::AnalogBeat
 // Flashes on beat with background color --> similar to the original LED animation
@@ -374,6 +374,7 @@ class SpotRackAnimation4 : public SpotRackAnimation{
     bool param_activate_flash;
     simpleColor flash_color = black;            // color used for flashes
     simpleColor back_color = black;             // background color displayed inbetween flashes
+    double density = 1.0;               // proportion of spots flashing (0-100%) 
     int fade_rate = 60;                 //[ms] rate of exponential flash decay
 
 
@@ -388,6 +389,7 @@ class SpotRackAnimation4 : public SpotRackAnimation{
     color_vec unauth_back_colors = {};  //list of unauthorized colors for flash_color parameter (empty == no colors unauthorized)
     
     // Dynamic variables (updated internally at each frame)
+    int_vec units_index;
 
     // Constructor
     SpotRackAnimation4(SpotRack *f, simpleColor f_col, simpleColor b_col, std::string d, std::string i, AnimationType typ, bool flash = true)
@@ -401,17 +403,26 @@ class SpotRackAnimation4 : public SpotRackAnimation{
 
         this->flash_color = f_col;
         this->back_color = b_col;
-
+        units_index.resize(this->fixture->spots.size());
+        for(int i=0; i<units_index.size(); i++){
+            units_index[i] = i;
+        }
+      
         this->update_palette(color_vec{f_col, b_col});
     }
     
     /*overloaded constructor autocolor
     TODO add a parameter to set at construction the number of colors ? or assign this parameter (random pick) at init()*/
-    SpotRackAnimation4(SpotRack *f, std::string d, std::string i, AnimationType typ, bool flash = true){
+    SpotRackAnimation4(SpotRack *f, double dens, std::string d, std::string i, AnimationType typ, bool flash = true){
         this->description = d, this->id = i, this->fixture = f; // set base parameters
         this->autocolor = true;             // animation relying on autocolor must be taggued as such
         
         this->param_activate_flash = flash;
+        this->density = dens;
+        units_index.resize(this->fixture->spots.size());
+        for(int i=0; i<units_index.size(); i++){
+            units_index[i] = i;
+        }
         /*The real color assignement is done at animation initialisation / activation (baseanimation.init()) 
         for safety purpose, at construction (or class definition), colors are set to black*/
     }

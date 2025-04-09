@@ -261,7 +261,8 @@ void front_rack_init(){
 
 
 /** TESTS & DEV */
-    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, "Flash animation with Autocolor", "FR.4", any));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, 1.0, "Analog Flash (100%) ", "FR.4.1", any));
+    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, 0.7, "Analog Flash (70%)", "FR.4.2", any));
     front_rack.animations.push_back(new SpotRackAnimation5(&front_rack, "Digital Flash", "FR.5", leader, 1, 255));
     
     front_rack.activate_none();
@@ -753,7 +754,6 @@ void SpotRackAnimation3::init(){
 void SpotRackAnimation3::new_frame(){
     BaseAnimation::new_frame();
 
-
 }
 
 /*
@@ -769,7 +769,6 @@ void SpotRackAnimation4::init(){
     BaseAnimation::init(); //TODO check with debug if this really works ??
     // Resets spots values (pixel & master) to clear any remainder of the previous active animation
     this->fixture->reset_spots();
-
 }
 
 // Special init() function for automatic color definition (in addition to standard init() function)
@@ -793,29 +792,37 @@ void SpotRackAnimation4::new_frame(){
 
     unsigned long t_ms = frame.t_current_ms;
     unsigned long t_last_beat_ms = sampler.t_last_new_beat;
+    const int n_unit = this->fixture->spots.size();
 
+    // enable / disable
     bool auto_activate_flash = (sampler.state == BEAT) && (t_ms-sampler.t_beat_tracking_start < MAX_CONT_FLASH);
     
-    for (auto spot : this->fixture->spots){
-        pixel backgd_RGB    = spot->RGBW(back_color, 20);
-        pixel flash_RGB     = spot->RGBW(flash_color);
-        pixel final_RGB     = spot->RGBW(black);
+    // for each new beat, sort segments in random order
+    if (sampler.new_beat)
+        units_index = fcn::randomized_vector(units_index);
+        
+    // Compute intensity value based on time elapsed since last beat
+    float coef = exp(-(double)(t_ms - t_last_beat_ms) / fade_rate);
+    // compute number of spots flashing at once
+    int n_unit_on = density * n_unit;
 
-        float coef = exp(-(double)(t_ms - t_last_beat_ms) / fade_rate);
-        if (param_activate_flash && auto_activate_flash)
-        {
+
+    for (int i=0; i<n_unit; i++){
+        auto current_spot = this->fixture->spots[units_index[i]];
+
+        pixel backgd_RGB    = current_spot->RGBW(back_color, 20);
+        pixel flash_RGB     = current_spot->RGBW(flash_color);
+        pixel final_RGB     = current_spot->RGBW(black); //initialization before calculations
+        
+        if (param_activate_flash && auto_activate_flash && i<n_unit_on){
             for(auto i_subpix = 0; i_subpix<final_RGB.size(); i_subpix++){
                 final_RGB[i_subpix] = (1-pow(coef, 0.2)) * backgd_RGB[i_subpix] + coef * flash_RGB[i_subpix];
             }
-        }
-        else
-        {
-            for(auto i_subpix = 0; i_subpix<final_RGB.size(); i_subpix++){
-                final_RGB[i_subpix] = backgd_RGB[i_subpix];
-            }
+        }else{
+            final_RGB = backgd_RGB;
         }
     
-        spot->pixel = final_RGB;
+        current_spot->pixel = final_RGB;
     }
 }
 
