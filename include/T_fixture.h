@@ -71,15 +71,14 @@ class FixtureAnimation1 : public FixtureAnimation{
         this->update_palette(/*argx*/);
     }
     //AUTOCOLOR Constructor
-    FixtureAnimation1(Fixture *f, ..., std::string d, std::string i, AnimationType t, int prio, int mast=255)
+    FixtureAnimation1(Fixture *f, /* ..args...,*/ std::string d, std::string i, AnimationType t, int prio, int mast=255)
     {
         //set BAse parameters
-        this->description = d, this->id = i, this->fixture = f, this->type=typ, this->priority=prio, this->master=mast;
+        this->description = d, this->id = i, this->fixture = f, this->type=t, this->priority=prio, this->master=mast;
         this->autocolor = true;
-        //Set cinematic parameters (except for colors)
+        //Set cinematic parameters
         this->param1 /* = arg1 */;
         this->param2 /* = arg2 */;
-        this->update_palette(/*argx*/);
     }
 
     void init() override; //Standard init fcn

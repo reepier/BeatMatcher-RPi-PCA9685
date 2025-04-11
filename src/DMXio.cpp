@@ -295,7 +295,6 @@ void processDMXinput(const ola::client::DMXMetadata &metadata, const ola::DmxBuf
     }else{
         
     }
-    
 
     //TODO to improve genericity, put all these repeating code blocks in BaseFixture class (with overrides if needed in SpecificFixture class)
 

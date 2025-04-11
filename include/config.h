@@ -49,7 +49,7 @@ extern std::vector<std::string> cli_anim_id;
 #define      PAL_LIFESPAN_BICO  5
 #define      PAL_LIFESPAN_MONO  3
 
-#define     SPOTRACK_ANI1_BkG_INTENSITY_LOW   150
+#define     SPOTRACK_ANI1_BkG_INTENSITY_LOW   50
 #define     SPOTRACK_ANI1_BkG_INTENSITY_HIGH  100
 
 #define     ADDRLED_ANI4_BkG_INTENSITY_LOW   15

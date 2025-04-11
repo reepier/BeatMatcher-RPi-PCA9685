@@ -47,9 +47,13 @@ SpotFixture spot_20(Shehds_RGBWAU_7x18W, 239, 10, "Spot 20 (@240) : SHEHDS RGBWA
 
 DMX_vec FunGeneration_12x1W_buffer(const SpotFixture& spot){
     //TODO protect every fixture.buffer function from null active_animation pointer
-    uint8_t active_animation_master = 255; //default value
-    if (spot.rack != nullptr && spot.rack->active_animation != nullptr){active_animation_master = spot.rack->active_animation->master;}
-    return DMX_vec{      (uint8_t) (spot.master/255.0 * active_animation_master),
+    uint8_t active_animation_master = 255;  //default value
+    uint8_t rack_master = 255;              //default value
+    if (spot.rack != nullptr && spot.rack->active_animation != nullptr){
+        active_animation_master = spot.rack->active_animation->master;
+        rack_master             = spot.rack->master;
+    }
+    return DMX_vec{      (uint8_t) (rack_master/255.0 * spot.master/255.0 * active_animation_master),
                          spot.pixel[R],
                          spot.pixel[G],
                          spot.pixel[B],
@@ -61,9 +65,13 @@ DMX_vec FunGeneration_12x1W_buffer(const SpotFixture& spot){
 }
 
 DMX_vec Shehds_10x8W_buffer(const SpotFixture& spot){
-    uint8_t active_animation_master = 255; //default value
-    if (spot.rack != nullptr && spot.rack->active_animation != nullptr){active_animation_master = spot.rack->active_animation->master;}
-    return DMX_vec{      (uint8_t) (spot.master/255.0 * active_animation_master),
+    uint8_t active_animation_master = 255;  //default value
+    uint8_t rack_master = 255;              //default value
+    if (spot.rack != nullptr && spot.rack->active_animation != nullptr){
+        active_animation_master = spot.rack->active_animation->master;
+        rack_master             = spot.rack->master;
+    }
+    return DMX_vec{      (uint8_t) (rack_master/255.0 * spot.master/255.0 * active_animation_master),
                          spot.pixel[R],
                          spot.pixel[G],
                          spot.pixel[B],
@@ -75,9 +83,13 @@ DMX_vec Shehds_10x8W_buffer(const SpotFixture& spot){
 }
 
 DMX_vec Shehds_7x18W_buffer(const SpotFixture& spot){
-    uint8_t active_animation_master = 255; //default value
-    if (spot.rack != nullptr && spot.rack->active_animation != nullptr){active_animation_master = spot.rack->active_animation->master;}
-    return DMX_vec{(uint8_t) (spot.master/255.0 * active_animation_master),
+    uint8_t active_animation_master = 255;  //default value
+    uint8_t rack_master = 255;              //default value
+    if (spot.rack != nullptr && spot.rack->active_animation != nullptr){
+        active_animation_master = spot.rack->active_animation->master;
+        rack_master             = spot.rack->master;
+    }
+    return DMX_vec{      (uint8_t) (rack_master/255.0 * spot.master/255.0 * active_animation_master),
                    spot.pixel[R],
                    spot.pixel[G],
                    spot.pixel[B],
@@ -146,7 +158,7 @@ void front_rack_init(){
 
     //this->animations.push_back();
     // Animation 1 : Backgrnd color + random soft flashes
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,         black,       8000, 1000,   " ", "FR.0", backer, 0));
+    front_rack.animations.push_back(new SpotRackAnimation0(&front_rack, black, " ", "FR.0", backer, 0));
     
 /*
     // Animation 1 : Random Bursts of color
@@ -261,6 +273,12 @@ void front_rack_init(){
 
 
 /** TESTS & DEV */
+
+
+
+    //AUTOCOLOR Animations
+    // Animation type 0 : Fixed color
+    front_rack.animations.push_back(new SpotRackAnimation0(&front_rack, "Couleur", "FR.0.1", any, 1, 255));
     // Animation type 1.1 : Random BUBBLES
     // Slow Bubbles
     front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, gaussian, /*Flash Period*/ 4000, /*Flash Length*/ 1500, "Slow Bubbles", "FR.1.1.1", backer, 1));
@@ -460,7 +478,7 @@ DMX_vec FunGeneration_12x1W_RGBW(simpleColor c, int intensity){
     case pink:            return fcn::RGBW_norm(DMX_vec{255,0,100,0}, intensity);break;
     case w_white:         return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);break;
     case c_white:         return fcn::RGBW_norm(DMX_vec{255,230,213,255}, 180.0/255*intensity);break;
-    case gold:            return fcn::RGBW_norm(DMX_vec{255,40,0,100}, intensity);break;
+    case gold:            return fcn::RGBW_norm(DMX_vec{255,40,0,180}, intensity);break;
     case light_blue:      return fcn::RGBW_norm(DMX_vec{50,64,255,0}, intensity);break;
     case light_cyan:      return fcn::RGBW_norm(DMX_vec{0,219,255,100}, intensity);break;
     case light_green:     return fcn::RGBW_norm(DMX_vec{30,255,30,100}, intensity);break;
@@ -576,6 +594,40 @@ DMX_vec SpotRack::RGBW(simpleColor c, int intensity){ //TODO delete
 #     # #    ##  #  #     # #     #    #     #  #     # #    ## #     #
 #     # #     # ### #     # #     #    #    ### ####### #     #  ##### 
 */
+
+
+
+
+/*
+  ###          ######                             #####                              
+ #   #         #     # #        ##   # #    #    #     #  ####  #       ####  #####  
+#     #        #     # #       #  #  # ##   #    #       #    # #      #    # #    # 
+#     #        ######  #      #    # # # #  #    #       #    # #      #    # #    # 
+#     # ###    #       #      ###### # #  # #    #       #    # #      #    # #####  
+ #   #  ###    #       #      #    # # #   ##    #     # #    # #      #    # #   #  
+  ###   ###    #       ###### #    # # #    #     #####   ####  ######  ####  #    # 
+  */
+// PLAIN COLOR : display one color on all every spot of the rack
+void SpotRackAnimation0::init(){
+    BaseAnimation::init();
+
+    for (auto spot : this->fixture->spots){
+        spot->pixel = spot->RGBW(this->color);
+    }
+}
+void SpotRackAnimation0::init(const color_vec& palette){
+    //AUTOCOLOR init
+    switch (palette.size())
+    {
+    case 0:
+        this->color = black;        break;
+    default:
+        this->color = palette[0];   break;
+    }
+
+    // STANDARD init
+    SpotRackAnimation0::init();
+}
 
 /*
    #          ######                                            
@@ -713,7 +765,7 @@ void SpotRackAnimation1::new_frame(){
             // current_spot->RGBWout[B] = min(max( (int)( (1.0-pow(flash_intensity, 0.2)) * frame_backgd_RGBW[B] + flash_intensity * frame_flash_RGBW[B]  ),0),255);
             // current_spot->RGBWout[W] = min(max( (int)( (1.0-pow(flash_intensity, 0.2)) * frame_backgd_RGBW[W] + flash_intensity * frame_flash_RGBW[W]  ),0),255);
             for (auto i_subpix = 0 ; i_subpix<pixel_size; i_subpix++){
-                 current_spot->pixel[i_subpix] = min(max( (int)( (1.0-pow(flash_intensity, 0.2)) * frame_backgd_RGBW[i_subpix] + flash_intensity * frame_flash_RGBW[i_subpix]  ),0),255); 
+                 current_spot->pixel[i_subpix] = min(max( (int)( (1.0-pow(flash_intensity, 0.4)) * frame_backgd_RGBW[i_subpix] + flash_intensity * frame_flash_RGBW[i_subpix]  ),0),255); 
             }
     }
 }

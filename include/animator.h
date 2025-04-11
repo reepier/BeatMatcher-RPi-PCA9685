@@ -27,7 +27,6 @@ namespace fcn{
   /* returns a normalized 4 (or 3 for RGB) channel DMX vector based on color literal 
   if intensity = -1, the normalization is disabled*/
 
-  
   // returns a NORMALIZED 4 (or 3 for RGB) channel DMX vector based on a DMX_vector and a DMX vlue (0-255)
   template<typename T>
   std::vector<T> RGBW_norm(std::vector<T> rgbw, int intensity=255){

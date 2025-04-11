@@ -158,6 +158,44 @@ public:
 };
 
 /*
+  ###          ######                             #####                              
+ #   #         #     # #        ##   # #    #    #     #  ####  #       ####  #####  
+#     #        #     # #       #  #  # ##   #    #       #    # #      #    # #    # 
+#     #        ######  #      #    # # # #  #    #       #    # #      #    # #    # 
+#     # ###    #       #      ###### # #  # #    #       #    # #      #    # #####  
+ #   #  ###    #       #      #    # # #   ##    #     # #    # #      #    # #   #  
+  ###   ###    #       ###### #    # # #    #     #####   ####  ######  ####  #    # 
+*/
+// PLAIN COLOR : display one color on all every spot of the rack
+class SpotRackAnimation0 : public SpotRackAnimation{
+   public:
+    simpleColor color = black;
+    int intensity = 255;
+    
+    //BASE Constructor
+    SpotRackAnimation0(SpotRack *f,  simpleColor c, std::string d, std::string i, AnimationType t, int prio, int mast=255)
+    {
+        //set BAse parameters
+        this->description = d, this->id = i, this->fixture = f, this->type=t, this->priority=prio, this->master=mast;
+        // Cinematic params
+        this->color = c;
+    }
+
+    //AUTOCOLOR Constructor
+    SpotRackAnimation0(SpotRack *f,  std::string d, std::string i, AnimationType t, int prio, int mast=255)
+    {
+        //set BAse parameters
+        this->description = d, this->id = i, this->fixture = f, this->type=t, this->priority=prio, this->master=mast;
+        this->autocolor = true;
+    }
+
+    void init() override; //Standard init fcn
+    void init(const color_vec&) override; //AUTOCOLOR init fcn
+    void new_frame() override{BaseAnimation::new_frame();};
+
+};
+ 
+/*
    #          ######                                            
   ##          #     # #    # #####  #####  #      ######  ####  
  # #          #     # #    # #    # #    # #      #      #      
@@ -166,7 +204,7 @@ public:
    #   ###    #     # #    # #    # #    # #      #      #    # 
  ##### ###    ######   ####  #####  #####  ###### ######  ####  
 */
-// BUBBLES : background color with another color randomly apppearing
+// BUBBLES : background color with another color randomly apppearing on a randomly chosen spot
 //TODO : whether in this animation or in a new one, add the possibility to chose a non-random sequence (traditional chaser)
 // TODO add AUTOCOLOR
 class SpotRackAnimation1 : public SpotRackAnimation
