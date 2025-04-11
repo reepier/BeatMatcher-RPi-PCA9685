@@ -5,7 +5,7 @@ build_dir = build/
 includeDir = include/
 main = src/main.cpp
 test = src/test.cpp
-objects = build/MCP3008.o build/animator.o build/config.o build/debug.o build/laser.o build/music.o build/spider.o build/spot.o build/addr_LED.o build/redrayz.o build/DMXio.o
+objects = build/animator.o build/config.o build/debug.o build/laser.o build/music.o build/spider.o build/spot.o build/addr_LED.o build/redrayz.o build/DMXio.o
 libs = -lola -lolacommon -lcurses  -lfftw3 -lwiringPi -lprotobuf -lrtaudio #-lgpio -lPCA9685 
 flags = -w -g -std=c++20
 includePaths = -I. -I.. -Iinclude
@@ -39,8 +39,8 @@ build/spider.o: src/spider.cpp include/spider.h $(genericInclude)
 	g++ $(flags) -c src/spider.cpp $(includePaths) -o build/spider.o
 build/spot.o: src/spot.cpp include/spot.h $(genericInclude)
 	g++ $(flags) -c src/spot.cpp $(includePaths) -o build/spot.o
-build/MCP3008.o: src/MCP3008.cpp
-	g++ $(flags) -c src/MCP3008.cpp $(includePaths) -o build/MCP3008.o
+#build/MCP3008.o: src/MCP3008.cpp
+#	g++ $(flags) -c src/MCP3008.cpp $(includePaths) -o build/MCP3008.o
 build/addr_LED.o: src/addr_LED.cpp include/addr_LED.h $(genericInclude)
 	g++ $(flags) -c src/addr_LED.cpp $(includePaths) -o build/addr_LED.o
 build/redrayz.o: src/redrayz.cpp include/redrayz.h $(genericInclude)

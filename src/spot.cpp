@@ -261,10 +261,36 @@ void front_rack_init(){
 
 
 /** TESTS & DEV */
+    // Animation type 1.1 : Random BUBBLES
+    // Slow Bubbles
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, gaussian, /*Flash Period*/ 4000, /*Flash Length*/ 1500, "Slow Bubbles", "FR.1.1.1", backer, 1));
+    // Fast bubbles
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, gaussian, /*Flash Period*/ 1000, /*Flash Length*/ 600, "Fast Bubbles", "FR.1.1.2", any, 1));
+    
+    // Animation type 1.2 : Random STROBE
+    //Slow strobe
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, square, /*Flash Period*/ 800, /*Flash Length*/ 1000/FRATE, "Slow Rand. Strobe", "FR.1.2.1", any, 1));
+    //Fast strobe
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, square, /*Flash Period*/ 300, /*Flash Length*/ 1000/FRATE, "Mid. Rand. Strobe", "FR.1.2.2", any, 1));
+    //Very Fast strobe
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, square, /*Flash Period*/ 100, /*Flash Length*/ 1000/FRATE, "Fast Rand. Strobe", "FR.1.2.3", any, 1));
+
+    // Animation type 1.3 : Random CHASER
+    //Slow Chaser
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, square, /*Flash Period*/ 4000, /*Flash Length*/ 1500, "Slow Rand. Chaser", "FR.1.3.1", any, 1));
+    //Fast Chaser
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, square, /*Flash Period*/ 1000, /*Flash Length*/ 600, "Fast Rand. Chaser", "FR.1.3.2", any, 1));
+
+
+    // Animation type 4 : Analog BEAT
     front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, 1.0, "Analog Flash (100%) ", "FR.4.1", any));
     front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, 0.7, "Analog Flash (70%)", "FR.4.2", any));
-    front_rack.animations.push_back(new SpotRackAnimation5(&front_rack, "Digital Flash", "FR.5", leader, 1, 255));
     
+    // Animation type 5 : Digital BEAT
+    front_rack.animations.push_back(new SpotRackAnimation5(&front_rack, "Digital Flash", "FR.5", leader, 1, 255));
+
+    
+
     front_rack.activate_none();
 };
 
@@ -418,7 +444,7 @@ void global_rack_init(){};
 #     # #       #     #    #       #    #  #     # #     # #  #  # 
  #####  #       #######    #       #     #  #####  ######   ## ##  
 */
-
+// TODO support light colors
 DMX_vec FunGeneration_12x1W_RGBW(simpleColor c, int intensity){
     switch (c){
     case black:           return fcn::RGBW_norm(DMX_vec{0,0,0,0}, intensity);break;
@@ -435,6 +461,13 @@ DMX_vec FunGeneration_12x1W_RGBW(simpleColor c, int intensity){
     case w_white:         return fcn::RGBW_norm(DMX_vec{0,0,0,255}, 200.0/255*intensity);break;
     case c_white:         return fcn::RGBW_norm(DMX_vec{255,230,213,255}, 180.0/255*intensity);break;
     case gold:            return fcn::RGBW_norm(DMX_vec{255,40,0,100}, intensity);break;
+    case light_blue:      return fcn::RGBW_norm(DMX_vec{50,64,255,0}, intensity);break;
+    case light_cyan:      return fcn::RGBW_norm(DMX_vec{0,219,255,100}, intensity);break;
+    case light_green:     return fcn::RGBW_norm(DMX_vec{30,255,30,100}, intensity);break;
+    case light_magenta:   return fcn::RGBW_norm(DMX_vec{255,70,240,0}, intensity);break;
+    case light_pink:      return fcn::RGBW_norm(DMX_vec{255,50,100,0}, intensity);break;
+    case light_purple:    return fcn::RGBW_norm(DMX_vec{180,63,255,0}, intensity);break;
+    case light_red:       return fcn::RGBW_norm(DMX_vec{255,20,20,0}, intensity);break;
     // case sevika_pink:     return fcn::RGBW_norm(DMX_vec{255,0,11,0}, intensity);break;
     // case hextech_cyan:    return fcn::RGBW_norm(DMX_vec{0,153,255,0}, intensity);break;
     // case shimmer_purple:  return fcn::RGBW_norm(DMX_vec{245,0,255,0}, intensity);break;
@@ -580,8 +613,24 @@ void SpotRackAnimation1::init(){
         flashes[i_spot][i_prev].color = black;
     }
 
-    // log(1,  __FILE__, " ", __LINE__, " ",__func__, " Palette : ", fcn::palette_to_string(this->flash_colors, '/'));
-
+}
+void SpotRackAnimation1::init(const color_vec& palette){
+    //AUTOCOLOR init
+    switch (palette.size())
+    {
+    case 0:     this->flash_colors=color_vec{black},        this->back_color=black;
+        break;
+    case 1:     this->flash_colors=color_vec{palette[0]},   this->back_color=palette[0];
+        break;
+    case 2:     this->flash_colors=color_vec{palette[0]},   this->back_color=palette[1];
+        break;
+    default:    this->flash_colors=color_vec{black},        this->back_color=black;
+        break;
+    }
+    // log(3, this->name, " init with palette ", fcn::palette_to_string(palette));
+    //STANDARD init
+    SpotRackAnimation1::init();
+    
 }
 
 void SpotRackAnimation1::new_frame(){
@@ -869,7 +918,7 @@ void SpotRackAnimation5::new_frame(){
     // for each new beat, sort segments in random order
     if (sampler.new_beat){
         units_index = fcn::randomized_vector(units_index);
-        log(2, "BEAT");
+        // log(2, "BEAT");
     }
 
     // compute intensity value

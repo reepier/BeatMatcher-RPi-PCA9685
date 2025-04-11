@@ -9,6 +9,7 @@
 #include <algorithm>
 #include <cmath>
 #include <climits>
+#include <cstring>
 
 #include "rtaudio/RtAudio.h"
 
@@ -26,23 +27,35 @@ typedef double SAMPLE_TYPE;
 #define FORMAT RTAUDIO_FLOAT64
 
 RtAudio adc;
-
+/*
+######  #######                                #####                
+#     #    #      ##   #    # #####  #  ####  #     # #####  #    # 
+#     #    #     #  #  #    # #    # # #    # #       #    # #   #  
+######     #    #    # #    # #    # # #    # #       #####  ####   
+#   #      #    ###### #    # #    # # #    # #       #    # #  #   
+#    #     #    #    # #    # #    # # #    # #     # #    # #   #  
+#     #    #    #    #  ####  #####  #  ####   #####  #####  #    # 
+*/
 /** This function is called automatically every time rtaudio records a new sample buffer (the frequency depends on sample 
  * size and sampling frequency). It is asynchronous with the rest of the program that runs on a constant 40Hz "main loop". if the sampling
  * runs at a higher rate, some samples will get lost in between executions of the "main loop" but every time the "main loop" executes, it
  * will access the newest sample buffer. 
  */
-int rtaudio_callback_fcn(void * /*outputBuffer*/, void *inputBuffer, unsigned int nBufferFrames,
+int rtaudio_callback_fcn(void * /*outputBuffer*/, void *inputBuffer, unsigned int /*nBufferFrames*/,
                         double /*streamTime*/, RtAudioStreamStatus /*status*/, void * /*data*/){
     
     // recast rtaudio std arguments :
     SAMPLE_TYPE *iBuffer = (SAMPLE_TYPE *) inputBuffer;
-
     
     // extract the buffer & format it like the old one (double from 0 to 1023)
     // store the N newest sample in a data structure accessible to the rest of the program
+
+    // std::memmove(sampler.fft_signal, sampler.fft_signal+SUBBUF_LENGTH, sizeof(fftw_complex) * SUBBUF_LENGTH);
+    
     for (int i=0; i<BUF_LENGTH; i++){
         double sample_i =  map(iBuffer[i], -1.0, 1.0, 0.0, 1023.0); // use only 1 channel --> TODO use averaged Left & Right
+        // sampler.fft_signal[BUF_LENGTH-SUBBUF_LENGTH+i][REAL] = sample_i;
+        // sampler.fft_signal[BUF_LENGTH-SUBBUF_LENGTH+i][IMAG] = 0;
         sampler.fft_signal[i][REAL] = sample_i;
         sampler.fft_signal[i][IMAG] = 0;
     }
@@ -58,6 +71,15 @@ int rtaudio_callback_fcn(void * /*outputBuffer*/, void *inputBuffer, unsigned in
 #endif
 
 
+/*
+                 
+# #    # # ##### 
+# ##   # #   #   
+# # #  # #   #   
+# #  # # #   #   
+# #   ## #   #   
+# #    # #   #   
+*/
 /**
  * This function initializes the music-input module of this project :
  * - allocates memory for the music samples
@@ -69,8 +91,9 @@ void SoundAnalyzer::init(){
     log(4, __FILE__, " ",__LINE__, " ", __func__);
 
      // allocate memory fot the fft_signal & fft out storage structures (arrays of doubles)
-    fft_signal = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*BUF_LENGTH);
-    fft_out = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*BUF_LENGTH);
+    fft_processed_signal  = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*BUF_LENGTH);
+    fft_signal            = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*BUF_LENGTH);
+    fft_out               = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*BUF_LENGTH);
     
     // initializa connection with MCP3008 ADC
     #ifndef LINUX_PC
@@ -80,19 +103,19 @@ void SoundAnalyzer::init(){
     if (b_NO_MUSIC == false){
         std::vector<unsigned int> deviceIds = adc.getDeviceIds();
         if ( deviceIds.size() < 1 ) {
-            
+            /*Do nothing*/
         }
         
-        unsigned int channels = 2, fs = SAMPLING_FREQ, bufferFrames = BUF_LENGTH, device = 0, offset = 0;
+        unsigned int channels = 2, fs = SAMPLING_FREQ, nbufferFrames = channels*SUBBUF_LENGTH, device = 0, offset = 0;
         RtAudio::StreamParameters iParams;
-        iParams.nChannels = 2;
+        iParams.nChannels = channels;
         iParams.firstChannel = 0;
         iParams.deviceId = adc.getDefaultInputDevice(); // default device is used //TODO implemnt choixe if required
 
         // adc.setErrorCallback( define a callback function to handle error ) // TODO integrate errors to the program's log console
 
         //open Stream
-        if ( adc.openStream( NULL, &iParams, RTAUDIO_FLOAT64, fs, &bufferFrames, &rtaudio_callback_fcn/*, (void *)&data*/) ){
+        if ( adc.openStream( NULL, &iParams, RTAUDIO_FLOAT64, fs, &nbufferFrames, &rtaudio_callback_fcn/*, (void *)&data*/) ){
             balise("\nRtAudio : Failed to open Stream!\n");
             exit( 1 );
         }
@@ -114,6 +137,16 @@ void SoundAnalyzer::init(){
     #endif
 }
 
+/*
+######                                                            
+#     # #####   ####   ####  ######  ####   ####  # #    #  ####  
+#     # #    # #    # #    # #      #      #      # ##   # #    # 
+######  #    # #    # #      #####   ####   ####  # # #  # #      
+#       #####  #    # #      #           #      # # #  # # #  ### 
+#       #   #  #    # #    # #      #    # #    # # #   ## #    # 
+#       #    #  ####   ####  ######  ####   ####  # #    #  ####  
+*/
+
 /**
  * This function is the sequencer all the major subtasks of real time sound-analysis 
  */
@@ -122,12 +155,12 @@ void SoundAnalyzer::update(){
 
     time_t t = frame.t_current_ms;
     #ifndef LINUX_PC
-    if(!b_NO_MUSIC){
-        this->_record();
-        this->_process_record();
-    }else{
-        sampler.process_record_fake();
-    }
+        if(!b_NO_MUSIC){
+            this->_record();
+            this->_process_record();
+        }else{
+            sampler.process_record_fake();
+        }
     #else
         if(b_NO_MUSIC){
             sampler.process_record_fake(); // If NOMUSIC flag is true use fake music signal
@@ -356,13 +389,16 @@ int SoundAnalyzer::recent_maximum(int period){
 }
 
 void SoundAnalyzer::_remove_DC_value(){
+    // evaluated DC value
     double sum = 0.0;
     for (int i=0; i<BUF_LENGTH; i++){
         sum += fft_signal[i][REAL];
     }
     double mean = sum/BUF_LENGTH;
+    // remove DC in a copy of
     for (int i=0; i<BUF_LENGTH; i++){
-        fft_signal[i][REAL] -= mean;
+        // fft_processed_signal[i][REAL] = fft_signal[i][REAL] - mean;
+        fft_signal[i][REAL] -= mean; 
     }
 }
 
@@ -371,7 +407,7 @@ void SoundAnalyzer::_compute_FFT(){
   fft_plan = fftw_plan_dft_1d(BUF_LENGTH, fft_signal, fft_out, FFTW_FORWARD, FFTW_ESTIMATE);
   fftw_execute(fft_plan);
 
-  // Reshape results 
+  // Reshape results
   for (int i=0; i<BUF_LENGTH; i++){
       sample_spectrum[i][FREQ] = i * SAMPLING_FREQ/BUF_LENGTH;
       sample_spectrum[i][AMPL] = (pow(fft_out[i][REAL], 2) + pow(fft_out[i][IMAG],2)) * 7E-5; // compute magnitude + normalize (empirical)
@@ -435,9 +471,6 @@ void SoundAnalyzer::_switch_to_state(states s){
 #       ####### #  #   #          #       #    # #  # # #        #   # #    # #  # #      # 
 #       #     # #   #  #          #       #    # #   ## #    #   #   # #    # #   ## #    # 
 #       #     # #    # #######    #        ####  #    #  ####    #   #  ####  #    #  ###*/
-
-
-
 
 const int beat_duration_ms = 60000/BPM;
 const int break_duration_ms = BREAKDuration * beat_duration_ms;
@@ -562,3 +595,55 @@ void SoundAnalyzer::fake_analysis(){
 }
 
 
+/*
+
+Killed───────────────────────────────────────────────────────────────────────────────────┐┌SPECTRUM──────────────────────────────┐
+reepier@Pierre-DELL:~/Documents/Beatmatcher$ ^Coooooooooooooooooooooooo|0 |3397 |        ││0                                     │
+reepier@Pierre-DELL:~/Documents/Beatmatcher$                                       BEAT  ││23   |||||||||||||||||||||||||||||||||│
+│                                                                                        ││46   |||||||||||||||||||||||||||||||||│
+│                   BAD_SIGNAL                                                           ││70   |||||||||||||||||||||||||||||||||│
+│                                                                                        ││93                                    │
+│                              | Nxt break : 1.8446| Nxt drop : 1.84467e+16s             ││117  |||||||||||||||||||||||||||||||||│
+│                                                                                        ││140  |||||||||||||||||||||||||||||||||│
+│                                                                                        ││164  |||||||||||||||||||||||||||||||||│
+└────────────────────────────────────────────────────────────────────────────────────────┘│187                                   │
+ ANIMATOR                                                                                 │210  |||||||||||||||||||||||||||||||| │
+                                                                                          │234  |||||||||||||||||||||||||||||||||│
+ Animation switch : 0              Show intensity : 0                                     │257  |||||||||||||||||||||||||||||||  │
+                                                                                          │281                                   │
+                                                                                          │304  ||||||||||||||||||||||||||||||   │
+┌OUTPUT──────────────────────────────────────────────────────────────────────────────────┐│328  |||||||||||||||||||||||||||||||| │
+│(b) LEDs PIX.0.0 -                          |   0,  0,  0,  0,  0,  0,  0,  0,  0,      ││351  |||||||||||||||||||||||||||||    │
+│(b) Laser LAS.0 -                           |   0,  0,  0,  0,  0,  0,  0,  0           ││375                                   │
+│(a) Front Rack FR.4.1 - Analog Flash (100%) |                                           ││398  ||||||||||||||||||||||||||||     │
+│                                                                                        ││421  ||||||||||||||||||||||||||||||   │
+│(a) Spider SPI.0.0 -                        |   0,  0,255,255,255,255,  0,  0,  0,      ││445  ||||||||||||||||||||||||||||     │
+│(b) Vert. Beams R15.0 -                     |                                           ││468                                   │
+│(b) Rack 2 R40.0 -                          |                                           ││492  |||||||||||||||||||||||||||      │
+│(b) SHEHDS Rack BR2.0 -                     |                                           ││515  |||||||||||||||||||||||||||||    │
+└────────────────────────────────────────────────────────────────────────────────────────┘│539  |||||||||||||||||||||||||||      │
+ GENERAL                                                                                  │562                                   │
+ Frame counter : 12201   Clock : 11573.1s         Calc Overhead : YES 22ms                │585  ||||||||||||||||||||||||||       │
+                                                                                          │609  ||||||||||||||||||||||||||||     │
+┌CONSOLE─────────────────────────────────────────────────────────────────────────────────┐│632  ||||||||||||||||||||||||||       │
+│                                                                                        ││656                                   │
+│                                                                                        ││679  |||||||||||||||||||||||||        │
+│                                                                                        ││703  |||||||||||||||||||||||||||      │
+│                                                                                        ││726  |||||||||||||||||||||||||        │
+│                                                                                        ││750                                   │
+│                                                                                        ││773  |||||||||||||||||||||||||        │
+│                                                                                        ││796  ||||||||||||||||||||||||||       │
+│                                                                                        ││820  ||||||||||||||||||||||||         │
+│                                                                                        ││843                                   │
+│                                                                                        ││867  ||||||||||||||||||||||||         │
+│                                                                                        ││890  ||||||||||||||||||||||||||       │
+│                                                                                        ││914  ||||||||||||||||||||||||         │
+│                                                                                        ││937                                   │
+│                                                                                        ││960  |||||||||||||||||||||||          │
+│                                                                                        ││984  |||||||||||||||||||||||||        │
+│                                                                                        ││1007 |||||||||||||||||||||||          │
+│3:7:46:83       Activating LAS.0:                                                       ││1031                                  │
+│3:7:46:83       Activating SPI.0.0:                                                     ││1054 |||||||||||||||||||||||          │
+└3:7:46:219─────Testing animation FR.4.1─────────────────────────────────────────────────┘└──────────────────────────────────────┘
+
+*/

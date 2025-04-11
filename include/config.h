@@ -19,8 +19,9 @@ extern std::vector<std::string> cli_anim_id;
 
 
 // Music sampler
-    #define BUF_LENGTH 1024       // audio buffer length (number of individual samples)
-    #define SAMPLING_FREQ 48000  // sampling frequency
+    #define SUBBUF_LENGTH   512    // size of each recorded buffer
+    #define BUF_LENGTH      2048   // Total audio buffer length (number of individual samples) (concatenation of multiple subbuffers)
+    #define SAMPLING_FREQ   48000  // sampling frequency
     #define FREQ_BAND 2          // frequency band used to evaluate volume (low value for bass / high value for treble) //TODO calibrate
 
     #define VOL_BUFF_SIZE 128   // size of the volume buffer
@@ -34,8 +35,8 @@ extern std::vector<std::string> cli_anim_id;
 
 // Music Emulator
 #define BPM 100           // BPM
-#define BREAKDuration 16  // beats
-#define DROPDuration  8   // beats
+#define BREAKDuration 4  // beats
+#define DROPDuration  16   // beats
 
 // -- CONFIG ------------------------------------------------------------
 #define     MAX_CONT_FLASH      120000          // 120000 

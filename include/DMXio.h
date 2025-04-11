@@ -38,7 +38,26 @@ void send();
  #  #    ## #       #     #    #    
 ### #     # #        #####     #            
 */
+#define OLA_ADR_OFFSET  -1
 
+#define MAIN_CTRL_ADR      1+OLA_ADR_OFFSET
+    #define MAIN_TRIG_CH            1 +OLA_ADR_OFFSET+MAIN_CTRL_ADR
+    #define MAIN_DIM_CH        2 +OLA_ADR_OFFSET+MAIN_CTRL_ADR
+    #define MAIN_COL1_CH       3 +OLA_ADR_OFFSET+MAIN_CTRL_ADR
+    #define MAIN_COL2_CH       4 +OLA_ADR_OFFSET+MAIN_CTRL_ADR
+    #define MAIN_INT_CH        5 +OLA_ADR_OFFSET+MAIN_CTRL_ADR
+
+#define LED_CTRL_ADR    25+OLA_ADR_OFFSET
+    #define LED_DIM_CH      1+OLA_ADR_OFFSET+LED_CTRL_ADR
+    #define LED_ANI_CH      2+OLA_ADR_OFFSET+LED_CTRL_ADR
+    #define LED_COL1_CH     3+OLA_ADR_OFFSET+LED_CTRL_ADR
+    #define LED_COL2_CH     4+OLA_ADR_OFFSET+LED_CTRL_ADR
+
+#define SR1_CTRL_ADR    15+OLA_ADR_OFFSET
+    #define SR1_DIM_CH      1+OLA_ADR_OFFSET+SR1_CTRL_ADR
+    #define SR1_ANI_CH      2+OLA_ADR_OFFSET+SR1_CTRL_ADR
+    #define SR1_COL1_CH     3+OLA_ADR_OFFSET+SR1_CTRL_ADR 
+    #define SR1_COL2_CH     4+OLA_ADR_OFFSET+SR1_CTRL_ADR
 
 // DMX Input interface
 const unsigned int input_universe_id = 10;

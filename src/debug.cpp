@@ -13,9 +13,9 @@
 
 using namespace std;
 
-extern SoundAnalyzer sampler;
-extern AnimationManager animator;
-extern LoopControler frame;
+// extern SoundAnalyzer sampler;
+// extern AnimationManager animator;
+// extern LoopControler frame;
 
 LogList log_list;
 
@@ -210,9 +210,9 @@ void disp_output_window(){
             DMX_vec raw_buf = fix->buffer();
             outbuf << "| " <<fcn::vec_to_str(raw_buf, ',');
 
-            int max_length = 30;
+            int max_length = 40;
             mvwprintw(outputw, line, 1, animbuf.str().data());
-            mvwprintw(outputw, line, 55, outbuf.str().size()<max_length? outbuf.str().data() : outbuf.str().substr(0, max_length).data());
+            mvwprintw(outputw, line, 45, outbuf.str().size()<max_length? outbuf.str().data() : outbuf.str().substr(0, max_length).data());
             
             if((fix == &front_rack) || fix == &shehds_rack)  line+=2;
             else line += 1;

@@ -66,6 +66,7 @@
         "thread": "cpp",
         "strstream": "cpp",
         "list": "cpp",
-        "cfenv": "cpp"
+        "cfenv": "cpp",
+        "csignal": "cpp"
     }
 }

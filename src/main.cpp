@@ -5,7 +5,8 @@
 #include <wiringPi.h>
 #include <algorithm>
 #include <thread>
-
+#include <csignal>
+#include <cstdlib>
 
 #include "debug.h"
 #include "fixtures.h"
@@ -75,7 +76,17 @@ bool process_arguments(int n, char* args[]){
     return true;
 }
 
+void on_exit(int signal) {
+    std::cout << "\nCaught Ctrl+C (SIGINT), restoring terminal settings...\n";
+    std::system("stty sane");  // restore terminal settings
+    std::exit(0);              // exit cleanly
+}
+
 void initialize() {
+
+    // Register signal handler
+    std::signal(SIGINT, on_exit);
+
     srand((unsigned)time(nullptr));
 
     #ifndef LINUX_PC // if compiling on raspberrypi
@@ -156,7 +167,7 @@ int main(int argc, char* argv[]){
         }
         else if (!b_EXT_CONTROL && b_ANI_TEST && frame.cpt == 0){   // else activate once and for all the animations to test
             balise("Run animator test fcn");
-            if(!animator.test_animation()){
+            if(!animator.test_animation_update()){
                 // return -1;
             }
         }else if(b_EXT_CONTROL){

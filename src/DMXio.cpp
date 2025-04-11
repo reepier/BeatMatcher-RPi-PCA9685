@@ -91,53 +91,6 @@ void send(){
 ola::client::OlaClientWrapper wrapper;
 ola::client::OlaClient *ola_input_client;
 
-#define TRIG_CH         0
-#define MAIN_COL1_CH       1
-#define MAIN_COL2_CH       2
-
-#define LED_DIM_CH      3
-#define LED_ANI_CH      4
-#define LED_COL1_CH     5
-#define LED_COL2_CH     6
-
-// Function Called when new DMX buffer is received. --> could be at 44Hz, even if data hasn't changed
-// void NewDmx(const ola::client::DMXMetadata &metadata, const ola::DmxBuffer &data) {
-//     // std::cout << "Received " << data.Size() << " channels for universe " << metadata.universe << ", priority " << static_cast<int>(metadata.priority) << std::endl;
-//     // for (auto i = 0; i < 20 && i<data.Size(); i++){
-//     //     std::cout << (int)data.Get(i)<< ", ";
-//     // }
-//     // std::cout << std::endl;
-    
-
-//     static ola::DmxBuffer memorized_buffer;
-//     bool first_call;
-//     if (memorized_buffer.Size()==0){ //at initialisation 
-//         first_call = true;              // set a flag to indicate the first call
-//         memorized_buffer = data;        // initialise memory to current data
-//     }else{
-//         first_call = false;
-//         //memorized_data was sete during the previous call 
-//     }
-
-//     //check wether datat has chagend or not
-//     bool data_change = false;
-//     if (!(data == memorized_buffer)){
-//         data_change = true;
-//         balise("Data has changed");
-//         log(3, "New DMX Data received");
-//     }
-
-//     // if data change, call special animator function & pass it the input data array
-//     if (data_change && b_EXT_CONTROL){
-//         balise("Running controled animator");
-//         DMX_vec data_vec(data.GetRaw(), data.GetRaw()+data.Size());
-//         balise("Running controled animator");
-//         animator.controled_update(data_vec);
-//     }
-
-//     memorized_buffer = data;
-// }
-
 
 /** Control logic & code structure :
  * - data from TRIG_CH is processed in the following manner
@@ -163,7 +116,7 @@ void processDMXinput(const ola::client::DMXMetadata &metadata, const ola::DmxBuf
     // Process trigger
     bool trigger = false;
     static time_t last_trigger_ms;
-    if ( data.Get(TRIG_CH) == 255    ||   (data.Get(TRIG_CH) > memorized_buffer.Get(TRIG_CH) && millis()-last_trigger_ms > 1000) ){
+    if ( data.Get(MAIN_TRIG_CH) == 255    ||   (data.Get(MAIN_TRIG_CH) > memorized_buffer.Get(MAIN_TRIG_CH) && millis()-last_trigger_ms > 1000) ){
         trigger = true;
         last_trigger_ms = millis();
     }else{
@@ -179,27 +132,35 @@ void processDMXinput(const ola::client::DMXMetadata &metadata, const ola::DmxBuf
         int main_col1_val = min(max((uint8_t)0,  data.Get(MAIN_COL1_CH)) , (uint8_t)(simpleColor::last_color));
         int main_col2_val = min(max((uint8_t)0,  data.Get(MAIN_COL2_CH)) , (uint8_t)(simpleColor::last_color));
         //create output structrue
-        color_vec main_palette = color_vec{};
+        color_vec main_palette;
         // if input data are not in DEFAULT positions (automatic mode)
         if ( main_col1_val!=0 || main_col2_val!=0 ) { 
             // create a palette based on input data
             if (main_col1_val > 0)  main_palette.push_back((simpleColor)(main_col1_val-1));
             if (main_col2_val > 0)  main_palette.push_back((simpleColor)(main_col2_val-1));
             // update animator main palette if there is a change
-            if (animator.controler_main_palette != main_palette){
-                animator.controler_main_palette = main_palette;
-                log(1, "New main palette : ", fcn::palette_to_string(animator.controler_main_palette));
+            if (animator.external_palette != main_palette){
+                animator.external_palette = main_palette;
+                animator.new_external_palette = true;
+                // log(1, "New main palette : ", fcn::palette_to_string(animator.external_palette));
+            }else{
+                
             }
         // if input data are in DEFAULT position
         }else{
-            if ( !animator.controler_main_palette.empty()){       //if not already empty 
-                animator.controler_main_palette = color_vec{};    //reset to empty palette (meaning auto palette or fixture palette will apply to leds)
+            if ( !animator.external_palette.empty()){       //if not already empty 
+                animator.external_palette.clear();    //reset to empty palette (meaning auto palette or fixture palette will apply to leds)
+                animator.new_external_palette = true;
                 log(1, "Back to automatic main palette");
+            }else{
+                
             }
         }
-    }else{/*Do nothing*/}
+    }else{
+        
+    }
 
-    //PROCESS ADRESSABLE LED DIMMER
+    // PROCESS ADRESSABLE LED DIMMER
     if (true){ // process dimmer input as a continuous stream (& not only on trigger)
         // get & rewrap raw data
         addr_led.master = data.Get(LED_DIM_CH); // already a 0-255 dmx data, no conversion/rewrap needed
@@ -214,24 +175,32 @@ void processDMXinput(const ola::client::DMXMetadata &metadata, const ola::DmxBuf
             // update led animation if there is a change
             if (addr_led.external_animation != led_ani_val){
                 addr_led.external_animation = led_ani_val;
-                log(2, "New led animation : ", fcn::num_to_str(addr_led.external_animation));
+                addr_led.new_external_animation = true;
+                // log(2, "New led animation : ", fcn::num_to_str(addr_led.external_animation));
+            }else{
+                
             }
         // if input data is DEFAULT (0) 
         }else{
             if (addr_led.external_animation != 0){  //if not already reset to 0
                 addr_led.external_animation = 0;    //reset to 0
+                addr_led.new_external_animation = true;
                 log(2, "Back to automatic led animation");
+            }else{
+                
             }
         }
-    }else{/*Do nothing*/}
+    }else{
+        
+    }
 
     //PROCESS ADDRESSABLE LEDs COLORS
     if (trigger){
-        // get & rewrap raw data
+        // get & rewrap raw data //TODO use "clamp" instead of min(max())
         int led_col1_val = min(max((uint8_t)0,  data.Get(LED_COL1_CH)) , (uint8_t)(simpleColor::last_color));
         int led_col2_val = min(max((uint8_t)0,  data.Get(LED_COL2_CH)) , (uint8_t)(simpleColor::last_color));
         //create output structrue
-        color_vec led_palette = color_vec{};   //start with empty palette
+        color_vec led_palette;   //start with empty palette
         // if input data are not in DEFAULT positions (automatic mode)
         if ( led_col1_val!=0 || led_col2_val!=0 ) {
             // create a palette based on (non zero) input data
@@ -239,18 +208,96 @@ void processDMXinput(const ola::client::DMXMetadata &metadata, const ola::DmxBuf
             if (led_col2_val > 0)  led_palette.push_back((simpleColor)(led_col2_val-1));
             // update led palette if there is a change
             if (addr_led.external_palette != led_palette){
+                addr_led.new_external_palette = true;
                 addr_led.external_palette = led_palette;
-                log(2, "New led palette : ", fcn::palette_to_string(addr_led.external_palette));
+                // log(2, "New led palette : ", fcn::palette_to_string(addr_led.external_palette));
+            }else{
+                
             }
         }else{
             if ( !addr_led.external_palette.empty()){  //if not already empty 
-                addr_led.external_palette = color_vec{};    //reset to empty palette (meaning main palette or auto palette will apply to leds)
+                addr_led.new_external_palette = true;
+                addr_led.external_palette.clear();    //reset to empty palette (meaning main palette or auto palette will apply to leds)
                 log(2, "Back to automatic led palette");
+            }else{
+                
             }
         }
-    }else{/*Do nothing*/}
+    }else{
+        
+    }//TODO clean this if / elseif structure --> it has way to many ramifications
 
 
+    SpotRack* spot_rack_1 = &front_rack;  //allows for more fexibility when using more than 1 rack
+    //PROCESS SPOT RACK 1 DIMMER
+    if (true){ // process dimmer input as a continuous stream (& not only on trigger)
+        // get & rewrap raw data
+        spot_rack_1->master = data.Get(SR1_DIM_CH); // already a 0-255 dmx data, no conversion/rewrap needed
+    }
+
+    //PROCESS SPOT RACK 1 Animation
+    if (trigger){
+        //get & rewrap raw data
+        int sr1_ani_val = data.Get(SR1_ANI_CH);
+        // if input data is not in DEFAULT positions (automatic mode)
+        if ( sr1_ani_val!=0) { 
+            // update Rack animation if there is a change
+            if (spot_rack_1->external_animation != sr1_ani_val){
+                spot_rack_1->external_animation = sr1_ani_val;
+                spot_rack_1->new_external_animation = true;
+                // log(2, "New SR1 animation : ", fcn::num_to_str(spot_rack_1->external_animation));
+            }else{
+                
+            }
+        // if input data is DEFAULT (0) 
+        }else{
+            if (spot_rack_1->external_animation != 0){  //if not already reset to 0
+                spot_rack_1->external_animation = 0;    //reset to 0
+                spot_rack_1->new_external_animation = true;
+                log(2, "Back to automatic SR1 animation");  //TODO choose where to put log instructions (cannot be both in DMXio and Animator)
+            }else{
+                
+            }
+        }
+    }else{
+        
+    }
+
+    //PROCESS SPOT RACK 1 LEDs COLORS
+    if (trigger){
+        // get & rewrap raw data
+        int sr1_col1_val = min(max((uint8_t)0,  data.Get(SR1_COL1_CH)) , (uint8_t)(simpleColor::last_color));
+        int sr1_col2_val = min(max((uint8_t)0,  data.Get(SR1_COL2_CH)) , (uint8_t)(simpleColor::last_color));
+        //create output structrue
+        color_vec sr1_palette;   //start with empty palette
+        // if input data are not in DEFAULT positions (automatic mode)
+        if ( sr1_col1_val!=0 || sr1_col2_val!=0 ) {
+            // create a palette based on (non zero) input data
+            if (sr1_col1_val > 0)  sr1_palette.push_back((simpleColor)(sr1_col1_val-1));
+            if (sr1_col2_val > 0)  sr1_palette.push_back((simpleColor)(sr1_col2_val-1));
+            // update Rack palette if there is a change
+            if (spot_rack_1->external_palette != sr1_palette){
+                spot_rack_1->external_palette = sr1_palette;
+                spot_rack_1->new_external_palette = true;
+                // log(2, "New SR1 palette : ", fcn::palette_to_string(spot_rack_1->external_palette));
+            }else{
+                
+            }
+        }else{
+            if ( !spot_rack_1->external_palette.empty()){  //if not already empty 
+                spot_rack_1->external_palette.clear();    //reset to empty palette (meaning main palette or auto palette will apply to leds)
+                spot_rack_1->new_external_palette = true;
+                log(2, "Back to automatic SR1 palette");
+            }else{
+                
+            }
+        }
+    }else{
+        
+    }
+    
+
+    //TODO to improve genericity, put all these repeating code blocks in BaseFixture class (with overrides if needed in SpecificFixture class)
 
 
     memorized_buffer = data;    // memorize current buffer for the next function call

@@ -10,10 +10,7 @@
     #include "MCP3008/MCP3008.h"
 #endif
 
-
-
-
-// MCP3008
+// MCP3008 //TODO remove MCP3008 code completely
 #define MCP3008_MAX 1023
 #define MCP3008_MIN 0
 #define MCP_CHAN 5
@@ -46,6 +43,7 @@ class SoundAnalyzer{
 
     // FFTW lib structures
     public : fftw_complex *fft_signal;
+    public : fftw_complex *fft_processed_signal;
     private : fftw_complex *fft_out;
     private : fftw_plan fft_plan;
 
@@ -63,7 +61,7 @@ class SoundAnalyzer{
     private :   int cpt = 0;                        // number of samples recorded
     
     // Beat tracking variables
-    public :    float beat_threshold = 60;
+    public :    float beat_threshold = 50;
     public :    bool raw_beat=false, new_beat=false, filtered_beat=false;
     public :    unsigned long t_last_beat = 0;         // Stores timestamp of the last raw_beat=true event
     public :    unsigned long t_last_new_beat = 0;

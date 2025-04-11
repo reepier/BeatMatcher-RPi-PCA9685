@@ -332,7 +332,10 @@ class AnimationManager{
     time_t timer_start_ms = 0, timer_end_ms=0, timer_duration_ms = 0;
     unsigned long t_last_change_ms = millis();   //timestamp of last switch between aniamtions
     ColorPaletteMagazine palette_magasine, palette_magasine_2, test_palette;
-    color_vec controler_main_palette = color_vec{}; 
+    
+    // for external controler
+    color_vec external_palette;
+    bool new_external_palette; 
 
     void init();
 
@@ -341,7 +344,7 @@ class AnimationManager{
     void autocolor_update();
     void show_update();
     void nov30_maximum_update();
-    bool test_animation();
+    bool test_animation_update();
     bool controled_update();
   
     void set_timer(time_t);
@@ -377,8 +380,10 @@ class BaseFixture{
 
     // DMX Controler parameters
     color_vec external_palette;     // this color palette is defined (or not) by the external controler 
+    bool      new_external_palette = false;  //turns true for 1 cycle when new external animation is detected 
     int       external_animation;   // stores external animation commands
-    
+    bool      new_external_animation = false;//turns true for 1 cycle when new external palette is detected 
+
     // Animations catalog
     BaseAnimation * active_animation = nullptr;
 
@@ -393,7 +398,7 @@ class BaseFixture{
     bool activate_none();
     bool activate_by_index(int), activate_by_index(int, const color_vec&);
     bool activate_random(bool include_black = true), activate_random(const color_vec&, bool include_black = true);
-    bool activate_by_ID(std::string);
+    bool activate_by_ID(std::string), activate_by_ID(std::string, const color_vec&);
     bool activate_autocolor(color_vec&);
     virtual bool activate_by_color(color_vec, AnimationType arg_type = any); //additionnal argument to orient the activation toward a leading or backing aniation
     bool activate_by_ptr(BaseAnimation*), activate_by_ptr(BaseAnimation*, const color_vec&);

@@ -168,6 +168,7 @@ public:
 */
 // BUBBLES : background color with another color randomly apppearing
 //TODO : whether in this animation or in a new one, add the possibility to chose a non-random sequence (traditional chaser)
+// TODO add AUTOCOLOR
 class SpotRackAnimation1 : public SpotRackAnimation
 {
 private :
@@ -222,13 +223,6 @@ public :
 
         this->flash_colors.push_back(f_col);
         this->back_color = b_col;
-        // if (f_col==black)
-        //     this->back_color = this->fixture->RGBW(b_col, SPOTRACK_ANI1_BkG_INTENSITY_HIGH);     // more intensity if there is no flash
-        // else
-        //     this->back_color = this->fixture->RGBW(b_col, SPOTRACK_ANI1_BkG_INTENSITY_LOW);     // less intensity if there is a flash
-
-        // this->sin_max_p_ms = pmax;
-        // this->sin_min_p_ms = pmin;
         this->rand_const_ms = prand;
         this->flash_len = flen;
 
@@ -259,7 +253,20 @@ public :
         this->flash_activation = false;
     }
 
+    //AUTOCOLOR Constructor
+    SpotRackAnimation1(SpotRack *f, Shape fshape, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio){
+        // Base parameters
+        this->description = d, this->id = i, this->fixture = f, this->type = t, this->priority = prio;
+        this->autocolor = true;             // animation relying on autocolor must be taggued as such
+        // Cinematic Parameters
+        this->rand_const_ms = prand;
+        this->flash_shape = fshape;
+        this->flash_len = flen;
+    }
+    
+    
     void init() override;
+    void init(const color_vec&) override;
     void new_frame();
 };
 /*
@@ -273,6 +280,7 @@ public :
 */
 // STROBE : Random color flashes
 // TODO add multicolor feature (change color at every new_frame)
+// TODO add AUTOCOLOR
 #define STRB_FASTEST 180
 #define STRB_FAST 80
 #define STRB_MED 30
@@ -329,7 +337,6 @@ private :
  #####  ###     #####  #    # #    #  ####  ###### #    # 
 */
 // CHASER : each spots individually lights up and stays on for a user defined duration
-
 class SpotRackAnimation3 : public SpotRackAnimation {
 public:
     // Parameters

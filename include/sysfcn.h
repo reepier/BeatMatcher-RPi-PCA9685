@@ -65,7 +65,7 @@ class LoopControler{
         
         while(micros() < t_next_us) {
             // std::cout << t_current_ms << " / " << micros()/1000 << " / " << t_next_ms  << std::endl;
-            delayMicroseconds(100);
+              delayMicroseconds(100);
         } // wait for the next frame
 
         if (first_loop) first_loop = false;
