@@ -280,10 +280,14 @@ void front_rack_init(){
     // Animation type 0 : Fixed color
     front_rack.animations.push_back(new SpotRackAnimation0(&front_rack, "Couleur", "FR.0.1", any, 1, 255));
     // Animation type 1.1 : Random BUBBLES
+    // Quasi-static Bubbles
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, gaussian, /*Flash Period*/ 20000, /*Flash Length*/ 30000, "Quasi-stat Bubbles", "FR.1.1.1", backer, 1));
+    // Super Slow Bubbles
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, gaussian, /*Flash Period*/ 8000, /*Flash Length*/ 3000, "Super Slow Bubbles", "FR.1.1.2", backer, 1));
     // Slow Bubbles
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, gaussian, /*Flash Period*/ 4000, /*Flash Length*/ 1500, "Slow Bubbles", "FR.1.1.1", backer, 1));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, gaussian, /*Flash Period*/ 4000, /*Flash Length*/ 1500, "Slow Bubbles", "FR.1.1.3", backer, 1));
     // Fast bubbles
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, gaussian, /*Flash Period*/ 1000, /*Flash Length*/ 600, "Fast Bubbles", "FR.1.1.2", any, 1));
+    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, gaussian, /*Flash Period*/ 1000, /*Flash Length*/ 600, "Fast Bubbles", "FR.1.1.4", any, 1));
     
     // Animation type 1.2 : Random STROBE
     //Slow strobe
@@ -472,7 +476,7 @@ DMX_vec FunGeneration_12x1W_RGBW(simpleColor c, int intensity){
     case yellow:          return fcn::RGBW_norm(DMX_vec{255,90,0,0}, intensity);break;
     case orange:          return fcn::RGBW_norm(DMX_vec{255,40,0,0}, intensity);break;
     case sodium:          return fcn::RGBW_norm(DMX_vec{255,20,0,0}, intensity);break;
-    case cyan:            return fcn::RGBW_norm(DMX_vec{0,219,255,0}, 180.0/255*intensity);break;
+    case cyan:            return fcn::RGBW_norm(DMX_vec{0,180,255,0}, 180.0/255*intensity);break;
     case purple:          return fcn::RGBW_norm(DMX_vec{150,0,255,0}, intensity);break;    
     case magenta:         return fcn::RGBW_norm(DMX_vec{255,0,240,0}, intensity);break;
     case pink:            return fcn::RGBW_norm(DMX_vec{255,0,100,0}, intensity);break;
@@ -619,10 +623,9 @@ void SpotRackAnimation0::init(const color_vec& palette){
     //AUTOCOLOR init
     switch (palette.size())
     {
-    case 0:
-        this->color = black;        break;
-    default:
-        this->color = palette[0];   break;
+    case 0:     this->color = black;        break;
+    case 1:     this->color = palette[0];   break;
+    default:    this->color = *(palette.end()-1);   break;
     }
 
     // STANDARD init
