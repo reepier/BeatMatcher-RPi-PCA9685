@@ -17,15 +17,6 @@
 #include "config.h"
 
 using namespace std;
-
-#ifndef LINUX_PC // if compiling on raspberrypi
-    // I2C Hardware interface (PCA9685)
-    int fd;
-    int addr = 0x40;
-    unsigned int setOnVals[_PCA9685_CHANS]  = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    unsigned int setOffVals[_PCA9685_CHANS] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-#endif
-
     
 
 fix_vec ll_fxtrs = {    /*&led,*/ &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, 
@@ -44,10 +35,6 @@ bool process_arguments(int n, char* args[]){
             exit(0);
         }else if(strcmp(arg, "--balise") == 0){
             b_BALISE = true;
-            // b_CURSES = false;
-        }
-        else if (strcmp(arg, "--noled") == 0){
-            b_NO_LED = true;
         }
         else if (strcmp(arg, "--nomusic") == 0){
             b_NO_MUSIC = true;
@@ -68,10 +55,6 @@ bool process_arguments(int n, char* args[]){
     }
 
 
-    #ifdef LINUX_PC //if compiling on PC, force NO_MUSIC and NO_LED since PCA9685 and MCP3008 are not compatible
-        // b_NO_MUSIC = true;
-        b_NO_LED = true;
-    #endif
 
     return true;
 }
@@ -89,16 +72,6 @@ void initialize() {
 
     srand((unsigned)time(nullptr));
 
-    #ifndef LINUX_PC // if compiling on raspberrypi
-    if (!b_NO_LED){
-        balise("Init. PCA...");
-        _PCA9685_DEBUG = 0;
-        _PCA9685_TEST = 0;
-
-        fd = PCA9685_openI2C(1, addr);
-        PCA9685_initPWM(fd, addr, _PCA9685_MAXFREQ);
-    }
-    #endif
 
     balise("Init. ola...");
     ola_output_client.Setup();
