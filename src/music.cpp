@@ -50,15 +50,15 @@ int rtaudio_callback_fcn(void * /*outputBuffer*/, void *inputBuffer, unsigned in
     // extract the buffer & format it like the old one (double from 0 to 1023)
     // store the N newest sample in a data structure accessible to the rest of the program
 
-    // std::memmove(sampler.fft_signal, sampler.fft_signal+SUBBUF_LENGTH, sizeof(fftw_complex) * SUBBUF_LENGTH);
+    std::memmove(sampler.fft_signal, sampler.fft_signal+SUBBUF_LENGTH, sizeof(fftw_complex) * SUBBUF_LENGTH);
     
-    for (int i=0; i<BUF_LENGTH; i++){
+    for (int i=0; i<SUBBUF_LENGTH; i++){
         // double sample_i =  map(iBuffer[i], -1.0, 1.0, 0.0, 1023.0); // use only 1 channel --> TODO use averaged Left & Right
         double sample_i =  static_cast<double>(iBuffer[i]); // use only 1 channel --> TODO use averaged Left & Right
-        // sampler.fft_signal[BUF_LENGTH-SUBBUF_LENGTH+i][REAL] = sample_i;
-        // sampler.fft_signal[BUF_LENGTH-SUBBUF_LENGTH+i][IMAG] = 0;
-        sampler.fft_signal[i][REAL] = sample_i;
-        sampler.fft_signal[i][IMAG] = 0;
+        sampler.fft_signal[BUF_LENGTH-SUBBUF_LENGTH+i][REAL] = sample_i;
+        sampler.fft_signal[BUF_LENGTH-SUBBUF_LENGTH+i][IMAG] = 0;
+        // sampler.fft_signal[i][REAL] = sample_i;
+        // sampler.fft_signal[i][IMAG] = 0;
     }
 
     //TODO mix together high sampling frequency with longer total buffer : each callback appends a small "subbuffer"
@@ -107,7 +107,7 @@ void SoundAnalyzer::init(){
             /*Do nothing*/
         }
         
-        unsigned int channels = 1, fs = SAMPLING_FREQ, nbufferFrames = channels*BUF_LENGTH, device = 0, offset = 0;
+        unsigned int channels = 1, fs = SAMPLING_FREQ, nbufferFrames = channels*SUBBUF_LENGTH, device = 0, offset = 0;
         RtAudio::StreamParameters iParams;
         iParams.nChannels = channels;
         iParams.firstChannel = 0;
@@ -214,11 +214,11 @@ void SoundAnalyzer::_record(){
 void SoundAnalyzer::_process_record(){
     log(4, __FILE__, " ",__LINE__, " ", __func__);
 
-    _remove_DC_value();
+    // _remove_DC_value();
     _compute_FFT();
       
     // extract current volume (measure in FFT frequency band "FREQ_BAND")
-    volume = sample_spectrum[FREQ_BAND][AMPL]*2/BUF_LENGTH;
+    volume = sample_spectrum[FREQ_BAND][AMPL];
     
     // push the current volume sample in rolling  memory
     // when the memory is full, overwrite the first records
@@ -417,7 +417,7 @@ void SoundAnalyzer::_compute_FFT(){
   // Reshape results
   for (int i=0; i<BUF_LENGTH; i++){
       sample_spectrum[i][FREQ] = i * SAMPLING_FREQ/BUF_LENGTH;
-      sample_spectrum[i][AMPL] = (pow(fft_out[i][REAL], 2) + pow(fft_out[i][IMAG],2)) * 7E-1; // compute magnitude + normalize (empirical)
+      sample_spectrum[i][AMPL] = (pow(fft_out[i][REAL], 2) + pow(fft_out[i][IMAG],2)) / BUF_LENGTH * 10; // compute magnitude + normalize (empirical)
   }  
 }
 

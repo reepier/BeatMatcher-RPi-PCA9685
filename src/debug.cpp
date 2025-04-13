@@ -350,10 +350,10 @@ void disp_spectrum_window(){
     mvwprintw(spectrumw, 0,1, "SPECTRUM");
     wattroff(spectrumw, A_BOLD);
 
-    for (int i=0 ; i<BUF_LENGTH && i<spectrumw_height-2; i++){
+    for (int i=0 ; i<BUF_LENGTH/2 && i<spectrumw_height-2; i++){
         mvwprintw(spectrumw, i+1, 1, fcn::num_to_str(sampler.sample_spectrum[i][FREQ]).c_str());
         double val_log = max(0.0, (double)20*log10(sampler.sample_spectrum[i][AMPL]));
-        double val_unit = val_log/100;
+        double val_unit = val_log/50;
         int val_pix = min((double)(spectrumw_width-7), val_unit * (spectrumw_width-7));
         mvwprintw(spectrumw, i+1, 1+4+1, string(val_pix, '|').c_str());
     }
