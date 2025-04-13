@@ -54,8 +54,8 @@ class SoundAnalyzer{
     public :    int volume;
     public :    double lagging_volume;
     
-    public :    std::vector<int> v_memory;          // time serie of the measured volume
-    public :    std::vector<int> v_memory_sorted;   // sorted serie of the measured volume
+    public :    int_vec v_memory        = int_vec(VOL_BUFF_SIZE, 0);          // time serie of the measured volume
+    public :    int_vec v_memory_sorted = int_vec(VOL_BUFF_SIZE, 0);   // sorted serie of the measured volume
 
     // phrase analysis variables
     private :   int cpt = 0;                        // number of samples recorded

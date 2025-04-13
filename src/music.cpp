@@ -53,7 +53,8 @@ int rtaudio_callback_fcn(void * /*outputBuffer*/, void *inputBuffer, unsigned in
     // std::memmove(sampler.fft_signal, sampler.fft_signal+SUBBUF_LENGTH, sizeof(fftw_complex) * SUBBUF_LENGTH);
     
     for (int i=0; i<BUF_LENGTH; i++){
-        double sample_i =  map(iBuffer[i], -1.0, 1.0, 0.0, 1023.0); // use only 1 channel --> TODO use averaged Left & Right
+        // double sample_i =  map(iBuffer[i], -1.0, 1.0, 0.0, 1023.0); // use only 1 channel --> TODO use averaged Left & Right
+        double sample_i =  static_cast<double>(iBuffer[i]); // use only 1 channel --> TODO use averaged Left & Right
         // sampler.fft_signal[BUF_LENGTH-SUBBUF_LENGTH+i][REAL] = sample_i;
         // sampler.fft_signal[BUF_LENGTH-SUBBUF_LENGTH+i][IMAG] = 0;
         sampler.fft_signal[i][REAL] = sample_i;
@@ -216,14 +217,14 @@ void SoundAnalyzer::_process_record(){
     _remove_DC_value();
     _compute_FFT();
       
-    // extract current volume (measure in FFT frequency band "FREQ_BAND") and
+    // extract current volume (measure in FFT frequency band "FREQ_BAND")
     volume = sample_spectrum[FREQ_BAND][AMPL]*2/BUF_LENGTH;
     
-    // save the current volume sample in moving memory
+    // push the current volume sample in rolling  memory
     // when the memory is full, overwrite the first records
-    v_memory.push_back(volume);
+    v_memory.push_back(volume);     //TODO find something 
+    v_memory.erase(v_memory.begin());
     cpt ++;
-    if(_memory_overflow()) v_memory.erase(v_memory.begin());    //when max size is reached, erase oldest values
 
     if (_condition_for_analyis()){
         this->_sort_memory();  
@@ -416,7 +417,7 @@ void SoundAnalyzer::_compute_FFT(){
   // Reshape results
   for (int i=0; i<BUF_LENGTH; i++){
       sample_spectrum[i][FREQ] = i * SAMPLING_FREQ/BUF_LENGTH;
-      sample_spectrum[i][AMPL] = (pow(fft_out[i][REAL], 2) + pow(fft_out[i][IMAG],2)) * 7E-5; // compute magnitude + normalize (empirical)
+      sample_spectrum[i][AMPL] = (pow(fft_out[i][REAL], 2) + pow(fft_out[i][IMAG],2)) * 7E-1; // compute magnitude + normalize (empirical)
   }  
 }
 
@@ -534,8 +535,9 @@ void SoundAnalyzer::process_record_fake(){
 
     // v_memory
     v_memory.push_back(volume);
+    v_memory.erase(v_memory.begin());
     cpt ++;
-    if(_memory_overflow()) v_memory.erase(v_memory.begin());    //when max size is reached, erase oldest values
+    // if(_memory_overflow()) v_memory.erase(v_memory.begin());    //when max size is reached, erase oldest values
 
     if (_condition_for_analyis()){
         this->_sort_memory();  
