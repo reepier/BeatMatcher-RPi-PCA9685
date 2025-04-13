@@ -71,8 +71,6 @@
 				"-lcurses",
 				"-lwiringPi",
 				"-lfftw3",
-				"-llgpio",
-				"-lPCA9685"
 			],
 			"options": {
 				"cwd": "${fileDirname}"

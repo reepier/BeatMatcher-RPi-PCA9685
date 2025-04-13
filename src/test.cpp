@@ -16,21 +16,14 @@
 
 using namespace std;
 
-#ifndef LINUX_PC // if compiling on raspberrypi
-    // I2C Hardware interface (PCA9685)
-    int fd;
-    int addr = 0x40;
-    unsigned int setOnVals[_PCA9685_CHANS]  = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    unsigned int setOffVals[_PCA9685_CHANS] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-#endif
 
 // DMX output interface (OLA)
     ola::client::StreamingClient ola_output_client;
     ola::DmxBuffer ola_buffer;
     vector<ola::DmxBuffer> ola_pix_buffers(NUM_SUBPIX/MAX_SUBPIX_PER_UNI + ((NUM_SUBPIX%MAX_SUBPIX_PER_UNI)==0 ? 0 : 1));
 
-fix_vec ll_fxtrs = {&led, &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, &spot_7,&spot_8, &spot_9, &spider, &laser};
-fix_vec fixtures = {&addr_led, &led, &laser, &front_rack, &rack_15, &spider};
+fix_vec ll_fxtrs = {&spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, &spot_7,&spot_8, &spot_9, &spider, &laser};
+fix_vec fixtures = {&addr_led, &laser, &front_rack, &rack_15, &spider};
 
 bool process_arguments(int n, char* args[]){
     for (int i=1; i<n; i++){
@@ -41,10 +34,6 @@ bool process_arguments(int n, char* args[]){
             exit(0);
         }else if(strcmp(arg, "--balise") == 0){
             b_BALISE = true;
-            // b_CURSES = false;
-        }
-        else if (strcmp(arg, "--noled") == 0){
-            b_NO_LED = true;
         }
         else if (strcmp(arg, "--nomusic") == 0){
             b_NO_MUSIC = true;
@@ -65,10 +54,6 @@ bool process_arguments(int n, char* args[]){
     }
 
 
-    #ifdef LINUX_PC //if compiling on PC, force NO_MUSIC and NO_LED since PCA9685 and MCP3008 are not compatible
-        b_NO_MUSIC = true;
-        b_NO_LED = true;
-    #endif
 
     return true;
 }
@@ -76,14 +61,6 @@ bool process_arguments(int n, char* args[]){
 void initialize() {
     srand((unsigned)time(nullptr));
 
-    #ifndef LINUX_PC // if compiling on raspberrypi
-        balise("Init. PCA...");
-        _PCA9685_DEBUG = 0;
-        _PCA9685_TEST = 0;
-
-        fd = PCA9685_openI2C(1, addr);
-        PCA9685_initPWM(fd, addr, _PCA9685_MAXFREQ);
-    #endif
 
     balise("Init. ola...");
     ola_output_client.Setup();
@@ -112,19 +89,6 @@ void initialize() {
 }
 
 void send(){
-    #ifndef LINUX_PC // if compiling on raspberrypi
-    // Send frame to the PCA9685 module
-    // Take into account the MASTER DIMMER value !! --> as late as possible, right before data is sent
-    setOffVals[LEDRed1] = led.RGBout[R] * led.master / 255.0;
-    setOffVals[LEDGreen1] = led.RGBout[G] * led.master/ 255.0;
-    setOffVals[LEDBlue1] = led.RGBout[B] * led.master/ 255.0;
-    setOffVals[LEDRed2] = led.RGBout[R] * led.master/ 255.0;
-    setOffVals[LEDGreen2] = led.RGBout[G] * led.master/ 255.0;
-    setOffVals[LEDBlue2] = led.RGBout[B] * led.master/ 255.0;
-
-  
-    PCA9685_setPWMVals(fd, addr, setOnVals, setOffVals);
-    #endif // DEBUG
 
     // construct & send DMX frame for old school fixtures (COTS DMX fixtures)
     balise("Construct & send buffer for classical fixtures");

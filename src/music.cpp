@@ -1,6 +1,6 @@
 /**
  * This Module contains all the code required to :
- * - Record a music sample using MCP3008 ADC chip and the I2C bus
+ * - Record music sample using audio interface (laptop's mic or ext audio card)
  * - Process the sample (FFT & custom phrase analysis)
  * - Update outputs ()
  * 
@@ -96,11 +96,6 @@ void SoundAnalyzer::init(){
     fft_signal            = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*BUF_LENGTH);
     fft_out               = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*BUF_LENGTH);
     
-    // initializa connection with MCP3008 ADC
-    #ifndef LINUX_PC
-        adc.connect();
-    // initialise connection to Audio interface on PC (RtAudio Library)
-    #else
     if (b_NO_MUSIC == false){
         std::vector<unsigned int> deviceIds = adc.getDeviceIds();
         if ( deviceIds.size() < 1 ) {
@@ -135,7 +130,6 @@ void SoundAnalyzer::init(){
         }
         balise("Rt Audio Stream started!");
     }
-    #endif
 }
 
 /*
@@ -175,34 +169,6 @@ void SoundAnalyzer::update(){
     this->_update_beat_threshold();
 }
 
-#ifndef LINUX_PC
-void SoundAnalyzer::_record(){
-    log(4, __FILE__, " ",__LINE__, " ", __func__);
-
-    if (micros() > (ULLONG_MAX - SAMPLE_SIZE*1000000/SAMPLING_FREQ)){ // if micros() is about to overflow
-        log(4, micros(), " ",ULLONG_MAX," ", SAMPLE_SIZE*1000000/SAMPLING_FREQ);
-        delayMicroseconds(SAMPLE_SIZE*1000000/SAMPLING_FREQ*2); // wait for the overflow to complete & resume
-    }
-
-    unsigned long next_us = micros();
-    clipping = false;
-    deb_max=MCP3008_MIN, deb_min=MCP3008_MAX;
-     
-    for (int i=0; i<SAMPLE_SIZE; i++){
-      next_us = next_us + 1000000.0/SAMPLING_FREQ;
-      fft_signal[i][REAL] = adc.read(MCP_CHAN);
-      fft_signal[i][IMAG] = 0;
-      if (fft_signal[i][REAL] > (MCP3008_MAX-CLIP_MARGIN) || fft_signal[i][REAL] < (MCP3008_MIN+CLIP_MARGIN))
-        clipping = true;
-      if (fft_signal[i][REAL] > deb_max)
-        deb_max = fft_signal[i][REAL];
-      if (fft_signal[i][REAL] < deb_min)
-        deb_min = fft_signal[i][REAL];
-
-      while(micros() < next_us){}    // wait until the end of the samplign period
-    }
-}
-#endif
 
 /**
  * This function : 

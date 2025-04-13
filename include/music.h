@@ -4,17 +4,6 @@
 #include <fftw3.h>
 #include <vector>
 #include <wiringPi.h>
-// #include "debug.h"
-
-#ifndef LINUX_PC //if compiling on raspberrypi
-    #include "MCP3008/MCP3008.h"
-#endif
-
-// MCP3008 //TODO remove MCP3008 code completely
-#define MCP3008_MAX 1023
-#define MCP3008_MIN 0
-#define MCP_CHAN 5
-#define CLIP_MARGIN 80
 
 // thresholds
 #define THD_toBK 30     // Volume Threshold to go from state X to BREAK  mode
@@ -37,9 +26,6 @@ enum states{
 
 class SoundAnalyzer{
 
-    #ifndef LINUX_PC //if compiling on raspberrypi
-        MCP3008Lib::MCP3008 adc;    // MCP3008 object
-    #endif
 
     // FFTW lib structures
     public : fftw_complex *fft_signal;
@@ -87,9 +73,6 @@ class SoundAnalyzer{
     // hidden functions (called by the main functions)
     // private :   void _copy_memory();
     // private :   void _compute_stats();
-    #ifndef LINUX_PC //if compiling on raspberrypi
-        public :    void _record();
-    #endif          
     public :    void _process_record();
     public:     void _update_beats();
     private :   void _update_beat_threshold();
