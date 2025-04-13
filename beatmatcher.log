@@ -1,360 +1,2436 @@
-[62659.2]     src/main.cpp 148 main
-[62659.2]     Balise : ----------------------------Start new frame...
-[62659.2]     Balise : Record & process sample...
-[62659.2]     src/music.cpp 154 update
-[62659.2]     src/music.cpp 238 _update_beats
-[62659.2]     src/music.cpp 265 _update_state
-[62659.2]     src/music.cpp 333 _update_beat_threshold
-[62659.2]     Balise : Run animator...
-[62659.2]     Balise : Compute new frames...
-[62659.2]     LEDs : new frame for PIX.0.0
-[62659.2]     Balise : Addr LED Ani1 New frames...
-[62659.2]     Balise : Addr LED Ani1 New frames 1
-[62659.2]     Laser : new frame for LAS.0
-[62659.2]     src/laser.cpp 145 new_frame
-[62659.2]     Front Rack : new frame for FR.4.2
-[62659.2]     Vert. Beams : new frame for R15.0
-[62659.2]     src/spot.cpp 692 new_frame
-[62659.2]     Rack 2 : new frame for R40.0
-[62659.2]     src/spot.cpp 692 new_frame
-[62659.2]     SHEHDS Rack : new frame for BR2.0
-[62659.2]     src/spot.cpp 692 new_frame
-[62659.2]     Spider : new frame for SPI.0.0
-[62659.2]     src/spider.cpp 183 new_frame
-[62659.2]     Balise : Compute new spider1 frame
-[62659.2]     Redray laser : new frame for RED.0
-[62659.2]     Balise : Send frame...
-[62659.2]     Balise : Construct & send buffer for classical fixtures
-[62659.2]     src/spider.cpp 113 buffer
-[62659.2]     src/laser.cpp 16 buffer
-[62659.2]     Balise : Construct & send buffer for artnet pixels
-[62659.2]     Balise : Debug...
-[62659.2]     src/debug.cpp 367 display_curse
-[62659.2]     src/debug.cpp 81 disp_music_window
-[62659.2]     src/debug.cpp 238 disp_animation_window
-[62659.2]     src/debug.cpp 193 disp_output_window
-[62659.2]     src/laser.cpp 16 buffer
-[62659.2]     src/spider.cpp 113 buffer
-[62659.2]     src/debug.cpp 269 disp_general_window
-[62659.2]     src/debug.cpp 309 disp_console_window
-[62659.2]     Balise : Wait next frame...
-[62659.2]     src/main.cpp 148 main
-[62659.2]     Balise : ----------------------------Start new frame...
-[62659.2]     Balise : Record & process sample...
-[62659.2]     src/music.cpp 154 update
-[62659.2]     src/music.cpp 238 _update_beats
-[62659.2]     src/music.cpp 265 _update_state
-[62659.2]     src/music.cpp 333 _update_beat_threshold
-[62659.2]     Balise : Run animator...
-[62659.2]     Balise : Compute new frames...
-[62659.2]     LEDs : new frame for PIX.0.0
-[62659.2]     Balise : Addr LED Ani1 New frames...
-[62659.2]     Balise : Addr LED Ani1 New frames 1
-[62659.2]     Laser : new frame for LAS.0
-[62659.2]     src/laser.cpp 145 new_frame
-[62659.2]     Front Rack : new frame for FR.4.2
-[62659.2]     Vert. Beams : new frame for R15.0
-[62659.2]     src/spot.cpp 692 new_frame
-[62659.2]     Rack 2 : new frame for R40.0
-[62659.2]     src/spot.cpp 692 new_frame
-[62659.2]     SHEHDS Rack : new frame for BR2.0
-[62659.2]     src/spot.cpp 692 new_frame
-[62659.2]     Spider : new frame for SPI.0.0
-[62659.2]     src/spider.cpp 183 new_frame
-[62659.2]     Balise : Compute new spider1 frame
-[62659.2]     Redray laser : new frame for RED.0
-[62659.2]     Balise : Send frame...
-[62659.2]     Balise : Construct & send buffer for classical fixtures
-[62659.2]     src/spider.cpp 113 buffer
-[62659.2]     src/laser.cpp 16 buffer
-[62659.2]     Balise : Construct & send buffer for artnet pixels
-[62659.2]     Balise : Debug...
-[62659.2]     src/debug.cpp 367 display_curse
-[62659.2]     src/debug.cpp 81 disp_music_window
-[62659.2]     src/debug.cpp 238 disp_animation_window
-[62659.2]     src/debug.cpp 193 disp_output_window
-[62659.2]     src/laser.cpp 16 buffer
-[62659.2]     src/spider.cpp 113 buffer
-[62659.2]     src/debug.cpp 269 disp_general_window
-[62659.2]     src/debug.cpp 309 disp_console_window
-[62659.2]     Balise : Wait next frame...
-[62659.2]     src/main.cpp 148 main
-[62659.2]     Balise : ----------------------------Start new frame...
-[62659.2]     Balise : Record & process sample...
-[62659.2]     src/music.cpp 154 update
-[62659.2]     src/music.cpp 238 _update_beats
-[62659.2]     src/music.cpp 265 _update_state
-[62659.2]     src/music.cpp 333 _update_beat_threshold
-[62659.2]     Balise : Run animator...
-[62659.2]     Balise : Compute new frames...
-[62659.2]     LEDs : new frame for PIX.0.0
-[62659.2]     Balise : Addr LED Ani1 New frames...
-[62659.2]     Balise : Addr LED Ani1 New frames 1
-[62659.2]     Laser : new frame for LAS.0
-[62659.2]     src/laser.cpp 145 new_frame
-[62659.2]     Front Rack : new frame for FR.4.2
-[62659.2]     Vert. Beams : new frame for R15.0
-[62659.2]     src/spot.cpp 692 new_frame
-[62659.2]     Rack 2 : new frame for R40.0
-[62659.2]     src/spot.cpp 692 new_frame
-[62659.2]     SHEHDS Rack : new frame for BR2.0
-[62659.2]     src/spot.cpp 692 new_frame
-[62659.2]     Spider : new frame for SPI.0.0
-[62659.2]     src/spider.cpp 183 new_frame
-[62659.2]     Balise : Compute new spider1 frame
-[62659.2]     Redray laser : new frame for RED.0
-[62659.2]     Balise : Send frame...
-[62659.2]     Balise : Construct & send buffer for classical fixtures
-[62659.2]     src/spider.cpp 113 buffer
-[62659.2]     src/laser.cpp 16 buffer
-[62659.2]     Balise : Construct & send buffer for artnet pixels
-[62659.2]     Balise : Debug...
-[62659.2]     src/debug.cpp 367 display_curse
-[62659.2]     src/debug.cpp 81 disp_music_window
-[62659.2]     src/debug.cpp 238 disp_animation_window
-[62659.2]     src/debug.cpp 193 disp_output_window
-[62659.2]     src/laser.cpp 16 buffer
-[62659.2]     src/spider.cpp 113 buffer
-[62659.2]     src/debug.cpp 269 disp_general_window
-[62659.2]     src/debug.cpp 309 disp_console_window
-[62659.2]     Balise : Wait next frame...
-[62659.2]     src/main.cpp 148 main
-[62659.2]     Balise : ----------------------------Start new frame...
-[62659.3]     Balise : Record & process sample...
-[62659.3]     src/music.cpp 154 update
-[62659.3]     src/music.cpp 238 _update_beats
-[62659.3]     src/music.cpp 265 _update_state
-[62659.3]     src/music.cpp 333 _update_beat_threshold
-[62659.3]     Balise : Run animator...
-[62659.3]     Balise : Compute new frames...
-[62659.3]     LEDs : new frame for PIX.0.0
-[62659.3]     Balise : Addr LED Ani1 New frames...
-[62659.3]     Balise : Addr LED Ani1 New frames 1
-[62659.3]     Laser : new frame for LAS.0
-[62659.3]     src/laser.cpp 145 new_frame
-[62659.3]     Front Rack : new frame for FR.4.2
-[62659.3]     Vert. Beams : new frame for R15.0
-[62659.3]     src/spot.cpp 692 new_frame
-[62659.3]     Rack 2 : new frame for R40.0
-[62659.3]     src/spot.cpp 692 new_frame
-[62659.3]     SHEHDS Rack : new frame for BR2.0
-[62659.3]     src/spot.cpp 692 new_frame
-[62659.3]     Spider : new frame for SPI.0.0
-[62659.3]     src/spider.cpp 183 new_frame
-[62659.3]     Balise : Compute new spider1 frame
-[62659.3]     Redray laser : new frame for RED.0
-[62659.3]     Balise : Send frame...
-[62659.3]     Balise : Construct & send buffer for classical fixtures
-[62659.3]     src/spider.cpp 113 buffer
-[62659.3]     src/laser.cpp 16 buffer
-[62659.3]     Balise : Construct & send buffer for artnet pixels
-[62659.3]     Balise : Debug...
-[62659.3]     src/debug.cpp 367 display_curse
-[62659.3]     src/debug.cpp 81 disp_music_window
-[62659.3]     src/debug.cpp 238 disp_animation_window
-[62659.3]     src/debug.cpp 193 disp_output_window
-[62659.3]     src/laser.cpp 16 buffer
-[62659.3]     src/spider.cpp 113 buffer
-[62659.3]     src/debug.cpp 269 disp_general_window
-[62659.3]     src/debug.cpp 309 disp_console_window
-[62659.3]     Balise : Wait next frame...
-[62659.3]     src/main.cpp 148 main
-[62659.3]     Balise : ----------------------------Start new frame...
-[62659.3]     Balise : Record & process sample...
-[62659.3]     src/music.cpp 154 update
-[62659.3]     src/music.cpp 238 _update_beats
-[62659.3]     src/music.cpp 265 _update_state
-[62659.3]     src/music.cpp 333 _update_beat_threshold
-[62659.3]     Balise : Run animator...
-[62659.3]     Balise : Compute new frames...
-[62659.3]     LEDs : new frame for PIX.0.0
-[62659.3]     Balise : Addr LED Ani1 New frames...
-[62659.3]     Balise : Addr LED Ani1 New frames 1
-[62659.3]     Laser : new frame for LAS.0
-[62659.3]     src/laser.cpp 145 new_frame
-[62659.3]     Front Rack : new frame for FR.4.2
-[62659.3]     Vert. Beams : new frame for R15.0
-[62659.3]     src/spot.cpp 692 new_frame
-[62659.3]     Rack 2 : new frame for R40.0
-[62659.3]     src/spot.cpp 692 new_frame
-[62659.3]     SHEHDS Rack : new frame for BR2.0
-[62659.3]     src/spot.cpp 692 new_frame
-[62659.3]     Spider : new frame for SPI.0.0
-[62659.3]     src/spider.cpp 183 new_frame
-[62659.3]     Balise : Compute new spider1 frame
-[62659.3]     Redray laser : new frame for RED.0
-[62659.3]     Balise : Send frame...
-[62659.3]     Balise : Construct & send buffer for classical fixtures
-[62659.3]     src/spider.cpp 113 buffer
-[62659.3]     src/laser.cpp 16 buffer
-[62659.3]     Balise : Construct & send buffer for artnet pixels
-[62659.3]     Balise : Debug...
-[62659.3]     src/debug.cpp 367 display_curse
-[62659.3]     src/debug.cpp 81 disp_music_window
-[62659.3]     src/debug.cpp 238 disp_animation_window
-[62659.3]     src/debug.cpp 193 disp_output_window
-[62659.3]     src/laser.cpp 16 buffer
-[62659.3]     src/spider.cpp 113 buffer
-[62659.3]     src/debug.cpp 269 disp_general_window
-[62659.3]     src/debug.cpp 309 disp_console_window
-[62659.3]     Balise : Wait next frame...
-[62659.3]     src/main.cpp 148 main
-[62659.3]     Balise : ----------------------------Start new frame...
-[62659.3]     Balise : Record & process sample...
-[62659.3]     src/music.cpp 154 update
-[62659.3]     src/music.cpp 238 _update_beats
-[62659.3]     src/music.cpp 265 _update_state
-[62659.3]     src/music.cpp 333 _update_beat_threshold
-[62659.3]     Balise : Run animator...
-[62659.3]     Balise : Compute new frames...
-[62659.3]     LEDs : new frame for PIX.0.0
-[62659.3]     Balise : Addr LED Ani1 New frames...
-[62659.3]     Balise : Addr LED Ani1 New frames 1
-[62659.3]     Laser : new frame for LAS.0
-[62659.3]     src/laser.cpp 145 new_frame
-[62659.3]     Front Rack : new frame for FR.4.2
-[62659.3]     Vert. Beams : new frame for R15.0
-[62659.3]     src/spot.cpp 692 new_frame
-[62659.3]     Rack 2 : new frame for R40.0
-[62659.3]     src/spot.cpp 692 new_frame
-[62659.3]     SHEHDS Rack : new frame for BR2.0
-[62659.3]     src/spot.cpp 692 new_frame
-[62659.3]     Spider : new frame for SPI.0.0
-[62659.3]     src/spider.cpp 183 new_frame
-[62659.3]     Balise : Compute new spider1 frame
-[62659.3]     Redray laser : new frame for RED.0
-[62659.3]     Balise : Send frame...
-[62659.3]     Balise : Construct & send buffer for classical fixtures
-[62659.3]     src/spider.cpp 113 buffer
-[62659.3]     src/laser.cpp 16 buffer
-[62659.3]     Balise : Construct & send buffer for artnet pixels
-[62659.3]     Balise : Debug...
-[62659.3]     src/debug.cpp 367 display_curse
-[62659.3]     src/debug.cpp 81 disp_music_window
-[62659.3]     src/debug.cpp 238 disp_animation_window
-[62659.3]     src/debug.cpp 193 disp_output_window
-[62659.3]     src/laser.cpp 16 buffer
-[62659.3]     src/spider.cpp 113 buffer
-[62659.3]     src/debug.cpp 269 disp_general_window
-[62659.3]     src/debug.cpp 309 disp_console_window
-[62659.3]     Balise : Wait next frame...
-[62659.3]     src/main.cpp 148 main
-[62659.3]     Balise : ----------------------------Start new frame...
-[62659.3]     Balise : Record & process sample...
-[62659.3]     src/music.cpp 154 update
-[62659.3]     src/music.cpp 238 _update_beats
-[62659.3]     src/music.cpp 265 _update_state
-[62659.3]     src/music.cpp 333 _update_beat_threshold
-[62659.3]     Balise : Run animator...
-[62659.3]     Balise : Compute new frames...
-[62659.3]     LEDs : new frame for PIX.0.0
-[62659.3]     Balise : Addr LED Ani1 New frames...
-[62659.3]     Balise : Addr LED Ani1 New frames 1
-[62659.3]     Laser : new frame for LAS.0
-[62659.3]     src/laser.cpp 145 new_frame
-[62659.3]     Front Rack : new frame for FR.4.2
-[62659.3]     Vert. Beams : new frame for R15.0
-[62659.3]     src/spot.cpp 692 new_frame
-[62659.3]     Rack 2 : new frame for R40.0
-[62659.3]     src/spot.cpp 692 new_frame
-[62659.3]     SHEHDS Rack : new frame for BR2.0
-[62659.3]     src/spot.cpp 692 new_frame
-[62659.3]     Spider : new frame for SPI.0.0
-[62659.3]     src/spider.cpp 183 new_frame
-[62659.3]     Balise : Compute new spider1 frame
-[62659.3]     Redray laser : new frame for RED.0
-[62659.3]     Balise : Send frame...
-[62659.3]     Balise : Construct & send buffer for classical fixtures
-[62659.3]     src/spider.cpp 113 buffer
-[62659.3]     src/laser.cpp 16 buffer
-[62659.3]     Balise : Construct & send buffer for artnet pixels
-[62659.3]     Balise : Debug...
-[62659.3]     src/debug.cpp 367 display_curse
-[62659.3]     src/debug.cpp 81 disp_music_window
-[62659.3]     src/debug.cpp 238 disp_animation_window
-[62659.3]     src/debug.cpp 193 disp_output_window
-[62659.3]     src/laser.cpp 16 buffer
-[62659.3]     src/spider.cpp 113 buffer
-[62659.3]     src/debug.cpp 269 disp_general_window
-[62659.3]     src/debug.cpp 309 disp_console_window
-[62659.3]     Balise : Wait next frame...
-[62659.3]     src/main.cpp 148 main
-[62659.3]     Balise : ----------------------------Start new frame...
-[62659.4]     Balise : Record & process sample...
-[62659.4]     src/music.cpp 154 update
-[62659.4]     src/music.cpp 238 _update_beats
-[62659.4]     src/music.cpp 265 _update_state
-[62659.4]     src/music.cpp 333 _update_beat_threshold
-[62659.4]     Balise : Run animator...
-[62659.4]     Balise : Compute new frames...
-[62659.4]     LEDs : new frame for PIX.0.0
-[62659.4]     Balise : Addr LED Ani1 New frames...
-[62659.4]     Balise : Addr LED Ani1 New frames 1
-[62659.4]     Laser : new frame for LAS.0
-[62659.4]     src/laser.cpp 145 new_frame
-[62659.4]     Front Rack : new frame for FR.4.2
-[62659.4]     Vert. Beams : new frame for R15.0
-[62659.4]     src/spot.cpp 692 new_frame
-[62659.4]     Rack 2 : new frame for R40.0
-[62659.4]     src/spot.cpp 692 new_frame
-[62659.4]     SHEHDS Rack : new frame for BR2.0
-[62659.4]     src/spot.cpp 692 new_frame
-[62659.4]     Spider : new frame for SPI.0.0
-[62659.4]     src/spider.cpp 183 new_frame
-[62659.4]     Balise : Compute new spider1 frame
-[62659.4]     Redray laser : new frame for RED.0
-[62659.4]     Balise : Send frame...
-[62659.4]     Balise : Construct & send buffer for classical fixtures
-[62659.4]     src/spider.cpp 113 buffer
-[62659.4]     src/laser.cpp 16 buffer
-[62659.4]     Balise : Construct & send buffer for artnet pixels
-[62659.4]     Balise : Debug...
-[62659.4]     src/debug.cpp 367 display_curse
-[62659.4]     src/debug.cpp 81 disp_music_window
-[62659.4]     src/debug.cpp 238 disp_animation_window
-[62659.4]     src/debug.cpp 193 disp_output_window
-[62659.4]     src/laser.cpp 16 buffer
-[62659.4]     src/spider.cpp 113 buffer
-[62659.4]     src/debug.cpp 269 disp_general_window
-[62659.4]     src/debug.cpp 309 disp_console_window
-[62659.4]     Balise : Wait next frame...
-[62659.4]     src/main.cpp 148 main
-[62659.4]     Balise : ----------------------------Start new frame...
-[62659.4]     Balise : Record & process sample...
-[62659.4]     src/music.cpp 154 update
-[62659.4]     src/music.cpp 238 _update_beats
-[62659.4]     src/music.cpp 265 _update_state
-[62659.4]     src/music.cpp 333 _update_beat_threshold
-[62659.4]     Balise : Run animator...
-[62659.4]     Balise : Compute new frames...
-[62659.4]     LEDs : new frame for PIX.0.0
-[62659.4]     Balise : Addr LED Ani1 New frames...
-[62659.4]     Balise : Addr LED Ani1 New frames 1
-[62659.4]     Laser : new frame for LAS.0
-[62659.4]     src/laser.cpp 145 new_frame
-[62659.4]     Front Rack : new frame for FR.4.2
-[62659.4]     Vert. Beams : new frame for R15.0
-[62659.4]     src/spot.cpp 692 new_frame
-[62659.4]     Rack 2 : new frame for R40.0
-[62659.4]     src/spot.cpp 692 new_frame
-[62659.4]     SHEHDS Rack : new frame for BR2.0
-[62659.4]     src/spot.cpp 692 new_frame
-[62659.4]     Spider : new frame for SPI.0.0
-[62659.4]     src/spider.cpp 183 new_frame
-[62659.4]     Balise : Compute new spider1 frame
-[62659.4]     Redray laser : new frame for RED.0
-[62659.4]     Balise : Send frame...
-[62659.4]     Balise : Construct & send buffer for classical fixtures
-[62659.4]     src/spider.cpp 113 buffer
-[62659.4]     src/laser.cpp 16 buffer
-[62659.4]     Balise : Construct & send buffer for artnet pixels
-[62659.4]     Balise : Debug...
-[62659.4]     src/debug.cpp 367 display_curse
-[62659.4]     src/debug.cpp 81 disp_music_window
-[62659.4]     src/debug.cpp 238 disp_animation_window
-[62659.4]     src/debug.cpp 193 disp_output_window
-[62659.4]     src/laser.cpp 16 buffer
-[62659.4]     src/spider.cpp 113 buffer
-[62659.4]     src/debug.cpp 269 disp_general_window
-[62659.4]     src/debug.cpp 309 disp_console_window
-[62659.4]     Balise : Wait next frame...
+[8668.44]     LEDs : new frame for PIX.6.2.2
+[8668.44]     Balise : Addr LED Ani1 New frames...
+[8668.44]     Balise : Addr LED Ani1 New frames 1
+[8668.44]     Laser : new frame for LAS.0
+[8668.44]     src/laser.cpp 145 new_frame
+[8668.44]     Front Rack : new frame for FR.1.2.2
+[8668.44]     src/spot.cpp 692 new_frame
+[8668.44]     Vert. Beams : new frame for R15.0
+[8668.44]     src/spot.cpp 692 new_frame
+[8668.44]     Rack 2 : new frame for R40.0
+[8668.44]     src/spot.cpp 692 new_frame
+[8668.44]     SHEHDS Rack : new frame for BR2.0
+[8668.44]     src/spot.cpp 692 new_frame
+[8668.44]     Spider : new frame for SPI.0.0
+[8668.44]     src/spider.cpp 183 new_frame
+[8668.44]     Balise : Compute new spider1 frame
+[8668.44]     Redrayz : new frame for RED.2.1.3
+[8668.44]     Balise : fausse balise
+[8668.44]     Balise : Send frame...
+[8668.44]     Balise : Construct & send buffer for classical fixtures
+[8668.44]     src/spider.cpp 113 buffer
+[8668.44]     src/laser.cpp 16 buffer
+[8668.44]     Balise : Construct & send buffer for artnet pixels
+[8668.44]     Balise : Debug...
+[8668.44]     src/debug.cpp 367 display_curse
+[8668.44]     src/debug.cpp 81 disp_music_window
+[8668.44]     src/debug.cpp 238 disp_animation_window
+[8668.44]     src/debug.cpp 193 disp_output_window
+[8668.44]     src/laser.cpp 16 buffer
+[8668.44]     src/debug.cpp 269 disp_general_window
+[8668.44]     src/debug.cpp 309 disp_console_window
+[8668.44]     Balise : Wait next frame...
+[8668.44]     src/music.cpp 214 _process_record
+[8668.44]     src/main.cpp 148 main
+[8668.44]     Balise : ----------------------------Start new frame...
+[8668.47]     Balise : Record & process sample...
+[8668.47]     src/music.cpp 154 update
+[8668.47]     src/music.cpp 238 _update_beats
+[8668.47]     src/music.cpp 265 _update_state
+[8668.47]     src/music.cpp 333 _update_beat_threshold
+[8668.47]     Balise : Run animator...
+[8668.47]     Balise : Compute new frames...
+[8668.47]     LEDs : new frame for PIX.6.2.2
+[8668.47]     Balise : Addr LED Ani1 New frames...
+[8668.47]     Balise : Addr LED Ani1 New frames 1
+[8668.47]     Laser : new frame for LAS.0
+[8668.47]     src/laser.cpp 145 new_frame
+[8668.47]     Front Rack : new frame for FR.1.2.2
+[8668.47]     src/spot.cpp 692 new_frame
+[8668.47]     Vert. Beams : new frame for R15.0
+[8668.47]     src/spot.cpp 692 new_frame
+[8668.47]     Rack 2 : new frame for R40.0
+[8668.47]     src/spot.cpp 692 new_frame
+[8668.47]     SHEHDS Rack : new frame for BR2.0
+[8668.47]     src/spot.cpp 692 new_frame
+[8668.47]     Spider : new frame for SPI.0.0
+[8668.47]     src/spider.cpp 183 new_frame
+[8668.47]     Balise : Compute new spider1 frame
+[8668.47]     Redrayz : new frame for RED.2.1.3
+[8668.47]     Balise : fausse balise
+[8668.47]     Balise : Send frame...
+[8668.47]     Balise : Construct & send buffer for classical fixtures
+[8668.47]     src/spider.cpp 113 buffer
+[8668.47]     src/laser.cpp 16 buffer
+[8668.47]     Balise : Construct & send buffer for artnet pixels
+[8668.47]     Balise : Debug...
+[8668.47]     src/debug.cpp 367 display_curse
+[8668.47]     src/debug.cpp 81 disp_music_window
+[8668.47]     src/debug.cpp 238 disp_animation_window
+[8668.47]     src/debug.cpp 193 disp_output_window
+[8668.47]     src/laser.cpp 16 buffer
+[8668.47]     src/debug.cpp 269 disp_general_window
+[8668.47]     src/debug.cpp 309 disp_console_window
+[8668.47]     Balise : Wait next frame...
+[8668.47]     src/music.cpp 214 _process_record
+[8668.47]     src/music.cpp 214 _process_record
+[8668.47]     src/main.cpp 148 main
+[8668.47]     Balise : ----------------------------Start new frame...
+[8668.49]     Balise : Record & process sample...
+[8668.49]     src/music.cpp 154 update
+[8668.49]     src/music.cpp 238 _update_beats
+[8668.49]     src/music.cpp 265 _update_state
+[8668.49]     src/music.cpp 333 _update_beat_threshold
+[8668.49]     Balise : Run animator...
+[8668.49]     Balise : Compute new frames...
+[8668.49]     LEDs : new frame for PIX.6.2.2
+[8668.49]     Balise : Addr LED Ani1 New frames...
+[8668.49]     Balise : Addr LED Ani1 New frames 1
+[8668.49]     Laser : new frame for LAS.0
+[8668.49]     src/laser.cpp 145 new_frame
+[8668.49]     Front Rack : new frame for FR.1.2.2
+[8668.49]     src/spot.cpp 692 new_frame
+[8668.49]     Vert. Beams : new frame for R15.0
+[8668.49]     src/spot.cpp 692 new_frame
+[8668.49]     Rack 2 : new frame for R40.0
+[8668.49]     src/spot.cpp 692 new_frame
+[8668.49]     SHEHDS Rack : new frame for BR2.0
+[8668.49]     src/spot.cpp 692 new_frame
+[8668.49]     Spider : new frame for SPI.0.0
+[8668.49]     src/spider.cpp 183 new_frame
+[8668.49]     Balise : Compute new spider1 frame
+[8668.49]     Redrayz : new frame for RED.2.1.3
+[8668.49]     Balise : fausse balise
+[8668.49]     Balise : Send frame...
+[8668.49]     Balise : Construct & send buffer for classical fixtures
+[8668.49]     src/spider.cpp 113 buffer
+[8668.49]     src/laser.cpp 16 buffer
+[8668.49]     Balise : Construct & send buffer for artnet pixels
+[8668.49]     Balise : Debug...
+[8668.49]     src/debug.cpp 367 display_curse
+[8668.49]     src/debug.cpp 81 disp_music_window
+[8668.49]     src/debug.cpp 238 disp_animation_window
+[8668.49]     src/debug.cpp 193 disp_output_window
+[8668.49]     src/laser.cpp 16 buffer
+[8668.49]     src/debug.cpp 269 disp_general_window
+[8668.49]     src/debug.cpp 309 disp_console_window
+[8668.49]     Balise : Wait next frame...
+[8668.49]     src/music.cpp 214 _process_record
+[8668.49]     src/main.cpp 148 main
+[8668.49]     Balise : ----------------------------Start new frame...
+[8668.52]     Balise : Record & process sample...
+[8668.52]     src/music.cpp 154 update
+[8668.52]     src/music.cpp 238 _update_beats
+[8668.52]     src/music.cpp 265 _update_state
+[8668.52]     src/music.cpp 333 _update_beat_threshold
+[8668.52]     Balise : Run animator...
+[8668.52]     Balise : Compute new frames...
+[8668.52]     LEDs : new frame for PIX.6.2.2
+[8668.52]     Balise : Addr LED Ani1 New frames...
+[8668.52]     Balise : Addr LED Ani1 New frames 1
+[8668.52]     Laser : new frame for LAS.0
+[8668.52]     src/laser.cpp 145 new_frame
+[8668.52]     Front Rack : new frame for FR.1.2.2
+[8668.52]     src/spot.cpp 692 new_frame
+[8668.52]     Vert. Beams : new frame for R15.0
+[8668.52]     src/spot.cpp 692 new_frame
+[8668.52]     Rack 2 : new frame for R40.0
+[8668.52]     src/spot.cpp 692 new_frame
+[8668.52]     SHEHDS Rack : new frame for BR2.0
+[8668.52]     src/spot.cpp 692 new_frame
+[8668.52]     Spider : new frame for SPI.0.0
+[8668.52]     src/spider.cpp 183 new_frame
+[8668.52]     Balise : Compute new spider1 frame
+[8668.52]     Redrayz : new frame for RED.2.1.3
+[8668.52]     Balise : fausse balise
+[8668.52]     Balise : Send frame...
+[8668.52]     Balise : Construct & send buffer for classical fixtures
+[8668.52]     src/spider.cpp 113 buffer
+[8668.52]     src/laser.cpp 16 buffer
+[8668.52]     Balise : Construct & send buffer for artnet pixels
+[8668.52]     Balise : Debug...
+[8668.52]     src/debug.cpp 367 display_curse
+[8668.52]     src/debug.cpp 81 disp_music_window
+[8668.52]     src/debug.cpp 238 disp_animation_window
+[8668.52]     src/debug.cpp 193 disp_output_window
+[8668.52]     src/laser.cpp 16 buffer
+[8668.52]     src/debug.cpp 269 disp_general_window
+[8668.52]     src/debug.cpp 309 disp_console_window
+[8668.52]     Balise : Wait next frame...
+[8668.52]     src/main.cpp 148 main
+[8668.52]     Balise : ----------------------------Start new frame...
+[8668.54]     Balise : Record & process sample...
+[8668.54]     src/music.cpp 154 update
+[8668.54]     src/music.cpp 238 _update_beats
+[8668.54]     src/music.cpp 265 _update_state
+[8668.54]     src/music.cpp 333 _update_beat_threshold
+[8668.54]     Balise : Run animator...
+[8668.54]     Balise : Compute new frames...
+[8668.54]     LEDs : new frame for PIX.6.2.2
+[8668.54]     Balise : Addr LED Ani1 New frames...
+[8668.54]     Balise : Addr LED Ani1 New frames 1
+[8668.54]     Laser : new frame for LAS.0
+[8668.54]     src/laser.cpp 145 new_frame
+[8668.54]     Front Rack : new frame for FR.1.2.2
+[8668.54]     src/spot.cpp 692 new_frame
+[8668.54]     Vert. Beams : new frame for R15.0
+[8668.54]     src/spot.cpp 692 new_frame
+[8668.54]     Rack 2 : new frame for R40.0
+[8668.54]     src/spot.cpp 692 new_frame
+[8668.54]     SHEHDS Rack : new frame for BR2.0
+[8668.54]     src/spot.cpp 692 new_frame
+[8668.54]     Spider : new frame for SPI.0.0
+[8668.54]     src/spider.cpp 183 new_frame
+[8668.54]     Balise : Compute new spider1 frame
+[8668.54]     Redrayz : new frame for RED.2.1.3
+[8668.54]     Balise : fausse balise
+[8668.54]     Balise : Send frame...
+[8668.54]     Balise : Construct & send buffer for classical fixtures
+[8668.54]     src/spider.cpp 113 buffer
+[8668.54]     src/laser.cpp 16 buffer
+[8668.54]     Balise : Construct & send buffer for artnet pixels
+[8668.54]     Balise : Debug...
+[8668.54]     src/debug.cpp 367 display_curse
+[8668.54]     src/debug.cpp 81 disp_music_window
+[8668.54]     src/debug.cpp 238 disp_animation_window
+[8668.54]     src/debug.cpp 193 disp_output_window
+[8668.54]     src/laser.cpp 16 buffer
+[8668.54]     src/debug.cpp 269 disp_general_window
+[8668.54]     src/debug.cpp 309 disp_console_window
+[8668.54]     Balise : Wait next frame...
+[8668.54]     src/music.cpp 214 _process_record
+[8668.54]     src/main.cpp 148 main
+[8668.54]     Balise : ----------------------------Start new frame...
+[8668.57]     Balise : Record & process sample...
+[8668.57]     src/music.cpp 154 update
+[8668.57]     src/music.cpp 238 _update_beats
+[8668.57]     src/music.cpp 265 _update_state
+[8668.57]     src/music.cpp 333 _update_beat_threshold
+[8668.57]     Balise : Run animator...
+[8668.57]     Balise : Compute new frames...
+[8668.57]     LEDs : new frame for PIX.6.2.2
+[8668.57]     Balise : Addr LED Ani1 New frames...
+[8668.57]     Balise : Addr LED Ani1 New frames 1
+[8668.57]     Laser : new frame for LAS.0
+[8668.57]     src/laser.cpp 145 new_frame
+[8668.57]     Front Rack : new frame for FR.1.2.2
+[8668.57]     src/spot.cpp 692 new_frame
+[8668.57]     Vert. Beams : new frame for R15.0
+[8668.57]     src/spot.cpp 692 new_frame
+[8668.57]     Rack 2 : new frame for R40.0
+[8668.57]     src/spot.cpp 692 new_frame
+[8668.57]     SHEHDS Rack : new frame for BR2.0
+[8668.57]     src/spot.cpp 692 new_frame
+[8668.57]     Spider : new frame for SPI.0.0
+[8668.57]     src/spider.cpp 183 new_frame
+[8668.57]     Balise : Compute new spider1 frame
+[8668.57]     Redrayz : new frame for RED.2.1.3
+[8668.57]     Balise : fausse balise
+[8668.57]     Balise : Send frame...
+[8668.57]     Balise : Construct & send buffer for classical fixtures
+[8668.57]     src/spider.cpp 113 buffer
+[8668.57]     src/laser.cpp 16 buffer
+[8668.57]     Balise : Construct & send buffer for artnet pixels
+[8668.57]     Balise : Debug...
+[8668.57]     src/debug.cpp 367 display_curse
+[8668.57]     src/debug.cpp 81 disp_music_window
+[8668.57]     src/debug.cpp 238 disp_animation_window
+[8668.57]     src/debug.cpp 193 disp_output_window
+[8668.57]     src/laser.cpp 16 buffer
+[8668.57]     src/debug.cpp 269 disp_general_window
+[8668.57]     src/debug.cpp 309 disp_console_window
+[8668.57]     Balise : Wait next frame...
+[8668.57]     src/music.cpp 214 _process_record
+[8668.57]     src/music.cpp 214 _process_record
+[8668.57]     src/main.cpp 148 main
+[8668.57]     Balise : ----------------------------Start new frame...
+[8668.59]     Balise : Record & process sample...
+[8668.59]     src/music.cpp 154 update
+[8668.59]     src/music.cpp 238 _update_beats
+[8668.59]     src/music.cpp 265 _update_state
+[8668.59]     src/music.cpp 333 _update_beat_threshold
+[8668.59]     Balise : Run animator...
+[8668.59]     Balise : Compute new frames...
+[8668.59]     LEDs : new frame for PIX.6.2.2
+[8668.59]     Balise : Addr LED Ani1 New frames...
+[8668.59]     Balise : Addr LED Ani1 New frames 1
+[8668.59]     Laser : new frame for LAS.0
+[8668.59]     src/laser.cpp 145 new_frame
+[8668.59]     Front Rack : new frame for FR.1.2.2
+[8668.59]     src/spot.cpp 692 new_frame
+[8668.59]     Vert. Beams : new frame for R15.0
+[8668.59]     src/spot.cpp 692 new_frame
+[8668.59]     Rack 2 : new frame for R40.0
+[8668.59]     src/spot.cpp 692 new_frame
+[8668.59]     SHEHDS Rack : new frame for BR2.0
+[8668.59]     src/spot.cpp 692 new_frame
+[8668.59]     Spider : new frame for SPI.0.0
+[8668.59]     src/spider.cpp 183 new_frame
+[8668.59]     Balise : Compute new spider1 frame
+[8668.59]     Redrayz : new frame for RED.2.1.3
+[8668.59]     Balise : fausse balise
+[8668.59]     Balise : Send frame...
+[8668.59]     Balise : Construct & send buffer for classical fixtures
+[8668.59]     src/spider.cpp 113 buffer
+[8668.59]     src/laser.cpp 16 buffer
+[8668.59]     Balise : Construct & send buffer for artnet pixels
+[8668.59]     Balise : Debug...
+[8668.59]     src/debug.cpp 367 display_curse
+[8668.59]     src/debug.cpp 81 disp_music_window
+[8668.59]     src/debug.cpp 238 disp_animation_window
+[8668.59]     src/debug.cpp 193 disp_output_window
+[8668.59]     src/laser.cpp 16 buffer
+[8668.59]     src/debug.cpp 269 disp_general_window
+[8668.59]     src/debug.cpp 309 disp_console_window
+[8668.59]     Balise : Wait next frame...
+[8668.59]     src/music.cpp 214 _process_record
+[8668.59]     src/main.cpp 148 main
+[8668.59]     Balise : ----------------------------Start new frame...
+[8668.62]     Balise : Record & process sample...
+[8668.62]     src/music.cpp 154 update
+[8668.62]     src/music.cpp 238 _update_beats
+[8668.62]     src/music.cpp 265 _update_state
+[8668.62]     src/music.cpp 333 _update_beat_threshold
+[8668.62]     Balise : Run animator...
+[8668.62]     Balise : Compute new frames...
+[8668.62]     LEDs : new frame for PIX.6.2.2
+[8668.62]     Balise : Addr LED Ani1 New frames...
+[8668.62]     Balise : Addr LED Ani1 New frames 1
+[8668.62]     Laser : new frame for LAS.0
+[8668.62]     src/laser.cpp 145 new_frame
+[8668.62]     Front Rack : new frame for FR.1.2.2
+[8668.62]     src/spot.cpp 692 new_frame
+[8668.62]     Vert. Beams : new frame for R15.0
+[8668.62]     src/spot.cpp 692 new_frame
+[8668.62]     Rack 2 : new frame for R40.0
+[8668.62]     src/spot.cpp 692 new_frame
+[8668.62]     SHEHDS Rack : new frame for BR2.0
+[8668.62]     src/spot.cpp 692 new_frame
+[8668.62]     Spider : new frame for SPI.0.0
+[8668.62]     src/spider.cpp 183 new_frame
+[8668.62]     Balise : Compute new spider1 frame
+[8668.62]     Redrayz : new frame for RED.2.1.3
+[8668.62]     Balise : fausse balise
+[8668.62]     Balise : Send frame...
+[8668.62]     Balise : Construct & send buffer for classical fixtures
+[8668.62]     src/spider.cpp 113 buffer
+[8668.62]     src/laser.cpp 16 buffer
+[8668.62]     Balise : Construct & send buffer for artnet pixels
+[8668.62]     Balise : Debug...
+[8668.62]     src/debug.cpp 367 display_curse
+[8668.62]     src/debug.cpp 81 disp_music_window
+[8668.62]     src/debug.cpp 238 disp_animation_window
+[8668.62]     src/debug.cpp 193 disp_output_window
+[8668.62]     src/laser.cpp 16 buffer
+[8668.62]     src/debug.cpp 269 disp_general_window
+[8668.62]     src/debug.cpp 309 disp_console_window
+[8668.62]     Balise : Wait next frame...
+[8668.62]     src/music.cpp 214 _process_record
+[8668.62]     src/music.cpp 214 _process_record
+[8668.62]     src/main.cpp 148 main
+[8668.62]     Balise : ----------------------------Start new frame...
+[8668.64]     Balise : Record & process sample...
+[8668.64]     src/music.cpp 154 update
+[8668.64]     src/music.cpp 238 _update_beats
+[8668.64]     src/music.cpp 265 _update_state
+[8668.64]     src/music.cpp 333 _update_beat_threshold
+[8668.64]     Balise : Run animator...
+[8668.64]     Balise : Compute new frames...
+[8668.64]     LEDs : new frame for PIX.6.2.2
+[8668.64]     Balise : Addr LED Ani1 New frames...
+[8668.64]     Balise : Addr LED Ani1 New frames 1
+[8668.64]     Laser : new frame for LAS.0
+[8668.64]     src/laser.cpp 145 new_frame
+[8668.64]     Front Rack : new frame for FR.1.2.2
+[8668.64]     src/spot.cpp 692 new_frame
+[8668.64]     Vert. Beams : new frame for R15.0
+[8668.64]     src/spot.cpp 692 new_frame
+[8668.64]     Rack 2 : new frame for R40.0
+[8668.64]     src/spot.cpp 692 new_frame
+[8668.64]     SHEHDS Rack : new frame for BR2.0
+[8668.64]     src/spot.cpp 692 new_frame
+[8668.64]     Spider : new frame for SPI.0.0
+[8668.64]     src/spider.cpp 183 new_frame
+[8668.64]     Balise : Compute new spider1 frame
+[8668.64]     Redrayz : new frame for RED.2.1.3
+[8668.64]     Balise : fausse balise
+[8668.64]     Balise : Send frame...
+[8668.64]     Balise : Construct & send buffer for classical fixtures
+[8668.64]     src/spider.cpp 113 buffer
+[8668.64]     src/laser.cpp 16 buffer
+[8668.64]     Balise : Construct & send buffer for artnet pixels
+[8668.64]     Balise : Debug...
+[8668.64]     src/debug.cpp 367 display_curse
+[8668.64]     src/debug.cpp 81 disp_music_window
+[8668.64]     src/debug.cpp 238 disp_animation_window
+[8668.64]     src/debug.cpp 193 disp_output_window
+[8668.64]     src/laser.cpp 16 buffer
+[8668.64]     src/debug.cpp 269 disp_general_window
+[8668.64]     src/debug.cpp 309 disp_console_window
+[8668.64]     Balise : Wait next frame...
+[8668.64]     src/music.cpp 214 _process_record
+[8668.64]     src/main.cpp 148 main
+[8668.64]     Balise : ----------------------------Start new frame...
+[8668.67]     Balise : Record & process sample...
+[8668.67]     src/music.cpp 154 update
+[8668.67]     src/music.cpp 238 _update_beats
+[8668.67]     src/music.cpp 265 _update_state
+[8668.67]     src/music.cpp 333 _update_beat_threshold
+[8668.67]     Balise : Run animator...
+[8668.67]     Balise : Compute new frames...
+[8668.67]     LEDs : new frame for PIX.6.2.2
+[8668.67]     Balise : Addr LED Ani1 New frames...
+[8668.67]     Balise : Addr LED Ani1 New frames 1
+[8668.67]     Laser : new frame for LAS.0
+[8668.67]     src/laser.cpp 145 new_frame
+[8668.67]     Front Rack : new frame for FR.1.2.2
+[8668.67]     src/spot.cpp 692 new_frame
+[8668.67]     Vert. Beams : new frame for R15.0
+[8668.67]     src/spot.cpp 692 new_frame
+[8668.67]     Rack 2 : new frame for R40.0
+[8668.67]     src/spot.cpp 692 new_frame
+[8668.67]     SHEHDS Rack : new frame for BR2.0
+[8668.67]     src/spot.cpp 692 new_frame
+[8668.67]     Spider : new frame for SPI.0.0
+[8668.67]     src/spider.cpp 183 new_frame
+[8668.67]     Balise : Compute new spider1 frame
+[8668.67]     Redrayz : new frame for RED.2.1.3
+[8668.67]     Balise : fausse balise
+[8668.67]     Balise : Send frame...
+[8668.67]     Balise : Construct & send buffer for classical fixtures
+[8668.67]     src/spider.cpp 113 buffer
+[8668.67]     src/laser.cpp 16 buffer
+[8668.67]     Balise : Construct & send buffer for artnet pixels
+[8668.67]     Balise : Debug...
+[8668.67]     src/debug.cpp 367 display_curse
+[8668.67]     src/debug.cpp 81 disp_music_window
+[8668.67]     src/debug.cpp 238 disp_animation_window
+[8668.67]     src/debug.cpp 193 disp_output_window
+[8668.67]     src/laser.cpp 16 buffer
+[8668.67]     src/debug.cpp 269 disp_general_window
+[8668.67]     src/debug.cpp 309 disp_console_window
+[8668.67]     Balise : Wait next frame...
+[8668.67]     src/main.cpp 148 main
+[8668.67]     Balise : ----------------------------Start new frame...
+[8668.69]     Balise : Record & process sample...
+[8668.69]     src/music.cpp 154 update
+[8668.69]     src/music.cpp 238 _update_beats
+[8668.69]     src/music.cpp 265 _update_state
+[8668.69]     src/music.cpp 333 _update_beat_threshold
+[8668.69]     Balise : Run animator...
+[8668.69]     Balise : Compute new frames...
+[8668.69]     LEDs : new frame for PIX.6.2.2
+[8668.69]     Balise : Addr LED Ani1 New frames...
+[8668.69]     Balise : Addr LED Ani1 New frames 1
+[8668.69]     Laser : new frame for LAS.0
+[8668.69]     src/laser.cpp 145 new_frame
+[8668.69]     Front Rack : new frame for FR.1.2.2
+[8668.69]     src/spot.cpp 692 new_frame
+[8668.69]     Vert. Beams : new frame for R15.0
+[8668.69]     src/spot.cpp 692 new_frame
+[8668.69]     Rack 2 : new frame for R40.0
+[8668.69]     src/spot.cpp 692 new_frame
+[8668.69]     SHEHDS Rack : new frame for BR2.0
+[8668.69]     src/spot.cpp 692 new_frame
+[8668.69]     Spider : new frame for SPI.0.0
+[8668.69]     src/spider.cpp 183 new_frame
+[8668.69]     Balise : Compute new spider1 frame
+[8668.69]     Redrayz : new frame for RED.2.1.3
+[8668.69]     Balise : fausse balise
+[8668.69]     Balise : Send frame...
+[8668.69]     Balise : Construct & send buffer for classical fixtures
+[8668.69]     src/spider.cpp 113 buffer
+[8668.69]     src/laser.cpp 16 buffer
+[8668.69]     Balise : Construct & send buffer for artnet pixels
+[8668.69]     Balise : Debug...
+[8668.69]     src/debug.cpp 367 display_curse
+[8668.69]     src/debug.cpp 81 disp_music_window
+[8668.69]     src/debug.cpp 238 disp_animation_window
+[8668.69]     src/debug.cpp 193 disp_output_window
+[8668.69]     src/laser.cpp 16 buffer
+[8668.69]     src/debug.cpp 269 disp_general_window
+[8668.69]     src/debug.cpp 309 disp_console_window
+[8668.69]     Balise : Wait next frame...
+[8668.69]     src/music.cpp 214 _process_record
+[8668.69]     src/main.cpp 148 main
+[8668.69]     Balise : ----------------------------Start new frame...
+[8668.72]     Balise : Record & process sample...
+[8668.72]     src/music.cpp 154 update
+[8668.72]     src/music.cpp 238 _update_beats
+[8668.72]     src/music.cpp 265 _update_state
+[8668.72]     src/music.cpp 333 _update_beat_threshold
+[8668.72]     Balise : Run animator...
+[8668.72]     Balise : Compute new frames...
+[8668.72]     LEDs : new frame for PIX.6.2.2
+[8668.72]     Balise : Addr LED Ani1 New frames...
+[8668.72]     Balise : Addr LED Ani1 New frames 1
+[8668.72]     Laser : new frame for LAS.0
+[8668.72]     src/laser.cpp 145 new_frame
+[8668.72]     Front Rack : new frame for FR.1.2.2
+[8668.72]     src/spot.cpp 692 new_frame
+[8668.72]     Vert. Beams : new frame for R15.0
+[8668.72]     src/spot.cpp 692 new_frame
+[8668.72]     Rack 2 : new frame for R40.0
+[8668.72]     src/spot.cpp 692 new_frame
+[8668.72]     SHEHDS Rack : new frame for BR2.0
+[8668.72]     src/spot.cpp 692 new_frame
+[8668.72]     Spider : new frame for SPI.0.0
+[8668.72]     src/spider.cpp 183 new_frame
+[8668.72]     Balise : Compute new spider1 frame
+[8668.72]     Redrayz : new frame for RED.2.1.3
+[8668.72]     Balise : fausse balise
+[8668.72]     Balise : Send frame...
+[8668.72]     Balise : Construct & send buffer for classical fixtures
+[8668.72]     src/spider.cpp 113 buffer
+[8668.72]     src/laser.cpp 16 buffer
+[8668.72]     Balise : Construct & send buffer for artnet pixels
+[8668.72]     Balise : Debug...
+[8668.72]     src/debug.cpp 367 display_curse
+[8668.72]     src/debug.cpp 81 disp_music_window
+[8668.72]     src/debug.cpp 238 disp_animation_window
+[8668.72]     src/debug.cpp 193 disp_output_window
+[8668.72]     src/laser.cpp 16 buffer
+[8668.72]     src/debug.cpp 269 disp_general_window
+[8668.72]     src/debug.cpp 309 disp_console_window
+[8668.72]     Balise : Wait next frame...
+[8668.72]     src/music.cpp 214 _process_record
+[8668.72]     src/music.cpp 214 _process_record
+[8668.72]     src/main.cpp 148 main
+[8668.72]     Balise : ----------------------------Start new frame...
+[8668.74]     Balise : Record & process sample...
+[8668.74]     src/music.cpp 154 update
+[8668.74]     src/music.cpp 238 _update_beats
+[8668.74]     src/music.cpp 265 _update_state
+[8668.74]     src/music.cpp 333 _update_beat_threshold
+[8668.74]     Balise : Run animator...
+[8668.74]     Balise : Compute new frames...
+[8668.74]     LEDs : new frame for PIX.6.2.2
+[8668.74]     Balise : Addr LED Ani1 New frames...
+[8668.74]     Balise : Addr LED Ani1 New frames 1
+[8668.74]     Laser : new frame for LAS.0
+[8668.74]     src/laser.cpp 145 new_frame
+[8668.74]     Front Rack : new frame for FR.1.2.2
+[8668.74]     src/spot.cpp 692 new_frame
+[8668.74]     Vert. Beams : new frame for R15.0
+[8668.74]     src/spot.cpp 692 new_frame
+[8668.74]     Rack 2 : new frame for R40.0
+[8668.74]     src/spot.cpp 692 new_frame
+[8668.74]     SHEHDS Rack : new frame for BR2.0
+[8668.74]     src/spot.cpp 692 new_frame
+[8668.74]     Spider : new frame for SPI.0.0
+[8668.74]     src/spider.cpp 183 new_frame
+[8668.74]     Balise : Compute new spider1 frame
+[8668.74]     Redrayz : new frame for RED.2.1.3
+[8668.74]     Balise : fausse balise
+[8668.74]     Balise : Send frame...
+[8668.74]     Balise : Construct & send buffer for classical fixtures
+[8668.74]     src/spider.cpp 113 buffer
+[8668.74]     src/laser.cpp 16 buffer
+[8668.74]     Balise : Construct & send buffer for artnet pixels
+[8668.74]     Balise : Debug...
+[8668.74]     src/debug.cpp 367 display_curse
+[8668.74]     src/debug.cpp 81 disp_music_window
+[8668.74]     src/debug.cpp 238 disp_animation_window
+[8668.74]     src/debug.cpp 193 disp_output_window
+[8668.74]     src/laser.cpp 16 buffer
+[8668.74]     src/debug.cpp 269 disp_general_window
+[8668.74]     src/debug.cpp 309 disp_console_window
+[8668.74]     Balise : Wait next frame...
+[8668.74]     src/music.cpp 214 _process_record
+[8668.74]     src/main.cpp 148 main
+[8668.74]     Balise : ----------------------------Start new frame...
+[8668.77]     Balise : Record & process sample...
+[8668.77]     src/music.cpp 154 update
+[8668.77]     src/music.cpp 238 _update_beats
+[8668.77]     src/music.cpp 265 _update_state
+[8668.77]     src/music.cpp 333 _update_beat_threshold
+[8668.77]     Balise : Run animator...
+[8668.77]     Balise : Compute new frames...
+[8668.77]     LEDs : new frame for PIX.6.2.2
+[8668.77]     Balise : Addr LED Ani1 New frames...
+[8668.77]     Balise : Addr LED Ani1 New frames 1
+[8668.77]     Laser : new frame for LAS.0
+[8668.77]     src/laser.cpp 145 new_frame
+[8668.77]     Front Rack : new frame for FR.1.2.2
+[8668.77]     src/spot.cpp 692 new_frame
+[8668.77]     Vert. Beams : new frame for R15.0
+[8668.77]     src/spot.cpp 692 new_frame
+[8668.77]     Rack 2 : new frame for R40.0
+[8668.77]     src/spot.cpp 692 new_frame
+[8668.77]     SHEHDS Rack : new frame for BR2.0
+[8668.77]     src/spot.cpp 692 new_frame
+[8668.77]     Spider : new frame for SPI.0.0
+[8668.77]     src/spider.cpp 183 new_frame
+[8668.77]     Balise : Compute new spider1 frame
+[8668.77]     Redrayz : new frame for RED.2.1.3
+[8668.77]     Balise : fausse balise
+[8668.77]     Balise : Send frame...
+[8668.77]     Balise : Construct & send buffer for classical fixtures
+[8668.77]     src/spider.cpp 113 buffer
+[8668.77]     src/laser.cpp 16 buffer
+[8668.77]     Balise : Construct & send buffer for artnet pixels
+[8668.77]     Balise : Debug...
+[8668.77]     src/debug.cpp 367 display_curse
+[8668.77]     src/debug.cpp 81 disp_music_window
+[8668.77]     src/debug.cpp 238 disp_animation_window
+[8668.77]     src/debug.cpp 193 disp_output_window
+[8668.77]     src/laser.cpp 16 buffer
+[8668.77]     src/debug.cpp 269 disp_general_window
+[8668.77]     src/debug.cpp 309 disp_console_window
+[8668.77]     Balise : Wait next frame...
+[8668.77]     src/music.cpp 214 _process_record
+[8668.77]     src/music.cpp 214 _process_record
+[8668.77]     src/main.cpp 148 main
+[8668.77]     Balise : ----------------------------Start new frame...
+[8668.79]     Balise : Record & process sample...
+[8668.79]     src/music.cpp 154 update
+[8668.79]     src/music.cpp 238 _update_beats
+[8668.79]     src/music.cpp 265 _update_state
+[8668.79]     src/music.cpp 333 _update_beat_threshold
+[8668.79]     Balise : Run animator...
+[8668.79]     Balise : Compute new frames...
+[8668.79]     LEDs : new frame for PIX.6.2.2
+[8668.79]     Balise : Addr LED Ani1 New frames...
+[8668.79]     Balise : Addr LED Ani1 New frames 1
+[8668.79]     Laser : new frame for LAS.0
+[8668.79]     src/laser.cpp 145 new_frame
+[8668.79]     Front Rack : new frame for FR.1.2.2
+[8668.79]     src/spot.cpp 692 new_frame
+[8668.79]     Vert. Beams : new frame for R15.0
+[8668.79]     src/spot.cpp 692 new_frame
+[8668.79]     Rack 2 : new frame for R40.0
+[8668.79]     src/spot.cpp 692 new_frame
+[8668.79]     SHEHDS Rack : new frame for BR2.0
+[8668.79]     src/spot.cpp 692 new_frame
+[8668.79]     Spider : new frame for SPI.0.0
+[8668.79]     src/spider.cpp 183 new_frame
+[8668.79]     Balise : Compute new spider1 frame
+[8668.79]     Redrayz : new frame for RED.2.1.3
+[8668.79]     Balise : fausse balise
+[8668.79]     Balise : Send frame...
+[8668.79]     Balise : Construct & send buffer for classical fixtures
+[8668.79]     src/spider.cpp 113 buffer
+[8668.79]     src/laser.cpp 16 buffer
+[8668.79]     Balise : Construct & send buffer for artnet pixels
+[8668.79]     Balise : Debug...
+[8668.79]     src/debug.cpp 367 display_curse
+[8668.79]     src/debug.cpp 81 disp_music_window
+[8668.79]     src/debug.cpp 238 disp_animation_window
+[8668.79]     src/debug.cpp 193 disp_output_window
+[8668.79]     src/laser.cpp 16 buffer
+[8668.79]     src/debug.cpp 269 disp_general_window
+[8668.79]     src/debug.cpp 309 disp_console_window
+[8668.79]     Balise : Wait next frame...
+[8668.79]     src/music.cpp 214 _process_record
+[8668.79]     src/main.cpp 148 main
+[8668.79]     Balise : ----------------------------Start new frame...
+[8668.82]     Balise : Record & process sample...
+[8668.82]     src/music.cpp 154 update
+[8668.82]     src/music.cpp 238 _update_beats
+[8668.82]     src/music.cpp 265 _update_state
+[8668.82]     src/music.cpp 333 _update_beat_threshold
+[8668.82]     Balise : Run animator...
+[8668.82]     Balise : Compute new frames...
+[8668.82]     LEDs : new frame for PIX.6.2.2
+[8668.82]     Balise : Addr LED Ani1 New frames...
+[8668.82]     Balise : Addr LED Ani1 New frames 1
+[8668.82]     Laser : new frame for LAS.0
+[8668.82]     src/laser.cpp 145 new_frame
+[8668.82]     Front Rack : new frame for FR.1.2.2
+[8668.82]     src/spot.cpp 692 new_frame
+[8668.82]     Vert. Beams : new frame for R15.0
+[8668.82]     src/spot.cpp 692 new_frame
+[8668.82]     Rack 2 : new frame for R40.0
+[8668.82]     src/spot.cpp 692 new_frame
+[8668.82]     SHEHDS Rack : new frame for BR2.0
+[8668.82]     src/spot.cpp 692 new_frame
+[8668.82]     Spider : new frame for SPI.0.0
+[8668.82]     src/spider.cpp 183 new_frame
+[8668.82]     Balise : Compute new spider1 frame
+[8668.82]     Redrayz : new frame for RED.2.1.3
+[8668.82]     Balise : fausse balise
+[8668.82]     Balise : Send frame...
+[8668.82]     Balise : Construct & send buffer for classical fixtures
+[8668.82]     src/spider.cpp 113 buffer
+[8668.82]     src/laser.cpp 16 buffer
+[8668.82]     Balise : Construct & send buffer for artnet pixels
+[8668.82]     Balise : Debug...
+[8668.82]     src/debug.cpp 367 display_curse
+[8668.82]     src/debug.cpp 81 disp_music_window
+[8668.82]     src/debug.cpp 238 disp_animation_window
+[8668.82]     src/debug.cpp 193 disp_output_window
+[8668.82]     src/laser.cpp 16 buffer
+[8668.82]     src/debug.cpp 269 disp_general_window
+[8668.82]     src/debug.cpp 309 disp_console_window
+[8668.82]     Balise : Wait next frame...
+[8668.82]     src/main.cpp 148 main
+[8668.82]     Balise : ----------------------------Start new frame...
+[8668.84]     Balise : Record & process sample...
+[8668.84]     src/music.cpp 154 update
+[8668.84]     src/music.cpp 238 _update_beats
+[8668.84]     src/music.cpp 265 _update_state
+[8668.84]     src/music.cpp 333 _update_beat_threshold
+[8668.84]     Balise : Run animator...
+[8668.84]     Balise : Compute new frames...
+[8668.84]     LEDs : new frame for PIX.6.2.2
+[8668.84]     Balise : Addr LED Ani1 New frames...
+[8668.84]     Balise : Addr LED Ani1 New frames 1
+[8668.84]     Laser : new frame for LAS.0
+[8668.84]     src/laser.cpp 145 new_frame
+[8668.84]     Front Rack : new frame for FR.1.2.2
+[8668.84]     src/spot.cpp 692 new_frame
+[8668.84]     Vert. Beams : new frame for R15.0
+[8668.84]     src/spot.cpp 692 new_frame
+[8668.84]     Rack 2 : new frame for R40.0
+[8668.84]     src/spot.cpp 692 new_frame
+[8668.84]     SHEHDS Rack : new frame for BR2.0
+[8668.84]     src/spot.cpp 692 new_frame
+[8668.84]     Spider : new frame for SPI.0.0
+[8668.84]     src/spider.cpp 183 new_frame
+[8668.84]     Balise : Compute new spider1 frame
+[8668.84]     Redrayz : new frame for RED.2.1.3
+[8668.84]     Balise : fausse balise
+[8668.84]     Balise : Send frame...
+[8668.84]     Balise : Construct & send buffer for classical fixtures
+[8668.84]     src/spider.cpp 113 buffer
+[8668.84]     src/laser.cpp 16 buffer
+[8668.84]     Balise : Construct & send buffer for artnet pixels
+[8668.84]     Balise : Debug...
+[8668.84]     src/debug.cpp 367 display_curse
+[8668.84]     src/debug.cpp 81 disp_music_window
+[8668.84]     src/debug.cpp 238 disp_animation_window
+[8668.84]     src/debug.cpp 193 disp_output_window
+[8668.84]     src/laser.cpp 16 buffer
+[8668.84]     src/debug.cpp 269 disp_general_window
+[8668.84]     src/debug.cpp 309 disp_console_window
+[8668.84]     Balise : Wait next frame...
+[8668.84]     src/music.cpp 214 _process_record
+[8668.84]     src/main.cpp 148 main
+[8668.84]     Balise : ----------------------------Start new frame...
+[8668.87]     Balise : Record & process sample...
+[8668.87]     src/music.cpp 154 update
+[8668.87]     src/music.cpp 238 _update_beats
+[8668.87]     src/music.cpp 265 _update_state
+[8668.87]     src/music.cpp 333 _update_beat_threshold
+[8668.87]     Balise : Run animator...
+[8668.87]     Balise : Compute new frames...
+[8668.87]     LEDs : new frame for PIX.6.2.2
+[8668.87]     Balise : Addr LED Ani1 New frames...
+[8668.87]     Balise : Addr LED Ani1 New frames 1
+[8668.87]     Laser : new frame for LAS.0
+[8668.87]     src/laser.cpp 145 new_frame
+[8668.87]     Front Rack : new frame for FR.1.2.2
+[8668.87]     src/spot.cpp 692 new_frame
+[8668.87]     Vert. Beams : new frame for R15.0
+[8668.87]     src/spot.cpp 692 new_frame
+[8668.87]     Rack 2 : new frame for R40.0
+[8668.87]     src/spot.cpp 692 new_frame
+[8668.87]     SHEHDS Rack : new frame for BR2.0
+[8668.87]     src/spot.cpp 692 new_frame
+[8668.87]     Spider : new frame for SPI.0.0
+[8668.87]     src/spider.cpp 183 new_frame
+[8668.87]     Balise : Compute new spider1 frame
+[8668.87]     Redrayz : new frame for RED.2.1.3
+[8668.87]     Balise : fausse balise
+[8668.87]     Balise : Send frame...
+[8668.87]     Balise : Construct & send buffer for classical fixtures
+[8668.87]     src/spider.cpp 113 buffer
+[8668.87]     src/laser.cpp 16 buffer
+[8668.87]     Balise : Construct & send buffer for artnet pixels
+[8668.87]     Balise : Debug...
+[8668.87]     src/debug.cpp 367 display_curse
+[8668.87]     src/debug.cpp 81 disp_music_window
+[8668.87]     src/debug.cpp 238 disp_animation_window
+[8668.87]     src/debug.cpp 193 disp_output_window
+[8668.87]     src/laser.cpp 16 buffer
+[8668.87]     src/debug.cpp 269 disp_general_window
+[8668.87]     src/debug.cpp 309 disp_console_window
+[8668.87]     Balise : Wait next frame...
+[8668.87]     src/music.cpp 214 _process_record
+[8668.87]     src/music.cpp 214 _process_record
+[8668.87]     src/main.cpp 148 main
+[8668.87]     Balise : ----------------------------Start new frame...
+[8668.89]     Balise : Record & process sample...
+[8668.89]     src/music.cpp 154 update
+[8668.89]     src/music.cpp 238 _update_beats
+[8668.89]     src/music.cpp 265 _update_state
+[8668.89]     src/music.cpp 333 _update_beat_threshold
+[8668.89]     Balise : Run animator...
+[8668.89]     Balise : Compute new frames...
+[8668.89]     LEDs : new frame for PIX.6.2.2
+[8668.89]     Balise : Addr LED Ani1 New frames...
+[8668.89]     Balise : Addr LED Ani1 New frames 1
+[8668.89]     Laser : new frame for LAS.0
+[8668.89]     src/laser.cpp 145 new_frame
+[8668.89]     Front Rack : new frame for FR.1.2.2
+[8668.89]     src/spot.cpp 692 new_frame
+[8668.89]     Vert. Beams : new frame for R15.0
+[8668.89]     src/spot.cpp 692 new_frame
+[8668.89]     Rack 2 : new frame for R40.0
+[8668.89]     src/spot.cpp 692 new_frame
+[8668.89]     SHEHDS Rack : new frame for BR2.0
+[8668.89]     src/spot.cpp 692 new_frame
+[8668.89]     Spider : new frame for SPI.0.0
+[8668.89]     src/spider.cpp 183 new_frame
+[8668.89]     Balise : Compute new spider1 frame
+[8668.89]     Redrayz : new frame for RED.2.1.3
+[8668.89]     Balise : fausse balise
+[8668.89]     Balise : Send frame...
+[8668.89]     Balise : Construct & send buffer for classical fixtures
+[8668.89]     src/spider.cpp 113 buffer
+[8668.89]     src/laser.cpp 16 buffer
+[8668.89]     Balise : Construct & send buffer for artnet pixels
+[8668.89]     Balise : Debug...
+[8668.89]     src/debug.cpp 367 display_curse
+[8668.89]     src/debug.cpp 81 disp_music_window
+[8668.89]     src/debug.cpp 238 disp_animation_window
+[8668.89]     src/debug.cpp 193 disp_output_window
+[8668.89]     src/laser.cpp 16 buffer
+[8668.89]     src/debug.cpp 269 disp_general_window
+[8668.89]     src/debug.cpp 309 disp_console_window
+[8668.89]     Balise : Wait next frame...
+[8668.89]     src/music.cpp 214 _process_record
+[8668.89]     src/main.cpp 148 main
+[8668.89]     Balise : ----------------------------Start new frame...
+[8668.92]     Balise : Record & process sample...
+[8668.92]     src/music.cpp 154 update
+[8668.92]     src/music.cpp 238 _update_beats
+[8668.92]     src/music.cpp 265 _update_state
+[8668.92]     src/music.cpp 333 _update_beat_threshold
+[8668.92]     Balise : Run animator...
+[8668.92]     Balise : Compute new frames...
+[8668.92]     LEDs : new frame for PIX.6.2.2
+[8668.92]     Balise : Addr LED Ani1 New frames...
+[8668.92]     Balise : Addr LED Ani1 New frames 1
+[8668.92]     Laser : new frame for LAS.0
+[8668.92]     src/laser.cpp 145 new_frame
+[8668.92]     Front Rack : new frame for FR.1.2.2
+[8668.92]     src/spot.cpp 692 new_frame
+[8668.92]     Vert. Beams : new frame for R15.0
+[8668.92]     src/spot.cpp 692 new_frame
+[8668.92]     Rack 2 : new frame for R40.0
+[8668.92]     src/spot.cpp 692 new_frame
+[8668.92]     SHEHDS Rack : new frame for BR2.0
+[8668.92]     src/spot.cpp 692 new_frame
+[8668.92]     Spider : new frame for SPI.0.0
+[8668.92]     src/spider.cpp 183 new_frame
+[8668.92]     Balise : Compute new spider1 frame
+[8668.92]     Redrayz : new frame for RED.2.1.3
+[8668.92]     Balise : fausse balise
+[8668.92]     Balise : Send frame...
+[8668.92]     Balise : Construct & send buffer for classical fixtures
+[8668.92]     src/spider.cpp 113 buffer
+[8668.92]     src/laser.cpp 16 buffer
+[8668.92]     Balise : Construct & send buffer for artnet pixels
+[8668.92]     Balise : Debug...
+[8668.92]     src/debug.cpp 367 display_curse
+[8668.92]     src/debug.cpp 81 disp_music_window
+[8668.92]     src/debug.cpp 238 disp_animation_window
+[8668.92]     src/debug.cpp 193 disp_output_window
+[8668.92]     src/laser.cpp 16 buffer
+[8668.92]     src/debug.cpp 269 disp_general_window
+[8668.92]     src/debug.cpp 309 disp_console_window
+[8668.92]     Balise : Wait next frame...
+[8668.92]     src/music.cpp 214 _process_record
+[8668.92]     src/music.cpp 214 _process_record
+[8668.92]     src/main.cpp 148 main
+[8668.92]     Balise : ----------------------------Start new frame...
+[8668.94]     Balise : Record & process sample...
+[8668.94]     src/music.cpp 154 update
+[8668.94]     src/music.cpp 238 _update_beats
+[8668.94]     src/music.cpp 265 _update_state
+[8668.94]     src/music.cpp 333 _update_beat_threshold
+[8668.94]     Balise : Run animator...
+[8668.94]     Balise : Compute new frames...
+[8668.94]     LEDs : new frame for PIX.6.2.2
+[8668.94]     Balise : Addr LED Ani1 New frames...
+[8668.94]     Balise : Addr LED Ani1 New frames 1
+[8668.94]     Laser : new frame for LAS.0
+[8668.94]     src/laser.cpp 145 new_frame
+[8668.94]     Front Rack : new frame for FR.1.2.2
+[8668.94]     src/spot.cpp 692 new_frame
+[8668.94]     Vert. Beams : new frame for R15.0
+[8668.94]     src/spot.cpp 692 new_frame
+[8668.94]     Rack 2 : new frame for R40.0
+[8668.94]     src/spot.cpp 692 new_frame
+[8668.94]     SHEHDS Rack : new frame for BR2.0
+[8668.94]     src/spot.cpp 692 new_frame
+[8668.94]     Spider : new frame for SPI.0.0
+[8668.94]     src/spider.cpp 183 new_frame
+[8668.94]     Balise : Compute new spider1 frame
+[8668.94]     Redrayz : new frame for RED.2.1.3
+[8668.94]     Balise : fausse balise
+[8668.94]     Balise : Send frame...
+[8668.94]     Balise : Construct & send buffer for classical fixtures
+[8668.94]     src/spider.cpp 113 buffer
+[8668.94]     src/laser.cpp 16 buffer
+[8668.94]     Balise : Construct & send buffer for artnet pixels
+[8668.94]     Balise : Debug...
+[8668.94]     src/debug.cpp 367 display_curse
+[8668.94]     src/debug.cpp 81 disp_music_window
+[8668.94]     src/debug.cpp 238 disp_animation_window
+[8668.94]     src/debug.cpp 193 disp_output_window
+[8668.94]     src/laser.cpp 16 buffer
+[8668.94]     src/debug.cpp 269 disp_general_window
+[8668.94]     src/debug.cpp 309 disp_console_window
+[8668.94]     Balise : Wait next frame...
+[8668.94]     src/music.cpp 214 _process_record
+[8668.94]     src/main.cpp 148 main
+[8668.94]     Balise : ----------------------------Start new frame...
+[8668.97]     Balise : Record & process sample...
+[8668.97]     src/music.cpp 154 update
+[8668.97]     src/music.cpp 238 _update_beats
+[8668.97]     src/music.cpp 265 _update_state
+[8668.97]     src/music.cpp 333 _update_beat_threshold
+[8668.97]     Balise : Run animator...
+[8668.97]     Balise : Compute new frames...
+[8668.97]     LEDs : new frame for PIX.6.2.2
+[8668.97]     Balise : Addr LED Ani1 New frames...
+[8668.97]     Balise : Addr LED Ani1 New frames 1
+[8668.97]     Laser : new frame for LAS.0
+[8668.97]     src/laser.cpp 145 new_frame
+[8668.97]     Front Rack : new frame for FR.1.2.2
+[8668.97]     src/spot.cpp 692 new_frame
+[8668.97]     Vert. Beams : new frame for R15.0
+[8668.97]     src/spot.cpp 692 new_frame
+[8668.97]     Rack 2 : new frame for R40.0
+[8668.97]     src/spot.cpp 692 new_frame
+[8668.97]     SHEHDS Rack : new frame for BR2.0
+[8668.97]     src/spot.cpp 692 new_frame
+[8668.97]     Spider : new frame for SPI.0.0
+[8668.97]     src/spider.cpp 183 new_frame
+[8668.97]     Balise : Compute new spider1 frame
+[8668.97]     Redrayz : new frame for RED.2.1.3
+[8668.97]     Balise : fausse balise
+[8668.97]     Balise : Send frame...
+[8668.97]     Balise : Construct & send buffer for classical fixtures
+[8668.97]     src/spider.cpp 113 buffer
+[8668.97]     src/laser.cpp 16 buffer
+[8668.97]     Balise : Construct & send buffer for artnet pixels
+[8668.97]     Balise : Debug...
+[8668.97]     src/debug.cpp 367 display_curse
+[8668.97]     src/debug.cpp 81 disp_music_window
+[8668.97]     src/debug.cpp 238 disp_animation_window
+[8668.97]     src/debug.cpp 193 disp_output_window
+[8668.97]     src/laser.cpp 16 buffer
+[8668.97]     src/debug.cpp 269 disp_general_window
+[8668.97]     src/debug.cpp 309 disp_console_window
+[8668.97]     Balise : Wait next frame...
+[8668.97]     src/main.cpp 148 main
+[8668.97]     Balise : ----------------------------Start new frame...
+[8668.99]     Balise : Record & process sample...
+[8668.99]     src/music.cpp 154 update
+[8668.99]     src/music.cpp 238 _update_beats
+[8668.99]     src/music.cpp 265 _update_state
+[8668.99]     src/music.cpp 333 _update_beat_threshold
+[8668.99]     Balise : Run animator...
+[8668.99]     Balise : Compute new frames...
+[8668.99]     LEDs : new frame for PIX.6.2.2
+[8668.99]     Balise : Addr LED Ani1 New frames...
+[8668.99]     Balise : Addr LED Ani1 New frames 1
+[8668.99]     Laser : new frame for LAS.0
+[8668.99]     src/laser.cpp 145 new_frame
+[8668.99]     Front Rack : new frame for FR.1.2.2
+[8668.99]     src/spot.cpp 692 new_frame
+[8668.99]     Vert. Beams : new frame for R15.0
+[8668.99]     src/spot.cpp 692 new_frame
+[8668.99]     Rack 2 : new frame for R40.0
+[8668.99]     src/spot.cpp 692 new_frame
+[8668.99]     SHEHDS Rack : new frame for BR2.0
+[8668.99]     src/spot.cpp 692 new_frame
+[8668.99]     Spider : new frame for SPI.0.0
+[8668.99]     src/spider.cpp 183 new_frame
+[8668.99]     Balise : Compute new spider1 frame
+[8668.99]     Redrayz : new frame for RED.2.1.3
+[8668.99]     Balise : fausse balise
+[8668.99]     Balise : Send frame...
+[8668.99]     Balise : Construct & send buffer for classical fixtures
+[8668.99]     src/spider.cpp 113 buffer
+[8668.99]     src/laser.cpp 16 buffer
+[8668.99]     Balise : Construct & send buffer for artnet pixels
+[8668.99]     Balise : Debug...
+[8668.99]     src/debug.cpp 367 display_curse
+[8668.99]     src/debug.cpp 81 disp_music_window
+[8668.99]     src/debug.cpp 238 disp_animation_window
+[8668.99]     src/debug.cpp 193 disp_output_window
+[8668.99]     src/laser.cpp 16 buffer
+[8668.99]     src/debug.cpp 269 disp_general_window
+[8668.99]     src/debug.cpp 309 disp_console_window
+[8668.99]     Balise : Wait next frame...
+[8668.99]     src/music.cpp 214 _process_record
+[8668.99]     src/music.cpp 214 _process_record
+[8668.99]     src/main.cpp 148 main
+[8668.99]     Balise : ----------------------------Start new frame...
+[8669.02]     Balise : Record & process sample...
+[8669.02]     src/music.cpp 154 update
+[8669.02]     src/music.cpp 238 _update_beats
+[8669.02]     src/music.cpp 265 _update_state
+[8669.02]     src/music.cpp 333 _update_beat_threshold
+[8669.02]     Balise : Run animator...
+[8669.02]     Balise : Compute new frames...
+[8669.02]     LEDs : new frame for PIX.6.2.2
+[8669.02]     Balise : Addr LED Ani1 New frames...
+[8669.02]     Balise : Addr LED Ani1 New frames 1
+[8669.02]     Laser : new frame for LAS.0
+[8669.02]     src/laser.cpp 145 new_frame
+[8669.02]     Front Rack : new frame for FR.1.2.2
+[8669.02]     src/spot.cpp 692 new_frame
+[8669.02]     Vert. Beams : new frame for R15.0
+[8669.02]     src/spot.cpp 692 new_frame
+[8669.02]     Rack 2 : new frame for R40.0
+[8669.02]     src/spot.cpp 692 new_frame
+[8669.02]     SHEHDS Rack : new frame for BR2.0
+[8669.02]     src/spot.cpp 692 new_frame
+[8669.02]     Spider : new frame for SPI.0.0
+[8669.02]     src/spider.cpp 183 new_frame
+[8669.02]     Balise : Compute new spider1 frame
+[8669.02]     Redrayz : new frame for RED.2.1.3
+[8669.02]     Balise : fausse balise
+[8669.02]     Balise : Send frame...
+[8669.02]     Balise : Construct & send buffer for classical fixtures
+[8669.02]     src/spider.cpp 113 buffer
+[8669.02]     src/laser.cpp 16 buffer
+[8669.02]     Balise : Construct & send buffer for artnet pixels
+[8669.02]     Balise : Debug...
+[8669.02]     src/debug.cpp 367 display_curse
+[8669.02]     src/debug.cpp 81 disp_music_window
+[8669.02]     src/debug.cpp 238 disp_animation_window
+[8669.02]     src/debug.cpp 193 disp_output_window
+[8669.02]     src/laser.cpp 16 buffer
+[8669.02]     src/debug.cpp 269 disp_general_window
+[8669.02]     src/debug.cpp 309 disp_console_window
+[8669.02]     Balise : Wait next frame...
+[8669.02]     src/music.cpp 214 _process_record
+[8669.02]     src/main.cpp 148 main
+[8669.02]     Balise : ----------------------------Start new frame...
+[8669.04]     Balise : Record & process sample...
+[8669.04]     src/music.cpp 154 update
+[8669.04]     src/music.cpp 238 _update_beats
+[8669.04]     src/music.cpp 265 _update_state
+[8669.04]     src/music.cpp 333 _update_beat_threshold
+[8669.04]     Balise : Run animator...
+[8669.04]     Balise : Compute new frames...
+[8669.04]     LEDs : new frame for PIX.6.2.2
+[8669.04]     Balise : Addr LED Ani1 New frames...
+[8669.04]     Balise : Addr LED Ani1 New frames 1
+[8669.04]     Laser : new frame for LAS.0
+[8669.04]     src/laser.cpp 145 new_frame
+[8669.04]     Front Rack : new frame for FR.1.2.2
+[8669.04]     src/spot.cpp 692 new_frame
+[8669.04]     Vert. Beams : new frame for R15.0
+[8669.04]     src/spot.cpp 692 new_frame
+[8669.04]     Rack 2 : new frame for R40.0
+[8669.04]     src/spot.cpp 692 new_frame
+[8669.04]     SHEHDS Rack : new frame for BR2.0
+[8669.04]     src/spot.cpp 692 new_frame
+[8669.04]     Spider : new frame for SPI.0.0
+[8669.04]     src/spider.cpp 183 new_frame
+[8669.04]     Balise : Compute new spider1 frame
+[8669.04]     Redrayz : new frame for RED.2.1.3
+[8669.04]     Balise : fausse balise
+[8669.04]     Balise : Send frame...
+[8669.04]     Balise : Construct & send buffer for classical fixtures
+[8669.04]     src/spider.cpp 113 buffer
+[8669.04]     src/laser.cpp 16 buffer
+[8669.04]     Balise : Construct & send buffer for artnet pixels
+[8669.04]     Balise : Debug...
+[8669.04]     src/debug.cpp 367 display_curse
+[8669.04]     src/debug.cpp 81 disp_music_window
+[8669.04]     src/debug.cpp 238 disp_animation_window
+[8669.04]     src/debug.cpp 193 disp_output_window
+[8669.04]     src/laser.cpp 16 buffer
+[8669.04]     src/debug.cpp 269 disp_general_window
+[8669.04]     src/debug.cpp 309 disp_console_window
+[8669.04]     Balise : Wait next frame...
+[8669.04]     src/music.cpp 214 _process_record
+[8669.04]     src/main.cpp 148 main
+[8669.04]     Balise : ----------------------------Start new frame...
+[8669.07]     Balise : Record & process sample...
+[8669.07]     src/music.cpp 154 update
+[8669.07]     src/music.cpp 238 _update_beats
+[8669.07]     src/music.cpp 265 _update_state
+[8669.07]     src/music.cpp 333 _update_beat_threshold
+[8669.07]     Balise : Run animator...
+[8669.07]     Balise : Compute new frames...
+[8669.07]     LEDs : new frame for PIX.6.2.2
+[8669.07]     Balise : Addr LED Ani1 New frames...
+[8669.07]     Balise : Addr LED Ani1 New frames 1
+[8669.07]     Laser : new frame for LAS.0
+[8669.07]     src/laser.cpp 145 new_frame
+[8669.07]     Front Rack : new frame for FR.1.2.2
+[8669.07]     src/spot.cpp 692 new_frame
+[8669.07]     Vert. Beams : new frame for R15.0
+[8669.07]     src/spot.cpp 692 new_frame
+[8669.07]     Rack 2 : new frame for R40.0
+[8669.07]     src/spot.cpp 692 new_frame
+[8669.07]     SHEHDS Rack : new frame for BR2.0
+[8669.07]     src/spot.cpp 692 new_frame
+[8669.07]     Spider : new frame for SPI.0.0
+[8669.07]     src/spider.cpp 183 new_frame
+[8669.07]     Balise : Compute new spider1 frame
+[8669.07]     Redrayz : new frame for RED.2.1.3
+[8669.07]     Balise : fausse balise
+[8669.07]     Balise : Send frame...
+[8669.07]     Balise : Construct & send buffer for classical fixtures
+[8669.07]     src/spider.cpp 113 buffer
+[8669.07]     src/laser.cpp 16 buffer
+[8669.07]     Balise : Construct & send buffer for artnet pixels
+[8669.07]     Balise : Debug...
+[8669.07]     src/debug.cpp 367 display_curse
+[8669.07]     src/debug.cpp 81 disp_music_window
+[8669.07]     src/debug.cpp 238 disp_animation_window
+[8669.07]     src/debug.cpp 193 disp_output_window
+[8669.07]     src/laser.cpp 16 buffer
+[8669.07]     src/debug.cpp 269 disp_general_window
+[8669.07]     src/debug.cpp 309 disp_console_window
+[8669.07]     Balise : Wait next frame...
+[8669.07]     src/music.cpp 214 _process_record
+[8669.07]     src/music.cpp 214 _process_record
+[8669.07]     src/main.cpp 148 main
+[8669.07]     Balise : ----------------------------Start new frame...
+[8669.09]     Balise : Record & process sample...
+[8669.09]     src/music.cpp 154 update
+[8669.09]     src/music.cpp 238 _update_beats
+[8669.09]     src/music.cpp 265 _update_state
+[8669.09]     src/music.cpp 333 _update_beat_threshold
+[8669.09]     Balise : Run animator...
+[8669.09]     Balise : Compute new frames...
+[8669.09]     LEDs : new frame for PIX.6.2.2
+[8669.09]     Balise : Addr LED Ani1 New frames...
+[8669.09]     Balise : Addr LED Ani1 New frames 1
+[8669.09]     Laser : new frame for LAS.0
+[8669.09]     src/laser.cpp 145 new_frame
+[8669.09]     Front Rack : new frame for FR.1.2.2
+[8669.09]     src/spot.cpp 692 new_frame
+[8669.09]     Vert. Beams : new frame for R15.0
+[8669.09]     src/spot.cpp 692 new_frame
+[8669.09]     Rack 2 : new frame for R40.0
+[8669.09]     src/spot.cpp 692 new_frame
+[8669.09]     SHEHDS Rack : new frame for BR2.0
+[8669.09]     src/spot.cpp 692 new_frame
+[8669.09]     Spider : new frame for SPI.0.0
+[8669.09]     src/spider.cpp 183 new_frame
+[8669.09]     Balise : Compute new spider1 frame
+[8669.09]     Redrayz : new frame for RED.2.1.3
+[8669.09]     Balise : fausse balise
+[8669.09]     Balise : Send frame...
+[8669.09]     Balise : Construct & send buffer for classical fixtures
+[8669.09]     src/spider.cpp 113 buffer
+[8669.09]     src/laser.cpp 16 buffer
+[8669.09]     Balise : Construct & send buffer for artnet pixels
+[8669.09]     Balise : Debug...
+[8669.09]     src/debug.cpp 367 display_curse
+[8669.09]     src/debug.cpp 81 disp_music_window
+[8669.09]     src/debug.cpp 238 disp_animation_window
+[8669.09]     src/debug.cpp 193 disp_output_window
+[8669.09]     src/laser.cpp 16 buffer
+[8669.09]     src/debug.cpp 269 disp_general_window
+[8669.09]     src/debug.cpp 309 disp_console_window
+[8669.09]     Balise : Wait next frame...
+[8669.09]     src/music.cpp 214 _process_record
+[8669.09]     src/main.cpp 148 main
+[8669.09]     Balise : ----------------------------Start new frame...
+[8669.12]     Balise : Record & process sample...
+[8669.12]     src/music.cpp 154 update
+[8669.12]     src/music.cpp 238 _update_beats
+[8669.12]     src/music.cpp 265 _update_state
+[8669.12]     src/music.cpp 333 _update_beat_threshold
+[8669.12]     Balise : Run animator...
+[8669.12]     Balise : Compute new frames...
+[8669.12]     LEDs : new frame for PIX.6.2.2
+[8669.12]     Balise : Addr LED Ani1 New frames...
+[8669.12]     Balise : Addr LED Ani1 New frames 1
+[8669.12]     Laser : new frame for LAS.0
+[8669.12]     src/laser.cpp 145 new_frame
+[8669.12]     Front Rack : new frame for FR.1.2.2
+[8669.12]     src/spot.cpp 692 new_frame
+[8669.12]     Vert. Beams : new frame for R15.0
+[8669.12]     src/spot.cpp 692 new_frame
+[8669.12]     Rack 2 : new frame for R40.0
+[8669.12]     src/spot.cpp 692 new_frame
+[8669.12]     SHEHDS Rack : new frame for BR2.0
+[8669.12]     src/spot.cpp 692 new_frame
+[8669.12]     Spider : new frame for SPI.0.0
+[8669.12]     src/spider.cpp 183 new_frame
+[8669.12]     Balise : Compute new spider1 frame
+[8669.12]     Redrayz : new frame for RED.2.1.3
+[8669.12]     Balise : fausse balise
+[8669.12]     Balise : Send frame...
+[8669.12]     Balise : Construct & send buffer for classical fixtures
+[8669.12]     src/spider.cpp 113 buffer
+[8669.12]     src/laser.cpp 16 buffer
+[8669.12]     Balise : Construct & send buffer for artnet pixels
+[8669.12]     Balise : Debug...
+[8669.12]     src/debug.cpp 367 display_curse
+[8669.12]     src/debug.cpp 81 disp_music_window
+[8669.12]     src/debug.cpp 238 disp_animation_window
+[8669.12]     src/debug.cpp 193 disp_output_window
+[8669.12]     src/laser.cpp 16 buffer
+[8669.12]     src/debug.cpp 269 disp_general_window
+[8669.12]     src/debug.cpp 309 disp_console_window
+[8669.12]     Balise : Wait next frame...
+[8669.12]     src/main.cpp 148 main
+[8669.12]     Balise : ----------------------------Start new frame...
+[8669.14]     Balise : Record & process sample...
+[8669.14]     src/music.cpp 154 update
+[8669.14]     src/music.cpp 238 _update_beats
+[8669.14]     src/music.cpp 265 _update_state
+[8669.14]     src/music.cpp 333 _update_beat_threshold
+[8669.14]     Balise : Run animator...
+[8669.14]     Balise : Compute new frames...
+[8669.14]     LEDs : new frame for PIX.6.2.2
+[8669.14]     Balise : Addr LED Ani1 New frames...
+[8669.14]     Balise : Addr LED Ani1 New frames 1
+[8669.14]     Laser : new frame for LAS.0
+[8669.14]     src/laser.cpp 145 new_frame
+[8669.14]     Front Rack : new frame for FR.1.2.2
+[8669.14]     src/spot.cpp 692 new_frame
+[8669.14]     Vert. Beams : new frame for R15.0
+[8669.14]     src/spot.cpp 692 new_frame
+[8669.14]     Rack 2 : new frame for R40.0
+[8669.14]     src/spot.cpp 692 new_frame
+[8669.14]     SHEHDS Rack : new frame for BR2.0
+[8669.14]     src/spot.cpp 692 new_frame
+[8669.14]     Spider : new frame for SPI.0.0
+[8669.14]     src/spider.cpp 183 new_frame
+[8669.14]     Balise : Compute new spider1 frame
+[8669.14]     Redrayz : new frame for RED.2.1.3
+[8669.14]     Balise : fausse balise
+[8669.14]     Balise : Send frame...
+[8669.14]     Balise : Construct & send buffer for classical fixtures
+[8669.14]     src/spider.cpp 113 buffer
+[8669.14]     src/laser.cpp 16 buffer
+[8669.14]     Balise : Construct & send buffer for artnet pixels
+[8669.14]     Balise : Debug...
+[8669.14]     src/debug.cpp 367 display_curse
+[8669.14]     src/debug.cpp 81 disp_music_window
+[8669.14]     src/debug.cpp 238 disp_animation_window
+[8669.14]     src/debug.cpp 193 disp_output_window
+[8669.14]     src/laser.cpp 16 buffer
+[8669.14]     src/debug.cpp 269 disp_general_window
+[8669.14]     src/debug.cpp 309 disp_console_window
+[8669.14]     Balise : Wait next frame...
+[8669.14]     src/music.cpp 214 _process_record
+[8669.14]     src/music.cpp 214 _process_record
+[8669.14]     src/main.cpp 148 main
+[8669.14]     Balise : ----------------------------Start new frame...
+[8669.17]     Balise : Record & process sample...
+[8669.17]     src/music.cpp 154 update
+[8669.17]     src/music.cpp 238 _update_beats
+[8669.17]     src/music.cpp 265 _update_state
+[8669.17]     src/music.cpp 333 _update_beat_threshold
+[8669.17]     Balise : Run animator...
+[8669.17]     Balise : Compute new frames...
+[8669.17]     LEDs : new frame for PIX.6.2.2
+[8669.17]     Balise : Addr LED Ani1 New frames...
+[8669.17]     Balise : Addr LED Ani1 New frames 1
+[8669.17]     Laser : new frame for LAS.0
+[8669.17]     src/laser.cpp 145 new_frame
+[8669.17]     Front Rack : new frame for FR.1.2.2
+[8669.17]     src/spot.cpp 692 new_frame
+[8669.17]     Vert. Beams : new frame for R15.0
+[8669.17]     src/spot.cpp 692 new_frame
+[8669.17]     Rack 2 : new frame for R40.0
+[8669.17]     src/spot.cpp 692 new_frame
+[8669.17]     SHEHDS Rack : new frame for BR2.0
+[8669.17]     src/spot.cpp 692 new_frame
+[8669.17]     Spider : new frame for SPI.0.0
+[8669.17]     src/spider.cpp 183 new_frame
+[8669.17]     Balise : Compute new spider1 frame
+[8669.17]     Redrayz : new frame for RED.2.1.3
+[8669.17]     Balise : fausse balise
+[8669.17]     Balise : Send frame...
+[8669.17]     Balise : Construct & send buffer for classical fixtures
+[8669.17]     src/spider.cpp 113 buffer
+[8669.17]     src/laser.cpp 16 buffer
+[8669.17]     Balise : Construct & send buffer for artnet pixels
+[8669.17]     Balise : Debug...
+[8669.17]     src/debug.cpp 367 display_curse
+[8669.17]     src/debug.cpp 81 disp_music_window
+[8669.17]     src/debug.cpp 238 disp_animation_window
+[8669.17]     src/debug.cpp 193 disp_output_window
+[8669.17]     src/laser.cpp 16 buffer
+[8669.17]     src/debug.cpp 269 disp_general_window
+[8669.17]     src/debug.cpp 309 disp_console_window
+[8669.17]     Balise : Wait next frame...
+[8669.17]     src/music.cpp 214 _process_record
+[8669.17]     src/main.cpp 148 main
+[8669.17]     Balise : ----------------------------Start new frame...
+[8669.19]     Balise : Record & process sample...
+[8669.19]     src/music.cpp 154 update
+[8669.19]     src/music.cpp 238 _update_beats
+[8669.19]     src/music.cpp 265 _update_state
+[8669.19]     src/music.cpp 333 _update_beat_threshold
+[8669.19]     Balise : Run animator...
+[8669.19]     Balise : Compute new frames...
+[8669.19]     LEDs : new frame for PIX.6.2.2
+[8669.19]     Balise : Addr LED Ani1 New frames...
+[8669.19]     Balise : Addr LED Ani1 New frames 1
+[8669.19]     Laser : new frame for LAS.0
+[8669.19]     src/laser.cpp 145 new_frame
+[8669.19]     Front Rack : new frame for FR.1.2.2
+[8669.19]     src/spot.cpp 692 new_frame
+[8669.19]     Vert. Beams : new frame for R15.0
+[8669.19]     src/spot.cpp 692 new_frame
+[8669.19]     Rack 2 : new frame for R40.0
+[8669.19]     src/spot.cpp 692 new_frame
+[8669.19]     SHEHDS Rack : new frame for BR2.0
+[8669.19]     src/spot.cpp 692 new_frame
+[8669.19]     Spider : new frame for SPI.0.0
+[8669.19]     src/spider.cpp 183 new_frame
+[8669.19]     Balise : Compute new spider1 frame
+[8669.19]     Redrayz : new frame for RED.2.1.3
+[8669.19]     Balise : fausse balise
+[8669.19]     Balise : Send frame...
+[8669.19]     Balise : Construct & send buffer for classical fixtures
+[8669.19]     src/spider.cpp 113 buffer
+[8669.19]     src/laser.cpp 16 buffer
+[8669.19]     Balise : Construct & send buffer for artnet pixels
+[8669.19]     Balise : Debug...
+[8669.19]     src/debug.cpp 367 display_curse
+[8669.19]     src/debug.cpp 81 disp_music_window
+[8669.19]     src/debug.cpp 238 disp_animation_window
+[8669.19]     src/debug.cpp 193 disp_output_window
+[8669.19]     src/laser.cpp 16 buffer
+[8669.19]     src/debug.cpp 269 disp_general_window
+[8669.19]     src/debug.cpp 309 disp_console_window
+[8669.19]     Balise : Wait next frame...
+[8669.19]     src/music.cpp 214 _process_record
+[8669.19]     src/main.cpp 148 main
+[8669.19]     Balise : ----------------------------Start new frame...
+[8669.22]     Balise : Record & process sample...
+[8669.22]     src/music.cpp 154 update
+[8669.22]     src/music.cpp 238 _update_beats
+[8669.22]     src/music.cpp 265 _update_state
+[8669.22]     src/music.cpp 333 _update_beat_threshold
+[8669.22]     Balise : Run animator...
+[8669.22]     Balise : Compute new frames...
+[8669.22]     LEDs : new frame for PIX.6.2.2
+[8669.22]     Balise : Addr LED Ani1 New frames...
+[8669.22]     Balise : Addr LED Ani1 New frames 1
+[8669.22]     Laser : new frame for LAS.0
+[8669.22]     src/laser.cpp 145 new_frame
+[8669.22]     Front Rack : new frame for FR.1.2.2
+[8669.22]     src/spot.cpp 692 new_frame
+[8669.22]     Vert. Beams : new frame for R15.0
+[8669.22]     src/spot.cpp 692 new_frame
+[8669.22]     Rack 2 : new frame for R40.0
+[8669.22]     src/spot.cpp 692 new_frame
+[8669.22]     SHEHDS Rack : new frame for BR2.0
+[8669.22]     src/spot.cpp 692 new_frame
+[8669.22]     Spider : new frame for SPI.0.0
+[8669.22]     src/spider.cpp 183 new_frame
+[8669.22]     Balise : Compute new spider1 frame
+[8669.22]     Redrayz : new frame for RED.2.1.3
+[8669.22]     Balise : fausse balise
+[8669.22]     Balise : Send frame...
+[8669.22]     Balise : Construct & send buffer for classical fixtures
+[8669.22]     src/spider.cpp 113 buffer
+[8669.22]     src/laser.cpp 16 buffer
+[8669.22]     Balise : Construct & send buffer for artnet pixels
+[8669.22]     Balise : Debug...
+[8669.22]     src/debug.cpp 367 display_curse
+[8669.22]     src/debug.cpp 81 disp_music_window
+[8669.22]     src/debug.cpp 238 disp_animation_window
+[8669.22]     src/debug.cpp 193 disp_output_window
+[8669.22]     src/laser.cpp 16 buffer
+[8669.22]     src/debug.cpp 269 disp_general_window
+[8669.22]     src/debug.cpp 309 disp_console_window
+[8669.22]     Balise : Wait next frame...
+[8669.22]     src/music.cpp 214 _process_record
+[8669.22]     src/music.cpp 214 _process_record
+[8669.22]     src/main.cpp 148 main
+[8669.22]     Balise : ----------------------------Start new frame...
+[8669.25]     Balise : Record & process sample...
+[8669.25]     src/music.cpp 154 update
+[8669.25]     src/music.cpp 238 _update_beats
+[8669.25]     src/music.cpp 265 _update_state
+[8669.25]     src/music.cpp 333 _update_beat_threshold
+[8669.25]     Balise : Run animator...
+[8669.25]     Balise : Compute new frames...
+[8669.25]     LEDs : new frame for PIX.6.2.2
+[8669.25]     Balise : Addr LED Ani1 New frames...
+[8669.25]     Balise : Addr LED Ani1 New frames 1
+[8669.25]     Laser : new frame for LAS.0
+[8669.25]     src/laser.cpp 145 new_frame
+[8669.25]     Front Rack : new frame for FR.1.2.2
+[8669.25]     src/spot.cpp 692 new_frame
+[8669.25]     Vert. Beams : new frame for R15.0
+[8669.25]     src/spot.cpp 692 new_frame
+[8669.25]     Rack 2 : new frame for R40.0
+[8669.25]     src/spot.cpp 692 new_frame
+[8669.25]     SHEHDS Rack : new frame for BR2.0
+[8669.25]     src/spot.cpp 692 new_frame
+[8669.25]     Spider : new frame for SPI.0.0
+[8669.25]     src/spider.cpp 183 new_frame
+[8669.25]     Balise : Compute new spider1 frame
+[8669.25]     Redrayz : new frame for RED.2.1.3
+[8669.25]     Balise : fausse balise
+[8669.25]     Balise : Send frame...
+[8669.25]     Balise : Construct & send buffer for classical fixtures
+[8669.25]     src/spider.cpp 113 buffer
+[8669.25]     src/laser.cpp 16 buffer
+[8669.25]     Balise : Construct & send buffer for artnet pixels
+[8669.25]     Balise : Debug...
+[8669.25]     src/debug.cpp 367 display_curse
+[8669.25]     src/debug.cpp 81 disp_music_window
+[8669.25]     src/debug.cpp 238 disp_animation_window
+[8669.25]     src/debug.cpp 193 disp_output_window
+[8669.25]     src/laser.cpp 16 buffer
+[8669.25]     src/debug.cpp 269 disp_general_window
+[8669.25]     src/debug.cpp 309 disp_console_window
+[8669.25]     Balise : Wait next frame...
+[8669.25]     src/music.cpp 214 _process_record
+[8669.25]     src/main.cpp 148 main
+[8669.25]     Balise : ----------------------------Start new frame...
+[8669.27]     Balise : Record & process sample...
+[8669.27]     src/music.cpp 154 update
+[8669.27]     src/music.cpp 238 _update_beats
+[8669.27]     src/music.cpp 265 _update_state
+[8669.27]     src/music.cpp 333 _update_beat_threshold
+[8669.27]     Balise : Run animator...
+[8669.27]     Balise : Compute new frames...
+[8669.27]     LEDs : new frame for PIX.6.2.2
+[8669.27]     Balise : Addr LED Ani1 New frames...
+[8669.27]     Balise : Addr LED Ani1 New frames 1
+[8669.27]     Laser : new frame for LAS.0
+[8669.27]     src/laser.cpp 145 new_frame
+[8669.27]     Front Rack : new frame for FR.1.2.2
+[8669.27]     src/spot.cpp 692 new_frame
+[8669.27]     Vert. Beams : new frame for R15.0
+[8669.27]     src/spot.cpp 692 new_frame
+[8669.27]     Rack 2 : new frame for R40.0
+[8669.27]     src/spot.cpp 692 new_frame
+[8669.27]     SHEHDS Rack : new frame for BR2.0
+[8669.27]     src/spot.cpp 692 new_frame
+[8669.27]     Spider : new frame for SPI.0.0
+[8669.27]     src/spider.cpp 183 new_frame
+[8669.27]     Balise : Compute new spider1 frame
+[8669.27]     Redrayz : new frame for RED.2.1.3
+[8669.27]     Balise : fausse balise
+[8669.27]     Balise : Send frame...
+[8669.27]     Balise : Construct & send buffer for classical fixtures
+[8669.27]     src/spider.cpp 113 buffer
+[8669.27]     src/laser.cpp 16 buffer
+[8669.27]     Balise : Construct & send buffer for artnet pixels
+[8669.27]     Balise : Debug...
+[8669.27]     src/debug.cpp 367 display_curse
+[8669.27]     src/debug.cpp 81 disp_music_window
+[8669.27]     src/debug.cpp 238 disp_animation_window
+[8669.27]     src/debug.cpp 193 disp_output_window
+[8669.27]     src/laser.cpp 16 buffer
+[8669.27]     src/debug.cpp 269 disp_general_window
+[8669.27]     src/debug.cpp 309 disp_console_window
+[8669.27]     Balise : Wait next frame...
+[8669.27]     src/main.cpp 148 main
+[8669.27]     Balise : ----------------------------Start new frame...
+[8669.3]     Balise : Record & process sample...
+[8669.3]     src/music.cpp 154 update
+[8669.3]     src/music.cpp 238 _update_beats
+[8669.3]     src/music.cpp 265 _update_state
+[8669.3]     src/music.cpp 333 _update_beat_threshold
+[8669.3]     Balise : Run animator...
+[8669.3]     Balise : Compute new frames...
+[8669.3]     LEDs : new frame for PIX.6.2.2
+[8669.3]     Balise : Addr LED Ani1 New frames...
+[8669.3]     Balise : Addr LED Ani1 New frames 1
+[8669.3]     Laser : new frame for LAS.0
+[8669.3]     src/laser.cpp 145 new_frame
+[8669.3]     Front Rack : new frame for FR.1.2.2
+[8669.3]     src/spot.cpp 692 new_frame
+[8669.3]     Vert. Beams : new frame for R15.0
+[8669.3]     src/spot.cpp 692 new_frame
+[8669.3]     Rack 2 : new frame for R40.0
+[8669.3]     src/spot.cpp 692 new_frame
+[8669.3]     SHEHDS Rack : new frame for BR2.0
+[8669.3]     src/spot.cpp 692 new_frame
+[8669.3]     Spider : new frame for SPI.0.0
+[8669.3]     src/spider.cpp 183 new_frame
+[8669.3]     Balise : Compute new spider1 frame
+[8669.3]     Redrayz : new frame for RED.2.1.3
+[8669.3]     Balise : fausse balise
+[8669.3]     Balise : Send frame...
+[8669.3]     Balise : Construct & send buffer for classical fixtures
+[8669.3]     src/spider.cpp 113 buffer
+[8669.3]     src/laser.cpp 16 buffer
+[8669.3]     Balise : Construct & send buffer for artnet pixels
+[8669.3]     Balise : Debug...
+[8669.3]     src/debug.cpp 367 display_curse
+[8669.3]     src/debug.cpp 81 disp_music_window
+[8669.3]     src/debug.cpp 238 disp_animation_window
+[8669.3]     src/debug.cpp 193 disp_output_window
+[8669.3]     src/laser.cpp 16 buffer
+[8669.3]     src/debug.cpp 269 disp_general_window
+[8669.3]     src/debug.cpp 309 disp_console_window
+[8669.3]     Balise : Wait next frame...
+[8669.3]     src/music.cpp 214 _process_record
+[8669.3]     src/music.cpp 214 _process_record
+[8669.3]     src/main.cpp 148 main
+[8669.3]     Balise : ----------------------------Start new frame...
+[8669.32]     Balise : Record & process sample...
+[8669.32]     src/music.cpp 154 update
+[8669.32]     src/music.cpp 238 _update_beats
+[8669.32]     src/music.cpp 265 _update_state
+[8669.32]     src/music.cpp 333 _update_beat_threshold
+[8669.32]     Balise : Run animator...
+[8669.32]     Balise : Compute new frames...
+[8669.32]     LEDs : new frame for PIX.6.2.2
+[8669.32]     Balise : Addr LED Ani1 New frames...
+[8669.32]     Balise : Addr LED Ani1 New frames 1
+[8669.32]     Laser : new frame for LAS.0
+[8669.32]     src/laser.cpp 145 new_frame
+[8669.32]     Front Rack : new frame for FR.1.2.2
+[8669.32]     src/spot.cpp 692 new_frame
+[8669.32]     Vert. Beams : new frame for R15.0
+[8669.32]     src/spot.cpp 692 new_frame
+[8669.32]     Rack 2 : new frame for R40.0
+[8669.32]     src/spot.cpp 692 new_frame
+[8669.32]     SHEHDS Rack : new frame for BR2.0
+[8669.32]     src/spot.cpp 692 new_frame
+[8669.32]     Spider : new frame for SPI.0.0
+[8669.32]     src/spider.cpp 183 new_frame
+[8669.32]     Balise : Compute new spider1 frame
+[8669.32]     Redrayz : new frame for RED.2.1.3
+[8669.32]     Balise : fausse balise
+[8669.32]     Balise : Send frame...
+[8669.32]     Balise : Construct & send buffer for classical fixtures
+[8669.32]     src/spider.cpp 113 buffer
+[8669.32]     src/laser.cpp 16 buffer
+[8669.32]     Balise : Construct & send buffer for artnet pixels
+[8669.32]     Balise : Debug...
+[8669.32]     src/debug.cpp 367 display_curse
+[8669.32]     src/debug.cpp 81 disp_music_window
+[8669.32]     src/debug.cpp 238 disp_animation_window
+[8669.32]     src/debug.cpp 193 disp_output_window
+[8669.32]     src/laser.cpp 16 buffer
+[8669.32]     src/debug.cpp 269 disp_general_window
+[8669.32]     src/debug.cpp 309 disp_console_window
+[8669.32]     Balise : Wait next frame...
+[8669.32]     src/music.cpp 214 _process_record
+[8669.32]     src/main.cpp 148 main
+[8669.32]     Balise : ----------------------------Start new frame...
+[8669.34]     Balise : Record & process sample...
+[8669.34]     src/music.cpp 154 update
+[8669.34]     src/music.cpp 238 _update_beats
+[8669.34]     src/music.cpp 265 _update_state
+[8669.34]     src/music.cpp 333 _update_beat_threshold
+[8669.34]     Balise : Run animator...
+[8669.34]     Balise : Compute new frames...
+[8669.34]     LEDs : new frame for PIX.6.2.2
+[8669.34]     Balise : Addr LED Ani1 New frames...
+[8669.34]     Balise : Addr LED Ani1 New frames 1
+[8669.34]     Laser : new frame for LAS.0
+[8669.34]     src/laser.cpp 145 new_frame
+[8669.34]     Front Rack : new frame for FR.1.2.2
+[8669.34]     src/spot.cpp 692 new_frame
+[8669.34]     Vert. Beams : new frame for R15.0
+[8669.34]     src/spot.cpp 692 new_frame
+[8669.34]     Rack 2 : new frame for R40.0
+[8669.34]     src/spot.cpp 692 new_frame
+[8669.34]     SHEHDS Rack : new frame for BR2.0
+[8669.34]     src/spot.cpp 692 new_frame
+[8669.34]     Spider : new frame for SPI.0.0
+[8669.34]     src/spider.cpp 183 new_frame
+[8669.34]     Balise : Compute new spider1 frame
+[8669.34]     Redrayz : new frame for RED.2.1.3
+[8669.34]     Balise : fausse balise
+[8669.34]     Balise : Send frame...
+[8669.34]     Balise : Construct & send buffer for classical fixtures
+[8669.34]     src/spider.cpp 113 buffer
+[8669.34]     src/laser.cpp 16 buffer
+[8669.34]     Balise : Construct & send buffer for artnet pixels
+[8669.34]     Balise : Debug...
+[8669.34]     src/debug.cpp 367 display_curse
+[8669.34]     src/debug.cpp 81 disp_music_window
+[8669.34]     src/debug.cpp 238 disp_animation_window
+[8669.34]     src/debug.cpp 193 disp_output_window
+[8669.34]     src/laser.cpp 16 buffer
+[8669.34]     src/debug.cpp 269 disp_general_window
+[8669.34]     src/debug.cpp 309 disp_console_window
+[8669.34]     Balise : Wait next frame...
+[8669.34]     src/music.cpp 214 _process_record
+[8669.34]     src/main.cpp 148 main
+[8669.34]     Balise : ----------------------------Start new frame...
+[8669.37]     Balise : Record & process sample...
+[8669.37]     src/music.cpp 154 update
+[8669.37]     src/music.cpp 238 _update_beats
+[8669.37]     src/music.cpp 265 _update_state
+[8669.37]     src/music.cpp 333 _update_beat_threshold
+[8669.37]     Balise : Run animator...
+[8669.37]     Balise : Compute new frames...
+[8669.37]     LEDs : new frame for PIX.6.2.2
+[8669.37]     Balise : Addr LED Ani1 New frames...
+[8669.37]     Balise : Addr LED Ani1 New frames 1
+[8669.37]     Laser : new frame for LAS.0
+[8669.37]     src/laser.cpp 145 new_frame
+[8669.37]     Front Rack : new frame for FR.1.2.2
+[8669.37]     src/spot.cpp 692 new_frame
+[8669.37]     Vert. Beams : new frame for R15.0
+[8669.37]     src/spot.cpp 692 new_frame
+[8669.37]     Rack 2 : new frame for R40.0
+[8669.37]     src/spot.cpp 692 new_frame
+[8669.37]     SHEHDS Rack : new frame for BR2.0
+[8669.37]     src/spot.cpp 692 new_frame
+[8669.37]     Spider : new frame for SPI.0.0
+[8669.37]     src/spider.cpp 183 new_frame
+[8669.37]     Balise : Compute new spider1 frame
+[8669.37]     Redrayz : new frame for RED.2.1.3
+[8669.37]     Balise : fausse balise
+[8669.37]     Balise : Send frame...
+[8669.37]     Balise : Construct & send buffer for classical fixtures
+[8669.37]     src/spider.cpp 113 buffer
+[8669.37]     src/laser.cpp 16 buffer
+[8669.37]     Balise : Construct & send buffer for artnet pixels
+[8669.37]     Balise : Debug...
+[8669.37]     src/debug.cpp 367 display_curse
+[8669.37]     src/debug.cpp 81 disp_music_window
+[8669.37]     src/debug.cpp 238 disp_animation_window
+[8669.37]     src/debug.cpp 193 disp_output_window
+[8669.37]     src/laser.cpp 16 buffer
+[8669.37]     src/debug.cpp 269 disp_general_window
+[8669.37]     src/debug.cpp 309 disp_console_window
+[8669.37]     Balise : Wait next frame...
+[8669.37]     src/music.cpp 214 _process_record
+[8669.37]     src/music.cpp 214 _process_record
+[8669.37]     src/main.cpp 148 main
+[8669.37]     Balise : ----------------------------Start new frame...
+[8669.4]     Balise : Record & process sample...
+[8669.4]     src/music.cpp 154 update
+[8669.4]     src/music.cpp 238 _update_beats
+[8669.4]     src/music.cpp 265 _update_state
+[8669.4]     src/music.cpp 333 _update_beat_threshold
+[8669.4]     Balise : Run animator...
+[8669.4]     Balise : Compute new frames...
+[8669.4]     LEDs : new frame for PIX.6.2.2
+[8669.4]     Balise : Addr LED Ani1 New frames...
+[8669.4]     Balise : Addr LED Ani1 New frames 1
+[8669.4]     Laser : new frame for LAS.0
+[8669.4]     src/laser.cpp 145 new_frame
+[8669.4]     Front Rack : new frame for FR.1.2.2
+[8669.4]     src/spot.cpp 692 new_frame
+[8669.4]     Vert. Beams : new frame for R15.0
+[8669.4]     src/spot.cpp 692 new_frame
+[8669.4]     Rack 2 : new frame for R40.0
+[8669.4]     src/spot.cpp 692 new_frame
+[8669.4]     SHEHDS Rack : new frame for BR2.0
+[8669.4]     src/spot.cpp 692 new_frame
+[8669.4]     Spider : new frame for SPI.0.0
+[8669.4]     src/spider.cpp 183 new_frame
+[8669.4]     Balise : Compute new spider1 frame
+[8669.4]     Redrayz : new frame for RED.2.1.3
+[8669.4]     Balise : fausse balise
+[8669.4]     Balise : Send frame...
+[8669.4]     Balise : Construct & send buffer for classical fixtures
+[8669.4]     src/spider.cpp 113 buffer
+[8669.4]     src/laser.cpp 16 buffer
+[8669.4]     Balise : Construct & send buffer for artnet pixels
+[8669.4]     Balise : Debug...
+[8669.4]     src/debug.cpp 367 display_curse
+[8669.4]     src/debug.cpp 81 disp_music_window
+[8669.4]     src/debug.cpp 238 disp_animation_window
+[8669.4]     src/debug.cpp 193 disp_output_window
+[8669.4]     src/laser.cpp 16 buffer
+[8669.4]     src/debug.cpp 269 disp_general_window
+[8669.4]     src/debug.cpp 309 disp_console_window
+[8669.4]     Balise : Wait next frame...
+[8669.4]     src/music.cpp 214 _process_record
+[8669.4]     src/main.cpp 148 main
+[8669.4]     Balise : ----------------------------Start new frame...
+[8669.42]     Balise : Record & process sample...
+[8669.42]     src/music.cpp 154 update
+[8669.42]     src/music.cpp 238 _update_beats
+[8669.42]     src/music.cpp 265 _update_state
+[8669.42]     src/music.cpp 333 _update_beat_threshold
+[8669.42]     Balise : Run animator...
+[8669.42]     Balise : Compute new frames...
+[8669.42]     LEDs : new frame for PIX.6.2.2
+[8669.42]     Balise : Addr LED Ani1 New frames...
+[8669.42]     Balise : Addr LED Ani1 New frames 1
+[8669.42]     Laser : new frame for LAS.0
+[8669.42]     src/laser.cpp 145 new_frame
+[8669.42]     Front Rack : new frame for FR.1.2.2
+[8669.42]     src/spot.cpp 692 new_frame
+[8669.42]     Vert. Beams : new frame for R15.0
+[8669.42]     src/spot.cpp 692 new_frame
+[8669.42]     Rack 2 : new frame for R40.0
+[8669.42]     src/spot.cpp 692 new_frame
+[8669.42]     SHEHDS Rack : new frame for BR2.0
+[8669.42]     src/spot.cpp 692 new_frame
+[8669.42]     Spider : new frame for SPI.0.0
+[8669.42]     src/spider.cpp 183 new_frame
+[8669.42]     Balise : Compute new spider1 frame
+[8669.42]     Redrayz : new frame for RED.2.1.3
+[8669.42]     Balise : fausse balise
+[8669.42]     Balise : Send frame...
+[8669.42]     Balise : Construct & send buffer for classical fixtures
+[8669.42]     src/spider.cpp 113 buffer
+[8669.42]     src/laser.cpp 16 buffer
+[8669.42]     Balise : Construct & send buffer for artnet pixels
+[8669.42]     Balise : Debug...
+[8669.42]     src/debug.cpp 367 display_curse
+[8669.42]     src/debug.cpp 81 disp_music_window
+[8669.42]     src/debug.cpp 238 disp_animation_window
+[8669.42]     src/debug.cpp 193 disp_output_window
+[8669.42]     src/laser.cpp 16 buffer
+[8669.42]     src/debug.cpp 269 disp_general_window
+[8669.42]     src/debug.cpp 309 disp_console_window
+[8669.42]     Balise : Wait next frame...
+[8669.42]     src/main.cpp 148 main
+[8669.42]     Balise : ----------------------------Start new frame...
+[8669.45]     Balise : Record & process sample...
+[8669.45]     src/music.cpp 154 update
+[8669.45]     src/music.cpp 238 _update_beats
+[8669.45]     src/music.cpp 265 _update_state
+[8669.45]     src/music.cpp 333 _update_beat_threshold
+[8669.45]     Balise : Run animator...
+[8669.45]     Balise : Compute new frames...
+[8669.45]     LEDs : new frame for PIX.6.2.2
+[8669.45]     Balise : Addr LED Ani1 New frames...
+[8669.45]     Balise : Addr LED Ani1 New frames 1
+[8669.45]     Laser : new frame for LAS.0
+[8669.45]     src/laser.cpp 145 new_frame
+[8669.45]     Front Rack : new frame for FR.1.2.2
+[8669.45]     src/spot.cpp 692 new_frame
+[8669.45]     Vert. Beams : new frame for R15.0
+[8669.45]     src/spot.cpp 692 new_frame
+[8669.45]     Rack 2 : new frame for R40.0
+[8669.45]     src/spot.cpp 692 new_frame
+[8669.45]     SHEHDS Rack : new frame for BR2.0
+[8669.45]     src/spot.cpp 692 new_frame
+[8669.45]     Spider : new frame for SPI.0.0
+[8669.45]     src/spider.cpp 183 new_frame
+[8669.45]     Balise : Compute new spider1 frame
+[8669.45]     Redrayz : new frame for RED.2.1.3
+[8669.45]     Balise : fausse balise
+[8669.45]     Balise : Send frame...
+[8669.45]     Balise : Construct & send buffer for classical fixtures
+[8669.45]     src/spider.cpp 113 buffer
+[8669.45]     src/laser.cpp 16 buffer
+[8669.45]     Balise : Construct & send buffer for artnet pixels
+[8669.45]     Balise : Debug...
+[8669.45]     src/debug.cpp 367 display_curse
+[8669.45]     src/debug.cpp 81 disp_music_window
+[8669.45]     src/debug.cpp 238 disp_animation_window
+[8669.45]     src/debug.cpp 193 disp_output_window
+[8669.45]     src/laser.cpp 16 buffer
+[8669.45]     src/debug.cpp 269 disp_general_window
+[8669.45]     src/debug.cpp 309 disp_console_window
+[8669.45]     Balise : Wait next frame...
+[8669.45]     src/music.cpp 214 _process_record
+[8669.45]     src/music.cpp 214 _process_record
+[8669.45]     src/main.cpp 148 main
+[8669.45]     Balise : ----------------------------Start new frame...
+[8669.47]     Balise : Record & process sample...
+[8669.47]     src/music.cpp 154 update
+[8669.47]     src/music.cpp 238 _update_beats
+[8669.47]     src/music.cpp 265 _update_state
+[8669.47]     src/music.cpp 333 _update_beat_threshold
+[8669.47]     Balise : Run animator...
+[8669.47]     Balise : Compute new frames...
+[8669.47]     LEDs : new frame for PIX.6.2.2
+[8669.47]     Balise : Addr LED Ani1 New frames...
+[8669.47]     Balise : Addr LED Ani1 New frames 1
+[8669.47]     Laser : new frame for LAS.0
+[8669.47]     src/laser.cpp 145 new_frame
+[8669.47]     Front Rack : new frame for FR.1.2.2
+[8669.47]     src/spot.cpp 692 new_frame
+[8669.47]     Vert. Beams : new frame for R15.0
+[8669.47]     src/spot.cpp 692 new_frame
+[8669.47]     Rack 2 : new frame for R40.0
+[8669.47]     src/spot.cpp 692 new_frame
+[8669.47]     SHEHDS Rack : new frame for BR2.0
+[8669.47]     src/spot.cpp 692 new_frame
+[8669.47]     Spider : new frame for SPI.0.0
+[8669.47]     src/spider.cpp 183 new_frame
+[8669.47]     Balise : Compute new spider1 frame
+[8669.47]     Redrayz : new frame for RED.2.1.3
+[8669.47]     Balise : fausse balise
+[8669.47]     Balise : Send frame...
+[8669.47]     Balise : Construct & send buffer for classical fixtures
+[8669.47]     src/spider.cpp 113 buffer
+[8669.47]     src/laser.cpp 16 buffer
+[8669.47]     Balise : Construct & send buffer for artnet pixels
+[8669.47]     Balise : Debug...
+[8669.47]     src/debug.cpp 367 display_curse
+[8669.47]     src/debug.cpp 81 disp_music_window
+[8669.47]     src/debug.cpp 238 disp_animation_window
+[8669.47]     src/debug.cpp 193 disp_output_window
+[8669.47]     src/laser.cpp 16 buffer
+[8669.47]     src/debug.cpp 269 disp_general_window
+[8669.47]     src/debug.cpp 309 disp_console_window
+[8669.47]     Balise : Wait next frame...
+[8669.47]     src/music.cpp 214 _process_record
+[8669.47]     src/main.cpp 148 main
+[8669.47]     Balise : ----------------------------Start new frame...
+[8669.5]     Balise : Record & process sample...
+[8669.5]     src/music.cpp 154 update
+[8669.5]     src/music.cpp 238 _update_beats
+[8669.5]     src/music.cpp 265 _update_state
+[8669.5]     src/music.cpp 333 _update_beat_threshold
+[8669.5]     Balise : Run animator...
+[8669.5]     Balise : Compute new frames...
+[8669.5]     LEDs : new frame for PIX.6.2.2
+[8669.5]     Balise : Addr LED Ani1 New frames...
+[8669.5]     Balise : Addr LED Ani1 New frames 1
+[8669.5]     Laser : new frame for LAS.0
+[8669.5]     src/laser.cpp 145 new_frame
+[8669.5]     Front Rack : new frame for FR.1.2.2
+[8669.5]     src/spot.cpp 692 new_frame
+[8669.5]     Vert. Beams : new frame for R15.0
+[8669.5]     src/spot.cpp 692 new_frame
+[8669.5]     Rack 2 : new frame for R40.0
+[8669.5]     src/spot.cpp 692 new_frame
+[8669.5]     SHEHDS Rack : new frame for BR2.0
+[8669.5]     src/spot.cpp 692 new_frame
+[8669.5]     Spider : new frame for SPI.0.0
+[8669.5]     src/spider.cpp 183 new_frame
+[8669.5]     Balise : Compute new spider1 frame
+[8669.5]     Redrayz : new frame for RED.2.1.3
+[8669.5]     Balise : fausse balise
+[8669.5]     Balise : Send frame...
+[8669.5]     Balise : Construct & send buffer for classical fixtures
+[8669.5]     src/spider.cpp 113 buffer
+[8669.5]     src/laser.cpp 16 buffer
+[8669.5]     Balise : Construct & send buffer for artnet pixels
+[8669.5]     Balise : Debug...
+[8669.5]     src/debug.cpp 367 display_curse
+[8669.5]     src/debug.cpp 81 disp_music_window
+[8669.5]     src/debug.cpp 238 disp_animation_window
+[8669.5]     src/debug.cpp 193 disp_output_window
+[8669.5]     src/laser.cpp 16 buffer
+[8669.5]     src/debug.cpp 269 disp_general_window
+[8669.5]     src/debug.cpp 309 disp_console_window
+[8669.5]     Balise : Wait next frame...
+[8669.5]     src/music.cpp 214 _process_record
+[8669.5]     src/music.cpp 214 _process_record
+[8669.5]     src/main.cpp 148 main
+[8669.5]     Balise : ----------------------------Start new frame...
+[8669.52]     Balise : Record & process sample...
+[8669.52]     src/music.cpp 154 update
+[8669.52]     src/music.cpp 238 _update_beats
+[8669.52]     src/music.cpp 265 _update_state
+[8669.52]     src/music.cpp 333 _update_beat_threshold
+[8669.52]     Balise : Run animator...
+[8669.52]     Balise : Compute new frames...
+[8669.52]     LEDs : new frame for PIX.6.2.2
+[8669.52]     Balise : Addr LED Ani1 New frames...
+[8669.52]     Balise : Addr LED Ani1 New frames 1
+[8669.52]     Laser : new frame for LAS.0
+[8669.52]     src/laser.cpp 145 new_frame
+[8669.52]     Front Rack : new frame for FR.1.2.2
+[8669.52]     src/spot.cpp 692 new_frame
+[8669.52]     Vert. Beams : new frame for R15.0
+[8669.52]     src/spot.cpp 692 new_frame
+[8669.52]     Rack 2 : new frame for R40.0
+[8669.52]     src/spot.cpp 692 new_frame
+[8669.52]     SHEHDS Rack : new frame for BR2.0
+[8669.52]     src/spot.cpp 692 new_frame
+[8669.52]     Spider : new frame for SPI.0.0
+[8669.52]     src/spider.cpp 183 new_frame
+[8669.52]     Balise : Compute new spider1 frame
+[8669.52]     Redrayz : new frame for RED.2.1.3
+[8669.52]     Balise : fausse balise
+[8669.52]     Balise : Send frame...
+[8669.52]     Balise : Construct & send buffer for classical fixtures
+[8669.52]     src/spider.cpp 113 buffer
+[8669.52]     src/laser.cpp 16 buffer
+[8669.52]     Balise : Construct & send buffer for artnet pixels
+[8669.52]     Balise : Debug...
+[8669.52]     src/debug.cpp 367 display_curse
+[8669.52]     src/debug.cpp 81 disp_music_window
+[8669.52]     src/debug.cpp 238 disp_animation_window
+[8669.52]     src/debug.cpp 193 disp_output_window
+[8669.52]     src/laser.cpp 16 buffer
+[8669.52]     src/debug.cpp 269 disp_general_window
+[8669.52]     src/debug.cpp 309 disp_console_window
+[8669.52]     Balise : Wait next frame...
+[8669.52]     src/music.cpp 214 _process_record
+[8669.52]     src/main.cpp 148 main
+[8669.52]     Balise : ----------------------------Start new frame...
+[8669.55]     Balise : Record & process sample...
+[8669.55]     src/music.cpp 154 update
+[8669.55]     src/music.cpp 238 _update_beats
+[8669.55]     src/music.cpp 265 _update_state
+[8669.55]     src/music.cpp 333 _update_beat_threshold
+[8669.55]     Balise : Run animator...
+[8669.55]     Balise : Compute new frames...
+[8669.55]     LEDs : new frame for PIX.6.2.2
+[8669.55]     Balise : Addr LED Ani1 New frames...
+[8669.55]     Balise : Addr LED Ani1 New frames 1
+[8669.55]     Laser : new frame for LAS.0
+[8669.55]     src/laser.cpp 145 new_frame
+[8669.55]     Front Rack : new frame for FR.1.2.2
+[8669.55]     src/spot.cpp 692 new_frame
+[8669.55]     Vert. Beams : new frame for R15.0
+[8669.55]     src/spot.cpp 692 new_frame
+[8669.55]     Rack 2 : new frame for R40.0
+[8669.55]     src/spot.cpp 692 new_frame
+[8669.55]     SHEHDS Rack : new frame for BR2.0
+[8669.55]     src/spot.cpp 692 new_frame
+[8669.55]     Spider : new frame for SPI.0.0
+[8669.55]     src/spider.cpp 183 new_frame
+[8669.55]     Balise : Compute new spider1 frame
+[8669.55]     Redrayz : new frame for RED.2.1.3
+[8669.55]     Balise : fausse balise
+[8669.55]     Balise : Send frame...
+[8669.55]     Balise : Construct & send buffer for classical fixtures
+[8669.55]     src/spider.cpp 113 buffer
+[8669.55]     src/laser.cpp 16 buffer
+[8669.55]     Balise : Construct & send buffer for artnet pixels
+[8669.55]     Balise : Debug...
+[8669.55]     src/debug.cpp 367 display_curse
+[8669.55]     src/debug.cpp 81 disp_music_window
+[8669.55]     src/debug.cpp 238 disp_animation_window
+[8669.55]     src/debug.cpp 193 disp_output_window
+[8669.55]     src/laser.cpp 16 buffer
+[8669.55]     src/debug.cpp 269 disp_general_window
+[8669.55]     src/debug.cpp 309 disp_console_window
+[8669.55]     Balise : Wait next frame...
+[8669.55]     src/music.cpp 214 _process_record
+[8669.55]     src/main.cpp 148 main
+[8669.55]     Balise : ----------------------------Start new frame...
+[8669.57]     Balise : Record & process sample...
+[8669.57]     src/music.cpp 154 update
+[8669.57]     src/music.cpp 238 _update_beats
+[8669.57]     src/music.cpp 265 _update_state
+[8669.57]     src/music.cpp 333 _update_beat_threshold
+[8669.57]     Balise : Run animator...
+[8669.57]     Balise : Compute new frames...
+[8669.57]     LEDs : new frame for PIX.6.2.2
+[8669.57]     Balise : Addr LED Ani1 New frames...
+[8669.57]     Balise : Addr LED Ani1 New frames 1
+[8669.57]     Laser : new frame for LAS.0
+[8669.57]     src/laser.cpp 145 new_frame
+[8669.57]     Front Rack : new frame for FR.1.2.2
+[8669.57]     src/spot.cpp 692 new_frame
+[8669.57]     Vert. Beams : new frame for R15.0
+[8669.57]     src/spot.cpp 692 new_frame
+[8669.57]     Rack 2 : new frame for R40.0
+[8669.57]     src/spot.cpp 692 new_frame
+[8669.57]     SHEHDS Rack : new frame for BR2.0
+[8669.57]     src/spot.cpp 692 new_frame
+[8669.57]     Spider : new frame for SPI.0.0
+[8669.57]     src/spider.cpp 183 new_frame
+[8669.57]     Balise : Compute new spider1 frame
+[8669.57]     Redrayz : new frame for RED.2.1.3
+[8669.57]     Balise : fausse balise
+[8669.57]     Balise : Send frame...
+[8669.57]     Balise : Construct & send buffer for classical fixtures
+[8669.57]     src/spider.cpp 113 buffer
+[8669.57]     src/laser.cpp 16 buffer
+[8669.57]     Balise : Construct & send buffer for artnet pixels
+[8669.57]     Balise : Debug...
+[8669.57]     src/debug.cpp 367 display_curse
+[8669.57]     src/debug.cpp 81 disp_music_window
+[8669.57]     src/debug.cpp 238 disp_animation_window
+[8669.57]     src/debug.cpp 193 disp_output_window
+[8669.57]     src/laser.cpp 16 buffer
+[8669.57]     src/debug.cpp 269 disp_general_window
+[8669.57]     src/debug.cpp 309 disp_console_window
+[8669.57]     Balise : Wait next frame...
+[8669.57]     src/main.cpp 148 main
+[8669.57]     Balise : ----------------------------Start new frame...
+[8669.6]     Balise : Record & process sample...
+[8669.6]     src/music.cpp 154 update
+[8669.6]     src/music.cpp 238 _update_beats
+[8669.6]     src/music.cpp 265 _update_state
+[8669.6]     src/music.cpp 333 _update_beat_threshold
+[8669.6]     Balise : Run animator...
+[8669.6]     Balise : Compute new frames...
+[8669.6]     LEDs : new frame for PIX.6.2.2
+[8669.6]     Balise : Addr LED Ani1 New frames...
+[8669.6]     Balise : Addr LED Ani1 New frames 1
+[8669.6]     Laser : new frame for LAS.0
+[8669.6]     src/laser.cpp 145 new_frame
+[8669.6]     Front Rack : new frame for FR.1.2.2
+[8669.6]     src/spot.cpp 692 new_frame
+[8669.6]     Vert. Beams : new frame for R15.0
+[8669.6]     src/spot.cpp 692 new_frame
+[8669.6]     Rack 2 : new frame for R40.0
+[8669.6]     src/spot.cpp 692 new_frame
+[8669.6]     SHEHDS Rack : new frame for BR2.0
+[8669.6]     src/spot.cpp 692 new_frame
+[8669.6]     Spider : new frame for SPI.0.0
+[8669.6]     src/spider.cpp 183 new_frame
+[8669.6]     Balise : Compute new spider1 frame
+[8669.6]     Redrayz : new frame for RED.2.1.3
+[8669.6]     Balise : fausse balise
+[8669.6]     Balise : Send frame...
+[8669.6]     Balise : Construct & send buffer for classical fixtures
+[8669.6]     src/spider.cpp 113 buffer
+[8669.6]     src/laser.cpp 16 buffer
+[8669.6]     Balise : Construct & send buffer for artnet pixels
+[8669.6]     Balise : Debug...
+[8669.6]     src/debug.cpp 367 display_curse
+[8669.6]     src/debug.cpp 81 disp_music_window
+[8669.6]     src/debug.cpp 238 disp_animation_window
+[8669.6]     src/debug.cpp 193 disp_output_window
+[8669.6]     src/laser.cpp 16 buffer
+[8669.6]     src/debug.cpp 269 disp_general_window
+[8669.6]     src/debug.cpp 309 disp_console_window
+[8669.6]     Balise : Wait next frame...
+[8669.6]     src/music.cpp 214 _process_record
+[8669.6]     src/music.cpp 214 _process_record
+[8669.6]     src/main.cpp 148 main
+[8669.6]     Balise : ----------------------------Start new frame...
+[8669.62]     Balise : Record & process sample...
+[8669.62]     src/music.cpp 154 update
+[8669.62]     src/music.cpp 238 _update_beats
+[8669.62]     src/music.cpp 265 _update_state
+[8669.62]     src/music.cpp 333 _update_beat_threshold
+[8669.62]     Balise : Run animator...
+[8669.62]     Balise : Compute new frames...
+[8669.62]     LEDs : new frame for PIX.6.2.2
+[8669.62]     Balise : Addr LED Ani1 New frames...
+[8669.62]     Balise : Addr LED Ani1 New frames 1
+[8669.62]     Laser : new frame for LAS.0
+[8669.62]     src/laser.cpp 145 new_frame
+[8669.62]     Front Rack : new frame for FR.1.2.2
+[8669.62]     src/spot.cpp 692 new_frame
+[8669.62]     Vert. Beams : new frame for R15.0
+[8669.62]     src/spot.cpp 692 new_frame
+[8669.62]     Rack 2 : new frame for R40.0
+[8669.62]     src/spot.cpp 692 new_frame
+[8669.62]     SHEHDS Rack : new frame for BR2.0
+[8669.62]     src/spot.cpp 692 new_frame
+[8669.62]     Spider : new frame for SPI.0.0
+[8669.62]     src/spider.cpp 183 new_frame
+[8669.62]     Balise : Compute new spider1 frame
+[8669.62]     Redrayz : new frame for RED.2.1.3
+[8669.62]     Balise : fausse balise
+[8669.62]     Balise : Send frame...
+[8669.62]     Balise : Construct & send buffer for classical fixtures
+[8669.62]     src/spider.cpp 113 buffer
+[8669.62]     src/laser.cpp 16 buffer
+[8669.62]     Balise : Construct & send buffer for artnet pixels
+[8669.62]     Balise : Debug...
+[8669.62]     src/debug.cpp 367 display_curse
+[8669.62]     src/debug.cpp 81 disp_music_window
+[8669.62]     src/debug.cpp 238 disp_animation_window
+[8669.62]     src/debug.cpp 193 disp_output_window
+[8669.62]     src/laser.cpp 16 buffer
+[8669.62]     src/debug.cpp 269 disp_general_window
+[8669.62]     src/debug.cpp 309 disp_console_window
+[8669.62]     Balise : Wait next frame...
+[8669.62]     src/music.cpp 214 _process_record
+[8669.62]     src/main.cpp 148 main
+[8669.62]     Balise : ----------------------------Start new frame...
+[8669.65]     Balise : Record & process sample...
+[8669.65]     src/music.cpp 154 update
+[8669.65]     src/music.cpp 238 _update_beats
+[8669.65]     src/music.cpp 265 _update_state
+[8669.65]     src/music.cpp 333 _update_beat_threshold
+[8669.65]     Balise : Run animator...
+[8669.65]     Balise : Compute new frames...
+[8669.65]     LEDs : new frame for PIX.6.2.2
+[8669.65]     Balise : Addr LED Ani1 New frames...
+[8669.65]     Balise : Addr LED Ani1 New frames 1
+[8669.65]     Laser : new frame for LAS.0
+[8669.65]     src/laser.cpp 145 new_frame
+[8669.65]     Front Rack : new frame for FR.1.2.2
+[8669.65]     src/spot.cpp 692 new_frame
+[8669.65]     Vert. Beams : new frame for R15.0
+[8669.65]     src/spot.cpp 692 new_frame
+[8669.65]     Rack 2 : new frame for R40.0
+[8669.65]     src/spot.cpp 692 new_frame
+[8669.65]     SHEHDS Rack : new frame for BR2.0
+[8669.65]     src/spot.cpp 692 new_frame
+[8669.65]     Spider : new frame for SPI.0.0
+[8669.65]     src/spider.cpp 183 new_frame
+[8669.65]     Balise : Compute new spider1 frame
+[8669.65]     Redrayz : new frame for RED.2.1.3
+[8669.65]     Balise : fausse balise
+[8669.65]     Balise : Send frame...
+[8669.65]     Balise : Construct & send buffer for classical fixtures
+[8669.65]     src/spider.cpp 113 buffer
+[8669.65]     src/laser.cpp 16 buffer
+[8669.65]     Balise : Construct & send buffer for artnet pixels
+[8669.65]     Balise : Debug...
+[8669.65]     src/debug.cpp 367 display_curse
+[8669.65]     src/debug.cpp 81 disp_music_window
+[8669.65]     src/debug.cpp 238 disp_animation_window
+[8669.65]     src/debug.cpp 193 disp_output_window
+[8669.65]     src/laser.cpp 16 buffer
+[8669.65]     src/debug.cpp 269 disp_general_window
+[8669.65]     src/debug.cpp 309 disp_console_window
+[8669.65]     Balise : Wait next frame...
+[8669.65]     src/music.cpp 214 _process_record
+[8669.65]     src/music.cpp 214 _process_record
+[8669.65]     src/main.cpp 148 main
+[8669.65]     Balise : ----------------------------Start new frame...
+[8669.67]     Balise : Record & process sample...
+[8669.67]     src/music.cpp 154 update
+[8669.67]     src/music.cpp 238 _update_beats
+[8669.67]     src/music.cpp 265 _update_state
+[8669.67]     src/music.cpp 333 _update_beat_threshold
+[8669.67]     Balise : Run animator...
+[8669.67]     Balise : Compute new frames...
+[8669.67]     LEDs : new frame for PIX.6.2.2
+[8669.67]     Balise : Addr LED Ani1 New frames...
+[8669.67]     Balise : Addr LED Ani1 New frames 1
+[8669.67]     Laser : new frame for LAS.0
+[8669.67]     src/laser.cpp 145 new_frame
+[8669.67]     Front Rack : new frame for FR.1.2.2
+[8669.67]     src/spot.cpp 692 new_frame
+[8669.67]     Vert. Beams : new frame for R15.0
+[8669.67]     src/spot.cpp 692 new_frame
+[8669.67]     Rack 2 : new frame for R40.0
+[8669.67]     src/spot.cpp 692 new_frame
+[8669.67]     SHEHDS Rack : new frame for BR2.0
+[8669.67]     src/spot.cpp 692 new_frame
+[8669.67]     Spider : new frame for SPI.0.0
+[8669.67]     src/spider.cpp 183 new_frame
+[8669.67]     Balise : Compute new spider1 frame
+[8669.67]     Redrayz : new frame for RED.2.1.3
+[8669.67]     Balise : fausse balise
+[8669.67]     Balise : Send frame...
+[8669.67]     Balise : Construct & send buffer for classical fixtures
+[8669.67]     src/spider.cpp 113 buffer
+[8669.67]     src/laser.cpp 16 buffer
+[8669.67]     Balise : Construct & send buffer for artnet pixels
+[8669.67]     Balise : Debug...
+[8669.67]     src/debug.cpp 367 display_curse
+[8669.67]     src/debug.cpp 81 disp_music_window
+[8669.67]     src/debug.cpp 238 disp_animation_window
+[8669.67]     src/debug.cpp 193 disp_output_window
+[8669.67]     src/laser.cpp 16 buffer
+[8669.67]     src/debug.cpp 269 disp_general_window
+[8669.67]     src/debug.cpp 309 disp_console_window
+[8669.67]     Balise : Wait next frame...
+[8669.67]     src/music.cpp 214 _process_record
+[8669.67]     src/main.cpp 148 main
+[8669.67]     Balise : ----------------------------Start new frame...
+[8669.7]     Balise : Record & process sample...
+[8669.7]     src/music.cpp 154 update
+[8669.7]     src/music.cpp 238 _update_beats
+[8669.7]     src/music.cpp 265 _update_state
+[8669.7]     src/music.cpp 333 _update_beat_threshold
+[8669.7]     Balise : Run animator...
+[8669.7]     Balise : Compute new frames...
+[8669.7]     LEDs : new frame for PIX.6.2.2
+[8669.7]     Balise : Addr LED Ani1 New frames...
+[8669.7]     Balise : Addr LED Ani1 New frames 1
+[8669.7]     Laser : new frame for LAS.0
+[8669.7]     src/laser.cpp 145 new_frame
+[8669.7]     Front Rack : new frame for FR.1.2.2
+[8669.7]     src/spot.cpp 692 new_frame
+[8669.7]     Vert. Beams : new frame for R15.0
+[8669.7]     src/spot.cpp 692 new_frame
+[8669.7]     Rack 2 : new frame for R40.0
+[8669.7]     src/spot.cpp 692 new_frame
+[8669.7]     SHEHDS Rack : new frame for BR2.0
+[8669.7]     src/spot.cpp 692 new_frame
+[8669.7]     Spider : new frame for SPI.0.0
+[8669.7]     src/spider.cpp 183 new_frame
+[8669.7]     Balise : Compute new spider1 frame
+[8669.7]     Redrayz : new frame for RED.2.1.3
+[8669.7]     Balise : fausse balise
+[8669.7]     Balise : Send frame...
+[8669.7]     Balise : Construct & send buffer for classical fixtures
+[8669.7]     src/spider.cpp 113 buffer
+[8669.7]     src/laser.cpp 16 buffer
+[8669.7]     Balise : Construct & send buffer for artnet pixels
+[8669.7]     Balise : Debug...
+[8669.7]     src/debug.cpp 367 display_curse
+[8669.7]     src/debug.cpp 81 disp_music_window
+[8669.7]     src/debug.cpp 238 disp_animation_window
+[8669.7]     src/debug.cpp 193 disp_output_window
+[8669.7]     src/laser.cpp 16 buffer
+[8669.7]     src/debug.cpp 269 disp_general_window
+[8669.7]     src/debug.cpp 309 disp_console_window
+[8669.7]     Balise : Wait next frame...
+[8669.7]     src/music.cpp 214 _process_record
+[8669.7]     src/main.cpp 148 main
+[8669.7]     Balise : ----------------------------Start new frame...
+[8669.72]     Balise : Record & process sample...
+[8669.72]     src/music.cpp 154 update
+[8669.72]     src/music.cpp 238 _update_beats
+[8669.72]     src/music.cpp 265 _update_state
+[8669.72]     src/music.cpp 333 _update_beat_threshold
+[8669.72]     Balise : Run animator...
+[8669.72]     Balise : Compute new frames...
+[8669.72]     LEDs : new frame for PIX.6.2.2
+[8669.72]     Balise : Addr LED Ani1 New frames...
+[8669.72]     Balise : Addr LED Ani1 New frames 1
+[8669.72]     Laser : new frame for LAS.0
+[8669.72]     src/laser.cpp 145 new_frame
+[8669.72]     Front Rack : new frame for FR.1.2.2
+[8669.72]     src/spot.cpp 692 new_frame
+[8669.72]     Vert. Beams : new frame for R15.0
+[8669.72]     src/spot.cpp 692 new_frame
+[8669.72]     Rack 2 : new frame for R40.0
+[8669.72]     src/spot.cpp 692 new_frame
+[8669.72]     SHEHDS Rack : new frame for BR2.0
+[8669.72]     src/spot.cpp 692 new_frame
+[8669.72]     Spider : new frame for SPI.0.0
+[8669.72]     src/spider.cpp 183 new_frame
+[8669.72]     Balise : Compute new spider1 frame
+[8669.72]     Redrayz : new frame for RED.2.1.3
+[8669.72]     Balise : fausse balise
+[8669.72]     Balise : Send frame...
+[8669.72]     Balise : Construct & send buffer for classical fixtures
+[8669.72]     src/spider.cpp 113 buffer
+[8669.72]     src/laser.cpp 16 buffer
+[8669.72]     Balise : Construct & send buffer for artnet pixels
+[8669.72]     Balise : Debug...
+[8669.72]     src/debug.cpp 367 display_curse
+[8669.72]     src/debug.cpp 81 disp_music_window
+[8669.72]     src/debug.cpp 238 disp_animation_window
+[8669.72]     src/debug.cpp 193 disp_output_window
+[8669.72]     src/laser.cpp 16 buffer
+[8669.72]     src/debug.cpp 269 disp_general_window
+[8669.72]     src/debug.cpp 309 disp_console_window
+[8669.72]     Balise : Wait next frame...
+[8669.72]     src/main.cpp 148 main
+[8669.72]     Balise : ----------------------------Start new frame...
+[8669.75]     Balise : Record & process sample...
+[8669.75]     src/music.cpp 154 update
+[8669.75]     src/music.cpp 238 _update_beats
+[8669.75]     src/music.cpp 265 _update_state
+[8669.75]     src/music.cpp 333 _update_beat_threshold
+[8669.75]     Balise : Run animator...
+[8669.75]     Balise : Compute new frames...
+[8669.75]     LEDs : new frame for PIX.6.2.2
+[8669.75]     Balise : Addr LED Ani1 New frames...
+[8669.75]     Balise : Addr LED Ani1 New frames 1
+[8669.75]     Laser : new frame for LAS.0
+[8669.75]     src/laser.cpp 145 new_frame
+[8669.75]     Front Rack : new frame for FR.1.2.2
+[8669.75]     src/spot.cpp 692 new_frame
+[8669.75]     Vert. Beams : new frame for R15.0
+[8669.75]     src/spot.cpp 692 new_frame
+[8669.75]     Rack 2 : new frame for R40.0
+[8669.75]     src/spot.cpp 692 new_frame
+[8669.75]     SHEHDS Rack : new frame for BR2.0
+[8669.75]     src/spot.cpp 692 new_frame
+[8669.75]     Spider : new frame for SPI.0.0
+[8669.75]     src/spider.cpp 183 new_frame
+[8669.75]     Balise : Compute new spider1 frame
+[8669.75]     Redrayz : new frame for RED.2.1.3
+[8669.75]     Balise : fausse balise
+[8669.75]     Balise : Send frame...
+[8669.75]     Balise : Construct & send buffer for classical fixtures
+[8669.75]     src/spider.cpp 113 buffer
+[8669.75]     src/laser.cpp 16 buffer
+[8669.75]     Balise : Construct & send buffer for artnet pixels
+[8669.75]     Balise : Debug...
+[8669.75]     src/debug.cpp 367 display_curse
+[8669.75]     src/debug.cpp 81 disp_music_window
+[8669.75]     src/debug.cpp 238 disp_animation_window
+[8669.75]     src/debug.cpp 193 disp_output_window
+[8669.75]     src/laser.cpp 16 buffer
+[8669.75]     src/debug.cpp 269 disp_general_window
+[8669.75]     src/debug.cpp 309 disp_console_window
+[8669.75]     Balise : Wait next frame...
+[8669.75]     src/music.cpp 214 _process_record
+[8669.75]     src/music.cpp 214 _process_record
+[8669.75]     src/main.cpp 148 main
+[8669.75]     Balise : ----------------------------Start new frame...
+[8669.77]     Balise : Record & process sample...
+[8669.77]     src/music.cpp 154 update
+[8669.77]     src/music.cpp 238 _update_beats
+[8669.77]     src/music.cpp 265 _update_state
+[8669.77]     src/music.cpp 333 _update_beat_threshold
+[8669.77]     Balise : Run animator...
+[8669.77]     Balise : Compute new frames...
+[8669.77]     LEDs : new frame for PIX.6.2.2
+[8669.77]     Balise : Addr LED Ani1 New frames...
+[8669.77]     Balise : Addr LED Ani1 New frames 1
+[8669.77]     Laser : new frame for LAS.0
+[8669.77]     src/laser.cpp 145 new_frame
+[8669.77]     Front Rack : new frame for FR.1.2.2
+[8669.77]     src/spot.cpp 692 new_frame
+[8669.77]     Vert. Beams : new frame for R15.0
+[8669.77]     src/spot.cpp 692 new_frame
+[8669.77]     Rack 2 : new frame for R40.0
+[8669.77]     src/spot.cpp 692 new_frame
+[8669.77]     SHEHDS Rack : new frame for BR2.0
+[8669.77]     src/spot.cpp 692 new_frame
+[8669.77]     Spider : new frame for SPI.0.0
+[8669.77]     src/spider.cpp 183 new_frame
+[8669.77]     Balise : Compute new spider1 frame
+[8669.77]     Redrayz : new frame for RED.2.1.3
+[8669.77]     Balise : fausse balise
+[8669.77]     Balise : Send frame...
+[8669.77]     Balise : Construct & send buffer for classical fixtures
+[8669.77]     src/spider.cpp 113 buffer
+[8669.77]     src/laser.cpp 16 buffer
+[8669.77]     Balise : Construct & send buffer for artnet pixels
+[8669.77]     Balise : Debug...
+[8669.77]     src/debug.cpp 367 display_curse
+[8669.77]     src/debug.cpp 81 disp_music_window
+[8669.77]     src/debug.cpp 238 disp_animation_window
+[8669.77]     src/debug.cpp 193 disp_output_window
+[8669.77]     src/laser.cpp 16 buffer
+[8669.77]     src/debug.cpp 269 disp_general_window
+[8669.77]     src/debug.cpp 309 disp_console_window
+[8669.77]     Balise : Wait next frame...
+[8669.77]     src/music.cpp 214 _process_record
+[8669.77]     src/main.cpp 148 main
+[8669.77]     Balise : ----------------------------Start new frame...
+[8669.8]     Balise : Record & process sample...
+[8669.8]     src/music.cpp 154 update
+[8669.8]     src/music.cpp 238 _update_beats
+[8669.8]     src/music.cpp 265 _update_state
+[8669.8]     src/music.cpp 333 _update_beat_threshold
+[8669.8]     Balise : Run animator...
+[8669.8]     Balise : Compute new frames...
+[8669.8]     LEDs : new frame for PIX.6.2.2
+[8669.8]     Balise : Addr LED Ani1 New frames...
+[8669.8]     Balise : Addr LED Ani1 New frames 1
+[8669.8]     Laser : new frame for LAS.0
+[8669.8]     src/laser.cpp 145 new_frame
+[8669.8]     Front Rack : new frame for FR.1.2.2
+[8669.8]     src/spot.cpp 692 new_frame
+[8669.8]     Vert. Beams : new frame for R15.0
+[8669.8]     src/spot.cpp 692 new_frame
+[8669.8]     Rack 2 : new frame for R40.0
+[8669.8]     src/spot.cpp 692 new_frame
+[8669.8]     SHEHDS Rack : new frame for BR2.0
+[8669.8]     src/spot.cpp 692 new_frame
+[8669.8]     Spider : new frame for SPI.0.0
+[8669.8]     src/spider.cpp 183 new_frame
+[8669.8]     Balise : Compute new spider1 frame
+[8669.8]     Redrayz : new frame for RED.2.1.3
+[8669.8]     Balise : fausse balise
+[8669.8]     Balise : Send frame...
+[8669.8]     Balise : Construct & send buffer for classical fixtures
+[8669.8]     src/spider.cpp 113 buffer
+[8669.8]     src/laser.cpp 16 buffer
+[8669.8]     Balise : Construct & send buffer for artnet pixels
+[8669.8]     Balise : Debug...
+[8669.8]     src/debug.cpp 367 display_curse
+[8669.8]     src/debug.cpp 81 disp_music_window
+[8669.8]     src/debug.cpp 238 disp_animation_window
+[8669.8]     src/debug.cpp 193 disp_output_window
+[8669.8]     src/laser.cpp 16 buffer
+[8669.8]     src/debug.cpp 269 disp_general_window
+[8669.8]     src/debug.cpp 309 disp_console_window
+[8669.8]     Balise : Wait next frame...
+[8669.8]     src/music.cpp 214 _process_record
+[8669.8]     src/music.cpp 214 _process_record
+[8669.8]     src/main.cpp 148 main
+[8669.8]     Balise : ----------------------------Start new frame...
+[8669.82]     Balise : Record & process sample...
+[8669.82]     src/music.cpp 154 update
+[8669.82]     src/music.cpp 238 _update_beats
+[8669.82]     src/music.cpp 265 _update_state
+[8669.82]     src/music.cpp 333 _update_beat_threshold
+[8669.82]     Balise : Run animator...
+[8669.82]     Balise : Compute new frames...
+[8669.82]     LEDs : new frame for PIX.6.2.2
+[8669.82]     Balise : Addr LED Ani1 New frames...
+[8669.82]     Balise : Addr LED Ani1 New frames 1
+[8669.82]     Laser : new frame for LAS.0
+[8669.82]     src/laser.cpp 145 new_frame
+[8669.82]     Front Rack : new frame for FR.1.2.2
+[8669.82]     src/spot.cpp 692 new_frame
+[8669.82]     Vert. Beams : new frame for R15.0
+[8669.82]     src/spot.cpp 692 new_frame
+[8669.82]     Rack 2 : new frame for R40.0
+[8669.82]     src/spot.cpp 692 new_frame
+[8669.82]     SHEHDS Rack : new frame for BR2.0
+[8669.82]     src/spot.cpp 692 new_frame
+[8669.82]     Spider : new frame for SPI.0.0
+[8669.82]     src/spider.cpp 183 new_frame
+[8669.82]     Balise : Compute new spider1 frame
+[8669.82]     Redrayz : new frame for RED.2.1.3
+[8669.82]     Balise : fausse balise
+[8669.82]     Balise : Send frame...
+[8669.82]     Balise : Construct & send buffer for classical fixtures
+[8669.82]     src/spider.cpp 113 buffer
+[8669.82]     src/laser.cpp 16 buffer
+[8669.82]     Balise : Construct & send buffer for artnet pixels
+[8669.82]     Balise : Debug...
+[8669.82]     src/debug.cpp 367 display_curse
+[8669.82]     src/debug.cpp 81 disp_music_window
+[8669.82]     src/debug.cpp 238 disp_animation_window
+[8669.82]     src/debug.cpp 193 disp_output_window
+[8669.82]     src/laser.cpp 16 buffer
+[8669.82]     src/debug.cpp 269 disp_general_window
+[8669.82]     src/debug.cpp 309 disp_console_window
+[8669.82]     Balise : Wait next frame...
+[8669.82]     src/music.cpp 214 _process_record
+[8669.82]     src/main.cpp 148 main
+[8669.82]     Balise : ----------------------------Start new frame...
+[8669.85]     Balise : Record & process sample...
+[8669.85]     src/music.cpp 154 update
+[8669.85]     src/music.cpp 238 _update_beats
+[8669.85]     src/music.cpp 265 _update_state
+[8669.85]     src/music.cpp 333 _update_beat_threshold
+[8669.85]     Balise : Run animator...
+[8669.85]     Balise : Compute new frames...
+[8669.85]     LEDs : new frame for PIX.6.2.2
+[8669.85]     Balise : Addr LED Ani1 New frames...
+[8669.85]     Balise : Addr LED Ani1 New frames 1
+[8669.85]     Laser : new frame for LAS.0
+[8669.85]     src/laser.cpp 145 new_frame
+[8669.85]     Front Rack : new frame for FR.1.2.2
+[8669.85]     src/spot.cpp 692 new_frame
+[8669.85]     Vert. Beams : new frame for R15.0
+[8669.85]     src/spot.cpp 692 new_frame
+[8669.85]     Rack 2 : new frame for R40.0
+[8669.85]     src/spot.cpp 692 new_frame
+[8669.85]     SHEHDS Rack : new frame for BR2.0
+[8669.85]     src/spot.cpp 692 new_frame
+[8669.85]     Spider : new frame for SPI.0.0
+[8669.85]     src/spider.cpp 183 new_frame
+[8669.85]     Balise : Compute new spider1 frame
+[8669.85]     Redrayz : new frame for RED.2.1.3
+[8669.85]     Balise : fausse balise
+[8669.85]     Balise : Send frame...
+[8669.85]     Balise : Construct & send buffer for classical fixtures
+[8669.85]     src/spider.cpp 113 buffer
+[8669.85]     src/laser.cpp 16 buffer
+[8669.85]     Balise : Construct & send buffer for artnet pixels
+[8669.85]     Balise : Debug...
+[8669.85]     src/debug.cpp 367 display_curse
+[8669.85]     src/debug.cpp 81 disp_music_window
+[8669.85]     src/debug.cpp 238 disp_animation_window
+[8669.85]     src/debug.cpp 193 disp_output_window
+[8669.85]     src/laser.cpp 16 buffer
+[8669.85]     src/debug.cpp 269 disp_general_window
+[8669.85]     src/debug.cpp 309 disp_console_window
+[8669.85]     Balise : Wait next frame...
+[8669.85]     src/music.cpp 214 _process_record
+[8669.85]     src/main.cpp 148 main
+[8669.85]     Balise : ----------------------------Start new frame...
+[8669.87]     Balise : Record & process sample...
+[8669.87]     src/music.cpp 154 update
+[8669.87]     src/music.cpp 238 _update_beats
+[8669.87]     src/music.cpp 265 _update_state
+[8669.87]     src/music.cpp 333 _update_beat_threshold
+[8669.87]     Balise : Run animator...
+[8669.87]     Balise : Compute new frames...
+[8669.87]     LEDs : new frame for PIX.6.2.2
+[8669.87]     Balise : Addr LED Ani1 New frames...
+[8669.87]     Balise : Addr LED Ani1 New frames 1
+[8669.87]     Laser : new frame for LAS.0
+[8669.87]     src/laser.cpp 145 new_frame
+[8669.87]     Front Rack : new frame for FR.1.2.2
+[8669.87]     src/spot.cpp 692 new_frame
+[8669.87]     Vert. Beams : new frame for R15.0
+[8669.87]     src/spot.cpp 692 new_frame
+[8669.87]     Rack 2 : new frame for R40.0
+[8669.87]     src/spot.cpp 692 new_frame
+[8669.87]     SHEHDS Rack : new frame for BR2.0
+[8669.87]     src/spot.cpp 692 new_frame
+[8669.87]     Spider : new frame for SPI.0.0
+[8669.87]     src/spider.cpp 183 new_frame
+[8669.87]     Balise : Compute new spider1 frame
+[8669.87]     Redrayz : new frame for RED.2.1.3
+[8669.87]     Balise : fausse balise
+[8669.87]     Balise : Send frame...
+[8669.87]     Balise : Construct & send buffer for classical fixtures
+[8669.87]     src/spider.cpp 113 buffer
+[8669.87]     src/laser.cpp 16 buffer
+[8669.87]     Balise : Construct & send buffer for artnet pixels
+[8669.87]     Balise : Debug...
+[8669.87]     src/debug.cpp 367 display_curse
+[8669.87]     src/debug.cpp 81 disp_music_window
+[8669.87]     src/debug.cpp 238 disp_animation_window
+[8669.87]     src/debug.cpp 193 disp_output_window
+[8669.87]     src/laser.cpp 16 buffer
+[8669.87]     src/debug.cpp 269 disp_general_window
+[8669.87]     src/debug.cpp 309 disp_console_window
+[8669.87]     Balise : Wait next frame...

@@ -2,7 +2,6 @@
 
 #include "debug.h"
 #include "DMXio.h"
-#include "addr_LED.h"
 #include "fixtures.h"
 
 using namespace std;
@@ -161,7 +160,7 @@ void processDMXinput(const ola::client::DMXMetadata &metadata, const ola::DmxBuf
     }
 
     // PROCESS ADRESSABLE LED DIMMER
-    if (true){ // process dimmer input as a continuous stream (& not only on trigger)
+    if (new_data_available){ // process dimmer input as a continuous stream (& not only on trigger)
         // get & rewrap raw data
         addr_led.master = data.Get(LED_DIM_CH); // already a 0-255 dmx data, no conversion/rewrap needed
     }
@@ -230,7 +229,7 @@ void processDMXinput(const ola::client::DMXMetadata &metadata, const ola::DmxBuf
 
     SpotRack* spot_rack_1 = &front_rack;  //allows for more fexibility when using more than 1 rack
     //PROCESS SPOT RACK 1 DIMMER
-    if (true){ // process dimmer input as a continuous stream (& not only on trigger)
+    if (new_data_available){ // process dimmer input as a continuous stream (& not only on trigger)
         // get & rewrap raw data
         spot_rack_1->master = data.Get(SR1_DIM_CH); // already a 0-255 dmx data, no conversion/rewrap needed
     }
@@ -288,6 +287,73 @@ void processDMXinput(const ola::client::DMXMetadata &metadata, const ola::DmxBuf
                 spot_rack_1->external_palette.clear();    //reset to empty palette (meaning main palette or auto palette will apply to leds)
                 spot_rack_1->new_external_palette = true;
                 log(2, "Back to automatic SR1 palette");
+            }else{
+                
+            }
+        }
+    }else{
+        
+    }
+
+    //PROCESS RED RAYZ DIMMER
+    if (new_data_available){ // process dimmer input as a continuous stream (& not only on trigger)
+        // get & rewrap raw data
+        redrayz.master = data.Get(RED_DIM_CH); // already a 0-255 dmx data, no conversion/rewrap needed
+        redrayz.address = redrayz.get_address();
+    }
+
+    //PROCESS RED RAYZ Animation
+    if (trigger){
+        //get & rewrap raw data
+        int red_ani_val = data.Get(RED_ANI_CH);
+        // if input data is not in DEFAULT positions (automatic mode)
+        if ( red_ani_val!=0) { 
+            // update Rack animation if there is a change
+            if (redrayz.external_animation != red_ani_val){
+                redrayz.external_animation = red_ani_val;
+                redrayz.new_external_animation = true;
+            }else{
+                
+            }
+        // if input data is DEFAULT (0) 
+        }else{
+            if (redrayz.external_animation != 0){  //if not already reset to 0
+                redrayz.external_animation = 0;    //reset to 0
+                redrayz.new_external_animation = true;
+                log(2, "Back to automatic RED animation");  //TODO choose where to put log instructions (cannot be both in DMXio and Animator)
+            }else{
+                
+            }
+        }
+    }else{
+        
+    }
+
+    //PROCESS RED RAYZ COLORS
+    if (trigger){
+        // get & rewrap raw data
+        int red_col1_val = min(max((uint8_t)0,  data.Get(RED_COL1_CH)) , (uint8_t)(simpleColor::last_color));
+        int red_col2_val = min(max((uint8_t)0,  data.Get(RED_COL2_CH)) , (uint8_t)(simpleColor::last_color));
+        //create output structrue
+        color_vec red_palette;   //start with empty palette
+        // if input data are not in DEFAULT positions (automatic mode)
+        if ( red_col1_val!=0 || red_col2_val!=0 ) {
+            // create a palette based on (non zero) input data
+            if (red_col1_val > 0)  red_palette.push_back((simpleColor)(red_col1_val-1));
+            if (red_col2_val > 0)  red_palette.push_back((simpleColor)(red_col2_val-1));
+            // update Rack palette if there is a change
+            if (redrayz.external_palette != red_palette){
+                redrayz.external_palette = red_palette;
+                redrayz.new_external_palette = true;
+                // log(2, "New SR1 palette : ", fcn::palette_to_string(spot_rack_1->external_palette));
+            }else{
+                
+            }
+        }else{
+            if ( !redrayz.external_palette.empty()){  //if not already empty 
+                redrayz.external_palette.clear();    //reset to empty palette (meaning main palette or auto palette will apply to leds)
+                redrayz.new_external_palette = true;
+                log(2, "Back to automatic RED palette");
             }else{
                 
             }

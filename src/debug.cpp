@@ -201,18 +201,18 @@ void disp_output_window(){
     wattroff(outputw, A_BOLD);
 
     int line=1;
-    for (auto fix : fix_vec{&addr_led, /*&led,*/ &laser, &front_rack, &spider, &rack_15, &rack_40, &shehds_rack, &redrayz}){
+    for (auto fix : fix_vec{&addr_led, /*&led,*/ &laser, &front_rack, /*&spider, &rack_15, &rack_40, &shehds_rack,*/ &redrayz}){
         if (fix->active_animation != nullptr){
             ostringstream animbuf, outbuf;
-            
+            // animation name & ID
             animbuf << ((fix->active_animation->type == leader) ? "(L) ":((fix->active_animation->type == backer) ? "(b) " : "(a) ")) << fix->name << " " << fix->active_animation->id << " - " << fix->active_animation->description;
-            
+            //fixture output buffer
             DMX_vec raw_buf = fix->buffer();
             outbuf << "| " <<fcn::vec_to_str(raw_buf, ',');
 
-            int max_length = 40;
+            int max_length = 25;
             mvwprintw(outputw, line, 1, animbuf.str().data());
-            mvwprintw(outputw, line, 45, outbuf.str().size()<max_length? outbuf.str().data() : outbuf.str().substr(0, max_length).data());
+            mvwprintw(outputw, line, 90-max_length-1, outbuf.str().size()<max_length? outbuf.str().data() : outbuf.str().substr(0, max_length).data());
             
             if((fix == &front_rack) || fix == &shehds_rack)  line+=2;
             else line += 1;

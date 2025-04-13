@@ -82,8 +82,8 @@ class FixtureAnimation1 : public FixtureAnimation{
     }
 
     void init() override; //Standard init fcn
-    void init(const color_vec&) override{BaseAnimation::init();}; //AUTOCOLOR init fcn
-    void new_frame() override{BaseAnimation::new_frame();};
+    void init(const color_vec&) override; //AUTOCOLOR init fcn
+    void new_frame() override;
 };
 
 

@@ -55,42 +55,45 @@ class RedrayzAnimation : public BaseAnimation{
 
 
 /*
-   #          #######                 
-  ##          #       # #    # ###### 
- # #          #       #  #  #  #      
-   #          #####   #   ##   #####  
-   #   ###    #       #   ##   #      
-   #   ###    #       #  #  #  #      
- ##### ###    #       # #    # #####
- 
+  ###          #######                 
+ #   #         #       # #    # ###### 
+#     #        #       #  #  #  #      
+#     #        #####   #   ##   #####  
+#     # ###    #       #   ##   #      
+ #   #  ###    #       #  #  #  #      
+  ###   ###    #       # #    # ###### 
+  
+  
  predefined, constant output, channel by channel*/
 
- class RedrayzAnimation1 : public RedrayzAnimation{
+ class RedrayzAnimation0 : public RedrayzAnimation{
   public:
     DMX_vec values;
 
-    RedrayzAnimation1(RedrayLaser *f, uint8_t val, std::string d, std::string i, AnimationType t){
+    RedrayzAnimation0(RedrayLaser *f, uint8_t val, std::string d, std::string i, AnimationType t){
         this->fixture = f;
         this->description = d;
         this->id = i;
         this->type = t;
         
         this->values = DMX_vec(NUM_LAS, val);
+        this->autocolor = true;
         
         if (val!= 0) this->update_palette(red);
     }
-    
+  
     void init() override;
+    void init(const color_vec&) override;
     void new_frame() override;
  };
 /*
-  #####         ######                          ######                             
- #     #        #     #   ##   #    # #####     #     # #    # #####   ####  ##### 
-       #        #     #  #  #  ##   # #    #    #     # #    # #    # #        #   
-  #####         ######  #    # # #  # #    #    ######  #    # #    #  ####    #   
- #       ###    #   #   ###### #  # # #    #    #     # #    # #####       #   #   
- #       ###    #    #  #    # #   ## #    #    #     # #    # #   #  #    #   #   
- ####### ###    #     # #    # #    # #####     ######   ####  #    #  ####    #   
+    #           ######                          ######                             
+   ##           #     #   ##   #    # #####     #     # #    # #####   ####  ##### 
+  # #           #     #  #  #  ##   # #    #    #     # #    # #    # #        #   
+    #           ######  #    # # #  # #    #    ######  #    # #    #  ####    #   
+    #   ###     #   #   ###### #  # # #    #    #     # #    # #####       #   #   
+    #   ###     #    #  #    # #   ## #    #    #     # #    # #   #  #    #   #   
+  ##### ###     #     # #    # #    # #####     ######   ####  #    #  ####    #   
 
 
 Makeover of Bubbles Animation for red ray lasers
@@ -99,7 +102,7 @@ Makeover of Bubbles Animation for red ray lasers
 */
 
 
-class RedrayzAnimation2 : public RedrayzAnimation{
+class RedrayzAnimation1 : public RedrayzAnimation{
   public:
     // Animation parameters (constant or set by animation constructor)
     bool flash_activation = true;
@@ -114,14 +117,10 @@ class RedrayzAnimation2 : public RedrayzAnimation{
     const int i_prev = 0, i_next = 1;
 
     // Constructor
-    RedrayzAnimation2(RedrayLaser *f, Shape fshape,  time_t flen, time_t prand, std::string d, std::string i, AnimationType t, int prio, int mast=255)
+    RedrayzAnimation1(RedrayLaser *f, Shape fshape,  time_t flen, time_t prand, std::string d, std::string i, AnimationType t, int prio, int mast=255)
     {
-      this->description = d;
-      this->id = i; 
-      this->fixture = f;
-      this->type = t;
-      this->priority = prio;
-      this->master = mast;
+      this->description = d,this->id = i,this->fixture = f,this->type = t,this->priority = prio,this->master = mast;
+      this->autocolor = true;
 
       this->flash_shape = fshape;
       this->burst_length = flen;
@@ -131,6 +130,7 @@ class RedrayzAnimation2 : public RedrayzAnimation{
     }
 
     void init() override;
+    void init(const color_vec&) override;
     void new_frame() override;
 };
 

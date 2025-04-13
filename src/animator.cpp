@@ -500,7 +500,7 @@ bool AnimationManager::controled_update(){
     }
 
 // Define fixtures installed
-    fix_vec fixs = {&addr_led, &front_rack};
+    fix_vec fixs = {&addr_led, &front_rack, &redrayz};
 
 //update animation automaticaaly when required
     bool auto_ani_update = false;
@@ -551,7 +551,7 @@ for (auto fix : fixs){
     fix->new_external_animation = false;
     fix->new_external_palette = false;
 }
-animator.new_external_palette = false;
+    animator.new_external_palette = false;
 
     /*Observed bugs :
         - when program is launched, with all external control to 0, there is no activae animation until first break

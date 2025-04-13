@@ -2,7 +2,7 @@ using namespace std;
 
 #include "redrayz.h"
 
-RedrayLaser redrayz(0, 6, "Redray laser", 1);
+RedrayLaser redrayz(0, 6, "Redrayz", 1);
 
 /*
 #######                                     
@@ -15,75 +15,86 @@ RedrayLaser redrayz(0, 6, "Redray laser", 1);
 
 void RedrayLaser::init(){
     // black, OFF animation
-    animations.push_back(new RedrayzAnimation1(this, 0, " ", "RED.0", any));
+    animations.push_back(new RedrayzAnimation0(this, 0, " ", "RED.0", any));
 
     // All laser switched on
-    animations.push_back(new RedrayzAnimation1(this, 255, "FULL ON", "RED.1.1", any));
+    animations.push_back(new RedrayzAnimation0(this, 255, "FULL ON", "RED.1.1", any));
     // define animations
 
     // RANDOM BURST
     //
-//  animations.push_back(new RedrayzAnimation2(this, gaussian,   600,   400,   "Fasr bubbles",            "RED.2.1.1", any, 1));
-    animations.push_back(new RedrayzAnimation2(this, gaussian,   1500,  800,   "Slow bubbles",            "RED.2.1.2", any, 1));
- // animations.push_back(new RedrayzAnimation2(this, gaussian2,  8000,  2500,  "Very slow bubbles",       "RED.2.1.3", any, 1));
-    animations.push_back(new RedrayzAnimation2(this, gaussian2,  1500,  4000,  "Scarce bubbles",          "RED.2.1.4", any, 1));
-    animations.push_back(new RedrayzAnimation2(this, gaussian,   10000,  3000, "VS overlapping bubbles",  "RED.2.1.5", any, 1));
+    animations.push_back(new RedrayzAnimation1(this, gaussian2,  8000,    2500, "VS Bubbles",                "RED.2.1.3", any, 1));
+    animations.push_back(new RedrayzAnimation1(this, gaussian,   10000,   3000, "VS Bubbles (overlapping)",  "RED.2.1.5", any, 1));
+    animations.push_back(new RedrayzAnimation1(this, gaussian,   1500,    800,  "Slow bubbles",              "RED.2.1.2", any, 1));
+    animations.push_back(new RedrayzAnimation1(this, gaussian2,  1500,    4000, "Scarce slow bubbles",       "RED.2.1.4", any, 1));
+    animations.push_back(new RedrayzAnimation1(this, gaussian,   600,     400,  "Fasr bubbles",              "RED.2.1.1", any, 1));
     
-    // animations.push_back(new RedrayzAnimation2(this, square, 600,   400,      "Fast chaser",              "RED.2.2.1", any, 1));
-    // animations.push_back(new RedrayzAnimation2(this, square, 1500,  500,      "Slow chaser",              "RED.2.2.2", any, 1));
-    // animations.push_back(new RedrayzAnimation2(this, square, 5000,  1000,     "Very slow chaser",         "RED.2.2.3", any, 1));
-    animations.push_back(new RedrayzAnimation2(this, square, 10000,  3000,    "VS, overlapping chaser",   "RED.2.2.4", any, 1));
+    animations.push_back(new RedrayzAnimation1(this, square, 5000,  1000,     "Very slow chaser",         "RED.2.2.3", any, 1));
+    animations.push_back(new RedrayzAnimation1(this, square, 10000, 3000,     "VS, overlapping chaser",   "RED.2.2.4", any, 1));
+    animations.push_back(new RedrayzAnimation1(this, square, 1500,  500,      "Slow chaser",              "RED.2.2.2", any, 1));
+    animations.push_back(new RedrayzAnimation1(this, square, 600,   400,      "Fast chaser",              "RED.2.2.1", any, 1));
 
-    // animations.push_back(new RedrayzAnimation2(this, square, 50,   100,   "VF Strobe",  "RED.2.3.1", any, 1));
-    // animations.push_back(new RedrayzAnimation2(this, square, 50,   500,   "F pulses",   "RED.2.3.2", any, 1));
-    // animations.push_back(new RedrayzAnimation2(this, square, 50,   1000,  "S pulses",   "RED.2.3.3", any, 1));
-    // animations.push_back(new RedrayzAnimation2(this, square, 50,   2000,  "VS pulses",  "RED.2.3.4", any, 1));
+    animations.push_back(new RedrayzAnimation1(this, square, 50,   2000,  "VS Strobe",  "RED.2.3.4", any, 1));
+    animations.push_back(new RedrayzAnimation1(this, square, 50,   1000,  "S Strobe",   "RED.2.3.3", any, 1));
+    animations.push_back(new RedrayzAnimation1(this, square, 50,   500,   "F Strobe",   "RED.2.3.2", any, 1));
+    animations.push_back(new RedrayzAnimation1(this, square, 50,   100,   "VF Strobe",  "RED.2.3.1", any, 1));
 
-    // animations.push_back(new RedrayzAnimation2(this, expdecay, 1500, 1500,  "VS decaying rayz",   "RED.2.4.1", any, 1));
-    animations.push_back(new RedrayzAnimation2(this, expdecay, 600, 700,    "S decaying rayz",    "RED.2.4.2", any, 1));
-    // animations.push_back(new RedrayzAnimation2(this, expdecay, 200, 300,    "F decaying rayz",    "RED.2.4.3", any, 1));
-    animations.push_back(new RedrayzAnimation2(this, expdecay, 700, 4000,   "Scarce S decaying rayz",  "RED.2.4.4", any, 1));
-    animations.push_back(new RedrayzAnimation2(this, expdecay, 200, 2000,   "Scarce F decaying rayz",  "RED.2.4.5", any, 1));
-    animations.push_back(new RedrayzAnimation2(this, expdecay, 4000, 1000,  "VS overlapping decaying rayz",   "RED.2.4.6", any, 1));
-
+    animations.push_back(new RedrayzAnimation1(this, expdecay, 1500,  1500,  "VS decaying rayz",               "RED.2.4.1", any, 1));
+    animations.push_back(new RedrayzAnimation1(this, expdecay, 4000,  1000,  "VS overlapping decaying rayz",   "RED.2.4.6", any, 1));
+    animations.push_back(new RedrayzAnimation1(this, expdecay, 600,   700,   "S decaying rayz",                "RED.2.4.2", any, 1));
+    animations.push_back(new RedrayzAnimation1(this, expdecay, 700,   4000,  "Scarce S decaying rayz",         "RED.2.4.4", any, 1));
+    animations.push_back(new RedrayzAnimation1(this, expdecay, 200,   300,   "F decaying rayz",                "RED.2.4.3", any, 1));
+    animations.push_back(new RedrayzAnimation1(this, expdecay, 200,   2000,  "Scarce F decaying rayz",         "RED.2.4.5", any, 1));
 
     this->activate_none();
 }
 
 DMX_vec RedrayLaser::buffer(){
     DMX_vec data(this->nCH);
-    data = this->output_channels;
+
+    for (int i=0; i<this->nCH; i++){  // adjust intensity with fixture master dimmer
+      data[i] = this->master/255.0 * this->output_channels[i];
+    }
+
     return data;
 }
 /*
-   #          #######                 
-  ##          #       # #    # ###### 
- # #          #       #  #  #  #      
-   #          #####   #   ##   #####  
-   #   ###    #       #   ##   #      
-   #   ###    #       #  #  #  #      
- ##### ###    #       # #    # #####*/
-void RedrayzAnimation1::init(){
+  ###          #######                 
+ #   #         #       # #    # ###### 
+#     #        #       #  #  #  #      
+#     #        #####   #   ##   #####  
+#     # ###    #       #   ##   #      
+ #   #  ###    #       #  #  #  #      
+  ###   ###    #       # #    # #####*/
+
+void RedrayzAnimation0::init(){
   BaseAnimation::init();
   this->fixture->output_channels = this->values;
 }
+void RedrayzAnimation0::init(const color_vec& palette){
+  /* Pas d'argument couleur défini pour le laser rouge --> il est toujours rouge*/
+  // STANDARD init()
+  RedrayzAnimation0::init();
+}
 
-void RedrayzAnimation1::new_frame(){
+void RedrayzAnimation0::new_frame(){
   BaseAnimation::new_frame();
 }
 
 
 
 /*
-  #####         ######                          ######                             
- #     #        #     #   ##   #    # #####     #     # #    # #####   ####  ##### 
-       #        #     #  #  #  ##   # #    #    #     # #    # #    # #        #   
-  #####         ######  #    # # #  # #    #    ######  #    # #    #  ####    #   
- #       ###    #   #   ###### #  # # #    #    #     # #    # #####       #   #   
- #       ###    #    #  #    # #   ## #    #    #     # #    # #   #  #    #   #   
- ####### ###    #     # #    # #    # #####     ######   ####  #    #  ####    #  */
+    #           ######                          ######                             
+   ##           #     #   ##   #    # #####     #     # #    # #####   ####  ##### 
+  # #           #     #  #  #  ##   # #    #    #     # #    # #    # #        #   
+    #           ######  #    # # #  # #    #    ######  #    # #    #  ####    #   
+    #   ###     #   #   ###### #  # # #    #    #     # #    # #####       #   #   
+    #   ###     #    #  #    # #   ## #    #    #     # #    # #   #  #    #   #   
+  ##### ###     #     # #    # #    # #####     ######   ####  #    #  ####    */
 
-void RedrayzAnimation2::init(){BaseAnimation::init();
+void RedrayzAnimation1::init(){
+  BaseAnimation::init();
+
   const int n_unit = NUM_LAS; //set the nuber of laser pixels to control
   this->flashes = vector<flash_vec>(n_unit, flash_vec(2));
   for (int i_unit=0; i_unit<n_unit; i_unit++){
@@ -91,12 +102,16 @@ void RedrayzAnimation2::init(){BaseAnimation::init();
     flashes[i_unit][i_prev].time = 0;
   }
 }
+void RedrayzAnimation1::init(const color_vec& palette){
+  /* Pas d'argument couleur défini pour le laser rouge --> il est toujours rouge*/
+  //STANDARD init()
+  RedrayzAnimation1::init();
+}
 
-
-void RedrayzAnimation2::new_frame(){
+void RedrayzAnimation1::new_frame(){
   BaseAnimation::new_frame();
   
-  long t = frame.t_current_ms;         // for readability
+  long t = frame.t_current_ms;                // for readability
   const int n_unit = this->flashes.size();   // for readability
 
   // for each laser "i" of the module
