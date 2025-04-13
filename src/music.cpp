@@ -106,7 +106,7 @@ void SoundAnalyzer::init(){
             /*Do nothing*/
         }
         
-        unsigned int channels = 2, fs = SAMPLING_FREQ, nbufferFrames = channels*SUBBUF_LENGTH, device = 0, offset = 0;
+        unsigned int channels = 1, fs = SAMPLING_FREQ, nbufferFrames = channels*BUF_LENGTH, device = 0, offset = 0;
         RtAudio::StreamParameters iParams;
         iParams.nChannels = channels;
         iParams.firstChannel = 0;
@@ -332,9 +332,15 @@ void SoundAnalyzer::_update_state(){
 void SoundAnalyzer::_update_beat_threshold(){
     log(4, __FILE__, " ",__LINE__, " ", __func__);
 
-    if (_condition_for_analyis() && state == BEAT){
-          beat_threshold = volume_percentile(90) * (float)1/10 + beat_threshold*(float)9/10;
+    if (_condition_for_analyis()){
+        if (state == BEAT){
+            float filter_lag_coef = 0.9;
+            beat_threshold = volume_percentile(90) * (1.0-filter_lag_coef) + beat_threshold*filter_lag_coef;
+        }else{
+            float filter_lag_coef = 0.99;
+            beat_threshold = volume_percentile(90) * (1.0-filter_lag_coef) + beat_threshold*filter_lag_coef;
         }
+    }
 }
 
 /**

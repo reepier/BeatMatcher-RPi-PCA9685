@@ -61,7 +61,7 @@ class SoundAnalyzer{
     private :   int cpt = 0;                        // number of samples recorded
     
     // Beat tracking variables
-    public :    float beat_threshold = 50;
+    public :    float beat_threshold = 30;
     public :    bool raw_beat=false, new_beat=false, filtered_beat=false;
     public :    unsigned long t_last_beat = 0;         // Stores timestamp of the last raw_beat=true event
     public :    unsigned long t_last_new_beat = 0;
