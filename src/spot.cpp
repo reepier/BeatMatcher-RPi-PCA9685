@@ -181,10 +181,14 @@ void front_rack_init(){
     spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, square, /*Flash Period*/ 100, /*Flash Length*/ 1000/FRATE, "Fast Rand. Strobe", "SR.1.2.3", any, 1));
 
     // Animation type 1.3 : Random CHASER
+    // Quasi-static Chaser
+    spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, square, /*Flash Period*/ 20000, /*Flash Length*/ 30000, "Quasi-stat Chaser", "SR.1.3.1", backer, 1));
+    // Super Slow Chaser
+    spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, square, /*Flash Period*/ 8000, /*Flash Length*/ 3000, "Super Slow Chaser", "SR.1.3.2", backer, 1));
     //Slow Chaser
-    spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, square, /*Flash Period*/ 4000, /*Flash Length*/ 1500, "Slow Rand. Chaser", "SR.1.3.1", any, 1));
+    spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, square, /*Flash Period*/ 4000, /*Flash Length*/ 1500, "Slow Rand. Chaser", "SR.1.3.3", any, 1));
     //Fast Chaser
-    spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, square, /*Flash Period*/ 1000, /*Flash Length*/ 600, "Fast Rand. Chaser", "SR.1.3.2", any, 1));
+    spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, square, /*Flash Period*/ 1000, /*Flash Length*/ 600, "Fast Rand. Chaser", "SR.1.3.4", any, 1));
 
     // Animation type 4 : Analog BEAT
     spot_rack_1.animations.push_back(new SpotRackAnimation4(&spot_rack_1, 1.0, "Analog Flash (100%) ", "SR.4.1", any));
@@ -235,10 +239,14 @@ void rack_15_init(){
     spot_rack_2.animations.push_back(new SpotRackAnimation1(&spot_rack_2, square, /*Flash Period*/ 100, /*Flash Length*/ 1000/FRATE, "Fast Rand. Strobe", "SR.1.2.3", any, 1));
 
     // Animation type 1.3 : Random CHASER
+    // Quasi-static Chaser
+    spot_rack_2.animations.push_back(new SpotRackAnimation1(&spot_rack_2, square, /*Flash Period*/ 20000, /*Flash Length*/ 30000, "Quasi-stat Chaser", "SR.1.3.1", backer, 1));
+    // Super Slow Chaser
+    spot_rack_2.animations.push_back(new SpotRackAnimation1(&spot_rack_2, square, /*Flash Period*/ 8000, /*Flash Length*/ 3000, "Super Slow Chaser", "SR.1.3.2", backer, 1));
     //Slow Chaser
-    spot_rack_2.animations.push_back(new SpotRackAnimation1(&spot_rack_2, square, /*Flash Period*/ 4000, /*Flash Length*/ 1500, "Slow Rand. Chaser", "SR.1.3.1", any, 1));
+    spot_rack_2.animations.push_back(new SpotRackAnimation1(&spot_rack_2, square, /*Flash Period*/ 4000, /*Flash Length*/ 1500, "Slow Rand. Chaser", "SR.1.3.3", any, 1));
     //Fast Chaser
-    spot_rack_2.animations.push_back(new SpotRackAnimation1(&spot_rack_2, square, /*Flash Period*/ 1000, /*Flash Length*/ 600, "Fast Rand. Chaser", "SR.1.3.2", any, 1));
+    spot_rack_2.animations.push_back(new SpotRackAnimation1(&spot_rack_2, square, /*Flash Period*/ 1000, /*Flash Length*/ 600, "Fast Rand. Chaser", "SR.1.3.4", any, 1));
 
 
     // Animation type 4 : Analog BEAT
@@ -288,10 +296,14 @@ void rack_40_init(){
     spot_rack_4.animations.push_back(new SpotRackAnimation1(&spot_rack_4, square, /*Flash Period*/ 100, /*Flash Length*/ 1000/FRATE, "Fast Rand. Strobe", "SR.1.2.3", any, 1));
 
     // Animation type 1.3 : Random CHASER
+    // Quasi-static Chaser
+    spot_rack_4.animations.push_back(new SpotRackAnimation1(&spot_rack_4, square, /*Flash Period*/ 20000, /*Flash Length*/ 30000, "Quasi-stat Chaser", "SR.1.3.1", backer, 1));
+    // Super Slow Chaser
+    spot_rack_4.animations.push_back(new SpotRackAnimation1(&spot_rack_4, square, /*Flash Period*/ 8000, /*Flash Length*/ 3000, "Super Slow Chaser", "SR.1.3.2", backer, 1));
     //Slow Chaser
-    spot_rack_4.animations.push_back(new SpotRackAnimation1(&spot_rack_4, square, /*Flash Period*/ 4000, /*Flash Length*/ 1500, "Slow Rand. Chaser", "SR.1.3.1", any, 1));
+    spot_rack_4.animations.push_back(new SpotRackAnimation1(&spot_rack_4, square, /*Flash Period*/ 4000, /*Flash Length*/ 1500, "Slow Rand. Chaser", "SR.1.3.3", any, 1));
     //Fast Chaser
-    spot_rack_4.animations.push_back(new SpotRackAnimation1(&spot_rack_4, square, /*Flash Period*/ 1000, /*Flash Length*/ 600, "Fast Rand. Chaser", "SR.1.3.2", any, 1));
+    spot_rack_4.animations.push_back(new SpotRackAnimation1(&spot_rack_4, square, /*Flash Period*/ 1000, /*Flash Length*/ 600, "Fast Rand. Chaser", "SR.1.3.4", any, 1));
 
 
     // Animation type 4 : Analog BEAT
@@ -341,10 +353,14 @@ void shehds_rack_init(){
     spot_rack_3.animations.push_back(new SpotRackAnimation1(&spot_rack_3, square, /*Flash Period*/ 100, /*Flash Length*/ 1000/FRATE, "Fast Rand. Strobe", "SR.1.2.3", any, 1));
 
     // Animation type 1.3 : Random CHASER
+    // Quasi-static Chaser
+    spot_rack_3.animations.push_back(new SpotRackAnimation1(&spot_rack_3, square, /*Flash Period*/ 20000, /*Flash Length*/ 30000, "Quasi-stat Chaser", "SR.1.3.1", backer, 1));
+    // Super Slow Chaser
+    spot_rack_3.animations.push_back(new SpotRackAnimation1(&spot_rack_3, square, /*Flash Period*/ 8000, /*Flash Length*/ 3000, "Super Slow Chaser", "SR.1.3.2", backer, 1));
     //Slow Chaser
-    spot_rack_3.animations.push_back(new SpotRackAnimation1(&spot_rack_3, square, /*Flash Period*/ 4000, /*Flash Length*/ 1500, "Slow Rand. Chaser", "SR.1.3.1", any, 1));
+    spot_rack_3.animations.push_back(new SpotRackAnimation1(&spot_rack_3, square, /*Flash Period*/ 4000, /*Flash Length*/ 1500, "Slow Rand. Chaser", "SR.1.3.3", any, 1));
     //Fast Chaser
-    spot_rack_3.animations.push_back(new SpotRackAnimation1(&spot_rack_3, square, /*Flash Period*/ 1000, /*Flash Length*/ 600, "Fast Rand. Chaser", "SR.1.3.2", any, 1));
+    spot_rack_3.animations.push_back(new SpotRackAnimation1(&spot_rack_3, square, /*Flash Period*/ 1000, /*Flash Length*/ 600, "Fast Rand. Chaser", "SR.1.3.4", any, 1));
 
 
     // Animation type 4 : Analog BEAT

@@ -14,35 +14,35 @@
   <Group Byte="0">Effect</Group>
   <Capability Min="0" Max="0">Automatic</Capability>
   <Capability Min="1" Max="1">Couleur fixe</Capability>
-  <Capability Min="2" Max="2">Bulles quasi statiques</Capability>
+  <Capability Min="2" Max="2">Bulles quasi static</Capability>
   <Capability Min="3" Max="3">Bulles super lentes</Capability>
   <Capability Min="4" Max="4">Bulles lentes</Capability>
   <Capability Min="5" Max="5">Bulles rapides</Capability>
   <Capability Min="6" Max="6">Strobe lent</Capability>
   <Capability Min="7" Max="7">Strobe mid</Capability>
   <Capability Min="8" Max="8">Strobe rapide</Capability>
-  <Capability Min="9" Max="9">Chaser lent</Capability>
-  <Capability Min="10" Max="10">Chaser rapide</Capability>
-  <Capability Min="11" Max="11">Flash analogique (tous)</Capability>
-  <Capability Min="12" Max="12">Flash analogique (70%)</Capability>
-  <Capability Min="13" Max="13">Flash numérique</Capability>
-  <Capability Min="14" Max="14">Reserve 4</Capability>
-  <Capability Min="15" Max="15">Reserve 5</Capability>
-  <Capability Min="16" Max="16">Reserve 6</Capability>
-  <Capability Min="17" Max="17">Reserve 7</Capability>
-  <Capability Min="18" Max="18">Reserve 8</Capability>
-  <Capability Min="19" Max="19">Reserve 9</Capability>
-  <Capability Min="20" Max="20">Reserve 10</Capability>
-  <Capability Min="21" Max="21">Reserve 11</Capability>
-  <Capability Min="22" Max="22">Reserve 12</Capability>
-  <Capability Min="23" Max="23">Reserve 13</Capability>
-  <Capability Min="24" Max="24">Reserve 14</Capability>
-  <Capability Min="25" Max="25">Reserve 15</Capability>
-  <Capability Min="26" Max="26">Reserve 16</Capability>
-  <Capability Min="27" Max="27">Reserve 17</Capability>
-  <Capability Min="28" Max="28">Reserve 18</Capability>
-  <Capability Min="29" Max="29">Reserve 19</Capability>
-  <Capability Min="30" Max="30">Reserve 20</Capability>
+  <Capability Min="9" Max="9">Chaser quasi static</Capability>
+  <Capability Min="10" Max="10">Chaser super lent</Capability>
+  <Capability Min="11" Max="11">Chaser lent</Capability>
+  <Capability Min="12" Max="12">Chaser rapide</Capability>
+  <Capability Min="13" Max="13">Flash analogique (tous)</Capability>
+  <Capability Min="14" Max="14">Flash analogique (70%)</Capability>
+  <Capability Min="15" Max="15">Flash numérique</Capability>
+  <Capability Min="16" Max="16">Reserve </Capability>
+  <Capability Min="17" Max="17">Reserve </Capability>
+  <Capability Min="18" Max="18">Reserve </Capability>
+  <Capability Min="19" Max="19">Reserve </Capability>
+  <Capability Min="20" Max="20">Reserve </Capability>
+  <Capability Min="21" Max="21">Reserve </Capability>
+  <Capability Min="22" Max="22">Reserve </Capability>
+  <Capability Min="23" Max="23">Reserve </Capability>
+  <Capability Min="24" Max="24">Reserve </Capability>
+  <Capability Min="25" Max="25">Reserve </Capability>
+  <Capability Min="26" Max="26">Reserve </Capability>
+  <Capability Min="27" Max="27">Reserve </Capability>
+  <Capability Min="28" Max="28">Reserve </Capability>
+  <Capability Min="29" Max="29">Reserve </Capability>
+  <Capability Min="30" Max="30">Reserve </Capability>
  </Channel>
  <Channel Name="Color 1">
   <Group Byte="0">Colour</Group>

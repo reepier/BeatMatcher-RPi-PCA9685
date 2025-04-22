@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Workspace>
-<Workspace xmlns="http://www.qlcplus.org/Workspace" CurrentWindow="FixtureManager">
+<Workspace xmlns="http://www.qlcplus.org/Workspace" CurrentWindow="SimpleDesk">
  <Creator>
   <Name>Q Light Controller Plus</Name>
   <Version>4.12.4</Version>
@@ -32,9 +32,9 @@
    <Model>SpotRack Control Panel</Model>
    <Mode>All CH.</Mode>
    <ID>1</ID>
-   <Name>PAR LED (groupe 1)</Name>
+   <Name>SpotRack #1</Name>
    <Universe>0</Universe>
-   <Address>14</Address>
+   <Address>24</Address>
    <Channels>4</Channels>
   </Fixture>
   <Fixture>
@@ -44,7 +44,7 @@
    <ID>2</ID>
    <Name>Barres LED</Name>
    <Universe>0</Universe>
-   <Address>24</Address>
+   <Address>14</Address>
    <Channels>4</Channels>
   </Fixture>
   <Fixture>
@@ -54,7 +54,37 @@
    <ID>3</ID>
    <Name>Red Rayz</Name>
    <Universe>0</Universe>
+   <Address>19</Address>
+   <Channels>4</Channels>
+  </Fixture>
+  <Fixture>
+   <Manufacturer>Omerta Inc.</Manufacturer>
+   <Model>SpotRack Control Panel</Model>
+   <Mode>All CH.</Mode>
+   <ID>4</ID>
+   <Name>SpotRack #2</Name>
+   <Universe>0</Universe>
+   <Address>29</Address>
+   <Channels>4</Channels>
+  </Fixture>
+  <Fixture>
+   <Manufacturer>Omerta Inc.</Manufacturer>
+   <Model>SpotRack Control Panel</Model>
+   <Mode>All CH.</Mode>
+   <ID>5</ID>
+   <Name>SpotRack #3</Name>
+   <Universe>0</Universe>
    <Address>34</Address>
+   <Channels>4</Channels>
+  </Fixture>
+  <Fixture>
+   <Manufacturer>Omerta Inc.</Manufacturer>
+   <Model>SpotRack Control Panel</Model>
+   <Mode>All CH.</Mode>
+   <ID>6</ID>
+   <Name>SpotRack #4</Name>
+   <Universe>0</Universe>
+   <Address>39</Address>
    <Channels>4</Channels>
   </Fixture>
  </Engine>
