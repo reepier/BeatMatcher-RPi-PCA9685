@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE FixtureDefinition>
+<FixtureDefinition xmlns="http://www.qlcplus.org/FixtureDefinition">
+ <Creator>
+  <Name>Q Light Controller Plus</Name>
+  <Version>4.12.4</Version>
+  <Author>Reepier</Author>
+ </Creator>
+ <Manufacturer>Omerta Inc.</Manufacturer>
+ <Model>Red Rayz Control Panel</Model>
+ <Type>Other</Type>
+ <Channel Name="Dimmer" Default="255" Preset="IntensityDimmer"/>
+ <Channel Name="Animation">
+  <Group Byte="0">Effect</Group>
+  <Capability Min="0" Max="0">Automatic</Capability>
+  <Capability Min="1" Max="1">Fixe</Capability>
+  <Capability Min="2" Max="2">Bulles (très lentes)</Capability>
+  <Capability Min="3" Max="3">Bulles (très lentes, + nbreuses)</Capability>
+  <Capability Min="4" Max="4">Bulles (lentes)</Capability>
+  <Capability Min="5" Max="5">Bulles (lentes, + rares)</Capability>
+  <Capability Min="6" Max="6">Bulles (rapides)</Capability>
+  <Capability Min="7" Max="7">Chaser (très lent) </Capability>
+  <Capability Min="8" Max="8">Chaser (très lent, +nbeux)</Capability>
+  <Capability Min="9" Max="9">Chaser (lent)</Capability>
+  <Capability Min="10" Max="10">Chaser (rapide)</Capability>
+  <Capability Min="11" Max="11">Strobe (très lent)</Capability>
+  <Capability Min="12" Max="12">Strobe (lent)</Capability>
+  <Capability Min="13" Max="13">Strobe (rapide)</Capability>
+  <Capability Min="14" Max="14">Strobe (très rapide)</Capability>
+  <Capability Min="15" Max="15">Flash (très lent)</Capability>
+  <Capability Min="16" Max="16">FLash (très lent, +nbrx)</Capability>
+  <Capability Min="17" Max="17">Flash (lent)</Capability>
+  <Capability Min="18" Max="18">Flash (lent, +rare)</Capability>
+  <Capability Min="19" Max="19">Flash (rapide)</Capability>
+  <Capability Min="20" Max="20">Flash (rapide, +rare)</Capability>
+  <Capability Min="21" Max="255"></Capability>
+ </Channel>
+ <Channel Name="Color 1">
+  <Group Byte="0">Colour</Group>
+  <Capability Min="0" Max="255">Red</Capability>
+ </Channel>
+ <Channel Name="Color 2">
+  <Group Byte="0">Colour</Group>
+  <Capability Min="0" Max="255">Red</Capability>
+ </Channel>
+ <Mode Name="All CH.">
+  <Channel Number="0" ActsOn="0">Dimmer</Channel>
+  <Channel Number="1" ActsOn="1">Animation</Channel>
+  <Channel Number="2">Color 1</Channel>
+  <Channel Number="3">Color 2</Channel>
+ </Mode>
+ <Physical>
+  <Bulb Type="" Lumens="0" ColourTemperature="0"/>
+  <Dimensions Weight="0" Width="0" Height="0" Depth="0"/>
+  <Lens Name="Other" DegreesMin="0" DegreesMax="0"/>
+  <Focus Type="Fixed" PanMax="0" TiltMax="0"/>
+  <Technical PowerConsumption="0" DmxConnector="5-pin"/>
+ </Physical>
+</FixtureDefinition>

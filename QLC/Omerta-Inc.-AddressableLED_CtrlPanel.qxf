@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE FixtureDefinition>
+<FixtureDefinition xmlns="http://www.qlcplus.org/FixtureDefinition">
+ <Creator>
+  <Name>Q Light Controller Plus</Name>
+  <Version>4.12.4</Version>
+  <Author>Reepier</Author>
+ </Creator>
+ <Manufacturer>Omerta Inc.</Manufacturer>
+ <Model>AddressableLED Control Panel</Model>
+ <Type>Other</Type>
+ <Channel Name="LED Dimmer" Default="255" Preset="IntensityDimmer"/>
+ <Channel Name="LED Animation">
+  <Group Byte="0">Effect</Group>
+  <Capability Min="0" Max="0">Automatic</Capability>
+  <Capability Min="1" Max="1">Flash TOUT</Capability>
+  <Capability Min="2" Max="2">Flash Analogique (par barre)</Capability>
+  <Capability Min="3" Max="3">Flash Analogique (par segment)</Capability>
+  <Capability Min="4" Max="4">Flash Analogique (par pixel)</Capability>
+  <Capability Min="5" Max="5">Flash Pixelisé (par barre)</Capability>
+  <Capability Min="6" Max="6">Flash Pixelisé (par segment)</Capability>
+  <Capability Min="7" Max="7">Flash Pixelisé (par pixel)</Capability>
+  <Capability Min="8" Max="8">Bulles lentes</Capability>
+  <Capability Min="9" Max="9">Bulles rapides</Capability>
+  <Capability Min="10" Max="10">Chaser aléatoire lent</Capability>
+  <Capability Min="11" Max="11">Chaser aléatoire rapide</Capability>
+  <Capability Min="12" Max="12">Strobe (par barre)</Capability>
+  <Capability Min="13" Max="255">&lt;Reserve&gt;</Capability>
+ </Channel>
+ <Channel Name="Fixture Color 1">
+  <Group Byte="0">Colour</Group>
+  <Capability Min="0" Max="0">Automatic</Capability>
+  <Capability Min="1" Max="1">Black</Capability>
+  <Capability Min="2" Max="2">Red</Capability>
+  <Capability Min="3" Max="3">Sodium</Capability>
+  <Capability Min="4" Max="4">Orange</Capability>
+  <Capability Min="5" Max="5">Yellow</Capability>
+  <Capability Min="6" Max="6">Gold</Capability>
+  <Capability Min="7" Max="7">Warm white</Capability>
+  <Capability Min="8" Max="8">Cold White</Capability>
+  <Capability Min="9" Max="9">Cyan</Capability>
+  <Capability Min="10" Max="10">Blue</Capability>
+  <Capability Min="11" Max="11">Purple</Capability>
+  <Capability Min="12" Max="12">Magenta</Capability>
+  <Capability Min="13" Max="13">Pink</Capability>
+  <Capability Min="14" Max="14">Green</Capability>
+  <Capability Min="15" Max="15">Light red</Capability>
+  <Capability Min="16" Max="16">Light cyan</Capability>
+  <Capability Min="17" Max="17">Light blue</Capability>
+  <Capability Min="18" Max="18">Light purple</Capability>
+  <Capability Min="19" Max="19">Light Magenta</Capability>
+  <Capability Min="20" Max="20">Light pink</Capability>
+  <Capability Min="21" Max="21">Light green</Capability>
+  <Capability Min="22" Max="255">reserve</Capability>
+ </Channel>
+ <Channel Name="Fixture Color 2">
+  <Group Byte="0">Colour</Group>
+  <Capability Min="0" Max="0">Automatic</Capability>
+  <Capability Min="1" Max="1">Black</Capability>
+  <Capability Min="2" Max="2">Red</Capability>
+  <Capability Min="3" Max="3">Sodium</Capability>
+  <Capability Min="4" Max="4">Orange</Capability>
+  <Capability Min="5" Max="5">Yellow</Capability>
+  <Capability Min="6" Max="6">Gold</Capability>
+  <Capability Min="7" Max="7">Warm white</Capability>
+  <Capability Min="8" Max="8">Cold White</Capability>
+  <Capability Min="9" Max="9">Cyan</Capability>
+  <Capability Min="10" Max="10">Blue</Capability>
+  <Capability Min="11" Max="11">Purple</Capability>
+  <Capability Min="12" Max="12">Magenta</Capability>
+  <Capability Min="13" Max="13">Pink</Capability>
+  <Capability Min="14" Max="14">Green</Capability>
+  <Capability Min="15" Max="15">Light red</Capability>
+  <Capability Min="16" Max="16">Light cyan</Capability>
+  <Capability Min="17" Max="17">Light blue</Capability>
+  <Capability Min="18" Max="18">Light purple</Capability>
+  <Capability Min="19" Max="19">Light Magenta</Capability>
+  <Capability Min="20" Max="20">Light pink</Capability>
+  <Capability Min="21" Max="21">Light green</Capability>
+  <Capability Min="22" Max="255">reserve</Capability>
+ </Channel>
+ <Mode Name="All CH.">
+  <Channel Number="0" ActsOn="0">LED Dimmer</Channel>
+  <Channel Number="1" ActsOn="1">LED Animation</Channel>
+  <Channel Number="2" ActsOn="2">Fixture Color 1</Channel>
+  <Channel Number="3" ActsOn="3">Fixture Color 2</Channel>
+ </Mode>
+ <Physical>
+  <Bulb Type="" Lumens="0" ColourTemperature="0"/>
+  <Dimensions Weight="0" Width="0" Height="0" Depth="0"/>
+  <Lens Name="Other" DegreesMin="0" DegreesMax="0"/>
+  <Focus Type="Fixed" PanMax="0" TiltMax="0"/>
+  <Technical PowerConsumption="0" DmxConnector="5-pin"/>
+ </Physical>
+</FixtureDefinition>

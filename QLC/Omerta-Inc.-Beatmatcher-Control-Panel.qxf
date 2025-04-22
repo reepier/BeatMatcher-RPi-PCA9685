@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE FixtureDefinition>
+<FixtureDefinition xmlns="http://www.qlcplus.org/FixtureDefinition">
+ <Creator>
+  <Name>Q Light Controller Plus</Name>
+  <Version>4.12.4</Version>
+  <Author>Reepier</Author>
+ </Creator>
+ <Manufacturer>Omerta Inc.</Manufacturer>
+ <Model>Beatmatcher Main Control Panel</Model>
+ <Type>Other</Type>
+ <Channel Name="Trigger">
+  <Group Byte="0">Effect</Group>
+  <Capability Min="0" Max="250">Tout front montant dans cet intervalle (&quot;trigger&quot;) sur ce signal déclenche la prise en compte du nouveau paramétrage. Sans &quot;trigger&quot;, pas de changement</Capability>
+  <Capability Min="251" Max="255">Dans cet intervalle, les changements de paramétrage sont pris en compte en temps réel</Capability>
+ </Channel>
+ <Channel Name="Master Color 1">
+  <Group Byte="0">Colour</Group>
+  <Capability Min="0" Max="0">Automatic</Capability>
+  <Capability Min="1" Max="1">Black</Capability>
+  <Capability Min="2" Max="2">Red</Capability>
+  <Capability Min="3" Max="3">Sodium</Capability>
+  <Capability Min="4" Max="4">Orange</Capability>
+  <Capability Min="5" Max="5">Yellow</Capability>
+  <Capability Min="6" Max="6">Gold</Capability>
+  <Capability Min="7" Max="7">Warm white</Capability>
+  <Capability Min="8" Max="8">Cold White</Capability>
+  <Capability Min="9" Max="9">Cyan</Capability>
+  <Capability Min="10" Max="10">Blue</Capability>
+  <Capability Min="11" Max="11">Purple</Capability>
+  <Capability Min="12" Max="12">Magenta</Capability>
+  <Capability Min="13" Max="13">Pink</Capability>
+  <Capability Min="14" Max="14">Green</Capability>
+  <Capability Min="15" Max="15">Light red</Capability>
+  <Capability Min="16" Max="16">Light cyan</Capability>
+  <Capability Min="17" Max="17">Light blue</Capability>
+  <Capability Min="18" Max="18">Light purple</Capability>
+  <Capability Min="19" Max="19">Light Magenta</Capability>
+  <Capability Min="20" Max="20">Light pink</Capability>
+  <Capability Min="21" Max="21">Light green</Capability>
+  <Capability Min="22" Max="255">reserve</Capability>
+ </Channel>
+ <Channel Name="Master Color 2">
+  <Group Byte="0">Colour</Group>
+  <Capability Min="0" Max="0">Automatic</Capability>
+  <Capability Min="1" Max="1">Black</Capability>
+  <Capability Min="2" Max="2">Red</Capability>
+  <Capability Min="3" Max="3">Sodium</Capability>
+  <Capability Min="4" Max="4">Orange</Capability>
+  <Capability Min="5" Max="5">Yellow</Capability>
+  <Capability Min="6" Max="6">Gold</Capability>
+  <Capability Min="7" Max="7">Warm white</Capability>
+  <Capability Min="8" Max="8">Cold White</Capability>
+  <Capability Min="9" Max="9">Cyan</Capability>
+  <Capability Min="10" Max="10">Blue</Capability>
+  <Capability Min="11" Max="11">Purple</Capability>
+  <Capability Min="12" Max="12">Magenta</Capability>
+  <Capability Min="13" Max="13">Pink</Capability>
+  <Capability Min="14" Max="14">Green</Capability>
+  <Capability Min="15" Max="15">Light red</Capability>
+  <Capability Min="16" Max="16">Light cyan</Capability>
+  <Capability Min="17" Max="17">Light blue</Capability>
+  <Capability Min="18" Max="18">Light purple</Capability>
+  <Capability Min="19" Max="19">Light Magenta</Capability>
+  <Capability Min="20" Max="20">Light pink</Capability>
+  <Capability Min="21" Max="21">Light green</Capability>
+  <Capability Min="22" Max="255">reserve</Capability>
+ </Channel>
+ <Channel Name="Master dimmer" Preset="IntensityMasterDimmer"/>
+ <Channel Name="Show intensity">
+  <Group Byte="0">Effect</Group>
+  <Capability Min="0" Max="0">Aucune</Capability>
+  <Capability Min="1" Max="1">Basse</Capability>
+  <Capability Min="2" Max="2">Moyenne</Capability>
+  <Capability Min="3" Max="3">Elevée</Capability>
+ </Channel>
+ <Mode Name="All CH.">
+  <Channel Number="0" ActsOn="0">Trigger</Channel>
+  <Channel Number="1" ActsOn="1">Master dimmer</Channel>
+  <Channel Number="2" ActsOn="2">Master Color 1</Channel>
+  <Channel Number="3" ActsOn="3">Master Color 2</Channel>
+  <Channel Number="4" ActsOn="4">Show intensity</Channel>
+ </Mode>
+ <Physical>
+  <Bulb Type="" Lumens="0" ColourTemperature="0"/>
+  <Dimensions Weight="0" Width="0" Height="0" Depth="0"/>
+  <Lens Name="Other" DegreesMin="0" DegreesMax="0"/>
+  <Focus Type="Fixed" PanMax="0" TiltMax="0"/>
+  <Technical PowerConsumption="0" DmxConnector="5-pin"/>
+ </Physical>
+</FixtureDefinition>
