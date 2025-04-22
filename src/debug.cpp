@@ -201,7 +201,7 @@ void disp_output_window(){
     wattroff(outputw, A_BOLD);
 
     int line=1;
-    for (auto fix : fix_vec{&addr_led, /*&led,*/ &laser, &front_rack, /*&spider, &rack_15, &rack_40, &shehds_rack,*/ &redrayz}){
+    for (auto fix : fix_vec{&addr_led, &laser, &spot_rack_1, &spot_rack_2, &spot_rack_3, &spot_rack_4, &redrayz}){
         if (fix->active_animation != nullptr){
             ostringstream animbuf, outbuf;
             // animation name & ID
@@ -214,8 +214,9 @@ void disp_output_window(){
             mvwprintw(outputw, line, 1, animbuf.str().data());
             mvwprintw(outputw, line, 90-max_length-1, outbuf.str().size()<max_length? outbuf.str().data() : outbuf.str().substr(0, max_length).data());
             
-            if((fix == &front_rack) || fix == &shehds_rack)  line+=2;
-            else line += 1;
+            // if((fix == &spot_rack_1) || fix == &spot_rack_3)  line+=2;
+            // else line += 1;
+            line += 1;
         }
 
 

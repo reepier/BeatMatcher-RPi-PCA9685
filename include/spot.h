@@ -98,7 +98,7 @@ public:
     int rack_size;                           // number of spots (derived)
     //std::vector<BaseAnimation *> animations; // vector containing animations
 
-    SpotRack(spot_vec sp, std::string nm, int i, uint8_t mast=255): BaseFixture(-1, 0, nm, i, mast){
+    SpotRack(spot_vec sp, std::string nm, int adr, int i, uint8_t mast=255): BaseFixture(adr, 0, nm, i, mast){
         this->id = i;
         this->spots = sp;
         this->rack_size = sp.size();
@@ -130,10 +130,10 @@ public:
     DMX_vec RGBW(simpleColor, int intensity = 255) override;
 };
 
-extern SpotRack front_rack;
-extern SpotRack rack_15;
-extern SpotRack shehds_rack;
-extern SpotRack rack_40;
+extern SpotRack spot_rack_1;
+extern SpotRack spot_rack_2;
+extern SpotRack spot_rack_3;
+extern SpotRack spot_rack_4;
 
 void front_rack_init();
 void rack_15_init();

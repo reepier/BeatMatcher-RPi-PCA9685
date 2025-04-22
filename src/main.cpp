@@ -24,7 +24,7 @@ fix_vec ll_fxtrs = {    /*&led,*/ &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &
                         &spot_13, &spot_14, &spot_15, &spot_16, &spot_17, &spot_18, &spot_19, &spot_20,
                         &spider, &laser, &redrayz};
 
-fix_vec fixtures = {&addr_led, &laser, &front_rack, &rack_15, &rack_40, &shehds_rack, &spider, &redrayz};
+fix_vec fixtures = {&addr_led, &laser, &spot_rack_1, &spot_rack_2, &spot_rack_4, &spot_rack_3, &spider, &redrayz};
 
 bool process_arguments(int n, char* args[]){
     for (int i=1; i<n; i++){

@@ -23,7 +23,7 @@ using namespace std;
     vector<ola::DmxBuffer> ola_pix_buffers(NUM_SUBPIX/MAX_SUBPIX_PER_UNI + ((NUM_SUBPIX%MAX_SUBPIX_PER_UNI)==0 ? 0 : 1));
 
 fix_vec ll_fxtrs = {&spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, &spot_7,&spot_8, &spot_9, &spider, &laser};
-fix_vec fixtures = {&addr_led, &laser, &front_rack, &rack_15, &spider};
+fix_vec fixtures = {&addr_led, &laser, &spot_rack_1, &spot_rack_2, &spider};
 
 bool process_arguments(int n, char* args[]){
     for (int i=1; i<n; i++){

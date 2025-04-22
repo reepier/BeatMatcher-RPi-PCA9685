@@ -241,7 +241,7 @@ void AnimationManager::show_update(){
             // lead_fix = fcn::random_pick(fix_vec{&led, &front_rack, & laser, &spider}, {4,2,2,3});
             // lead_fix = fcn::random_pick(fix_vec{&addr_led, &front_rack, &laser}, {4, 2, 1});
             // lead_fix = &front_rack;
-            lead_fix = fcn::random_pick(fix_vec{&addr_led, &front_rack}, {1, 1 });
+            lead_fix = fcn::random_pick(fix_vec{&addr_led, &spot_rack_1}, {1, 1 });
             
             // activate leader animation
             balise(__FILE__, " ", __LINE__, "activate leader animation");
@@ -252,7 +252,7 @@ void AnimationManager::show_update(){
         balise(__FILE__, " ", __LINE__, "select backer fixture");
         fix_vec backer_fix;
         // for (auto fix : fix_vec{&addr_led, &front_rack, &laser}){
-        for (auto fix : fix_vec{&addr_led, &front_rack}){
+        for (auto fix : fix_vec{&addr_led, &spot_rack_1}){
         // for (auto fix : fix_vec{&led, &front_rack}){
             if (fix != lead_fix){
                 backer_fix.push_back(fix);
@@ -282,7 +282,7 @@ void AnimationManager::show_update(){
         }
         
         balise(__FILE__, " ", __LINE__, "activate backstage rack  animation");
-        rack_15.activate_by_color(current_palette);   // deal with the backstage rack separately
+        spot_rack_2.activate_by_color(current_palette);   // deal with the backstage rack separately
 
         // spider.activate_by_color(current_palette);
 
@@ -328,7 +328,7 @@ void AnimationManager::nov30_maximum_update(){
     }
 
     // update Warehouse fixture animation
-    fix_vec warehouse_fixtures = {&shehds_rack, &rack_15, &rack_40, &redrayz};  // list of fixtures in the warehouse
+    fix_vec warehouse_fixtures = {&spot_rack_3, &spot_rack_2, &spot_rack_4, &redrayz};  // list of fixtures in the warehouse
     const int n_wareh_fix =  warehouse_fixtures.size();                         // number of fixtures
     static vector<time_t> warehouse_timestp(n_wareh_fix, 0);                    // for each fixture, stores the timestamp of the next animation change
 
@@ -369,7 +369,7 @@ void AnimationManager::nov30_maximum_update(){
     }
 
     // On musical condition, update active Animation for one, or more fixtures
-    fix_vec dancefloor_fixtures = {&addr_led, &front_rack};                 // define list of fixtures
+    fix_vec dancefloor_fixtures = {&addr_led, &spot_rack_1};                 // define list of fixtures
     static BaseFixture * leader = fcn::random_pick(dancefloor_fixtures);    // leading fixtures (initialization just in case)
     static time_ms t_last_df_ani_change = 0;
 
@@ -428,7 +428,7 @@ void AnimationManager::autocolor_update(){ // test function to develop the AUTOC
 
         //activate an animation using autocolor
         // front_rack.activate_autocolor(palette);
-        front_rack.activate_random(palette);
+        spot_rack_1.activate_random(palette);
         addr_led.activate_random(palette);
         palette_lifespan--; //decrease palette lifespan
     }
@@ -500,7 +500,7 @@ bool AnimationManager::controled_update(){
     }
 
 // Define fixtures installed
-    fix_vec fixs = {&addr_led, &front_rack, &redrayz};
+    fix_vec fixs = {&addr_led, &spot_rack_1, &spot_rack_2, &spot_rack_3, &spot_rack_4, &redrayz};
 
 //update animation automaticaaly when required
     bool auto_ani_update = false;

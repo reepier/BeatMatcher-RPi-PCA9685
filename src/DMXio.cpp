@@ -212,72 +212,73 @@ void processDMXinput(const ola::client::DMXMetadata &metadata, const ola::DmxBuf
     }//TODO clean this if / elseif structure --> it has way to many ramifications
 
 
-    SpotRack* spot_rack_1 = &front_rack;  //allows for more fexibility when using more than 1 rack
-    //PROCESS SPOT RACK 1 DIMMER
-    if (new_data_available){ // process dimmer input as a continuous stream (& not only on trigger)
-        // get & rewrap raw data
-        spot_rack_1->master = data.Get(SR1_DIM_CH); // already a 0-255 dmx data, no conversion/rewrap needed
-    }
-
-    //PROCESS SPOT RACK 1 Animation
-    if (trigger){
-        //get & rewrap raw data
-        int sr1_ani_val = data.Get(SR1_ANI_CH);
-        // if input data is not in DEFAULT positions (automatic mode)
-        if ( sr1_ani_val!=0) { 
-            // update Rack animation if there is a change
-            if (spot_rack_1->external_animation != sr1_ani_val){
-                spot_rack_1->external_animation = sr1_ani_val;
-                spot_rack_1->new_external_animation = true;
-                // log(2, "New SR1 animation : ", fcn::num_to_str(spot_rack_1->external_animation));
-            }else{
-                
-            }
-        // if input data is DEFAULT (0) 
-        }else{
-            if (spot_rack_1->external_animation != 0){  //if not already reset to 0
-                spot_rack_1->external_animation = 0;    //reset to 0
-                spot_rack_1->new_external_animation = true;
-                log(2, "Back to automatic SR1 animation");  //TODO choose where to put log instructions (cannot be both in DMXio and Animator)
-            }else{
-                
-            }
+    for (SpotRack* spot_rack : vector<SpotRack*>{&spot_rack_1,&spot_rack_2,&spot_rack_3,&spot_rack_4}){  //allows for more fexibility when using more than 1 rack
+        //PROCESS SPOT RACK 1 DIMMER
+        if (new_data_available){ // process dimmer input as a continuous stream (& not only on trigger)
+            // get & rewrap raw data
+            spot_rack->master = data.Get(spot_rack->address + SR_DIM_CH); // already a 0-255 dmx data, no conversion/rewrap needed
         }
-    }else{
-        
-    }
 
-    //PROCESS SPOT RACK 1 LEDs COLORS
-    if (trigger){
-        // get & rewrap raw data
-        int sr1_col1_val = min(max((uint8_t)0,  data.Get(SR1_COL1_CH)) , (uint8_t)(simpleColor::last_color));
-        int sr1_col2_val = min(max((uint8_t)0,  data.Get(SR1_COL2_CH)) , (uint8_t)(simpleColor::last_color));
-        //create output structrue
-        color_vec sr1_palette;   //start with empty palette
-        // if input data are not in DEFAULT positions (automatic mode)
-        if ( sr1_col1_val!=0 || sr1_col2_val!=0 ) {
-            // create a palette based on (non zero) input data
-            if (sr1_col1_val > 0)  sr1_palette.push_back((simpleColor)(sr1_col1_val-1));
-            if (sr1_col2_val > 0)  sr1_palette.push_back((simpleColor)(sr1_col2_val-1));
-            // update Rack palette if there is a change
-            if (spot_rack_1->external_palette != sr1_palette){
-                spot_rack_1->external_palette = sr1_palette;
-                spot_rack_1->new_external_palette = true;
-                // log(2, "New SR1 palette : ", fcn::palette_to_string(spot_rack_1->external_palette));
+        //PROCESS SPOT RACK 1 Animation
+        if (trigger){
+            //get & rewrap raw data
+            int sr1_ani_val = data.Get(spot_rack->address + SR_ANI_CH);
+            // if input data is not in DEFAULT positions (automatic mode)
+            if ( sr1_ani_val!=0) { 
+                // update Rack animation if there is a change
+                if (spot_rack->external_animation != sr1_ani_val){
+                    spot_rack->external_animation = sr1_ani_val;
+                    spot_rack->new_external_animation = true;
+                    // log(2, "New SR1 animation : ", fcn::num_to_str(spot_rack->external_animation));
+                }else{
+                    
+                }
+            // if input data is DEFAULT (0) 
             }else{
-                
+                if (spot_rack->external_animation != 0){  //if not already reset to 0
+                    spot_rack->external_animation = 0;    //reset to 0
+                    spot_rack->new_external_animation = true;
+                    log(2, "Back to automatic SR1 animation");  //TODO choose where to put log instructions (cannot be both in DMXio and Animator)
+                }else{
+                    
+                }
             }
         }else{
-            if ( !spot_rack_1->external_palette.empty()){  //if not already empty 
-                spot_rack_1->external_palette.clear();    //reset to empty palette (meaning main palette or auto palette will apply to leds)
-                spot_rack_1->new_external_palette = true;
-                log(2, "Back to automatic SR1 palette");
-            }else{
-                
-            }
+            
         }
-    }else{
-        
+
+        //PROCESS SPOT RACK 1 LEDs COLORS
+        if (trigger){
+            // get & rewrap raw data
+            int sr1_col1_val = min(max((uint8_t)0,  data.Get(spot_rack->address + SR_COL1_CH)) , (uint8_t)(simpleColor::last_color));
+            int sr1_col2_val = min(max((uint8_t)0,  data.Get(spot_rack->address + SR_COL2_CH)) , (uint8_t)(simpleColor::last_color));
+            //create output structrue
+            color_vec sr1_palette;   //start with empty palette
+            // if input data are not in DEFAULT positions (automatic mode)
+            if ( sr1_col1_val!=0 || sr1_col2_val!=0 ) {
+                // create a palette based on (non zero) input data
+                if (sr1_col1_val > 0)  sr1_palette.push_back((simpleColor)(sr1_col1_val-1));
+                if (sr1_col2_val > 0)  sr1_palette.push_back((simpleColor)(sr1_col2_val-1));
+                // update Rack palette if there is a change
+                if (spot_rack->external_palette != sr1_palette){
+                    spot_rack->external_palette = sr1_palette;
+                    spot_rack->new_external_palette = true;
+                    // log(2, "New SR1 palette : ", fcn::palette_to_string(spot_rack->external_palette));
+                }else{
+                    
+                }
+            }else{
+                if ( !spot_rack->external_palette.empty()){  //if not already empty 
+                    spot_rack->external_palette.clear();    //reset to empty palette (meaning main palette or auto palette will apply to leds)
+                    spot_rack->new_external_palette = true;
+                    log(2, "Back to automatic SR1 palette");
+                }else{
+                    
+                }
+            }
+        }else{
+            
+        }
     }
 
     //PROCESS RED RAYZ DIMMER
@@ -330,7 +331,7 @@ void processDMXinput(const ola::client::DMXMetadata &metadata, const ola::DmxBuf
             if (redrayz.external_palette != red_palette){
                 redrayz.external_palette = red_palette;
                 redrayz.new_external_palette = true;
-                // log(2, "New SR1 palette : ", fcn::palette_to_string(spot_rack_1->external_palette));
+                // log(2, "New SR1 palette : ", fcn::palette_to_string(spot_rack->external_palette));
             }else{
                 
             }

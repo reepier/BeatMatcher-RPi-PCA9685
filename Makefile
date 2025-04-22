@@ -47,5 +47,5 @@ build/DMXio.o: src/DMXio.cpp include/DMXio.h include/addr_LED.h $(genericInclude
 	g++ $(flags) -c src/DMXio.cpp $(includePaths) -o build/DMXio.o
 
 clean:
-	rm build/*.o bin/* .*/*.log *.log
+	rm -f build/*.o bin/* *.log */*.log
 	

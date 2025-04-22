@@ -47,23 +47,30 @@ void send();
     #define MAIN_COL2_CH       4 +OLA_ADR_OFFSET+MAIN_CTRL_ADR
     #define MAIN_INT_CH        5 +OLA_ADR_OFFSET+MAIN_CTRL_ADR
 
-#define LED_CTRL_ADR    25+OLA_ADR_OFFSET
+#define LED_CTRL_ADR    15+OLA_ADR_OFFSET
     #define LED_DIM_CH      1+OLA_ADR_OFFSET+LED_CTRL_ADR
     #define LED_ANI_CH      2+OLA_ADR_OFFSET+LED_CTRL_ADR
     #define LED_COL1_CH     3+OLA_ADR_OFFSET+LED_CTRL_ADR
     #define LED_COL2_CH     4+OLA_ADR_OFFSET+LED_CTRL_ADR
 
-#define SR1_CTRL_ADR    15+OLA_ADR_OFFSET
-    #define SR1_DIM_CH      1+OLA_ADR_OFFSET+SR1_CTRL_ADR
-    #define SR1_ANI_CH      2+OLA_ADR_OFFSET+SR1_CTRL_ADR
-    #define SR1_COL1_CH     3+OLA_ADR_OFFSET+SR1_CTRL_ADR 
-    #define SR1_COL2_CH     4+OLA_ADR_OFFSET+SR1_CTRL_ADR
 
-#define RED_CTRL_ADR    35+OLA_ADR_OFFSET
+#define SR1_CTRL_ADR    25+OLA_ADR_OFFSET
+#define SR2_CTRL_ADR    30+OLA_ADR_OFFSET
+#define SR3_CTRL_ADR    35+OLA_ADR_OFFSET
+#define SR4_CTRL_ADR    40+OLA_ADR_OFFSET
+    #define SR_DIM_CH      1+OLA_ADR_OFFSET
+    #define SR_ANI_CH      2+OLA_ADR_OFFSET
+    #define SR_COL1_CH     3+OLA_ADR_OFFSET
+    #define SR_COL2_CH     4+OLA_ADR_OFFSET
+
+
+
+#define RED_CTRL_ADR    20+OLA_ADR_OFFSET
     #define RED_DIM_CH      1+OLA_ADR_OFFSET+RED_CTRL_ADR
     #define RED_ANI_CH      2+OLA_ADR_OFFSET+RED_CTRL_ADR
     #define RED_COL1_CH     3+OLA_ADR_OFFSET+RED_CTRL_ADR 
     #define RED_COL2_CH     4+OLA_ADR_OFFSET+RED_CTRL_ADR
+
 
 // DMX Input interface
 const unsigned int input_universe_id = 10;

@@ -3,6 +3,7 @@
 #include "spot.h"
 #include "sysfcn.h"
 #include "debug.h"
+#include "DMXio.h"
 
 using namespace std;
 
@@ -123,13 +124,10 @@ DMX_vec SpotFixture::buffer(){
 #     # #       #     #    #       #    #  #     # #     # #   #  #     # 
  #####  #       #######    #       #     # #     #  #####  #    #  #####  
 / ----------------------------------------------------------------------- */
-SpotRack front_rack(spot_vec{&spot_2, &spot_5, &spot_7, &spot_8}, "Front Rack", 1);
-SpotRack rack_15(spot_vec{&spot_1, &spot_3, &spot_4, &spot_6}, "Vert. Beams", 2);
-SpotRack rack_40(spot_vec{&spot_9, &spot_10, &spot_11, &spot_12}, "Rack 2", 3);
-SpotRack shehds_rack(spot_vec{&spot_13, &spot_14, &spot_15, &spot_16, &spot_17, &spot_18, &spot_19, &spot_20}, "SHEHDS Rack", 4);
-
-/** Config Salon */
-SpotRack back_rack(spot_vec{&spot_1, &spot_3, &spot_4, &spot_6}, "Back Rack", 2);
+SpotRack spot_rack_1(spot_vec{&spot_2, &spot_5, &spot_7, &spot_8}, "Front Rack", SR1_CTRL_ADR, 1);
+SpotRack spot_rack_2(spot_vec{&spot_1, &spot_3, &spot_4, &spot_6}, "Vert. Beams", SR2_CTRL_ADR, 2);
+SpotRack spot_rack_4(spot_vec{&spot_9, &spot_10, &spot_11, &spot_12}, "Rack 2", SR3_CTRL_ADR, 3);
+SpotRack spot_rack_3(spot_vec{&spot_13, &spot_14, &spot_15, &spot_16, &spot_17, &spot_18, &spot_19, &spot_20}, "SHEHDS Rack", SR4_CTRL_ADR, 4);
 
 
 // SpotRack global_rack(spot_vec{&spot_1,&spot_2,&spot_3,&spot_4,&spot_5,&spot_6,&spot_7,&spot_8,&spot_9,&spot_10,&spot_11,&spot_12}, "Global Rack", 1);
@@ -158,162 +156,46 @@ void front_rack_init(){
 
     //this->animations.push_back();
     // Animation 1 : Backgrnd color + random soft flashes
-    front_rack.animations.push_back(new SpotRackAnimation0(&front_rack, black, " ", "FR.0", backer, 0));
-    
-/*
-    // Animation 1 : Random Bursts of color
-#if SHOW_INTENSITY == 1 or SHOW_INTENSITY == 0 
-    // gaussian bursts (short & slow) --> to be used as backer animation with LED (or else)
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    w_white,       4000, 1500,   "white slow bubbles",       "FR.2.2.6",     leader, 2));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    gold,        4000, 1500,   "gold slow bubbles",        "FR.2.2.5",     leader, 2));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    cyan,        4000, 1500,   "cyan slow bubbles",        "FR.2.2.7",     leader, 2));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    red,         4000, 1500,   "red slow bubbles",         "FR.2.2.1",     leader, 2));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    blue,        4000, 1500,   "blue slow bubbles",        "FR.2.2.8",     leader, 2));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    pink,        4000, 1500,   "pink slow bubbles",        "FR.2.2.11",    leader, 2));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    magenta,     4000, 1500,   "magenta slow bubbles",     "FR.2.2.10",    leader, 2));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    purple,      4000, 1500,   "purple slow bubbles",      "FR.2.2.9",     leader, 2));   
-#endif 
-#if SHOW_INTENSITY >= 2 or SHOW_INTENSITY == 0
-    // gaussian bursts (short & fast) --> to be used as solo animation during breaks
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    w_white,       1000, 600,   "WWhite fast bubbles",       "FR.2.1.6", leader, 2));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    gold,        1000, 600,   "gold fast bubbles",        "FR.2.1.5", leader, 2));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    cyan,        1000, 600,   "cyan fast bubbles",        "FR.2.1.7", leader, 2));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    red,         1000, 600,   "red fast bubbles",         "FR.2.1.1", leader, 2));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    blue,        1000, 600,   "blue fast bubbles",        "FR.2.1.8", leader, 2));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    pink,        1000, 600,   "pink fast bubbles",        "FR.2.1.11", leader, 2));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    magenta,     1000, 600,   "magenta fast bubbles",     "FR.2.1.10", leader, 2));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    purple,      1000, 600,   "purple fast bubbles",      "FR.2.1.9", leader, 2));
-#endif 
-
-    // Animation 2: Stroboscope --> To be used as LEAD animation
-    // Very Fast
-#if SHOW_INTENSITY == 3 or SHOW_INTENSITY == 0
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, w_white,     STRB_FASTEST, "WWhite, VFAST strobe",     "FR.1.1.6",     leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, gold,      STRB_FASTEST, "gold, VFAST strobe",      "FR.1.1.5",     leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, cyan,      STRB_FASTEST, "cyan, VFAST strobe",      "FR.1.1.7",     leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, red,       STRB_FASTEST, "red, VFAST strobe",       "FR.1.1.1",     leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, blue,      STRB_FASTEST, "blue, 8 strobe",          "FR.1.1.8",     leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, pink,      STRB_FASTEST, "pink, VFAST strobe",      "FR.1.1.11",    leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, magenta,   STRB_FASTEST, "magenta, VFAST strobe",   "FR.1.1.10",    leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, purple,    STRB_FASTEST, "purple, VFAST strobe",    "FR.1.1.9",     leader, 1));
-    
-#endif
-    // Fast frquency
-#if SHOW_INTENSITY==0 or SHOW_INTENSITY>=2
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, red,      STRB_FAST, "S red strobe",      "FR.1.2.1",  leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, blue,     STRB_FAST, "S blue strobe",     "FR.1.2.2",  leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, purple,   STRB_FAST, "S purple strobe",   "FR.1.2.3",  leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, gold,     STRB_FAST, "S gold strobe",     "FR.1.2.4",  leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, sodium,   STRB_FAST, "S sodium strobe",   "FR.1.2.5",  leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, cyan,     STRB_FAST, "S cyan strobe",     "FR.1.2.6",  leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, w_white,  STRB_FAST, "S w_white strobe",  "FR.1.2.7",  leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation2(&front_rack, c_white,  STRB_FAST, "S c_white strobe",  "FR.1.2.8",  leader, 1));
-#endif
-
-    // 2. BUBBLES
-    //Slow
-#if SHOW_INTENSITY==0 or SHOW_INTENSITY<=2
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, red,     4000, 1500,  "S red bubbles",      "FR.2.1.1", backer, 3));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, blue,    4000, 1500,  "S blue bubbles",     "FR.2.1.2", backer, 3));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, purple,  4000, 1500,  "S purple bubbles",   "FR.2.1.3", backer, 3));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, cyan,    4000, 1500,  "S cyan bubbles",     "FR.2.1.4", backer, 3));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, w_white, 4000, 1500,  "S w_white bubbles",  "FR.2.1.5", backer, 3));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, c_white, 4000, 1500,  "S c_white bubbles",  "FR.2.1.6", backer, 3));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, gold,    4000, 1500,  "S gold bubbles",     "FR.2.1.7", backer, 3));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, sodium,  4000, 1500,  "S sodium bubbles",   "FR.2.1.8", backer, 3));
-#endif
-#if SHOW_INTENSITY==0 or SHOW_INTENSITY>=1
-    //Medium
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, red,     2000, 700,  "S red bubbles",      "FR.2.2.1", any, 3));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, blue,    2000, 700,  "S blue bubbles",     "FR.2.2.2", any, 3));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, purple,  2000, 700,  "S purple bubbles",   "FR.2.2.3", any, 3));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, cyan,    2000, 700,  "S cyan bubbles",     "FR.2.2.4", any, 3));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, w_white, 2000, 700,  "S w_white bubbles",  "FR.2.2.5", any, 3));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, c_white, 2000, 700,  "S c_white bubbles",  "FR.2.2.6", any, 3));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, gold,    2000, 700,  "S gold bubbles",     "FR.2.2.7", any, 3));
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black, sodium,  2000, 700,  "S sodium bubbles",   "FR.2.2.8", any, 3));
-#endif
-
-    // 3. BEAT
-#if SHOW_INTENSITY==0 or SHOW_INTENSITY>=2
-    //Monochrome flashes, no background
-    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, red,        black,  "red beat",      "FR.3.1.1", leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, blue,       black,  "blue beat",     "FR.3.1.2", leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, purple,     black,  "purple beat",   "FR.3.1.3", leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, gold,       black,  "gold beat",     "FR.3.1.4", leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, sodium,     black,  "sodium beat",   "FR.3.1.5", leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, cyan,       black,  "cyan beat",     "FR.3.1.6", leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, w_white,    black,  "w_white beat",  "FR.3.1.7", leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, c_white,    black,  "c_white beat",  "FR.3.1.8", leader, 1));
-    //Monochrome flashes, with background
-    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, c_white,    red,        "ColdWhite beat, red backgd",     "FR.3.2.1", leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, w_white,    red,        "Warmwhite beat, red backgd",     "FR.3.2.2", leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, gold,       red,        "Gold beat, red backgd",          "FR.3.2.3", leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, c_white,    purple,     "ColdWhite beat, purple backgd",  "FR.3.2.4", leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, w_white,    purple,     "Warmwhite beat, purple backgd",  "FR.3.2.5", leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, gold,       purple,     "Gold beat, purple backgd",       "FR.3.2.6", leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, cyan,       red,        "Cyan beat, red backgd",          "FR.3.2.7", leader, 1));
-    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, cyan,       purple,     "Cyan beat, purple backgd",       "FR.3.2.8", leader, 1));
-#endif
-
-    // Animation 1 -> CHASER MODE (TEST) (square shaped waves)
-    // SLOW
-    // front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    w_white,       square,  1000, 600,      "white chaser",                   "FR.3.1",   leader, 2));
-    // front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    w_white,       square,  200, 300,       "fast white chaser",              "FR.3.2",   leader, 2));
-    // front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    w_white,       square,  200, 600,       "fast white chaser",              "FR.3.3",   leader, 2));
-    // front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    sevika_pink, square,  100, 200,       "fast sevika_pink chaser",        "FR.3.4",   leader, 2));
-    // front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    sevika_pink, square,  50, 100,        "super fast sevika_pink chaser",  "FR.3.5",   leader, 2));
-
-    // front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    color_vec{sevika_pink,hextech_cyan}, square, 50, 50,     "super fast hextech sevika chaser",   "FR.3.6.1", leader, 2));
-    // front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    color_vec{sevika_pink,hextech_cyan, shimmer_purple}, square, 100, 50,     "fast hextech sevika chaser",   "FR.3.6", leader, 2));
-    // front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    color_vec{sevika_pink,hextech_cyan}, square, 500, 500,     "slow hextech sevika chaser",   "FR.3.7", leader, 2));
-    // front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    color_vec{sevika_pink,hextech_cyan}, square, 500, 1000,     "slow hextech sevika chaser",  "FR.3.8", leader, 2));
-    // front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    color_vec{sevika_pink,hextech_cyan}, square, 100, 200,     "slow hextech sevika chaser",   "FR.3.7", leader, 2));
-    // front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, black,    color_vec{sevika_pink,hextech_cyan}, square, 100, 200,     "slow hextech sevika chaser",   "FR.3.7", leader, 2));
-
-
-/** TESTS & DEV */
-
+    spot_rack_1.animations.push_back(new SpotRackAnimation0(&spot_rack_1, black, " ", "SR.0", backer, 0));
 
 
     //AUTOCOLOR Animations
     // Animation type 0 : Fixed color
-    front_rack.animations.push_back(new SpotRackAnimation0(&front_rack, "Couleur", "FR.0.1", any, 1, 255));
+    spot_rack_1.animations.push_back(new SpotRackAnimation0(&spot_rack_1, "Couleur", "SR.0.1", any, 1, 255));
     // Animation type 1.1 : Random BUBBLES
     // Quasi-static Bubbles
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, gaussian, /*Flash Period*/ 20000, /*Flash Length*/ 30000, "Quasi-stat Bubbles", "FR.1.1.1", backer, 1));
+    spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, gaussian, /*Flash Period*/ 20000, /*Flash Length*/ 30000, "Quasi-stat Bubbles", "SR.1.1.1", backer, 1));
     // Super Slow Bubbles
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, gaussian, /*Flash Period*/ 8000, /*Flash Length*/ 3000, "Super Slow Bubbles", "FR.1.1.2", backer, 1));
+    spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, gaussian, /*Flash Period*/ 8000, /*Flash Length*/ 3000, "Super Slow Bubbles", "SR.1.1.2", backer, 1));
     // Slow Bubbles
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, gaussian, /*Flash Period*/ 4000, /*Flash Length*/ 1500, "Slow Bubbles", "FR.1.1.3", backer, 1));
+    spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, gaussian, /*Flash Period*/ 4000, /*Flash Length*/ 1500, "Slow Bubbles", "SR.1.1.3", backer, 1));
     // Fast bubbles
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, gaussian, /*Flash Period*/ 1000, /*Flash Length*/ 600, "Fast Bubbles", "FR.1.1.4", any, 1));
+    spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, gaussian, /*Flash Period*/ 1000, /*Flash Length*/ 600, "Fast Bubbles", "SR.1.1.4", any, 1));
     
     // Animation type 1.2 : Random STROBE
     //Slow strobe
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, square, /*Flash Period*/ 800, /*Flash Length*/ 1000/FRATE, "Slow Rand. Strobe", "FR.1.2.1", any, 1));
+    spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, square, /*Flash Period*/ 800, /*Flash Length*/ 1000/FRATE, "Slow Rand. Strobe", "SR.1.2.1", any, 1));
     //Fast strobe
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, square, /*Flash Period*/ 300, /*Flash Length*/ 1000/FRATE, "Mid. Rand. Strobe", "FR.1.2.2", any, 1));
+    spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, square, /*Flash Period*/ 300, /*Flash Length*/ 1000/FRATE, "Mid. Rand. Strobe", "SR.1.2.2", any, 1));
     //Very Fast strobe
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, square, /*Flash Period*/ 100, /*Flash Length*/ 1000/FRATE, "Fast Rand. Strobe", "FR.1.2.3", any, 1));
+    spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, square, /*Flash Period*/ 100, /*Flash Length*/ 1000/FRATE, "Fast Rand. Strobe", "SR.1.2.3", any, 1));
 
     // Animation type 1.3 : Random CHASER
     //Slow Chaser
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, square, /*Flash Period*/ 4000, /*Flash Length*/ 1500, "Slow Rand. Chaser", "FR.1.3.1", any, 1));
+    spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, square, /*Flash Period*/ 4000, /*Flash Length*/ 1500, "Slow Rand. Chaser", "SR.1.3.1", any, 1));
     //Fast Chaser
-    front_rack.animations.push_back(new SpotRackAnimation1(&front_rack, square, /*Flash Period*/ 1000, /*Flash Length*/ 600, "Fast Rand. Chaser", "FR.1.3.2", any, 1));
-
+    spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, square, /*Flash Period*/ 1000, /*Flash Length*/ 600, "Fast Rand. Chaser", "SR.1.3.2", any, 1));
 
     // Animation type 4 : Analog BEAT
-    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, 1.0, "Analog Flash (100%) ", "FR.4.1", any));
-    front_rack.animations.push_back(new SpotRackAnimation4(&front_rack, 0.7, "Analog Flash (70%)", "FR.4.2", any));
+    spot_rack_1.animations.push_back(new SpotRackAnimation4(&spot_rack_1, 1.0, "Analog Flash (100%) ", "SR.4.1", any));
+    spot_rack_1.animations.push_back(new SpotRackAnimation4(&spot_rack_1, 0.7, "Analog Flash (70%)", "SR.4.2", any));
     
     // Animation type 5 : Digital BEAT
-    front_rack.animations.push_back(new SpotRackAnimation5(&front_rack, "Digital Flash", "FR.5", leader, 1, 255));
+    spot_rack_1.animations.push_back(new SpotRackAnimation5(&spot_rack_1, "Digital Flash", "SR.5", leader, 1, 255));
 
     
 
-    front_rack.activate_none();
+    spot_rack_1.activate_none();
 };
 
 
@@ -329,46 +211,45 @@ void front_rack_init(){
 
 // Define animation for the background spot rack
 void rack_15_init(){
-    rack_15.animations.push_back(new SpotRackAnimation1(&rack_15, black,         black,       100000, 1000,   " ", "R15.0", backer, 0));
+    spot_rack_2.animations.push_back(new SpotRackAnimation1(&spot_rack_2, black,         black,       100000, 1000,   " ", "R15.0", backer, 0));
+
+    //AUTOCOLOR Animations
+    // Animation type 0 : Fixed color
+    spot_rack_2.animations.push_back(new SpotRackAnimation0(&spot_rack_2, "Couleur", "SR.0.1", any, 1, 255));
+    // Animation type 1.1 : Random BUBBLES
+    // Quasi-static Bubbles
+    spot_rack_2.animations.push_back(new SpotRackAnimation1(&spot_rack_2, gaussian, /*Flash Period*/ 20000, /*Flash Length*/ 30000, "Quasi-stat Bubbles", "SR.1.1.1", backer, 1));
+    // Super Slow Bubbles
+    spot_rack_2.animations.push_back(new SpotRackAnimation1(&spot_rack_2, gaussian, /*Flash Period*/ 8000, /*Flash Length*/ 3000, "Super Slow Bubbles", "SR.1.1.2", backer, 1));
+    // Slow Bubbles
+    spot_rack_2.animations.push_back(new SpotRackAnimation1(&spot_rack_2, gaussian, /*Flash Period*/ 4000, /*Flash Length*/ 1500, "Slow Bubbles", "SR.1.1.3", backer, 1));
+    // Fast bubbles
+    spot_rack_2.animations.push_back(new SpotRackAnimation1(&spot_rack_2, gaussian, /*Flash Period*/ 1000, /*Flash Length*/ 600, "Fast Bubbles", "SR.1.1.4", any, 1));
     
-    //Very Slow & overlapping Bubbles
-    // Monochrome bubbles, no background
-    rack_15.animations.push_back(new SpotRackAnimation1(&rack_15, black, red,    gaussian, 4000, 15000, "VS red bubbles",     "R15.1.1.1", any, 1));
-    rack_15.animations.push_back(new SpotRackAnimation1(&rack_15, black, purple, gaussian, 4000, 15000, "VS purple bubbles",  "R15.1.1.2", any, 1));
-    rack_15.animations.push_back(new SpotRackAnimation1(&rack_15, black, gold,   gaussian, 4000, 15000, "VS gold bubbles",    "R15.1.1.3", any, 1));
-    rack_15.animations.push_back(new SpotRackAnimation1(&rack_15, black, sodium, gaussian, 4000, 15000, "VS sodium bubbles",  "R15.1.1.4", any, 1));
-    rack_15.animations.push_back(new SpotRackAnimation1(&rack_15, black, cyan,   gaussian, 4000, 15000, "VS cyan bubbles",    "R15.1.1.5", any, 1));
-    rack_15.animations.push_back(new SpotRackAnimation1(&rack_15, black, sodium, gaussian, 4000, 15000, "VS sodium bubbles",  "R15.1.1.6", any, 1));
-    //Monochrome bubbles, same color background
-    rack_15.animations.push_back(new SpotRackAnimation1(&rack_15, red,     red,    gaussian, 5000, 7000, "VS red bubbles, red backgd",        "R15.1.2.1", any, 1));
-    rack_15.animations.push_back(new SpotRackAnimation1(&rack_15, purple,  purple, gaussian, 5000, 7000, "VS purple bubbles, purple backgd",  "R15.1.2.2", any, 1));
-    rack_15.animations.push_back(new SpotRackAnimation1(&rack_15, gold,    gold,   gaussian, 5000, 7000, "VS gold bubbles, gold backgd",      "R15.1.2.3", any, 1));
-    rack_15.animations.push_back(new SpotRackAnimation1(&rack_15, sodium,  sodium, gaussian, 5000, 7000, "VS sodium bubbles, sodium backgd",  "R15.1.2.4", any, 1));
-    rack_15.animations.push_back(new SpotRackAnimation1(&rack_15, sodium,  sodium, gaussian, 5000, 7000, "VS sodium bubbles, sodium backgd",  "R15.1.2.6", any, 1));
-    //Monochrome on different color background
-    rack_15.animations.push_back(new SpotRackAnimation1(&rack_15, red,     gold,    gaussian, 5000, 70000, "VS gold bubbles, red backgd",      "R15.1.3.1", any, 1));
-    rack_15.animations.push_back(new SpotRackAnimation1(&rack_15, red,     sodium,  gaussian, 5000, 70000, "VS sodium bubbles, red backgd",    "R15.1.3.2", any, 1));
-    rack_15.animations.push_back(new SpotRackAnimation1(&rack_15, red,     purple,  gaussian, 5000, 70000, "VS purple bubbles, red backgd",    "R15.1.3.3", any, 1));
-    rack_15.animations.push_back(new SpotRackAnimation1(&rack_15, purple,  gold,    gaussian, 5000, 70000, "VS gold bubbles, purple backgd",   "R15.1.3.4", any, 1));
-    rack_15.animations.push_back(new SpotRackAnimation1(&rack_15, purple,  sodium,  gaussian, 5000, 70000, "VS sodium bubbles, purple backgd", "R15.1.3.5", any, 1));
-    rack_15.animations.push_back(new SpotRackAnimation1(&rack_15, red,     cyan,    gaussian, 5000, 70000, "VS cyan bubbles, red backgd",      "R15.1.3.6", any, 1));
-    rack_15.animations.push_back(new SpotRackAnimation1(&rack_15, purple,  cyan,    gaussian, 5000, 70000, "VS cyan bubbles, purple backgd",   "R15.1.3.7", any, 1));
+    // Animation type 1.2 : Random STROBE
+    //Slow strobe
+    spot_rack_2.animations.push_back(new SpotRackAnimation1(&spot_rack_2, square, /*Flash Period*/ 800, /*Flash Length*/ 1000/FRATE, "Slow Rand. Strobe", "SR.1.2.1", any, 1));
+    //Fast strobe
+    spot_rack_2.animations.push_back(new SpotRackAnimation1(&spot_rack_2, square, /*Flash Period*/ 300, /*Flash Length*/ 1000/FRATE, "Mid. Rand. Strobe", "SR.1.2.2", any, 1));
+    //Very Fast strobe
+    spot_rack_2.animations.push_back(new SpotRackAnimation1(&spot_rack_2, square, /*Flash Period*/ 100, /*Flash Length*/ 1000/FRATE, "Fast Rand. Strobe", "SR.1.2.3", any, 1));
 
-    //Short & scarces pulses
-    // Monochrome
-    rack_15.animations.push_back(new SpotRackAnimation1(&rack_15, red,    red,    square, 15000, 50, "red flashes, red background",         "R15.2.1.1", any, 1));
-    rack_15.animations.push_back(new SpotRackAnimation1(&rack_15, purple, purple, square, 15000, 50, "purple flashes, purple background",   "R15.2.1.1", any, 1));
-    //Bicolor
-    rack_15.animations.push_back(new SpotRackAnimation1(&rack_15, red,    gold,    square, 15000, 50, "gold flashes, red background",      "R15.2.2.1", any, 1));
-    rack_15.animations.push_back(new SpotRackAnimation1(&rack_15, red,    sodium,  square, 15000, 50, "cyan flashes, red background",      "R15.2.2.1", any, 1));
-    rack_15.animations.push_back(new SpotRackAnimation1(&rack_15, red,    purple,  square, 15000, 50, "purple flashes, red background",    "R15.2.2.1", any, 1));
-    rack_15.animations.push_back(new SpotRackAnimation1(&rack_15, red,    cyan,    square, 15000, 50, "cyan flashes, red background",      "R15.2.2.1", any, 1));
-    rack_15.animations.push_back(new SpotRackAnimation1(&rack_15, purple, gold,    square, 15000, 50, "gold flashes, purple background",   "R15.2.2.1", any, 1));
-    rack_15.animations.push_back(new SpotRackAnimation1(&rack_15, purple, sodium,  square, 15000, 50, "sodium flashes, purple background", "R15.2.2.1", any, 1));
-    rack_15.animations.push_back(new SpotRackAnimation1(&rack_15, purple, cyan,    square, 15000, 50, "cyan flashes, purple background",   "R15.2.2.1", any, 1));
+    // Animation type 1.3 : Random CHASER
+    //Slow Chaser
+    spot_rack_2.animations.push_back(new SpotRackAnimation1(&spot_rack_2, square, /*Flash Period*/ 4000, /*Flash Length*/ 1500, "Slow Rand. Chaser", "SR.1.3.1", any, 1));
+    //Fast Chaser
+    spot_rack_2.animations.push_back(new SpotRackAnimation1(&spot_rack_2, square, /*Flash Period*/ 1000, /*Flash Length*/ 600, "Fast Rand. Chaser", "SR.1.3.2", any, 1));
 
 
-    rack_15.activate_none();
+    // Animation type 4 : Analog BEAT
+    spot_rack_2.animations.push_back(new SpotRackAnimation4(&spot_rack_2, 1.0, "Analog Flash (100%) ", "SR.4.1", any));
+    spot_rack_2.animations.push_back(new SpotRackAnimation4(&spot_rack_2, 0.7, "Analog Flash (70%)", "SR.4.2", any));
+    
+    // Animation type 5 : Digital BEAT
+    spot_rack_2.animations.push_back(new SpotRackAnimation5(&spot_rack_2, "Digital Flash", "SR.5", leader, 1, 255));
+
+
+    spot_rack_2.activate_none();
 };
 
 /**
@@ -383,41 +264,46 @@ void rack_15_init(){
 
 // Define animation for the background spot rack
 void rack_40_init(){
-    rack_40.animations.push_back(new SpotRackAnimation1(&rack_40, black,         black,       100000, 1000,   " ", "R40.0", backer, 0));
+    spot_rack_4.animations.push_back(new SpotRackAnimation1(&spot_rack_4, black,         black,       100000, 1000,   " ", "SR.0", backer, 0));
+
+    //AUTOCOLOR Animations
+    // Animation type 0 : Fixed color
+    spot_rack_4.animations.push_back(new SpotRackAnimation0(&spot_rack_4, "Couleur", "SR.0.1", any, 1, 255));
+    // Animation type 1.1 : Random BUBBLES
+    // Quasi-static Bubbles
+    spot_rack_4.animations.push_back(new SpotRackAnimation1(&spot_rack_4, gaussian, /*Flash Period*/ 20000, /*Flash Length*/ 30000, "Quasi-stat Bubbles", "SR.1.1.1", backer, 1));
+    // Super Slow Bubbles
+    spot_rack_4.animations.push_back(new SpotRackAnimation1(&spot_rack_4, gaussian, /*Flash Period*/ 8000, /*Flash Length*/ 3000, "Super Slow Bubbles", "SR.1.1.2", backer, 1));
+    // Slow Bubbles
+    spot_rack_4.animations.push_back(new SpotRackAnimation1(&spot_rack_4, gaussian, /*Flash Period*/ 4000, /*Flash Length*/ 1500, "Slow Bubbles", "SR.1.1.3", backer, 1));
+    // Fast bubbles
+    spot_rack_4.animations.push_back(new SpotRackAnimation1(&spot_rack_4, gaussian, /*Flash Period*/ 1000, /*Flash Length*/ 600, "Fast Bubbles", "SR.1.1.4", any, 1));
     
-    //Very Slow & overlapping Bubbles
-    // Monochrome bubbles, no background
-    rack_40.animations.push_back(new SpotRackAnimation1(&rack_40, black, red,    gaussian, 5000, 10000, "VS red bubbles",     "R40.1.1.1", any, 1));
-    rack_40.animations.push_back(new SpotRackAnimation1(&rack_40, black, purple, gaussian, 5000, 10000, "VS purple bubbles",  "R40.1.1.2", any, 1));
-    rack_40.animations.push_back(new SpotRackAnimation1(&rack_40, black, gold,   gaussian, 5000, 10000, "VS gold bubbles",    "R40.1.1.3", any, 1));
-    rack_40.animations.push_back(new SpotRackAnimation1(&rack_40, black, sodium, gaussian, 5000, 10000, "VS sodium bubbles",  "R40.1.1.4", any, 1));
-    rack_40.animations.push_back(new SpotRackAnimation1(&rack_40, black, cyan,   gaussian, 5000, 10000, "VS cyan bubbles",    "R40.1.1.5", any, 1));
-    rack_40.animations.push_back(new SpotRackAnimation1(&rack_40, black, sodium, gaussian, 5000, 10000, "VS sodium bubbles",  "R40.1.1.6", any, 1));
-    //Monochrome bubbles, same color background
-    rack_40.animations.push_back(new SpotRackAnimation1(&rack_40, red,     red,    gaussian, 5000, 10000, "VS red bubbles, red backgd",        "R40.1.2.1", any, 1));
-    rack_40.animations.push_back(new SpotRackAnimation1(&rack_40, purple,  purple, gaussian, 5000, 10000, "VS purple bubbles, purple backgd",  "R40.1.2.2", any, 1));
-    rack_40.animations.push_back(new SpotRackAnimation1(&rack_40, gold,    gold,   gaussian, 5000, 10000, "VS gold bubbles, gold backgd",      "R40.1.2.3", any, 1));
-    rack_40.animations.push_back(new SpotRackAnimation1(&rack_40, sodium,  sodium, gaussian, 5000, 10000, "VS sodium bubbles, sodium backgd",  "R40.1.2.4", any, 1));
-    rack_40.animations.push_back(new SpotRackAnimation1(&rack_40, sodium,  sodium, gaussian, 5000, 10000, "VS sodium bubbles, sodium backgd",  "R40.1.2.6", any, 1));
-    //Monochrome on different color background
-    rack_40.animations.push_back(new SpotRackAnimation1(&rack_40, red,     gold,    gaussian, 5000, 10000, "VS gold bubbles, red backgd",      "R40.1.3.1", any, 1));
-    rack_40.animations.push_back(new SpotRackAnimation1(&rack_40, red,     sodium,  gaussian, 5000, 10000, "VS sodium bubbles, red backgd",    "R40.1.3.2", any, 1));
-    rack_40.animations.push_back(new SpotRackAnimation1(&rack_40, red,     purple,  gaussian, 5000, 10000, "VS purple bubbles, red backgd",    "R40.1.3.3", any, 1));
-    rack_40.animations.push_back(new SpotRackAnimation1(&rack_40, purple,  gold,    gaussian, 5000, 10000, "VS gold bubbles, purple backgd",   "R40.1.3.4", any, 1));
-    rack_40.animations.push_back(new SpotRackAnimation1(&rack_40, purple,  sodium,  gaussian, 5000, 10000, "VS sodium bubbles, purple backgd", "R40.1.3.5", any, 1));
-    rack_40.animations.push_back(new SpotRackAnimation1(&rack_40, red,     cyan,    gaussian, 5000, 10000, "VS cyan bubbles, red backgd",      "R40.1.3.6", any, 1));
-    rack_40.animations.push_back(new SpotRackAnimation1(&rack_40, purple,  cyan,    gaussian, 5000, 10000, "VS cyan bubbles, purple backgd",   "R40.1.3.7", any, 1));
+    // Animation type 1.2 : Random STROBE
+    //Slow strobe
+    spot_rack_4.animations.push_back(new SpotRackAnimation1(&spot_rack_4, square, /*Flash Period*/ 800, /*Flash Length*/ 1000/FRATE, "Slow Rand. Strobe", "SR.1.2.1", any, 1));
+    //Fast strobe
+    spot_rack_4.animations.push_back(new SpotRackAnimation1(&spot_rack_4, square, /*Flash Period*/ 300, /*Flash Length*/ 1000/FRATE, "Mid. Rand. Strobe", "SR.1.2.2", any, 1));
+    //Very Fast strobe
+    spot_rack_4.animations.push_back(new SpotRackAnimation1(&spot_rack_4, square, /*Flash Period*/ 100, /*Flash Length*/ 1000/FRATE, "Fast Rand. Strobe", "SR.1.2.3", any, 1));
 
-    //Short & scarces pulses
-    rack_40.animations.push_back(new SpotRackAnimation1(&rack_40, red,    gold,    square, 10000, 50, "gold flashes, red background",      "R40.2.1", any, 1));
-    rack_40.animations.push_back(new SpotRackAnimation1(&rack_40, red,    sodium,  square, 10000, 50, "cyan flashes, red background",      "R40.2.1", any, 1));
-    rack_40.animations.push_back(new SpotRackAnimation1(&rack_40, red,    purple,  square, 10000, 50, "purple flashes, red background",    "R40.2.1", any, 1));
-    rack_40.animations.push_back(new SpotRackAnimation1(&rack_40, red,    cyan,    square, 10000, 50, "cyan flashes, red background",      "R40.2.1", any, 1));
-    rack_40.animations.push_back(new SpotRackAnimation1(&rack_40, purple, gold,    square, 10000, 50, "gold flashes, purple background",   "R40.2.1", any, 1));
-    rack_40.animations.push_back(new SpotRackAnimation1(&rack_40, purple, sodium,  square, 10000, 50, "sodium flashes, purple background", "R40.2.1", any, 1));
-    rack_40.animations.push_back(new SpotRackAnimation1(&rack_40, purple, cyan,    square, 10000, 50, "cyan flashes, purple background",   "R40.2.1", any, 1));
+    // Animation type 1.3 : Random CHASER
+    //Slow Chaser
+    spot_rack_4.animations.push_back(new SpotRackAnimation1(&spot_rack_4, square, /*Flash Period*/ 4000, /*Flash Length*/ 1500, "Slow Rand. Chaser", "SR.1.3.1", any, 1));
+    //Fast Chaser
+    spot_rack_4.animations.push_back(new SpotRackAnimation1(&spot_rack_4, square, /*Flash Period*/ 1000, /*Flash Length*/ 600, "Fast Rand. Chaser", "SR.1.3.2", any, 1));
 
-    rack_40.activate_none();
+
+    // Animation type 4 : Analog BEAT
+    spot_rack_4.animations.push_back(new SpotRackAnimation4(&spot_rack_4, 1.0, "Analog Flash (100%) ", "SR.4.1", any));
+    spot_rack_4.animations.push_back(new SpotRackAnimation4(&spot_rack_4, 0.7, "Analog Flash (70%)", "SR.4.2", any));
+    
+    // Animation type 5 : Digital BEAT
+    spot_rack_4.animations.push_back(new SpotRackAnimation5(&spot_rack_4, "Digital Flash", "SR.5", leader, 1, 255));
+    
+    
+    
+    spot_rack_4.activate_none();
 };
 
         /**
@@ -430,28 +316,46 @@ void rack_40_init(){
 #     # #    #  ####  #    #     #####  #     # ####### #     # ######   #####  
         */
 void shehds_rack_init(){
-    shehds_rack.animations.push_back(new SpotRackAnimation1(&shehds_rack, black,  black,       100000, 1000,   " ", "BR2.0", backer, 0));
+    spot_rack_3.animations.push_back(new SpotRackAnimation1(&spot_rack_3, black,  black,       100000, 1000,   " ", "SR.0", backer, 0));
 
-    // Monochrome SLOW & Overlapping chaser
-    shehds_rack.animations.push_back(new SpotRackAnimation1(&shehds_rack, black, red, square, 25000, 120000, "VS Red random chaser", "SR.1.1", any, 1));  
-    shehds_rack.animations.push_back(new SpotRackAnimation1(&shehds_rack, black, purple, square, 25000, 120000, "VS Red random chaser", "SR.1.1", any, 1));  
 
-    //Bicolor SLOW & Overlapping Chaser
-    shehds_rack.animations.push_back(new SpotRackAnimation1(&shehds_rack, red,     purple,   square, 25000, 30000, "VS purple chaser, red background",    "SR.2.1", any, 1));  
-    shehds_rack.animations.push_back(new SpotRackAnimation1(&shehds_rack, red,     gold,     square, 25000, 30000, "VS gold chaser, red background",      "SR.2.2", any, 1));  
-    shehds_rack.animations.push_back(new SpotRackAnimation1(&shehds_rack, purple,  gold,     square, 25000, 30000, "VS gold chaser, purple background",   "SR.2.3", any, 1));  
-    shehds_rack.animations.push_back(new SpotRackAnimation1(&shehds_rack, purple,  sodium,   square, 25000, 30000, "VS sodium chaser, purple background", "SR.2.4", any, 1));  
-    shehds_rack.animations.push_back(new SpotRackAnimation1(&shehds_rack, purple,  cyan,     square, 25000, 30000, "VS cyan chaser, purple background",   "SR.2.5", any, 1));  
+    //AUTOCOLOR Animations
+    // Animation type 0 : Fixed color
+    spot_rack_3.animations.push_back(new SpotRackAnimation0(&spot_rack_3, "Couleur", "SR.0.1", any, 1, 255));
+    // Animation type 1.1 : Random BUBBLES
+    // Quasi-static Bubbles
+    spot_rack_3.animations.push_back(new SpotRackAnimation1(&spot_rack_3, gaussian, /*Flash Period*/ 20000, /*Flash Length*/ 30000, "Quasi-stat Bubbles", "SR.1.1.1", backer, 1));
+    // Super Slow Bubbles
+    spot_rack_3.animations.push_back(new SpotRackAnimation1(&spot_rack_3, gaussian, /*Flash Period*/ 8000, /*Flash Length*/ 3000, "Super Slow Bubbles", "SR.1.1.2", backer, 1));
+    // Slow Bubbles
+    spot_rack_3.animations.push_back(new SpotRackAnimation1(&spot_rack_3, gaussian, /*Flash Period*/ 4000, /*Flash Length*/ 1500, "Slow Bubbles", "SR.1.1.3", backer, 1));
+    // Fast bubbles
+    spot_rack_3.animations.push_back(new SpotRackAnimation1(&spot_rack_3, gaussian, /*Flash Period*/ 1000, /*Flash Length*/ 600, "Fast Bubbles", "SR.1.1.4", any, 1));
+    
+    // Animation type 1.2 : Random STROBE
+    //Slow strobe
+    spot_rack_3.animations.push_back(new SpotRackAnimation1(&spot_rack_3, square, /*Flash Period*/ 800, /*Flash Length*/ 1000/FRATE, "Slow Rand. Strobe", "SR.1.2.1", any, 1));
+    //Fast strobe
+    spot_rack_3.animations.push_back(new SpotRackAnimation1(&spot_rack_3, square, /*Flash Period*/ 300, /*Flash Length*/ 1000/FRATE, "Mid. Rand. Strobe", "SR.1.2.2", any, 1));
+    //Very Fast strobe
+    spot_rack_3.animations.push_back(new SpotRackAnimation1(&spot_rack_3, square, /*Flash Period*/ 100, /*Flash Length*/ 1000/FRATE, "Fast Rand. Strobe", "SR.1.2.3", any, 1));
 
-    //Short pulses over BACKGROUND color
-    shehds_rack.animations.push_back(new SpotRackAnimation1(&shehds_rack, red,    gold,    square, 30000, 50, "gold flashes, red background",      "SR.3.1", any, 1));
-    shehds_rack.animations.push_back(new SpotRackAnimation1(&shehds_rack, red,    sodium,  square, 30000, 50, "cyan flashes, red background",      "SR.3.1", any, 1));
-    shehds_rack.animations.push_back(new SpotRackAnimation1(&shehds_rack, red,    purple,  square, 30000, 50, "purple flashes, red background",    "SR.3.1", any, 1));
-    shehds_rack.animations.push_back(new SpotRackAnimation1(&shehds_rack, red,    cyan,    square, 30000, 50, "cyan flashes, red background",      "SR.3.1", any, 1));
-    shehds_rack.animations.push_back(new SpotRackAnimation1(&shehds_rack, purple, gold,    square, 30000, 50, "gold flashes, purple background",   "SR.3.1", any, 1));
-    shehds_rack.animations.push_back(new SpotRackAnimation1(&shehds_rack, purple, sodium,  square, 30000, 50, "sodium flashes, purple background", "SR.3.1", any, 1));
-    shehds_rack.animations.push_back(new SpotRackAnimation1(&shehds_rack, purple, cyan,    square, 30000, 50, "cyan flashes, purple background",   "SR.3.1", any, 1));
+    // Animation type 1.3 : Random CHASER
+    //Slow Chaser
+    spot_rack_3.animations.push_back(new SpotRackAnimation1(&spot_rack_3, square, /*Flash Period*/ 4000, /*Flash Length*/ 1500, "Slow Rand. Chaser", "SR.1.3.1", any, 1));
+    //Fast Chaser
+    spot_rack_3.animations.push_back(new SpotRackAnimation1(&spot_rack_3, square, /*Flash Period*/ 1000, /*Flash Length*/ 600, "Fast Rand. Chaser", "SR.1.3.2", any, 1));
 
+
+    // Animation type 4 : Analog BEAT
+    spot_rack_3.animations.push_back(new SpotRackAnimation4(&spot_rack_3, 1.0, "Analog Flash (100%) ", "SR.4.1", any));
+    spot_rack_3.animations.push_back(new SpotRackAnimation4(&spot_rack_3, 0.7, "Analog Flash (70%)", "SR.4.2", any));
+    
+    // Animation type 5 : Digital BEAT
+    spot_rack_3.animations.push_back(new SpotRackAnimation5(&spot_rack_3, "Digital Flash", "SR.5", leader, 1, 255));
+
+
+    spot_rack_3.activate_none();
 }
 
 // Define animation for the global spot rack (including both frontal and background spots);

@@ -381,7 +381,7 @@ class BaseFixture{
     color_vec external_palette;     // this color palette is defined (or not) by the external controler 
     bool      new_external_palette = false;  //turns true for 1 cycle when new external animation is detected 
     int       external_animation;   // stores external animation commands
-    bool      new_external_animation = false;//turns true for 1 cycle when new external palette is detected 
+    bool      new_external_animation = false;//turns true for 1 cycle when new external palette is detected
 
     // Animations catalog
     BaseAnimation * active_animation = nullptr;
