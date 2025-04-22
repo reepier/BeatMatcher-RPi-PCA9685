@@ -187,7 +187,7 @@ namespace fcn{
       }
     }
 
-    return (T)0;    //TODO bellec ce cast est bancale AF
+    return T();
   }
 
   template<class T>
