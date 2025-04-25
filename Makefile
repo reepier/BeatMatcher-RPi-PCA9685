@@ -7,6 +7,7 @@ main = src/main.cpp
 test = src/test.cpp
 objects = build/animator.o build/config.o build/debug.o build/laser.o build/music.o build/spider.o build/spot.o build/addr_LED.o build/redrayz.o build/DMXio.o
 qlc_files = QLC/Omerta-Inc.-AddressableLED_CtrlPanel.qxf QLC/Omerta-Inc.-RedRayz_CtrlPanel.qxf QLC/Omerta-Inc.-SpotRack_CtrlPanel.qxf QLC/Omerta-Inc.-Beatmatcher-Control-Panel.qxf  QLC/Omerta-Inc.-BaseFixture_CtrlPanel.qxf QLC/Config_beatmatcher_controler.qxw
+qlc_dest_files = 
 qlc_fix_path = /home/reepier/.qlcplus/fixtures
 
 libs = -lola -lolacommon -lcurses  -lfftw3 -lwiringPi -lprotobuf -lrtaudio 
@@ -57,7 +58,7 @@ install_qlc: $(qlc_files)
 	cp QLC/Omerta-Inc.-SpotRack_CtrlPanel.qxf 			$(qlc_fix_path)
 	cp QLC/Omerta-Inc.-Beatmatcher-Control-Panel.qxf 	$(qlc_fix_path)
 
-get_qlc:
+get_qlc: 
 	cp /home/reepier/Documents/QLC/Config_beatmatcher_controler.qxw QLC/
 	cp $(qlc_fix_path)/Omerta-Inc.-BaseFixture_CtrlPanel.qxf		QLC/	
 	cp $(qlc_fix_path)/Omerta-Inc.-AddressableLED_CtrlPanel.qxf		QLC/	

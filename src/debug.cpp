@@ -112,7 +112,7 @@ void disp_music_window(){
     // Threshold
     // double thr_unit = max(min(100/MAXVOL, 1.0),0.0);  //unitary threshold value [0;1]
     double thr_unit = max(min(   sampler.beat_threshold/MAXVOL  ,1.0),0.0);  //unitary threshold value [0;1]
-    int thr_px = pow(thr_unit, 0.5) * MAXVOLPX;
+    int thr_px = max(1.0, pow(thr_unit, 0.5) * MAXVOLPX);
     thrbuf << "Threshold | " << string(thr_px-1, ' ') << '|' << string(MAXVOLPX-thr_px, ' ') << " | " << (int)sampler.beat_threshold;
     // mvwprintw(musicw, 2,1, "Threshold");
     // mvwprintw(musicw, 2,1, thrbuf.str().c_str());

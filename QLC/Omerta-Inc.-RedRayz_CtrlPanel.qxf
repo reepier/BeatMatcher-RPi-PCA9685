@@ -19,7 +19,7 @@
   <Capability Min="4" Max="4">Bulles (lentes)</Capability>
   <Capability Min="5" Max="5">Bulles (lentes, + rares)</Capability>
   <Capability Min="6" Max="6">Bulles (rapides)</Capability>
-  <Capability Min="7" Max="7">Chaser (très lent) </Capability>
+  <Capability Min="7" Max="7">Chaser (très lent)</Capability>
   <Capability Min="8" Max="8">Chaser (très lent, +nbeux)</Capability>
   <Capability Min="9" Max="9">Chaser (lent)</Capability>
   <Capability Min="10" Max="10">Chaser (rapide)</Capability>
