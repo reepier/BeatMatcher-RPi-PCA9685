@@ -204,25 +204,39 @@ void SoundAnalyzer::_process_record(){
 void SoundAnalyzer::_update_beats(){
     log(4, __FILE__, " ",__LINE__, " ", __func__);
 
+    static bool previous_raw_beat = false;
+    
     // check for raw_beat
     // Compare current level to threshold and control LED
-    if (volume >= beat_threshold){
-        if (!raw_beat){
-            new_beat = true;
-            t_last_new_beat = frame.t_current_ms;
+    if(beat_auto){ //Beat defined from audio analysis
+        if (volume >= beat_threshold){
+            if (!raw_beat){
+                new_beat = true;
+                t_last_new_beat = frame.t_current_ms;
+            }else{
+                new_beat = false;
+            }
+            
+            raw_beat = true;
+            t_last_beat = frame.t_current_ms;
         }
         else{
+            raw_beat = false;
+            // filtered_beat = false;
             new_beat = false;
         }
-        
-        raw_beat = true;
-        t_last_beat = frame.t_current_ms;
+    }else{ //Beat defined from external DMX Controler
+        // in this case, raw_beat is set in DMXio.cpp/processDMXinput() func.
+        if(raw_beat && !previous_raw_beat){
+            new_beat = true;
+            log(2, "New Beat !");
+            t_last_new_beat = frame.t_current_ms;
+        }else{
+            new_beat = false;
+        }
     }
-    else{
-        raw_beat = false;
-        filtered_beat = false;
-        new_beat = false;
-    }
+
+    previous_raw_beat = raw_beat;   // memorize raw_beat value for next loop
 }
 
 /** 

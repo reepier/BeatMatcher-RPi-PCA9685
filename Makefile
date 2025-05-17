@@ -59,7 +59,6 @@ install_qlc: $(qlc_files)
 	cp QLC/Omerta-Inc.-Beatmatcher-Control-Panel.qxf 	$(qlc_fix_path)
 
 get_qlc: 
-	cp /home/reepier/Documents/QLC/Config_beatmatcher_controler.qxw QLC/
 	cp $(qlc_fix_path)/Omerta-Inc.-BaseFixture_CtrlPanel.qxf		QLC/	
 	cp $(qlc_fix_path)/Omerta-Inc.-AddressableLED_CtrlPanel.qxf		QLC/	
 	cp $(qlc_fix_path)/Omerta-Inc.-RedRayz_CtrlPanel.qxf			QLC/

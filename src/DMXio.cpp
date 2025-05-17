@@ -144,6 +144,18 @@ void processDMXinput(const ola::client::DMXMetadata &metadata, const ola::DmxBuf
         
     }
 
+    //Process BEAT Signal
+        //Beat Auto or Manual ?
+        static uint8_t prev_beat_trigger_val = 0;
+        uint8_t beat_trigger_val = data.Get(MAIN_BEAT_CH);
+        sampler.beat_auto = beat_trigger_val <= 10 ? true : false;
+        if(sampler.beat_auto == false){
+            sampler.raw_beat = beat_trigger_val>prev_beat_trigger_val ? true : false;
+        }
+        prev_beat_trigger_val = beat_trigger_val;
+        //
+
+
     // PROCESS ADRESSABLE LED DIMMER
     if (new_data_available){ // process dimmer input as a continuous stream (& not only on trigger)
         // get & rewrap raw data

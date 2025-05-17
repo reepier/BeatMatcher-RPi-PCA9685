@@ -48,6 +48,7 @@ class SoundAnalyzer{
     
     // Beat tracking variables
     public :    float beat_threshold = 10;
+    public :    bool beat_auto = true; //wether or not Beat is detected from audio recording (or external controler)
     public :    bool raw_beat=false, new_beat=false, filtered_beat=false;
     public :    unsigned long t_last_beat = 0;         // Stores timestamp of the last raw_beat=true event
     public :    unsigned long t_last_new_beat = 0;
