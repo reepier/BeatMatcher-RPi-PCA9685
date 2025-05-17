@@ -74,12 +74,18 @@
   <Capability Min="2" Max="2">Moyenne</Capability>
   <Capability Min="3" Max="3">Elevée</Capability>
  </Channel>
+ <Channel Name="Beat Trigger">
+  <Group Byte="0">Effect</Group>
+  <Capability Min="0" Max="10">Auto Detection (audio)</Capability>
+  <Capability Min="11" Max="255">Manuel (front montant)</Capability>
+ </Channel>
  <Mode Name="All CH.">
   <Channel Number="0" ActsOn="0">Trigger</Channel>
   <Channel Number="1" ActsOn="1">Master dimmer</Channel>
   <Channel Number="2" ActsOn="2">Master Color 1</Channel>
   <Channel Number="3" ActsOn="3">Master Color 2</Channel>
   <Channel Number="4" ActsOn="4">Show intensity</Channel>
+  <Channel Number="5" ActsOn="5">Beat Trigger</Channel>
  </Mode>
  <Physical>
   <Bulb Type="" Lumens="0" ColourTemperature="0"/>
