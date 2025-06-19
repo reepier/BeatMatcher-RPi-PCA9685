@@ -99,7 +99,7 @@ public:
     //std::vector<BaseAnimation *> animations; // vector containing animations
 
     SpotRack(spot_vec sp, std::string nm, int adr, int i, uint8_t mast=255): BaseFixture(adr, 0, nm, i, mast){
-        this->id = i;
+        // this->id = i;
         this->spots = sp;
         this->rack_size = sp.size();
 

@@ -389,7 +389,7 @@ class BaseFixture{
     anim_vec animations;
 
     //constructor (adresse [0-511], number of channels, fixture's name)
-    BaseFixture(int addr,int ch, std::string nm, int i, uint8_t mast): address(addr), nCH(ch), name(nm), id(i), master(mast){};
+    BaseFixture(int addr,int nch, std::string nm, int i, uint8_t mast): address(addr), nCH(nch), name(nm), id(i), master(mast){};
     virtual void init()=0;
 
     //animation activation & management

@@ -14,6 +14,7 @@
 // Common Datatypes
 typedef time_t time_ms;
 typedef time_t time_us;
+typedef uint8_t DMX_channel;
 
 enum simpleColor{ //TODO : create a desaturated (lighter) version of each color
     black=0,

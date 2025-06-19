@@ -296,8 +296,8 @@ void processDMXinput(const ola::client::DMXMetadata &metadata, const ola::DmxBuf
     //PROCESS RED RAYZ DIMMER
     if (new_data_available){ // process dimmer input as a continuous stream (& not only on trigger)
         // get & rewrap raw data
-        redrayz.master = data.Get(RED_DIM_CH); // already a 0-255 dmx data, no conversion/rewrap needed
-        redrayz.address = redrayz.get_address();
+        laserbox1.master = data.Get(RED_DIM_CH); // already a 0-255 dmx data, no conversion/rewrap needed
+        laserbox1.address = laserbox1.get_address();
     }
 
     //PROCESS RED RAYZ Animation
@@ -307,17 +307,17 @@ void processDMXinput(const ola::client::DMXMetadata &metadata, const ola::DmxBuf
         // if input data is not in DEFAULT positions (automatic mode)
         if ( red_ani_val!=0) { 
             // update Rack animation if there is a change
-            if (redrayz.external_animation != red_ani_val){
-                redrayz.external_animation = red_ani_val;
-                redrayz.new_external_animation = true;
+            if (laserbox1.external_animation != red_ani_val){
+                laserbox1.external_animation = red_ani_val;
+                laserbox1.new_external_animation = true;
             }else{
                 
             }
         // if input data is DEFAULT (0) 
         }else{
-            if (redrayz.external_animation != 0){  //if not already reset to 0
-                redrayz.external_animation = 0;    //reset to 0
-                redrayz.new_external_animation = true;
+            if (laserbox1.external_animation != 0){  //if not already reset to 0
+                laserbox1.external_animation = 0;    //reset to 0
+                laserbox1.new_external_animation = true;
                 log(2, "Back to automatic RED animation");  //TODO choose where to put log instructions (cannot be both in DMXio and Animator)
             }else{
                 
@@ -340,17 +340,17 @@ void processDMXinput(const ola::client::DMXMetadata &metadata, const ola::DmxBuf
             if (red_col1_val > 0)  red_palette.push_back((simpleColor)(red_col1_val-1));
             if (red_col2_val > 0)  red_palette.push_back((simpleColor)(red_col2_val-1));
             // update Rack palette if there is a change
-            if (redrayz.external_palette != red_palette){
-                redrayz.external_palette = red_palette;
-                redrayz.new_external_palette = true;
+            if (laserbox1.external_palette != red_palette){
+                laserbox1.external_palette = red_palette;
+                laserbox1.new_external_palette = true;
                 // log(2, "New SR1 palette : ", fcn::palette_to_string(spot_rack->external_palette));
             }else{
                 
             }
         }else{
-            if ( !redrayz.external_palette.empty()){  //if not already empty 
-                redrayz.external_palette.clear();    //reset to empty palette (meaning main palette or auto palette will apply to leds)
-                redrayz.new_external_palette = true;
+            if ( !laserbox1.external_palette.empty()){  //if not already empty 
+                laserbox1.external_palette.clear();    //reset to empty palette (meaning main palette or auto palette will apply to leds)
+                laserbox1.new_external_palette = true;
                 log(2, "Back to automatic RED palette");
             }else{
                 

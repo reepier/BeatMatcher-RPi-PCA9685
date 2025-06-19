@@ -1,3 +1,29 @@
+/*
+$$$$$$$\                       $$\     
+$$  __$$\                      $$ |    
+$$ |  $$ | $$$$$$\   $$$$$$\ $$$$$$\   
+$$$$$$$\ |$$  __$$\  \____$$\\_$$  _|  
+$$  __$$\ $$$$$$$$ | $$$$$$$ | $$ |    
+$$ |  $$ |$$   ____|$$  __$$ | $$ |$$\ 
+$$$$$$$  |\$$$$$$$\ \$$$$$$$ | \$$$$  |
+\_______/  \_______| \_______|  \____/ 
+                                                                                                               
+$$\      $$\            $$\               $$\                           
+$$$\    $$$ |           $$ |              $$ |                          
+$$$$\  $$$$ | $$$$$$\ $$$$$$\    $$$$$$$\ $$$$$$$\   $$$$$$\   $$$$$$\  
+$$\$$\$$ $$ | \____$$\\_$$  _|  $$  _____|$$  __$$\ $$  __$$\ $$  __$$\ 
+$$ \$$$  $$ | $$$$$$$ | $$ |    $$ /      $$ |  $$ |$$$$$$$$ |$$ |  \__|
+$$ |\$  /$$ |$$  __$$ | $$ |$$\ $$ |      $$ |  $$ |$$   ____|$$ |      
+$$ | \_/ $$ |\$$$$$$$ | \$$$$  |\$$$$$$$\ $$ |  $$ |\$$$$$$$\ $$ |      
+\__|     \__| \_______|  \____/  \_______|\__|  \__| \_______|\__|      
+
+
+By P.VEZIN
+For 0M3RT4 & W4BI S4B1
+                                                                                                               
+*/
+
+
 #include <iostream>
 #include <iomanip>
 #include <string>
@@ -22,9 +48,9 @@ using namespace std;
 fix_vec ll_fxtrs = {    /*&led,*/ &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, 
                         &spot_7, &spot_8, &spot_9, &spot_10, &spot_11, &spot_12, 
                         &spot_13, &spot_14, &spot_15, &spot_16, &spot_17, &spot_18, &spot_19, &spot_20,
-                        &spider, &laser, &redrayz};
+                        &spider, &laser, &laserbox1};
 
-fix_vec fixtures = {&addr_led, &laser, &spot_rack_1, &spot_rack_2, &spot_rack_4, &spot_rack_3, &spider, &redrayz};
+fix_vec fixtures = {&addr_led, &laser, &spot_rack_1, &spot_rack_2, &spot_rack_4, &spot_rack_3, &spider, &lasergroup1, &lasergroup2};
 
 bool process_arguments(int n, char* args[]){
     for (int i=1; i<n; i++){

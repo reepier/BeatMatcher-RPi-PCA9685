@@ -328,7 +328,7 @@ void AnimationManager::nov30_maximum_update(){
     }
 
     // update Warehouse fixture animation
-    fix_vec warehouse_fixtures = {&spot_rack_3, &spot_rack_2, &spot_rack_4, &redrayz};  // list of fixtures in the warehouse
+    fix_vec warehouse_fixtures = {&spot_rack_3, &spot_rack_2, &spot_rack_4, &laserbox1};  // list of fixtures in the warehouse
     const int n_wareh_fix =  warehouse_fixtures.size();                         // number of fixtures
     static vector<time_t> warehouse_timestp(n_wareh_fix, 0);                    // for each fixture, stores the timestamp of the next animation change
 
@@ -500,7 +500,7 @@ bool AnimationManager::controled_update(){
     }
 
 // Define fixtures installed
-    fix_vec fixs = {&addr_led, &spot_rack_1, &spot_rack_2, &spot_rack_3, &spot_rack_4, &redrayz};
+    fix_vec fixs = {&addr_led, &spot_rack_1, &spot_rack_2, &spot_rack_3, &spot_rack_4, &lasergroup1, &lasergroup2};
 
 //update animation automaticaaly when required
     bool auto_ani_update = false;

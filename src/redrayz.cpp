@@ -2,18 +2,24 @@ using namespace std;
 
 #include "redrayz.h"
 
-RedrayLaser redrayz(0, 6, "Redrayz", 1);
+RedLaserBox laserbox1(0, 6, "Grada Laser 1", 1);
+
+RedLaserGroup lasergroup1(vector<DMX_channel*>{&laserbox1.lasers[0], &laserbox1.lasers[1], &laserbox1.lasers[2]}, 
+                          "Groupe Laser 1", 0, 1);
+RedLaserGroup lasergroup2(vector<DMX_channel*>{&laserbox1.lasers[3], &laserbox1.lasers[4], &laserbox1.lasers[5]}, 
+                          "Groupe Laser 2", 0, 2);
+
 
 /*
-#######                                     
-#       # #    # ##### #    # #####  ###### 
-#       #  #  #    #   #    # #    # #      
-#####   #   ##     #   #    # #    # #####  
-#       #   ##     #   #    # #####  #      
-#       #  #  #    #   #    # #   #  #      
-#       # #    #   #    ####  #    # ###### */
+#                                       #####                              
+#         ##    ####  ###### #####     #     # #####   ####  #    # #####  
+#        #  #  #      #      #    #    #       #    # #    # #    # #    # 
+#       #    #  ####  #####  #    #    #  #### #    # #    # #    # #    # 
+#       ######      # #      #####     #     # #####  #    # #    # #####  
+#       #    # #    # #      #   #     #     # #   #  #    # #    # #      
+####### #    #  ####  ###### #    #     #####  #    #  ####   ####  #      */
 
-void RedrayLaser::init(){
+void RedLaserGroup::init(){
     // black, OFF animation
     animations.push_back(new RedrayzAnimation0(this, 0, " ", "RED.0", any));
 
@@ -49,15 +55,28 @@ void RedrayLaser::init(){
     this->activate_none();
 }
 
-DMX_vec RedrayLaser::buffer(){
+/*
+#                                      ######                
+#         ##    ####  ###### #####     #     #  ####  #    # 
+#        #  #  #      #      #    #    #     # #    #  #  #  
+#       #    #  ####  #####  #    #    ######  #    #   ##   
+#       ######      # #      #####     #     # #    #   ##   
+#       #    # #    # #      #   #     #     # #    #  #  #  
+####### #    #  ####  ###### #    #    ######   ####  #    #  */
+
+DMX_vec RedLaserBox::buffer(){
     DMX_vec data(this->nCH);
 
     for (int i=0; i<this->nCH; i++){  // adjust intensity with fixture master dimmer
-      data[i] = this->master/255.0 * this->output_channels[i];
+      data[i] = this->master/255.0 * this->lasers[i];
     }
 
     return data;
 }
+
+//TODO : move all animation in RedLaserGroup class;
+
+
 /*
   ###          #######                 
  #   #         #       # #    # ###### 
@@ -65,11 +84,13 @@ DMX_vec RedrayLaser::buffer(){
 #     #        #####   #   ##   #####  
 #     # ###    #       #   ##   #      
  #   #  ###    #       #  #  #  #      
-  ###   ###    #       # #    # #####*/
+  ###   ###    #       # #    # ##### */
 
 void RedrayzAnimation0::init(){
   BaseAnimation::init();
-  this->fixture->output_channels = this->values;
+  for (int i=0; i<this->fixture->group_size; i++){
+    *(this->fixture->lasers[i]) = this->values[i];
+  }
 }
 void RedrayzAnimation0::init(const color_vec& palette){
   /* Pas d'argument couleur défini pour le laser rouge --> il est toujours rouge*/
@@ -95,7 +116,7 @@ void RedrayzAnimation0::new_frame(){
 void RedrayzAnimation1::init(){
   BaseAnimation::init();
 
-  const int n_unit = NUM_LAS; //set the nuber of laser pixels to control
+  const int n_unit = this->fixture->group_size; //set the nuber of laser pixels to control
   this->flashes = vector<flash_vec>(n_unit, flash_vec(2));
   for (int i_unit=0; i_unit<n_unit; i_unit++){
     flashes[i_unit][i_next].time = frame.t_current_ms + rand_min_max(rand_const_ms/5, rand_const_ms*2*n_unit); 
@@ -152,7 +173,7 @@ void RedrayzAnimation1::new_frame(){
       flash_intensity = 0.0;
     }
 
-    this->fixture->output_channels[i_unit] = flash_intensity*this->master;
+    *(this->fixture->lasers[i_unit]) = flash_intensity*this->master;
   }
   balise("fausse balise");
 }
