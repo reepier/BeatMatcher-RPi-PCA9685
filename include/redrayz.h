@@ -44,7 +44,7 @@ class RedLaserGroup : public BaseFixture{
 
     
 };
-extern RedLaserGroup lasergroup1, lasergroup2;
+extern RedLaserGroup lasergroup1/*, lasergroup2*/;
 
 
 /*

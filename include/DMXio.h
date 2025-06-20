@@ -55,6 +55,14 @@ void send();
     #define LED_COL2_CH     4+OLA_ADR_OFFSET+LED_CTRL_ADR
 
 
+#define RED_CTRL_ADR    20+OLA_ADR_OFFSET
+    #define RED_DIM_CH      1+OLA_ADR_OFFSET+RED_CTRL_ADR
+    #define RED_ANI_CH      2+OLA_ADR_OFFSET+RED_CTRL_ADR
+    #define RED_COL1_CH     3+OLA_ADR_OFFSET+RED_CTRL_ADR 
+    #define RED_COL2_CH     4+OLA_ADR_OFFSET+RED_CTRL_ADR
+
+
+
 #define SR1_CTRL_ADR    25+OLA_ADR_OFFSET
 #define SR2_CTRL_ADR    30+OLA_ADR_OFFSET
 #define SR3_CTRL_ADR    35+OLA_ADR_OFFSET
@@ -66,11 +74,6 @@ void send();
 
 
 
-#define RED_CTRL_ADR    20+OLA_ADR_OFFSET
-    #define RED_DIM_CH      1+OLA_ADR_OFFSET+RED_CTRL_ADR
-    #define RED_ANI_CH      2+OLA_ADR_OFFSET+RED_CTRL_ADR
-    #define RED_COL1_CH     3+OLA_ADR_OFFSET+RED_CTRL_ADR 
-    #define RED_COL2_CH     4+OLA_ADR_OFFSET+RED_CTRL_ADR
 
 
 // DMX Input interface

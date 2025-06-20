@@ -432,7 +432,7 @@ void AnimationManager::autocolor_update(){
         spot_rack_1.activate_random(palette);
         addr_led.activate_random(palette);
         lasergroup1.activate_random();
-        lasergroup2.activate_random();
+        // lasergroup2.activate_random();
         palette_lifespan--; //decrease palette lifespan
     }
 }
@@ -503,9 +503,9 @@ bool AnimationManager::controled_update(){
     }
 
 // Define fixtures installed
-    fix_vec fixs = {&addr_led, &spot_rack_1, &spot_rack_2, &spot_rack_3, &spot_rack_4, &lasergroup1, &lasergroup2};
+    fix_vec fixs = {&addr_led, &spot_rack_1, &spot_rack_2, &spot_rack_3, &spot_rack_4, &lasergroup1/*, &lasergroup2*/};
 
-//update animation automaticaaly when required
+//automatic animation update trigger (based on timer & beat detection)
     bool auto_ani_update = false;
     static time_t last_ani_update_ms = 0;
     //choose an animation randomly at first & change whenever Beat stat changes & a timer elapses
@@ -526,11 +526,11 @@ for (auto fix : fixs){
     }
 
 // determines which setting is manual & which is automatic
-    bool automatic_main_palette = animator.external_palette.empty();
-    bool automatic_fix_palette = fix->external_palette.empty() && animator.external_palette.empty();
-    bool automatic_fix_ani = fix->external_animation==0;
+    bool automatic_main_palette = animator.external_palette.empty();                                    // true if main palette update is automatic
+    bool automatic_fix_palette = fix->external_palette.empty() && animator.external_palette.empty();    // true if palette update for this fixture is auto (true or false)
+    bool automatic_fix_ani = fix->external_animation==0;                                                // true if animation update for this fixture is auto(true or false)
 
-// APPLY UPDATE to fixture: 
+// APPLY UPDATE to fixture :
     // if input command is received or automatic settings change (palette or animation), change animation
     if(manual_update || auto_ani_update && automatic_fix_ani || auto_palette_update && automatic_fix_palette){
         color_vec final_palette;

@@ -97,6 +97,16 @@ void processDMXinput(const ola::client::DMXMetadata &metadata, const ola::DmxBuf
         // log(1, "New control data available");
     }
 
+
+/*
+▗▖  ▗▖ ▗▄▖ ▗▄▄▄▖▗▖  ▗▖    ▗▄▄▄▖▗▖  ▗▖▗▄▄▖ ▗▖ ▗▖▗▄▄▄▖
+▐▛▚▞▜▌▐▌ ▐▌  █  ▐▛▚▖▐▌      █  ▐▛▚▖▐▌▐▌ ▐▌▐▌ ▐▌  █  
+▐▌  ▐▌▐▛▀▜▌  █  ▐▌ ▝▜▌      █  ▐▌ ▝▜▌▐▛▀▘ ▐▌ ▐▌  █  
+▐▌  ▐▌▐▌ ▐▌▗▄█▄▖▐▌  ▐▌    ▗▄█▄▖▐▌  ▐▌▐▌   ▝▚▄▞▘  █  
+                                                    
+                                                    
+RubiFont                                                    */
+
     // Process trigger
     bool trigger = false;
     static time_t last_trigger_ms;
@@ -155,6 +165,17 @@ void processDMXinput(const ola::client::DMXMetadata &metadata, const ola::DmxBuf
         prev_beat_trigger_val = beat_trigger_val;
         //
 
+
+
+/*
+
+ ▗▄▖ ▗▄▄▄ ▗▄▄▄ ▗▄▄▖ ▗▄▄▄▖ ▗▄▄▖ ▗▄▄▖ ▗▄▖ ▗▄▄▖ ▗▖   ▗▄▄▄▖    ▗▖   ▗▄▄▄▖▗▄▄▄ 
+▐▌ ▐▌▐▌  █▐▌  █▐▌ ▐▌▐▌   ▐▌   ▐▌   ▐▌ ▐▌▐▌ ▐▌▐▌   ▐▌       ▐▌   ▐▌   ▐▌  █
+▐▛▀▜▌▐▌  █▐▌  █▐▛▀▚▖▐▛▀▀▘ ▝▀▚▖ ▝▀▚▖▐▛▀▜▌▐▛▀▚▖▐▌   ▐▛▀▀▘    ▐▌   ▐▛▀▀▘▐▌  █
+▐▌ ▐▌▐▙▄▄▀▐▙▄▄▀▐▌ ▐▌▐▙▄▄▖▗▄▄▞▘▗▄▄▞▘▐▌ ▐▌▐▙▄▞▘▐▙▄▄▖▐▙▄▄▖    ▐▙▄▄▖▐▙▄▄▖▐▙▄▄▀
+                                                                          
+                                                                
+*/
 
     // PROCESS ADRESSABLE LED DIMMER
     if (new_data_available){ // process dimmer input as a continuous stream (& not only on trigger)
@@ -223,6 +244,14 @@ void processDMXinput(const ola::client::DMXMetadata &metadata, const ola::DmxBuf
         
     }//TODO clean this if / elseif structure --> it has way to many ramifications
 
+/*
+ ▗▄▄▖▗▄▄▖  ▗▄▖ ▗▄▄▄▖    ▗▄▄▖  ▗▄▖  ▗▄▄▖▗▖ ▗▖
+▐▌   ▐▌ ▐▌▐▌ ▐▌  █      ▐▌ ▐▌▐▌ ▐▌▐▌   ▐▌▗▞▘
+ ▝▀▚▖▐▛▀▘ ▐▌ ▐▌  █      ▐▛▀▚▖▐▛▀▜▌▐▌   ▐▛▚▖ 
+▗▄▄▞▘▐▌   ▝▚▄▞▘  █      ▐▌ ▐▌▐▌ ▐▌▝▚▄▄▖▐▌ ▐▌
+                                            
+                                            
+                                            */
 
     for (SpotRack* spot_rack : vector<SpotRack*>{&spot_rack_1,&spot_rack_2,&spot_rack_3,&spot_rack_4}){  //allows for more fexibility when using more than 1 rack
         //PROCESS SPOT RACK 1 DIMMER
@@ -292,12 +321,20 @@ void processDMXinput(const ola::client::DMXMetadata &metadata, const ola::DmxBuf
             
         }
     }
-
+/*
+▗▄▄▖ ▗▄▄▄▖▗▄▄▄     ▗▄▄▖  ▗▄▖ ▗▖  ▗▖▗▄▄▄▄▖
+▐▌ ▐▌▐▌   ▐▌  █    ▐▌ ▐▌▐▌ ▐▌ ▝▚▞▘    ▗▞▘
+▐▛▀▚▖▐▛▀▀▘▐▌  █    ▐▛▀▚▖▐▛▀▜▌  ▐▌   ▗▞▘  
+▐▌ ▐▌▐▙▄▄▖▐▙▄▄▀    ▐▌ ▐▌▐▌ ▐▌  ▐▌  ▐▙▄▄▄▖
+                                         
+                                         
+                                         */
+    
     //PROCESS RED RAYZ DIMMER
     if (new_data_available){ // process dimmer input as a continuous stream (& not only on trigger)
         // get & rewrap raw data
-        laserbox1.master = data.Get(RED_DIM_CH); // already a 0-255 dmx data, no conversion/rewrap needed
-        laserbox1.address = laserbox1.get_address();
+        lasergroup1.master = data.Get(RED_DIM_CH); // already a 0-255 dmx data, no conversion/rewrap needed
+        // lasergroup1.address = lasergroup1.get_address();
     }
 
     //PROCESS RED RAYZ Animation
@@ -307,17 +344,17 @@ void processDMXinput(const ola::client::DMXMetadata &metadata, const ola::DmxBuf
         // if input data is not in DEFAULT positions (automatic mode)
         if ( red_ani_val!=0) { 
             // update Rack animation if there is a change
-            if (laserbox1.external_animation != red_ani_val){
-                laserbox1.external_animation = red_ani_val;
-                laserbox1.new_external_animation = true;
+            if (lasergroup1.external_animation != red_ani_val){
+                lasergroup1.external_animation = red_ani_val;
+                lasergroup1.new_external_animation = true;
             }else{
                 
             }
         // if input data is DEFAULT (0) 
         }else{
-            if (laserbox1.external_animation != 0){  //if not already reset to 0
-                laserbox1.external_animation = 0;    //reset to 0
-                laserbox1.new_external_animation = true;
+            if (lasergroup1.external_animation != 0){  //if not already reset to 0
+                lasergroup1.external_animation = 0;    //reset to 0
+                lasergroup1.new_external_animation = true;
                 log(2, "Back to automatic RED animation");  //TODO choose where to put log instructions (cannot be both in DMXio and Animator)
             }else{
                 
@@ -327,7 +364,7 @@ void processDMXinput(const ola::client::DMXMetadata &metadata, const ola::DmxBuf
         
     }
 
-    //PROCESS RED RAYZ COLORS
+    //PROCESS RED RAYZ COLORS // TODO remove ??
     if (trigger){
         // get & rewrap raw data
         int red_col1_val = min(max((uint8_t)0,  data.Get(RED_COL1_CH)) , (uint8_t)(simpleColor::last_color));
@@ -340,17 +377,17 @@ void processDMXinput(const ola::client::DMXMetadata &metadata, const ola::DmxBuf
             if (red_col1_val > 0)  red_palette.push_back((simpleColor)(red_col1_val-1));
             if (red_col2_val > 0)  red_palette.push_back((simpleColor)(red_col2_val-1));
             // update Rack palette if there is a change
-            if (laserbox1.external_palette != red_palette){
-                laserbox1.external_palette = red_palette;
-                laserbox1.new_external_palette = true;
+            if (lasergroup1.external_palette != red_palette){
+                lasergroup1.external_palette = red_palette;
+                lasergroup1.new_external_palette = true;
                 // log(2, "New SR1 palette : ", fcn::palette_to_string(spot_rack->external_palette));
             }else{
                 
             }
         }else{
-            if ( !laserbox1.external_palette.empty()){  //if not already empty 
-                laserbox1.external_palette.clear();    //reset to empty palette (meaning main palette or auto palette will apply to leds)
-                laserbox1.new_external_palette = true;
+            if ( !lasergroup1.external_palette.empty()){  //if not already empty 
+                lasergroup1.external_palette.clear();    //reset to empty palette (meaning main palette or auto palette will apply to leds)
+                lasergroup1.new_external_palette = true;
                 log(2, "Back to automatic RED palette");
             }else{
                 
