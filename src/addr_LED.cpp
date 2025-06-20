@@ -33,7 +33,7 @@ void AddressableLED::init(){
     animations.push_back(new AddrLEDAnimation2(this, seg, "Segments Digital Beat (autocolor)",  "PIX.7.2", leader, true, 255));     
     animations.push_back(new AddrLEDAnimation2(this, pix, "Pixel Digital Beat (autocolor)",     "PIX.7.3", leader, true, 255));     
     
-    //AUTOCOLOR with Animation type 4 ----------------------------------------------------------------------------------------
+    //AUTOCOLOR with Animation type 4 : Random Bursts----------------------------------------------------------------------------------------
     //Slow & long bubbles
     animations.push_back(new AddrLEDAnimation4(this, gaussian, bar, 400, 1500, "Slow Bubbles", "PIX.8.1", backer, 1, 255));
     // Fast & short Bubbles
@@ -42,8 +42,11 @@ void AddressableLED::init(){
     animations.push_back(new AddrLEDAnimation4(this, square,   bar, 300, 1500, "Slow Chaser",  "PIX.8.3", backer, 1, 255));
     // Fast Random Chaser 
     animations.push_back(new AddrLEDAnimation4(this, square,   bar, 200, 600, "Fast Chaser",  "PIX.8.4", any, 1, 255));
-    //TODO add random strobes
+    // Fast Random Strobe
     animations.push_back(new AddrLEDAnimation4(this, square, bar, 50, 1000/FRATE, "Random Strobe", "PIX.8.5", any, 1, 255));
+    // Decaying Flash
+    animations.push_back(new AddrLEDAnimation4(this, expdecay, bar, 1000, 1000, "Flashes", "PIX.8.6", any, 1, 255));
+
 
     this->activate_none();
 }
@@ -391,17 +394,23 @@ void AddrLEDAnimation4::new_frame(){
                     c_next = fcn::random_pick(this->flash_colors);
                     
                 }
-
+                
                 // flash_intensity = exp( -pow(2.5/this->flash_len*(t - t_prev), 2)) + exp( -pow(2.5/this->flash_len*(t - t_next), 2));
                 switch (this->flash_shape){
                     case square :
                         flash_intensity = fcn::square(t, t_prev, flash_len, 0.0,1.0) + fcn::square(t, t_next, flash_len, 0.0,1.0);
                         break;
+                    case gaussian :
+                        flash_intensity = fcn::gaussian(t, t_prev, flash_len, 0.0,1.0) + fcn::gaussian(t, t_next, flash_len, 0.0,1.0);
+                        break;
                     case gaussian2 :
-                        flash_intensity = fcn::gaussian2(t, t_prev, flash_len, 0.0,1.0) + fcn::gaussian2(t, t_next, flash_len, 0.0,1.0); //exp( -pow(2.5/this->flash_len*(t - t_prev), 2)) + exp( -pow(2.5/this->flash_len*(t - t_next), 2));
+                        flash_intensity = fcn::gaussian2(t, t_prev, flash_len, 0.0,1.0) + fcn::gaussian2(t, t_next, flash_len, 0.0,1.0);
+                        break;
+                    case expdecay :
+                        flash_intensity = fcn::exp_decay(t, t_prev, flash_len, 0.0,1.0);
                         break;
                     default :
-                        flash_intensity = fcn::gaussian(t, t_prev, flash_len, 0.0,1.0) + fcn::gaussian(t, t_next, flash_len, 0.0,1.0); //exp( -pow(2.5/this->flash_len*(t - t_prev), 2)) + exp( -pow(2.5/this->flash_len*(t - t_next), 2));
+                        flash_intensity = fcn::gaussian(t, t_prev, flash_len, 0.0,1.0) + fcn::gaussian(t, t_next, flash_len, 0.0,1.0);
                         break;
                 }
 
