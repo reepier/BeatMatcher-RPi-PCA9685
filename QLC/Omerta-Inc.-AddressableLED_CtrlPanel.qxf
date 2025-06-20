@@ -29,54 +29,54 @@
  </Channel>
  <Channel Name="Fixture Color 1">
   <Group Byte="0">Colour</Group>
-  <Capability Min="0" Max="0">Automatic</Capability>
-  <Capability Min="1" Max="1">Black</Capability>
-  <Capability Min="2" Max="2">Red</Capability>
-  <Capability Min="3" Max="3">Sodium</Capability>
-  <Capability Min="4" Max="4">Orange</Capability>
-  <Capability Min="5" Max="5">Yellow</Capability>
-  <Capability Min="6" Max="6">Gold</Capability>
-  <Capability Min="7" Max="7">Warm white</Capability>
-  <Capability Min="8" Max="8">Cold White</Capability>
-  <Capability Min="9" Max="9">Cyan</Capability>
-  <Capability Min="10" Max="10">Blue</Capability>
-  <Capability Min="11" Max="11">Purple</Capability>
-  <Capability Min="12" Max="12">Magenta</Capability>
-  <Capability Min="13" Max="13">Pink</Capability>
-  <Capability Min="14" Max="14">Green</Capability>
-  <Capability Min="15" Max="15">Light red</Capability>
-  <Capability Min="16" Max="16">Light cyan</Capability>
-  <Capability Min="17" Max="17">Light blue</Capability>
-  <Capability Min="18" Max="18">Light purple</Capability>
-  <Capability Min="19" Max="19">Light Magenta</Capability>
-  <Capability Min="20" Max="20">Light pink</Capability>
-  <Capability Min="21" Max="21">Light green</Capability>
-  <Capability Min="22" Max="255">reserve</Capability>
+  <Capability Min="0" Max="0" Preset="ColorMacro" >Automatic</Capability>
+  <Capability Min="1" Max="1" Preset="ColorMacro" Res1="#5e5c64">Black</Capability>
+  <Capability Min="2" Max="2" Preset="ColorMacro" Res1="#ff1f29">Red</Capability>
+  <Capability Min="3" Max="3" Preset="ColorMacro" Res1="#ff561f">Sodium</Capability>
+  <Capability Min="4" Max="4" Preset="ColorMacro" Res1="#ff7a1f">Orange</Capability>
+  <Capability Min="5" Max="5" Preset="ColorMacro" Res1="#f6d32d">Yellow</Capability>
+  <Capability Min="6" Max="6" Preset="ColorMacro" Res1="#ffd37d">Gold</Capability>
+  <Capability Min="7" Max="7" Preset="ColorMacro" Res1="#fff8d9">Warm white</Capability>
+  <Capability Min="8" Max="8" Preset="ColorMacro" Res1="#f5ffff">Cold White</Capability>
+  <Capability Min="9" Max="9" Preset="ColorMacro" Res1="#00dbff">Cyan</Capability>
+  <Capability Min="10" Max="10" Preset="ColorMacro" Res1="#001cff">Blue</Capability>
+  <Capability Min="11" Max="11" Preset="ColorMacro" Res1="#9e00ff">Purple</Capability>
+  <Capability Min="12" Max="12" Preset="ColorMacro" Res1="#ff00f5">Magenta</Capability>
+  <Capability Min="13" Max="13" Preset="ColorMacro" Res1="#ff00b8">Pink</Capability>
+  <Capability Min="14" Max="14" Preset="ColorMacro" Res1="#00ff2b">Green</Capability>
+  <Capability Min="15" Max="15" Preset="ColorMacro" Res1="#ff9ca0">Light red</Capability>
+  <Capability Min="16" Max="16" Preset="ColorMacro" Res1="#8cefff">Light cyan</Capability>
+  <Capability Min="17" Max="17" Preset="ColorMacro" Res1="#6576ff">Light blue</Capability>
+  <Capability Min="18" Max="18" Preset="ColorMacro" Res1="#d99bff">Light purple</Capability>
+  <Capability Min="19" Max="19" Preset="ColorMacro" Res1="#ffa6fb">Light Magenta</Capability>
+  <Capability Min="20" Max="20" Preset="ColorMacro" Res1="#ffa9e7">Light pink</Capability>
+  <Capability Min="21" Max="21" Preset="ColorMacro" Res1="#aaffb8">Light green</Capability>
+  <Capability Min="22" Max="255" >reserve</Capability>
  </Channel>
  <Channel Name="Fixture Color 2">
   <Group Byte="0">Colour</Group>
-  <Capability Min="0" Max="0">Automatic</Capability>
-  <Capability Min="1" Max="1">Black</Capability>
-  <Capability Min="2" Max="2">Red</Capability>
-  <Capability Min="3" Max="3">Sodium</Capability>
-  <Capability Min="4" Max="4">Orange</Capability>
-  <Capability Min="5" Max="5">Yellow</Capability>
-  <Capability Min="6" Max="6">Gold</Capability>
-  <Capability Min="7" Max="7">Warm white</Capability>
-  <Capability Min="8" Max="8">Cold White</Capability>
-  <Capability Min="9" Max="9">Cyan</Capability>
-  <Capability Min="10" Max="10">Blue</Capability>
-  <Capability Min="11" Max="11">Purple</Capability>
-  <Capability Min="12" Max="12">Magenta</Capability>
-  <Capability Min="13" Max="13">Pink</Capability>
-  <Capability Min="14" Max="14">Green</Capability>
-  <Capability Min="15" Max="15">Light red</Capability>
-  <Capability Min="16" Max="16">Light cyan</Capability>
-  <Capability Min="17" Max="17">Light blue</Capability>
-  <Capability Min="18" Max="18">Light purple</Capability>
-  <Capability Min="19" Max="19">Light Magenta</Capability>
-  <Capability Min="20" Max="20">Light pink</Capability>
-  <Capability Min="21" Max="21">Light green</Capability>
+  <Capability Min="0" Max="0"> Preset="ColorMacro"Automatic</Capability>
+  <Capability Min="1" Max="1" Preset="ColorMacro" Res1="#5e5c64">Black</Capability>
+  <Capability Min="2" Max="2" Preset="ColorMacro" Res1="#ff1f29">Red</Capability>
+  <Capability Min="3" Max="3" Preset="ColorMacro" Res1="#ff561f">Sodium</Capability>
+  <Capability Min="4" Max="4" Preset="ColorMacro" Res1="#ff7a1f">Orange</Capability>
+  <Capability Min="5" Max="5" Preset="ColorMacro" Res1="#f6d32d">Yellow</Capability>
+  <Capability Min="6" Max="6" Preset="ColorMacro" Res1="#ffd37d">Gold</Capability>
+  <Capability Min="7" Max="7" Preset="ColorMacro" Res1="#fff8d9">Warm white</Capability>
+  <Capability Min="8" Max="8" Preset="ColorMacro" Res1="#f5ffff">Cold White</Capability>
+  <Capability Min="9" Max="9" Preset="ColorMacro" Res1="#00dbff">Cyan</Capability>
+  <Capability Min="10" Max="10" Preset="ColorMacro" Res1="#001cff">Blue</Capability>
+  <Capability Min="11" Max="11" Preset="ColorMacro" Res1="#9e00ff">Purple</Capability>
+  <Capability Min="12" Max="12" Preset="ColorMacro" Res1="#ff00f5">Magenta</Capability>
+  <Capability Min="13" Max="13" Preset="ColorMacro" Res1="#ff00b8">Pink</Capability>
+  <Capability Min="14" Max="14" Preset="ColorMacro" Res1="#00ff2b">Green</Capability>
+  <Capability Min="15" Max="15" Preset="ColorMacro" Res1="#ff9ca0">Light red</Capability>
+  <Capability Min="16" Max="16" Preset="ColorMacro" Res1="#8cefff">Light cyan</Capability>
+  <Capability Min="17" Max="17" Preset="ColorMacro" Res1="#6576ff">Light blue</Capability>
+  <Capability Min="18" Max="18" Preset="ColorMacro" Res1="#d99bff">Light purple</Capability>
+  <Capability Min="19" Max="19" Preset="ColorMacro" Res1="#ffa6fb">Light Magenta</Capability>
+  <Capability Min="20" Max="20" Preset="ColorMacro" Res1="#ffa9e7">Light pink</Capability>
+  <Capability Min="21" Max="21" Preset="ColorMacro" Res1="#aaffb8">Light green</Capability>
   <Capability Min="22" Max="255">reserve</Capability>
  </Channel>
  <Mode Name="All CH.">

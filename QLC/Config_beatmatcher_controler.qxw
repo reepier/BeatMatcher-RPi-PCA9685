@@ -25,7 +25,7 @@
    <Name>Main Control Panel</Name>
    <Universe>0</Universe>
    <Address>0</Address>
-   <Channels>5</Channels>
+   <Channels>6</Channels>
   </Fixture>
   <Fixture>
    <Manufacturer>Omerta Inc.</Manufacturer>
@@ -151,21 +151,37 @@
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="1">1,15</FixtureVal>
   </Function>
+  <Function ID="16" Type="Sequence" Name="BEAT!" BoundScene="18">
+   <Speed FadeIn="0" FadeOut="0" Duration="1"/>
+   <Direction>Forward</Direction>
+   <RunOrder>SingleShot</RunOrder>
+   <SpeedModes FadeIn="Default" FadeOut="Default" Duration="PerStep"/>
+   <Step Number="0" FadeIn="0" Hold="50" FadeOut="0" Values="1">0:5,255</Step>
+   <Step Number="1" FadeIn="0" Hold="1" FadeOut="0" Values="1">0:5,79</Step>
+  </Function>
   <Function ID="17" Type="Scene" Name="Trigger OFF" Path="Main Controler">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="0">0,255</FixtureVal>
   </Function>
-  <Function ID="19" Type="Scene" Name="" Hidden="True">
+  <Function ID="18" Type="Scene" Name="Res1=&quot;#5e5c64&quot;&#10;Res1=&quot;#ff1f29&quot;&#10;Res1=&quot;#ff561f&quot;&#10;Res1=&quot;#ff7a1f&quot;&#10;Res1=&quot;#f6d32d&quot;&#10;Res1=&quot;#ffd37d&quot;&#10;Res1=&quot;#fff8d9&quot;&#10;Res1=&quot;#f5ffff&quot;&#10;Res1=&quot;#00dbff&quot;&#10;Res1=&quot;#001cff&quot;&#10;Res1=&quot;#9e00ff&quot;&#10;Res1=&quot;#ff00f5&quot;&#10;Res1=&quot;#ff00b8&quot;&#10;Res1=&quot;#00ff2b&quot;&#10;Res1=&quot;#ff9ca0&quot;&#10;Res1=&quot;#8cefff&quot;&#10;Res1=&quot;#6576ff&quot;&#10;Res1=&quot;#d99bff&quot;&#10;Res1=&quot;#ffa6fb&quot;&#10;Res1=&quot;#ffa9e7&quot;&#10;Res1=&quot;#aaffb8&quot;" Hidden="True">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="0">0,0</FixtureVal>
+   <FixtureVal ID="0">5,0</FixtureVal>
+  </Function>
+  <Function ID="19" Type="Scene" Name="Res1=&quot;#5e5c64&quot;&#10;Res1=&quot;#ff1f29&quot;&#10;Res1=&quot;#ff561f&quot;&#10;Res1=&quot;#ff7a1f&quot;&#10;Res1=&quot;#f6d32d&quot;&#10;Res1=&quot;#ffd37d&quot;&#10;Res1=&quot;#fff8d9&quot;&#10;Res1=&quot;#f5ffff&quot;&#10;Res1=&quot;#00dbff&quot;&#10;Res1=&quot;#001cff&quot;&#10;Res1=&quot;#9e00ff&quot;&#10;Res1=&quot;#ff00f5&quot;&#10;Res1=&quot;#ff00b8&quot;&#10;Res1=&quot;#00ff2b&quot;&#10;Res1=&quot;#ff9ca0&quot;&#10;Res1=&quot;#8cefff&quot;&#10;Res1=&quot;#6576ff&quot;&#10;Res1=&quot;#d99bff&quot;&#10;Res1=&quot;#ffa6fb&quot;&#10;Res1=&quot;#ffa9e7&quot;&#10;Res1=&quot;#aaffb8&quot;" Hidden="True">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="0">0,0,5,0</FixtureVal>
   </Function>
   <Function ID="20" Type="Sequence" Name="TRIGGER!" BoundScene="19">
    <Speed FadeIn="0" FadeOut="0" Duration="50"/>
    <Direction>Forward</Direction>
    <RunOrder>SingleShot</RunOrder>
-   <SpeedModes FadeIn="Default" FadeOut="Default" Duration="Common"/>
-   <Step Number="0" FadeIn="0" Hold="0" FadeOut="0" Values="1"/>
-   <Step Number="1" FadeIn="0" Hold="0" FadeOut="0" Values="1">0:0,10</Step>
+   <SpeedModes FadeIn="Default" FadeOut="Default" Duration="PerStep"/>
+   <Step Number="0" FadeIn="0" Hold="50" FadeOut="0" Values="2">0:0,130</Step>
+   <Step Number="1" FadeIn="0" Hold="0" FadeOut="0" Values="2">0:0,10</Step>
+  </Function>
+  <Function ID="21" Type="Scene" Name="Beat AUTO" Path="Main Controler">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="0">5,0</FixtureVal>
   </Function>
   <Function ID="32" Type="Scene" Name="00 Automatic" Path="Spot Rack #1/Color 1">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
@@ -994,7 +1010,7 @@
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="16">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="4">2</Channel>
      </Level>
      <Playback>
@@ -1011,7 +1027,7 @@
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="11">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="4">3</Channel>
      </Level>
      <Playback>
@@ -1078,7 +1094,7 @@
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="18">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="5">2</Channel>
      </Level>
      <Playback>
@@ -1095,7 +1111,7 @@
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="2">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="5">3</Channel>
      </Level>
      <Playback>
@@ -1162,7 +1178,7 @@
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="21">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="6">2</Channel>
      </Level>
      <Playback>
@@ -1179,7 +1195,7 @@
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="11">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="6">3</Channel>
      </Level>
      <Playback>
@@ -1296,7 +1312,7 @@
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="16">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="2">2</Channel>
      </Level>
      <Playback>
@@ -1313,7 +1329,7 @@
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="2">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="2">3</Channel>
      </Level>
      <Playback>
@@ -1338,6 +1354,49 @@
      </Playback>
     </Slider>
    </Frame>
+   <SoloFrame Caption="" ID="28">
+    <Appearance>
+     <FrameStyle>Sunken</FrameStyle>
+     <ForegroundColor>Default</ForegroundColor>
+     <BackgroundColor>Default</BackgroundColor>
+     <BackgroundImage>None</BackgroundImage>
+     <Font>Default</Font>
+    </Appearance>
+    <WindowState Visible="True" X="295" Y="25" Width="175" Height="155"/>
+    <AllowChildren>True</AllowChildren>
+    <AllowResize>True</AllowResize>
+    <ShowHeader>True</ShowHeader>
+    <ShowEnableButton>False</ShowEnableButton>
+    <Mixing>False</Mixing>
+    <Collapsed>False</Collapsed>
+    <Disabled>False</Disabled>
+    <Button Caption="AUTO Beat" ID="29" Icon="">
+     <WindowState Visible="True" X="20" Y="50" Width="125" Height="45"/>
+     <Appearance>
+      <FrameStyle>None</FrameStyle>
+      <ForegroundColor>Default</ForegroundColor>
+      <BackgroundColor>Default</BackgroundColor>
+      <BackgroundImage>None</BackgroundImage>
+      <Font>Default</Font>
+     </Appearance>
+     <Function ID="21"/>
+     <Action>Toggle</Action>
+     <Intensity Adjust="False">100</Intensity>
+    </Button>
+    <Button Caption="BEAT !" ID="30" Icon="">
+     <WindowState Visible="True" X="20" Y="100" Width="125" Height="45"/>
+     <Appearance>
+      <FrameStyle>None</FrameStyle>
+      <ForegroundColor>Default</ForegroundColor>
+      <BackgroundColor>Default</BackgroundColor>
+      <BackgroundImage>None</BackgroundImage>
+      <Font>Default</Font>
+     </Appearance>
+     <Function ID="16"/>
+     <Action>Toggle</Action>
+     <Intensity Adjust="False">100</Intensity>
+    </Button>
+   </SoloFrame>
   </Frame>
   <Properties>
    <Size Width="1920" Height="1080"/>
