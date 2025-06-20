@@ -191,7 +191,7 @@ class SpotRackAnimation0 : public SpotRackAnimation{
 
     void init() override; //Standard init fcn
     void init(const color_vec&) override; //AUTOCOLOR init fcn
-    void new_frame() override{BaseAnimation::new_frame();};
+    void new_frame() override;
 
 };
  

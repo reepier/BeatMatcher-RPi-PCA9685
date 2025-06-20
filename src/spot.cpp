@@ -9,15 +9,15 @@ using namespace std;
 
 // Original Fun Generation spots
 SpotFixture spot_1(FunGen_RGBW_12x1W, 73,    8,  "Spot 1 (@74)",    1);     
-SpotFixture spot_2(FunGen_RGBW_12x1W, 81,    8,  "Spot 2 (@82)",    2);     //Salon
+SpotFixture spot_2(FunGen_RGBW_12x1W, 81,    8,  "Spot 2 (@82)",    2);     
 SpotFixture spot_3(FunGen_RGBW_12x1W, 89,    8,  "Spot 3 (@90)",    3);     
 SpotFixture spot_4(FunGen_RGBW_12x1W, 97,    8,  "Spot 4 (@98)",    4);     
-SpotFixture spot_5(FunGen_RGBW_12x1W, 105,   8,  "Spot 5 (@106)",   5);     //Salon
-SpotFixture spot_6(FunGen_RGBW_12x1W, 113,   8,  "Spot 6 (@114)",   6);
+SpotFixture spot_5(FunGen_RGBW_12x1W, 105,   8,  "Spot 5 (@106)",   5);     
+SpotFixture spot_6(FunGen_RGBW_12x1W, 113,   8,  "Spot 6 (@114)",   6); //Salon
 
-SpotFixture spot_7(FunGen_RGBW_12x1W,   121, 8,   "Spot 7 (@122)",    7);     //Salon
-SpotFixture spot_8(FunGen_RGBW_12x1W,   129, 8,   "Spot 8 (@130)",    8);     //Salon
-SpotFixture spot_9(FunGen_RGBW_12x1W,   137, 8,   "Spot 9 (@138)",    9);  
+SpotFixture spot_7(FunGen_RGBW_12x1W,   121, 8,   "Spot 7 (@122)",    7);     
+SpotFixture spot_8(FunGen_RGBW_12x1W,   129, 8,   "Spot 8 (@130)",    8);     
+SpotFixture spot_9(FunGen_RGBW_12x1W,   137, 8,   "Spot 9 (@138)",    9);  //Salon
 SpotFixture spot_10(FunGen_RGBW_12x1W,  145, 8,   "Spot 10 (@146)",   10);
 SpotFixture spot_11(FunGen_RGBW_12x1W,  153, 8,   "Spot 11 (@154)",   11);
 SpotFixture spot_12(FunGen_RGBW_12x1W,  161, 8,   "Spot 12 (@162)",   12);
@@ -125,9 +125,9 @@ DMX_vec SpotFixture::buffer(){
  #####  #       #######    #       #     # #     #  #####  #    #  #####  
 / ----------------------------------------------------------------------- */
 //config salon
-SpotRack spot_rack_1(spot_vec{&spot_2, &spot_5, &spot_7, &spot_8}, "Front Rack", SR1_CTRL_ADR, 1);
-SpotRack spot_rack_2(spot_vec{&spot_1, &spot_3, &spot_4, &spot_6}, "Vert. Beams", SR2_CTRL_ADR, 2);
-SpotRack spot_rack_4(spot_vec{&spot_9, &spot_10, &spot_11, &spot_12}, "Rack 2", SR3_CTRL_ADR, 3);
+SpotRack spot_rack_1(spot_vec{&spot_6, &spot_9}, "Front Rack", SR1_CTRL_ADR, 1);
+SpotRack spot_rack_2(spot_vec{&spot_2, &spot_5, &spot_7, &spot_8, &spot_1, &spot_3, &spot_4}, "Vert. Beams", SR2_CTRL_ADR, 2);
+SpotRack spot_rack_4(spot_vec{&spot_10, &spot_11, &spot_12}, "Rack 2", SR3_CTRL_ADR, 3);
 SpotRack spot_rack_3(spot_vec{&spot_13, &spot_14, &spot_15, &spot_16, &spot_17, &spot_18, &spot_19, &spot_20}, "SHEHDS Rack", SR4_CTRL_ADR, 4);
 
 //CONFIG HLR #2
@@ -169,6 +169,7 @@ void front_rack_init(){
     //AUTOCOLOR Animations
     // Animation type 0 : Fixed color
     spot_rack_1.animations.push_back(new SpotRackAnimation0(&spot_rack_1, "Couleur", "SR.0.1", any, 1, 255));
+
     // Animation type 1.1 : Random BUBBLES
     // Quasi-static Bubbles
     spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, gaussian, /*Flash Period*/ 20000, /*Flash Length*/ 30000, "Quasi-stat Bubbles", "SR.1.1.1", backer, 1));
@@ -179,15 +180,15 @@ void front_rack_init(){
     // Fast bubbles
     spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, gaussian, /*Flash Period*/ 1000, /*Flash Length*/ 600, "Fast Bubbles", "SR.1.1.4", any, 1));
     
-    // Animation type 1.2 : Random STROBE
+    // Animation type 1.2 : Random strobe
     //Slow strobe
     spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, square, /*Flash Period*/ 800, /*Flash Length*/ 1000/FRATE, "Slow Rand. Strobe", "SR.1.2.1", any, 1));
     //Fast strobe
     spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, square, /*Flash Period*/ 300, /*Flash Length*/ 1000/FRATE, "Mid. Rand. Strobe", "SR.1.2.2", any, 1));
     //Very Fast strobe
     spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, square, /*Flash Period*/ 100, /*Flash Length*/ 1000/FRATE, "Fast Rand. Strobe", "SR.1.2.3", any, 1));
-
-    // Animation type 1.3 : Random CHASER
+    
+    // Animation type 1.3 : Random Square
     // Quasi-static Chaser
     spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, square, /*Flash Period*/ 20000, /*Flash Length*/ 30000, "Quasi-stat Chaser", "SR.1.3.1", backer, 1));
     // Super Slow Chaser
@@ -205,6 +206,12 @@ void front_rack_init(){
     spot_rack_1.animations.push_back(new SpotRackAnimation5(&spot_rack_1, "Digital Flash", "SR.5", leader, 1, 255));
 
     
+    // Animation type 1.4 : Random Flashes (with decay)
+    //Slow Flashes
+    spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, expdecay, /*Flash Period*/ 2000, /*Flash Length*/ 200, "Slow Rand. Flashes", "SR.1.2.1", any, 1));
+    //Fast Flashes
+    spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, expdecay, /*Flash Period*/ 1000, /*Flash Length*/ 80, "Mid. Rand. Flashes", "SR.1.2.2", any, 1));
+
 
     spot_rack_1.activate_none();
 };
@@ -542,31 +549,38 @@ DMX_vec SpotRack::RGBW(simpleColor c, int intensity){ //TODO delete
 void SpotRackAnimation0::init(){
     BaseAnimation::init();
 
-    for (auto spot : this->fixture->spots){
-        spot->pixel = spot->RGBW(this->color);
-    }
 }
 void SpotRackAnimation0::init(const color_vec& palette){
     //AUTOCOLOR init
-    switch (palette.size())
-    {
-    case 0:     this->color = black;        break;
-    case 1:     this->color = palette[0];   break;
-    default:    this->color = *(palette.end()-1);   break;
+    if (this->autocolor){
+        switch (palette.size())
+        {
+        case 0:     this->color = black;        break;
+        case 1:     this->color = palette[0];   break;
+        default:    this->color = *(palette.end()-1);   break;
+        }
     }
 
     // STANDARD init
     SpotRackAnimation0::init();
 }
+void SpotRackAnimation0::new_frame() {
+    BaseAnimation::new_frame();
+
+    for (auto spot : this->fixture->spots){
+        spot->pixel = spot->RGBW(this->color);
+    }
+};
+
 
 /*
-   #          ######                                            
-  ##          #     # #    # #####  #####  #      ######  ####  
- # #          #     # #    # #    # #    # #      #      #      
-   #          ######  #    # #####  #####  #      #####   ####  
-   #   ###    #     # #    # #    # #    # #      #           # 
-   #   ###    #     # #    # #    # #    # #      #      #    # 
- ##### ###    ######   ####  #####  #####  ###### ######  ####  
+   #          ######                          ######                             
+  ##          #     #   ##   #    # #####     #     # #    # #####   ####  ##### 
+ # #          #     #  #  #  ##   # #    #    #     # #    # #    # #        #   
+   #          ######  #    # # #  # #    #    ######  #    # #    #  ####    #   
+   #   ###    #   #   ###### #  # # #    #    #     # #    # #####       #   #   
+   #   ###    #    #  #    # #   ## #    #    #     # #    # #   #  #    #   #   
+ ##### ###    #     # #    # #    # #####     ######   ####  #    #  ####    #   
 */
 // Bubbles
 void SpotRackAnimation1::init(){
@@ -677,8 +691,14 @@ void SpotRackAnimation1::new_frame(){
                     case square :
                         flash_intensity = fcn::square(t, t_prev, flash_len, 0.0,1.0) + fcn::square(t, t_next, flash_len, 0.0,1.0);
                         break;
+                    case gaussian :
+                        flash_intensity = fcn::gaussian(t, t_prev, flash_len, 0.0,1.0) + fcn::gaussian(t, t_next, flash_len, 0.0,1.0); //exp( -pow(2.5/this->flash_len*(t - t_prev), 2)) + exp( -pow(2.5/this->flash_len*(t - t_next), 2));
+                        break;
                     case gaussian2 :
                         flash_intensity = fcn::gaussian2(t, t_prev, flash_len, 0.0,1.0) + fcn::gaussian2(t, t_next, flash_len, 0.0,1.0); //exp( -pow(2.5/this->flash_len*(t - t_prev), 2)) + exp( -pow(2.5/this->flash_len*(t - t_next), 2));
+                        break;
+                    case expdecay :
+                        flash_intensity = fcn::exp_decay(t, t_prev, flash_len, 0.0,1.0);
                         break;
                     default :
                         flash_intensity = fcn::gaussian(t, t_prev, flash_len, 0.0,1.0) + fcn::gaussian(t, t_next, flash_len, 0.0,1.0); //exp( -pow(2.5/this->flash_len*(t - t_prev), 2)) + exp( -pow(2.5/this->flash_len*(t - t_next), 2));

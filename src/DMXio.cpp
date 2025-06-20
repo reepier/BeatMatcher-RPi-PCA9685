@@ -288,7 +288,7 @@ RubiFont                                                    */
             
         }
 
-        //PROCESS SPOT RACK 1 LEDs COLORS
+        //PROCESS SPOT RACK 1 COLORS
         if (trigger){
             // get & rewrap raw data
             int sr1_col1_val = min(max((uint8_t)0,  data.Get(spot_rack->address + SR_COL1_CH)) , (uint8_t)(simpleColor::last_color));

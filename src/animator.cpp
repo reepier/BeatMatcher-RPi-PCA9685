@@ -529,6 +529,8 @@ for (auto fix : fixs){
     bool automatic_main_palette = animator.external_palette.empty();                                    // true if main palette update is automatic
     bool automatic_fix_palette = fix->external_palette.empty() && animator.external_palette.empty();    // true if palette update for this fixture is auto (true or false)
     bool automatic_fix_ani = fix->external_animation==0;                                                // true if animation update for this fixture is auto(true or false)
+    //TODO change 0 behavior --> 0 = BLACK and 255 = AUTO
+
 
 // APPLY UPDATE to fixture :
     // if input command is received or automatic settings change (palette or animation), change animation
@@ -553,7 +555,7 @@ for (auto fix : fixs){
     // reset new_XXX flags once they have been used
     fix->new_external_animation = false;
     fix->new_external_palette = false;
-}
+    }
     animator.new_external_palette = false;
 
     /*Observed bugs :
