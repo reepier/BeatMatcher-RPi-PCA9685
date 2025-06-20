@@ -4,9 +4,9 @@ using namespace std;
 
 RedLaserBox laserbox1(0, 6, "Grada Laser 1", 1);
 
-RedLaserGroup lasergroup1(vector<DMX_channel*>{&laserbox1.lasers[0], &laserbox1.lasers[1], &laserbox1.lasers[2]}, 
+RedLaserGroup lasergroup1(vector<DMX_channel*>{&laserbox1.lasers[0], &laserbox1.lasers[1]}, 
                           "Groupe Laser 1", 0, 1);
-RedLaserGroup lasergroup2(vector<DMX_channel*>{&laserbox1.lasers[3], &laserbox1.lasers[4], &laserbox1.lasers[5]}, 
+RedLaserGroup lasergroup2(vector<DMX_channel*>{&laserbox1.lasers[2], &laserbox1.lasers[3], &laserbox1.lasers[4]}, 
                           "Groupe Laser 2", 0, 2);
 
 
@@ -24,33 +24,33 @@ void RedLaserGroup::init(){
     animations.push_back(new RedrayzAnimation0(this, 0, " ", "RED.0", any));
 
     // All laser switched on
-    animations.push_back(new RedrayzAnimation0(this, 255, "FULL ON", "RED.1.1", any));
+    // animations.push_back(new RedrayzAnimation0(this, 255, "FULL ON", "RED.1.1", any));
     // define animations
 
     // RANDOM BURST
     //
-    animations.push_back(new RedrayzAnimation1(this, gaussian2,  8000,    2500, "VS Bubbles",                "RED.2.1.3", any, 1));
-    animations.push_back(new RedrayzAnimation1(this, gaussian,   10000,   3000, "VS Bubbles (overlapping)",  "RED.2.1.5", any, 1));
-    animations.push_back(new RedrayzAnimation1(this, gaussian,   1500,    800,  "Slow bubbles",              "RED.2.1.2", any, 1));
-    animations.push_back(new RedrayzAnimation1(this, gaussian2,  1500,    4000, "Scarce slow bubbles",       "RED.2.1.4", any, 1));
-    animations.push_back(new RedrayzAnimation1(this, gaussian,   600,     400,  "Fasr bubbles",              "RED.2.1.1", any, 1));
+    // animations.push_back(new RedrayzAnimation1(this, gaussian2,  8000,    2500, "VS Bubbles",                "RED.2.1.3", any, 1));
+    // animations.push_back(new RedrayzAnimation1(this, gaussian,   10000,   3000, "VS Bubbles (overlapping)",  "RED.2.1.5", any, 1));
+    // animations.push_back(new RedrayzAnimation1(this, gaussian,   1500,    800,  "Slow bubbles",              "RED.2.1.2", any, 1));
+    // animations.push_back(new RedrayzAnimation1(this, gaussian2,  1500,    4000, "Scarce slow bubbles",       "RED.2.1.4", any, 1));
+    // animations.push_back(new RedrayzAnimation1(this, gaussian,   600,     400,  "Fasr bubbles",              "RED.2.1.1", any, 1));
     
-    animations.push_back(new RedrayzAnimation1(this, square, 5000,  1000,     "Very slow chaser",         "RED.2.2.3", any, 1));
-    animations.push_back(new RedrayzAnimation1(this, square, 10000, 3000,     "VS, overlapping chaser",   "RED.2.2.4", any, 1));
-    animations.push_back(new RedrayzAnimation1(this, square, 1500,  500,      "Slow chaser",              "RED.2.2.2", any, 1));
-    animations.push_back(new RedrayzAnimation1(this, square, 600,   400,      "Fast chaser",              "RED.2.2.1", any, 1));
+    // animations.push_back(new RedrayzAnimation1(this, square, 5000,  1000,     "Very slow chaser",         "RED.2.2.3", any, 1));
+    // animations.push_back(new RedrayzAnimation1(this, square, 10000, 3000,     "VS, overlapping chaser",   "RED.2.2.4", any, 1));
+    // animations.push_back(new RedrayzAnimation1(this, square, 1500,  500,      "Slow chaser",              "RED.2.2.2", any, 1));
+    // animations.push_back(new RedrayzAnimation1(this, square, 600,   400,      "Fast chaser",              "RED.2.2.1", any, 1));
 
-    animations.push_back(new RedrayzAnimation1(this, square, 50,   2000,  "VS Strobe",  "RED.2.3.4", any, 1));
-    animations.push_back(new RedrayzAnimation1(this, square, 50,   1000,  "S Strobe",   "RED.2.3.3", any, 1));
-    animations.push_back(new RedrayzAnimation1(this, square, 50,   500,   "F Strobe",   "RED.2.3.2", any, 1));
-    animations.push_back(new RedrayzAnimation1(this, square, 50,   100,   "VF Strobe",  "RED.2.3.1", any, 1));
+    // animations.push_back(new RedrayzAnimation1(this, square, 50,   2000,  "VS Strobe",  "RED.2.3.4", any, 1));
+    // animations.push_back(new RedrayzAnimation1(this, square, 50,   1000,  "S Strobe",   "RED.2.3.3", any, 1));
+    // animations.push_back(new RedrayzAnimation1(this, square, 50,   500,   "F Strobe",   "RED.2.3.2", any, 1));
+    // animations.push_back(new RedrayzAnimation1(this, square, 50,   100,   "VF Strobe",  "RED.2.3.1", any, 1));
 
-    animations.push_back(new RedrayzAnimation1(this, expdecay, 1500,  1500,  "VS decaying rayz",               "RED.2.4.1", any, 1));
+    // animations.push_back(new RedrayzAnimation1(this, expdecay, 1500,  1500,  "VS decaying rayz",               "RED.2.4.1", any, 1));
     animations.push_back(new RedrayzAnimation1(this, expdecay, 4000,  1000,  "VS overlapping decaying rayz",   "RED.2.4.6", any, 1));
-    animations.push_back(new RedrayzAnimation1(this, expdecay, 600,   700,   "S decaying rayz",                "RED.2.4.2", any, 1));
-    animations.push_back(new RedrayzAnimation1(this, expdecay, 700,   4000,  "Scarce S decaying rayz",         "RED.2.4.4", any, 1));
-    animations.push_back(new RedrayzAnimation1(this, expdecay, 200,   300,   "F decaying rayz",                "RED.2.4.3", any, 1));
-    animations.push_back(new RedrayzAnimation1(this, expdecay, 200,   2000,  "Scarce F decaying rayz",         "RED.2.4.5", any, 1));
+    // animations.push_back(new RedrayzAnimation1(this, expdecay, 600,   700,   "S decaying rayz",                "RED.2.4.2", any, 1));
+    // animations.push_back(new RedrayzAnimation1(this, expdecay, 700,   4000,  "Scarce S decaying rayz",         "RED.2.4.4", any, 1));
+    // animations.push_back(new RedrayzAnimation1(this, expdecay, 200,   300,   "F decaying rayz",                "RED.2.4.3", any, 1));
+    // animations.push_back(new RedrayzAnimation1(this, expdecay, 200,   2000,  "Scarce F decaying rayz",         "RED.2.4.5", any, 1));
 
     this->activate_none();
 }
@@ -151,7 +151,7 @@ void RedrayzAnimation1::new_frame(){
       if (t > t_next){
           
         t_prev = t_next;
-        t_next = t_next + rand_min_max(this->burst_length, 2*n_unit*this->rand_const_ms);
+        t_next = t_next + rand_min_max(0, 2*n_unit*this->rand_const_ms);
       }
 
       // Compute pixel intensity

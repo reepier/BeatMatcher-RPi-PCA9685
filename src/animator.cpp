@@ -409,7 +409,8 @@ void AnimationManager::nov30_maximum_update(){
 
 }
 
-void AnimationManager::autocolor_update(){ // test function to develop the AUTOCOLOR feature
+// test function to develop the AUTOCOLOR feature
+void AnimationManager::autocolor_update(){ 
     static color_vec palette;
     static int palette_lifespan = 3;
     
@@ -430,6 +431,8 @@ void AnimationManager::autocolor_update(){ // test function to develop the AUTOC
         // front_rack.activate_autocolor(palette);
         spot_rack_1.activate_random(palette);
         addr_led.activate_random(palette);
+        lasergroup1.activate_random();
+        lasergroup2.activate_random();
         palette_lifespan--; //decrease palette lifespan
     }
 }

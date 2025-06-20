@@ -201,7 +201,7 @@ void disp_output_window(){
     wattroff(outputw, A_BOLD);
 
     int line=1;
-    for (auto fix : fix_vec{&addr_led, &laser, &spot_rack_1, &spot_rack_2, &spot_rack_3, &spot_rack_4, &laserbox1}){
+    for (auto fix : fix_vec{&addr_led, &spot_rack_1, &spot_rack_2, &spot_rack_3, &spot_rack_4, &lasergroup1, &lasergroup2}){
         if (fix->active_animation != nullptr){
             ostringstream animbuf, outbuf;
             // animation name & ID
