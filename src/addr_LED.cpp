@@ -43,9 +43,10 @@ void AddressableLED::init(){
     // Fast Random Chaser 
     animations.push_back(new AddrLEDAnimation4(this, square,   bar, 200, 600, "Fast Chaser",  "PIX.8.4", any, 1, 255));
     // Fast Random Strobe
-    animations.push_back(new AddrLEDAnimation4(this, square, bar, 50, 1000/FRATE, "Random Strobe", "PIX.8.5", any, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, square, bar, 50, 1000/FRATE, "Fast Random Strobe", "PIX.8.5", any, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, square, bar, 50, 1000/FRATE, "Mid  Random Strobe", "PIX.8.5", any, 1, 255));
     // Decaying Flash
-    animations.push_back(new AddrLEDAnimation4(this, expdecay, bar, 1000, 1000, "Flashes", "PIX.8.6", any, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, square, bar, 150, 1000/FRATE, "Slow Strobe", "PIX.8.6", any, 1, 255));
 
 
     this->activate_none();

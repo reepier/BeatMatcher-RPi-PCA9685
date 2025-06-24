@@ -25,7 +25,8 @@
   <Capability Min="10" Max="10">Chaser aléatoire lent</Capability>
   <Capability Min="11" Max="11">Chaser aléatoire rapide</Capability>
   <Capability Min="12" Max="12">Strobe (par barre)</Capability>
-  <Capability Min="13" Max="255">&lt;Reserve&gt;</Capability>
+  <Capability Min="13" Max="13">Strobe lent (par barre)</Capability>
+  <Capability Min="14" Max="255">&lt;Reserve&gt;</Capability>
  </Channel>
  <Channel Name="Fixture Color 1">
   <Group Byte="0">Colour</Group>

@@ -258,12 +258,12 @@ void SoundAnalyzer::_update_state(){
                 }
 
                 // If no beat is discernible 
-                else if (volume_ratio(95, 25) < THD_BTtoBS){
-                    BS_buff += 1;
-                    if (BS_buff == 4){
-                        _switch_to_state(BAD_SIGNAL);
-                    }
-                }
+                // else if (volume_ratio(95, 25) < THD_BTtoBS){
+                //     BS_buff += 1;
+                //     if (BS_buff == 4){
+                //         _switch_to_state(BAD_SIGNAL);
+                //     }
+                // }
 
                 else{BS_buff=0;}
             }
@@ -316,10 +316,10 @@ void SoundAnalyzer::_update_beat_threshold(){
     if (_condition_for_analyis()){
         if (state == BEAT){
             float filter_lag_coef = 0.9;
-            beat_threshold = volume_percentile(90) * (1.0-filter_lag_coef) + beat_threshold*filter_lag_coef;
+            beat_threshold = volume_percentile(93) * (1.0-filter_lag_coef) + beat_threshold*filter_lag_coef;
         }else{
             float filter_lag_coef = 0.99;
-            beat_threshold = volume_percentile(90) * (1.0-filter_lag_coef) + beat_threshold*filter_lag_coef;
+            beat_threshold = volume_percentile(93) * (1.0-filter_lag_coef) + beat_threshold*filter_lag_coef;
         }
     }
 }

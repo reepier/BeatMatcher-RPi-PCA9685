@@ -7,7 +7,7 @@
 #define MAX_SUBPIX_PER_UNI  510 // maximum number of subpixels arried over 1 universe (1 universe can only carry complete pixels (BC-204 limitation))
 // WS2815 led strip config
   // Config paramters
-  constexpr int NUM_BAR = 3;                       // Total Number of bars
+  constexpr int NUM_BAR = 18;                       // Total Number of bars
   constexpr int NUM_SEG = 3*NUM_BAR;             // Total number of segments (across all bars)
   const int_vec groups_size = {3};        // Number of bars for each group  
 

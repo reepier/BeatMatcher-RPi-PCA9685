@@ -17,10 +17,10 @@ SpotFixture spot_6(FunGen_RGBW_12x1W, 113,   8,  "Spot 6 (@114)",   6); //Salon
 
 SpotFixture spot_7(FunGen_RGBW_12x1W,   121, 8,   "Spot 7 (@122)",    7);     
 SpotFixture spot_8(FunGen_RGBW_12x1W,   129, 8,   "Spot 8 (@130)",    8);     
-SpotFixture spot_9(FunGen_RGBW_12x1W,   137, 8,   "Spot 9 (@138)",    9);  //Salon
-SpotFixture spot_10(FunGen_RGBW_12x1W,  145, 8,   "Spot 10 (@146)",   10);
+SpotFixture spot_9(FunGen_RGBW_12x1W,   137, 8,   "Spot 9 (@138)",    9);  //Salon 
+SpotFixture spot_10(FunGen_RGBW_12x1W,  145, 8,   "Spot 10 (@146)",   10); //FDLM
 SpotFixture spot_11(FunGen_RGBW_12x1W,  153, 8,   "Spot 11 (@154)",   11);
-SpotFixture spot_12(FunGen_RGBW_12x1W,  161, 8,   "Spot 12 (@162)",   12);
+SpotFixture spot_12(FunGen_RGBW_12x1W,  161, 8,   "Spot 12 (@162)",   12);  //FDLM
 
 // New Shehds spots
 SpotFixture spot_13(Shehds_RGBWAU_7x18W, 169, 10, "Spot 13 (@170) : SHEHDS RGBWAU", 13);
@@ -125,9 +125,9 @@ DMX_vec SpotFixture::buffer(){
  #####  #       #######    #       #     # #     #  #####  #    #  #####  
 / ----------------------------------------------------------------------- */
 //config salon
-SpotRack spot_rack_1(spot_vec{&spot_6, &spot_9}, "Front Rack", SR1_CTRL_ADR, 1);
+SpotRack spot_rack_1(spot_vec{&spot_10, &spot_12}, "Front Rack", SR1_CTRL_ADR, 1);
 SpotRack spot_rack_2(spot_vec{&spot_2, &spot_5, &spot_7, &spot_8, &spot_1, &spot_3, &spot_4}, "Vert. Beams", SR2_CTRL_ADR, 2);
-SpotRack spot_rack_4(spot_vec{&spot_10, &spot_11, &spot_12}, "Rack 2", SR3_CTRL_ADR, 3);
+SpotRack spot_rack_4(spot_vec{&spot_11, &spot_6, &spot_9}, "Rack 2", SR3_CTRL_ADR, 3);
 SpotRack spot_rack_3(spot_vec{&spot_13, &spot_14, &spot_15, &spot_16, &spot_17, &spot_18, &spot_19, &spot_20}, "SHEHDS Rack", SR4_CTRL_ADR, 4);
 
 //CONFIG HLR #2

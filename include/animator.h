@@ -221,9 +221,25 @@ namespace fcn{
     return common_col>=n;
   }
 
+  //check wether 2 palettes are identical
+  inline bool are_same(color_vec cp1, color_vec cp2){
+    bool same_palette = true;
+    bool same_size = cp1.size()==cp2.size();
+    if(same_size){
+      for (auto i=0; i<cp1.size(); i++){
+        if (cp1[i] != cp2[i]){  //if there is any difference within the 2 palettes, declare them different
+          same_palette = false;
+        }
+      }
+      return same_palette;
+    }else{
+      return false;
+    }
+  }
 
 
-  //TODO define function that takes in 2 vectors and combine them using different rules (intersection, exclusion, etc.)
+
+  // function that takes in 2 vectors and combine them using different rules (intersection, exclusion, etc.)
   /* returns a vector containing only the common elements between v1 and v2 */
 template<class T>
 std::vector<T> get_vector_intersection(const std::vector<T>& v1, const std::vector<T>& v2) {
@@ -288,15 +304,15 @@ class ColorPaletteMagazine{
         //list candidates
         ColorPaletteMagazine candidates;
         for (int i = 0; i<this->size(); i++){
-          if (fcn::are_consistent(this->color_palettes[i], current_palette)){
+          if ( fcn::are_consistent(this->color_palettes[i], current_palette) && !fcn::are_same(this->color_palettes[i], current_palette) ){
             candidates.push_back(this->color_palettes[i], this->probas[i]);
           }
         }
         // choses randomly taking proba into account
-        if (candidates.size() !=0 ){
+        if (candidates.size() > 0){
           return candidates.get_random_palette();
         }else{
-          log(1, "No similar color palette exist... ", fcn::palette_to_string(current_palette, '/'));
+          log(1, "No similar color palette exists... ", fcn::palette_to_string(current_palette, '/'));
           return this->get_random_palette();
         }
       }

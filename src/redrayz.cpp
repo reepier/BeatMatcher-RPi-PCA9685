@@ -75,6 +75,8 @@ DMX_vec RedLaserBox::buffer(){
     return data;
 }
 
+
+
 /*
   ###          #######                 
  #   #         #       # #    # ###### 

@@ -50,8 +50,6 @@ public:
         this->type = typ;
 
         this->pixel = this->RGBW(black); // resize & initialise RGBWout vector
-
-        // log(1, "Init. of ", this->name, " / Pixel size : ", this->pixel.size());
     };
     void init(){};
 

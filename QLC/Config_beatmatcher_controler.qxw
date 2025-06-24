@@ -9,7 +9,9 @@
  <Engine>
   <InputOutputMap>
    <Universe Name="Universe 1" ID="0">
-    <Output Plugin="ArtNet" Line="1"/>
+    <Output Plugin="ArtNet" Line="1">
+     <PluginParameters outputUni="10"/>
+    </Output>
    </Universe>
    <Universe Name="Universe 2" ID="1"/>
    <Universe Name="Universe 3" ID="2"/>
@@ -843,7 +845,7 @@
      <BackgroundImage>None</BackgroundImage>
      <Font>Default</Font>
     </Appearance>
-    <WindowState Visible="True" X="25" Y="320" Width="355" Height="320"/>
+    <WindowState Visible="True" X="65" Y="310" Width="355" Height="320"/>
     <AllowChildren>True</AllowChildren>
     <AllowResize>True</AllowResize>
     <ShowHeader>True</ShowHeader>
@@ -911,7 +913,7 @@
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="0">
+     <Level LowLimit="0" HighLimit="255" Value="5">
       <Channel Fixture="1">1</Channel>
      </Level>
      <Playback>
@@ -970,13 +972,13 @@
      <BackgroundImage>None</BackgroundImage>
      <Font>Default</Font>
     </Appearance>
-    <WindowState Visible="True" X="390" Y="320" Width="355" Height="320"/>
+    <WindowState Visible="True" X="450" Y="750" Width="355" Height="320"/>
     <AllowChildren>True</AllowChildren>
     <AllowResize>True</AllowResize>
     <ShowHeader>True</ShowHeader>
-    <ShowEnableButton>False</ShowEnableButton>
+    <ShowEnableButton>True</ShowEnableButton>
     <Collapsed>False</Collapsed>
-    <Disabled>False</Disabled>
+    <Disabled>True</Disabled>
     <Slider Caption="Dim." ID="5" WidgetStyle="Slider" InvertedAppearance="false">
      <WindowState Visible="True" X="20" Y="50" Width="55" Height="255"/>
      <Appearance>
@@ -987,7 +989,7 @@
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="255">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="1">0</Channel>
       <Channel Fixture="1">1</Channel>
       <Channel Fixture="1">2</Channel>
@@ -1058,13 +1060,13 @@
      <BackgroundImage>None</BackgroundImage>
      <Font>Default</Font>
     </Appearance>
-    <WindowState Visible="True" X="755" Y="320" Width="355" Height="320"/>
+    <WindowState Visible="True" X="875" Y="755" Width="355" Height="320"/>
     <AllowChildren>True</AllowChildren>
     <AllowResize>True</AllowResize>
     <ShowHeader>True</ShowHeader>
-    <ShowEnableButton>False</ShowEnableButton>
+    <ShowEnableButton>True</ShowEnableButton>
     <Collapsed>False</Collapsed>
-    <Disabled>False</Disabled>
+    <Disabled>True</Disabled>
     <Slider Caption="Dim." ID="10" WidgetStyle="Slider" InvertedAppearance="false">
      <WindowState Visible="True" X="20" Y="50" Width="55" Height="255"/>
      <Appearance>
@@ -1075,7 +1077,7 @@
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="255">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="5">0</Channel>
      </Level>
      <Playback>
@@ -1142,13 +1144,13 @@
      <BackgroundImage>None</BackgroundImage>
      <Font>Default</Font>
     </Appearance>
-    <WindowState Visible="True" X="1130" Y="320" Width="355" Height="320"/>
+    <WindowState Visible="True" X="1280" Y="760" Width="355" Height="320"/>
     <AllowChildren>True</AllowChildren>
     <AllowResize>True</AllowResize>
     <ShowHeader>True</ShowHeader>
-    <ShowEnableButton>False</ShowEnableButton>
+    <ShowEnableButton>True</ShowEnableButton>
     <Collapsed>False</Collapsed>
-    <Disabled>False</Disabled>
+    <Disabled>True</Disabled>
     <Slider Caption="Dim." ID="16" WidgetStyle="Slider" InvertedAppearance="false">
      <WindowState Visible="True" X="20" Y="50" Width="55" Height="255"/>
      <Appearance>
@@ -1159,7 +1161,7 @@
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="255">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="6">0</Channel>
      </Level>
      <Playback>
@@ -1210,7 +1212,7 @@
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="0">
+     <Level LowLimit="0" HighLimit="255" Value="39">
       <Channel Fixture="6">1</Channel>
      </Level>
      <Playback>
@@ -1226,14 +1228,14 @@
      <BackgroundImage>None</BackgroundImage>
      <Font>Default</Font>
     </Appearance>
-    <WindowState Visible="True" X="20" Y="655" Width="355" Height="315"/>
+    <WindowState Visible="True" X="30" Y="750" Width="355" Height="315"/>
     <AllowChildren>True</AllowChildren>
     <AllowResize>True</AllowResize>
     <ShowHeader>True</ShowHeader>
-    <ShowEnableButton>False</ShowEnableButton>
+    <ShowEnableButton>True</ShowEnableButton>
     <Collapsed>False</Collapsed>
     <Disabled>True</Disabled>
-    <Slider Caption="Dim." ID="22" WidgetStyle="Slider" InvertedAppearance="false">
+    <Slider Caption="Dim." ID="22" WidgetStyle="Slider" InvertedAppearance="true">
      <WindowState Visible="True" X="65" Y="75" Width="50" Height="205"/>
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
@@ -1260,7 +1262,7 @@
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="6">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="3">1</Channel>
      </Level>
      <Playback>
@@ -1276,7 +1278,7 @@
      <BackgroundImage>None</BackgroundImage>
      <Font>Default</Font>
     </Appearance>
-    <WindowState Visible="True" X="390" Y="655" Width="355" Height="320"/>
+    <WindowState Visible="True" X="450" Y="310" Width="350" Height="320"/>
     <AllowChildren>True</AllowChildren>
     <AllowResize>True</AllowResize>
     <ShowHeader>True</ShowHeader>
@@ -1284,7 +1286,7 @@
     <Collapsed>False</Collapsed>
     <Disabled>False</Disabled>
     <Slider Caption="Dim." ID="2" WidgetStyle="Slider" InvertedAppearance="false">
-     <WindowState Visible="True" X="15" Y="45" Width="55" Height="260"/>
+     <WindowState Visible="True" X="15" Y="45" Width="55" Height="220"/>
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
@@ -1301,7 +1303,7 @@
      </Playback>
     </Slider>
     <Slider Caption="Couleur Forte" ID="24" WidgetStyle="Slider" InvertedAppearance="false">
-     <WindowState Visible="True" X="170" Y="90" Width="75" Height="175"/>
+     <WindowState Visible="True" X="170" Y="65" Width="75" Height="175"/>
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
@@ -1318,7 +1320,7 @@
      </Playback>
     </Slider>
     <Slider Caption="Couleur Faible" ID="25" WidgetStyle="Slider" InvertedAppearance="false">
-     <WindowState Visible="True" X="250" Y="90" Width="75" Height="175"/>
+     <WindowState Visible="True" X="250" Y="65" Width="75" Height="175"/>
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
@@ -1335,7 +1337,7 @@
      </Playback>
     </Slider>
     <Slider Caption="Animation" ID="26" WidgetStyle="Knob" InvertedAppearance="false">
-     <WindowState Visible="True" X="80" Y="90" Width="85" Height="175"/>
+     <WindowState Visible="True" X="80" Y="65" Width="85" Height="175"/>
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
@@ -1344,7 +1346,7 @@
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="150">
+     <Level LowLimit="0" HighLimit="255" Value="8">
       <Channel Fixture="2">1</Channel>
      </Level>
      <Playback>
@@ -1437,7 +1439,7 @@
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="0">
+     <Level LowLimit="0" HighLimit="255" Value="7">
       <Channel Fixture="0">2</Channel>
      </Level>
      <Playback>
@@ -1454,7 +1456,7 @@
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="0">
+     <Level LowLimit="0" HighLimit="255" Value="2">
       <Channel Fixture="0">3</Channel>
      </Level>
      <Playback>
