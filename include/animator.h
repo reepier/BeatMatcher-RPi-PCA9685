@@ -71,7 +71,12 @@ namespace fcn{
   
   int_vec convert_8_to_12bits(DMX_vec);
 
-  /*shape functions*/
+  /*
+ ▗▄▄▖▗▖ ▗▖ ▗▄▖ ▗▄▄▖ ▗▄▄▄▖ ▗▄▄▖
+▐▌   ▐▌ ▐▌▐▌ ▐▌▐▌ ▐▌▐▌   ▐▌   
+ ▝▀▚▖▐▛▀▜▌▐▛▀▜▌▐▛▀▘ ▐▛▀▀▘ ▝▀▚▖
+▗▄▄▞▘▐▌ ▐▌▐▌ ▐▌▐▌   ▐▙▄▄▖▗▄▄▞▘
+*/
 
   // SINGLE BURSTS
   //exponential decay
@@ -87,6 +92,13 @@ namespace fcn{
       double x = ((int)t-(int)t0)/sigma;
       return min + (max-min)*std::exp( -std::pow(x, 2)/2 ); 
   }
+  inline double gaussian(double t, double t0, double period, double min, double max){
+    double sigma = period/3.0;
+    // return min + (max-min)*std::exp( -std::pow((t-t0)/sigma, 2)/2 );
+
+    double x = ((int)t-(int)t0)/sigma;
+    return min + (max-min)*std::exp( -std::pow(x, 2)/2 ); 
+}
 
   // squared gaussian shape -> exp(-x⁴/4) (longer plateau, steeper slopes)
   inline double gaussian2(time_ms t, time_ms t0, time_ms period, double min, double max){ 
@@ -119,6 +131,7 @@ namespace fcn{
     }
   }
 
+
   // PERIODIC FUNCTIONS
   //sine wave
   inline double sin_wave(time_ms t, time_ms period, double min, double max, double phase = 0){
@@ -147,7 +160,36 @@ namespace fcn{
     else                {return max;}
   }
 
-  // RANDOM generation functions
+  inline double heartbeat(time_ms t, double bpm, double min, double max) {
+    
+    double period = 60000.0 / bpm;
+    double t_mod = fmod((double)t, period);
+    // Simule deux pics (lub-dub)
+    return gaussian(t_mod, 0.2 * period, period/9, min, max) + 0.4 * gaussian(t_mod, 0.45 * period, period/4, min, max);
+  }
+
+  inline std::vector<double> heartbeat_vec(time_ms t, double bpm, double min, double max) {
+    
+    std::vector<double> ret = {0.0, 0.0};
+
+    double period = 60000.0 / bpm;
+    double t_mod = fmod((double)t, period);
+    // Simule deux pics (lub-dub)
+    ret[0] = gaussian(t_mod, 0.2 * period, period/9, min, max);
+    ret[1] = 0.4 * gaussian(t_mod, 0.4 * period, period/5, min, max);
+    return  ret;
+  }
+
+
+/*
+▗▄▄▖  ▗▄▖ ▗▖  ▗▖▗▄▄▄  ▗▄▖ ▗▖  ▗▖
+▐▌ ▐▌▐▌ ▐▌▐▛▚▖▐▌▐▌  █▐▌ ▐▌▐▛▚▞▜▌
+▐▛▀▚▖▐▛▀▜▌▐▌ ▝▜▌▐▌  █▐▌ ▐▌▐▌  ▐▌
+▐▌ ▐▌▐▌ ▐▌▐▌  ▐▌▐▙▄▄▀▝▚▄▞▘▐▌  ▐▌
+                                
+                                
+                                */
+
   template<class T>
   T random_pick(std::vector<T> vals, int_vec proba_vec = {}){
     int n = vals.size();
@@ -207,7 +249,15 @@ namespace fcn{
   }
  
 
-  // Color functions
+/*
+ ▗▄▄▖ ▗▄▖ ▗▖    ▗▄▖ ▗▄▄▖     ▗▄▄▖  ▗▄▖ ▗▖   ▗▄▄▄▖▗▄▄▄▖▗▄▄▄▖▗▄▄▄▖
+▐▌   ▐▌ ▐▌▐▌   ▐▌ ▐▌▐▌ ▐▌    ▐▌ ▐▌▐▌ ▐▌▐▌   ▐▌     █    █  ▐▌   
+▐▌   ▐▌ ▐▌▐▌   ▐▌ ▐▌▐▛▀▚▖    ▐▛▀▘ ▐▛▀▜▌▐▌   ▐▛▀▀▘  █    █  ▐▛▀▀▘
+▝▚▄▄▖▝▚▄▞▘▐▙▄▄▖▝▚▄▞▘▐▌ ▐▌    ▐▌   ▐▌ ▐▌▐▙▄▄▖▐▙▄▄▖  █    █  ▐▙▄▄▖
+                                                                
+                                                                
+                                                                
+*/
   // check wether color palettes cp1 and cp2 have at least n color in common
   inline bool are_consistent(color_vec cp1, color_vec cp2, int n = 1){
     int common_col = 0;

@@ -44,7 +44,6 @@ void AddressableLED::init(){
     animations.push_back(new AddrLEDAnimation4(this, square,   bar, 200, 600, "Fast Chaser",  "PIX.8.4", any, 1, 255));
     // Fast Random Strobe
     animations.push_back(new AddrLEDAnimation4(this, square, bar, 50, 1000/FRATE, "Fast Random Strobe", "PIX.8.5", any, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, square, bar, 50, 1000/FRATE, "Mid  Random Strobe", "PIX.8.5", any, 1, 255));
     // Decaying Flash
     animations.push_back(new AddrLEDAnimation4(this, square, bar, 150, 1000/FRATE, "Slow Strobe", "PIX.8.6", any, 1, 255));
 
@@ -437,57 +436,3 @@ void AddrLEDAnimation4::new_frame(){
 }
 
 
-// /* 4 - HiVE*/
-// void AddrLEDAnimation5::init() {BaseAnimation::init();
-//     const auto num_group = groups_size.size();
-    
-//     for (int i_grp = 0; i_grp<num_group; i_grp++){
-//         const auto group_size = groups_size[i_grp];
-//         // for each group of led bar, initialize a vector of blots with a number of elements proportional to the number of bars in the group
-//         this->blot_groups[i_grp] = blot_vec(    (int)(this->density_factor * group_size * 6)    );
-
-//         // for each of the group's blot, initialize its widthn, position, speed & intensity 
-//         for (auto blot : blot_groups[i_grp]) {
-//             // position (pixels as a uint) is randomly picked along the length of the bars' group 
-//             blot.position = rand_min_max(0, group_size * NUM_PIX_BAR);
-//             //nothing else for now, all blots are created equal (see class definition)
-//         }
-//     }
-// };
-
-// void AddrLEDAnimation5::new_frame() {BaseAnimation::new_frame();
-//     //update blot kinematics (position)
-
-//     //compute each pixel's value :
-//     //for each group of bars :
-//     auto pix_parser = this->fixture->pixels.begin();
-
-//     for (auto i_grp = 0; i_grp < groups_size.size(); i_grp++){
-//         const int num_bar_group = groups_size[i_grp];
-//         const int num_pix_group = num_bar_group * NUM_PIX_BAR;
-//         auto blots = this->blot_groups[i_grp];
-        
-//         //for each pixel in the group
-//         int pix_position = 0;
-//         for (auto pix = pix_parser; pix != pix_parser + num_pix_group; pix ++){
-//             // find the closest blot (in terms of position)
-//             auto closest_blot = blots[0];
-//             for (auto blot : blots){
-//                 if (abs(blot.position-pix_position) < abs(closest_blot.position-pix_position)){
-//                     closest_blot.position = blot.position;
-//                     closest_blot.luminosity = blot.luminosity;
-//                     closest_blot.color = blot.color;
-//                     closest_blot.width = blot.width;
-//                 }
-//             }
-
-//             // compute the pixel's color (from closest blot's width, color & intensity);
-//             auto blot_dist = closest_blot.position - pix_position;
-//             (*pix) = blot_dist > closest_blot.width/2 ? this->fixture->RGBW(closest_blot.color, closest_blot.luminosity*255) : this->fixture->RGBW(black, 0);
-//         }
-//         pix_parser += num_pix_group;
-
-//     }
-  
-
-// };

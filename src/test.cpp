@@ -4,26 +4,27 @@
 #include <cstring>
 #include <wiringPi.h>
 #include <algorithm>
-
-#include <ola/DmxBuffer.h>
-#include <ola/client/StreamingClient.h>
+#include <thread>
+#include <csignal>
+#include <cstdlib>
 
 #include "debug.h"
 #include "fixtures.h"
 #include "music.h"
+#include "animator.h"
+#include "DMXio.h"
 #include "sysfcn.h"
 #include "config.h"
 
 using namespace std;
+    
 
+fix_vec ll_fxtrs = {    /*&led,*/ &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, 
+                        &spot_7, &spot_8, &spot_9, &spot_10, &spot_11, &spot_12, 
+                        &spot_13, &spot_14, &spot_15, &spot_16, &spot_17, &spot_18, &spot_19, &spot_20,
+                        &spider, &laser, &laserbox1};
 
-// DMX output interface (OLA)
-    ola::client::StreamingClient ola_output_client;
-    ola::DmxBuffer ola_buffer;
-    vector<ola::DmxBuffer> ola_pix_buffers(NUM_SUBPIX/MAX_SUBPIX_PER_UNI + ((NUM_SUBPIX%MAX_SUBPIX_PER_UNI)==0 ? 0 : 1));
-
-fix_vec ll_fxtrs = {&spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, &spot_7,&spot_8, &spot_9, &spider, &laser};
-fix_vec fixtures = {&addr_led, &laser, &spot_rack_1, &spot_rack_2, &spider};
+fix_vec fixtures = {&addr_led, &laser, &spot_rack_1, &spot_rack_2, &spot_rack_4, &spot_rack_3, &spider, &lasergroup1/*, &lasergroup1*/};
 
 bool process_arguments(int n, char* args[]){
     for (int i=1; i<n; i++){
@@ -38,15 +39,15 @@ bool process_arguments(int n, char* args[]){
         else if (strcmp(arg, "--nomusic") == 0){
             b_NO_MUSIC = true;
         }
-        else if(strcmp(arg, "--nocurses") == 0){
-            b_CURSES == false;
-        }
         else if(strcmp(arg, "--animation") == 0){
             b_ANI_TEST = true;
             while ( (i<n-1) && (string(args[++i]).find('-') != 0) ) {
                 cli_anim_id.push_back(string(args[i]));
                 balise( (*(cli_anim_id.end()-1)).data() );
             }
+        }
+        else if(strcmp(arg, "--controled") == 0){
+            b_EXT_CONTROL = true;
         }
         else{
             return false;
@@ -58,16 +59,27 @@ bool process_arguments(int n, char* args[]){
     return true;
 }
 
+void on_exit(int signal) {
+    std::cout << "\nCaught Ctrl+C (SIGINT), restoring terminal settings...\n";
+    std::system("stty sane");  // restore terminal settings
+    std::exit(0);              // exit cleanly
+}
+
 void initialize() {
+
+    // Register signal handler
+    std::signal(SIGINT, on_exit);
+
     srand((unsigned)time(nullptr));
 
 
     balise("Init. ola...");
     ola_output_client.Setup();
     ola_buffer.Blackout();
-    for(auto buf : ola_pix_buffers){
-        buf.Blackout();
+    for(auto pix_uni : ola_pix_unis){
+        pix_uni.buf.Blackout();
     }
+    
 
     balise("Init. Sampler...");
     sampler.init();   // initialize Music lib
@@ -79,44 +91,16 @@ void initialize() {
     for (fix_vec::iterator fixture = fixtures.begin(); fixture != fixtures.end(); fixture++){
         balise("Initializing ", (*fixture)->name);
         (*fixture)->init();
+        (*fixture)->activate_none();
     }
 
-    
+    if (b_EXT_CONTROL) // very important to start DMX input code AFTER initializing Fixtures
+        setup_DMX_input();
+
     if (!b_BALISE){
         balise("Init. Debug...");
         init_display();
     }
-}
-
-void send(){
-
-    // construct & send DMX frame for old school fixtures (COTS DMX fixtures)
-    balise("Construct & send buffer for classical fixtures");
-    for (fix_vec::iterator fx = ll_fxtrs.begin(); fx != ll_fxtrs.end(); fx++){
-        ola_buffer.SetRange((*fx)->get_address(), (*fx)->buffer().data(), (*fx)->get_nCH());
-    }
-    ola_output_client.SendDmx(0, ola_buffer);
-
-    // construct & send DMX frames for addressable leds pixels values (sent through artnet)
-    balise("Construct & send buffer for artnet pixels");
-    DMX_vec sub_buffer, long_buffer = addr_led.buffer();
-    auto start = long_buffer.begin();
-    int universe_cpt = 1;
-    for(auto& pix_buf : ola_pix_buffers){
-        unsigned int length;
-        if (long_buffer.end() > start + MAX_SUBPIX_PER_UNI){
-            sub_buffer.assign(start, start + MAX_SUBPIX_PER_UNI);
-            length = MAX_SUBPIX_PER_UNI;
-            start += MAX_SUBPIX_PER_UNI;
-        }else{ 
-            sub_buffer.assign(start, long_buffer.end());
-            length = distance(start, long_buffer.end());
-        }
-
-        pix_buf.SetRange(0, sub_buffer.data(), length);
-        ola_output_client.SendDmx(universe_cpt++, pix_buf);
-    }
-
 }
 
 LoopControler frame;
@@ -126,7 +110,7 @@ int main(int argc, char* argv[]){
 
 
     // MAIN PROGRAM (take what is needed and comment out the rest    
-    // initialize();
+    initialize();
     // balise("Initalisation terminated with success !");
 
     // while (true){
@@ -180,46 +164,18 @@ int main(int argc, char* argv[]){
     //     frame.wait_for_next();
     // }
 
-
-
-    // while (true){
-    //     for(auto int_c = 0; int_c < colorName.size(); int_c++){
-    //         auto c = (simpleColor)int_c;
-    //         addr_led.set_allpix_color(c);
-    //         send();
-    //         delay(1000);
-    //     }
-    // }
-
-
-
-    // while(true){
-    //     auto start = millis();
-    //     auto t=start;
-    //     while(t<(start+2000)){
-    //         int val = min(255, max(0, (int)fcn::exp_decay(t, start, 1000, 0, 100) ));
-            
-    //         cout<<string(val, '-')<<endl;
-    //         // cout<<(t-start)/1000.0<< " : " << val <<endl;
-            
-    //         delay(50);
-    //         t=millis();
-    //     }
-    // }
-
-    // while(true){
-    //     auto t = millis();
-    //     cout << t << " -> " << fcn::ms_to_hhmmss(t) << " or " << fcn::ms_to_hhmmssms(t) << endl;;
-    //     delay(100);
-    // }
-
-    color_vec palette = {red, green, blue};
-    color_vec authorized = {red, blue, orange, gold};
-    color_vec unauthorized = {green, cyan};
-    cout << "palette : " << fcn::palette_to_string(palette) <<endl;
-    cout << "auth. : " << fcn::palette_to_string(authorized) <<endl<<endl;
-    cout << "unauth. : " << fcn::palette_to_string(unauthorized) <<endl;
-    cout << "palette <Inter.> authrozed : " << fcn::palette_to_string( fcn::get_vector_intersection(palette, authorized) , '/') << endl;
-    cout << "palette - unauthorized : " << fcn::palette_to_string( fcn::get_vector_exclusion(palette, unauthorized) , '/') << endl;
+    while (true){
+        //  int val = fcn::heartbeat(millis(), 20, 0.0, 180.0);
+        //  spot_6.pixel = spot_6.RGBW(red, val);
+        //  spot_9.pixel = spot_9.RGBW(red, val);
+         
+        vector<double> vals = fcn::heartbeat_vec(millis(), 20, 0.0, 180.0);
+        spot_6.pixel = spot_6.RGBW(red, vals[0]);
+        spot_9.pixel = spot_9.RGBW(red, vals[1]);
+        
+        
+        send();
+        delay(20);
+    }
 
 }
