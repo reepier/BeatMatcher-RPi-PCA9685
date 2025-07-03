@@ -5,10 +5,11 @@ build_dir = build/
 includeDir = include/
 main = src/main.cpp
 test = src/test.cpp
-objects = build/animator.o build/config.o build/debug.o build/laser.o build/music.o build/spider.o build/spot.o build/addr_LED.o build/redrayz.o build/DMXio.o
+objects = build/animator.o build/config.o build/debug.o build/music.o build/spider.o build/spot.o build/addr_LED.o build/redrayz.o build/DMXio.o
 qlc_files = QLC/Omerta-Inc.-AddressableLED_CtrlPanel.qxf QLC/Omerta-Inc.-RedRayz_CtrlPanel.qxf QLC/Omerta-Inc.-SpotRack_CtrlPanel.qxf QLC/Omerta-Inc.-Beatmatcher-Control-Panel.qxf  QLC/Omerta-Inc.-BaseFixture_CtrlPanel.qxf QLC/Config_beatmatcher_controler.qxw
 qlc_dest_files = 
 qlc_fix_path = /home/reepier/.qlcplus/fixtures
+qlc_bkp_dirname = bkp_$(shell date "+%Y_%m_%d@%T")
 
 libs = -lola -lolacommon -lcurses  -lfftw3 -lwiringPi -lprotobuf -lrtaudio 
 flags = -w -g -std=c++20
@@ -35,8 +36,6 @@ build/config.o: src/config.cpp $(genericInclude)
 	g++ $(flags) -c src/config.cpp $(includePaths) -o build/config.o
 build/debug.o: src/debug.cpp include/debug.h $(genericInclude)
 	g++ $(flags) -c src/debug.cpp $(includePaths) -o build/debug.o -lcurses
-build/laser.o: src/laser.cpp include/laser.h $(genericInclude)
-	g++ $(flags) -c src/laser.cpp $(includePaths) -o build/laser.o
 build/music.o: src/music.cpp include/music.h $(genericInclude)
 	g++ $(flags) -c src/music.cpp $(includePaths) -o build/music.o
 build/spider.o: src/spider.cpp include/spider.h $(genericInclude)
@@ -51,6 +50,12 @@ build/DMXio.o: src/DMXio.cpp include/DMXio.h include/addr_LED.h $(genericInclude
 	g++ $(flags) -c src/DMXio.cpp $(includePaths) -o build/DMXio.o
 	
 install_qlc: $(qlc_files)
+#Backup
+	mkdir /home/reepier/Documents/QLC/$(qlc_bkp_dirname)
+	cp /home/reepier/Documents/QLC/*.qxw /home/reepier/Documents/QLC/$(qlc_bkp_dirname)
+	mkdir $(qlc_fix_path)/$(qlc_bkp_dirname)
+	cp $(qlc_fix_path)/*.qxf $(qlc_fix_path)/$(qlc_bkp_dirname)
+#Install
 	cp QLC/Config_beatmatcher_controler.qxw /home/reepier/Documents/QLC/
 	cp QLC/Omerta-Inc.-BaseFixture_CtrlPanel.qxf 		$(qlc_fix_path)
 	cp QLC/Omerta-Inc.-AddressableLED_CtrlPanel.qxf 	$(qlc_fix_path)
@@ -68,3 +73,7 @@ get_qlc:
 
 clean:
 	rm -f build/*.o bin/* *.log */*.log
+
+
+debug:
+	echo $(qlc_bkp_dirname)

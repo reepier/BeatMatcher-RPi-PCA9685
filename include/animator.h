@@ -399,6 +399,7 @@ class AnimationManager{
     ColorPaletteMagazine palette_magasine, palette_magasine_2, test_palette;
     
     // for external controler
+    uint8_t master = 255;
     color_vec external_palette;
     bool new_external_palette; 
 

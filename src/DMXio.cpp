@@ -107,6 +107,9 @@ void processDMXinput(const ola::client::DMXMetadata &metadata, const ola::DmxBuf
                                                     
 RubiFont                                                    */
 
+    //Process general master
+    animator.master = data.Get(MAIN_DIM_CH);
+
     // Process trigger
     bool trigger = false;
     static time_t last_trigger_ms;
@@ -334,6 +337,7 @@ RubiFont                                                    */
     if (new_data_available){ // process dimmer input as a continuous stream (& not only on trigger)
         // get & rewrap raw data
         lasergroup1.master = data.Get(RED_DIM_CH); // already a 0-255 dmx data, no conversion/rewrap needed
+        // log(1, fcn::num_to_str(lasergroup1.master));
         // lasergroup1.address = lasergroup1.get_address();
     }
 

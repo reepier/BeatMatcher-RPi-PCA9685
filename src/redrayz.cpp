@@ -57,11 +57,11 @@ void RedLaserGroup::init(){
 
     animations.push_back(new RedrayzAnimation2(this, 1.0, "Analog Beat 100%",  "RED.2.1", any, 1, 255));
     animations.push_back(new RedrayzAnimation2(this, 0.7, "Analog Beat 70%",   "RED.2.2", any, 1, 255));
-    animations.push_back(new RedrayzAnimation2(this, 0.4, "Analog Beat 35%",   "RED.2.3", any, 1, 255));
+    animations.push_back(new RedrayzAnimation2(this, 0.4, "Analog Beat 40%",   "RED.2.3", any, 1, 255));
     animations.push_back(new RedrayzAnimation2(this, 0.2, "Analog Beat 20%",   "RED.2.4", any, 1, 255));
 
     animations.push_back(new RedrayzAnimation3(this, "Digital Beat", "RED.3.1", any, 1, 255));
-    
+
     this->activate_none();
 }
 
@@ -78,7 +78,7 @@ DMX_vec RedLaserBox::buffer(){
     DMX_vec data(this->nCH);
 
     for (int i=0; i<this->nCH; i++){  // adjust intensity with fixture master dimmer
-      data[i] = this->master/255.0 * this->lasers[i];
+      data[i] = animator.master/255.0 * this->master/255.0 * this->lasers[i];
     }
 
     return data;
@@ -110,7 +110,7 @@ void RedrayzAnimation0::new_frame(){
   BaseAnimation::new_frame();
 
   for (int i=0; i<this->fixture->group_size; i++){
-    *(this->fixture->lasers[i]) = this->values[i] * this->fixture->master * this->master/255.0;
+    *(this->fixture->lasers[i]) = this->values[i] * this->fixture->master/255.0 * this->master/255.0;
   }
 }
 

@@ -44,12 +44,13 @@ For 0M3RT4 & W4BI S4B1
 using namespace std;
     
 
-fix_vec ll_fxtrs = {    /*&led,*/ &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, 
+fix_vec ll_fxtrs = {    &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, 
                         &spot_7, &spot_8, &spot_9, &spot_10, &spot_11, &spot_12, 
-                        &spot_13, &spot_14, &spot_15, &spot_16, &spot_17, &spot_18, &spot_19, &spot_20,
-                        &spider, &laser, &laserbox1, &laserbox2};
+                        &spot_13, &spot_14, &spot_15, &spot_16, &spot_17, &spot_18, &spot_19, &spot_20, 
+                        &spot_21, &spot_22, &spot_23,
+                        &spider, &laserbox1, &laserbox2};
 
-fix_vec fixtures = {&addr_led, &laser, &spot_rack_1, &spot_rack_2, &spot_rack_4, &spot_rack_3, &spider, &lasergroup1/*, &lasergroup1*/};
+fix_vec fixtures = {&addr_led, &spot_rack_1, &spot_rack_2, &spot_rack_4, &spot_rack_3, &spider, &lasergroup1/*, &lasergroup1*/};
 
 bool process_arguments(int n, char* args[]){
     for (int i=1; i<n; i++){

@@ -1346,7 +1346,7 @@
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="8">
+     <Level LowLimit="0" HighLimit="255" Value="2">
       <Channel Fixture="2">1</Channel>
      </Level>
      <Playback>
@@ -1439,7 +1439,7 @@
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="7">
+     <Level LowLimit="0" HighLimit="255" Value="18">
       <Channel Fixture="0">2</Channel>
      </Level>
      <Playback>

@@ -61,7 +61,7 @@ DMX_vec FunGeneration_12x1W_buffer(const SpotFixture& spot){
         active_animation_master = spot.rack->active_animation->master;
         rack_master             = spot.rack->master;
     }
-    return DMX_vec{      (uint8_t) (rack_master/255.0 * spot.master/255.0 * active_animation_master),
+    return DMX_vec{      (uint8_t) (animator.master/255.0 * rack_master/255.0 * spot.master/255.0 * active_animation_master),
                          spot.pixel[R],
                          spot.pixel[G],
                          spot.pixel[B],
@@ -79,7 +79,7 @@ DMX_vec Shehds_10x8W_buffer(const SpotFixture& spot){
         active_animation_master = spot.rack->active_animation->master;
         rack_master             = spot.rack->master;
     }
-    return DMX_vec{      (uint8_t) (rack_master/255.0 * spot.master/255.0 * active_animation_master),
+    return DMX_vec{      (uint8_t) (animator.master/255.0 * rack_master/255.0 * spot.master/255.0 * active_animation_master),
                          spot.pixel[R],
                          spot.pixel[G],
                          spot.pixel[B],
@@ -97,7 +97,7 @@ DMX_vec Shehds_7x18W_buffer(const SpotFixture& spot){
         active_animation_master = spot.rack->active_animation->master;
         rack_master             = spot.rack->master;
     }
-    return DMX_vec{      (uint8_t) (rack_master/255.0 * spot.master/255.0 * active_animation_master),
+    return DMX_vec{      (uint8_t) (animator.master/255.0 * rack_master/255.0 * spot.master/255.0 * active_animation_master),
                    spot.pixel[R],
                    spot.pixel[G],
                    spot.pixel[B],
@@ -132,7 +132,7 @@ DMX_vec SpotFixture::buffer(){
  #####  #       #######    #       #     # #     #  #####  #    #  #####  
 / ----------------------------------------------------------------------- */
 //config salon
-SpotRack spot_rack_1(spot_vec{&spot_10, &spot_12}, "Front Rack", SR1_CTRL_ADR, 1);
+SpotRack spot_rack_1(spot_vec{&spot_10, &spot_12, &spot_21, &spot_22, &spot_23}, "Front Rack", SR1_CTRL_ADR, 1);
 SpotRack spot_rack_2(spot_vec{&spot_2, &spot_5, &spot_7, &spot_8, &spot_1, &spot_3, &spot_4}, "Vert. Beams", SR2_CTRL_ADR, 2);
 SpotRack spot_rack_4(spot_vec{&spot_11, &spot_6, &spot_9}, "Rack 2", SR3_CTRL_ADR, 3);
 SpotRack spot_rack_3(spot_vec{&spot_13, &spot_14, &spot_15, &spot_16, &spot_17, &spot_18, &spot_19, &spot_20}, "SHEHDS Rack", SR4_CTRL_ADR, 4);

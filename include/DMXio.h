@@ -41,7 +41,7 @@ void send();
 #define OLA_ADR_OFFSET  -1
 
 #define MAIN_CTRL_ADR      1+OLA_ADR_OFFSET
-    #define MAIN_TRIG_CH            1 +OLA_ADR_OFFSET+MAIN_CTRL_ADR
+    #define MAIN_TRIG_CH       1 +OLA_ADR_OFFSET+MAIN_CTRL_ADR
     #define MAIN_DIM_CH        2 +OLA_ADR_OFFSET+MAIN_CTRL_ADR
     #define MAIN_COL1_CH       3 +OLA_ADR_OFFSET+MAIN_CTRL_ADR
     #define MAIN_COL2_CH       4 +OLA_ADR_OFFSET+MAIN_CTRL_ADR

@@ -14,7 +14,7 @@ using namespace std;
 #        #   #   #     #    #     # #    #  #       
 #       ### #     #    #     #####  #     # ####### 
 */
-SpiderFixture spider(29, 400, "Spider", 1);
+SpiderFixture spider(400, 43, "Spider", 1);
 
 void SpiderFixture::init(){
         log(4, __FILE__, " ", __LINE__, " ",__func__);
@@ -130,7 +130,7 @@ DMX_vec SpiderFixture::buffer(){
     ret[3]= min(max(    map(this->tilt[1], 0, 90, 41, 207)    ,0),255);
     ret[4]= min(max(    map(this->tilt[2], 0, 90, 39, 204)    ,0),255);
     
-    ret[5]=this->master;
+    ret[5]= animator.master/255.0 * this->master;
     ret[6]=this->strobe;
 
     double animation_master = this->active_animation!=nullptr ?

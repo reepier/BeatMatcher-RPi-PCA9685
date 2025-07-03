@@ -56,8 +56,8 @@ DMX_vec AddressableLED::buffer(){
     DMX_vec data(NUM_SUBPIX);
     
     double final_master =  this->active_animation!=nullptr ? 
-                                    this->master/255.0 * this->active_animation->master/255.0
-                                    : 1.0;  // from 0.0 to 1.0
+                                    animator.master/255.0 * this->master/255.0 * this->active_animation->master/255.0
+                                    : animator.master/255.0;  // from 0.0 to 1.0
 
     int i_data = 0;
     for (auto pix : this->pixels){        
