@@ -160,7 +160,7 @@ void AddrLEDAnimation1::new_frame(){
     int_vec::size_type n_unit = units_index.size();
 
     balise("Addr LED Ani1 New frames 1");
-    // enable / disable
+    // enable / disable based on music status
     bool auto_activate_flash = (sampler.state == BEAT) /*&& (t_ms-sampler.t_beat_tracking_start < MAX_CONT_FLASH)*/;
     
     // for each new beat, sort segments in random order

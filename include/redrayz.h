@@ -80,7 +80,7 @@ class RedLaserBox : public BaseFixture{
 
     // Fixture Specific Color Macro
 };
-extern RedLaserBox laserbox1;
+extern RedLaserBox laserbox1, laserbox2;
 
 
 
@@ -179,3 +179,86 @@ class RedrayzAnimation1 : public RedrayzAnimation{
 };
 
 
+/*
+ #####            #                                          ######                      
+#     #          # #   #    #   ##   #       ####   ####     #     # ######   ##   ##### 
+      #         #   #  ##   #  #  #  #      #    # #    #    #     # #       #  #    #   
+ #####         #     # # #  # #    # #      #    # #         ######  #####  #    #   #   
+#       ###    ####### #  # # ###### #      #    # #  ###    #     # #      ######   #   
+#       ###    #     # #   ## #    # #      #    # #    #    #     # #      #    #   #   
+####### ###    #     # #    # #    # ######  ####   ####     ######  ###### #    #   #   
+
+
+
+*/
+class RedrayzAnimation2 : public RedrayzAnimation{
+  public:
+    // Animation parameters (constant or set by animation constructor)
+    bool param_activate_flash;
+    double density = 1.0;               // proportion of LED's flashing (0-100%) 
+    
+    int fade_rate = 60;                            // ms flash fade rate (time constant of an exponential decay : intensity = exp(-(t-t0)/fade_rate)
+  
+    // Dynamic variables (updated internally at each frame)
+    int_vec units_index;
+
+    //AUTOCOLOR Constructor
+    RedrayzAnimation2(RedLaserGroup *f, double dens, std::string d, std::string i, AnimationType t, int prio, int mast=255)
+    {
+      //set BAse parameters
+      this->description = d, this->id = i, this->fixture = f, this->type=t, this->priority=prio, this->master=mast;
+      this->autocolor = true;
+      //Set cinematic parameters
+      this->density = dens;
+      units_index.resize(f->group_size);
+      for(int i=0; i<units_index.size(); i++){
+        units_index[i] = i;
+      }
+    }
+    
+    void init() override; //Standard init fcn
+    void init(const color_vec&) override; //AUTOCOLOR init fcn
+    void new_frame() override;
+};
+
+
+/*
+ #####         ######                                    ######                      
+#     #        #     # #  ####  # #####   ##   #         #     # ######   ##   ##### 
+      #        #     # # #    # #   #    #  #  #         #     # #       #  #    #   
+ #####         #     # # #      #   #   #    # #         ######  #####  #    #   #   
+      # ###    #     # # #  ### #   #   ###### #         #     # #      ######   #   
+#     # ###    #     # # #    # #   #   #    # #         #     # #      #    #   #   
+ #####  ###    ######  #  ####  #   #   #    # ######    ######  ###### #    #   #   
+ 
+Variant of the original beat matching animation : 
+  - The strip is ivided into segments
+  - The flash turns on all segments
+  - The flash Decay turns of segments one by one as intensity decreases */
+
+  class RedrayzAnimation3 : public RedrayzAnimation{
+    public:
+      // Animation parameters (constant or set by animation constructor)
+      bool param_activate_flash;
+      int fade_rate = 80;                            // ms flash fade rate (time constant of an exponential decay : intensity = exp(-(t-t0)/fade_rate)
+  
+      // Dynamic variables (updated internally at each frame)
+      int_vec units_index;
+      // AUTOCOLOR Constructor
+      RedrayzAnimation3(RedLaserGroup *f, std::string d, std::string i, AnimationType typ=any, int prio=1, int mast=255){
+        //set BAse params
+        this->description = d,this->id = i,this->fixture = f,this->type = typ,this->master = mast,this->priority=prio;
+        this->autocolor=true;
+        //set cinematic params
+        units_index.resize(f->group_size);
+
+        for(int i=0; i<units_index.size(); i++){
+          units_index[i] = i;
+        }
+      }
+
+      void init() override;
+      void init(const color_vec&) override;
+      void new_frame() override;
+  };
+  

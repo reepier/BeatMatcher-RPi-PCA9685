@@ -33,6 +33,7 @@ void FixtureAnimation1::init(const color_vec& palette){
 }
 
 void FixtureAnimation1::new_frame(){
+    BaseAnimation::new_frame();
     // update fixture channels at every computational step
     
 }

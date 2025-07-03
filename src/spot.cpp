@@ -32,6 +32,13 @@ SpotFixture spot_18(Shehds_RGBWAU_7x18W, 219, 10, "Spot 18 (@220) : SHEHDS RGBWA
 SpotFixture spot_19(Shehds_RGBWAU_7x18W, 229, 10, "Spot 19 (@230) : SHEHDS RGBWAU", 19);
 SpotFixture spot_20(Shehds_RGBWAU_7x18W, 239, 10, "Spot 20 (@240) : SHEHDS RGBWAU", 20);
 
+
+// NEw FunGeneration spots 
+SpotFixture spot_21(FunGen_RGBW_12x1W, 49,    8,  "Spot 21 (@50)",    21);     
+SpotFixture spot_22(FunGen_RGBW_12x1W, 57,    8,  "Spot 22 (@58)",    22);     
+SpotFixture spot_23(FunGen_RGBW_12x1W, 65,    8,  "Spot 23 (@66)",    23);     
+
+
 // SpotFixture spot_8(130, 8, "Spot 8 (130)");     
 
 /* --------------------------------------------------------------------

@@ -293,6 +293,7 @@ class AddrLEDAnimation2 : public AddrLEDAnimation{
         units_index[i] = i;
       }
     }
+    
     void init() override;
     void init(const color_vec&) override;
     void new_frame() override;

@@ -14,7 +14,7 @@ using namespace std;
 #        #   #   #     #    #     # #    #  #       
 #       ### #     #    #     #####  #     # ####### 
 */
-SpiderFixture spider(29, 44, "Spider", 1);
+SpiderFixture spider(29, 400, "Spider", 1);
 
 void SpiderFixture::init(){
         log(4, __FILE__, " ", __LINE__, " ",__func__);

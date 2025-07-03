@@ -4,8 +4,10 @@ using namespace std;
 #include "DMXio.h"
 
 RedLaserBox laserbox1(0, 6, "Grada Laser 1", 1);
+RedLaserBox laserbox2(6, 6, "Grada Laser 2", 2);
 
-RedLaserGroup lasergroup1(vector<DMX_channel*>{&laserbox1.lasers[0], &laserbox1.lasers[1], &laserbox1.lasers[2], &laserbox1.lasers[3], &laserbox1.lasers[4]}, 
+RedLaserGroup lasergroup1(vector<DMX_channel*>{&laserbox1.lasers[0], &laserbox1.lasers[1], &laserbox1.lasers[2], &laserbox1.lasers[3], &laserbox1.lasers[4], &laserbox1.lasers[5],
+                                               &laserbox2.lasers[0], &laserbox2.lasers[1], &laserbox2.lasers[2], &laserbox2.lasers[3], &laserbox2.lasers[4], &laserbox2.lasers[5]}, 
                           "Groupe Laser 1", RED_CTRL_ADR, 1);
 /*RedLaserGroup lasergroup2(vector<DMX_channel*>{}, 
                            "Groupe Laser 2", 0, 2);*/
@@ -53,6 +55,13 @@ void RedLaserGroup::init(){
     animations.push_back(new RedrayzAnimation1(this, expdecay, 200,   300,   "F decaying rayz",                "RED.2.4.3", any, 1));
     animations.push_back(new RedrayzAnimation1(this, expdecay, 200,   2000,  "Scarce F decaying rayz",         "RED.2.4.5", any, 1));
 
+    animations.push_back(new RedrayzAnimation2(this, 1.0, "Analog Beat 100%",  "RED.2.1", any, 1, 255));
+    animations.push_back(new RedrayzAnimation2(this, 0.7, "Analog Beat 70%",   "RED.2.2", any, 1, 255));
+    animations.push_back(new RedrayzAnimation2(this, 0.4, "Analog Beat 35%",   "RED.2.3", any, 1, 255));
+    animations.push_back(new RedrayzAnimation2(this, 0.2, "Analog Beat 20%",   "RED.2.4", any, 1, 255));
+
+    animations.push_back(new RedrayzAnimation3(this, "Digital Beat", "RED.3.1", any, 1, 255));
+    
     this->activate_none();
 }
 
@@ -179,4 +188,128 @@ void RedrayzAnimation1::new_frame(){
     *(this->fixture->lasers[i_unit]) = flash_intensity * this->fixture->master * this->master/255.0;
   }
   balise("fausse balise");
+}
+
+/*
+ #####            #                                          ######                      
+#     #          # #   #    #   ##   #       ####   ####     #     # ######   ##   ##### 
+      #         #   #  ##   #  #  #  #      #    # #    #    #     # #       #  #    #   
+ #####         #     # # #  # #    # #      #    # #         ######  #####  #    #   #   
+#       ###    ####### #  # # ###### #      #    # #  ###    #     # #      ######   #   
+#       ###    #     # #   ## #    # #      #    # #    #    #     # #      #    #   #   
+####### ###    #     # #    # #    # ######  ####   ####     ######  ###### #    #   #   
+
+
+
+*/
+void RedrayzAnimation2::init(){
+  BaseAnimation::init();
+}
+void RedrayzAnimation2::init(const color_vec& palette){
+  //AUTOCOLOR settings
+  /* set animation colors based on color palette passed as argument*/
+  /* since the laser boxes can only display red colo, just check wehter palette contains red, and
+      activate flash param if it does*/
+  if (std::find(palette.begin(), palette.end(), red) != palette.end()){
+    this->param_activate_flash = true;
+  }else{
+    this->param_activate_flash = false;
+  }
+
+  // call standard init
+  RedrayzAnimation2::init();
+}
+
+void RedrayzAnimation2::new_frame(){
+  BaseAnimation::new_frame();
+
+  // local variables for readability
+  unsigned long t_ms = frame.t_current_ms;
+  unsigned long t_last_beat_ms = sampler.t_last_new_beat;
+  int_vec::size_type n_unit = units_index.size(); 
+  int n_unit_on = density * n_unit;
+
+  // enable / disable based on music status
+  bool auto_activate_flash = (sampler.state == BEAT) /*&& (t_ms-sampler.t_beat_tracking_start < MAX_CONT_FLASH)*/;
+
+  // for each new beat, sort segments in random order
+  if (sampler.new_beat){
+      units_index = fcn::randomized_vector(units_index);
+      // log(1, fcn::num_to_str(n_unit_on), "/", fcn::num_to_str((int)n_unit), " : ",  fcn::vec_to_str(units_index, ','));
+      // int_vec on_las = int_vec(units_index.begin(), units_index.begin()+n_unit_on);
+      // log(1, fcn::vec_to_str(on_las, ','));
+  }
+
+  // Compute intensity value based on time elapsed since last beat
+  float coef;
+  if (param_activate_flash && auto_activate_flash)
+    coef = fcn::exp_decay(t_ms, t_last_beat_ms, this->fade_rate, 0.0, 1.0);
+  else
+    coef = 0;
+  
+  // set each laser intensity
+  for (int i=0; i<n_unit; i++){
+    if (i<n_unit_on)
+      *(this->fixture->lasers[units_index[i]]) = coef * this->fixture->master * this->master/255.0;
+    else
+      *(this->fixture->lasers[units_index[i]]) = 0;
+  }
+}
+
+/*
+ #####         ######                                    ######                      
+#     #        #     # #  ####  # #####   ##   #         #     # ######   ##   ##### 
+      #        #     # # #    # #   #    #  #  #         #     # #       #  #    #   
+ #####         #     # # #      #   #   #    # #         ######  #####  #    #   #   
+      # ###    #     # # #  ### #   #   ###### #         #     # #      ######   #   
+#     # ###    #     # # #    # #   #   #    # #         #     # #      #    #   #   
+ #####  ###    ######  #  ####  #   #   #    # ######    ######  ###### #    #   #   
+ 
+
+ */
+
+ void RedrayzAnimation3::init(){
+  BaseAnimation::init();
+}
+
+void RedrayzAnimation3::init(const color_vec& palette){
+  //AUTOCOLOR init
+  /* set animation colors based on color palette passed as argument*/
+  /* since the laser boxes can only display red colo, just check wehter palette contains red, and
+      activate flash param if it does*/
+      if (std::find(palette.begin(), palette.end(), red) != palette.end()){
+        this->param_activate_flash = true;
+      }else{
+        this->param_activate_flash = false;
+      }
+    
+  //Standard init
+  RedrayzAnimation3::init();
+}
+
+void RedrayzAnimation3::new_frame(){
+  BaseAnimation::new_frame();
+  
+  // for readability
+  unsigned long t_ms = frame.t_current_ms;
+  unsigned long t_last_beat_ms = sampler.t_last_new_beat;
+  int_vec::size_type n_unit = units_index.size();
+
+  bool auto_activate_flash = (sampler.state == BEAT) /*&& (t_ms-sampler.t_beat_tracking_start < MAX_CONT_FLASH)*/; //TODO useless ?
+
+  // for each new beat, sort segments in random order
+  if (sampler.new_beat)
+      units_index = fcn::randomized_vector(units_index);
+
+  // compute intensity value
+  float coef = fcn::exp_decay(t_ms, t_last_beat_ms, this->fade_rate, 0.0, 1.0);
+  //derive number of segments to turn on
+  int n_unit_on = coef * n_unit;
+  //chose which segments to turn on
+  for (int i = 0; i<n_unit; i++){
+      if (i<n_unit_on)
+        *(this->fixture->lasers[units_index[i]]) = 1.0 *this->fixture->master*this->master/255.0;
+      else
+        *(this->fixture->lasers[units_index[i]]) = 0;
+  }
 }
