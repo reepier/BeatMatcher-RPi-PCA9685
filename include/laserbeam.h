@@ -52,6 +52,31 @@ extern LaserBeam laserbeam;
 /* 1 : Random bursts*/
 /* 2 : Analog Beat*/
 
+
+/*
+  #          ######                          ######                             
+ ##          #     #   ##   #    # #####     #     # #    # #####   ####  ##### 
+# #          #     #  #  #  ##   # #    #    #     # #    # #    # #        #   
+  #          ######  #    # # #  # #    #    ######  #    # #    #  ####    #   
+  #   ###    #   #   ###### #  # # #    #    #     # #    # #####       #   #   
+  #   ###    #    #  #    # #   ## #    #    #     # #    # #   #  #    #   #   
+##### ###    #     # #    # #    # #####     ######   ####  #    #  ####    #   
+*/
+
+  
+
+/*
+ #####            #                                          ######  #######    #    #######
+#     #          # #   #    #   ##   #       ####   ####     #     # #         # #      #   
+      #         #   #  ##   #  #  #  #      #    # #    #    #     # #        #   #     #   
+ #####         #     # # #  # #    # #      #    # #         ######  #####   #     #    #   
+#       ###    ####### #  # # ###### #      #    # #  ###    #     # #       #######    #   
+#       ###    #     # #   ## #    # #      #    # #    #    #     # #       #     #    #   
+####### ###    #     # #    # #    # ######  ####   ####     ######  ####### #     #    #   
+*/
+
+
+
 class LaserBeamAnimation : public BaseAnimation{
   public:
     LaserBeam *fixture;
@@ -60,26 +85,28 @@ class LaserBeamAnimation : public BaseAnimation{
 
 
 class LaserBeamAnimation1 : public LaserBeamAnimation{
-  public:
-    // Animation parameters (constant or set by animation constructor)
-    int param1, param2;
-    // Dynamic variables (updated internally at each frame)
-    int var1, var2;
+    public:
+      // specific parameters
+    bool param_activate_flash;
+    simpleColor flash_color = black;            // flash color
+    simpleColor back_color = black;             // background color
     
-    //AUTOCOLOR Constructor
-    LaserBeamAnimation1(LaserBeam *f, /* ..args...,*/ std::string d, std::string i, AnimationType t, int prio, int mast=255)
-    {
-        //set BAse parameters
-        this->description = d, this->id = i, this->fixture = f, this->type=t, this->priority=prio, this->master=mast;
-        this->autocolor = true;
-        //Set cinematic parameters
-        this->param1 /* = arg1 */;
-        this->param2 /* = arg2 */;
+    int fade_rate = 60;                            // ms flash fade rate (time constant of an exponential decay : intensity = exp(-(t-t0)/fade_rate)
+  
+      // Dynamic variables (updated internally at each frame)
+  
+    //AUTOCOLOR constructor 
+    LaserBeamAnimation1(LaserBeam* f, std::string d, std::string i, AnimationType typ, bool flash = true, uint8_t mast = 255){
+      //set Base params 
+      this->fixture = f,this->description = d,this->id = i, this->type = typ;
+      this->autocolor=true;
+      //set cinematic params
     }
-
-    void init() override; //Standard init fcn
-    void init(const color_vec&) override; //AUTOCOLOR init fcn
-    void new_frame() override;
-};
+  
+      void init() override;
+      void init(const color_vec&) override;
+      void new_frame() override;
+      
+  };
 
 

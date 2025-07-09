@@ -79,24 +79,83 @@ DMX_vec LaserBeam::RGB(simpleColor c, int intensity){
 #     # #   ## # #    # #    #   #   # #    # #   ## 
 #     # #    # # #    # #    #   #   #  ####  #    # */
 
-/*TODO proposition : for every animation that requires it, define functions such as get_flash_color(const color_vec& palette)
- and get_back_color(const color_vec& palette) that parse the palette (passed as argument) and compose it with internal
-  parameters "(un)authorized_flash_color", (un)authorized_back_color. This could yield the perfect trade-off between the master palette 
-  and each animation's own limitations (i.e. rendering complex colors at low intensity) */
-void FixtureAnimation1::init(){
+/*
+  #          ######                          ######                             
+ ##          #     #   ##   #    # #####     #     # #    # #####   ####  ##### 
+# #          #     #  #  #  ##   # #    #    #     # #    # #    # #        #   
+  #          ######  #    # # #  # #    #    ######  #    # #    #  ####    #   
+  #   ###    #   #   ###### #  # # #    #    #     # #    # #####       #   #   
+  #   ###    #    #  #    # #   ## #    #    #     # #    # #   #  #    #   #   
+##### ###    #     # #    # #    # #####     ######   ####  #    #  ####    #   
+*/
+
+  
+
+/*
+ #####            #                                          ######  #######    #    #######
+#     #          # #   #    #   ##   #       ####   ####     #     # #         # #      #   
+      #         #   #  ##   #  #  #  #      #    # #    #    #     # #        #   #     #   
+ #####         #     # # #  # #    # #      #    # #         ######  #####   #     #    #   
+#       ###    ####### #  # # ###### #      #    # #  ###    #     # #       #######    #   
+#       ###    #     # #   ## #    # #      #    # #    #    #     # #       #     #    #   
+####### ###    #     # #    # #    # ######  ####   ####     ######  ####### #     #    #   
+*/
+
+
+void LaserBeamAnimation1::init(){
     BaseAnimation::init();
 }
-
-void FixtureAnimation1::init(const color_vec& palette){
-    //AUTOCOLOR settings
-    /* set animation colors based on color palette passed as argument*/
-    
-    // call standard init
-    FixtureAnimation1::init();
+void LaserBeamAnimation1::init(const color_vec& palette){
+    // AUTOCOLOR init
+    switch (palette.size())
+    {
+    case 0:     this->flash_color=black,        this->back_color=black;
+        break;
+    case 1:     this->flash_color=palette[0];   this->back_color=palette[0];
+        break;
+    case 2:     this->flash_color=palette[0],   this->back_color=palette[1];
+        break;
+    default:    this->flash_color=black,        this->back_color=black;
+        break;
+    }
+    //STANDARD init
+    LaserBeamAnimation1::init();
 }
 
-void FixtureAnimation1::new_frame(){
+void LaserBeamAnimation1::new_frame(){
     BaseAnimation::new_frame();
-    // update fixture channels at every computational step
     
+    // local variables for readability
+    unsigned long t_ms = frame.t_current_ms;
+    unsigned long t_last_beat_ms = sampler.t_last_new_beat;
+
+    // enable / disable based on music status
+    bool auto_activate_flash = (sampler.state == BEAT) /*&& (t_ms-sampler.t_beat_tracking_start < MAX_CONT_FLASH)*/;
+    
+
+    // precompute pixel values
+    pixel backgd_RGB = this->fixture->RGB(back_color, 20 * this->master/255.0);
+    pixel flash_RGB = this->fixture->RGB(flash_color, this->master);
+    pixel final_mix_RGB = this->fixture->RGB(black);
+
+    // Compute intensity vaue based on time elapsed since last beat
+    float coef = exp(-(double)(t_ms - t_last_beat_ms) / fade_rate);
+
+    // compute final RGB colors
+    if (param_activate_flash && auto_activate_flash)
+    {
+         
+        final_mix_RGB[R] = (1-pow(coef, 0.2)) * backgd_RGB[R] + coef * flash_RGB[R];
+        final_mix_RGB[G] = (1-pow(coef, 0.2)) * backgd_RGB[G] + coef * flash_RGB[G];
+        final_mix_RGB[B] = (1-pow(coef, 0.2)) * backgd_RGB[B] + coef * flash_RGB[B];
+    }
+    else
+    {
+        final_mix_RGB[R] = backgd_RGB[R];
+        final_mix_RGB[G] = backgd_RGB[G];
+        final_mix_RGB[B] = backgd_RGB[B];
+    }
+
+    // set each units color
+    this->fixture->pixel = final_mix_RGB;
 }
