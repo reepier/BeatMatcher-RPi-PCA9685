@@ -54,7 +54,7 @@ SpotFixture spot_23(FunGen_RGBW_12x1W, 65,    8,  "Spot 23 (@66)",    23);
 / ----------------------------------------------------------------------- */
 
 DMX_vec FunGeneration_12x1W_buffer(const SpotFixture& spot){
-    //TODO protect every fixture.buffer function from null active_animation pointer
+    //TODO Move activae_animation.master action to animation::new_frame pixel computations (for every animations)
     uint8_t active_animation_master = 255;  //default value
     uint8_t rack_master = 255;              //default value
     if (spot.rack != nullptr && spot.rack->active_animation != nullptr){

@@ -1,6 +1,43 @@
 /** TEMPALTE FILE for a new fixture module*/
 #include "T_fixture.h"
 
+using namespace std;
+
+
+Fixture fixturename;
+
+/*
+#######                                     
+#       # #    # ##### #    # #####  ###### 
+#       #  #  #    #   #    # #    # #      
+#####   #   ##     #   #    # #    # #####  
+#       #   ##     #   #    # #####  #      
+#       #  #  #    #   #    # #   #  #      
+#       # #    #   #    ####  #    # ###### */
+
+void Fixture::init(){
+    /*declare animations*/
+}
+
+DMX_vec Fixture::buffer(){
+    /*build DMX sub-frame*/
+    return DMX_vec{ /*...*/};
+}
+
+/**
+######   #####  ######  #     #    #######               
+#     # #     # #     # #  #  #    #        ####  #    # 
+#     # #       #     # #  #  #    #       #    # ##   # 
+######  #  #### ######  #  #  #    #####   #      # #  # 
+#   #   #     # #     # #  #  #    #       #      #  # # 
+#    #  #     # #     # #  #  #    #       #    # #   ## 
+#     #  #####  ######   ## ##     #        ####  #    # 
+*/
+
+DMX_vec Fixture::RGBW(simpleColor c, int intensity){
+    /*define color catalog as DMX_vec*/
+}
+
 /*
    #                                                 
   # #   #    # # #    #   ##   ##### #  ####  #    # 
