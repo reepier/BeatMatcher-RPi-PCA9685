@@ -229,7 +229,7 @@ void SoundAnalyzer::_update_beats(){
         // in this case, raw_beat is set in DMXio.cpp/processDMXinput() func.
         if(raw_beat && !previous_raw_beat){
             new_beat = true;
-            log(2, "New Beat !");
+            // log(2, "New Beat !");
             t_last_new_beat = frame.t_current_ms;
         }else{
             new_beat = false;

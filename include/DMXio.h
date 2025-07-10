@@ -72,6 +72,12 @@ void send();
     #define SR_COL1_CH     3+OLA_ADR_OFFSET
     #define SR_COL2_CH     4+OLA_ADR_OFFSET
 
+#define BEAM_CTRL_ADR   45+OLA_ADR_OFFSET
+    #define BEAM_DIM_CH      1+OLA_ADR_OFFSET+BEAM_CTRL_ADR
+    #define BEAM_ANI_CH      2+OLA_ADR_OFFSET+BEAM_CTRL_ADR
+    #define BEAM_COL1_CH     3+OLA_ADR_OFFSET+BEAM_CTRL_ADR
+    #define BEAM_COL2_CH     4+OLA_ADR_OFFSET+BEAM_CTRL_ADR
+
 
 
 

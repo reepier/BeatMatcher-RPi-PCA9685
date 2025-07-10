@@ -401,6 +401,82 @@ RubiFont                                                    */
         
     }
 
+/*
+▗▖    ▗▄▖  ▗▄▄▖▗▄▄▄▖▗▄▄▖ ▗▄▄▖ ▗▄▄▄▖ ▗▄▖ ▗▖  ▗▖
+▐▌   ▐▌ ▐▌▐▌   ▐▌   ▐▌ ▐▌▐▌ ▐▌▐▌   ▐▌ ▐▌▐▛▚▞▜▌
+▐▌   ▐▛▀▜▌ ▝▀▚▖▐▛▀▀▘▐▛▀▚▖▐▛▀▚▖▐▛▀▀▘▐▛▀▜▌▐▌  ▐▌
+▐▙▄▄▖▐▌ ▐▌▗▄▄▞▘▐▙▄▄▖▐▌ ▐▌▐▙▄▞▘▐▙▄▄▖▐▌ ▐▌▐▌  ▐▌
+                                              
+                                              
+                                              */
+
+
+    //PROCESS Laser Beam DIMMER
+    if (new_data_available){ // process dimmer input as a continuous stream (& not only on trigger)
+        // get & rewrap raw data
+        laserbeam.master = data.Get(BEAM_DIM_CH); // already a 0-255 dmx data, no conversion/rewrap needed
+    }
+
+    //PROCESS Laser Beam Animation
+    if (trigger){
+        //get & rewrap raw data
+        int beam_ani_val = data.Get(BEAM_ANI_CH);
+        // if input data is not in DEFAULT positions (automatic mode)
+        if ( beam_ani_val!=0) { 
+            // update Rack animation if there is a change
+            if (laserbeam.external_animation != beam_ani_val){
+                laserbeam.external_animation = beam_ani_val;
+                laserbeam.new_external_animation = true;
+            }else{
+                
+            }
+        // if input data is DEFAULT (0) 
+        }else{
+            if (laserbeam.external_animation != 0){  //if not already reset to 0
+                laserbeam.external_animation = 0;    //reset to 0
+                laserbeam.new_external_animation = true;
+                log(2, "Back to automatic BEAM animation");  //TODO choose where to put log instructions (cannot be both in DMXio and Animator)
+            }else{
+                
+            }
+        }
+    }else{
+        
+    }
+
+    //PROCESS Laser Beam COLORS
+    if (trigger){
+        // get & rewrap raw data
+        int beam_col1_val = min(max((uint8_t)0,  data.Get(BEAM_COL1_CH)) , (uint8_t)(simpleColor::last_color));
+        int beam_col2_val = min(max((uint8_t)0,  data.Get(BEAM_COL2_CH)) , (uint8_t)(simpleColor::last_color));
+        //create output structrue
+        color_vec beam_palette;   //start with empty palette
+        // if input data are not in DEFAULT positions (automatic mode)
+        if ( beam_col1_val!=0 || beam_col2_val!=0 ) {
+            // create a palette based on (non zero) input data
+            if (beam_col1_val > 0)  beam_palette.push_back((simpleColor)(beam_col1_val-1));
+            if (beam_col2_val > 0)  beam_palette.push_back((simpleColor)(beam_col2_val-1));
+            // update fixture palette if there is a change
+            if (laserbeam.external_palette != beam_palette){
+                laserbeam.external_palette = beam_palette;
+                laserbeam.new_external_palette = true;
+            }else{
+                
+            }
+        }else{
+            if ( !laserbeam.external_palette.empty()){  //if not already empty 
+                laserbeam.external_palette.clear();    //reset to empty palette (meaning main palette or auto palette will apply)
+                laserbeam.new_external_palette = true;
+                log(2, "Back to automatic BEAM palette");
+            }else{
+                
+            }
+        }
+    }else{
+        
+    }
+
+
     //TODO to improve genericity, put all these repeating code blocks in BaseFixture class (with overrides if needed in SpecificFixture class)
 
 

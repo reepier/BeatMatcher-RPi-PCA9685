@@ -49,8 +49,20 @@ extern LaserBeam laserbeam;
 #     # #   ## # #    # #    #   #   # #    # #   ## 
 #     # #    # # #    # #    #   #   #  ####  #    # */
 
-/* 1 : Random bursts*/
-/* 2 : Analog Beat*/
+class LaserBeamAnimation : public BaseAnimation{
+    public:
+      LaserBeam *fixture;
+  };
+  
+/*
+  ###          #######                 
+ #   #         #       # #    # ###### 
+#     #        #       #  #  #  #      
+#     #        #####   #   ##   #####  
+#     # ###    #       #   ##   #      
+ #   #  ###    #       #  #  #  #      
+  ###   ###    #       # #    # ##### */
+
 
 
 /*
@@ -77,11 +89,6 @@ extern LaserBeam laserbeam;
 
 
 
-class LaserBeamAnimation : public BaseAnimation{
-  public:
-    LaserBeam *fixture;
-};
-
 
 
 class LaserBeamAnimation1 : public LaserBeamAnimation{
@@ -101,6 +108,7 @@ class LaserBeamAnimation1 : public LaserBeamAnimation{
       this->fixture = f,this->description = d,this->id = i, this->type = typ;
       this->autocolor=true;
       //set cinematic params
+      this->param_activate_flash = flash;
     }
   
       void init() override;

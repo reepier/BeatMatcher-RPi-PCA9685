@@ -503,7 +503,7 @@ bool AnimationManager::controled_update(){
     }
 
 // Define fixtures installed
-    fix_vec fixs = {&addr_led, &spot_rack_1, &spot_rack_2, &spot_rack_3, &spot_rack_4, &lasergroup1/*, &lasergroup2*/};
+    fix_vec fixs = {&addr_led, &spot_rack_1, &spot_rack_2, &spot_rack_3, &spot_rack_4, &lasergroup1, /* &lasergroup2,*/ &laserbeam};
 
 //automatic animation update trigger (based on timer & beat detection)
     bool auto_ani_update = false;
@@ -558,12 +558,6 @@ for (auto fix : fixs){
     }
     animator.new_external_palette = false;
 
-    /*Observed bugs :
-        - when program is launched, with all external control to 0, there is no activae animation until first break
-            *->might just be bad luck (random animation selection sometimes returns the BLACK animation)
-        - When led palette is set to MANUAL, the automatic palette update triggers an animation change. It should not. The new
-         animation keeps the led manual palette.
-        - When led animation is set to MANUAL, the automatic palette update triggers an animation change. It should not. */
 }
 
 void AnimationManager::set_timer(time_t duration_ms){

@@ -4,7 +4,7 @@
 
 using namespace std;
 
-LaserBeam laserbeam(13, 3, "BEAM", 1, 255);
+LaserBeam laserbeam(12, 3, "BEAM", 1, 255);
 
 /*
 #######                                     
@@ -16,7 +16,14 @@ LaserBeam laserbeam(13, 3, "BEAM", 1, 255);
 #       # #    #   #    ####  #    # ###### */
 
 void LaserBeam::init(){
+    this->animations.push_back(new LaserBeamAnimation1(this, "", "LB.0", backer, true, 255));
 
+    this->animations.push_back(new LaserBeamAnimation1(this, "Beat", "LB.1", leader, true, 255));
+    this->animations.push_back(new LaserBeamAnimation1(this, "Beat 2", "LB.1.1", leader, true, 255));
+    this->animations.push_back(new LaserBeamAnimation1(this, "Beat 3", "LB.1.2", leader, true, 255));
+    this->animations.push_back(new LaserBeamAnimation1(this, "Beat 4", "LB.1.3", leader, true, 255));
+
+    this->activate_none();
 }
 
 DMX_vec LaserBeam::buffer(){
@@ -65,7 +72,7 @@ DMX_vec LaserBeam::RGB(simpleColor c, int intensity){
 
         /* return a color vector with the same tint as temp but normalized according to a color specific 
         coefficient (to account for the fixtures's color by color response)*/
-        return fcn::RGB_norm(temp, intensity==-1 ? -1 : intensity/255.0);
+        return fcn::RGB_norm(temp, intensity);
 
 }
 
@@ -78,6 +85,17 @@ DMX_vec LaserBeam::RGB(simpleColor c, int intensity){
 ####### #  # # # #    # ######   #   # #    # #  # # 
 #     # #   ## # #    # #    #   #   # #    # #   ## 
 #     # #    # # #    # #    #   #   #  ####  #    # */
+
+/*
+  ###          #######                 
+ #   #         #       # #    # ###### 
+#     #        #       #  #  #  #      
+#     #        #####   #   ##   #####  
+#     # ###    #       #   ##   #      
+ #   #  ###    #       #  #  #  #      
+  ###   ###    #       # #    # ##### */
+
+
 
 /*
   #          ######                          ######                             
@@ -134,28 +152,34 @@ void LaserBeamAnimation1::new_frame(){
     
 
     // precompute pixel values
-    pixel backgd_RGB = this->fixture->RGB(back_color, 20 * this->master/255.0);
-    pixel flash_RGB = this->fixture->RGB(flash_color, this->master);
+    pixel backgd_RGB = this->fixture->RGB(back_color, 20);
+    pixel flash_RGB = this->fixture->RGB(flash_color, -1);
     pixel final_mix_RGB = this->fixture->RGB(black);
 
     // Compute intensity vaue based on time elapsed since last beat
     float coef = exp(-(double)(t_ms - t_last_beat_ms) / fade_rate);
-
     // compute final RGB colors
     if (param_activate_flash && auto_activate_flash)
     {
          
-        final_mix_RGB[R] = (1-pow(coef, 0.2)) * backgd_RGB[R] + coef * flash_RGB[R];
-        final_mix_RGB[G] = (1-pow(coef, 0.2)) * backgd_RGB[G] + coef * flash_RGB[G];
-        final_mix_RGB[B] = (1-pow(coef, 0.2)) * backgd_RGB[B] + coef * flash_RGB[B];
+        final_mix_RGB[R] = ((1-pow(coef, 0.2)) * backgd_RGB[R] + coef * flash_RGB[R]) * this->master/255.0;
+        final_mix_RGB[G] = ((1-pow(coef, 0.2)) * backgd_RGB[G] + coef * flash_RGB[G]) * this->master/255.0;
+        final_mix_RGB[B] = ((1-pow(coef, 0.2)) * backgd_RGB[B] + coef * flash_RGB[B]) * this->master/255.0;
     }
     else
     {
-        final_mix_RGB[R] = backgd_RGB[R];
-        final_mix_RGB[G] = backgd_RGB[G];
-        final_mix_RGB[B] = backgd_RGB[B];
+        final_mix_RGB[R] = backgd_RGB[R] * this->master/255.0;
+        final_mix_RGB[G] = backgd_RGB[G] * this->master/255.0;
+        final_mix_RGB[B] = backgd_RGB[B] * this->master/255.0;
     }
 
+    
     // set each units color
     this->fixture->pixel = final_mix_RGB;
+    log(3, fcn::num_to_str(final_mix_RGB[R]));
+
+
+    if (sampler.new_beat){
+        balise(" ");
+    }
 }
