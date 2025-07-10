@@ -75,7 +75,48 @@ class LaserBeamAnimation : public BaseAnimation{
 ##### ###    #     # #    # #    # #####     ######   ####  #    #  ####    #   
 */
 
-  
+class LaserBeamAnimation1 : public LaserBeamAnimation
+{
+  public :
+    // animation parameters (constant, set at construction)
+    bool flash_activation = true;
+    // DMX_vec back_color;
+    simpleColor back_color;
+    // DMX_vec flash_color;
+    color_vec flash_colors;
+
+    Shape flash_shape = gaussian; // default setting leads to gaussian flashes (of bubbles)
+    // int sin_max_p_ms = 15000;
+    // int sin_min_p_ms = 5000;
+    int rand_const_ms;
+    int flash_len;
+    // double fluct_int = 0.4;
+    // double fluct_col = 0.25;
+
+    // Internal variable (updated at every new_frame call)
+    flash_vec flashes;     // stores previous & next flash data (color & time) --> flashes[spot_ind][prev/next].color/time
+
+    // Internal helpful & hidden stuff (for readability)
+    const int i_prev = 0, i_next = 1;
+
+    //CONSTUCTORS
+    // AUTOCOLOR constructor
+    LaserBeamAnimation1(LaserBeam *f, Shape fshape, int prand, int flen, std::string d, std::string i, AnimationType t, int prio, int mast=255){
+      //set Base paramters
+      this->description = d,this->id = i,this->fixture = f,this->type = t,this->priority = prio,this->master = mast;
+      this->autocolor = true;
+      //set cinematic parameters
+      this->flash_shape = fshape;
+      this->rand_const_ms=prand;
+      this->flash_len = flen;
+    }
+
+
+    void init() override;
+    void init(const color_vec&) override;
+    void new_frame();
+};
+
 
 /*
  #####            #                                          ######  #######    #    #######
@@ -91,7 +132,7 @@ class LaserBeamAnimation : public BaseAnimation{
 
 
 
-class LaserBeamAnimation1 : public LaserBeamAnimation{
+class LaserBeamAnimation2 : public LaserBeamAnimation{
     public:
       // specific parameters
     bool param_activate_flash;
@@ -103,7 +144,7 @@ class LaserBeamAnimation1 : public LaserBeamAnimation{
       // Dynamic variables (updated internally at each frame)
   
     //AUTOCOLOR constructor 
-    LaserBeamAnimation1(LaserBeam* f, std::string d, std::string i, AnimationType typ, bool flash = true, uint8_t mast = 255){
+    LaserBeamAnimation2(LaserBeam* f, std::string d, std::string i, AnimationType typ, bool flash = true, uint8_t mast = 255){
       //set Base params 
       this->fixture = f,this->description = d,this->id = i, this->type = typ;
       this->autocolor=true;
