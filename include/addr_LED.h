@@ -275,6 +275,8 @@ class AddrLEDAnimation1 : public AddrLEDAnimation{
     this->density = dens;
     this->unit = subdiv;
     switch (subdiv){
+      case group: units_index.resize(group_conf.size());
+            break;
       case bar : units_index.resize(NUM_BAR);
         break;
       case seg : units_index.resize(NUM_SEG);
