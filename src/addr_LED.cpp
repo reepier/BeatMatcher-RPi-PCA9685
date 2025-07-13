@@ -60,6 +60,7 @@ void AddressableLED::init(){
     animations.push_back(new AddrLEDAnimation4(this, gaussian, group, 1500, 2000, "Slow Bubbles (group)", "PIX.8.1", backer, 1, 255));
     animations.push_back(new AddrLEDAnimation4(this, gaussian, pix, 10, 800, "Fast Bubbles (pix)", "PIX.8.1", backer, 1, 255));
     animations.push_back(new AddrLEDAnimation4(this, gaussian, pix, 100, 1500, "Slow Bubbles (pix)", "PIX.8.1", backer, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, expdecay, pix, 100, 1000, "Slow flash (pix)", "PIX.8.1", backer, 1, 255));
     //Animation type 4 : fast Random strobe by pixel 
     animations.push_back(new AddrLEDAnimation4(this, square, pix, 10, 1000/FRATE, "Fast RandStrobe (group)", "PIX.8.1", backer, 1, 255));
 

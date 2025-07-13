@@ -519,8 +519,6 @@ private :
     void new_frame();
 };
 
-
-
 /** LED driver configuration :
  *    3 SERIES CONFIGURATION (use driver output channel 1,2,3)
  *        6 bars bars per series configuration :
@@ -550,3 +548,5 @@ private :
  *    2 SERIES CONFIGURATION
 
 */
+
+

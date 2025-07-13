@@ -528,7 +528,7 @@ for (auto fix : fixs){
 // determines which setting is manual & which is automatic
     bool automatic_main_palette = animator.external_palette.empty();                                    // true if main palette update is automatic
     bool automatic_fix_palette = fix->external_palette.empty() && animator.external_palette.empty();    // true if palette update for this fixture is auto (true or false)
-    bool automatic_fix_ani = fix->external_animation==0;                                                // true if animation update for this fixture is auto(true or false)
+    bool automatic_fix_ani = fix->external_animation==255;                                                // true if animation update for this fixture is auto(true or false)
     //TODO change 0 behavior --> 0 = BLACK and 255 = AUTO
 
 
@@ -536,6 +536,7 @@ for (auto fix : fixs){
     // if input command is received or automatic settings change (palette or animation), change animation
     if(manual_update || auto_ani_update && automatic_fix_ani || auto_palette_update && automatic_fix_palette){
         color_vec final_palette;
+        
         // choose color palette by order of priority : manual fixture palette > manual main palette > automatic palette
         if(fix->external_palette.empty() == false){ //use external fixture's palette if available
             final_palette = fix->external_palette;
@@ -544,11 +545,12 @@ for (auto fix : fixs){
         }else{      // else use auto palette (if both main & fixture palette are set to AUTO in the external controler)
             final_palette = auto_palette;
         }
+
         // choose animation by order of priority (external animation > automatic animation)
         if(fix->external_animation != 255){       // use external animation if available
             fix->activate_by_index(fix->external_animation, final_palette);
         }else{          // choose random animation
-            fix->activate_random(final_palette);
+            fix->activate_random(final_palette, false);
         }
     }
 

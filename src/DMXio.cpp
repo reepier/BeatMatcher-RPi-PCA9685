@@ -202,8 +202,8 @@ RubiFont                                                    */
             }
         // if input data is DEFAULT (0) 
         }else{
-            if (addr_led.external_animation != 0){  //if not already reset to 0
-                addr_led.external_animation = 0;    //reset to 0
+            if (addr_led.external_animation != 255){  //if not already reset to 0
+                addr_led.external_animation = 255;    //reset to 0
                 addr_led.new_external_animation = true;
                 log(2, "Back to automatic led animation");
             }else{
@@ -246,6 +246,8 @@ RubiFont                                                    */
     }else{
         
     }//TODO clean this if / elseif structure --> it has way to many ramifications
+
+
 
 /*
  ▗▄▄▖▗▄▄▖  ▗▄▖ ▗▄▄▄▖    ▗▄▄▖  ▗▄▖  ▗▄▄▖▗▖ ▗▖
