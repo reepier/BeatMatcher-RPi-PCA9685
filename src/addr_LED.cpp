@@ -53,6 +53,8 @@ void AddressableLED::init(){
 
     //Animation type 1 : Analog Beat with group fragmentation ----------------------------------------------------
     animations.push_back(new AddrLEDAnimation1(this, group, 0.7,  "Group Analog Beat",      "PIX.9", leader, true, 255));     
+    //animation type 1 : Digital Beat with group frag
+    animations.push_back(new AddrLEDAnimation2(this, group , "Group Digital Beat",       "PIX.10", leader, true, 255));     
 
     this->activate_none();
 }
@@ -310,6 +312,8 @@ void AddrLEDAnimation2::new_frame(){
                     break;
                 case bar : this->fixture->set_bar_color(units_index[i], flash_RGB);
                     break;
+                case group:this->fixture->set_group_color(units_index[i], flash_RGB);
+                    break;
             }
             
         else
@@ -319,6 +323,8 @@ void AddrLEDAnimation2::new_frame(){
                 case seg : this->fixture->set_segment_color(units_index[i], backgd_RGB);
                     break;
                 case bar : this->fixture->set_bar_color(units_index[i], backgd_RGB);
+                    break;
+                case group : this->fixture->set_group_color(units_index[i], backgd_RGB);
                     break;
             }
     }

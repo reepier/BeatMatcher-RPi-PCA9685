@@ -333,6 +333,8 @@ class AddrLEDAnimation2 : public AddrLEDAnimation{
       this->unit = u;
 
       switch (u){
+        case group: units_index.resize(group_conf.size());
+          break;
         case bar : units_index.resize(NUM_BAR);
           break;
         case seg : units_index.resize(NUM_SEG);
@@ -355,6 +357,8 @@ class AddrLEDAnimation2 : public AddrLEDAnimation{
       //set cinematic params
       this->unit = u;
       switch (u){
+        case group: units_index.resize(group_conf.size());
+          break;
         case bar : units_index.resize(NUM_BAR);
           break;
         case seg : units_index.resize(NUM_SEG);
