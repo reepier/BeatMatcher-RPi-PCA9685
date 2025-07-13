@@ -4,6 +4,8 @@ using namespace std;
 
 #include "addr_LED.h"
 
+
+
 AddressableLED addr_led(1, 0, 3*NUM_PIX, "LEDs", 1, 180);
 
 /*
@@ -18,7 +20,9 @@ AddressableLED addr_led(1, 0, 3*NUM_PIX, "LEDs", 1, 180);
 
 void AddressableLED::init(){
     // declare animations here
-    animations.push_back(new AddrLEDAnimation1(this, black,  black,  " ",    "PIX.0.0", backer));
+    animations.push_back(new AddrLEDAnimation0(this, black, " ",    "PIX.0.0", any, 1, 255));
+    
+    animations.push_back(new AddrLEDAnimation0(this, "Couleur fixe",    "PIX.0.1", any, 1, 255));
 
     //AUTOCOLOR with Animation type 1 : Analog Beat all pixels ()Beatmatcher original animation)------------------------------
     animations.push_back(new AddrLEDAnimation1(this, bar, 1, "Analog Beat", "PIX.6.1", leader, true, 255));     
@@ -47,6 +51,8 @@ void AddressableLED::init(){
     // Decaying Flash
     animations.push_back(new AddrLEDAnimation4(this, square, bar, 150, 1000/FRATE, "Slow Strobe", "PIX.8.6", any, 1, 255));
 
+    //Animation type 1 : Analog Beat with group fragmentation ----------------------------------------------------
+    animations.push_back(new AddrLEDAnimation1(this, group, 0.7,  "Group Analog Beat",      "PIX.9", leader, true, 255));     
 
     this->activate_none();
 }
@@ -118,6 +124,37 @@ DMX_vec AddressableLED::RGB(simpleColor c, int intensity){
 }
 
 
+/*
+  ###          #######                 
+ #   #         #       # #    # ###### 
+#     #        #       #  #  #  #      
+#     #        #####   #   ##   #####  
+#     # ###    #       #   ##   #      
+ #   #  ###    #       #  #  #  #      
+  ###   ###    #       # #    # ##### */
+
+
+void AddrLEDAnimation0::init() {
+    BaseAnimation::init();
+}
+void AddrLEDAnimation0::init(const color_vec& palette) {
+    if (this->autocolor){
+        switch (palette.size())
+        {
+        case 0:     this->color = black;        break;
+        case 1:     this->color = palette[0];   break;
+        default:    this->color = *(palette.end()-1);   break;
+        }
+    }
+
+    //Standard init()
+    AddrLEDAnimation0::init();
+}
+
+void AddrLEDAnimation0::new_frame() {
+    this->fixture->set_allpix_color(this->color);
+}
+  
 
 
 
@@ -205,6 +242,8 @@ void AddrLEDAnimation1::new_frame(){
                 case seg : this->fixture->set_segment_color(units_index[i], unit_i_RGB);
                 break;
                 case bar : this->fixture->set_bar_color(units_index[i], unit_i_RGB);
+                break;
+                case group:this->fixture->set_group_color(units_index[i], unit_i_RGB);
                 break;
                 default :
                 break;

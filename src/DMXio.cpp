@@ -31,7 +31,7 @@ void send(){
     }
     ola_output_client.SendDmx(0, ola_buffer);
 
-    // construct & send DMX frames for addressable leds pixels values (sent through artnet)
+    // construct & send DMX frames for addressable LEDs pixels values (sent through artnet)
     balise("Construct & send buffer for artnet pixels");
     DMX_vec sub_buffer, long_buffer = addr_led.buffer();
     auto start = long_buffer.begin();
@@ -513,8 +513,7 @@ void setup_DMX_input(){
 
 
 
-/*TODO DMX Commande interface
-Pour faciliter l'integration du systeme Beatmatcher avec d'autre éléments, la necessité d'une IHM de pilotage en temps réel
+/* Pour faciliter l'integration du systeme Beatmatcher avec d'autre éléments, la necessité d'une IHM de pilotage en temps réel
 s'impose.
 Afin de maximiser les cas d'usage possible, les exigences sont les suivantes : 
 

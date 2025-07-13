@@ -19,12 +19,13 @@
 using namespace std;
     
 
-fix_vec ll_fxtrs = {    /*&led,*/ &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, 
+fix_vec ll_fxtrs = {    &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, 
                         &spot_7, &spot_8, &spot_9, &spot_10, &spot_11, &spot_12, 
-                        &spot_13, &spot_14, &spot_15, &spot_16, &spot_17, &spot_18, &spot_19, &spot_20,
-                        &spider, &laser, &laserbox1};
+                        &spot_13, &spot_14, &spot_15, &spot_16, &spot_17, &spot_18, &spot_19, &spot_20, 
+                        &spot_21, &spot_22, &spot_23,
+                        &spider, &laserbox1, &laserbox2, &laserbeam};
 
-fix_vec fixtures = {&addr_led, &laser, &spot_rack_1, &spot_rack_2, &spot_rack_4, &spot_rack_3, &spider, &lasergroup1/*, &lasergroup1*/};
+fix_vec fixtures = {&addr_led, &spot_rack_1, &spot_rack_2, &spot_rack_4, &spot_rack_3, &spider, &lasergroup1, /*&lasergroup2, */ &laserbeam};
 
 bool process_arguments(int n, char* args[]){
     for (int i=1; i<n; i++){
@@ -99,7 +100,7 @@ void initialize() {
 
     if (!b_BALISE){
         balise("Init. Debug...");
-        init_display();
+        // init_display();
     }
 }
 
@@ -165,17 +166,21 @@ int main(int argc, char* argv[]){
     // }
 
     while (true){
-        //  int val = fcn::heartbeat(millis(), 20, 0.0, 180.0);
-        //  spot_6.pixel = spot_6.RGBW(red, val);
-        //  spot_9.pixel = spot_9.RGBW(red, val);
-         
-        vector<double> vals = fcn::heartbeat_vec(millis(), 20, 0.0, 180.0);
-        spot_6.pixel = spot_6.RGBW(red, vals[0]);
-        spot_9.pixel = spot_9.RGBW(red, vals[1]);
+        for (int i=0; i<group_conf.size(); i++){
+            cout << "Group " << i <<endl;
+            addr_led.set_allpix_color(black);
+            addr_led.set_group_color(i, c_white);
+            
+            
+            time_ms delay_time_ms = 1000;
+            time_ms delay_send_ms = 20;
+            
+            for (int j = 0; j<delay_time_ms; j+=delay_send_ms){
+                send();
+                delay(delay_send_ms);
+            }
+        }
         
-        
-        send();
-        delay(20);
     }
 
 }
