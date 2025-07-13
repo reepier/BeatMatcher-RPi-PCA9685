@@ -56,6 +56,13 @@ void AddressableLED::init(){
     //animation type 1 : Digital Beat with group frag
     animations.push_back(new AddrLEDAnimation2(this, group , "Group Digital Beat",       "PIX.10", leader, true, 255));     
 
+    //Animation type 4 : Slow Bubbles by group 
+    animations.push_back(new AddrLEDAnimation4(this, gaussian, group, 1500, 2000, "Slow Bubbles (group)", "PIX.8.1", backer, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, gaussian, pix, 10, 800, "Fast Bubbles (pix)", "PIX.8.1", backer, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, gaussian, pix, 100, 1500, "Slow Bubbles (pix)", "PIX.8.1", backer, 1, 255));
+    //Animation type 4 : fast Random strobe by pixel 
+    animations.push_back(new AddrLEDAnimation4(this, square, pix, 10, 1000/FRATE, "Fast RandStrobe (group)", "PIX.8.1", backer, 1, 255));
+
     this->activate_none();
 }
 
@@ -372,7 +379,7 @@ void AddrLEDAnimation4::init(){
 
     BaseAnimation::init();
     
-    const int n_unit = unit==bar ? NUM_BAR : (unit==seg ? NUM_SEG : (unit==pix ? NUM_PIX : 0));
+    const int n_unit = unit==group ? group_conf.size() : (unit==bar ? NUM_BAR : (unit==seg ? NUM_SEG : (unit==pix ? NUM_PIX : 0)));
 
     this->flashes = vector<flash_vec>(n_unit, flash_vec(2));
 
@@ -470,6 +477,8 @@ void AddrLEDAnimation4::new_frame(){
             unit_final_RGB[B] = min(max( (int)( (1.0-pow(flash_intensity, 0.2)) * ani_backgd_RGB[B] + flash_intensity * frame_flash_RGB[B]  ),0),255);
 
             switch (this->unit){
+                case group:this->fixture->set_group_color(i_unit, unit_final_RGB);
+                    break;
                 case bar : this->fixture->set_bar_color(i_unit, unit_final_RGB);
                     break;
                 case seg : this->fixture->set_segment_color(i_unit, unit_final_RGB);

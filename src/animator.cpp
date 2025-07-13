@@ -545,7 +545,7 @@ for (auto fix : fixs){
             final_palette = auto_palette;
         }
         // choose animation by order of priority (external animation > automatic animation)
-        if(fix->external_animation != 0){       // use external animation if available
+        if(fix->external_animation != 255){       // use external animation if available
             fix->activate_by_index(fix->external_animation, final_palette);
         }else{          // choose random animation
             fix->activate_random(final_palette);

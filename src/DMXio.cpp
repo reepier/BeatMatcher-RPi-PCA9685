@@ -191,7 +191,7 @@ RubiFont                                                    */
         //get & rewrap raw data
         int led_ani_val = data.Get(LED_ANI_CH);
         // if input data is not in DEFAULT positions (automatic mode)
-        if ( led_ani_val!=0) { 
+        if ( led_ani_val!=255) { 
             // update led animation if there is a change
             if (addr_led.external_animation != led_ani_val){
                 addr_led.external_animation = led_ani_val;
@@ -268,7 +268,7 @@ RubiFont                                                    */
             //get & rewrap raw data
             int sr1_ani_val = data.Get(spot_rack->address + SR_ANI_CH);
             // if input data is not in DEFAULT positions (automatic mode)
-            if ( sr1_ani_val!=0) { 
+            if ( sr1_ani_val!=255) { 
                 // update Rack animation if there is a change
                 if (spot_rack->external_animation != sr1_ani_val){
                     spot_rack->external_animation = sr1_ani_val;
@@ -346,7 +346,7 @@ RubiFont                                                    */
         //get & rewrap raw data
         int red_ani_val = data.Get(RED_ANI_CH);
         // if input data is not in DEFAULT positions (automatic mode)
-        if ( red_ani_val!=0) { 
+        if ( red_ani_val!=255) { 
             // update Rack animation if there is a change
             if (lasergroup1.external_animation != red_ani_val){
                 lasergroup1.external_animation = red_ani_val;
@@ -422,7 +422,7 @@ RubiFont                                                    */
         //get & rewrap raw data
         int beam_ani_val = data.Get(BEAM_ANI_CH);
         // if input data is not in DEFAULT positions (automatic mode)
-        if ( beam_ani_val!=0) { 
+        if ( beam_ani_val!=255) { 
             // update Rack animation if there is a change
             if (laserbeam.external_animation != beam_ani_val){
                 laserbeam.external_animation = beam_ani_val;
