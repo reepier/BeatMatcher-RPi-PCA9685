@@ -186,7 +186,7 @@ void AddrLEDAnimation1::init(const color_vec& palette){
     {
     case 0:     this->flash_color=black,        this->back_color=black;
         break;
-    case 1:     this->flash_color=palette[0];   this->back_color=palette[0];
+    case 1:     this->flash_color=palette[0];   this->back_color=black;
         break;
     case 2:     this->flash_color=palette[0],   this->back_color=palette[1];
         break;
@@ -279,7 +279,7 @@ void AddrLEDAnimation2::init(const color_vec& palette){
     {
     case 0:     this->flash_color=black,        this->back_color=black;
         break;
-    case 1:     this->flash_color=palette[0];   this->back_color=palette[0];
+    case 1:     this->flash_color=palette[0];   this->back_color=black;
         break;
     case 2:     this->flash_color=palette[0],   this->back_color=palette[1];
         break;
@@ -399,7 +399,7 @@ void AddrLEDAnimation4::init(const color_vec& palette){
     case 0:
         this->flash_colors = color_vec{black}, this->back_color = black;            break;
     case 1:
-        this->flash_colors = color_vec{palette[0]}, this->back_color = palette[0];  break;
+        this->flash_colors = color_vec{palette[0]}, this->back_color = black;  break;
     case 2: 
         this->flash_colors = color_vec{palette[0]}, this->back_color = palette[1];  break;
     default:

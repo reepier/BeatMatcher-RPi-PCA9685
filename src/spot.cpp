@@ -622,8 +622,8 @@ void SpotRackAnimation1::init(const color_vec& palette){
     switch (palette.size())
     {
     case 0:     this->flash_colors=color_vec{black},        this->back_color=black;
-        break;
-    case 1:     this->flash_colors=color_vec{palette[0]},   this->back_color=palette[0];
+        break; 
+    case 1:     this->flash_colors=color_vec{palette[0]},   this->back_color=black;
         break;
     case 2:     this->flash_colors=color_vec{palette[0]},   this->back_color=palette[1];
         break;
@@ -832,13 +832,16 @@ void SpotRackAnimation4::init(){
 // Special init() function for automatic color definition (in addition to standard init() function)
 void SpotRackAnimation4::init(const color_vec& palette){
     // AUTOCOLOR init : assign front & back color based on passed color palette color_vec&
-    color_vec color_palette = palette;  //useless ?
-    //TODO protect against empty palette --> set all black in this case
-    this->flash_color = color_palette[0];       // first palette color is the flash color
-    if (color_palette.size()>1){
-        this->back_color = color_palette[1];    // second color (if exists) is the back color
-    }else{      
-        this-> back_color = black;              // back color is  black otherwise
+    switch (palette.size())
+    {
+    case 0:     this->flash_color=black,        this->back_color=black;
+        break; 
+    case 1:     this->flash_color=palette[0],   this->back_color=black;
+        break;
+    case 2:     this->flash_color=palette[0],   this->back_color=palette[1];
+        break;
+    default:    this->flash_color=black,        this->back_color=black;
+        break;
     }
 
     // then call the "STANDARD" init() function for stuff unrelated to autocolor
@@ -902,7 +905,7 @@ void SpotRackAnimation5::init(const color_vec& palette){
     {
     case 0:     this->flash_color=black,        this->back_color=black;
         break;
-    case 1:     this->flash_color=palette[0];   this->back_color=palette[0];
+    case 1:     this->flash_color=palette[0];   this->back_color=black;
         break;
     case 2:     this->flash_color=palette[0],   this->back_color=palette[1];
         break;
