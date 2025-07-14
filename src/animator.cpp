@@ -483,7 +483,7 @@ bool AnimationManager::controled_update(){
     WHen external settings are set to "manual", the automatic sequencer keeps doing its job in the background in case
      external setting goes back to "automatic" */
 // update automatic palette when required
-    static color_vec auto_palette;              //contains automatic colors
+    static color_vec auto_palette;              //contains automatic colors (persistent)
     bool auto_palette_update = false;           //
     static time_t last_palette_update_ms = 0;   //
     // choose a palette randomly at first

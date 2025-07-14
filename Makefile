@@ -64,6 +64,7 @@ install_qlc: $(qlc_files)
 	cp QLC/Omerta-Inc.-RedRayz_CtrlPanel.qxf 			$(qlc_fix_path)
 	cp QLC/Omerta-Inc.-SpotRack_CtrlPanel.qxf 			$(qlc_fix_path)
 	cp QLC/Omerta-Inc.-Beatmatcher-Control-Panel.qxf 	$(qlc_fix_path)
+	cp QLC/Omerta-Inc.-Beam_CtrlPanel.qxf				$(qlc_fix_path)
 
 get_qlc: 
 	cp /home/reepier/Documents/QLC/Config_beatmatcher_controler.qxw QLC/
@@ -72,6 +73,7 @@ get_qlc:
 	cp $(qlc_fix_path)/Omerta-Inc.-RedRayz_CtrlPanel.qxf			QLC/
 	cp $(qlc_fix_path)/Omerta-Inc.-SpotRack_CtrlPanel.qxf			QLC/
 	cp $(qlc_fix_path)/Omerta-Inc.-Beatmatcher-Control-Panel.qxf    QLC/
+	cp $(qlc_fix_path)/Omerta-Inc.-Beam_CtrlPanel.qxf				QLC/
 
 clean:
 	rm -f build/*.o bin/* *.log */*.log

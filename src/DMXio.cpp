@@ -202,8 +202,8 @@ RubiFont                                                    */
             }
         // if input data is DEFAULT (0) 
         }else{
-            if (addr_led.external_animation != 255){  //if not already reset to 0
-                addr_led.external_animation = 255;    //reset to 0
+            if (addr_led.external_animation != 255){  //if not already reset to (255)
+                addr_led.external_animation = 255;    //reset to 255 (auto)
                 addr_led.new_external_animation = true;
                 log(2, "Back to automatic led animation");
             }else{
@@ -281,8 +281,8 @@ RubiFont                                                    */
                 }
             // if input data is DEFAULT (0) 
             }else{
-                if (spot_rack->external_animation != 0){  //if not already reset to 0
-                    spot_rack->external_animation = 0;    //reset to 0
+                if (spot_rack->external_animation != 255){  //if not already reset to 255
+                    spot_rack->external_animation = 255;    //reset to 255
                     spot_rack->new_external_animation = true;
                     log(2, "Back to automatic SR1 animation");  //TODO choose where to put log instructions (cannot be both in DMXio and Animator)
                 }else{
@@ -358,8 +358,8 @@ RubiFont                                                    */
             }
         // if input data is DEFAULT (0) 
         }else{
-            if (lasergroup1.external_animation != 0){  //if not already reset to 0
-                lasergroup1.external_animation = 0;    //reset to 0
+            if (lasergroup1.external_animation != 255){  //if not already reset to 255
+                lasergroup1.external_animation = 255;    //reset to 255
                 lasergroup1.new_external_animation = true;
                 log(2, "Back to automatic RED animation");  //TODO choose where to put log instructions (cannot be both in DMXio and Animator)
             }else{
@@ -434,8 +434,8 @@ RubiFont                                                    */
             }
         // if input data is DEFAULT (0) 
         }else{
-            if (laserbeam.external_animation != 0){  //if not already reset to 0
-                laserbeam.external_animation = 0;    //reset to 0
+            if (laserbeam.external_animation != 255){  //if not already reset to 255
+                laserbeam.external_animation = 255;    //reset to 255
                 laserbeam.new_external_animation = true;
                 log(2, "Back to automatic BEAM animation");  //TODO choose where to put log instructions (cannot be both in DMXio and Animator)
             }else{
