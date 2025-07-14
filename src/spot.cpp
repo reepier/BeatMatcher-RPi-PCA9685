@@ -15,8 +15,8 @@ SpotFixture spot_4(FunGen_RGBW_12x1W, 97,    8,  "Spot 4 (@98)",    4);
 SpotFixture spot_5(FunGen_RGBW_12x1W, 105,   8,  "Spot 5 (@106)",   5);     
 SpotFixture spot_6(FunGen_RGBW_12x1W, 113,   8,  "Spot 6 (@114)",   6); //Salon
 
-SpotFixture spot_7(FunGen_RGBW_12x1W,   121, 8,   "Spot 7 (@122)",    7);     
-SpotFixture spot_8(FunGen_RGBW_12x1W,   129, 8,   "Spot 8 (@130)",    8);     
+SpotFixture spot_7(FunGen_RGBW_12x1W,   121, 8,   "Spot 7 (@122)",    7);  //Salon   
+SpotFixture spot_8(FunGen_RGBW_12x1W,   129, 8,   "Spot 8 (@130)",    8);  //Salon
 SpotFixture spot_9(FunGen_RGBW_12x1W,   137, 8,   "Spot 9 (@138)",    9);  //Salon 
 SpotFixture spot_10(FunGen_RGBW_12x1W,  145, 8,   "Spot 10 (@146)",   10); //FDLM
 SpotFixture spot_11(FunGen_RGBW_12x1W,  153, 8,   "Spot 11 (@154)",   11);
@@ -132,9 +132,9 @@ DMX_vec SpotFixture::buffer(){
  #####  #       #######    #       #     # #     #  #####  #    #  #####  
 / ----------------------------------------------------------------------- */
 //config salon
-SpotRack spot_rack_1(spot_vec{&spot_10, &spot_12, &spot_21, &spot_22, &spot_23}, "Front Rack", SR1_CTRL_ADR, 1);
-SpotRack spot_rack_2(spot_vec{&spot_2, &spot_5, &spot_7, &spot_8, &spot_1, &spot_3, &spot_4}, "Vert. Beams", SR2_CTRL_ADR, 2);
-SpotRack spot_rack_4(spot_vec{&spot_11, &spot_6, &spot_9}, "Rack 2", SR3_CTRL_ADR, 3);
+SpotRack spot_rack_1(spot_vec{&spot_6, &spot_7, &spot_8, &spot_9}, "Front Rack", SR1_CTRL_ADR, 1);
+SpotRack spot_rack_2(spot_vec{&spot_10, &spot_12, &spot_21, &spot_22, &spot_23, &spot_2, &spot_5, &spot_1, &spot_3, &spot_4}, "Vert. Beams", SR2_CTRL_ADR, 2);
+SpotRack spot_rack_4(spot_vec{&spot_11}, "Rack 2", SR3_CTRL_ADR, 3);
 SpotRack spot_rack_3(spot_vec{&spot_13, &spot_14, &spot_15, &spot_16, &spot_17, &spot_18, &spot_19, &spot_20}, "SHEHDS Rack", SR4_CTRL_ADR, 4);
 
 //CONFIG HLR #2
@@ -425,12 +425,12 @@ DMX_vec FunGeneration_12x1W_RGBW(simpleColor c, int intensity){
     case c_white:         return fcn::RGBW_norm(DMX_vec{255,230,213,255}, 180.0/255*intensity);break;
     case gold:            return fcn::RGBW_norm(DMX_vec{255,40,0,180}, intensity);break;
     case light_blue:      return fcn::RGBW_norm(DMX_vec{50,64,255,0}, intensity);break;
-    case light_cyan:      return fcn::RGBW_norm(DMX_vec{0,219,255,100}, intensity);break;
-    case light_green:     return fcn::RGBW_norm(DMX_vec{30,255,30,100}, intensity);break;
+    case light_cyan:      return fcn::RGBW_norm(DMX_vec{0,219,255,140}, intensity);break;
+    case light_green:     return fcn::RGBW_norm(DMX_vec{30,255,30,150}, intensity);break;
     case light_magenta:   return fcn::RGBW_norm(DMX_vec{255,70,240,0}, intensity);break;
     case light_pink:      return fcn::RGBW_norm(DMX_vec{255,50,100,0}, intensity);break;
     case light_purple:    return fcn::RGBW_norm(DMX_vec{180,63,255,0}, intensity);break;
-    case light_red:       return fcn::RGBW_norm(DMX_vec{255,20,20,0}, intensity);break;
+    case light_red:       return fcn::RGBW_norm(DMX_vec{255,0,0,160}, intensity);break;
     // case sevika_pink:     return fcn::RGBW_norm(DMX_vec{255,0,11,0}, intensity);break;
     // case hextech_cyan:    return fcn::RGBW_norm(DMX_vec{0,153,255,0}, intensity);break;
     // case shimmer_purple:  return fcn::RGBW_norm(DMX_vec{245,0,255,0}, intensity);break;

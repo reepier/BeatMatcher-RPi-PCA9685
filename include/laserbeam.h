@@ -63,6 +63,31 @@ class LaserBeamAnimation : public BaseAnimation{
  #   #  ###    #       #  #  #  #      
   ###   ###    #       # #    # ##### */
 
+class LaserBeamAnimation0 : public LaserBeamAnimation{
+  public:
+    simpleColor color = black;
+  
+    //  Constructor 
+    LaserBeamAnimation0(LaserBeam* f, simpleColor c, std::string d, std::string i, AnimationType t=any, int prio=1, int mast=255){
+      //set BAse parameters
+      this->description = d, this->id = i, this->fixture = f, this->type=t, this->priority=prio, this->master=mast;
+      //set cinematic parameters
+      this->color = c;
+      this->autocolor = false;
+    }
+    //  AUTOCOLOR Constructor
+    LaserBeamAnimation0(LaserBeam* f, std::string d, std::string i, AnimationType t=any, int prio=1, int mast=255){
+      //set BAse parameters
+      this->description = d, this->id = i, this->fixture = f, this->type=t, this->priority=prio, this->master=mast;
+      //set cinematic parameters
+      this->autocolor = true;
+    }
+
+    void init() override; //Standard init fcn
+    void init(const color_vec&) override; //AUTOCOLOR init fcn
+    void new_frame() override;
+
+};
 
 
 /*
@@ -159,3 +184,4 @@ class LaserBeamAnimation2 : public LaserBeamAnimation{
   };
 
 
+/*3 Heart Beat*/

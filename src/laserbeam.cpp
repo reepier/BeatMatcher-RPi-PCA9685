@@ -16,16 +16,18 @@ LaserBeam laserbeam(12, 3, "BEAM", 1, 255);
 #       # #    #   #    ####  #    # ###### */
 
 void LaserBeam::init(){
-    this->animations.push_back(new LaserBeamAnimation2(this, "", "LB.0", backer, true, 255));
+    this->animations.push_back(new LaserBeamAnimation0(this, black,  "", "LB.0", backer, 1, 0));
+    this->animations.push_back(new LaserBeamAnimation0(this, "Couleur", "LB.0.1", backer, 1, 255));
+
 
     this->animations.push_back(new LaserBeamAnimation1(this, gaussian,  3000, 800, "Test Bubbles", "LB.1", any, 1, 255));
     this->animations.push_back(new LaserBeamAnimation1(this, square,    3000, 800, "Test Square", "LB.1", any, 1, 255));
     this->animations.push_back(new LaserBeamAnimation1(this, expdecay,  3000, 800, "Test Flash", "LB.1", any, 1, 255));
 
+    this->animations.push_back(new LaserBeamAnimation1(this, square,    1000, 1000/FRATE, "Slow Strobe", "LB.1", any, 1, 255));
+
+
     this->animations.push_back(new LaserBeamAnimation2(this, "Beat",    "LB.2", leader, true, 255));
-    this->animations.push_back(new LaserBeamAnimation2(this, "Beat 2",  "LB.2.1", leader, true, 255));
-    this->animations.push_back(new LaserBeamAnimation2(this, "Beat 3",  "LB.2.2", leader, true, 255));
-    this->animations.push_back(new LaserBeamAnimation2(this, "Beat 4",  "LB.2.3", leader, true, 255));
 
     this->activate_none();
 }
@@ -54,23 +56,23 @@ DMX_vec LaserBeam::RGB(simpleColor c, int intensity){
         case red        :                   temp = fcn::RGB_norm(DMX_vec{255,0,0});     break;
         case green      :                   temp = fcn::RGB_norm(DMX_vec{0,255,0});     break;
         case blue       :                   temp = fcn::RGB_norm(DMX_vec{0,0,255});     break;
-        case yellow     :                   temp = fcn::RGB_norm(DMX_vec{255,87,0});    break;
-        case orange     :                   temp = fcn::RGB_norm(DMX_vec{255,35,0});    break;
-        case sodium     :                   temp = fcn::RGB_norm(DMX_vec{255,16,0});    break;
-        case cyan       :                   temp = fcn::RGB_norm(DMX_vec{0,184,255});   break;
-        case purple     :                   temp = fcn::RGB_norm(DMX_vec{180,0,255});   break;    
-        case magenta    :                   temp = fcn::RGB_norm(DMX_vec{255,0,197});   break;
-        case pink       :                   temp = fcn::RGB_norm(DMX_vec{255,0,86});    break;
-        case w_white    :                   temp = fcn::RGB_norm(DMX_vec{255,173,102}); break;
-        case c_white    :                   temp = fcn::RGB_norm(DMX_vec{255,255,255}); break;
-        case gold       :                   temp = fcn::RGB_norm(DMX_vec{255,50,3});    break;
-        case light_red      :               temp = fcn::RGB_norm(DMX_vec{255,50,18});   break;
-        case light_cyan     :               temp = fcn::RGB_norm(DMX_vec{70,200,255});   break;
-        case light_blue     :               temp = fcn::RGB_norm(DMX_vec{52,74,255});   break;
-        case light_purple   :               temp = fcn::RGB_norm(DMX_vec{206,89,255});   break;
-        case light_magenta  :               temp = fcn::RGB_norm(DMX_vec{255,75,231});   break;
-        case light_pink     :               temp = fcn::RGB_norm(DMX_vec{255,58,114});   break;
-        case light_green    :               temp = fcn::RGB_norm(DMX_vec{50,255,50});   break;
+        case yellow     :                   temp = fcn::RGB_norm(DMX_vec{255,230,0});    break;
+        case orange     :                   temp = fcn::RGB_norm(DMX_vec{255,50,0});    break;
+        case sodium     :                   temp = fcn::RGB_norm(DMX_vec{255,25,0});    break;
+        case cyan       :                   temp = fcn::RGB_norm(DMX_vec{0,255,100});   break;
+        case purple     :                   temp = fcn::RGB_norm(DMX_vec{100,0,255});   break;    
+        case magenta    :                   temp = fcn::RGB_norm(DMX_vec{180,0,255});   break;
+        case pink       :                   temp = fcn::RGB_norm(DMX_vec{255,0,40});    break;
+        case w_white    :                   temp = fcn::RGB_norm(DMX_vec{140,255,6}); break;
+        case c_white    :                   temp = fcn::RGB_norm(DMX_vec{74,255,36}); break;
+        case gold       :                   temp = fcn::RGB_norm(DMX_vec{255,100,0});    break;
+        case light_red      :               temp = fcn::RGB_norm(DMX_vec{255,155,4});   break;
+        case light_cyan     :               temp = fcn::RGB_norm(DMX_vec{40,255,50});   break;
+        case light_blue     :               temp = fcn::RGB_norm(DMX_vec{30,255,255});   break;
+        case light_purple   :               temp = fcn::RGB_norm(DMX_vec{135,255,255});   break;
+        case light_magenta  :               temp = fcn::RGB_norm(DMX_vec{255,255,206});   break;
+        case light_pink     :               temp = fcn::RGB_norm(DMX_vec{255,200,60});   break;
+        case light_green    :               temp = fcn::RGB_norm(DMX_vec{40,255,10});   break;
         default         :                   temp = fcn::RGB_norm(DMX_vec{0,0,0});       break;
         }
 
@@ -99,6 +101,26 @@ DMX_vec LaserBeam::RGB(simpleColor c, int intensity){
  #   #  ###    #       #  #  #  #      
   ###   ###    #       # #    # ##### */
 
+void LaserBeamAnimation0::init() {
+    BaseAnimation::init();
+}
+void LaserBeamAnimation0::init(const color_vec& palette) {
+    if (this->autocolor){
+        switch (palette.size())
+        {
+        case 0:     this->color = black;        break;
+        case 1:     this->color = palette[0];   break;
+        default:    this->color = *(palette.end()-1);   break;
+        }
+    }
+
+    //Standard init()
+    LaserBeamAnimation0::init();
+}
+
+void LaserBeamAnimation0::new_frame() {
+    this->fixture->pixel = this->fixture->RGB(this->color, -1);
+}
 
 
 /*
