@@ -154,6 +154,7 @@ class SpotRackAnimation : public BaseAnimation
 {
 public:
     SpotRack *fixture;
+    SpotRackAnimation(std::string d, std::string i, AnimationType typ, uint8_t mast, int prio, int_vec intens) : BaseAnimation(d, i, typ, mast, prio, intens){};
 };
 
 /*
@@ -172,8 +173,8 @@ class SpotRackAnimation0 : public SpotRackAnimation{
     int intensity = 255;
     
     //BASE Constructor
-    SpotRackAnimation0(SpotRack *f,  simpleColor c, std::string d, std::string i, AnimationType t, int prio, int mast=255)
-    {
+    SpotRackAnimation0(SpotRack *f,  simpleColor c, std::string d, std::string i, AnimationType t, int prio, int mast, int_vec intens)
+    : SpotRackAnimation(d, i, t, mast, prio, intens){
         //set BAse parameters
         this->description = d, this->id = i, this->fixture = f, this->type=t, this->priority=prio, this->master=mast;
         // Cinematic params
@@ -181,8 +182,8 @@ class SpotRackAnimation0 : public SpotRackAnimation{
     }
 
     //AUTOCOLOR Constructor
-    SpotRackAnimation0(SpotRack *f,  std::string d, std::string i, AnimationType t, int prio, int mast=255)
-    {
+    SpotRackAnimation0(SpotRack *f,  std::string d, std::string i, AnimationType t, int prio, int mast, int_vec intens)
+    : SpotRackAnimation(d, i, t, mast, prio, intens){
         //set BAse parameters
         this->description = d, this->id = i, this->fixture = f, this->type=t, this->priority=prio, this->master=mast;
         this->autocolor = true;
@@ -509,7 +510,7 @@ class SpotRackAnimation5 : public SpotRackAnimation{
     int_vec units_index;
 
     // AUTOCOLOR Constructor
-    SpotRackAnimation5(SpotRack *f, std::string d, std::string i, AnimationType typ=any, int prio=1, int mast=255){
+    SpotRackAnimation5(SpotRack *f, std::string d, std::string i, AnimationType typ=any, int prio=1, int mast){
         //set BAse params
         this->description = d,this->id = i,this->fixture = f,this->type = typ,this->master = mast,this->priority=prio;
         this->autocolor=true;

@@ -170,12 +170,12 @@ void front_rack_init(){
 
     //this->animations.push_back();
     // Animation 1 : Backgrnd color + random soft flashes
-    spot_rack_1.animations.push_back(new SpotRackAnimation0(&spot_rack_1, black, " ", "SR.0", backer, 0));
+    spot_rack_1.animations.push_back(new SpotRackAnimation0(&spot_rack_1, black, " ", "SR.0", backer,0, 0, int_vec{}));
 
 
     //AUTOCOLOR Animations
     // Animation type 0 : Fixed color
-    spot_rack_1.animations.push_back(new SpotRackAnimation0(&spot_rack_1, "Couleur", "SR.0.1", any, 1, 255));
+    spot_rack_1.animations.push_back(new SpotRackAnimation0(&spot_rack_1, "Couleur", "SR.0.1", any, 0, 255, int_vec{}));
 
     // Animation type 1.1 : Random BUBBLES
     // Quasi-static Bubbles

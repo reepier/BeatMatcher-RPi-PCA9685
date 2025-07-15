@@ -402,6 +402,8 @@ class AnimationManager{
     uint8_t master = 255;
     color_vec external_palette;
     bool new_external_palette; 
+    int show_intensity = 3;
+    bool new_intensity;
 
     void init();
 
@@ -451,7 +453,8 @@ class BaseFixture{
     bool      new_external_animation = false;//turns true for 1 cycle when new external palette is detected
 
     // Animations catalog
-    BaseAnimation * active_animation = nullptr;
+    BaseAnimation * active_animation = nullptr; // animation currently running on this fixture
+    BaseAnimation * saved_animation = nullptr;  // animation stored (for later activation) -> this allow to switch easily between manual and automatic animation settings
 
     anim_vec animations;
 
@@ -468,7 +471,8 @@ class BaseFixture{
     bool activate_autocolor(color_vec&);
     virtual bool activate_by_color(color_vec, AnimationType arg_type = any); //additionnal argument to orient the activation toward a leading or backing aniation
     bool activate_by_ptr(BaseAnimation*), activate_by_ptr(BaseAnimation*, const color_vec&);
-    
+    BaseAnimation* get_rand_animation_by_criteria(AnimationType , bool , int );
+
     //DMX output
     virtual int get_address() = 0;
     virtual int get_nCH()     = 0;
@@ -499,15 +503,19 @@ class BaseAnimation{
     color_vec color_palette;            // lists the colors used in the animation (initialized by constructor)
     int priority = 1;                  // weight on the priority list (animations with higher priority will be have higher chance of activation)
     uint8_t master = 255;
+ 
+    int_vec intensities = {1,2,3};                // list of show intensities for which this animation is relevant  (default is : all possible intensity value)
 
+    // Autocolor parameters
     bool autocolor = false;                       // defines wether the animation has predefiend color or autocolor
     color_vec authorized_color = {};              // list of authorized colors for autocolor (empty means all color OK==authorized)
     color_vec unauthorized_color = {};            // list of unauthorized colors for autocolor (empty means al color OK==authorized)
     color_vec* auto_color_palette = nullptr;      //pointer to the color palette used for automatic color definition (allows the use of multiple color palettes in the program) 
 
+
     //Base constructor
-    BaseAnimation(){};
-    BaseAnimation(std::string d, std::string i, AnimationType typ, uint8_t mast) : description(d),  id(i), type(typ), master(mast) {};
+    // BaseAnimation(){};
+    BaseAnimation(std::string d, std::string i, AnimationType typ, uint8_t mast, int prio, int_vec intens) : description(d),  id(i), type(typ), master(mast), priority(prio), intensities(intens) {};
 
     bool is_monochrome(){return (color_palette.size() == 1);};
     bool is_first_frame(){return frame_cpt==0;};

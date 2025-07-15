@@ -252,7 +252,7 @@ void disp_animation_window(){
     anim_change_buf << "Animation switch : " << (timer>0 ? timer : 0);
     mvwprintw(animw, 2, 1, anim_change_buf.str().c_str());
 
-    show_int_buf << "Show intensity : " << SHOW_INTENSITY;
+    show_int_buf << "Show intensity : " << animator.show_intensity;
     mvwprintw(animw, 2, 35, show_int_buf.str().c_str());
 
     wrefresh(animw);

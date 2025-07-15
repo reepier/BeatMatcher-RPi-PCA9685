@@ -20,9 +20,9 @@ AddressableLED addr_led(1, 0, 3*NUM_PIX, "LEDs", 1, 180);
 
 void AddressableLED::init(){
     // declare animations here
-    animations.push_back(new AddrLEDAnimation0(this, black, " ",    "PIX.0.0", any, 1, 255));
+    animations.push_back(new AddrLEDAnimation0(this, black, " ",    "PIX.0.0", any, 0, 255));
     
-    animations.push_back(new AddrLEDAnimation0(this, "Couleur fixe",    "PIX.0.1", any, 1, 255));
+    animations.push_back(new AddrLEDAnimation0(this, "Couleur fixe",    "PIX.0.1", any, 0, 255));
 
     //AUTOCOLOR with Animation type 1 : Analog Beat all pixels ()Beatmatcher original animation)------------------------------
     animations.push_back(new AddrLEDAnimation1(this, bar, 1, "Analog Beat", "PIX.6.1", leader, true, 255));     
@@ -47,7 +47,7 @@ void AddressableLED::init(){
     // Fast Random Chaser 
     animations.push_back(new AddrLEDAnimation4(this, square,   bar, 200, 600, "Fast Chaser",  "PIX.8.4", any, 1, 255));
     // Fast Random Strobe
-    animations.push_back(new AddrLEDAnimation4(this, square, bar, 50, 1000/FRATE, "Fast Random Strobe", "PIX.8.5", any, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, square, bar, 50, 1000/FRATE, "Fast Random Strobe", "PIX.8.5", leader, 1, 255));
     // Decaying Flash
     animations.push_back(new AddrLEDAnimation4(this, square, bar, 150, 1000/FRATE, "Slow Strobe", "PIX.8.6", any, 1, 255));
 

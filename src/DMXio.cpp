@@ -110,6 +110,7 @@ RubiFont                                                    */
     //Process general master
     animator.master = data.Get(MAIN_DIM_CH);
 
+
     // Process trigger
     bool trigger = false;
     static time_t last_trigger_ms;
@@ -168,7 +169,8 @@ RubiFont                                                    */
         prev_beat_trigger_val = beat_trigger_val;
         //
 
-
+    //Process show intensity
+    animator.show_intensity = min((uint8_t)3, max((uint8_t)1, data.Get(MAIN_INT_CH)));
 
 /*
 

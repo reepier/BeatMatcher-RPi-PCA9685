@@ -178,14 +178,14 @@ class AddrLEDAnimation : public BaseAnimation{
     public:
       simpleColor color = black;
 
-      AddrLEDAnimation0(AddressableLED* f, simpleColor c, std::string d, std::string i, AnimationType t=any, int prio=1, int mast=255){
+      AddrLEDAnimation0(AddressableLED* f, simpleColor c, std::string d, std::string i, AnimationType t=any, int prio, int mast){
         //set BAse parameters
         this->description = d, this->id = i, this->fixture = f, this->type=t, this->priority=prio, this->master=mast;
         //set cinematic parameters
         this->color = c;
         this->autocolor = false;
       }
-      AddrLEDAnimation0(AddressableLED* f, std::string d, std::string i, AnimationType t=any, int prio=1, int mast=255){
+      AddrLEDAnimation0(AddressableLED* f, std::string d, std::string i, AnimationType t=any, int prio, int mast){
         //set BAse parameters
         this->description = d, this->id = i, this->fixture = f, this->type=t, this->priority=prio, this->master=mast;
         //set cinematic parameters
@@ -323,7 +323,7 @@ class AddrLEDAnimation2 : public AddrLEDAnimation{
     // Dynamic variables (updated internally at each frame)
     int_vec units_index;
     // Constructor
-    AddrLEDAnimation2(AddressableLED *f, simpleColor f_col, simpleColor b_col, strip_subdiv_t u, std::string d, std::string i, AnimationType typ=any, int prio=1, int mast=255)
+    AddrLEDAnimation2(AddressableLED *f, simpleColor f_col, simpleColor b_col, strip_subdiv_t u, std::string d, std::string i, AnimationType typ=any, int prio=1, int mast)
     {
       //set BAse params
       this->description = d,this->id = i,this->fixture = f,this->type = typ,this->master = mast,this->priority=prio;
@@ -350,7 +350,7 @@ class AddrLEDAnimation2 : public AddrLEDAnimation{
       this->update_palette(color_vec{f_col, b_col});
     }
     // AUTOCOLOR Constructor
-    AddrLEDAnimation2(AddressableLED *f, strip_subdiv_t u, std::string d, std::string i, AnimationType typ=any, int prio=1, int mast=255){
+    AddrLEDAnimation2(AddressableLED *f, strip_subdiv_t u, std::string d, std::string i, AnimationType typ=any, int prio=1, int mast){
       //set BAse params
       this->description = d,this->id = i,this->fixture = f,this->type = typ,this->master = mast,this->priority=prio;
       this->autocolor=true;
@@ -488,7 +488,7 @@ private :
   public:
     //CONSTUCTORS
     // Base constructor
-    AddrLEDAnimation4(AddressableLED *f, simpleColor b_col, color_vec f_cols, Shape fshape, strip_subdiv_t u, int prand, int flen, std::string d, std::string i, AnimationType t, int prio, int mast=255){
+    AddrLEDAnimation4(AddressableLED *f, simpleColor b_col, color_vec f_cols, Shape fshape, strip_subdiv_t u, int prand, int flen, std::string d, std::string i, AnimationType t, int prio, int mast){
       //set Base parameters
       this->description = d,this->id = i,this->fixture = f,this->type = t,this->priority = prio,this->master = mast;
       //set cinematic parameters
@@ -502,7 +502,7 @@ private :
       this->update_palette(f_cols);
     }
     // AUTOCOLOR constructor
-    AddrLEDAnimation4(AddressableLED *f, Shape fshape, strip_subdiv_t u, int prand, int flen, std::string d, std::string i, AnimationType t, int prio, int mast=255){
+    AddrLEDAnimation4(AddressableLED *f, Shape fshape, strip_subdiv_t u, int prand, int flen, std::string d, std::string i, AnimationType t, int prio, int mast){
       //set Base paramters
       this->description = d,this->id = i,this->fixture = f,this->type = t,this->priority = prio,this->master = mast;
       this->autocolor = true;
