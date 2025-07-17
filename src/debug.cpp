@@ -203,16 +203,22 @@ void disp_output_window(){
     int line=1;
     for (auto fix : fixtures ){// fix_vec{&addr_led, &spot_rack_1, &spot_rack_2, &spot_rack_3, &spot_rack_4, &lasergroup1/*, &lasergroup2*/}){
         if (fix->active_animation != nullptr){
-            ostringstream animbuf, outbuf;
+            ostringstream leadbuf, namebuf, idbuf, descbuf;
             // animation name & ID
-            animbuf << ((fix->active_animation->type == leader) ? "(L) ":((fix->active_animation->type == backer) ? "(b) " : "(a) ")) << fix->name << " " << fix->active_animation->id << " - " << fix->active_animation->description;
+            leadbuf << ((fix->active_animation->type == leader) ? "(L) ":((fix->active_animation->type == backer) ? "(b) " : "(a) "));
+            namebuf << fix->name;
+            idbuf   << fix->active_animation->id;
+            descbuf << fix->active_animation->description;
             //fixture output buffer
-            DMX_vec raw_buf = fix->buffer();
-            outbuf << "| " <<fcn::vec_to_str(raw_buf, ',');
+            // DMX_vec raw_buf = fix->buffer();
+            // outbuf << "| " <<fcn::vec_to_str(raw_buf, ',');
 
             int max_length = 25;
-            mvwprintw(outputw, line, 1, animbuf.str().data());
-            mvwprintw(outputw, line, 90-max_length-1, outbuf.str().size()<max_length? outbuf.str().data() : outbuf.str().substr(0, max_length).data());
+            mvwprintw(outputw, line, 1,  leadbuf.str().data());
+            mvwprintw(outputw, line, 5,  namebuf.str().data());
+            mvwprintw(outputw, line, 17, idbuf.str().data());
+            mvwprintw(outputw, line, 32, descbuf.str().data());
+            // mvwprintw(outputw, line, 90-max_length-1, outbuf.str().size()<max_length? outbuf.str().data() : outbuf.str().substr(0, max_length).data());
             
             // if((fix == &spot_rack_1) || fix == &spot_rack_3)  line+=2;
             // else line += 1;

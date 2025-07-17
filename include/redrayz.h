@@ -95,6 +95,7 @@ extern RedLaserBox laserbox1, laserbox2;
 class RedrayzAnimation : public BaseAnimation{
   public:
     RedLaserGroup *fixture;
+    RedrayzAnimation(std::string d, std::string i, AnimationType typ, uint8_t mast, int prio, int_vec intens) : BaseAnimation(d, i, typ, mast, prio, intens){};
 };
 
 
@@ -114,16 +115,14 @@ class RedrayzAnimation : public BaseAnimation{
   public:
     DMX_vec values;
 
-    RedrayzAnimation0(RedLaserGroup *f, uint8_t val, std::string d, std::string i, AnimationType t){
-        this->fixture = f;
-        this->description = d;
-        this->id = i;
-        this->type = t;
-        
-        this->values = DMX_vec(f->lasers.size(), val);
-        this->autocolor = true;
-        
-        if (val!= 0) this->update_palette(red);
+    RedrayzAnimation0(RedLaserGroup *f, uint8_t val, std::string d, std::string i, AnimationType t, int mast, int prio, int_vec intens)
+    :RedrayzAnimation(d, i, t, mast, prio, intens){
+      this->fixture = f;
+            
+      this->values = DMX_vec(f->lasers.size(), val);
+      this->autocolor = true;
+      
+      if (val!= 0) this->update_palette(red);
     }
   
     void init() override;
@@ -161,9 +160,9 @@ class RedrayzAnimation1 : public RedrayzAnimation{
     const int i_prev = 0, i_next = 1;
 
     // Constructor
-    RedrayzAnimation1(RedLaserGroup *f, Shape fshape,  time_t flen, time_t prand, std::string d, std::string i, AnimationType t, int prio, int mast=255)
-    {
-      this->description = d,this->id = i,this->fixture = f,this->type = t,this->priority = prio,this->master = mast;
+    RedrayzAnimation1(RedLaserGroup *f, Shape fshape,  time_t flen, time_t prand, std::string d, std::string i, AnimationType t, int prio, int mast, int_vec intens)
+    :RedrayzAnimation(d, i, t, mast, prio, intens){
+      this->fixture = f;
       this->autocolor = true;
 
       this->flash_shape = fshape;
@@ -203,10 +202,10 @@ class RedrayzAnimation2 : public RedrayzAnimation{
     int_vec units_index;
 
     //AUTOCOLOR Constructor
-    RedrayzAnimation2(RedLaserGroup *f, double dens, std::string d, std::string i, AnimationType t, int prio, int mast=255)
-    {
+    RedrayzAnimation2(RedLaserGroup *f, double dens, std::string d, std::string i, AnimationType t, int prio, int mast, int_vec intens)
+    :RedrayzAnimation(d, i, t, mast, prio, intens){
       //set BAse parameters
-      this->description = d, this->id = i, this->fixture = f, this->type=t, this->priority=prio, this->master=mast;
+      this->fixture = f;
       this->autocolor = true;
       //Set cinematic parameters
       this->density = dens;
@@ -245,9 +244,10 @@ Variant of the original beat matching animation :
       // Dynamic variables (updated internally at each frame)
       int_vec units_index;
       // AUTOCOLOR Constructor
-      RedrayzAnimation3(RedLaserGroup *f, std::string d, std::string i, AnimationType typ=any, int prio=1, int mast=255){
+      RedrayzAnimation3(RedLaserGroup *f, std::string d, std::string i, AnimationType t, int prio, int mast, int_vec intens)
+      :RedrayzAnimation(d, i, t, mast, prio, intens){
         //set BAse params
-        this->description = d,this->id = i,this->fixture = f,this->type = typ,this->master = mast,this->priority=prio;
+        this->description = d,this->id = i,this->fixture = f,this->type = t,this->master = mast,this->priority=prio;
         this->autocolor=true;
         //set cinematic params
         units_index.resize(f->group_size);

@@ -5,8 +5,8 @@ build_dir = build/
 includeDir = include/
 main = src/main.cpp
 test = src/test.cpp
-objects = build/laserbeam.o build/animator.o build/config.o build/debug.o build/music.o build/spider.o build/spot.o build/addr_LED.o build/redrayz.o build/DMXio.o
-qlc_files = QLC/Omerta-Inc.-AddressableLED_CtrlPanel.qxf QLC/Omerta-Inc.-RedRayz_CtrlPanel.qxf QLC/Omerta-Inc.-SpotRack_CtrlPanel.qxf QLC/Omerta-Inc.-Beatmatcher-Control-Panel.qxf  QLC/Omerta-Inc.-BaseFixture_CtrlPanel.qxf QLC/Config_beatmatcher_controler.qxw
+objects = build/laserbeam.o build/animator.o build/config.o build/debug.o build/music.o build/spot.o build/addr_LED.o build/redrayz.o build/DMXio.o #build/spider.o 
+qlc_files = QLC/AddrLED_CtrlPanel.qxf QLC/RedRayz_CtrlPanel.qxf QLC/SpotRack_CtrlPanel.qxf QLC/Beatmatcher-Control-Panel.qxf  QLC/BaseFixture_CtrlPanel.qxf QLC/Config_beatmatcher_controler.qxw
 qlc_dest_files = 
 qlc_fix_path = /home/reepier/.qlcplus/fixtures
 qlc_bkp_dirname = bkp_$(shell date "+%Y_%m_%d@%T")
@@ -27,6 +27,7 @@ $(test_app) : $(test) $(build_dir) $(objects)
 
 $(app): $(main) $(build_dir) $(objects) 
 	g++ $(flags) src/main.cpp $(objects) $(includePaths) $(libs) -o $(app)
+	rm QLC/Functions
 
 build/:
 	mkdir build
@@ -38,8 +39,8 @@ build/debug.o: src/debug.cpp include/debug.h $(genericInclude)
 	g++ $(flags) -c src/debug.cpp $(includePaths) -o build/debug.o -lcurses
 build/music.o: src/music.cpp include/music.h $(genericInclude)
 	g++ $(flags) -c src/music.cpp $(includePaths) -o build/music.o
-build/spider.o: src/spider.cpp include/spider.h $(genericInclude)
-	g++ $(flags) -c src/spider.cpp $(includePaths) -o build/spider.o
+#build/spider.o: src/spider.cpp include/spider.h $(genericInclude)
+#	g++ $(flags) -c src/spider.cpp $(includePaths) -o build/spider.o
 build/spot.o: src/spot.cpp include/spot.h $(genericInclude)
 	g++ $(flags) -c src/spot.cpp $(includePaths) -o build/spot.o
 build/addr_LED.o: src/addr_LED.cpp include/addr_LED.h $(genericInclude)
@@ -59,24 +60,24 @@ install_qlc: $(qlc_files)
 	cp $(qlc_fix_path)/*.qxf $(qlc_fix_path)/$(qlc_bkp_dirname)
 #Install
 	cp QLC/Config_beatmatcher_controler.qxw /home/reepier/Documents/QLC/
-	cp QLC/Omerta-Inc.-BaseFixture_CtrlPanel.qxf 		$(qlc_fix_path)
-	cp QLC/Omerta-Inc.-AddressableLED_CtrlPanel.qxf 	$(qlc_fix_path)
-	cp QLC/Omerta-Inc.-RedRayz_CtrlPanel.qxf 			$(qlc_fix_path)
-	cp QLC/Omerta-Inc.-SpotRack_CtrlPanel.qxf 			$(qlc_fix_path)
-	cp QLC/Omerta-Inc.-Beatmatcher-Control-Panel.qxf 	$(qlc_fix_path)
-	cp QLC/Omerta-Inc.-Beam_CtrlPanel.qxf				$(qlc_fix_path)
+	cp QLC/BaseFixture_CtrlPanel.qxf 		$(qlc_fix_path)
+	cp QLC/AddrLED_CtrlPanel.qxf 	$(qlc_fix_path)
+	cp QLC/RedRayz_CtrlPanel.qxf 			$(qlc_fix_path)
+	cp QLC/SpotRack_CtrlPanel.qxf 			$(qlc_fix_path)
+	cp QLC/Beatmatcher-Control-Panel.qxf 	$(qlc_fix_path)
+	cp QLC/Beam_CtrlPanel.qxf				$(qlc_fix_path)
 
 get_qlc: 
 	cp /home/reepier/Documents/QLC/Config_beatmatcher_controler.qxw QLC/
-	cp $(qlc_fix_path)/Omerta-Inc.-BaseFixture_CtrlPanel.qxf		QLC/	
-	cp $(qlc_fix_path)/Omerta-Inc.-AddressableLED_CtrlPanel.qxf		QLC/	
-	cp $(qlc_fix_path)/Omerta-Inc.-RedRayz_CtrlPanel.qxf			QLC/
-	cp $(qlc_fix_path)/Omerta-Inc.-SpotRack_CtrlPanel.qxf			QLC/
-	cp $(qlc_fix_path)/Omerta-Inc.-Beatmatcher-Control-Panel.qxf    QLC/
-	cp $(qlc_fix_path)/Omerta-Inc.-Beam_CtrlPanel.qxf				QLC/
+	cp $(qlc_fix_path)/BaseFixture_CtrlPanel.qxf		QLC/	
+	cp $(qlc_fix_path)/AddrLED_CtrlPanel.qxf		QLC/	
+	cp $(qlc_fix_path)/RedRayz_CtrlPanel.qxf			QLC/
+	cp $(qlc_fix_path)/SpotRack_CtrlPanel.qxf			QLC/
+	cp $(qlc_fix_path)/Beatmatcher-Control-Panel.qxf    QLC/
+	cp $(qlc_fix_path)/Beam_CtrlPanel.qxf				QLC/
 
 clean:
-	rm -f build/*.o bin/* *.log */*.log
+	rm -f build/*.o bin/* *.log */*.log QLC/*
 
 
 debug:

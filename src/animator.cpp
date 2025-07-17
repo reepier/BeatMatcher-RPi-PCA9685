@@ -1,7 +1,10 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
-
+#include <iostream>
+#include <sstream>
+#include <fstream>
+#include <string>
 
 // #include "LED.h"
 // #include "animator.h"
@@ -487,11 +490,10 @@ bool AnimationManager::controled_update(){
     // Define fixtures installed & controled by this function
     fix_vec fixs = {&addr_led, &spot_rack_1, &spot_rack_2, &spot_rack_3, &spot_rack_4, &lasergroup1, /* &lasergroup2,*/ &laserbeam};
     // define potential leaders & their respective priorities
-    fix_vec leader_fixs =   {&addr_led, &spot_rack_1,   &spot_rack_2,  &lasergroup1,    &laserbeam};
-    int_vec leader_prios =  {1,         1,              1,             1,               1}; // useless ?
+    fix_vec leader_fixs =   {&addr_led/*, &spot_rack_1,   &spot_rack_2,  &lasergroup1,    &laserbeam*/};
+    int_vec leader_prios =  {1,       /*  1,              1,             1,               1         */}; // useless ?
     // define potential backers & their respective priorities
-    fix_vec backer_fixs =   {&addr_led, &spot_rack_1,   &spot_rack_2,   &lasergroup1,   &laserbeam};
-    int_vec backer_prios =  {1,         1,              1,              1,              1}; // useless ?
+    fix_vec backer_fixs =   {/*&addr_led, &spot_rack_1,   */&spot_rack_2/*,   &lasergroup1,   &laserbeam*/};
 
     // update automatic palette when required
     static color_vec auto_palette;              // contains current automatic palette (persistent)
@@ -537,7 +539,8 @@ bool AnimationManager::controled_update(){
             if (fix != leader_fix) backers.push_back(fix); 
         }
         backers = fcn::randomized_vector(backers); // shuffle the list
-        int n_backer = fcn::random_pick(int_vec{3,2,1}, int_vec{2,2,1});
+        // int n_backer = fcn::random_pick(int_vec{3,2,1}, int_vec{2,2,1});
+        int n_backer = fcn::random_pick(int_vec{0}, int_vec{});
         for (int i=0; i<backers.size(); i++){
             auto backer_fix = backers[i];
             if (i<n_backer){    
@@ -660,7 +663,7 @@ bool BaseFixture::activate_by_index(int i){ //obsolete with autocolor
         this->active_animation->init();
     else
         this->active_animation->init(animator.palette_magasine.get_random_palette());   //just in cazse this function is used abusively 
-    // log(2, "Activating ", active_animation->id, ":", active_animation->description);
+    log(2, "Activating ", active_animation->id, ":", active_animation->description);
 }
 bool BaseFixture::activate_by_index(int i, const color_vec& palette){ //autocolor variant
     // log(4, __FILE__, " ",__LINE__, " ", __func__);
@@ -669,7 +672,7 @@ bool BaseFixture::activate_by_index(int i, const color_vec& palette){ //autocolo
     else
         this->active_animation = this->animations[0];
     this->active_animation->init(palette);
-    // log(2, "Activating ", active_animation->id, ":", active_animation->description, '\t', fcn::palette_to_string(palette));
+    log(2, "Activating ", active_animation->id, ":", active_animation->description, '\t', fcn::palette_to_string(palette));
 }
 
 // select and init an animtion randomly picked wihtin the list 
@@ -922,6 +925,53 @@ bool BaseFixture::activate_by_ptr(BaseAnimation * anim_ptr, const color_vec& pal
 
 }
 
+const int first_fid = 100;
+int function_id = first_fid;
+
+void BaseFixture::dump_animations(const char* fname){
+    
+    // log Fixture Animation list for QLC fixture object 
+    ostringstream filename;
+    filename << "QLC/" << fname;
+    std::ofstream logFile(filename.str());
+
+
+    logFile << " <Channel Name=\"Animation\">"<<endl;
+    logFile << "  <Group Byte=\"0\">Effect</Group>"<<endl;
+
+    int i;
+    for (i=0 ; i<this->animations.size(); i++){
+        logFile << "  <Capability Min=\"" << i << "\" Max=\"" << i <<"\">" << animations[i]->description.c_str() <<"</Capability>"<<endl;
+    }
+    logFile << "  <Capability Min=\"" << i << "\" Max=\"254\">Reserve</Capability>"<<endl;
+    logFile << "  <Capability Min=\"255\" Max=\"255\">Automatic</Capability>"<<endl;
+    logFile << " </Channel>" << endl;
+
+
+    // log Fixture Animation function for QLC main project (append every fixture)
+    ostringstream fcnfilename;
+    fcnfilename << "QLC/Functions";
+    std::ofstream fcnLogFile(fcnfilename.str(), std::ios::app);
+
+
+    for (i=0 ; i<this->animations.size(); i++){
+        fcnLogFile  <<"  <Function ID=\"" << function_id++ <<"\" " 
+                    <<"Type=\"Scene\" Name=\"" << this->animations[i]->description.c_str() << "\" "
+                    <<"Path=\"" << this->id << " " << this->name.c_str() << "\">" << endl;
+        fcnLogFile  <<"   <Speed FadeIn=\"0\" FadeOut=\"0\" Duration=\"0\"/>" <<endl;
+        fcnLogFile  <<"   <FixtureVal ID=\""<< this->id <<"\">"<< 1 <<","<< i <<"</FixtureVal>"<<endl;
+        fcnLogFile  <<"  </Function>"<<endl;
+    }
+
+    fcnLogFile  <<"  <Function ID=\"" << function_id++ <<"\" " 
+                <<"Type=\"Scene\" Name=\"" << "Automatic" << "\" "
+                <<"Path=\"" << this->id << " " << this->name.c_str() << "\">" << endl;
+    fcnLogFile  <<"   <Speed FadeIn=\"0\" FadeOut=\"0\" Duration=\"0\"/>" <<endl;
+    fcnLogFile  <<"   <FixtureVal ID=\""<< this->id <<"\">"<< 1 <<","<< 255 <<"</FixtureVal>"<<endl;
+    fcnLogFile  <<"  </Function>"<<endl;
+
+
+}
 
 
 

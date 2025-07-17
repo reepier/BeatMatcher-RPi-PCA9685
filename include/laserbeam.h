@@ -52,6 +52,7 @@ extern LaserBeam laserbeam;
 class LaserBeamAnimation : public BaseAnimation{
     public:
       LaserBeam *fixture;
+      LaserBeamAnimation(std::string d, std::string i, AnimationType typ, uint8_t mast, int prio, int_vec intens) : BaseAnimation(d, i, typ, mast, prio, intens){};
   };
   
 /*
@@ -68,17 +69,19 @@ class LaserBeamAnimation0 : public LaserBeamAnimation{
     simpleColor color = black;
   
     //  Constructor 
-    LaserBeamAnimation0(LaserBeam* f, simpleColor c, std::string d, std::string i, AnimationType t=any, int prio=1, int mast=255){
+    LaserBeamAnimation0(LaserBeam* f, simpleColor c, std::string d, std::string i, AnimationType t, int prio, int mast, int_vec intens)
+    :LaserBeamAnimation(d, i, t, mast, prio, intens){
       //set BAse parameters
-      this->description = d, this->id = i, this->fixture = f, this->type=t, this->priority=prio, this->master=mast;
+      this->fixture = f;
       //set cinematic parameters
       this->color = c;
       this->autocolor = false;
     }
     //  AUTOCOLOR Constructor
-    LaserBeamAnimation0(LaserBeam* f, std::string d, std::string i, AnimationType t=any, int prio=1, int mast=255){
-      //set BAse parameters
-      this->description = d, this->id = i, this->fixture = f, this->type=t, this->priority=prio, this->master=mast;
+    LaserBeamAnimation0(LaserBeam* f, std::string d, std::string i, AnimationType t, int prio, int mast, int_vec intens)
+    :LaserBeamAnimation(d, i, t, mast, prio, intens){
+        //set BAse parameters
+      this->fixture = f;
       //set cinematic parameters
       this->autocolor = true;
     }
@@ -126,9 +129,10 @@ class LaserBeamAnimation1 : public LaserBeamAnimation
 
     //CONSTUCTORS
     // AUTOCOLOR constructor
-    LaserBeamAnimation1(LaserBeam *f, Shape fshape, int prand, int flen, std::string d, std::string i, AnimationType t, int prio, int mast=255){
+    LaserBeamAnimation1(LaserBeam *f, Shape fshape, int prand, int flen, std::string d, std::string i, AnimationType t, int prio, int mast, int_vec intens)
+    :LaserBeamAnimation(d, i, t, mast, prio, intens){
       //set Base paramters
-      this->description = d,this->id = i,this->fixture = f,this->type = t,this->priority = prio,this->master = mast;
+      this->fixture = f;
       this->autocolor = true;
       //set cinematic parameters
       this->flash_shape = fshape;
@@ -160,7 +164,7 @@ class LaserBeamAnimation1 : public LaserBeamAnimation
 class LaserBeamAnimation2 : public LaserBeamAnimation{
     public:
       // specific parameters
-    bool param_activate_flash;
+    bool param_activate_flash = true;;
     simpleColor flash_color = black;            // flash color
     simpleColor back_color = black;             // background color
     
@@ -169,12 +173,12 @@ class LaserBeamAnimation2 : public LaserBeamAnimation{
       // Dynamic variables (updated internally at each frame)
   
     //AUTOCOLOR constructor 
-    LaserBeamAnimation2(LaserBeam* f, std::string d, std::string i, AnimationType typ, bool flash = true, uint8_t mast = 255){
-      //set Base params 
-      this->fixture = f,this->description = d,this->id = i, this->type = typ;
+    LaserBeamAnimation2(LaserBeam* f, std::string d, std::string i, AnimationType t, uint8_t mast, int prio, int_vec intens)
+    :LaserBeamAnimation(d, i, t, mast, prio, intens){
+        //set Base params 
+      this->fixture = f;
       this->autocolor=true;
       //set cinematic params
-      this->param_activate_flash = flash;
     }
   
       void init() override;

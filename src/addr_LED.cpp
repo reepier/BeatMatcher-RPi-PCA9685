@@ -20,51 +20,53 @@ AddressableLED addr_led(1, 0, 3*NUM_PIX, "LEDs", 1, 180);
 
 void AddressableLED::init(){
     // declare animations here
-    animations.push_back(new AddrLEDAnimation0(this, black, " ",    "PIX.0.0", any, 0, 255));
+    animations.push_back(new AddrLEDAnimation0(this, black, " - ",    "PIX.0.0", any, 0, 255, int_vec{1,2,3}));
     
-    animations.push_back(new AddrLEDAnimation0(this, "Couleur fixe",    "PIX.0.1", any, 0, 255));
+    animations.push_back(new AddrLEDAnimation0(this, "Couleur fixe",    "PIX.0.1", any, 0, 255, int_vec{1,2,3}));
 
     //AUTOCOLOR with Animation type 1 : Analog Beat all pixels ()Beatmatcher original animation)------------------------------
-    animations.push_back(new AddrLEDAnimation1(this, bar, 1, "Analog Beat", "PIX.6.1", leader, true, 255));     
+    animations.push_back(new AddrLEDAnimation1(this, bar, 1, "Analog Beat", "PIX.6.1", leader, 255, 1, int_vec{1,2,3}));     
 
     //AUTOCOLOR with Animation type 1 : Analog Beat with random fragments ----------------------------------------------------
-    animations.push_back(new AddrLEDAnimation1(this, bar, 0.7,  "Bar Analog Beat",      "PIX.6.2.1", leader, true, 255));     
-    animations.push_back(new AddrLEDAnimation1(this, seg, 0.7,  "Segments Analog Beat", "PIX.6.2.2", leader, true, 255));    //TODO Fix this one 
-    animations.push_back(new AddrLEDAnimation1(this, pix, 0.7,  "Pixels Analog Beat",   "PIX.6.2.3", leader, true, 255));     
+    animations.push_back(new AddrLEDAnimation1(this, bar, 0.7,  "Bar Analog Beat",      "PIX.6.2.1", leader, 255, 1, int_vec{1,2,3}));     
+    animations.push_back(new AddrLEDAnimation1(this, seg, 0.7,  "Segments Analog Beat", "PIX.6.2.2", leader, 255, 1, int_vec{1,2,3}));    //TODO Fix or delete this one 
+    animations.push_back(new AddrLEDAnimation1(this, pix, 0.7,  "Pixels Analog Beat",   "PIX.6.2.3", leader, 255, 1, int_vec{1,2,3}));     
     
     //AUTOCOLOR with Animation type 2 : Digital Beat -------------------------------------------------------------------------
-    animations.push_back(new AddrLEDAnimation2(this, bar, "Bar Digital Beat (autocolor)",       "PIX.7.1", leader, true, 255));     
-    animations.push_back(new AddrLEDAnimation2(this, seg, "Segments Digital Beat (autocolor)",  "PIX.7.2", leader, true, 255));     
-    animations.push_back(new AddrLEDAnimation2(this, pix, "Pixel Digital Beat (autocolor)",     "PIX.7.3", leader, true, 255));     
+    animations.push_back(new AddrLEDAnimation2(this, bar, "Bar Digital Beat (autocolor)",       "PIX.7.1", leader, 1, 255, int_vec{1,2,3}));     
+    animations.push_back(new AddrLEDAnimation2(this, seg, "Segments Digital Beat (autocolor)",  "PIX.7.2", leader, 1, 255, int_vec{1,2,3}));     
+    animations.push_back(new AddrLEDAnimation2(this, pix, "Pixel Digital Beat (autocolor)",     "PIX.7.3", leader, 1, 255, int_vec{1,2,3}));     
     
     //AUTOCOLOR with Animation type 4 : Random Bursts----------------------------------------------------------------------------------------
     //Slow & long bubbles
-    animations.push_back(new AddrLEDAnimation4(this, gaussian, bar, 400, 1500, "Slow Bubbles", "PIX.8.1", backer, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, gaussian, bar, 400, 1500, "Slow Bubbles", "PIX.8.1", backer, 1, 255, int_vec{1,2,3}));
     // Fast & short Bubbles
-    animations.push_back(new AddrLEDAnimation4(this, gaussian, bar, 200, 600, "Fast Bubbles ", "PIX.8.2", any, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, gaussian, bar, 200, 600, "Fast Bubbles ", "PIX.8.2", any, 1, 255, int_vec{1,2,3}));
     // Slow Random Chaser
-    animations.push_back(new AddrLEDAnimation4(this, square,   bar, 300, 1500, "Slow Chaser",  "PIX.8.3", backer, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, square,   bar, 300, 1500, "Slow Chaser",  "PIX.8.3", backer, 1, 255, int_vec{1,2,3}));
     // Fast Random Chaser 
-    animations.push_back(new AddrLEDAnimation4(this, square,   bar, 200, 600, "Fast Chaser",  "PIX.8.4", any, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, square,   bar, 200, 600, "Fast Chaser",  "PIX.8.4", any, 1, 255, int_vec{1,2,3}));
     // Fast Random Strobe
-    animations.push_back(new AddrLEDAnimation4(this, square, bar, 50, 1000/FRATE, "Fast Random Strobe", "PIX.8.5", leader, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, square, bar, 50, 1000/FRATE, "Fast Random Strobe", "PIX.8.5", leader, 1, 255, int_vec{1,2,3}));
     // Decaying Flash
-    animations.push_back(new AddrLEDAnimation4(this, square, bar, 150, 1000/FRATE, "Slow Strobe", "PIX.8.6", any, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, square, bar, 150, 1000/FRATE, "Slow Strobe", "PIX.8.6", any, 1, 255, int_vec{1,2,3}));
 
     //Animation type 1 : Analog Beat with group fragmentation ----------------------------------------------------
-    animations.push_back(new AddrLEDAnimation1(this, group, 0.7,  "Group Analog Beat",      "PIX.9", leader, true, 255));     
+    animations.push_back(new AddrLEDAnimation1(this, group, 0.7,  "Group Analog Beat",      "PIX.9", leader, 255, 1, int_vec{1,2,3}));     
     //animation type 1 : Digital Beat with group frag
-    animations.push_back(new AddrLEDAnimation2(this, group , "Group Digital Beat",       "PIX.10", leader, true, 255));     
+    animations.push_back(new AddrLEDAnimation2(this, group , "Group Digital Beat",       "PIX.10", leader, 1, 255, int_vec{1,2,3}));     
 
     //Animation type 4 : Slow Bubbles by group 
-    animations.push_back(new AddrLEDAnimation4(this, gaussian, group, 1500, 2000, "Slow Bubbles (group)", "PIX.8.1", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, gaussian, pix, 10, 800, "Fast Bubbles (pix)", "PIX.8.1", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, gaussian, pix, 100, 1500, "Slow Bubbles (pix)", "PIX.8.1", backer, 1, 255));
-    animations.push_back(new AddrLEDAnimation4(this, expdecay, pix, 100, 1000, "Slow flash (pix)", "PIX.8.1", backer, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, gaussian, group, 1500, 2000, "Slow Bubbles (group)", "PIX.8.1", backer, 1, 255, int_vec{1,2,3}));
+    animations.push_back(new AddrLEDAnimation4(this, gaussian, pix, 10, 800, "Fast Bubbles (pix)", "PIX.8.1", backer, 1, 255, int_vec{1,2,3}));
+    animations.push_back(new AddrLEDAnimation4(this, gaussian, pix, 100, 1500, "Slow Bubbles (pix)", "PIX.8.1", backer, 1, 255, int_vec{1,2,3}));
+    animations.push_back(new AddrLEDAnimation4(this, expdecay, pix, 100, 1000, "Slow flash (pix)", "PIX.8.1", backer, 1, 255, int_vec{1,2,3}));
     //Animation type 4 : fast Random strobe by pixel 
-    animations.push_back(new AddrLEDAnimation4(this, square, pix, 10, 1000/FRATE, "Fast RandStrobe (group)", "PIX.8.1", backer, 1, 255));
+    animations.push_back(new AddrLEDAnimation4(this, square, pix, 10, 1000/FRATE, "Fast RandStrobe (group)", "PIX.8.1", backer, 1, 255, int_vec{1,2,3}));
 
     this->activate_none();
+
+    this->dump_animations("AddressableLED");
 }
 
 // spits out an ordered vector containing every subpixel value (0-256)
@@ -347,24 +349,24 @@ void AddrLEDAnimation2::new_frame(){
 #     # ###     #    ## #    # # #    # #      
  #####  ###     #     #  ####  #  ####  ###### 
 */
-void AddrLEDAnimation3::init() {
-    BaseAnimation::init();
-}
-void AddrLEDAnimation3::new_frame() {
-    BaseAnimation::new_frame();
+// void AddrLEDAnimation3::init() {
+//     BaseAnimation::init();
+// }
+// void AddrLEDAnimation3::new_frame() {
+//     BaseAnimation::new_frame();
     
-    // double f_weight = enable_filter*param_filter_weight*!is_first_frame();
+//     // double f_weight = enable_filter*param_filter_weight*!is_first_frame();
     
-    for (int i = 0; i<NUM_PIX; i++){
-        pix_intensities[i] = min(255, max(0, fcn::random_walk((int)pix_intensities[i], 5, 0, 255) ));
-        // if(f_weight != 0)
-        //     pix_intensities[i] = min(255.0, max(0.0, pix_intensities[i] + f_weight * (atan_transfo[rand_min_max(0, 256)] - 127.0) ));
-        // else
-        //     pix_intensities[i] = atan_transfo[rand_min_max(0, 256)];
+//     for (int i = 0; i<NUM_PIX; i++){
+//         pix_intensities[i] = min(255, max(0, fcn::random_walk((int)pix_intensities[i], 5, 0, 255) ));
+//         // if(f_weight != 0)
+//         //     pix_intensities[i] = min(255.0, max(0.0, pix_intensities[i] + f_weight * (atan_transfo[rand_min_max(0, 256)] - 127.0) ));
+//         // else
+//         //     pix_intensities[i] = atan_transfo[rand_min_max(0, 256)];
 
-        this->fixture->pixels[i] = this->fixture->RGB(color, pix_intensities[i]);
-    }
-}
+//         this->fixture->pixels[i] = this->fixture->RGB(color, pix_intensities[i]);
+//     }
+// }
 
 /*
 #              ######                          ######                             

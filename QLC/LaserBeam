@@ -1,0 +1,12 @@
+ <Channel Name="Animation">
+  <Group Byte="0">Effect</Group>
+  <Capability Min="0" Max="0"> - </Capability>
+  <Capability Min="1" Max="1">Couleur</Capability>
+  <Capability Min="2" Max="2">Test Bubbles</Capability>
+  <Capability Min="3" Max="3">Test Square</Capability>
+  <Capability Min="4" Max="4">Test Flash</Capability>
+  <Capability Min="5" Max="5">Slow Strobe</Capability>
+  <Capability Min="6" Max="6">Beat</Capability>
+  <Capability Min="7" Max="254">Reserve</Capability>
+  <Capability Min="255" Max="255">Automatic</Capability>
+ </Channel>

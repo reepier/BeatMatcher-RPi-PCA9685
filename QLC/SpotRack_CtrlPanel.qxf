@@ -7,38 +7,31 @@
   <Author>Reepier</Author>
  </Creator>
  <Manufacturer>Omerta Inc.</Manufacturer>
- <Model>Red Rayz Control Panel</Model>
+ <Model>SpotRack Control Panel</Model>
  <Type>Other</Type>
  <Channel Name="Dimmer" Default="255" Preset="IntensityDimmer"/>
  <Channel Name="Animation">
   <Group Byte="0">Effect</Group>
-  <Capability Min="0" Max="0">Automatic</Capability>
-  <Capability Min="1" Max="1">Fixe</Capability>
-  <Capability Min="2" Max="2">Bulles (très lentes)</Capability>
-  <Capability Min="3" Max="3">Bulles (très lentes, + nbreuses)</Capability>
-  <Capability Min="4" Max="4">Bulles (lentes)</Capability>
-  <Capability Min="5" Max="5">Bulles (lentes, + rares)</Capability>
-  <Capability Min="6" Max="6">Bulles (rapides)</Capability>
-  <Capability Min="7" Max="7">Chaser (très lent)</Capability>
-  <Capability Min="8" Max="8">Chaser (très lent, +nbeux)</Capability>
-  <Capability Min="9" Max="9">Chaser (lent)</Capability>
-  <Capability Min="10" Max="10">Chaser (rapide)</Capability>
-  <Capability Min="11" Max="11">Strobe (très lent)</Capability>
-  <Capability Min="12" Max="12">Strobe (lent)</Capability>
-  <Capability Min="13" Max="13">Strobe (rapide)</Capability>
-  <Capability Min="14" Max="14">Strobe (très rapide)</Capability>
-  <Capability Min="15" Max="15">Flash (très lent)</Capability>
-  <Capability Min="16" Max="16">FLash (très lent, +nbrx)</Capability>
-  <Capability Min="17" Max="17">Flash (lent)</Capability>
-  <Capability Min="18" Max="18">Flash (lent, +rare)</Capability>
-  <Capability Min="19" Max="19">Flash (rapide)</Capability>
-  <Capability Min="20" Max="20">Flash (rapide, +rare)</Capability>
-  <Capability Min="21" Max="21">Analog Beat 100%</Capability>
-  <Capability Min="22" Max="22">Analog Beat 70%</Capability>
-  <Capability Min="23" Max="23">Analog Beat 40%</Capability>
-  <Capability Min="24" Max="24">Analog Beat 20%</Capability>
-  <Capability Min="25" Max="25">Digital Beat</Capability>
-  <Capability Min="26" Max="255"></Capability>
+  <Capability Min="0" Max="0"> - </Capability>
+  <Capability Min="1" Max="1">Couleur</Capability>
+  <Capability Min="2" Max="2">Quasi-stat Bubbles</Capability>
+  <Capability Min="3" Max="3">Super Slow Bubbles</Capability>
+  <Capability Min="4" Max="4">Slow Bubbles</Capability>
+  <Capability Min="5" Max="5">Fast Bubbles</Capability>
+  <Capability Min="6" Max="6">Slow Rand. Strobe</Capability>
+  <Capability Min="7" Max="7">Mid. Rand. Strobe</Capability>
+  <Capability Min="8" Max="8">Fast Rand. Strobe</Capability>
+  <Capability Min="9" Max="9">Quasi-stat Chaser</Capability>
+  <Capability Min="10" Max="10">Super Slow Chaser</Capability>
+  <Capability Min="11" Max="11">Slow Rand. Chaser</Capability>
+  <Capability Min="12" Max="12">Fast Rand. Chaser</Capability>
+  <Capability Min="13" Max="13">Analog Flash (100%) </Capability>
+  <Capability Min="14" Max="14">Analog Flash (70%)</Capability>
+  <Capability Min="15" Max="15">Digital Flash</Capability>
+  <Capability Min="16" Max="16">Slow Rand. Flashes</Capability>
+  <Capability Min="17" Max="17">Mid. Rand. Flashes</Capability>
+  <Capability Min="18" Max="254">Reserve</Capability>
+  <Capability Min="255" Max="255">Automatic</Capability>
  </Channel>
  <Channel Name="Color 1">
   <Group Byte="0">Colour</Group>
@@ -95,8 +88,8 @@
  <Mode Name="All CH.">
   <Channel Number="0" ActsOn="0">Dimmer</Channel>
   <Channel Number="1" ActsOn="1">Animation</Channel>
-  <Channel Number="2">Color 1</Channel>
-  <Channel Number="3">Color 2</Channel>
+  <Channel Number="2" ActsOn="2">Color 1</Channel>
+  <Channel Number="3" ActsOn="3">Color 2</Channel>
  </Mode>
  <Physical>
   <Bulb Type="" Lumens="0" ColourTemperature="0"/>

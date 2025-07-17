@@ -12,27 +12,15 @@
  <Channel Name="Dimmer" Default="255" Preset="IntensityDimmer"/>
  <Channel Name="Animation">
   <Group Byte="0">Effect</Group>
-  <Capability Min="0" Max="0">Automatic</Capability>
-  <Capability Min="1" Max="1">Capability 1</Capability>
-  <Capability Min="2" Max="2">Capability 2</Capability>
-  <Capability Min="3" Max="3">Capability 3</Capability>
-  <Capability Min="4" Max="4">Capability 4</Capability>
-  <Capability Min="5" Max="5">Capability 5</Capability>
-  <Capability Min="6" Max="6">Capability 6</Capability>
-  <Capability Min="7" Max="7">Capability 7</Capability>
-  <Capability Min="8" Max="8">Capability 8</Capability>
-  <Capability Min="9" Max="9">Capability 9</Capability>
-  <Capability Min="10" Max="10">Capability 10</Capability>
-  <Capability Min="11" Max="11">Capability 11</Capability>
-  <Capability Min="12" Max="12">Capability 12</Capability>
-  <Capability Min="13" Max="13">Capability 13</Capability>
-  <Capability Min="14" Max="14">Capability 14</Capability>
-  <Capability Min="15" Max="15">Capability 15</Capability>
-  <Capability Min="16" Max="16">Capability 16</Capability>
-  <Capability Min="17" Max="17">Capability 17</Capability>
-  <Capability Min="18" Max="18">Capability 18</Capability>
-  <Capability Min="19" Max="19">Capability 19</Capability>
-  <Capability Min="20" Max="20">Capability 20</Capability>
+  <Capability Min="0" Max="0"></Capability>
+  <Capability Min="1" Max="1">Couleur</Capability>
+  <Capability Min="2" Max="2">Test Bubbles</Capability>
+  <Capability Min="3" Max="3">Test Square</Capability>
+  <Capability Min="4" Max="4">Test Flash</Capability>
+  <Capability Min="5" Max="5">Slow Strobe</Capability>
+  <Capability Min="6" Max="6">Beat</Capability>
+  <Capability Min="7" Max="254">Reserve</Capability>
+  <Capability Min="255" Max="255">Automatic</Capability>
  </Channel>
  <Channel Name="Color 1">
   <Group Byte="0">Colour</Group>

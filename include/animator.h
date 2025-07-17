@@ -480,6 +480,9 @@ class BaseFixture{
 
     virtual DMX_vec RGBW(simpleColor, int){}; // common (but overriden) function that returns a 4 RGBW vector based on standrad color input
     virtual DMX_vec RGB(simpleColor, int){};
+
+    //other
+    void dump_animations(const char*);
 };
 /** Font : Old Banner
 ######                             #                                                 

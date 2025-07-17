@@ -1,0 +1,31 @@
+ <Channel Name="Animation">
+  <Group Byte="0">Effect</Group>
+  <Capability Min="0" Max="0"> - </Capability>
+  <Capability Min="1" Max="1">FULL ON</Capability>
+  <Capability Min="2" Max="2">VS Bubbles</Capability>
+  <Capability Min="3" Max="3">VS Bubbles (overlapping)</Capability>
+  <Capability Min="4" Max="4">Slow bubbles</Capability>
+  <Capability Min="5" Max="5">Scarce slow bubbles</Capability>
+  <Capability Min="6" Max="6">Fasr bubbles</Capability>
+  <Capability Min="7" Max="7">Very slow chaser</Capability>
+  <Capability Min="8" Max="8">VS, overlapping chaser</Capability>
+  <Capability Min="9" Max="9">Slow chaser</Capability>
+  <Capability Min="10" Max="10">Fast chaser</Capability>
+  <Capability Min="11" Max="11">VS Strobe</Capability>
+  <Capability Min="12" Max="12">S Strobe</Capability>
+  <Capability Min="13" Max="13">F Strobe</Capability>
+  <Capability Min="14" Max="14">VF Strobe</Capability>
+  <Capability Min="15" Max="15">VS decaying rayz</Capability>
+  <Capability Min="16" Max="16">VS overlapping decaying rayz</Capability>
+  <Capability Min="17" Max="17">S decaying rayz</Capability>
+  <Capability Min="18" Max="18">Scarce S decaying rayz</Capability>
+  <Capability Min="19" Max="19">F decaying rayz</Capability>
+  <Capability Min="20" Max="20">Scarce F decaying rayz</Capability>
+  <Capability Min="21" Max="21">Analog Beat 100%</Capability>
+  <Capability Min="22" Max="22">Analog Beat 70%</Capability>
+  <Capability Min="23" Max="23">Analog Beat 40%</Capability>
+  <Capability Min="24" Max="24">Analog Beat 20%</Capability>
+  <Capability Min="25" Max="25">Digital Beat</Capability>
+  <Capability Min="26" Max="254">Reserve</Capability>
+  <Capability Min="255" Max="255">Automatic</Capability>
+ </Channel>

@@ -103,7 +103,7 @@ DMX_vec Shehds_7x18W_buffer(const SpotFixture& spot){
                    spot.pixel[B],
                    spot.pixel[W],
                    spot.pixel[Amb],
-                   spot.pixel[UV],
+                   spot.pixel[UV], 
                    spot.strobe,
                    0,
                    0};
@@ -132,10 +132,10 @@ DMX_vec SpotFixture::buffer(){
  #####  #       #######    #       #     # #     #  #####  #    #  #####  
 / ----------------------------------------------------------------------- */
 //config salon
-SpotRack spot_rack_1(spot_vec{&spot_6, &spot_7, &spot_8, &spot_9}, "Front Rack", SR1_CTRL_ADR, 1);
-SpotRack spot_rack_2(spot_vec{&spot_10, &spot_12, &spot_21, &spot_22, &spot_23, &spot_2, &spot_5, &spot_1, &spot_3, &spot_4}, "Vert. Beams", SR2_CTRL_ADR, 2);
-SpotRack spot_rack_4(spot_vec{&spot_11}, "Rack 2", SR3_CTRL_ADR, 3);
-SpotRack spot_rack_3(spot_vec{&spot_13, &spot_14, &spot_15, &spot_16, &spot_17, &spot_18, &spot_19, &spot_20}, "SHEHDS Rack", SR4_CTRL_ADR, 4);
+SpotRack spot_rack_1(spot_vec{&spot_6, &spot_7, &spot_8, &spot_9}, "PAR 1", SR1_CTRL_ADR, 2);
+SpotRack spot_rack_2(spot_vec{&spot_10, &spot_12, &spot_21, &spot_22, &spot_23, &spot_2, &spot_5, &spot_1, &spot_3, &spot_4}, "PAR 2", SR2_CTRL_ADR, 3);
+SpotRack spot_rack_3(spot_vec{&spot_13, &spot_14, &spot_15, &spot_16, &spot_17, &spot_18, &spot_19, &spot_20}, "PAR 3", SR4_CTRL_ADR, 4);
+SpotRack spot_rack_4(spot_vec{&spot_11}, "PAR 4", SR3_CTRL_ADR, 5);
 
 //CONFIG HLR #2
 // SpotRack spot_rack_1(spot_vec{&spot_2, &spot_5, &spot_7, &spot_8}, "Front Rack", SR1_CTRL_ADR, 1);
@@ -167,60 +167,63 @@ SpotRack spot_rack_3(spot_vec{&spot_13, &spot_14, &spot_15, &spot_16, &spot_17, 
 
 // Define animation for the frontal spot rack
 void front_rack_init(){
+    auto this_rack = &spot_rack_1;
 
     //this->animations.push_back();
     // Animation 1 : Backgrnd color + random soft flashes
-    spot_rack_1.animations.push_back(new SpotRackAnimation0(&spot_rack_1, black, " ", "SR.0", backer,0, 0, int_vec{}));
-
+    this_rack->animations.push_back(new SpotRackAnimation0(this_rack, black, " - ", "SR.0", backer,0, 0, int_vec{1,2,3}));
 
     //AUTOCOLOR Animations
     // Animation type 0 : Fixed color
-    spot_rack_1.animations.push_back(new SpotRackAnimation0(&spot_rack_1, "Couleur", "SR.0.1", any, 0, 255, int_vec{}));
+    this_rack->animations.push_back(new SpotRackAnimation0(this_rack, "Couleur", "SR.0.1", any, 0, 255, int_vec{1,2,3}));
 
     // Animation type 1.1 : Random BUBBLES
     // Quasi-static Bubbles
-    spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, gaussian, /*Flash Period*/ 20000, /*Flash Length*/ 30000, "Quasi-stat Bubbles", "SR.1.1.1", backer, 1));
+    // SpotRackAnimation1(                                  SpotRack *f,  Shape fshape, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio,int mast, int_vec intens)
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  20000,  30000, "Quasi-stat Bubbles", "SR.1.1.1", backer, 1, 255, int_vec{1,2,3}));
     // Super Slow Bubbles
-    spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, gaussian, /*Flash Period*/ 8000, /*Flash Length*/ 3000, "Super Slow Bubbles", "SR.1.1.2", backer, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  8000,  3000, "Super Slow Bubbles", "SR.1.1.2", backer, 1, 255, int_vec{1,2,3}));
     // Slow Bubbles
-    spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, gaussian, /*Flash Period*/ 4000, /*Flash Length*/ 1500, "Slow Bubbles", "SR.1.1.3", backer, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  4000,  1500, "Slow Bubbles", "SR.1.1.3", backer, 1, 255, int_vec{1,2,3}));
     // Fast bubbles
-    spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, gaussian, /*Flash Period*/ 1000, /*Flash Length*/ 600, "Fast Bubbles", "SR.1.1.4", any, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  1000,  600, "Fast Bubbles", "SR.1.1.4", any, 1, 255, int_vec{1,2,3}));
     
     // Animation type 1.2 : Random strobe
     //Slow strobe
-    spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, square, /*Flash Period*/ 800, /*Flash Length*/ 1000/FRATE, "Slow Rand. Strobe", "SR.1.2.1", any, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  800,  1000/FRATE, "Slow Rand. Strobe", "SR.1.2.1", any, 1, 255, int_vec{1,2,3}));
     //Fast strobe
-    spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, square, /*Flash Period*/ 300, /*Flash Length*/ 1000/FRATE, "Mid. Rand. Strobe", "SR.1.2.2", any, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  300,  1000/FRATE, "Mid. Rand. Strobe", "SR.1.2.2", any, 1, 255, int_vec{1,2,3}));
     //Very Fast strobe
-    spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, square, /*Flash Period*/ 100, /*Flash Length*/ 1000/FRATE, "Fast Rand. Strobe", "SR.1.2.3", any, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  100,  1000/FRATE, "Fast Rand. Strobe", "SR.1.2.3", any, 1, 255, int_vec{1,2,3}));
     
     // Animation type 1.3 : Random Square
     // Quasi-static Chaser
-    spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, square, /*Flash Period*/ 20000, /*Flash Length*/ 30000, "Quasi-stat Chaser", "SR.1.3.1", backer, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  20000,  30000, "Quasi-stat Chaser", "SR.1.3.1", backer, 1, 255, int_vec{1,2,3}));
     // Super Slow Chaser
-    spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, square, /*Flash Period*/ 8000, /*Flash Length*/ 3000, "Super Slow Chaser", "SR.1.3.2", backer, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  8000,  3000, "Super Slow Chaser", "SR.1.3.2", backer, 1, 255, int_vec{1,2,3}));
     //Slow Chaser
-    spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, square, /*Flash Period*/ 4000, /*Flash Length*/ 1500, "Slow Rand. Chaser", "SR.1.3.3", any, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  4000,  1500, "Slow Rand. Chaser", "SR.1.3.3", any, 1, 255, int_vec{1,2,3}));
     //Fast Chaser
-    spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, square, /*Flash Period*/ 1000, /*Flash Length*/ 600, "Fast Rand. Chaser", "SR.1.3.4", any, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  1000,  600, "Fast Rand. Chaser", "SR.1.3.4", any, 1, 255, int_vec{1,2,3}));
 
     // Animation type 4 : Analog BEAT
-    spot_rack_1.animations.push_back(new SpotRackAnimation4(&spot_rack_1, 1.0, "Analog Flash (100%) ", "SR.4.1", any));
-    spot_rack_1.animations.push_back(new SpotRackAnimation4(&spot_rack_1, 0.7, "Analog Flash (70%)", "SR.4.2", any));
+    this_rack->animations.push_back(new SpotRackAnimation4(this_rack, 1.0, "Analog Flash (100%) ", "SR.4.1", any, 1, 255, int_vec{1,2,3}));
+    this_rack->animations.push_back(new SpotRackAnimation4(this_rack, 0.7, "Analog Flash (70%)", "SR.4.2", any, 1, 255, int_vec{1,2,3}));
     
     // Animation type 5 : Digital BEAT
-    spot_rack_1.animations.push_back(new SpotRackAnimation5(&spot_rack_1, "Digital Flash", "SR.5", leader, 1, 255));
+    this_rack->animations.push_back(new SpotRackAnimation5(this_rack, "Digital Flash", "SR.5", leader, 1, 255, int_vec{1,2,3}));
 
     
     // Animation type 1.4 : Random Flashes (with decay)
     //Slow Flashes
-    spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, expdecay, /*Flash Period*/ 2000, /*Flash Length*/ 200, "Slow Rand. Flashes", "SR.1.2.1", any, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, expdecay,  2000,  200, "Slow Rand. Flashes", "SR.1.2.1", any, 1, 255, int_vec{1,2,3}));
     //Fast Flashes
-    spot_rack_1.animations.push_back(new SpotRackAnimation1(&spot_rack_1, expdecay, /*Flash Period*/ 1000, /*Flash Length*/ 80, "Mid. Rand. Flashes", "SR.1.2.2", any, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, expdecay,  1000,  80, "Mid. Rand. Flashes", "SR.1.2.2", any, 1, 255, int_vec{1,2,3}));
 
 
-    spot_rack_1.activate_none();
+    this_rack->activate_none();
+
+    this_rack->dump_animations(this_rack->name.c_str());
 };
 
 
@@ -236,49 +239,62 @@ void front_rack_init(){
 
 // Define animation for the background spot rack
 void rack_15_init(){
-    spot_rack_2.animations.push_back(new SpotRackAnimation1(&spot_rack_2, black,         black,       100000, 1000,   " ", "R15.0", backer, 0));
+
+    auto this_rack = &spot_rack_2;
+
+    //this->animations.push_back();
+    // Animation 1 : Backgrnd color + random soft flashes
+    this_rack->animations.push_back(new SpotRackAnimation0(this_rack, black, " ", "SR.0", backer,0, 0, int_vec{1,2,3}));
 
     //AUTOCOLOR Animations
     // Animation type 0 : Fixed color
-    spot_rack_2.animations.push_back(new SpotRackAnimation0(&spot_rack_2, "Couleur", "SR.0.1", any, 1, 255));
+    this_rack->animations.push_back(new SpotRackAnimation0(this_rack, "Couleur", "SR.0.1", any, 0, 255, int_vec{1,2,3}));
+
     // Animation type 1.1 : Random BUBBLES
     // Quasi-static Bubbles
-    spot_rack_2.animations.push_back(new SpotRackAnimation1(&spot_rack_2, gaussian, /*Flash Period*/ 20000, /*Flash Length*/ 30000, "Quasi-stat Bubbles", "SR.1.1.1", backer, 1));
+    // SpotRackAnimation1(                                  SpotRack *f,  Shape fshape, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio,int mast, int_vec intens)
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  20000,  30000, "Quasi-stat Bubbles", "SR.1.1.1", backer, 1, 255, int_vec{1,2,3}));
     // Super Slow Bubbles
-    spot_rack_2.animations.push_back(new SpotRackAnimation1(&spot_rack_2, gaussian, /*Flash Period*/ 8000, /*Flash Length*/ 3000, "Super Slow Bubbles", "SR.1.1.2", backer, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  8000,  3000, "Super Slow Bubbles", "SR.1.1.2", backer, 1, 255, int_vec{1,2,3}));
     // Slow Bubbles
-    spot_rack_2.animations.push_back(new SpotRackAnimation1(&spot_rack_2, gaussian, /*Flash Period*/ 4000, /*Flash Length*/ 1500, "Slow Bubbles", "SR.1.1.3", backer, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  4000,  1500, "Slow Bubbles", "SR.1.1.3", backer, 1, 255, int_vec{1,2,3}));
     // Fast bubbles
-    spot_rack_2.animations.push_back(new SpotRackAnimation1(&spot_rack_2, gaussian, /*Flash Period*/ 1000, /*Flash Length*/ 600, "Fast Bubbles", "SR.1.1.4", any, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  1000,  600, "Fast Bubbles", "SR.1.1.4", any, 1, 255, int_vec{1,2,3}));
     
-    // Animation type 1.2 : Random STROBE
+    // Animation type 1.2 : Random strobe
     //Slow strobe
-    spot_rack_2.animations.push_back(new SpotRackAnimation1(&spot_rack_2, square, /*Flash Period*/ 800, /*Flash Length*/ 1000/FRATE, "Slow Rand. Strobe", "SR.1.2.1", any, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  800,  1000/FRATE, "Slow Rand. Strobe", "SR.1.2.1", any, 1, 255, int_vec{1,2,3}));
     //Fast strobe
-    spot_rack_2.animations.push_back(new SpotRackAnimation1(&spot_rack_2, square, /*Flash Period*/ 300, /*Flash Length*/ 1000/FRATE, "Mid. Rand. Strobe", "SR.1.2.2", any, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  300,  1000/FRATE, "Mid. Rand. Strobe", "SR.1.2.2", any, 1, 255, int_vec{1,2,3}));
     //Very Fast strobe
-    spot_rack_2.animations.push_back(new SpotRackAnimation1(&spot_rack_2, square, /*Flash Period*/ 100, /*Flash Length*/ 1000/FRATE, "Fast Rand. Strobe", "SR.1.2.3", any, 1));
-
-    // Animation type 1.3 : Random CHASER
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  100,  1000/FRATE, "Fast Rand. Strobe", "SR.1.2.3", any, 1, 255, int_vec{1,2,3}));
+    
+    // Animation type 1.3 : Random Square
     // Quasi-static Chaser
-    spot_rack_2.animations.push_back(new SpotRackAnimation1(&spot_rack_2, square, /*Flash Period*/ 20000, /*Flash Length*/ 30000, "Quasi-stat Chaser", "SR.1.3.1", backer, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  20000,  30000, "Quasi-stat Chaser", "SR.1.3.1", backer, 1, 255, int_vec{1,2,3}));
     // Super Slow Chaser
-    spot_rack_2.animations.push_back(new SpotRackAnimation1(&spot_rack_2, square, /*Flash Period*/ 8000, /*Flash Length*/ 3000, "Super Slow Chaser", "SR.1.3.2", backer, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  8000,  3000, "Super Slow Chaser", "SR.1.3.2", backer, 1, 255, int_vec{1,2,3}));
     //Slow Chaser
-    spot_rack_2.animations.push_back(new SpotRackAnimation1(&spot_rack_2, square, /*Flash Period*/ 4000, /*Flash Length*/ 1500, "Slow Rand. Chaser", "SR.1.3.3", any, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  4000,  1500, "Slow Rand. Chaser", "SR.1.3.3", any, 1, 255, int_vec{1,2,3}));
     //Fast Chaser
-    spot_rack_2.animations.push_back(new SpotRackAnimation1(&spot_rack_2, square, /*Flash Period*/ 1000, /*Flash Length*/ 600, "Fast Rand. Chaser", "SR.1.3.4", any, 1));
-
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  1000,  600, "Fast Rand. Chaser", "SR.1.3.4", any, 1, 255, int_vec{1,2,3}));
 
     // Animation type 4 : Analog BEAT
-    spot_rack_2.animations.push_back(new SpotRackAnimation4(&spot_rack_2, 1.0, "Analog Flash (100%) ", "SR.4.1", any));
-    spot_rack_2.animations.push_back(new SpotRackAnimation4(&spot_rack_2, 0.7, "Analog Flash (70%)", "SR.4.2", any));
+    this_rack->animations.push_back(new SpotRackAnimation4(this_rack, 1.0, "Analog Flash (100%) ", "SR.4.1", any, 1, 255, int_vec{1,2,3}));
+    this_rack->animations.push_back(new SpotRackAnimation4(this_rack, 0.7, "Analog Flash (70%)", "SR.4.2", any, 1, 255, int_vec{1,2,3}));
     
     // Animation type 5 : Digital BEAT
-    spot_rack_2.animations.push_back(new SpotRackAnimation5(&spot_rack_2, "Digital Flash", "SR.5", leader, 1, 255));
+    this_rack->animations.push_back(new SpotRackAnimation5(this_rack, "Digital Flash", "SR.5", leader, 1, 255, int_vec{1,2,3}));
 
+    
+    // Animation type 1.4 : Random Flashes (with decay)
+    //Slow Flashes
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, expdecay,  2000,  200, "Slow Rand. Flashes", "SR.1.2.1", any, 1, 255, int_vec{1,2,3}));
+    //Fast Flashes
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, expdecay,  1000,  80, "Mid. Rand. Flashes", "SR.1.2.2", any, 1, 255, int_vec{1,2,3}));
 
-    spot_rack_2.activate_none();
+    this_rack->dump_animations(this_rack->name.c_str());
+    this_rack->activate_none();
 };
 
 /**
@@ -293,50 +309,64 @@ void rack_15_init(){
 
 // Define animation for the background spot rack
 void rack_40_init(){
-    spot_rack_4.animations.push_back(new SpotRackAnimation1(&spot_rack_4, black,         black,       100000, 1000,   " ", "SR.0", backer, 0));
+
+    auto this_rack = &spot_rack_4;
+
+    //this->animations.push_back();
+    // Animation 1 : Backgrnd color + random soft flashes
+    this_rack->animations.push_back(new SpotRackAnimation0(this_rack, black, " ", "SR.0", backer,0, 0, int_vec{1,2,3}));
 
     //AUTOCOLOR Animations
     // Animation type 0 : Fixed color
-    spot_rack_4.animations.push_back(new SpotRackAnimation0(&spot_rack_4, "Couleur", "SR.0.1", any, 1, 255));
+    this_rack->animations.push_back(new SpotRackAnimation0(this_rack, "Couleur", "SR.0.1", any, 0, 255, int_vec{1,2,3}));
+
     // Animation type 1.1 : Random BUBBLES
     // Quasi-static Bubbles
-    spot_rack_4.animations.push_back(new SpotRackAnimation1(&spot_rack_4, gaussian, /*Flash Period*/ 20000, /*Flash Length*/ 30000, "Quasi-stat Bubbles", "SR.1.1.1", backer, 1));
+    // SpotRackAnimation1(                                  SpotRack *f,  Shape fshape, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio,int mast, int_vec intens)
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  20000,  30000, "Quasi-stat Bubbles", "SR.1.1.1", backer, 1, 255, int_vec{1,2,3}));
     // Super Slow Bubbles
-    spot_rack_4.animations.push_back(new SpotRackAnimation1(&spot_rack_4, gaussian, /*Flash Period*/ 8000, /*Flash Length*/ 3000, "Super Slow Bubbles", "SR.1.1.2", backer, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  8000,  3000, "Super Slow Bubbles", "SR.1.1.2", backer, 1, 255, int_vec{1,2,3}));
     // Slow Bubbles
-    spot_rack_4.animations.push_back(new SpotRackAnimation1(&spot_rack_4, gaussian, /*Flash Period*/ 4000, /*Flash Length*/ 1500, "Slow Bubbles", "SR.1.1.3", backer, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  4000,  1500, "Slow Bubbles", "SR.1.1.3", backer, 1, 255, int_vec{1,2,3}));
     // Fast bubbles
-    spot_rack_4.animations.push_back(new SpotRackAnimation1(&spot_rack_4, gaussian, /*Flash Period*/ 1000, /*Flash Length*/ 600, "Fast Bubbles", "SR.1.1.4", any, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  1000,  600, "Fast Bubbles", "SR.1.1.4", any, 1, 255, int_vec{1,2,3}));
     
-    // Animation type 1.2 : Random STROBE
+    // Animation type 1.2 : Random strobe
     //Slow strobe
-    spot_rack_4.animations.push_back(new SpotRackAnimation1(&spot_rack_4, square, /*Flash Period*/ 800, /*Flash Length*/ 1000/FRATE, "Slow Rand. Strobe", "SR.1.2.1", any, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  800,  1000/FRATE, "Slow Rand. Strobe", "SR.1.2.1", any, 1, 255, int_vec{1,2,3}));
     //Fast strobe
-    spot_rack_4.animations.push_back(new SpotRackAnimation1(&spot_rack_4, square, /*Flash Period*/ 300, /*Flash Length*/ 1000/FRATE, "Mid. Rand. Strobe", "SR.1.2.2", any, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  300,  1000/FRATE, "Mid. Rand. Strobe", "SR.1.2.2", any, 1, 255, int_vec{1,2,3}));
     //Very Fast strobe
-    spot_rack_4.animations.push_back(new SpotRackAnimation1(&spot_rack_4, square, /*Flash Period*/ 100, /*Flash Length*/ 1000/FRATE, "Fast Rand. Strobe", "SR.1.2.3", any, 1));
-
-    // Animation type 1.3 : Random CHASER
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  100,  1000/FRATE, "Fast Rand. Strobe", "SR.1.2.3", any, 1, 255, int_vec{1,2,3}));
+    
+    // Animation type 1.3 : Random Square
     // Quasi-static Chaser
-    spot_rack_4.animations.push_back(new SpotRackAnimation1(&spot_rack_4, square, /*Flash Period*/ 20000, /*Flash Length*/ 30000, "Quasi-stat Chaser", "SR.1.3.1", backer, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  20000,  30000, "Quasi-stat Chaser", "SR.1.3.1", backer, 1, 255, int_vec{1,2,3}));
     // Super Slow Chaser
-    spot_rack_4.animations.push_back(new SpotRackAnimation1(&spot_rack_4, square, /*Flash Period*/ 8000, /*Flash Length*/ 3000, "Super Slow Chaser", "SR.1.3.2", backer, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  8000,  3000, "Super Slow Chaser", "SR.1.3.2", backer, 1, 255, int_vec{1,2,3}));
     //Slow Chaser
-    spot_rack_4.animations.push_back(new SpotRackAnimation1(&spot_rack_4, square, /*Flash Period*/ 4000, /*Flash Length*/ 1500, "Slow Rand. Chaser", "SR.1.3.3", any, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  4000,  1500, "Slow Rand. Chaser", "SR.1.3.3", any, 1, 255, int_vec{1,2,3}));
     //Fast Chaser
-    spot_rack_4.animations.push_back(new SpotRackAnimation1(&spot_rack_4, square, /*Flash Period*/ 1000, /*Flash Length*/ 600, "Fast Rand. Chaser", "SR.1.3.4", any, 1));
-
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  1000,  600, "Fast Rand. Chaser", "SR.1.3.4", any, 1, 255, int_vec{1,2,3}));
 
     // Animation type 4 : Analog BEAT
-    spot_rack_4.animations.push_back(new SpotRackAnimation4(&spot_rack_4, 1.0, "Analog Flash (100%) ", "SR.4.1", any));
-    spot_rack_4.animations.push_back(new SpotRackAnimation4(&spot_rack_4, 0.7, "Analog Flash (70%)", "SR.4.2", any));
+    this_rack->animations.push_back(new SpotRackAnimation4(this_rack, 1.0, "Analog Flash (100%) ", "SR.4.1", any, 1, 255, int_vec{1,2,3}));
+    this_rack->animations.push_back(new SpotRackAnimation4(this_rack, 0.7, "Analog Flash (70%)", "SR.4.2", any, 1, 255, int_vec{1,2,3}));
     
     // Animation type 5 : Digital BEAT
-    spot_rack_4.animations.push_back(new SpotRackAnimation5(&spot_rack_4, "Digital Flash", "SR.5", leader, 1, 255));
+    this_rack->animations.push_back(new SpotRackAnimation5(this_rack, "Digital Flash", "SR.5", leader, 1, 255, int_vec{1,2,3}));
+
     
-    
-    
-    spot_rack_4.activate_none();
+    // Animation type 1.4 : Random Flashes (with decay)
+    //Slow Flashes
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, expdecay,  2000,  200, "Slow Rand. Flashes", "SR.1.2.1", any, 1, 255, int_vec{1,2,3}));
+    //Fast Flashes
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, expdecay,  1000,  80, "Mid. Rand. Flashes", "SR.1.2.2", any, 1, 255, int_vec{1,2,3}));
+
+
+    this_rack->activate_none();
+    this_rack->dump_animations(this_rack->name.c_str());
+
 };
 
         /**
@@ -349,50 +379,65 @@ void rack_40_init(){
 #     # #    #  ####  #    #     #####  #     # ####### #     # ######   #####  
         */
 void shehds_rack_init(){
-    spot_rack_3.animations.push_back(new SpotRackAnimation1(&spot_rack_3, black,  black,       100000, 1000,   " ", "SR.0", backer, 0));
 
+
+    auto this_rack = &spot_rack_3;
+
+    //this->animations.push_back();
+    // Animation 1 : Backgrnd color + random soft flashes
+    this_rack->animations.push_back(new SpotRackAnimation0(this_rack, black, " ", "SR.0", backer,0, 0, int_vec{1,2,3}));
 
     //AUTOCOLOR Animations
     // Animation type 0 : Fixed color
-    spot_rack_3.animations.push_back(new SpotRackAnimation0(&spot_rack_3, "Couleur", "SR.0.1", any, 1, 255));
+    this_rack->animations.push_back(new SpotRackAnimation0(this_rack, "Couleur", "SR.0.1", any, 0, 255, int_vec{1,2,3}));
+
     // Animation type 1.1 : Random BUBBLES
     // Quasi-static Bubbles
-    spot_rack_3.animations.push_back(new SpotRackAnimation1(&spot_rack_3, gaussian, /*Flash Period*/ 20000, /*Flash Length*/ 30000, "Quasi-stat Bubbles", "SR.1.1.1", backer, 1));
+    // SpotRackAnimation1(                                  SpotRack *f,  Shape fshape, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio,int mast, int_vec intens)
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  20000,  30000, "Quasi-stat Bubbles", "SR.1.1.1", backer, 1, 255, int_vec{1,2,3}));
     // Super Slow Bubbles
-    spot_rack_3.animations.push_back(new SpotRackAnimation1(&spot_rack_3, gaussian, /*Flash Period*/ 8000, /*Flash Length*/ 3000, "Super Slow Bubbles", "SR.1.1.2", backer, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  8000,  3000, "Super Slow Bubbles", "SR.1.1.2", backer, 1, 255, int_vec{1,2,3}));
     // Slow Bubbles
-    spot_rack_3.animations.push_back(new SpotRackAnimation1(&spot_rack_3, gaussian, /*Flash Period*/ 4000, /*Flash Length*/ 1500, "Slow Bubbles", "SR.1.1.3", backer, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  4000,  1500, "Slow Bubbles", "SR.1.1.3", backer, 1, 255, int_vec{1,2,3}));
     // Fast bubbles
-    spot_rack_3.animations.push_back(new SpotRackAnimation1(&spot_rack_3, gaussian, /*Flash Period*/ 1000, /*Flash Length*/ 600, "Fast Bubbles", "SR.1.1.4", any, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  1000,  600, "Fast Bubbles", "SR.1.1.4", any, 1, 255, int_vec{1,2,3}));
     
-    // Animation type 1.2 : Random STROBE
+    // Animation type 1.2 : Random strobe
     //Slow strobe
-    spot_rack_3.animations.push_back(new SpotRackAnimation1(&spot_rack_3, square, /*Flash Period*/ 800, /*Flash Length*/ 1000/FRATE, "Slow Rand. Strobe", "SR.1.2.1", any, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  800,  1000/FRATE, "Slow Rand. Strobe", "SR.1.2.1", any, 1, 255, int_vec{1,2,3}));
     //Fast strobe
-    spot_rack_3.animations.push_back(new SpotRackAnimation1(&spot_rack_3, square, /*Flash Period*/ 300, /*Flash Length*/ 1000/FRATE, "Mid. Rand. Strobe", "SR.1.2.2", any, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  300,  1000/FRATE, "Mid. Rand. Strobe", "SR.1.2.2", any, 1, 255, int_vec{1,2,3}));
     //Very Fast strobe
-    spot_rack_3.animations.push_back(new SpotRackAnimation1(&spot_rack_3, square, /*Flash Period*/ 100, /*Flash Length*/ 1000/FRATE, "Fast Rand. Strobe", "SR.1.2.3", any, 1));
-
-    // Animation type 1.3 : Random CHASER
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  100,  1000/FRATE, "Fast Rand. Strobe", "SR.1.2.3", any, 1, 255, int_vec{1,2,3}));
+    
+    // Animation type 1.3 : Random Square
     // Quasi-static Chaser
-    spot_rack_3.animations.push_back(new SpotRackAnimation1(&spot_rack_3, square, /*Flash Period*/ 20000, /*Flash Length*/ 30000, "Quasi-stat Chaser", "SR.1.3.1", backer, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  20000,  30000, "Quasi-stat Chaser", "SR.1.3.1", backer, 1, 255, int_vec{1,2,3}));
     // Super Slow Chaser
-    spot_rack_3.animations.push_back(new SpotRackAnimation1(&spot_rack_3, square, /*Flash Period*/ 8000, /*Flash Length*/ 3000, "Super Slow Chaser", "SR.1.3.2", backer, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  8000,  3000, "Super Slow Chaser", "SR.1.3.2", backer, 1, 255, int_vec{1,2,3}));
     //Slow Chaser
-    spot_rack_3.animations.push_back(new SpotRackAnimation1(&spot_rack_3, square, /*Flash Period*/ 4000, /*Flash Length*/ 1500, "Slow Rand. Chaser", "SR.1.3.3", any, 1));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  4000,  1500, "Slow Rand. Chaser", "SR.1.3.3", any, 1, 255, int_vec{1,2,3}));
     //Fast Chaser
-    spot_rack_3.animations.push_back(new SpotRackAnimation1(&spot_rack_3, square, /*Flash Period*/ 1000, /*Flash Length*/ 600, "Fast Rand. Chaser", "SR.1.3.4", any, 1));
-
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  1000,  600, "Fast Rand. Chaser", "SR.1.3.4", any, 1, 255, int_vec{1,2,3}));
 
     // Animation type 4 : Analog BEAT
-    spot_rack_3.animations.push_back(new SpotRackAnimation4(&spot_rack_3, 1.0, "Analog Flash (100%) ", "SR.4.1", any));
-    spot_rack_3.animations.push_back(new SpotRackAnimation4(&spot_rack_3, 0.7, "Analog Flash (70%)", "SR.4.2", any));
+    this_rack->animations.push_back(new SpotRackAnimation4(this_rack, 1.0, "Analog Flash (100%) ", "SR.4.1", any, 1, 255, int_vec{1,2,3}));
+    this_rack->animations.push_back(new SpotRackAnimation4(this_rack, 0.7, "Analog Flash (70%)", "SR.4.2", any, 1, 255, int_vec{1,2,3}));
     
     // Animation type 5 : Digital BEAT
-    spot_rack_3.animations.push_back(new SpotRackAnimation5(&spot_rack_3, "Digital Flash", "SR.5", leader, 1, 255));
+    this_rack->animations.push_back(new SpotRackAnimation5(this_rack, "Digital Flash", "SR.5", leader, 1, 255, int_vec{1,2,3}));
+
+    
+    // Animation type 1.4 : Random Flashes (with decay)
+    //Slow Flashes
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, expdecay,  2000,  200, "Slow Rand. Flashes", "SR.1.2.1", any, 1, 255, int_vec{1,2,3}));
+    //Fast Flashes
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, expdecay,  1000,  80, "Mid. Rand. Flashes", "SR.1.2.2", any, 1, 255, int_vec{1,2,3}));
 
 
-    spot_rack_3.activate_none();
+    this_rack->activate_none();
+    this_rack->dump_animations(this_rack->name.c_str());
+
 }
 
 // Define animation for the global spot rack (including both frontal and background spots);
@@ -627,6 +672,8 @@ void SpotRackAnimation1::init(const color_vec& palette){
         break;
     case 2:     this->flash_colors=color_vec{palette[0]},   this->back_color=palette[1];
         break;
+    case 3:     this->flash_colors=color_vec{palette[0], palette[1]},   this->back_color=palette[2];
+       break;
     default:    this->flash_colors=color_vec{black},        this->back_color=black;
         break;
     }

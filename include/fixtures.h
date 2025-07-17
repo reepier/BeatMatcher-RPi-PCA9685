@@ -1,7 +1,7 @@
 #pragma once
 
 #include "spot.h"
-#include "spider.h"
+/*#include "spider.h"*/
 #include "addr_LED.h"
 #include "redrayz.h"
 #include "laserbeam.h"

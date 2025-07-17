@@ -1,0 +1,27 @@
+ <Channel Name="Animation">
+  <Group Byte="0">Effect</Group>
+  <Capability Min="0" Max="0"> - </Capability>
+  <Capability Min="1" Max="1">Couleur fixe</Capability>
+  <Capability Min="2" Max="2">Analog Beat</Capability>
+  <Capability Min="3" Max="3">Bar Analog Beat</Capability>
+  <Capability Min="4" Max="4">Segments Analog Beat</Capability>
+  <Capability Min="5" Max="5">Pixels Analog Beat</Capability>
+  <Capability Min="6" Max="6">Bar Digital Beat (autocolor)</Capability>
+  <Capability Min="7" Max="7">Segments Digital Beat (autocolor)</Capability>
+  <Capability Min="8" Max="8">Pixel Digital Beat (autocolor)</Capability>
+  <Capability Min="9" Max="9">Slow Bubbles</Capability>
+  <Capability Min="10" Max="10">Fast Bubbles </Capability>
+  <Capability Min="11" Max="11">Slow Chaser</Capability>
+  <Capability Min="12" Max="12">Fast Chaser</Capability>
+  <Capability Min="13" Max="13">Fast Random Strobe</Capability>
+  <Capability Min="14" Max="14">Slow Strobe</Capability>
+  <Capability Min="15" Max="15">Group Analog Beat</Capability>
+  <Capability Min="16" Max="16">Group Digital Beat</Capability>
+  <Capability Min="17" Max="17">Slow Bubbles (group)</Capability>
+  <Capability Min="18" Max="18">Fast Bubbles (pix)</Capability>
+  <Capability Min="19" Max="19">Slow Bubbles (pix)</Capability>
+  <Capability Min="20" Max="20">Slow flash (pix)</Capability>
+  <Capability Min="21" Max="21">Fast RandStrobe (group)</Capability>
+  <Capability Min="22" Max="254">Reserve</Capability>
+  <Capability Min="255" Max="255">Automatic</Capability>
+ </Channel>

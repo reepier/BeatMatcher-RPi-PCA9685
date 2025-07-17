@@ -176,7 +176,7 @@ class SpotRackAnimation0 : public SpotRackAnimation{
     SpotRackAnimation0(SpotRack *f,  simpleColor c, std::string d, std::string i, AnimationType t, int prio, int mast, int_vec intens)
     : SpotRackAnimation(d, i, t, mast, prio, intens){
         //set BAse parameters
-        this->description = d, this->id = i, this->fixture = f, this->type=t, this->priority=prio, this->master=mast;
+        this->fixture = f;
         // Cinematic params
         this->color = c;
     }
@@ -185,7 +185,7 @@ class SpotRackAnimation0 : public SpotRackAnimation{
     SpotRackAnimation0(SpotRack *f,  std::string d, std::string i, AnimationType t, int prio, int mast, int_vec intens)
     : SpotRackAnimation(d, i, t, mast, prio, intens){
         //set BAse parameters
-        this->description = d, this->id = i, this->fixture = f, this->type=t, this->priority=prio, this->master=mast;
+        this->fixture = f;
         this->autocolor = true;
     }
 
@@ -233,68 +233,71 @@ private :
 public :
     // fixture, color bckgd, color flash, oscil. period(ms)  max , min, mean time btwn flashes (ms), flash duration(ms), description, id
     // Multicolor flash constructor
-    SpotRackAnimation1(SpotRack *f, simpleColor b_col, color_vec f_cols, Shape fshape, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio){
-        this->description = d;
-        this->id = i;
-        this->fixture = f;
-        this->type = t;
-        this->priority = prio;
+    // SpotRackAnimation1(SpotRack *f, simpleColor b_col, color_vec f_cols, Shape fshape, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio, int mast, int_vec intens)
+    // : SpotRackAnimation(d, i, t, mast, prio, intens){
+    //     this->description = d;
+    //     this->id = i;
+    //     this->fixture = f;
+    //     this->type = t;
+    //     this->priority = prio;
         
-        this->flash_colors = f_cols;
-        this->back_color = b_col;
-        this->flash_shape = fshape;
-                // log(1, __func__, " ", this->id, " Palette : ", fcn::palette_to_string(this->flash_colors, '/'));
+    //     this->flash_colors = f_cols;
+    //     this->back_color = b_col;
+    //     this->flash_shape = fshape;
+    //     // log(1, __func__, " ", this->id, " Palette : ", fcn::palette_to_string(this->flash_colors, '/'));
 
-        this->rand_const_ms = prand;
-        this->flash_len = flen;
+    //     this->rand_const_ms = prand;
+    //     this->flash_len = flen;
 
-        this->update_palette(color_vec{b_col});
-        this->update_palette(f_cols);
-    }
-    // Base constructor
-    SpotRackAnimation1(SpotRack *f, simpleColor b_col, simpleColor f_col, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio){
-        this->description = d;
-        this->id = i;
-        this->fixture = f;
-        this->type = t;
-        this->priority = prio;
+    //     this->update_palette(color_vec{b_col});
+    //     this->update_palette(f_cols);
+    // }
+    // // Base constructor
+    // SpotRackAnimation1(SpotRack *f, simpleColor b_col, simpleColor f_col, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio, int mast, int_vec intens)
+    // : SpotRackAnimation(d, i, t, mast, prio, intens){
+    //     this->description = d;
+    //     this->id = i;
+    //     this->fixture = f;
+    //     this->type = t;
+    //     this->priority = prio;
 
-        this->flash_colors.push_back(f_col);
-        this->back_color = b_col;
-        this->rand_const_ms = prand;
-        this->flash_len = flen;
+    //     this->flash_colors.push_back(f_col);
+    //     this->back_color = b_col;
+    //     this->rand_const_ms = prand;
+    //     this->flash_len = flen;
 
 
-        this->update_palette(color_vec{b_col, f_col});
-    }
+    //     this->update_palette(color_vec{b_col, f_col});
+    // }
 
-    //overloaded constructors to add a master argument
-    SpotRackAnimation1(SpotRack *f, simpleColor b_col, color_vec f_cols, Shape fshape, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio, int mast)
-        : SpotRackAnimation1(f, b_col, f_cols, fshape, prand, flen, d, i, t, prio)
-    {
-        this->master = mast;
-    }
-    SpotRackAnimation1(SpotRack *f, simpleColor b_col, simpleColor f_col, Shape fshape, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio, int mast)
-        : SpotRackAnimation1(f, b_col, f_col, fshape, prand, flen, d, i, t, prio)
-    {
-        this->master = mast;
-    }
+    // //overloaded constructors to add a master argument
+    // SpotRackAnimation1(SpotRack *f, simpleColor b_col, color_vec f_cols, Shape fshape, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio, int mast)
+    //     : SpotRackAnimation1(f, b_col, f_cols, fshape, prand, flen, d, i, t, prio)
+    // {
+    //     this->master = mast;
+    // }
+    // SpotRackAnimation1(SpotRack *f, simpleColor b_col, simpleColor f_col, Shape fshape, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio, int mast)
+    //     : SpotRackAnimation1(f, b_col, f_col, fshape, prand, flen, d, i, t, prio)
+    // {
+    //     this->master = mast;
+    // }
 
-    //overloaded constructor to add a flash shape argument
-    SpotRackAnimation1(SpotRack *f, simpleColor b_col, simpleColor f_col, Shape fshape, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio) 
-        : SpotRackAnimation1(f, b_col, f_col, prand, flen, d, i, t, prio){
-        this->flash_shape = fshape;
-    }
-    // overloaded constructor to create the same animation without flash (everything else being equal)
-    SpotRackAnimation1(SpotRack *f, simpleColor b_col, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio)
-        : SpotRackAnimation1(f, b_col, b_col, prand, flen, d, i, t, prio){
-        this->flash_activation = false;
-    }
+    // //overloaded constructor to add a flash shape argument
+    // SpotRackAnimation1(SpotRack *f, simpleColor b_col, simpleColor f_col, Shape fshape, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio) 
+    //     : SpotRackAnimation1(f, b_col, f_col, prand, flen, d, i, t, prio){
+    //     this->flash_shape = fshape;
+    // }
+    // // overloaded constructor to create the same animation without flash (everything else being equal)
+    // SpotRackAnimation1(SpotRack *f, simpleColor b_col, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio)
+    //     : SpotRackAnimation1(f, b_col, b_col, prand, flen, d, i, t, prio){
+    //     this->flash_activation = false;
+    // }
 
     //AUTOCOLOR Constructor
-    SpotRackAnimation1(SpotRack *f, Shape fshape, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio){
+    SpotRackAnimation1(SpotRack *f, Shape fshape, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio,int mast, int_vec intens)
+    : SpotRackAnimation(d, i, t, mast, prio, intens){
         // Base parameters
-        this->description = d, this->id = i, this->fixture = f, this->type = t, this->priority = prio;
+        this->fixture = f;
         this->autocolor = true;             // animation relying on autocolor must be taggued as such
         // Cinematic Parameters
         this->rand_const_ms = prand;
@@ -340,12 +343,9 @@ class SpotRackAnimation2 : public SpotRackAnimation{
     const double deltaDmax = 0;  // absolute random variation of speed @DMX_max
     
 
-    SpotRackAnimation2(SpotRack *f, simpleColor c, uint8_t speed, std::string d, std::string i, AnimationType t, uint8_t prio){
-        this->description = d;
-        this->id = i;
+    SpotRackAnimation2(SpotRack *f, simpleColor c, uint8_t speed, std::string d, std::string i, AnimationType t, uint8_t prio, int mast, int_vec intens)
+    : SpotRackAnimation(d, i, t, mast, prio, intens){
         this->fixture = f;
-        this->type = t;
-        this->priority = prio;
 
         this->color =  c;
         this->strobe_spd = speed;
@@ -386,10 +386,8 @@ public:
     // Dynamic variables (updated internally at each frame)
 
     // Constructor
-    SpotRackAnimation3(color_vec c, time_t spd, time_t dur, SpotRack *f, std::string d, std::string i)
-    {
-        this->description = d;
-        this->id = i; 
+    SpotRackAnimation3(color_vec c, time_t spd, time_t dur, SpotRack *f, std::string d, std::string i, AnimationType t, int prio, int mast, int_vec intens)
+    : SpotRackAnimation(d, i, t, mast, prio, intens){
         this->fixture = f;
 
         this->colors = c;
@@ -416,7 +414,7 @@ public:
 class SpotRackAnimation4 : public SpotRackAnimation{
   public:
     // Animation parameters (constant or set by animation constructor)
-    bool param_activate_flash;
+    bool param_activate_flash = true;           //old relic
     simpleColor flash_color = black;            // color used for flashes
     simpleColor back_color = black;             // background color displayed inbetween flashes
     double density = 1.0;               // proportion of spots flashing (0-100%) 
@@ -437,32 +435,32 @@ class SpotRackAnimation4 : public SpotRackAnimation{
     int_vec units_index;
 
     // Constructor
-    SpotRackAnimation4(SpotRack *f, simpleColor f_col, simpleColor b_col, std::string d, std::string i, AnimationType typ, bool flash = true)
-    {
-        this->description = d;
-        this->id = i; 
-        this->fixture = f;
+    // SpotRackAnimation4(SpotRack *f, simpleColor f_col, simpleColor b_col, std::string d, std::string i, AnimationType t, bool flash = true, int prio, int mast, int_vec intens)
+    // : SpotRackAnimation(d, i, t, mast, prio, intens){
+    //     this->description = d;
+    //     this->id = i; 
+    //     this->fixture = f;
 
-        this->type = typ;
-        this->param_activate_flash = flash;
+    //     this->type = t;
+    //     this->param_activate_flash = flash;
 
-        this->flash_color = f_col;
-        this->back_color = b_col;
-        units_index.resize(this->fixture->spots.size());
-        for(int i=0; i<units_index.size(); i++){
-            units_index[i] = i;
-        }
+    //     this->flash_color = f_col;
+    //     this->back_color = b_col;
+    //     units_index.resize(this->fixture->spots.size());
+    //     for(int i=0; i<units_index.size(); i++){
+    //         units_index[i] = i;
+    //     }
       
-        this->update_palette(color_vec{f_col, b_col});
-    }
+    //     this->update_palette(color_vec{f_col, b_col});
+    // }
     
     /*overloaded constructor autocolor
     TODO add a parameter to set at construction the number of colors ? or assign this parameter (random pick) at init()*/
-    SpotRackAnimation4(SpotRack *f, double dens, std::string d, std::string i, AnimationType typ, bool flash = true){
-        this->description = d, this->id = i, this->fixture = f; // set base parameters
+    SpotRackAnimation4(SpotRack *f, double dens, std::string d, std::string i, AnimationType t, int prio, int mast, int_vec intens)
+    : SpotRackAnimation(d, i, t, mast, prio, intens){
+        this->fixture = f; // set base parameters
         this->autocolor = true;             // animation relying on autocolor must be taggued as such
         
-        this->param_activate_flash = flash;
         this->density = dens;
         units_index.resize(this->fixture->spots.size());
         for(int i=0; i<units_index.size(); i++){
@@ -510,9 +508,10 @@ class SpotRackAnimation5 : public SpotRackAnimation{
     int_vec units_index;
 
     // AUTOCOLOR Constructor
-    SpotRackAnimation5(SpotRack *f, std::string d, std::string i, AnimationType typ=any, int prio=1, int mast){
+    SpotRackAnimation5(SpotRack *f, std::string d, std::string i, AnimationType t, int prio, int mast, int_vec intens)
+    : SpotRackAnimation(d, i, t, mast, prio, intens){
         //set BAse params
-        this->description = d,this->id = i,this->fixture = f,this->type = typ,this->master = mast,this->priority=prio;
+        this->fixture = f;
         this->autocolor=true;
         //set cinematic params
         units_index.resize(this->fixture->spots.size());
