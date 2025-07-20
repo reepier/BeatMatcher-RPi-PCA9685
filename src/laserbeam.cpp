@@ -17,17 +17,20 @@ LaserBeam laserbeam(12, 3, "BEAM", 7, 255);
 
 void LaserBeam::init(){
     this->animations.push_back(new LaserBeamAnimation0(this, black,  " - ", "LB.0", backer, 0, 0, int_vec{}));
-    this->animations.push_back(new LaserBeamAnimation0(this, "Couleur", "LB.0.1", backer, 0, 255, int_vec{}));
+    this->animations.push_back(new LaserBeamAnimation0(this, "Couleur", "LB.0.1",   backer, 0, 255, int_vec{}));
 
 
-    this->animations.push_back(new LaserBeamAnimation1(this, gaussian,  3000, 800, "Test Bubbles", "LB.1", any, 1, 255, int_vec{1,2,3}));
-    this->animations.push_back(new LaserBeamAnimation1(this, square,    3000, 800, "Test Square", "LB.1", any, 1, 255, int_vec{1,2,3}));
-    this->animations.push_back(new LaserBeamAnimation1(this, expdecay,  3000, 800, "Test Flash", "LB.1", any, 1, 255, int_vec{1,2,3}));
+    this->animations.push_back(new LaserBeamAnimation1(this, gaussian,  3000, 800, "Bulles lent", "LB.1",       any, 1, 255, int_vec{1,2,3}));
+    this->animations.push_back(new LaserBeamAnimation1(this, gaussian,  1000, 400, "Bulles rapide", "LB.1",     any, 1, 255, int_vec{1,2,3}));
 
-    this->animations.push_back(new LaserBeamAnimation1(this, square,    1000, 1000/FRATE, "Slow Strobe", "LB.1", any, 1, 255, int_vec{1,2,3}));
+    this->animations.push_back(new LaserBeamAnimation1(this, expdecay,  3000, 800, "Décharge lent", "LB.1",     any, 1, 255, int_vec{1,2,3}));
+    this->animations.push_back(new LaserBeamAnimation1(this, expdecay,  800, 200, "Décharge rapide", "LB.1",    any, 1, 255, int_vec{1,2,3}));
 
 
-    this->animations.push_back(new LaserBeamAnimation2(this, "Beat",    "LB.2", leader, 255, 1, int_vec{1,2,3}));
+    this->animations.push_back(new LaserBeamAnimation1(this, square,    1500, 1000/FRATE,   "Strobe lent", "LB.1",      any,   1, 255, int_vec{1,2,3}));
+    this->animations.push_back(new LaserBeamAnimation1(this, square,    500, 1000/FRATE,    "Strobe rapide", "LB.1",    any, 1, 255, int_vec{1,2,3}));
+
+    this->animations.push_back(new LaserBeamAnimation2(this, "Beat",    "LB.2", leader, 255, 1, int_vec{3}));
 
     this->activate_none();
 

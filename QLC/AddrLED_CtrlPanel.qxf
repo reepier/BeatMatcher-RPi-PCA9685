@@ -14,27 +14,35 @@
   <Group Byte="0">Effect</Group>
   <Capability Min="0" Max="0"> - </Capability>
   <Capability Min="1" Max="1">Couleur fixe</Capability>
-  <Capability Min="2" Max="2">Analog Beat</Capability>
-  <Capability Min="3" Max="3">Bar Analog Beat</Capability>
-  <Capability Min="4" Max="4">Segments Analog Beat</Capability>
-  <Capability Min="5" Max="5">Pixels Analog Beat</Capability>
-  <Capability Min="6" Max="6">Bar Digital Beat (autocolor)</Capability>
-  <Capability Min="7" Max="7">Segments Digital Beat (autocolor)</Capability>
-  <Capability Min="8" Max="8">Pixel Digital Beat (autocolor)</Capability>
-  <Capability Min="9" Max="9">Slow Bubbles</Capability>
-  <Capability Min="10" Max="10">Fast Bubbles </Capability>
-  <Capability Min="11" Max="11">Slow Chaser</Capability>
-  <Capability Min="12" Max="12">Fast Chaser</Capability>
-  <Capability Min="13" Max="13">Fast Random Strobe</Capability>
-  <Capability Min="14" Max="14">Slow Strobe</Capability>
-  <Capability Min="15" Max="15">Group Analog Beat</Capability>
-  <Capability Min="16" Max="16">Group Digital Beat</Capability>
-  <Capability Min="17" Max="17">Slow Bubbles (group)</Capability>
-  <Capability Min="18" Max="18">Fast Bubbles (pix)</Capability>
-  <Capability Min="19" Max="19">Slow Bubbles (pix)</Capability>
-  <Capability Min="20" Max="20">Slow flash (pix)</Capability>
-  <Capability Min="21" Max="21">Fast RandStrobe (group)</Capability>
-  <Capability Min="22" Max="254">Reserve</Capability>
+  <Capability Min="2" Max="2">Beat (Original)</Capability>
+  <Capability Min="3" Max="3">Beat (Group)</Capability>
+  <Capability Min="4" Max="4">Beat (Barre)</Capability>
+  <Capability Min="5" Max="5">Beat (Segm.)</Capability>
+  <Capability Min="6" Max="6">Beat (Pixel)</Capability>
+  <Capability Min="7" Max="7">Beat digital (Group)</Capability>
+  <Capability Min="8" Max="8">Beat digital (Barre)</Capability>
+  <Capability Min="9" Max="9">Beat digital (Segm.)</Capability>
+  <Capability Min="10" Max="10">Pixel Digital Beat</Capability>
+  <Capability Min="11" Max="11">Bulles quasi-stat.</Capability>
+  <Capability Min="12" Max="12">Bulles très lentes</Capability>
+  <Capability Min="13" Max="13">Bulles lentes </Capability>
+  <Capability Min="14" Max="14">Bulles rapides </Capability>
+  <Capability Min="15" Max="15">Bulles lentes (group)</Capability>
+  <Capability Min="16" Max="16">Bulles rapides (group)</Capability>
+  <Capability Min="17" Max="17">Scintillement lent</Capability>
+  <Capability Min="18" Max="18">Scintillement rapide</Capability>
+  <Capability Min="19" Max="19">Scintillement frénétique</Capability>
+  <Capability Min="20" Max="20">Néon quasi-stat.</Capability>
+  <Capability Min="21" Max="21">Néon très lent</Capability>
+  <Capability Min="22" Max="22">Néon lent</Capability>
+  <Capability Min="23" Max="23">Néon rapide</Capability>
+  <Capability Min="24" Max="24">Décharge lent</Capability>
+  <Capability Min="25" Max="25">Décharge rapide</Capability>
+  <Capability Min="26" Max="26">Strobe lent</Capability>
+  <Capability Min="27" Max="27">Strobe lent (groupe)</Capability>
+  <Capability Min="28" Max="28">Strobe rapide</Capability>
+  <Capability Min="29" Max="29">Strobe rapide (groupe)</Capability>
+  <Capability Min="30" Max="254">Reserve</Capability>
   <Capability Min="255" Max="255">Automatic</Capability>
  </Channel>
  <Channel Name="Color 1">

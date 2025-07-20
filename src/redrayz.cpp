@@ -32,35 +32,35 @@ void RedLaserGroup::init(){
 
     // RANDOM BURST
     //
-    animations.push_back(new RedrayzAnimation1(this, gaussian2,  8000,    2500, "VS Bubbles",                "RED.2.1.3", any, 1, 255, int_vec{1,2,3}));
-    animations.push_back(new RedrayzAnimation1(this, gaussian,   10000,   3000, "VS Bubbles (overlapping)",  "RED.2.1.5", any, 1, 255, int_vec{1,2,3}));
-    animations.push_back(new RedrayzAnimation1(this, gaussian,   1500,    800,  "Slow bubbles",              "RED.2.1.2", any, 1, 255, int_vec{1,2,3}));
-    animations.push_back(new RedrayzAnimation1(this, gaussian2,  1500,    4000, "Scarce slow bubbles",       "RED.2.1.4", any, 1, 255, int_vec{1,2,3}));
-    animations.push_back(new RedrayzAnimation1(this, gaussian,   600,     400,  "Fasr bubbles",              "RED.2.1.1", any, 1, 255, int_vec{1,2,3}));
+    animations.push_back(new RedrayzAnimation1(this, gaussian2,  8000,    2500, "Bulles très lent",      "RED.2.1.3", backer, 1, 255, int_vec{1}));
+    animations.push_back(new RedrayzAnimation1(this, gaussian,   10000,   3000, "Bulles très lent (+)",  "RED.2.1.5", backer, 1, 255, int_vec{1}));
+    animations.push_back(new RedrayzAnimation1(this, gaussian,   1500,    800,  "Bulles lent",           "RED.2.1.2", backer, 1, 255, int_vec{2,3}));
+    animations.push_back(new RedrayzAnimation1(this, gaussian2,  1500,    4000, "Bulles lent (-)",       "RED.2.1.4", backer, 1, 255, int_vec{2,3}));
+    animations.push_back(new RedrayzAnimation1(this, gaussian,   600,     400,  "Bulles rapides",        "RED.2.1.1", any, 1, 255, int_vec{1,2,3}));
     
-    animations.push_back(new RedrayzAnimation1(this, square, 5000,  1000,     "Very slow chaser",         "RED.2.2.3", any, 1, 255, int_vec{1,2,3}));
-    animations.push_back(new RedrayzAnimation1(this, square, 10000, 3000,     "VS, overlapping chaser",   "RED.2.2.4", any, 1, 255, int_vec{1,2,3}));
-    animations.push_back(new RedrayzAnimation1(this, square, 1500,  500,      "Slow chaser",              "RED.2.2.2", any, 1, 255, int_vec{1,2,3}));
-    animations.push_back(new RedrayzAnimation1(this, square, 600,   400,      "Fast chaser",              "RED.2.2.1", any, 1, 255, int_vec{1,2,3}));
+    animations.push_back(new RedrayzAnimation1(this, square, 5000,  1000,     "Very slow chaser",         "RED.2.2.3", backer, 1, 255, int_vec{1,2}));
+    animations.push_back(new RedrayzAnimation1(this, square, 10000, 3000,     "VS, overlapping chaser",   "RED.2.2.4", backer, 1, 255, int_vec{1,2}));
+    animations.push_back(new RedrayzAnimation1(this, square, 1500,  500,      "Slow chaser",              "RED.2.2.2", backer, 1, 255, int_vec{1,2,3}));
+    animations.push_back(new RedrayzAnimation1(this, square, 600,   400,      "Fast chaser",              "RED.2.2.1", any, 1, 255, int_vec{2,3}));
 
-    animations.push_back(new RedrayzAnimation1(this, square, 50,   2000,  "VS Strobe",  "RED.2.3.4", any, 1, 255, int_vec{1,2,3}));
-    animations.push_back(new RedrayzAnimation1(this, square, 50,   1000,  "S Strobe",   "RED.2.3.3", any, 1, 255, int_vec{1,2,3}));
-    animations.push_back(new RedrayzAnimation1(this, square, 50,   500,   "F Strobe",   "RED.2.3.2", any, 1, 255, int_vec{1,2,3}));
-    animations.push_back(new RedrayzAnimation1(this, square, 50,   100,   "VF Strobe",  "RED.2.3.1", any, 1, 255, int_vec{1,2,3}));
+    animations.push_back(new RedrayzAnimation1(this, square, 50,   2000,  "Strobe très lent",   "RED.2.3.4", backer, 1, 255, int_vec{2,3}));
+    animations.push_back(new RedrayzAnimation1(this, square, 50,   1000,  "Strobe lent",        "RED.2.3.3", backer, 1, 255, int_vec{2,3}));
+    animations.push_back(new RedrayzAnimation1(this, square, 50,   500,   "Strobe rapide",      "RED.2.3.2", any,    1, 255, int_vec{3}));
+    animations.push_back(new RedrayzAnimation1(this, square, 50,   100,   "Strobe très rapide", "RED.2.3.1", leader, 1, 255, int_vec{3}));
 
-    animations.push_back(new RedrayzAnimation1(this, expdecay, 1500,  1500,  "VS decaying rayz",               "RED.2.4.1", any, 1, 255, int_vec{1,2,3}));
-    animations.push_back(new RedrayzAnimation1(this, expdecay, 4000,  1000,  "VS overlapping decaying rayz",   "RED.2.4.6", any, 1, 255, int_vec{1,2,3}));
-    animations.push_back(new RedrayzAnimation1(this, expdecay, 600,   700,   "S decaying rayz",                "RED.2.4.2", any, 1, 255, int_vec{1,2,3}));
-    animations.push_back(new RedrayzAnimation1(this, expdecay, 700,   4000,  "Scarce S decaying rayz",         "RED.2.4.4", any, 1, 255, int_vec{1,2,3}));
-    animations.push_back(new RedrayzAnimation1(this, expdecay, 200,   300,   "F decaying rayz",                "RED.2.4.3", any, 1, 255, int_vec{1,2,3}));
-    animations.push_back(new RedrayzAnimation1(this, expdecay, 200,   2000,  "Scarce F decaying rayz",         "RED.2.4.5", any, 1, 255, int_vec{1,2,3}));
+    animations.push_back(new RedrayzAnimation1(this, expdecay, 1500,  1500,  "Décharge très lent",     "RED.2.4.1", backer, 1, 255, int_vec{1,2}));
+    animations.push_back(new RedrayzAnimation1(this, expdecay, 1500,  1000,  "Décharge très lent (+)", "RED.2.4.6", backer, 1, 255, int_vec{1,2}));
+    animations.push_back(new RedrayzAnimation1(this, expdecay, 600,   700,   "Décharge lent",          "RED.2.4.2", any,    1, 255, int_vec{1,2,3}));
+    animations.push_back(new RedrayzAnimation1(this, expdecay, 700,   4000,  "décharge lent (-)",      "RED.2.4.4", any,    1, 255, int_vec{1,2,3}));
+    animations.push_back(new RedrayzAnimation1(this, expdecay, 200,   300,   "Décharge rapide",        "RED.2.4.3", leader, 1, 255, int_vec{2,3}));
+    animations.push_back(new RedrayzAnimation1(this, expdecay, 200,   2000,  "Décharge rapide (-)",    "RED.2.4.5", leader, 1, 255, int_vec{2,3}));
 
-    animations.push_back(new RedrayzAnimation2(this, 1.0, "Analog Beat 100%",  "RED.2.1", any, 1, 255, int_vec{1,2,3}));
-    animations.push_back(new RedrayzAnimation2(this, 0.7, "Analog Beat 70%",   "RED.2.2", any, 1, 255, int_vec{1,2,3}));
-    animations.push_back(new RedrayzAnimation2(this, 0.4, "Analog Beat 40%",   "RED.2.3", any, 1, 255, int_vec{1,2,3}));
-    animations.push_back(new RedrayzAnimation2(this, 0.2, "Analog Beat 20%",   "RED.2.4", any, 1, 255, int_vec{1,2,3}));
+    animations.push_back(new RedrayzAnimation2(this, 1.0, "Beat",       "RED.2.1", leader, 1, 255, int_vec{1,2,3}));
+    animations.push_back(new RedrayzAnimation2(this, 0.7, "Beat 70%",   "RED.2.2", leader, 1, 255, int_vec{2,3}));
+    animations.push_back(new RedrayzAnimation2(this, 0.4, "Beat 40%",   "RED.2.3", leader, 1, 255, int_vec{2,3}));
+    animations.push_back(new RedrayzAnimation2(this, 0.2, "Beat 20%",   "RED.2.4", leader, 0, 255, int_vec{2,3}));
 
-    animations.push_back(new RedrayzAnimation3(this, "Digital Beat", "RED.3.1", any, 1, 255, int_vec{1,2,3}));
+    animations.push_back(new RedrayzAnimation3(this, "Digital Beat", "RED.3.1", leader, 1, 255, int_vec{2,3}));
 
     this->activate_none();
 

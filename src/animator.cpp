@@ -490,10 +490,10 @@ bool AnimationManager::controled_update(){
     // Define fixtures installed & controled by this function
     fix_vec fixs = {&addr_led, &spot_rack_1, &spot_rack_2, &spot_rack_3, &spot_rack_4, &lasergroup1, /* &lasergroup2,*/ &laserbeam};
     // define potential leaders & their respective priorities
-    fix_vec leader_fixs =   {&addr_led/*, &spot_rack_1,   &spot_rack_2,  &lasergroup1,    &laserbeam*/};
-    int_vec leader_prios =  {1,       /*  1,              1,             1,               1         */}; // useless ?
+    fix_vec leader_fixs =   {&addr_led, &spot_rack_1,   /*&spot_rack_2,  */&lasergroup1/*,    &laserbeam*/};
+    int_vec leader_prios =  {};
     // define potential backers & their respective priorities
-    fix_vec backer_fixs =   {/*&addr_led, &spot_rack_1,   */&spot_rack_2/*,   &lasergroup1,   &laserbeam*/};
+    fix_vec backer_fixs =   {&addr_led, &spot_rack_1,   &spot_rack_2,   &lasergroup1/*,   &laserbeam*/};
 
     // update automatic palette when required
     static color_vec auto_palette;              // contains current automatic palette (persistent)
@@ -539,8 +539,9 @@ bool AnimationManager::controled_update(){
             if (fix != leader_fix) backers.push_back(fix); 
         }
         backers = fcn::randomized_vector(backers); // shuffle the list
-        // int n_backer = fcn::random_pick(int_vec{3,2,1}, int_vec{2,2,1});
-        int n_backer = fcn::random_pick(int_vec{0}, int_vec{});
+        int n_backer = fcn::random_pick(int_vec{3,2,1}, int_vec{2,3,1});
+        // int n_backer = fcn::random_pick(int_vec{0}, int_vec{});
+        // int n_backer = fcn::random_pick(int_vec{3}, int_vec{});
         for (int i=0; i<backers.size(); i++){
             auto backer_fix = backers[i];
             if (i<n_backer){    
@@ -574,6 +575,8 @@ for (auto fix : fixs){
     // if input command is received or automatic settings change (palette or animation), change animation
     if(manual_update || auto_ani_update && automatic_fix_ani || auto_palette_update && automatic_fix_palette){
         color_vec final_palette;
+        if (fix == &addr_led) 
+            log(4, "Test");
         
         // choose color palette by order of priority : manual fixture palette > manual main palette > automatic palette
         if(fix->external_palette.empty() == false){ //use external fixture's palette if available
@@ -599,6 +602,11 @@ for (auto fix : fixs){
     }
     animator.new_external_palette = false;
 
+
+
+    /*Bug reports (TOFIX):
+    - when auto animation update hits while fixture is on external animation, the external animation gets 
+    erased*/
 }
 
 void AnimationManager::set_timer(time_t duration_ms){
@@ -818,7 +826,7 @@ BaseAnimation* BaseFixture::get_rand_animation_by_criteria(AnimationType typ, bo
     // copy the fixture's animation list
     anim_vec fixtures_anim_list = this->animations;
 
-    this->activate_none(); // start by resetting the fixture to the black animation in case no match is found
+    // this->activate_none(); // start by resetting the fixture to the black animation in case no match is found
 
     // Parse through the animations'list (in a random order) and select the first anim that matches the palette
     // All the animation's color must be listed int h
@@ -831,7 +839,7 @@ BaseAnimation* BaseFixture::get_rand_animation_by_criteria(AnimationType typ, bo
             // check the compatibility between the current animation & the Intensity passed as argument
             bool intensity_match = false;
             for (int i : each_animation->intensities){
-                if (i = intensity) intensity_match = true;
+                if ((i == intensity) || (intensity == 0)) intensity_match = true;
             }
             animation_match = animation_match && intensity_match;
 
