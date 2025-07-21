@@ -963,12 +963,15 @@ void BaseFixture::dump_animations(const char* fname){
 
 
     for (i=0 ; i<this->animations.size(); i++){
-        fcnLogFile  <<"  <Function ID=\"" << function_id++ <<"\" " 
-                    <<"Type=\"Scene\" Name=\"" << this->animations[i]->description.c_str() << "\" "
-                    <<"Path=\"" << this->id << " " << this->name.c_str() << "\">" << endl;
-        fcnLogFile  <<"   <Speed FadeIn=\"0\" FadeOut=\"0\" Duration=\"0\"/>" <<endl;
-        fcnLogFile  <<"   <FixtureVal ID=\""<< this->id <<"\">"<< 1 <<","<< i <<"</FixtureVal>"<<endl;
-        fcnLogFile  <<"  </Function>"<<endl;
+        if( i == 0 || this->animations[i]->description != " - " ){
+            fcnLogFile  <<"  <Function ID=\"" << function_id <<"\" " 
+                        <<"Type=\"Scene\" Name=\"" << this->animations[i]->description.c_str() << "\" "
+                        <<"Path=\"" << this->id << " " << this->name.c_str() << "\">" << endl;
+            fcnLogFile  <<"   <Speed FadeIn=\"0\" FadeOut=\"0\" Duration=\"0\"/>" <<endl;
+            fcnLogFile  <<"   <FixtureVal ID=\""<< this->id <<"\">"<< 1 <<","<< i <<"</FixtureVal>"<<endl;
+            fcnLogFile  <<"  </Function>"<<endl;
+        }
+        function_id++;
     }
 
     fcnLogFile  <<"  <Function ID=\"" << function_id++ <<"\" " 

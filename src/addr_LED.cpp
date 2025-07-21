@@ -4,7 +4,8 @@ using namespace std;
 
 #include "addr_LED.h"
 
-
+// reserve animation for future use --> without it, QLC config would need to be rebuilt for every added animation
+#define FILL animations.push_back(new AddrLEDAnimation0(this, black, " - ",    "PIX.0.0", any, 0, 0, int_vec{}));
 
 AddressableLED addr_led(1, 0, 3*NUM_PIX, "LEDs", 1, 180);
 
@@ -21,10 +22,12 @@ AddressableLED addr_led(1, 0, 3*NUM_PIX, "LEDs", 1, 180);
 
 void AddressableLED::init(){
     // declare animations here
-    animations.push_back(new AddrLEDAnimation0(this, black, " - ",    "PIX.0.0", any, 0, 255, int_vec{1,2,3}));
+    animations.push_back(new AddrLEDAnimation0(this, black, " - ",    "PIX.0.0", any, 0, 0, int_vec{1,2,3}));
     
     animations.push_back(new AddrLEDAnimation0(this, "Couleur fixe",    "PIX.0.1", any, 0, 255, int_vec{1,2,3}));
 
+    FILL    
+    FILL
     //AUTOCOLOR with Animation type 1 : Analog Beat all pixels ()Beatmatcher original animation)------------------------------
     animations.push_back(new AddrLEDAnimation1(this, bar, 1, "Beat (Original)", "PIX.6.1", leader, 255, 1, int_vec{2,3}));     
 
@@ -33,39 +36,94 @@ void AddressableLED::init(){
     animations.push_back(new AddrLEDAnimation1(this, bar,   0.7,  "Beat (Barre)",   "PIX.6.2.1", leader, 255, 1, int_vec{2,3}));     
     animations.push_back(new AddrLEDAnimation1(this, seg,   0.7,  "Beat (Segm.)",   "PIX.6.2.1", leader, 255, 0, int_vec{2,3}));     
     animations.push_back(new AddrLEDAnimation1(this, pix,   0.7,  "Beat (Pixel)",   "PIX.6.2.3", leader, 255, 1, int_vec{3}));     
-    
+    FILL
+
     //AUTOCOLOR with Animation type 2 : Digital Beat -------------------------------------------------------------------------
     animations.push_back(new AddrLEDAnimation2(this, group,   "Beat digital (Group)",  "PIX.7.1", leader, 1, 255, int_vec{2,3}));     
     animations.push_back(new AddrLEDAnimation2(this, bar,     "Beat digital (Barre)",  "PIX.7.1", leader, 1, 255, int_vec{2,3}));     
     animations.push_back(new AddrLEDAnimation2(this, seg,     "Beat digital (Segm.)",  "PIX.7.2", leader, 0, 255, int_vec{2,3}));     
     animations.push_back(new AddrLEDAnimation2(this, pix,     "Beat digital (Pixel)",  "PIX.7.3", leader, 1, 255, int_vec{3}));     
-    
+    FILL
+    FILL
+
     //AUTOCOLOR with Animation type 4 : Random Bursts----------------------------------------------------------------------------------------
     animations.push_back(new AddrLEDAnimation4(this, gaussian, bar, 7000,   30000, "Bulles statique", "PIX.8.1",  backer,  1, 255, int_vec{1}));
     animations.push_back(new AddrLEDAnimation4(this, gaussian, bar, 3000,   3000,  "Bulles très lentes", "PIX.8.1",  backer,  1, 255, int_vec{1}));
     animations.push_back(new AddrLEDAnimation4(this, gaussian, bar, 1800,   1500,  "Bulles lentes ",     "PIX.8.2",  backer,  1, 255, int_vec{1,2}));
     animations.push_back(new AddrLEDAnimation4(this, gaussian, bar, 200,    600,   "Bulles rapides ",    "PIX.8.2",  any,     1, 255, int_vec{1,2,3}));
-
     animations.push_back(new AddrLEDAnimation4(this, gaussian, group, 1500,   2000,  "Bulles lentes (group)",     "PIX.8.2",  any,     1, 255, int_vec{1,2}));
     animations.push_back(new AddrLEDAnimation4(this, gaussian, group, 200,    600,   "Bulles rapides (group)",    "PIX.8.2",  any,     1, 255, int_vec{2,3}));
-
+    FILL
+    FILL
     animations.push_back(new AddrLEDAnimation4(this, gaussian,  pix, 100, 1500,        "Scintillement lent",         "PIX.8.1", backer, 1, 255, int_vec{1}));
     animations.push_back(new AddrLEDAnimation4(this, gaussian,  pix, 10,  800,         "Scintillement rapide",       "PIX.8.1", backer, 1, 255, int_vec{1,2}));
     animations.push_back(new AddrLEDAnimation4(this, square,    pix, 10,  1000/FRATE,  "Scintillement frénétique",  "PIX.8.1", backer, 1, 255, int_vec{2,3}));
+    FILL
+    FILL
+    FILL
 
     animations.push_back(new AddrLEDAnimation4(this, square,   bar, 7000,   30000,   "Néon quasi-stat.",   "PIX.8.3",  backer,  1, 255, int_vec{1}));
     animations.push_back(new AddrLEDAnimation4(this, square,   bar, 3000,   3000,    "Néon très lent",     "PIX.8.3",  backer,  1, 255, int_vec{1,2}));
     animations.push_back(new AddrLEDAnimation4(this, square,   bar, 1800,   1500,    "Néon lent",          "PIX.8.3",  backer,  1, 255, int_vec{1,2}));
     animations.push_back(new AddrLEDAnimation4(this, square,   bar, 200,    600,     "Néon rapide",        "PIX.8.4",  any,     1, 255, int_vec{1,2,3}));
+    FILL
+    FILL
 
     animations.push_back(new AddrLEDAnimation4(this, expdecay,   bar, 1800,   1500,    "Décharge lent",        "PIX.8.3",  backer,  1, 255, int_vec{1,2}));
     animations.push_back(new AddrLEDAnimation4(this, expdecay,   bar, 200,    600,     "Décharge rapide",      "PIX.8.4",  any,     1, 255, int_vec{3}));
+    FILL
+    FILL
+    FILL
+    FILL
 
     animations.push_back(new AddrLEDAnimation4(this, square, bar,    150,   1000/FRATE, "Strobe lent", "PIX.8.6",            any,     1, 255, int_vec{2,3}));
     animations.push_back(new AddrLEDAnimation4(this, square, group,  150,   1000/FRATE, "Strobe lent (groupe)", "PIX.8.6",   any,     1, 255, int_vec{2,3}));
     animations.push_back(new AddrLEDAnimation4(this, square, bar,    50,    1000/FRATE, "Strobe rapide", "PIX.8.5",          leader,  1, 255, int_vec{3}));
     animations.push_back(new AddrLEDAnimation4(this, square, group,  50,    1000/FRATE, "Strobe rapide (groupe)", "PIX.8.5", leader,  1, 255, int_vec{3}));
-
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
+    FILL
 
     this->activate_none();
     this->dump_animations("AddressableLED");

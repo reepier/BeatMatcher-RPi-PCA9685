@@ -14,14 +14,70 @@
   <Group Byte="0">Effect</Group>
   <Capability Min="0" Max="0"> - </Capability>
   <Capability Min="1" Max="1">Couleur</Capability>
-  <Capability Min="2" Max="2">Bulles lent</Capability>
-  <Capability Min="3" Max="3">Bulles rapide</Capability>
-  <Capability Min="4" Max="4">Décharge lent</Capability>
-  <Capability Min="5" Max="5">Décharge rapide</Capability>
-  <Capability Min="6" Max="6">Strobe lent</Capability>
-  <Capability Min="7" Max="7">Strobe rapide</Capability>
-  <Capability Min="8" Max="8">Beat</Capability>
-  <Capability Min="9" Max="254">Reserve</Capability>
+  <Capability Min="2" Max="2"> - </Capability>
+  <Capability Min="3" Max="3"> - </Capability>
+  <Capability Min="4" Max="4">Bulles lent</Capability>
+  <Capability Min="5" Max="5">Bulles rapide</Capability>
+  <Capability Min="6" Max="6"> - </Capability>
+  <Capability Min="7" Max="7"> - </Capability>
+  <Capability Min="8" Max="8"> - </Capability>
+  <Capability Min="9" Max="9"> - </Capability>
+  <Capability Min="10" Max="10">Décharge lent</Capability>
+  <Capability Min="11" Max="11">Décharge rapide</Capability>
+  <Capability Min="12" Max="12"> - </Capability>
+  <Capability Min="13" Max="13"> - </Capability>
+  <Capability Min="14" Max="14"> - </Capability>
+  <Capability Min="15" Max="15"> - </Capability>
+  <Capability Min="16" Max="16">Strobe lent</Capability>
+  <Capability Min="17" Max="17">Strobe rapide</Capability>
+  <Capability Min="18" Max="18"> - </Capability>
+  <Capability Min="19" Max="19"> - </Capability>
+  <Capability Min="20" Max="20"> - </Capability>
+  <Capability Min="21" Max="21"> - </Capability>
+  <Capability Min="22" Max="22">Beat</Capability>
+  <Capability Min="23" Max="23"> - </Capability>
+  <Capability Min="24" Max="24"> - </Capability>
+  <Capability Min="25" Max="25"> - </Capability>
+  <Capability Min="26" Max="26"> - </Capability>
+  <Capability Min="27" Max="27"> - </Capability>
+  <Capability Min="28" Max="28"> - </Capability>
+  <Capability Min="29" Max="29"> - </Capability>
+  <Capability Min="30" Max="30"> - </Capability>
+  <Capability Min="31" Max="31"> - </Capability>
+  <Capability Min="32" Max="32"> - </Capability>
+  <Capability Min="33" Max="33"> - </Capability>
+  <Capability Min="34" Max="34"> - </Capability>
+  <Capability Min="35" Max="35"> - </Capability>
+  <Capability Min="36" Max="36"> - </Capability>
+  <Capability Min="37" Max="37"> - </Capability>
+  <Capability Min="38" Max="38"> - </Capability>
+  <Capability Min="39" Max="39"> - </Capability>
+  <Capability Min="40" Max="40"> - </Capability>
+  <Capability Min="41" Max="41"> - </Capability>
+  <Capability Min="42" Max="42"> - </Capability>
+  <Capability Min="43" Max="43"> - </Capability>
+  <Capability Min="44" Max="44"> - </Capability>
+  <Capability Min="45" Max="45"> - </Capability>
+  <Capability Min="46" Max="46"> - </Capability>
+  <Capability Min="47" Max="47"> - </Capability>
+  <Capability Min="48" Max="48"> - </Capability>
+  <Capability Min="49" Max="49"> - </Capability>
+  <Capability Min="50" Max="50"> - </Capability>
+  <Capability Min="51" Max="51"> - </Capability>
+  <Capability Min="52" Max="52"> - </Capability>
+  <Capability Min="53" Max="53"> - </Capability>
+  <Capability Min="54" Max="54"> - </Capability>
+  <Capability Min="55" Max="55"> - </Capability>
+  <Capability Min="56" Max="56"> - </Capability>
+  <Capability Min="57" Max="57"> - </Capability>
+  <Capability Min="58" Max="58"> - </Capability>
+  <Capability Min="59" Max="59"> - </Capability>
+  <Capability Min="60" Max="60"> - </Capability>
+  <Capability Min="61" Max="61"> - </Capability>
+  <Capability Min="62" Max="62"> - </Capability>
+  <Capability Min="63" Max="63"> - </Capability>
+  <Capability Min="64" Max="64"> - </Capability>
+  <Capability Min="65" Max="254">Reserve</Capability>
   <Capability Min="255" Max="255">Automatic</Capability>
  </Channel>
  <Channel Name="Color 1">

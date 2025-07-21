@@ -2,34 +2,94 @@
   <Group Byte="0">Effect</Group>
   <Capability Min="0" Max="0"> - </Capability>
   <Capability Min="1" Max="1">Couleur fixe</Capability>
-  <Capability Min="2" Max="2">Beat (Original)</Capability>
-  <Capability Min="3" Max="3">Beat (Group)</Capability>
-  <Capability Min="4" Max="4">Beat (Barre)</Capability>
-  <Capability Min="5" Max="5">Beat (Segm.)</Capability>
-  <Capability Min="6" Max="6">Beat (Pixel)</Capability>
-  <Capability Min="7" Max="7">Beat digital (Group)</Capability>
-  <Capability Min="8" Max="8">Beat digital (Barre)</Capability>
-  <Capability Min="9" Max="9">Beat digital (Segm.)</Capability>
-  <Capability Min="10" Max="10">Pixel Digital Beat</Capability>
-  <Capability Min="11" Max="11">Bulles statique</Capability>
-  <Capability Min="12" Max="12">Bulles très lentes</Capability>
-  <Capability Min="13" Max="13">Bulles lentes </Capability>
-  <Capability Min="14" Max="14">Bulles rapides </Capability>
-  <Capability Min="15" Max="15">Bulles lentes (group)</Capability>
-  <Capability Min="16" Max="16">Bulles rapides (group)</Capability>
-  <Capability Min="17" Max="17">Scintillement lent</Capability>
-  <Capability Min="18" Max="18">Scintillement rapide</Capability>
-  <Capability Min="19" Max="19">Scintillement frénétique</Capability>
-  <Capability Min="20" Max="20">Néon quasi-stat.</Capability>
-  <Capability Min="21" Max="21">Néon très lent</Capability>
-  <Capability Min="22" Max="22">Néon lent</Capability>
-  <Capability Min="23" Max="23">Néon rapide</Capability>
-  <Capability Min="24" Max="24">Décharge lent</Capability>
-  <Capability Min="25" Max="25">Décharge rapide</Capability>
-  <Capability Min="26" Max="26">Strobe lent</Capability>
-  <Capability Min="27" Max="27">Strobe lent (groupe)</Capability>
-  <Capability Min="28" Max="28">Strobe rapide</Capability>
-  <Capability Min="29" Max="29">Strobe rapide (groupe)</Capability>
-  <Capability Min="30" Max="254">Reserve</Capability>
+  <Capability Min="2" Max="2"> - </Capability>
+  <Capability Min="3" Max="3"> - </Capability>
+  <Capability Min="4" Max="4">Beat (Original)</Capability>
+  <Capability Min="5" Max="5">Beat (Group)</Capability>
+  <Capability Min="6" Max="6">Beat (Barre)</Capability>
+  <Capability Min="7" Max="7">Beat (Segm.)</Capability>
+  <Capability Min="8" Max="8">Beat (Pixel)</Capability>
+  <Capability Min="9" Max="9"> - </Capability>
+  <Capability Min="10" Max="10">Beat digital (Group)</Capability>
+  <Capability Min="11" Max="11">Beat digital (Barre)</Capability>
+  <Capability Min="12" Max="12">Beat digital (Segm.)</Capability>
+  <Capability Min="13" Max="13">Beat digital (Pixel)</Capability>
+  <Capability Min="14" Max="14"> - </Capability>
+  <Capability Min="15" Max="15"> - </Capability>
+  <Capability Min="16" Max="16">Bulles statique</Capability>
+  <Capability Min="17" Max="17">Bulles très lentes</Capability>
+  <Capability Min="18" Max="18">Bulles lentes </Capability>
+  <Capability Min="19" Max="19">Bulles rapides </Capability>
+  <Capability Min="20" Max="20">Bulles lentes (group)</Capability>
+  <Capability Min="21" Max="21">Bulles rapides (group)</Capability>
+  <Capability Min="22" Max="22"> - </Capability>
+  <Capability Min="23" Max="23"> - </Capability>
+  <Capability Min="24" Max="24">Scintillement lent</Capability>
+  <Capability Min="25" Max="25">Scintillement rapide</Capability>
+  <Capability Min="26" Max="26">Scintillement frénétique</Capability>
+  <Capability Min="27" Max="27"> - </Capability>
+  <Capability Min="28" Max="28"> - </Capability>
+  <Capability Min="29" Max="29"> - </Capability>
+  <Capability Min="30" Max="30">Néon quasi-stat.</Capability>
+  <Capability Min="31" Max="31">Néon très lent</Capability>
+  <Capability Min="32" Max="32">Néon lent</Capability>
+  <Capability Min="33" Max="33">Néon rapide</Capability>
+  <Capability Min="34" Max="34"> - </Capability>
+  <Capability Min="35" Max="35"> - </Capability>
+  <Capability Min="36" Max="36">Décharge lent</Capability>
+  <Capability Min="37" Max="37">Décharge rapide</Capability>
+  <Capability Min="38" Max="38"> - </Capability>
+  <Capability Min="39" Max="39"> - </Capability>
+  <Capability Min="40" Max="40"> - </Capability>
+  <Capability Min="41" Max="41"> - </Capability>
+  <Capability Min="42" Max="42">Strobe lent</Capability>
+  <Capability Min="43" Max="43">Strobe lent (groupe)</Capability>
+  <Capability Min="44" Max="44">Strobe rapide</Capability>
+  <Capability Min="45" Max="45">Strobe rapide (groupe)</Capability>
+  <Capability Min="46" Max="46"> - </Capability>
+  <Capability Min="47" Max="47"> - </Capability>
+  <Capability Min="48" Max="48"> - </Capability>
+  <Capability Min="49" Max="49"> - </Capability>
+  <Capability Min="50" Max="50"> - </Capability>
+  <Capability Min="51" Max="51"> - </Capability>
+  <Capability Min="52" Max="52"> - </Capability>
+  <Capability Min="53" Max="53"> - </Capability>
+  <Capability Min="54" Max="54"> - </Capability>
+  <Capability Min="55" Max="55"> - </Capability>
+  <Capability Min="56" Max="56"> - </Capability>
+  <Capability Min="57" Max="57"> - </Capability>
+  <Capability Min="58" Max="58"> - </Capability>
+  <Capability Min="59" Max="59"> - </Capability>
+  <Capability Min="60" Max="60"> - </Capability>
+  <Capability Min="61" Max="61"> - </Capability>
+  <Capability Min="62" Max="62"> - </Capability>
+  <Capability Min="63" Max="63"> - </Capability>
+  <Capability Min="64" Max="64"> - </Capability>
+  <Capability Min="65" Max="65"> - </Capability>
+  <Capability Min="66" Max="66"> - </Capability>
+  <Capability Min="67" Max="67"> - </Capability>
+  <Capability Min="68" Max="68"> - </Capability>
+  <Capability Min="69" Max="69"> - </Capability>
+  <Capability Min="70" Max="70"> - </Capability>
+  <Capability Min="71" Max="71"> - </Capability>
+  <Capability Min="72" Max="72"> - </Capability>
+  <Capability Min="73" Max="73"> - </Capability>
+  <Capability Min="74" Max="74"> - </Capability>
+  <Capability Min="75" Max="75"> - </Capability>
+  <Capability Min="76" Max="76"> - </Capability>
+  <Capability Min="77" Max="77"> - </Capability>
+  <Capability Min="78" Max="78"> - </Capability>
+  <Capability Min="79" Max="79"> - </Capability>
+  <Capability Min="80" Max="80"> - </Capability>
+  <Capability Min="81" Max="81"> - </Capability>
+  <Capability Min="82" Max="82"> - </Capability>
+  <Capability Min="83" Max="83"> - </Capability>
+  <Capability Min="84" Max="84"> - </Capability>
+  <Capability Min="85" Max="85"> - </Capability>
+  <Capability Min="86" Max="86"> - </Capability>
+  <Capability Min="87" Max="87"> - </Capability>
+  <Capability Min="88" Max="88"> - </Capability>
+  <Capability Min="89" Max="89"> - </Capability>
+  <Capability Min="90" Max="254">Reserve</Capability>
   <Capability Min="255" Max="255">Automatic</Capability>
  </Channel>
