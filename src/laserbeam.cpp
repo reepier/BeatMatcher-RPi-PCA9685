@@ -93,9 +93,9 @@ void LaserBeam::init(){
 }
 
 DMX_vec LaserBeam::buffer(){
-    return DMX_vec{ (uint8_t)(this->pixel[R] *this->master/255.0),
-                    (uint8_t)(this->pixel[G] *this->master/255.0),
-                    (uint8_t)(this->pixel[B] *this->master/255.0)};
+    return DMX_vec{ (uint8_t)(255-(this->pixel[R] *this->master/255.0)),
+                    (uint8_t)(255-(this->pixel[G] *this->master/255.0)),
+                    (uint8_t)(255-(this->pixel[B] *this->master/255.0))};
 }
 
 /**

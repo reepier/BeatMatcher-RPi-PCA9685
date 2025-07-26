@@ -835,7 +835,7 @@
       <Intensity Adjust="False">100</Intensity>
      </Button>
      <Button Caption="Auto" ID="148" Icon="">
-      <WindowState Visible="True" X="475" Y="95" Width="50" Height="30"/>
+      <WindowState Visible="True" X="480" Y="95" Width="40" Height="30"/>
       <Appearance>
        <FrameStyle>None</FrameStyle>
        <ForegroundColor>Default</ForegroundColor>
@@ -848,7 +848,7 @@
       <Intensity Adjust="False">100</Intensity>
      </Button>
      <Button Caption="OFF" ID="149" Icon="">
-      <WindowState Visible="True" X="425" Y="95" Width="50" Height="30"/>
+      <WindowState Visible="True" X="405" Y="95" Width="40" Height="30"/>
       <Appearance>
        <FrameStyle>None</FrameStyle>
        <ForegroundColor>Default</ForegroundColor>
@@ -1320,6 +1320,19 @@
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
      </Button>
+     <Button Caption="ON" ID="130" Icon="">
+      <WindowState Visible="True" X="445" Y="95" Width="35" Height="30"/>
+      <Appearance>
+       <FrameStyle>None</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>4294336849</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Default</Font>
+      </Appearance>
+      <Function ID="359"/>
+      <Action>Toggle</Action>
+      <Intensity Adjust="False">100</Intensity>
+     </Button>
     </SoloFrame>
    </Frame>
    <Frame Caption="PAR 2" ID="9">
@@ -1449,7 +1462,7 @@
       <Intensity Adjust="False">100</Intensity>
      </Button>
      <Button Caption="Auto" ID="43" Icon="">
-      <WindowState Visible="True" X="335" Y="180" Width="50" Height="30"/>
+      <WindowState Visible="True" X="340" Y="180" Width="45" Height="30"/>
       <Appearance>
        <FrameStyle>None</FrameStyle>
        <ForegroundColor>Default</ForegroundColor>
@@ -1462,7 +1475,7 @@
       <Intensity Adjust="False">100</Intensity>
      </Button>
      <Button Caption="OFF" ID="44" Icon="">
-      <WindowState Visible="True" X="285" Y="180" Width="50" Height="30"/>
+      <WindowState Visible="True" X="265" Y="180" Width="40" Height="30"/>
       <Appearance>
        <FrameStyle>None</FrameStyle>
        <ForegroundColor>Default</ForegroundColor>
@@ -1781,6 +1794,19 @@
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
      </Label>
+     <Button Caption="ON" ID="132" Icon="">
+      <WindowState Visible="True" X="305" Y="180" Width="35" Height="30"/>
+      <Appearance>
+       <FrameStyle>None</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>4294336849</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Default</Font>
+      </Appearance>
+      <Function ID="173"/>
+      <Action>Toggle</Action>
+      <Intensity Adjust="False">100</Intensity>
+     </Button>
     </SoloFrame>
    </Frame>
    <Frame Caption="PAR 3" ID="15">
@@ -2046,7 +2072,7 @@
       <Intensity Adjust="False">100</Intensity>
      </Button>
      <Button Caption="Auto" ID="74" Icon="">
-      <WindowState Visible="True" X="385" Y="100" Width="50" Height="30"/>
+      <WindowState Visible="True" X="405" Y="100" Width="45" Height="30"/>
       <Appearance>
        <FrameStyle>None</FrameStyle>
        <ForegroundColor>Default</ForegroundColor>
@@ -2059,7 +2085,7 @@
       <Intensity Adjust="False">100</Intensity>
      </Button>
      <Button Caption="OFF" ID="75" Icon="">
-      <WindowState Visible="True" X="335" Y="100" Width="50" Height="30"/>
+      <WindowState Visible="True" X="330" Y="100" Width="40" Height="30"/>
       <Appearance>
        <FrameStyle>None</FrameStyle>
        <ForegroundColor>Default</ForegroundColor>
@@ -2469,6 +2495,19 @@
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
      </Button>
+     <Button Caption="ON" ID="113" Icon="">
+      <WindowState Visible="True" X="370" Y="100" Width="35" Height="30"/>
+      <Appearance>
+       <FrameStyle>None</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>4294336849</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Default</Font>
+      </Appearance>
+      <Function ID="450"/>
+      <Action>Toggle</Action>
+      <Intensity Adjust="False">100</Intensity>
+     </Button>
     </SoloFrame>
    </Frame>
    <Frame Caption="PAR 1" ID="27">
@@ -2598,7 +2637,7 @@
       <Intensity Adjust="False">100</Intensity>
      </Button>
      <Button Caption="Auto" ID="89" Icon="">
-      <WindowState Visible="True" X="335" Y="180" Width="50" Height="30"/>
+      <WindowState Visible="True" X="345" Y="180" Width="45" Height="30"/>
       <Appearance>
        <FrameStyle>None</FrameStyle>
        <ForegroundColor>Default</ForegroundColor>
@@ -2611,7 +2650,7 @@
       <Intensity Adjust="False">100</Intensity>
      </Button>
      <Button Caption="OFF" ID="90" Icon="">
-      <WindowState Visible="True" X="285" Y="180" Width="50" Height="30"/>
+      <WindowState Visible="True" X="270" Y="180" Width="40" Height="30"/>
       <Appearance>
        <FrameStyle>None</FrameStyle>
        <ForegroundColor>Default</ForegroundColor>
@@ -2930,6 +2969,19 @@
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
      </Label>
+     <Button Caption="ON" ID="131" Icon="">
+      <WindowState Visible="True" X="310" Y="180" Width="35" Height="30"/>
+      <Appearance>
+       <FrameStyle>None</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>4294336849</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Default</Font>
+      </Appearance>
+      <Function ID="101"/>
+      <Action>Toggle</Action>
+      <Intensity Adjust="False">100</Intensity>
+     </Button>
     </SoloFrame>
    </Frame>
    <Frame Caption="Main Control" ID="35">
@@ -2992,7 +3044,7 @@
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="2">
+     <Level LowLimit="0" HighLimit="255" Value="11">
       <Channel Fixture="0">3</Channel>
      </Level>
      <Playback>
@@ -3235,7 +3287,7 @@
       <Intensity Adjust="False">100</Intensity>
      </Button>
      <Button Caption="Auto" ID="190" Icon="">
-      <WindowState Visible="True" X="335" Y="180" Width="50" Height="30"/>
+      <WindowState Visible="True" X="320" Y="180" Width="40" Height="30"/>
       <Appearance>
        <FrameStyle>None</FrameStyle>
        <ForegroundColor>Default</ForegroundColor>
@@ -3248,7 +3300,7 @@
       <Intensity Adjust="False">100</Intensity>
      </Button>
      <Button Caption="OFF" ID="191" Icon="">
-      <WindowState Visible="True" X="285" Y="180" Width="50" Height="30"/>
+      <WindowState Visible="True" X="245" Y="180" Width="40" Height="30"/>
       <Appearance>
        <FrameStyle>None</FrameStyle>
        <ForegroundColor>Default</ForegroundColor>
@@ -3544,6 +3596,19 @@
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
      </Label>
+     <Button Caption="ON" ID="87" Icon="">
+      <WindowState Visible="True" X="285" Y="180" Width="35" Height="30"/>
+      <Appearance>
+       <FrameStyle>None</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>4294336849</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Default</Font>
+      </Appearance>
+      <Function ID="531"/>
+      <Action>Toggle</Action>
+      <Intensity Adjust="False">100</Intensity>
+     </Button>
     </SoloFrame>
    </Frame>
   </Frame>
