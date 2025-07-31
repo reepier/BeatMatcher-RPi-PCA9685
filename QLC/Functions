@@ -1,290 +1,290 @@
-  <Function ID="100" Type="Scene" Name=" - " Path="2 PAR 1">
+  <Function ID="100" Type="Scene" Name=" - " Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,0</FixtureVal>
+  </Function>
+  <Function ID="101" Type="Scene" Name="Couleur" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,1</FixtureVal>
+  </Function>
+  <Function ID="104" Type="Scene" Name="Bulles statique" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,4</FixtureVal>
+  </Function>
+  <Function ID="105" Type="Scene" Name="Bulles très lent" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,5</FixtureVal>
+  </Function>
+  <Function ID="106" Type="Scene" Name="Bulles lent" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,6</FixtureVal>
+  </Function>
+  <Function ID="107" Type="Scene" Name="Bulles rapide" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,7</FixtureVal>
+  </Function>
+  <Function ID="110" Type="Scene" Name="Chaser aléa. statiq." Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,10</FixtureVal>
+  </Function>
+  <Function ID="111" Type="Scene" Name="Chaser aléa. lent" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,11</FixtureVal>
+  </Function>
+  <Function ID="112" Type="Scene" Name="Chaser aléa. rapide" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,12</FixtureVal>
+  </Function>
+  <Function ID="116" Type="Scene" Name="Décharge aléa. lent" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,16</FixtureVal>
+  </Function>
+  <Function ID="117" Type="Scene" Name="Décharge aléa. rapide" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,17</FixtureVal>
+  </Function>
+  <Function ID="122" Type="Scene" Name="Strobe lent" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,22</FixtureVal>
+  </Function>
+  <Function ID="123" Type="Scene" Name="Strobe moyen" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,23</FixtureVal>
+  </Function>
+  <Function ID="124" Type="Scene" Name="Strobe rapide" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,24</FixtureVal>
+  </Function>
+  <Function ID="128" Type="Scene" Name="Beat analogique" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,28</FixtureVal>
+  </Function>
+  <Function ID="129" Type="Scene" Name="Beat analog. (70%)" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,29</FixtureVal>
+  </Function>
+  <Function ID="134" Type="Scene" Name="Beat digital" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,34</FixtureVal>
+  </Function>
+  <Function ID="171" Type="Scene" Name="Automatic" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,255</FixtureVal>
+  </Function>
+  <Function ID="172" Type="Scene" Name=" - " Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,0</FixtureVal>
   </Function>
-  <Function ID="101" Type="Scene" Name="Couleur" Path="2 PAR 1">
+  <Function ID="173" Type="Scene" Name="Couleur" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,1</FixtureVal>
   </Function>
-  <Function ID="104" Type="Scene" Name="Bulles statique" Path="2 PAR 1">
+  <Function ID="176" Type="Scene" Name="Bulles statique" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,4</FixtureVal>
   </Function>
-  <Function ID="105" Type="Scene" Name="Bulles très lent" Path="2 PAR 1">
+  <Function ID="177" Type="Scene" Name="Bulles très lent" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,5</FixtureVal>
   </Function>
-  <Function ID="106" Type="Scene" Name="Bulles lent" Path="2 PAR 1">
+  <Function ID="178" Type="Scene" Name="Bulles lent" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,6</FixtureVal>
   </Function>
-  <Function ID="107" Type="Scene" Name="Bulles rapide" Path="2 PAR 1">
+  <Function ID="179" Type="Scene" Name="Bulles rapide" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,7</FixtureVal>
   </Function>
-  <Function ID="110" Type="Scene" Name="Chaser aléa. statiq." Path="2 PAR 1">
+  <Function ID="180" Type="Scene" Name="Chaser aléa. statiq." Path="2 PAR 2">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="2">1,8</FixtureVal>
+  </Function>
+  <Function ID="181" Type="Scene" Name="Chaser aléa. lent" Path="2 PAR 2">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="2">1,9</FixtureVal>
+  </Function>
+  <Function ID="182" Type="Scene" Name="Chaser aléa. rapide" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,10</FixtureVal>
   </Function>
-  <Function ID="111" Type="Scene" Name="Chaser aléa. lent" Path="2 PAR 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,11</FixtureVal>
-  </Function>
-  <Function ID="112" Type="Scene" Name="Chaser aléa. rapide" Path="2 PAR 1">
+  <Function ID="184" Type="Scene" Name="Décharge aléa. lent" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,12</FixtureVal>
   </Function>
-  <Function ID="116" Type="Scene" Name="Décharge aléa. lent" Path="2 PAR 1">
+  <Function ID="185" Type="Scene" Name="Décharge aléa. rapide" Path="2 PAR 2">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="2">1,13</FixtureVal>
+  </Function>
+  <Function ID="188" Type="Scene" Name="Strobe lent" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,16</FixtureVal>
   </Function>
-  <Function ID="117" Type="Scene" Name="Décharge aléa. rapide" Path="2 PAR 1">
+  <Function ID="189" Type="Scene" Name="Strobe moyen" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,17</FixtureVal>
   </Function>
-  <Function ID="122" Type="Scene" Name="Strobe lent" Path="2 PAR 1">
+  <Function ID="190" Type="Scene" Name="Strobe rapide" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,22</FixtureVal>
+   <FixtureVal ID="2">1,18</FixtureVal>
   </Function>
-  <Function ID="123" Type="Scene" Name="Strobe moyen" Path="2 PAR 1">
+  <Function ID="192" Type="Scene" Name="Beat analogique" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,23</FixtureVal>
+   <FixtureVal ID="2">1,20</FixtureVal>
   </Function>
-  <Function ID="124" Type="Scene" Name="Strobe rapide" Path="2 PAR 1">
+  <Function ID="193" Type="Scene" Name="Beat analog. (70%)" Path="2 PAR 2">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="2">1,21</FixtureVal>
+  </Function>
+  <Function ID="196" Type="Scene" Name="Beat digital" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,24</FixtureVal>
   </Function>
-  <Function ID="128" Type="Scene" Name="Beat analogique" Path="2 PAR 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,28</FixtureVal>
-  </Function>
-  <Function ID="129" Type="Scene" Name="Beat analog. (70%)" Path="2 PAR 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,29</FixtureVal>
-  </Function>
-  <Function ID="134" Type="Scene" Name="Beat digital" Path="2 PAR 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,34</FixtureVal>
-  </Function>
-  <Function ID="171" Type="Scene" Name="Automatic" Path="2 PAR 1">
+  <Function ID="233" Type="Scene" Name="Automatic" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,255</FixtureVal>
   </Function>
-  <Function ID="172" Type="Scene" Name=" - " Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,0</FixtureVal>
-  </Function>
-  <Function ID="173" Type="Scene" Name="Couleur" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,1</FixtureVal>
-  </Function>
-  <Function ID="176" Type="Scene" Name="Bulles statique" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,4</FixtureVal>
-  </Function>
-  <Function ID="177" Type="Scene" Name="Bulles très lent" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,5</FixtureVal>
-  </Function>
-  <Function ID="178" Type="Scene" Name="Bulles lent" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,6</FixtureVal>
-  </Function>
-  <Function ID="179" Type="Scene" Name="Bulles rapide" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,7</FixtureVal>
-  </Function>
-  <Function ID="180" Type="Scene" Name="Chaser aléa. statiq." Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,8</FixtureVal>
-  </Function>
-  <Function ID="181" Type="Scene" Name="Chaser aléa. lent" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,9</FixtureVal>
-  </Function>
-  <Function ID="182" Type="Scene" Name="Chaser aléa. rapide" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,10</FixtureVal>
-  </Function>
-  <Function ID="184" Type="Scene" Name="Décharge aléa. lent" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,12</FixtureVal>
-  </Function>
-  <Function ID="185" Type="Scene" Name="Décharge aléa. rapide" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,13</FixtureVal>
-  </Function>
-  <Function ID="188" Type="Scene" Name="Strobe lent" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,16</FixtureVal>
-  </Function>
-  <Function ID="189" Type="Scene" Name="Strobe moyen" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,17</FixtureVal>
-  </Function>
-  <Function ID="190" Type="Scene" Name="Strobe rapide" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,18</FixtureVal>
-  </Function>
-  <Function ID="192" Type="Scene" Name="Beat analogique" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,20</FixtureVal>
-  </Function>
-  <Function ID="193" Type="Scene" Name="Beat analog. (70%)" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,21</FixtureVal>
-  </Function>
-  <Function ID="196" Type="Scene" Name="Beat digital" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,24</FixtureVal>
-  </Function>
-  <Function ID="233" Type="Scene" Name="Automatic" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,255</FixtureVal>
-  </Function>
-  <Function ID="234" Type="Scene" Name=" - " Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,0</FixtureVal>
-  </Function>
-  <Function ID="235" Type="Scene" Name="Couleur" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,1</FixtureVal>
-  </Function>
-  <Function ID="238" Type="Scene" Name="Bulles statique" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,4</FixtureVal>
-  </Function>
-  <Function ID="239" Type="Scene" Name="Bulles très lent" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,5</FixtureVal>
-  </Function>
-  <Function ID="240" Type="Scene" Name="Bulles lent" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,6</FixtureVal>
-  </Function>
-  <Function ID="241" Type="Scene" Name="Bulles rapide" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,7</FixtureVal>
-  </Function>
-  <Function ID="242" Type="Scene" Name="Chaser aléa. statiq." Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,8</FixtureVal>
-  </Function>
-  <Function ID="243" Type="Scene" Name="Chaser aléa. lent" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,9</FixtureVal>
-  </Function>
-  <Function ID="244" Type="Scene" Name="Chaser aléa. rapide" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,10</FixtureVal>
-  </Function>
-  <Function ID="246" Type="Scene" Name="Décharge aléa. lent" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,12</FixtureVal>
-  </Function>
-  <Function ID="247" Type="Scene" Name="Décharge aléa. rapide" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,13</FixtureVal>
-  </Function>
-  <Function ID="250" Type="Scene" Name="Strobe lent" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,16</FixtureVal>
-  </Function>
-  <Function ID="251" Type="Scene" Name="Strobe moyen" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,17</FixtureVal>
-  </Function>
-  <Function ID="252" Type="Scene" Name="Strobe rapide" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,18</FixtureVal>
-  </Function>
-  <Function ID="254" Type="Scene" Name="Beat analogique" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,20</FixtureVal>
-  </Function>
-  <Function ID="255" Type="Scene" Name="Beat analog. (70%)" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,21</FixtureVal>
-  </Function>
-  <Function ID="258" Type="Scene" Name="Beat digital" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,24</FixtureVal>
-  </Function>
-  <Function ID="295" Type="Scene" Name="Automatic" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,255</FixtureVal>
-  </Function>
-  <Function ID="296" Type="Scene" Name=" - " Path="4 PAR 3">
+  <Function ID="234" Type="Scene" Name=" - " Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,0</FixtureVal>
   </Function>
-  <Function ID="297" Type="Scene" Name="Couleur" Path="4 PAR 3">
+  <Function ID="235" Type="Scene" Name="Couleur" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,1</FixtureVal>
   </Function>
-  <Function ID="300" Type="Scene" Name="Bulles statique" Path="4 PAR 3">
+  <Function ID="238" Type="Scene" Name="Bulles statique" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,4</FixtureVal>
   </Function>
-  <Function ID="301" Type="Scene" Name="Bulles très lent" Path="4 PAR 3">
+  <Function ID="239" Type="Scene" Name="Bulles très lent" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,5</FixtureVal>
   </Function>
-  <Function ID="302" Type="Scene" Name="Bulles lent" Path="4 PAR 3">
+  <Function ID="240" Type="Scene" Name="Bulles lent" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,6</FixtureVal>
   </Function>
-  <Function ID="303" Type="Scene" Name="Bulles rapide" Path="4 PAR 3">
+  <Function ID="241" Type="Scene" Name="Bulles rapide" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,7</FixtureVal>
   </Function>
-  <Function ID="304" Type="Scene" Name="Chaser aléa. statiq." Path="4 PAR 3">
+  <Function ID="242" Type="Scene" Name="Chaser aléa. statiq." Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,8</FixtureVal>
   </Function>
-  <Function ID="305" Type="Scene" Name="Chaser aléa. lent" Path="4 PAR 3">
+  <Function ID="243" Type="Scene" Name="Chaser aléa. lent" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,9</FixtureVal>
   </Function>
-  <Function ID="306" Type="Scene" Name="Chaser aléa. rapide" Path="4 PAR 3">
+  <Function ID="244" Type="Scene" Name="Chaser aléa. rapide" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,10</FixtureVal>
   </Function>
-  <Function ID="308" Type="Scene" Name="Décharge aléa. lent" Path="4 PAR 3">
+  <Function ID="246" Type="Scene" Name="Décharge aléa. lent" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,12</FixtureVal>
   </Function>
-  <Function ID="309" Type="Scene" Name="Décharge aléa. rapide" Path="4 PAR 3">
+  <Function ID="247" Type="Scene" Name="Décharge aléa. rapide" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,13</FixtureVal>
   </Function>
-  <Function ID="312" Type="Scene" Name="Strobe lent" Path="4 PAR 3">
+  <Function ID="250" Type="Scene" Name="Strobe lent" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,16</FixtureVal>
   </Function>
-  <Function ID="313" Type="Scene" Name="Strobe moyen" Path="4 PAR 3">
+  <Function ID="251" Type="Scene" Name="Strobe moyen" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,17</FixtureVal>
   </Function>
-  <Function ID="314" Type="Scene" Name="Strobe rapide" Path="4 PAR 3">
+  <Function ID="252" Type="Scene" Name="Strobe rapide" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,18</FixtureVal>
   </Function>
-  <Function ID="316" Type="Scene" Name="Beat analogique" Path="4 PAR 3">
+  <Function ID="254" Type="Scene" Name="Beat analogique" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,20</FixtureVal>
   </Function>
-  <Function ID="317" Type="Scene" Name="Beat analog. (70%)" Path="4 PAR 3">
+  <Function ID="255" Type="Scene" Name="Beat analog. (70%)" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,21</FixtureVal>
   </Function>
-  <Function ID="320" Type="Scene" Name="Beat digital" Path="4 PAR 3">
+  <Function ID="258" Type="Scene" Name="Beat digital" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,24</FixtureVal>
   </Function>
-  <Function ID="357" Type="Scene" Name="Automatic" Path="4 PAR 3">
+  <Function ID="295" Type="Scene" Name="Automatic" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,255</FixtureVal>
+  </Function>
+  <Function ID="296" Type="Scene" Name=" - " Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,0</FixtureVal>
+  </Function>
+  <Function ID="297" Type="Scene" Name="Couleur" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,1</FixtureVal>
+  </Function>
+  <Function ID="300" Type="Scene" Name="Bulles statique" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,4</FixtureVal>
+  </Function>
+  <Function ID="301" Type="Scene" Name="Bulles très lent" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,5</FixtureVal>
+  </Function>
+  <Function ID="302" Type="Scene" Name="Bulles lent" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,6</FixtureVal>
+  </Function>
+  <Function ID="303" Type="Scene" Name="Bulles rapide" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,7</FixtureVal>
+  </Function>
+  <Function ID="304" Type="Scene" Name="Chaser aléa. statiq." Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,8</FixtureVal>
+  </Function>
+  <Function ID="305" Type="Scene" Name="Chaser aléa. lent" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,9</FixtureVal>
+  </Function>
+  <Function ID="306" Type="Scene" Name="Chaser aléa. rapide" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,10</FixtureVal>
+  </Function>
+  <Function ID="308" Type="Scene" Name="Décharge aléa. lent" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,12</FixtureVal>
+  </Function>
+  <Function ID="309" Type="Scene" Name="Décharge aléa. rapide" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,13</FixtureVal>
+  </Function>
+  <Function ID="312" Type="Scene" Name="Strobe lent" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,16</FixtureVal>
+  </Function>
+  <Function ID="313" Type="Scene" Name="Strobe moyen" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,17</FixtureVal>
+  </Function>
+  <Function ID="314" Type="Scene" Name="Strobe rapide" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,18</FixtureVal>
+  </Function>
+  <Function ID="316" Type="Scene" Name="Beat analogique" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,20</FixtureVal>
+  </Function>
+  <Function ID="317" Type="Scene" Name="Beat analog. (70%)" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,21</FixtureVal>
+  </Function>
+  <Function ID="320" Type="Scene" Name="Beat digital" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,24</FixtureVal>
+  </Function>
+  <Function ID="357" Type="Scene" Name="Automatic" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,255</FixtureVal>
   </Function>
   <Function ID="358" Type="Scene" Name=" - " Path="1 LEDs">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
@@ -558,293 +558,293 @@
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="7">1,255</FixtureVal>
   </Function>
-  <Function ID="100" Type="Scene" Name=" - " Path="2 PAR 1">
+  <Function ID="100" Type="Scene" Name=" - " Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,0</FixtureVal>
+  </Function>
+  <Function ID="101" Type="Scene" Name="Couleur" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,1</FixtureVal>
+  </Function>
+  <Function ID="104" Type="Scene" Name="Bulles statique" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,4</FixtureVal>
+  </Function>
+  <Function ID="105" Type="Scene" Name="Bulles très lent" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,5</FixtureVal>
+  </Function>
+  <Function ID="106" Type="Scene" Name="Bulles lent" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,6</FixtureVal>
+  </Function>
+  <Function ID="107" Type="Scene" Name="Bulles rapide" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,7</FixtureVal>
+  </Function>
+  <Function ID="110" Type="Scene" Name="Chaser aléa. statiq." Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,10</FixtureVal>
+  </Function>
+  <Function ID="111" Type="Scene" Name="Chaser aléa. lent" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,11</FixtureVal>
+  </Function>
+  <Function ID="112" Type="Scene" Name="Chaser aléa. rapide" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,12</FixtureVal>
+  </Function>
+  <Function ID="116" Type="Scene" Name="Décharge aléa. lent" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,16</FixtureVal>
+  </Function>
+  <Function ID="117" Type="Scene" Name="Décharge aléa. rapide" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,17</FixtureVal>
+  </Function>
+  <Function ID="122" Type="Scene" Name="Strobe lent" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,22</FixtureVal>
+  </Function>
+  <Function ID="123" Type="Scene" Name="Strobe moyen" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,23</FixtureVal>
+  </Function>
+  <Function ID="124" Type="Scene" Name="Strobe rapide" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,24</FixtureVal>
+  </Function>
+  <Function ID="128" Type="Scene" Name="Beat analogique" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,28</FixtureVal>
+  </Function>
+  <Function ID="129" Type="Scene" Name="Beat analog. (70%)" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,29</FixtureVal>
+  </Function>
+  <Function ID="134" Type="Scene" Name="Beat digital" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,34</FixtureVal>
+  </Function>
+  <Function ID="171" Type="Scene" Name="Automatic" Path="1 PAR 1">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,255</FixtureVal>
+  </Function>
+  <Function ID="172" Type="Scene" Name=" - " Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,0</FixtureVal>
   </Function>
-  <Function ID="101" Type="Scene" Name="Couleur" Path="2 PAR 1">
+  <Function ID="173" Type="Scene" Name="Couleur" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,1</FixtureVal>
   </Function>
-  <Function ID="104" Type="Scene" Name="Bulles statique" Path="2 PAR 1">
+  <Function ID="176" Type="Scene" Name="Bulles statique" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,4</FixtureVal>
   </Function>
-  <Function ID="105" Type="Scene" Name="Bulles très lent" Path="2 PAR 1">
+  <Function ID="177" Type="Scene" Name="Bulles très lent" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,5</FixtureVal>
   </Function>
-  <Function ID="106" Type="Scene" Name="Bulles lent" Path="2 PAR 1">
+  <Function ID="178" Type="Scene" Name="Bulles lent" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,6</FixtureVal>
   </Function>
-  <Function ID="107" Type="Scene" Name="Bulles rapide" Path="2 PAR 1">
+  <Function ID="179" Type="Scene" Name="Bulles rapide" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,7</FixtureVal>
   </Function>
-  <Function ID="110" Type="Scene" Name="Chaser aléa. statiq." Path="2 PAR 1">
+  <Function ID="180" Type="Scene" Name="Chaser aléa. statiq." Path="2 PAR 2">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="2">1,8</FixtureVal>
+  </Function>
+  <Function ID="181" Type="Scene" Name="Chaser aléa. lent" Path="2 PAR 2">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="2">1,9</FixtureVal>
+  </Function>
+  <Function ID="182" Type="Scene" Name="Chaser aléa. rapide" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,10</FixtureVal>
   </Function>
-  <Function ID="111" Type="Scene" Name="Chaser aléa. lent" Path="2 PAR 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,11</FixtureVal>
-  </Function>
-  <Function ID="112" Type="Scene" Name="Chaser aléa. rapide" Path="2 PAR 1">
+  <Function ID="184" Type="Scene" Name="Décharge aléa. lent" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,12</FixtureVal>
   </Function>
-  <Function ID="116" Type="Scene" Name="Décharge aléa. lent" Path="2 PAR 1">
+  <Function ID="185" Type="Scene" Name="Décharge aléa. rapide" Path="2 PAR 2">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="2">1,13</FixtureVal>
+  </Function>
+  <Function ID="188" Type="Scene" Name="Strobe lent" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,16</FixtureVal>
   </Function>
-  <Function ID="117" Type="Scene" Name="Décharge aléa. rapide" Path="2 PAR 1">
+  <Function ID="189" Type="Scene" Name="Strobe moyen" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,17</FixtureVal>
   </Function>
-  <Function ID="122" Type="Scene" Name="Strobe lent" Path="2 PAR 1">
+  <Function ID="190" Type="Scene" Name="Strobe rapide" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,22</FixtureVal>
+   <FixtureVal ID="2">1,18</FixtureVal>
   </Function>
-  <Function ID="123" Type="Scene" Name="Strobe moyen" Path="2 PAR 1">
+  <Function ID="192" Type="Scene" Name="Beat analogique" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,23</FixtureVal>
+   <FixtureVal ID="2">1,20</FixtureVal>
   </Function>
-  <Function ID="124" Type="Scene" Name="Strobe rapide" Path="2 PAR 1">
+  <Function ID="193" Type="Scene" Name="Beat analog. (70%)" Path="2 PAR 2">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="2">1,21</FixtureVal>
+  </Function>
+  <Function ID="196" Type="Scene" Name="Beat digital" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,24</FixtureVal>
   </Function>
-  <Function ID="128" Type="Scene" Name="Beat analogique" Path="2 PAR 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,28</FixtureVal>
-  </Function>
-  <Function ID="129" Type="Scene" Name="Beat analog. (70%)" Path="2 PAR 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,29</FixtureVal>
-  </Function>
-  <Function ID="134" Type="Scene" Name="Beat digital" Path="2 PAR 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,34</FixtureVal>
-  </Function>
-  <Function ID="171" Type="Scene" Name="Automatic" Path="2 PAR 1">
+  <Function ID="233" Type="Scene" Name="Automatic" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,255</FixtureVal>
   </Function>
-  <Function ID="172" Type="Scene" Name=" - " Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,0</FixtureVal>
-  </Function>
-  <Function ID="173" Type="Scene" Name="Couleur" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,1</FixtureVal>
-  </Function>
-  <Function ID="176" Type="Scene" Name="Bulles statique" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,4</FixtureVal>
-  </Function>
-  <Function ID="177" Type="Scene" Name="Bulles très lent" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,5</FixtureVal>
-  </Function>
-  <Function ID="178" Type="Scene" Name="Bulles lent" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,6</FixtureVal>
-  </Function>
-  <Function ID="179" Type="Scene" Name="Bulles rapide" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,7</FixtureVal>
-  </Function>
-  <Function ID="180" Type="Scene" Name="Chaser aléa. statiq." Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,8</FixtureVal>
-  </Function>
-  <Function ID="181" Type="Scene" Name="Chaser aléa. lent" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,9</FixtureVal>
-  </Function>
-  <Function ID="182" Type="Scene" Name="Chaser aléa. rapide" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,10</FixtureVal>
-  </Function>
-  <Function ID="184" Type="Scene" Name="Décharge aléa. lent" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,12</FixtureVal>
-  </Function>
-  <Function ID="185" Type="Scene" Name="Décharge aléa. rapide" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,13</FixtureVal>
-  </Function>
-  <Function ID="188" Type="Scene" Name="Strobe lent" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,16</FixtureVal>
-  </Function>
-  <Function ID="189" Type="Scene" Name="Strobe moyen" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,17</FixtureVal>
-  </Function>
-  <Function ID="190" Type="Scene" Name="Strobe rapide" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,18</FixtureVal>
-  </Function>
-  <Function ID="192" Type="Scene" Name="Beat analogique" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,20</FixtureVal>
-  </Function>
-  <Function ID="193" Type="Scene" Name="Beat analog. (70%)" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,21</FixtureVal>
-  </Function>
-  <Function ID="196" Type="Scene" Name="Beat digital" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,24</FixtureVal>
-  </Function>
-  <Function ID="233" Type="Scene" Name="Automatic" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,255</FixtureVal>
-  </Function>
-  <Function ID="234" Type="Scene" Name=" - " Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,0</FixtureVal>
-  </Function>
-  <Function ID="235" Type="Scene" Name="Couleur" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,1</FixtureVal>
-  </Function>
-  <Function ID="238" Type="Scene" Name="Bulles statique" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,4</FixtureVal>
-  </Function>
-  <Function ID="239" Type="Scene" Name="Bulles très lent" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,5</FixtureVal>
-  </Function>
-  <Function ID="240" Type="Scene" Name="Bulles lent" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,6</FixtureVal>
-  </Function>
-  <Function ID="241" Type="Scene" Name="Bulles rapide" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,7</FixtureVal>
-  </Function>
-  <Function ID="242" Type="Scene" Name="Chaser aléa. statiq." Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,8</FixtureVal>
-  </Function>
-  <Function ID="243" Type="Scene" Name="Chaser aléa. lent" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,9</FixtureVal>
-  </Function>
-  <Function ID="244" Type="Scene" Name="Chaser aléa. rapide" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,10</FixtureVal>
-  </Function>
-  <Function ID="246" Type="Scene" Name="Décharge aléa. lent" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,12</FixtureVal>
-  </Function>
-  <Function ID="247" Type="Scene" Name="Décharge aléa. rapide" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,13</FixtureVal>
-  </Function>
-  <Function ID="250" Type="Scene" Name="Strobe lent" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,16</FixtureVal>
-  </Function>
-  <Function ID="251" Type="Scene" Name="Strobe moyen" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,17</FixtureVal>
-  </Function>
-  <Function ID="252" Type="Scene" Name="Strobe rapide" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,18</FixtureVal>
-  </Function>
-  <Function ID="254" Type="Scene" Name="Beat analogique" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,20</FixtureVal>
-  </Function>
-  <Function ID="255" Type="Scene" Name="Beat analog. (70%)" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,21</FixtureVal>
-  </Function>
-  <Function ID="258" Type="Scene" Name="Beat digital" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,24</FixtureVal>
-  </Function>
-  <Function ID="295" Type="Scene" Name="Automatic" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,255</FixtureVal>
-  </Function>
-  <Function ID="296" Type="Scene" Name=" - " Path="4 PAR 3">
+  <Function ID="234" Type="Scene" Name=" - " Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,0</FixtureVal>
   </Function>
-  <Function ID="297" Type="Scene" Name="Couleur" Path="4 PAR 3">
+  <Function ID="235" Type="Scene" Name="Couleur" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,1</FixtureVal>
   </Function>
-  <Function ID="300" Type="Scene" Name="Bulles statique" Path="4 PAR 3">
+  <Function ID="238" Type="Scene" Name="Bulles statique" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,4</FixtureVal>
   </Function>
-  <Function ID="301" Type="Scene" Name="Bulles très lent" Path="4 PAR 3">
+  <Function ID="239" Type="Scene" Name="Bulles très lent" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,5</FixtureVal>
   </Function>
-  <Function ID="302" Type="Scene" Name="Bulles lent" Path="4 PAR 3">
+  <Function ID="240" Type="Scene" Name="Bulles lent" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,6</FixtureVal>
   </Function>
-  <Function ID="303" Type="Scene" Name="Bulles rapide" Path="4 PAR 3">
+  <Function ID="241" Type="Scene" Name="Bulles rapide" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,7</FixtureVal>
   </Function>
-  <Function ID="304" Type="Scene" Name="Chaser aléa. statiq." Path="4 PAR 3">
+  <Function ID="242" Type="Scene" Name="Chaser aléa. statiq." Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,8</FixtureVal>
   </Function>
-  <Function ID="305" Type="Scene" Name="Chaser aléa. lent" Path="4 PAR 3">
+  <Function ID="243" Type="Scene" Name="Chaser aléa. lent" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,9</FixtureVal>
   </Function>
-  <Function ID="306" Type="Scene" Name="Chaser aléa. rapide" Path="4 PAR 3">
+  <Function ID="244" Type="Scene" Name="Chaser aléa. rapide" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,10</FixtureVal>
   </Function>
-  <Function ID="308" Type="Scene" Name="Décharge aléa. lent" Path="4 PAR 3">
+  <Function ID="246" Type="Scene" Name="Décharge aléa. lent" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,12</FixtureVal>
   </Function>
-  <Function ID="309" Type="Scene" Name="Décharge aléa. rapide" Path="4 PAR 3">
+  <Function ID="247" Type="Scene" Name="Décharge aléa. rapide" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,13</FixtureVal>
   </Function>
-  <Function ID="312" Type="Scene" Name="Strobe lent" Path="4 PAR 3">
+  <Function ID="250" Type="Scene" Name="Strobe lent" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,16</FixtureVal>
   </Function>
-  <Function ID="313" Type="Scene" Name="Strobe moyen" Path="4 PAR 3">
+  <Function ID="251" Type="Scene" Name="Strobe moyen" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,17</FixtureVal>
   </Function>
-  <Function ID="314" Type="Scene" Name="Strobe rapide" Path="4 PAR 3">
+  <Function ID="252" Type="Scene" Name="Strobe rapide" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,18</FixtureVal>
   </Function>
-  <Function ID="316" Type="Scene" Name="Beat analogique" Path="4 PAR 3">
+  <Function ID="254" Type="Scene" Name="Beat analogique" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,20</FixtureVal>
   </Function>
-  <Function ID="317" Type="Scene" Name="Beat analog. (70%)" Path="4 PAR 3">
+  <Function ID="255" Type="Scene" Name="Beat analog. (70%)" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,21</FixtureVal>
   </Function>
-  <Function ID="320" Type="Scene" Name="Beat digital" Path="4 PAR 3">
+  <Function ID="258" Type="Scene" Name="Beat digital" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,24</FixtureVal>
   </Function>
-  <Function ID="357" Type="Scene" Name="Automatic" Path="4 PAR 3">
+  <Function ID="295" Type="Scene" Name="Automatic" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,255</FixtureVal>
+  </Function>
+  <Function ID="296" Type="Scene" Name=" - " Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,0</FixtureVal>
+  </Function>
+  <Function ID="297" Type="Scene" Name="Couleur" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,1</FixtureVal>
+  </Function>
+  <Function ID="300" Type="Scene" Name="Bulles statique" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,4</FixtureVal>
+  </Function>
+  <Function ID="301" Type="Scene" Name="Bulles très lent" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,5</FixtureVal>
+  </Function>
+  <Function ID="302" Type="Scene" Name="Bulles lent" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,6</FixtureVal>
+  </Function>
+  <Function ID="303" Type="Scene" Name="Bulles rapide" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,7</FixtureVal>
+  </Function>
+  <Function ID="304" Type="Scene" Name="Chaser aléa. statiq." Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,8</FixtureVal>
+  </Function>
+  <Function ID="305" Type="Scene" Name="Chaser aléa. lent" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,9</FixtureVal>
+  </Function>
+  <Function ID="306" Type="Scene" Name="Chaser aléa. rapide" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,10</FixtureVal>
+  </Function>
+  <Function ID="308" Type="Scene" Name="Décharge aléa. lent" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,12</FixtureVal>
+  </Function>
+  <Function ID="309" Type="Scene" Name="Décharge aléa. rapide" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,13</FixtureVal>
+  </Function>
+  <Function ID="312" Type="Scene" Name="Strobe lent" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,16</FixtureVal>
+  </Function>
+  <Function ID="313" Type="Scene" Name="Strobe moyen" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,17</FixtureVal>
+  </Function>
+  <Function ID="314" Type="Scene" Name="Strobe rapide" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,18</FixtureVal>
+  </Function>
+  <Function ID="316" Type="Scene" Name="Beat analogique" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,20</FixtureVal>
+  </Function>
+  <Function ID="317" Type="Scene" Name="Beat analog. (70%)" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,21</FixtureVal>
+  </Function>
+  <Function ID="320" Type="Scene" Name="Beat digital" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,24</FixtureVal>
+  </Function>
+  <Function ID="357" Type="Scene" Name="Automatic" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,255</FixtureVal>
   </Function>
   <Function ID="358" Type="Scene" Name=" - " Path="1 LEDs">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
@@ -1118,853 +1118,293 @@
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="7">1,255</FixtureVal>
   </Function>
-  <Function ID="100" Type="Scene" Name=" - " Path="2 PAR 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,0</FixtureVal>
-  </Function>
-  <Function ID="101" Type="Scene" Name="Couleur" Path="2 PAR 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,1</FixtureVal>
-  </Function>
-  <Function ID="104" Type="Scene" Name="Bulles statique" Path="2 PAR 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,4</FixtureVal>
-  </Function>
-  <Function ID="105" Type="Scene" Name="Bulles très lent" Path="2 PAR 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,5</FixtureVal>
-  </Function>
-  <Function ID="106" Type="Scene" Name="Bulles lent" Path="2 PAR 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,6</FixtureVal>
-  </Function>
-  <Function ID="107" Type="Scene" Name="Bulles rapide" Path="2 PAR 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,7</FixtureVal>
-  </Function>
-  <Function ID="110" Type="Scene" Name="Chaser aléa. statiq." Path="2 PAR 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,10</FixtureVal>
-  </Function>
-  <Function ID="111" Type="Scene" Name="Chaser aléa. lent" Path="2 PAR 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,11</FixtureVal>
-  </Function>
-  <Function ID="112" Type="Scene" Name="Chaser aléa. rapide" Path="2 PAR 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,12</FixtureVal>
-  </Function>
-  <Function ID="116" Type="Scene" Name="Décharge aléa. lent" Path="2 PAR 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,16</FixtureVal>
-  </Function>
-  <Function ID="117" Type="Scene" Name="Décharge aléa. rapide" Path="2 PAR 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,17</FixtureVal>
-  </Function>
-  <Function ID="122" Type="Scene" Name="Strobe lent" Path="2 PAR 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,22</FixtureVal>
-  </Function>
-  <Function ID="123" Type="Scene" Name="Strobe moyen" Path="2 PAR 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,23</FixtureVal>
-  </Function>
-  <Function ID="124" Type="Scene" Name="Strobe rapide" Path="2 PAR 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,24</FixtureVal>
-  </Function>
-  <Function ID="128" Type="Scene" Name="Beat analogique" Path="2 PAR 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,28</FixtureVal>
-  </Function>
-  <Function ID="129" Type="Scene" Name="Beat analog. (70%)" Path="2 PAR 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,29</FixtureVal>
-  </Function>
-  <Function ID="134" Type="Scene" Name="Beat digital" Path="2 PAR 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,34</FixtureVal>
-  </Function>
-  <Function ID="171" Type="Scene" Name="Automatic" Path="2 PAR 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,255</FixtureVal>
-  </Function>
-  <Function ID="172" Type="Scene" Name=" - " Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,0</FixtureVal>
-  </Function>
-  <Function ID="173" Type="Scene" Name="Couleur" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,1</FixtureVal>
-  </Function>
-  <Function ID="176" Type="Scene" Name="Bulles statique" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,4</FixtureVal>
-  </Function>
-  <Function ID="177" Type="Scene" Name="Bulles très lent" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,5</FixtureVal>
-  </Function>
-  <Function ID="178" Type="Scene" Name="Bulles lent" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,6</FixtureVal>
-  </Function>
-  <Function ID="179" Type="Scene" Name="Bulles rapide" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,7</FixtureVal>
-  </Function>
-  <Function ID="180" Type="Scene" Name="Chaser aléa. statiq." Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,8</FixtureVal>
-  </Function>
-  <Function ID="181" Type="Scene" Name="Chaser aléa. lent" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,9</FixtureVal>
-  </Function>
-  <Function ID="182" Type="Scene" Name="Chaser aléa. rapide" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,10</FixtureVal>
-  </Function>
-  <Function ID="184" Type="Scene" Name="Décharge aléa. lent" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,12</FixtureVal>
-  </Function>
-  <Function ID="185" Type="Scene" Name="Décharge aléa. rapide" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,13</FixtureVal>
-  </Function>
-  <Function ID="188" Type="Scene" Name="Strobe lent" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,16</FixtureVal>
-  </Function>
-  <Function ID="189" Type="Scene" Name="Strobe moyen" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,17</FixtureVal>
-  </Function>
-  <Function ID="190" Type="Scene" Name="Strobe rapide" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,18</FixtureVal>
-  </Function>
-  <Function ID="192" Type="Scene" Name="Beat analogique" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,20</FixtureVal>
-  </Function>
-  <Function ID="193" Type="Scene" Name="Beat analog. (70%)" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,21</FixtureVal>
-  </Function>
-  <Function ID="196" Type="Scene" Name="Beat digital" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,24</FixtureVal>
-  </Function>
-  <Function ID="233" Type="Scene" Name="Automatic" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,255</FixtureVal>
-  </Function>
-  <Function ID="234" Type="Scene" Name=" - " Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,0</FixtureVal>
-  </Function>
-  <Function ID="235" Type="Scene" Name="Couleur" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,1</FixtureVal>
-  </Function>
-  <Function ID="238" Type="Scene" Name="Bulles statique" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,4</FixtureVal>
-  </Function>
-  <Function ID="239" Type="Scene" Name="Bulles très lent" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,5</FixtureVal>
-  </Function>
-  <Function ID="240" Type="Scene" Name="Bulles lent" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,6</FixtureVal>
-  </Function>
-  <Function ID="241" Type="Scene" Name="Bulles rapide" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,7</FixtureVal>
-  </Function>
-  <Function ID="242" Type="Scene" Name="Chaser aléa. statiq." Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,8</FixtureVal>
-  </Function>
-  <Function ID="243" Type="Scene" Name="Chaser aléa. lent" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,9</FixtureVal>
-  </Function>
-  <Function ID="244" Type="Scene" Name="Chaser aléa. rapide" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,10</FixtureVal>
-  </Function>
-  <Function ID="246" Type="Scene" Name="Décharge aléa. lent" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,12</FixtureVal>
-  </Function>
-  <Function ID="247" Type="Scene" Name="Décharge aléa. rapide" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,13</FixtureVal>
-  </Function>
-  <Function ID="250" Type="Scene" Name="Strobe lent" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,16</FixtureVal>
-  </Function>
-  <Function ID="251" Type="Scene" Name="Strobe moyen" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,17</FixtureVal>
-  </Function>
-  <Function ID="252" Type="Scene" Name="Strobe rapide" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,18</FixtureVal>
-  </Function>
-  <Function ID="254" Type="Scene" Name="Beat analogique" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,20</FixtureVal>
-  </Function>
-  <Function ID="255" Type="Scene" Name="Beat analog. (70%)" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,21</FixtureVal>
-  </Function>
-  <Function ID="258" Type="Scene" Name="Beat digital" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,24</FixtureVal>
-  </Function>
-  <Function ID="295" Type="Scene" Name="Automatic" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,255</FixtureVal>
-  </Function>
-  <Function ID="296" Type="Scene" Name=" - " Path="4 PAR 3">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="4">1,0</FixtureVal>
-  </Function>
-  <Function ID="297" Type="Scene" Name="Couleur" Path="4 PAR 3">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="4">1,1</FixtureVal>
-  </Function>
-  <Function ID="300" Type="Scene" Name="Bulles statique" Path="4 PAR 3">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="4">1,4</FixtureVal>
-  </Function>
-  <Function ID="301" Type="Scene" Name="Bulles très lent" Path="4 PAR 3">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="4">1,5</FixtureVal>
-  </Function>
-  <Function ID="302" Type="Scene" Name="Bulles lent" Path="4 PAR 3">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="4">1,6</FixtureVal>
-  </Function>
-  <Function ID="303" Type="Scene" Name="Bulles rapide" Path="4 PAR 3">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="4">1,7</FixtureVal>
-  </Function>
-  <Function ID="304" Type="Scene" Name="Chaser aléa. statiq." Path="4 PAR 3">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="4">1,8</FixtureVal>
-  </Function>
-  <Function ID="305" Type="Scene" Name="Chaser aléa. lent" Path="4 PAR 3">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="4">1,9</FixtureVal>
-  </Function>
-  <Function ID="306" Type="Scene" Name="Chaser aléa. rapide" Path="4 PAR 3">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="4">1,10</FixtureVal>
-  </Function>
-  <Function ID="308" Type="Scene" Name="Décharge aléa. lent" Path="4 PAR 3">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="4">1,12</FixtureVal>
-  </Function>
-  <Function ID="309" Type="Scene" Name="Décharge aléa. rapide" Path="4 PAR 3">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="4">1,13</FixtureVal>
-  </Function>
-  <Function ID="312" Type="Scene" Name="Strobe lent" Path="4 PAR 3">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="4">1,16</FixtureVal>
-  </Function>
-  <Function ID="313" Type="Scene" Name="Strobe moyen" Path="4 PAR 3">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="4">1,17</FixtureVal>
-  </Function>
-  <Function ID="314" Type="Scene" Name="Strobe rapide" Path="4 PAR 3">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="4">1,18</FixtureVal>
-  </Function>
-  <Function ID="316" Type="Scene" Name="Beat analogique" Path="4 PAR 3">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="4">1,20</FixtureVal>
-  </Function>
-  <Function ID="317" Type="Scene" Name="Beat analog. (70%)" Path="4 PAR 3">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="4">1,21</FixtureVal>
-  </Function>
-  <Function ID="320" Type="Scene" Name="Beat digital" Path="4 PAR 3">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="4">1,24</FixtureVal>
-  </Function>
-  <Function ID="357" Type="Scene" Name="Automatic" Path="4 PAR 3">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="4">1,255</FixtureVal>
-  </Function>
-  <Function ID="358" Type="Scene" Name=" - " Path="1 LEDs">
+  <Function ID="100" Type="Scene" Name=" - " Path="1 PAR 1">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="1">1,0</FixtureVal>
   </Function>
-  <Function ID="359" Type="Scene" Name="Couleur fixe" Path="1 LEDs">
+  <Function ID="101" Type="Scene" Name="Couleur" Path="1 PAR 1">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="1">1,1</FixtureVal>
   </Function>
-  <Function ID="362" Type="Scene" Name="Beat (Original)" Path="1 LEDs">
+  <Function ID="104" Type="Scene" Name="Bulles statique" Path="1 PAR 1">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="1">1,4</FixtureVal>
   </Function>
-  <Function ID="363" Type="Scene" Name="Beat (Group)" Path="1 LEDs">
+  <Function ID="105" Type="Scene" Name="Bulles très lent" Path="1 PAR 1">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="1">1,5</FixtureVal>
   </Function>
-  <Function ID="364" Type="Scene" Name="Beat (Barre)" Path="1 LEDs">
+  <Function ID="106" Type="Scene" Name="Bulles lent" Path="1 PAR 1">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="1">1,6</FixtureVal>
   </Function>
-  <Function ID="365" Type="Scene" Name="Beat (Segm.)" Path="1 LEDs">
+  <Function ID="107" Type="Scene" Name="Bulles rapide" Path="1 PAR 1">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="1">1,7</FixtureVal>
   </Function>
-  <Function ID="366" Type="Scene" Name="Beat (Pixel)" Path="1 LEDs">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="1">1,8</FixtureVal>
-  </Function>
-  <Function ID="368" Type="Scene" Name="Beat digital (Group)" Path="1 LEDs">
+  <Function ID="110" Type="Scene" Name="Chaser aléa. statiq." Path="1 PAR 1">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="1">1,10</FixtureVal>
   </Function>
-  <Function ID="369" Type="Scene" Name="Beat digital (Barre)" Path="1 LEDs">
+  <Function ID="111" Type="Scene" Name="Chaser aléa. lent" Path="1 PAR 1">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="1">1,11</FixtureVal>
   </Function>
-  <Function ID="370" Type="Scene" Name="Beat digital (Segm.)" Path="1 LEDs">
+  <Function ID="112" Type="Scene" Name="Chaser aléa. rapide" Path="1 PAR 1">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="1">1,12</FixtureVal>
   </Function>
-  <Function ID="371" Type="Scene" Name="Beat digital (Pixel)" Path="1 LEDs">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="1">1,13</FixtureVal>
-  </Function>
-  <Function ID="374" Type="Scene" Name="Bulles statique" Path="1 LEDs">
+  <Function ID="116" Type="Scene" Name="Décharge aléa. lent" Path="1 PAR 1">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="1">1,16</FixtureVal>
   </Function>
-  <Function ID="375" Type="Scene" Name="Bulles très lentes" Path="1 LEDs">
+  <Function ID="117" Type="Scene" Name="Décharge aléa. rapide" Path="1 PAR 1">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="1">1,17</FixtureVal>
   </Function>
-  <Function ID="376" Type="Scene" Name="Bulles lentes " Path="1 LEDs">
+  <Function ID="122" Type="Scene" Name="Strobe lent" Path="1 PAR 1">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="1">1,18</FixtureVal>
+   <FixtureVal ID="1">1,22</FixtureVal>
   </Function>
-  <Function ID="377" Type="Scene" Name="Bulles rapides " Path="1 LEDs">
+  <Function ID="123" Type="Scene" Name="Strobe moyen" Path="1 PAR 1">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="1">1,19</FixtureVal>
+   <FixtureVal ID="1">1,23</FixtureVal>
   </Function>
-  <Function ID="378" Type="Scene" Name="Bulles lentes (group)" Path="1 LEDs">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="1">1,20</FixtureVal>
-  </Function>
-  <Function ID="379" Type="Scene" Name="Bulles rapides (group)" Path="1 LEDs">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="1">1,21</FixtureVal>
-  </Function>
-  <Function ID="382" Type="Scene" Name="Scintillement lent" Path="1 LEDs">
+  <Function ID="124" Type="Scene" Name="Strobe rapide" Path="1 PAR 1">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="1">1,24</FixtureVal>
   </Function>
-  <Function ID="383" Type="Scene" Name="Scintillement rapide" Path="1 LEDs">
+  <Function ID="128" Type="Scene" Name="Beat analogique" Path="1 PAR 1">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="1">1,25</FixtureVal>
+   <FixtureVal ID="1">1,28</FixtureVal>
   </Function>
-  <Function ID="384" Type="Scene" Name="Scintillement frénétique" Path="1 LEDs">
+  <Function ID="129" Type="Scene" Name="Beat analog. (70%)" Path="1 PAR 1">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="1">1,26</FixtureVal>
+   <FixtureVal ID="1">1,29</FixtureVal>
   </Function>
-  <Function ID="388" Type="Scene" Name="Néon quasi-stat." Path="1 LEDs">
+  <Function ID="134" Type="Scene" Name="Beat digital" Path="1 PAR 1">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="1">1,30</FixtureVal>
+   <FixtureVal ID="1">1,34</FixtureVal>
   </Function>
-  <Function ID="389" Type="Scene" Name="Néon très lent" Path="1 LEDs">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="1">1,31</FixtureVal>
-  </Function>
-  <Function ID="390" Type="Scene" Name="Néon lent" Path="1 LEDs">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="1">1,32</FixtureVal>
-  </Function>
-  <Function ID="391" Type="Scene" Name="Néon rapide" Path="1 LEDs">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="1">1,33</FixtureVal>
-  </Function>
-  <Function ID="394" Type="Scene" Name="Décharge lent" Path="1 LEDs">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="1">1,36</FixtureVal>
-  </Function>
-  <Function ID="395" Type="Scene" Name="Décharge rapide" Path="1 LEDs">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="1">1,37</FixtureVal>
-  </Function>
-  <Function ID="400" Type="Scene" Name="Strobe lent" Path="1 LEDs">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="1">1,42</FixtureVal>
-  </Function>
-  <Function ID="401" Type="Scene" Name="Strobe lent (groupe)" Path="1 LEDs">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="1">1,43</FixtureVal>
-  </Function>
-  <Function ID="402" Type="Scene" Name="Strobe rapide" Path="1 LEDs">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="1">1,44</FixtureVal>
-  </Function>
-  <Function ID="403" Type="Scene" Name="Strobe rapide (groupe)" Path="1 LEDs">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="1">1,45</FixtureVal>
-  </Function>
-  <Function ID="448" Type="Scene" Name="Automatic" Path="1 LEDs">
+  <Function ID="171" Type="Scene" Name="Automatic" Path="1 PAR 1">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="1">1,255</FixtureVal>
   </Function>
-  <Function ID="449" Type="Scene" Name=" - " Path="6 RedRayz 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="6">1,0</FixtureVal>
-  </Function>
-  <Function ID="450" Type="Scene" Name="FULL ON" Path="6 RedRayz 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="6">1,1</FixtureVal>
-  </Function>
-  <Function ID="453" Type="Scene" Name="Bulles Très lent" Path="6 RedRayz 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="6">1,4</FixtureVal>
-  </Function>
-  <Function ID="454" Type="Scene" Name="Bulles Très lent (+)" Path="6 RedRayz 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="6">1,5</FixtureVal>
-  </Function>
-  <Function ID="455" Type="Scene" Name="Bulles Lent" Path="6 RedRayz 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="6">1,6</FixtureVal>
-  </Function>
-  <Function ID="456" Type="Scene" Name="Bulles Lent (-)" Path="6 RedRayz 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="6">1,7</FixtureVal>
-  </Function>
-  <Function ID="457" Type="Scene" Name="Bulles Rapides" Path="6 RedRayz 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="6">1,8</FixtureVal>
-  </Function>
-  <Function ID="460" Type="Scene" Name="Chaser Très lent" Path="6 RedRayz 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="6">1,11</FixtureVal>
-  </Function>
-  <Function ID="461" Type="Scene" Name="Chaser Très lent +" Path="6 RedRayz 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="6">1,12</FixtureVal>
-  </Function>
-  <Function ID="462" Type="Scene" Name="Chaser Lent" Path="6 RedRayz 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="6">1,13</FixtureVal>
-  </Function>
-  <Function ID="463" Type="Scene" Name="Chaser Rapide" Path="6 RedRayz 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="6">1,14</FixtureVal>
-  </Function>
-  <Function ID="466" Type="Scene" Name="Strobe Très lent" Path="6 RedRayz 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="6">1,17</FixtureVal>
-  </Function>
-  <Function ID="467" Type="Scene" Name="Strobe Lent" Path="6 RedRayz 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="6">1,18</FixtureVal>
-  </Function>
-  <Function ID="468" Type="Scene" Name="Strobe Rapide" Path="6 RedRayz 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="6">1,19</FixtureVal>
-  </Function>
-  <Function ID="469" Type="Scene" Name="Strobe Très rapide" Path="6 RedRayz 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="6">1,20</FixtureVal>
-  </Function>
-  <Function ID="472" Type="Scene" Name="Décharge très lent" Path="6 RedRayz 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="6">1,23</FixtureVal>
-  </Function>
-  <Function ID="473" Type="Scene" Name="Décharge très lent (+)" Path="6 RedRayz 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="6">1,24</FixtureVal>
-  </Function>
-  <Function ID="474" Type="Scene" Name="Décharge lent" Path="6 RedRayz 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="6">1,25</FixtureVal>
-  </Function>
-  <Function ID="475" Type="Scene" Name="Décharge lent (-)" Path="6 RedRayz 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="6">1,26</FixtureVal>
-  </Function>
-  <Function ID="476" Type="Scene" Name="Décharge rapide" Path="6 RedRayz 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="6">1,27</FixtureVal>
-  </Function>
-  <Function ID="477" Type="Scene" Name="Décharge rapide (-)" Path="6 RedRayz 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="6">1,28</FixtureVal>
-  </Function>
-  <Function ID="480" Type="Scene" Name="Beat" Path="6 RedRayz 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="6">1,31</FixtureVal>
-  </Function>
-  <Function ID="481" Type="Scene" Name="Beat 70%" Path="6 RedRayz 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="6">1,32</FixtureVal>
-  </Function>
-  <Function ID="482" Type="Scene" Name="Beat 40%" Path="6 RedRayz 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="6">1,33</FixtureVal>
-  </Function>
-  <Function ID="483" Type="Scene" Name="Beat 20%" Path="6 RedRayz 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="6">1,34</FixtureVal>
-  </Function>
-  <Function ID="486" Type="Scene" Name="Digital Beat" Path="6 RedRayz 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="6">1,37</FixtureVal>
-  </Function>
-  <Function ID="529" Type="Scene" Name="Automatic" Path="6 RedRayz 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="6">1,255</FixtureVal>
-  </Function>
-  <Function ID="530" Type="Scene" Name=" - " Path="7 BEAM">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="7">1,0</FixtureVal>
-  </Function>
-  <Function ID="531" Type="Scene" Name="Couleur" Path="7 BEAM">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="7">1,1</FixtureVal>
-  </Function>
-  <Function ID="534" Type="Scene" Name="Bulles lent" Path="7 BEAM">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="7">1,4</FixtureVal>
-  </Function>
-  <Function ID="535" Type="Scene" Name="Bulles rapide" Path="7 BEAM">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="7">1,5</FixtureVal>
-  </Function>
-  <Function ID="540" Type="Scene" Name="Décharge lent" Path="7 BEAM">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="7">1,10</FixtureVal>
-  </Function>
-  <Function ID="541" Type="Scene" Name="Décharge rapide" Path="7 BEAM">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="7">1,11</FixtureVal>
-  </Function>
-  <Function ID="546" Type="Scene" Name="Strobe lent" Path="7 BEAM">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="7">1,16</FixtureVal>
-  </Function>
-  <Function ID="547" Type="Scene" Name="Strobe rapide" Path="7 BEAM">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="7">1,17</FixtureVal>
-  </Function>
-  <Function ID="552" Type="Scene" Name="Beat" Path="7 BEAM">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="7">1,22</FixtureVal>
-  </Function>
-  <Function ID="595" Type="Scene" Name="Automatic" Path="7 BEAM">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="7">1,255</FixtureVal>
-  </Function>
-  <Function ID="100" Type="Scene" Name=" - " Path="2 PAR 1">
+  <Function ID="172" Type="Scene" Name=" - " Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,0</FixtureVal>
   </Function>
-  <Function ID="101" Type="Scene" Name="Couleur" Path="2 PAR 1">
+  <Function ID="173" Type="Scene" Name="Couleur" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,1</FixtureVal>
   </Function>
-  <Function ID="104" Type="Scene" Name="Bulles statique" Path="2 PAR 1">
+  <Function ID="176" Type="Scene" Name="Bulles statique" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,4</FixtureVal>
   </Function>
-  <Function ID="105" Type="Scene" Name="Bulles très lent" Path="2 PAR 1">
+  <Function ID="177" Type="Scene" Name="Bulles très lent" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,5</FixtureVal>
   </Function>
-  <Function ID="106" Type="Scene" Name="Bulles lent" Path="2 PAR 1">
+  <Function ID="178" Type="Scene" Name="Bulles lent" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,6</FixtureVal>
   </Function>
-  <Function ID="107" Type="Scene" Name="Bulles rapide" Path="2 PAR 1">
+  <Function ID="179" Type="Scene" Name="Bulles rapide" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,7</FixtureVal>
   </Function>
-  <Function ID="110" Type="Scene" Name="Chaser aléa. statiq." Path="2 PAR 1">
+  <Function ID="180" Type="Scene" Name="Chaser aléa. statiq." Path="2 PAR 2">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="2">1,8</FixtureVal>
+  </Function>
+  <Function ID="181" Type="Scene" Name="Chaser aléa. lent" Path="2 PAR 2">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="2">1,9</FixtureVal>
+  </Function>
+  <Function ID="182" Type="Scene" Name="Chaser aléa. rapide" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,10</FixtureVal>
   </Function>
-  <Function ID="111" Type="Scene" Name="Chaser aléa. lent" Path="2 PAR 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,11</FixtureVal>
-  </Function>
-  <Function ID="112" Type="Scene" Name="Chaser aléa. rapide" Path="2 PAR 1">
+  <Function ID="184" Type="Scene" Name="Décharge aléa. lent" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,12</FixtureVal>
   </Function>
-  <Function ID="116" Type="Scene" Name="Décharge aléa. lent" Path="2 PAR 1">
+  <Function ID="185" Type="Scene" Name="Décharge aléa. rapide" Path="2 PAR 2">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="2">1,13</FixtureVal>
+  </Function>
+  <Function ID="188" Type="Scene" Name="Strobe lent" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,16</FixtureVal>
   </Function>
-  <Function ID="117" Type="Scene" Name="Décharge aléa. rapide" Path="2 PAR 1">
+  <Function ID="189" Type="Scene" Name="Strobe moyen" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,17</FixtureVal>
   </Function>
-  <Function ID="122" Type="Scene" Name="Strobe lent" Path="2 PAR 1">
+  <Function ID="190" Type="Scene" Name="Strobe rapide" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,22</FixtureVal>
+   <FixtureVal ID="2">1,18</FixtureVal>
   </Function>
-  <Function ID="123" Type="Scene" Name="Strobe moyen" Path="2 PAR 1">
+  <Function ID="192" Type="Scene" Name="Beat analogique" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,23</FixtureVal>
+   <FixtureVal ID="2">1,20</FixtureVal>
   </Function>
-  <Function ID="124" Type="Scene" Name="Strobe rapide" Path="2 PAR 1">
+  <Function ID="193" Type="Scene" Name="Beat analog. (70%)" Path="2 PAR 2">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="2">1,21</FixtureVal>
+  </Function>
+  <Function ID="196" Type="Scene" Name="Beat digital" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,24</FixtureVal>
   </Function>
-  <Function ID="128" Type="Scene" Name="Beat analogique" Path="2 PAR 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,28</FixtureVal>
-  </Function>
-  <Function ID="129" Type="Scene" Name="Beat analog. (70%)" Path="2 PAR 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,29</FixtureVal>
-  </Function>
-  <Function ID="134" Type="Scene" Name="Beat digital" Path="2 PAR 1">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,34</FixtureVal>
-  </Function>
-  <Function ID="171" Type="Scene" Name="Automatic" Path="2 PAR 1">
+  <Function ID="233" Type="Scene" Name="Automatic" Path="2 PAR 2">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,255</FixtureVal>
   </Function>
-  <Function ID="172" Type="Scene" Name=" - " Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,0</FixtureVal>
-  </Function>
-  <Function ID="173" Type="Scene" Name="Couleur" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,1</FixtureVal>
-  </Function>
-  <Function ID="176" Type="Scene" Name="Bulles statique" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,4</FixtureVal>
-  </Function>
-  <Function ID="177" Type="Scene" Name="Bulles très lent" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,5</FixtureVal>
-  </Function>
-  <Function ID="178" Type="Scene" Name="Bulles lent" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,6</FixtureVal>
-  </Function>
-  <Function ID="179" Type="Scene" Name="Bulles rapide" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,7</FixtureVal>
-  </Function>
-  <Function ID="180" Type="Scene" Name="Chaser aléa. statiq." Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,8</FixtureVal>
-  </Function>
-  <Function ID="181" Type="Scene" Name="Chaser aléa. lent" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,9</FixtureVal>
-  </Function>
-  <Function ID="182" Type="Scene" Name="Chaser aléa. rapide" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,10</FixtureVal>
-  </Function>
-  <Function ID="184" Type="Scene" Name="Décharge aléa. lent" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,12</FixtureVal>
-  </Function>
-  <Function ID="185" Type="Scene" Name="Décharge aléa. rapide" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,13</FixtureVal>
-  </Function>
-  <Function ID="188" Type="Scene" Name="Strobe lent" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,16</FixtureVal>
-  </Function>
-  <Function ID="189" Type="Scene" Name="Strobe moyen" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,17</FixtureVal>
-  </Function>
-  <Function ID="190" Type="Scene" Name="Strobe rapide" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,18</FixtureVal>
-  </Function>
-  <Function ID="192" Type="Scene" Name="Beat analogique" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,20</FixtureVal>
-  </Function>
-  <Function ID="193" Type="Scene" Name="Beat analog. (70%)" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,21</FixtureVal>
-  </Function>
-  <Function ID="196" Type="Scene" Name="Beat digital" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,24</FixtureVal>
-  </Function>
-  <Function ID="233" Type="Scene" Name="Automatic" Path="3 PAR 2">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,255</FixtureVal>
-  </Function>
-  <Function ID="234" Type="Scene" Name=" - " Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,0</FixtureVal>
-  </Function>
-  <Function ID="235" Type="Scene" Name="Couleur" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,1</FixtureVal>
-  </Function>
-  <Function ID="238" Type="Scene" Name="Bulles statique" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,4</FixtureVal>
-  </Function>
-  <Function ID="239" Type="Scene" Name="Bulles très lent" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,5</FixtureVal>
-  </Function>
-  <Function ID="240" Type="Scene" Name="Bulles lent" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,6</FixtureVal>
-  </Function>
-  <Function ID="241" Type="Scene" Name="Bulles rapide" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,7</FixtureVal>
-  </Function>
-  <Function ID="242" Type="Scene" Name="Chaser aléa. statiq." Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,8</FixtureVal>
-  </Function>
-  <Function ID="243" Type="Scene" Name="Chaser aléa. lent" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,9</FixtureVal>
-  </Function>
-  <Function ID="244" Type="Scene" Name="Chaser aléa. rapide" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,10</FixtureVal>
-  </Function>
-  <Function ID="246" Type="Scene" Name="Décharge aléa. lent" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,12</FixtureVal>
-  </Function>
-  <Function ID="247" Type="Scene" Name="Décharge aléa. rapide" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,13</FixtureVal>
-  </Function>
-  <Function ID="250" Type="Scene" Name="Strobe lent" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,16</FixtureVal>
-  </Function>
-  <Function ID="251" Type="Scene" Name="Strobe moyen" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,17</FixtureVal>
-  </Function>
-  <Function ID="252" Type="Scene" Name="Strobe rapide" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,18</FixtureVal>
-  </Function>
-  <Function ID="254" Type="Scene" Name="Beat analogique" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,20</FixtureVal>
-  </Function>
-  <Function ID="255" Type="Scene" Name="Beat analog. (70%)" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,21</FixtureVal>
-  </Function>
-  <Function ID="258" Type="Scene" Name="Beat digital" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,24</FixtureVal>
-  </Function>
-  <Function ID="295" Type="Scene" Name="Automatic" Path="5 PAR 4">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,255</FixtureVal>
-  </Function>
-  <Function ID="296" Type="Scene" Name=" - " Path="4 PAR 3">
+  <Function ID="234" Type="Scene" Name=" - " Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,0</FixtureVal>
   </Function>
-  <Function ID="297" Type="Scene" Name="Couleur" Path="4 PAR 3">
+  <Function ID="235" Type="Scene" Name="Couleur" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,1</FixtureVal>
   </Function>
-  <Function ID="300" Type="Scene" Name="Bulles statique" Path="4 PAR 3">
+  <Function ID="238" Type="Scene" Name="Bulles statique" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,4</FixtureVal>
   </Function>
-  <Function ID="301" Type="Scene" Name="Bulles très lent" Path="4 PAR 3">
+  <Function ID="239" Type="Scene" Name="Bulles très lent" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,5</FixtureVal>
   </Function>
-  <Function ID="302" Type="Scene" Name="Bulles lent" Path="4 PAR 3">
+  <Function ID="240" Type="Scene" Name="Bulles lent" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,6</FixtureVal>
   </Function>
-  <Function ID="303" Type="Scene" Name="Bulles rapide" Path="4 PAR 3">
+  <Function ID="241" Type="Scene" Name="Bulles rapide" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,7</FixtureVal>
   </Function>
-  <Function ID="304" Type="Scene" Name="Chaser aléa. statiq." Path="4 PAR 3">
+  <Function ID="242" Type="Scene" Name="Chaser aléa. statiq." Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,8</FixtureVal>
   </Function>
-  <Function ID="305" Type="Scene" Name="Chaser aléa. lent" Path="4 PAR 3">
+  <Function ID="243" Type="Scene" Name="Chaser aléa. lent" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,9</FixtureVal>
   </Function>
-  <Function ID="306" Type="Scene" Name="Chaser aléa. rapide" Path="4 PAR 3">
+  <Function ID="244" Type="Scene" Name="Chaser aléa. rapide" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,10</FixtureVal>
   </Function>
-  <Function ID="308" Type="Scene" Name="Décharge aléa. lent" Path="4 PAR 3">
+  <Function ID="246" Type="Scene" Name="Décharge aléa. lent" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,12</FixtureVal>
   </Function>
-  <Function ID="309" Type="Scene" Name="Décharge aléa. rapide" Path="4 PAR 3">
+  <Function ID="247" Type="Scene" Name="Décharge aléa. rapide" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,13</FixtureVal>
   </Function>
-  <Function ID="312" Type="Scene" Name="Strobe lent" Path="4 PAR 3">
+  <Function ID="250" Type="Scene" Name="Strobe lent" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,16</FixtureVal>
   </Function>
-  <Function ID="313" Type="Scene" Name="Strobe moyen" Path="4 PAR 3">
+  <Function ID="251" Type="Scene" Name="Strobe moyen" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,17</FixtureVal>
   </Function>
-  <Function ID="314" Type="Scene" Name="Strobe rapide" Path="4 PAR 3">
+  <Function ID="252" Type="Scene" Name="Strobe rapide" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,18</FixtureVal>
   </Function>
-  <Function ID="316" Type="Scene" Name="Beat analogique" Path="4 PAR 3">
+  <Function ID="254" Type="Scene" Name="Beat analogique" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,20</FixtureVal>
   </Function>
-  <Function ID="317" Type="Scene" Name="Beat analog. (70%)" Path="4 PAR 3">
+  <Function ID="255" Type="Scene" Name="Beat analog. (70%)" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,21</FixtureVal>
   </Function>
-  <Function ID="320" Type="Scene" Name="Beat digital" Path="4 PAR 3">
+  <Function ID="258" Type="Scene" Name="Beat digital" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,24</FixtureVal>
   </Function>
-  <Function ID="357" Type="Scene" Name="Automatic" Path="4 PAR 3">
+  <Function ID="295" Type="Scene" Name="Automatic" Path="4 PAR 4">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,255</FixtureVal>
+  </Function>
+  <Function ID="296" Type="Scene" Name=" - " Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,0</FixtureVal>
+  </Function>
+  <Function ID="297" Type="Scene" Name="Couleur" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,1</FixtureVal>
+  </Function>
+  <Function ID="300" Type="Scene" Name="Bulles statique" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,4</FixtureVal>
+  </Function>
+  <Function ID="301" Type="Scene" Name="Bulles très lent" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,5</FixtureVal>
+  </Function>
+  <Function ID="302" Type="Scene" Name="Bulles lent" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,6</FixtureVal>
+  </Function>
+  <Function ID="303" Type="Scene" Name="Bulles rapide" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,7</FixtureVal>
+  </Function>
+  <Function ID="304" Type="Scene" Name="Chaser aléa. statiq." Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,8</FixtureVal>
+  </Function>
+  <Function ID="305" Type="Scene" Name="Chaser aléa. lent" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,9</FixtureVal>
+  </Function>
+  <Function ID="306" Type="Scene" Name="Chaser aléa. rapide" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,10</FixtureVal>
+  </Function>
+  <Function ID="308" Type="Scene" Name="Décharge aléa. lent" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,12</FixtureVal>
+  </Function>
+  <Function ID="309" Type="Scene" Name="Décharge aléa. rapide" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,13</FixtureVal>
+  </Function>
+  <Function ID="312" Type="Scene" Name="Strobe lent" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,16</FixtureVal>
+  </Function>
+  <Function ID="313" Type="Scene" Name="Strobe moyen" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,17</FixtureVal>
+  </Function>
+  <Function ID="314" Type="Scene" Name="Strobe rapide" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,18</FixtureVal>
+  </Function>
+  <Function ID="316" Type="Scene" Name="Beat analogique" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,20</FixtureVal>
+  </Function>
+  <Function ID="317" Type="Scene" Name="Beat analog. (70%)" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,21</FixtureVal>
+  </Function>
+  <Function ID="320" Type="Scene" Name="Beat digital" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,24</FixtureVal>
+  </Function>
+  <Function ID="357" Type="Scene" Name="Automatic" Path="3 PAR 3">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,255</FixtureVal>
   </Function>
   <Function ID="358" Type="Scene" Name=" - " Path="1 LEDs">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>

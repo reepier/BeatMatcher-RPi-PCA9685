@@ -553,6 +553,14 @@ private :
  *              
  * 
  *    2 SERIES CONFIGURATION
+ *  *       9 bars per series configuration :
+ *          OUT 1 :  
+ *              Start Universe  : 2
+ *              Start Channel   : 1 (first)
+ *              Pixels          : 9*58 = 522
+ * 
+ *              OUT 1 sends 522 pixels, 1566 dmx channels, 3 full universe (uni 2+3+4) + 36 channels in universe 5
+
 
 */
 

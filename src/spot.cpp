@@ -135,16 +135,16 @@ DMX_vec SpotFixture::buffer(){
  #####  #       #######    #       #     # #     #  #####  #    #  #####  
 / ----------------------------------------------------------------------- */
 //config salon
-SpotRack spot_rack_1(spot_vec{&spot_6, &spot_7, &spot_8, &spot_9}, "PAR 1", SR1_CTRL_ADR, 2);
-SpotRack spot_rack_2(spot_vec{&spot_10, &spot_12, &spot_21, &spot_22, &spot_23, &spot_2, &spot_5, &spot_1, &spot_3, &spot_4}, "PAR 2", SR2_CTRL_ADR, 3);
-SpotRack spot_rack_3(spot_vec{&spot_13, &spot_14, &spot_15, &spot_16, &spot_17, &spot_18, &spot_19, &spot_20}, "PAR 3", SR3_CTRL_ADR, 4);
-SpotRack spot_rack_4(spot_vec{&spot_11}, "PAR 4", SR4_CTRL_ADR, 5);
+// SpotRack spot_rack_1(spot_vec{&spot_6, &spot_7, &spot_8, &spot_9}, "PAR 1", SR1_CTRL_ADR, 2);
+// SpotRack spot_rack_2(spot_vec{&spot_10, &spot_12, &spot_21, &spot_22, &spot_23, &spot_2, &spot_5, &spot_1, &spot_3, &spot_4}, "PAR 2", SR2_CTRL_ADR, 3);
+// SpotRack spot_rack_3(spot_vec{&spot_13, &spot_14, &spot_15, &spot_16, &spot_17, &spot_18, &spot_19, &spot_20}, "PAR 3", SR3_CTRL_ADR, 4);
+// SpotRack spot_rack_4(spot_vec{&spot_11}, "PAR 4", SR4_CTRL_ADR, 5);
 
-//CONFIG HLR #2
-// SpotRack spot_rack_1(spot_vec{&spot_2, &spot_5, &spot_7, &spot_8}, "Front Rack", SR1_CTRL_ADR, 1);
-// SpotRack spot_rack_2(spot_vec{&spot_1, &spot_3, &spot_4, &spot_6}, "Vert. Beams", SR2_CTRL_ADR, 2);
-// SpotRack spot_rack_4(spot_vec{&spot_9, &spot_10, &spot_11, &spot_12}, "Rack 2", SR3_CTRL_ADR, 3);
-// SpotRack spot_rack_3(spot_vec{&spot_13, &spot_14, &spot_15, &spot_16, &spot_17, &spot_18, &spot_19, &spot_20}, "SHEHDS Rack", SR4_CTRL_ADR, 4);
+//CONFIG WS TESTS
+SpotRack spot_rack_1(spot_vec{&spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, &spot_21, &spot_22, &spot_23}, "PAR 1", SR1_CTRL_ADR, 1);
+SpotRack spot_rack_2(spot_vec{&spot_7, &spot_8, &spot_9, &spot_10, &spot_11, &spot_12}, "PAR 2", SR2_CTRL_ADR, 2);
+SpotRack spot_rack_3(spot_vec{&spot_13, &spot_14, &spot_15}, "PAR 3", SR3_CTRL_ADR, 3);
+SpotRack spot_rack_4(spot_vec{&spot_16, &spot_17, &spot_18, &spot_19, &spot_20}, "PAR 4", SR4_CTRL_ADR, 4);
 
 
 // SpotRack global_rack(spot_vec{&spot_1,&spot_2,&spot_3,&spot_4,&spot_5,&spot_6,&spot_7,&spot_8,&spot_9,&spot_10,&spot_11,&spot_12}, "Global Rack", 1);
