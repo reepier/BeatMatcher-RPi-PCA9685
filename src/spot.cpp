@@ -11,19 +11,19 @@
 using namespace std;
 
 // Original Fun Generation spots
-SpotFixture spot_1(FunGen_RGBW_12x1W, 73,    8,  "Spot 1 (@74)",    1);     
-SpotFixture spot_2(FunGen_RGBW_12x1W, 81,    8,  "Spot 2 (@82)",    2);     
-SpotFixture spot_3(FunGen_RGBW_12x1W, 89,    8,  "Spot 3 (@90)",    3);     
-SpotFixture spot_4(FunGen_RGBW_12x1W, 97,    8,  "Spot 4 (@98)",    4);     
-SpotFixture spot_5(FunGen_RGBW_12x1W, 105,   8,  "Spot 5 (@106)",   5);     
-SpotFixture spot_6(FunGen_RGBW_12x1W, 113,   8,  "Spot 6 (@114)",   6); //Salon
+SpotFixture spot_1(FunGen_RGBW_12x1W, 73,    8,  "Spot 1 (@74)",    1);  // plaf
+SpotFixture spot_2(FunGen_RGBW_12x1W, 81,    8,  "Spot 2 (@82)",    2);  // plaf
+SpotFixture spot_3(FunGen_RGBW_12x1W, 89,    8,  "Spot 3 (@90)",    3);  // 
+SpotFixture spot_4(FunGen_RGBW_12x1W, 97,    8,  "Spot 4 (@98)",    4);  // plaf
+SpotFixture spot_5(FunGen_RGBW_12x1W, 105,   8,  "Spot 5 (@106)",   5);  // Booth J
+SpotFixture spot_6(FunGen_RGBW_12x1W, 113,   8,  "Spot 6 (@114)",   6);  // Booth C
 
-SpotFixture spot_7(FunGen_RGBW_12x1W,   121, 8,   "Spot 7 (@122)",    7);  //Salon   
-SpotFixture spot_8(FunGen_RGBW_12x1W,   129, 8,   "Spot 8 (@130)",    8);  //Salon
-SpotFixture spot_9(FunGen_RGBW_12x1W,   137, 8,   "Spot 9 (@138)",    9);  //Salon 
-SpotFixture spot_10(FunGen_RGBW_12x1W,  145, 8,   "Spot 10 (@146)",   10); //FDLM
-SpotFixture spot_11(FunGen_RGBW_12x1W,  153, 8,   "Spot 11 (@154)",   11);
-SpotFixture spot_12(FunGen_RGBW_12x1W,  161, 8,   "Spot 12 (@162)",   12);  //FDLM
+SpotFixture spot_7(FunGen_RGBW_12x1W,   121, 8,   "Spot 7 (@122)",    7);  // charpente
+SpotFixture spot_8(FunGen_RGBW_12x1W,   129, 8,   "Spot 8 (@130)",    8);  
+SpotFixture spot_9(FunGen_RGBW_12x1W,   137, 8,   "Spot 9 (@138)",    9);  // charpente
+SpotFixture spot_10(FunGen_RGBW_12x1W,  145, 8,   "Spot 10 (@146)",   10); // Mezza J
+SpotFixture spot_11(FunGen_RGBW_12x1W,  153, 8,   "Spot 11 (@154)",   11); // charpente
+SpotFixture spot_12(FunGen_RGBW_12x1W,  161, 8,   "Spot 12 (@162)",   12); // Mezza C
 
 // New Shehds spots
 SpotFixture spot_13(Shehds_RGBWAU_7x18W, 169, 10, "Spot 13 (@170) : SHEHDS RGBWAU", 13);
@@ -35,12 +35,10 @@ SpotFixture spot_18(Shehds_RGBWAU_7x18W, 219, 10, "Spot 18 (@220) : SHEHDS RGBWA
 SpotFixture spot_19(Shehds_RGBWAU_7x18W, 229, 10, "Spot 19 (@230) : SHEHDS RGBWAU", 19);
 SpotFixture spot_20(Shehds_RGBWAU_7x18W, 239, 10, "Spot 20 (@240) : SHEHDS RGBWAU", 20);
 
-
 // NEw FunGeneration spots 
-SpotFixture spot_21(FunGen_RGBW_12x1W, 49,    8,  "Spot 21 (@50)",    21);     
-SpotFixture spot_22(FunGen_RGBW_12x1W, 57,    8,  "Spot 22 (@58)",    22);     
-SpotFixture spot_23(FunGen_RGBW_12x1W, 65,    8,  "Spot 23 (@66)",    23);     
-
+SpotFixture spot_21(FunGen_RGBW_12x1W, 49,    8,  "Spot 21 (@50)",    21); // plaf    
+SpotFixture spot_22(FunGen_RGBW_12x1W, 57,    8,  "Spot 22 (@58)",    22); // plaf    
+SpotFixture spot_23(FunGen_RGBW_12x1W, 65,    8,  "Spot 23 (@66)",    23); // plaf
 
 // SpotFixture spot_8(130, 8, "Spot 8 (130)");     
 
@@ -141,9 +139,10 @@ DMX_vec SpotFixture::buffer(){
 // SpotRack spot_rack_4(spot_vec{&spot_11}, "PAR 4", SR4_CTRL_ADR, 5);
 
 //CONFIG WS TESTS
-SpotRack spot_rack_1(spot_vec{&spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, &spot_21, &spot_22, &spot_23}, "PAR 1", SR1_CTRL_ADR, 1);
-SpotRack spot_rack_2(spot_vec{&spot_7, &spot_8, &spot_9, &spot_10, &spot_11, &spot_12}, "PAR 2", SR2_CTRL_ADR, 2);
-SpotRack spot_rack_3(spot_vec{&spot_13, &spot_14, &spot_15}, "PAR 3", SR3_CTRL_ADR, 3);
+SpotRack spot_rack_1(spot_vec{&spot_1, &spot_2, &spot_4, &spot_5, &spot_21, &spot_22, &spot_23}, "Plafond", SR1_CTRL_ADR, 1);
+SpotRack spot_rack_2(spot_vec{&spot_7, &spot_9, &spot_11}, "Charpente", SR2_CTRL_ADR, 2);
+SpotRack spot_rack_3(spot_vec{&spot_5, &spot_6, &spot_10, &spot_12}, "DJ + Mezza", SR3_CTRL_ADR, 3);
+
 SpotRack spot_rack_4(spot_vec{&spot_16, &spot_17, &spot_18, &spot_19, &spot_20}, "PAR 4", SR4_CTRL_ADR, 4);
 
 
@@ -183,7 +182,7 @@ void front_rack_init(){
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  20000,  30000, "Bulles statique",   "SR.1.1.1", backer,  1,   255, int_vec{1}));
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  8000,   3000,  "Bulles très lent",  "SR.1.1.2", backer,  1,   255, int_vec{1}));
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  4000,   1500,  "Bulles lent",       "SR.1.1.3", backer,  1,   255, int_vec{1,2}));
-    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  1000,   600,   "Bulles rapide",     "SR.1.1.4", any,     1,   255, int_vec{1,2,3}));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  700,   600,   "Bulles rapide",     "SR.1.1.4", any,     1,   255, int_vec{1,2,3}));
     FILL
     FILL
     // Animation type 1.3 : Random Square
@@ -202,8 +201,8 @@ void front_rack_init(){
     FILL
     // Animation type 1.2 : Random strobe
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  800,  1000/FRATE, "Strobe lent",   "SR.1.2.1", any,    1, 255,   int_vec{2}));
-    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  300,  1000/FRATE, "Strobe moyen",  "SR.1.2.2", leader, 1, 255,   int_vec{2,3}));
-    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  100,  1000/FRATE, "Strobe rapide", "SR.1.2.3", leader, 1, 255,   int_vec{3}));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  250,  1000/FRATE, "Strobe moyen",  "SR.1.2.2", leader, 1, 255,   int_vec{2,3}));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  70,   1000/FRATE, "Strobe rapide", "SR.1.2.3", leader, 1, 255,   int_vec{3}));
     FILL
     FILL
     FILL
@@ -364,7 +363,7 @@ void rack_15_init(){
 void rack_40_init(){
 
     auto this_rack = &spot_rack_4;
-
+    
     // Animation 1 : Backgrnd color + random soft flashes
     this_rack->animations.push_back(new SpotRackAnimation0(this_rack, black, " - ", "SR.0", backer,0, 0, int_vec{1,2,3}));
 
@@ -799,7 +798,7 @@ void SpotRackAnimation1::new_frame(){
 
         // log(4, __FILE__, " ", __LINE__, " ",__func__, " Mark2 , ", fcn::num_to_str(i_spot));
 
-        const pixel     ani_backgd_RGBW = current_spot->RGBW(back_color, SPOTRACK_ANI1_BkG_INTENSITY_LOW);
+        const pixel     ani_backgd_RGBW = current_spot->RGBW(back_color, 80);
         pixel           frame_backgd_RGBW = current_spot->RGBW(black);
         // log(1, "Pixel size : ", fcn::num_to_str((int)pixel_size));
 

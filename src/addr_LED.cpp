@@ -179,7 +179,7 @@ DMX_vec AddressableLED::RGB(simpleColor c, int intensity){
         case pink       :                   temp = fcn::RGB_norm(DMX_vec{255,0,86});    break;
         case w_white    :                   temp = fcn::RGB_norm(DMX_vec{255,130,65}); break;
         case c_white    :                   temp = fcn::RGB_norm(DMX_vec{255,200,180}); break;
-        case gold       :                   temp = fcn::RGB_norm(DMX_vec{255,70,4});    break;
+        case gold       :                   temp = fcn::RGB_norm(DMX_vec{255,80,10});    break;
         case light_red      :               temp = fcn::RGB_norm(DMX_vec{255,40,15});   break;
         case light_cyan     :ref_int = 220; temp = fcn::RGB_norm(DMX_vec{120,235,255});   break;
         case light_blue     :               temp = fcn::RGB_norm(DMX_vec{70,80,255});   break;
@@ -495,7 +495,7 @@ void AddrLEDAnimation4::new_frame(){
 
         // log(4, __FILE__, " ", __LINE__, " ",__func__, " Mark2 , ", fcn::num_to_str(i_spot));
 
-        const pixel ani_backgd_RGB = fixture->RGB(back_color, ADDRLED_ANI4_BkG_INTENSITY_LOW);
+        const pixel ani_backgd_RGB = fixture->RGB(back_color, 30);
         
         // if flash is actviated, compute the flash --> exp( -(spd.(t-t0))²)
             double flash_intensity; // 0 by default

@@ -1,8 +1,30 @@
-.o
-.txt
-.log
-*/*.log
-bin/beatmatcher
-bin/test
-**/build
-beatmatcher.log
+# .o
+# .txt
+# *.log
+# bin/beatmatcher
+# bin/test
+# **/build
+# beatmatcher.log
+
+/*
+
+/**/*
+
+!.gitignore
+!.Makefile
+!README.md
+
+!/include/
+!/include/**
+
+!/src/
+!/src/**
+
+!/QLC/
+/QLC/**
+!/QLC/*.qxf
+!/QLC/*.qxw
+
+
+!/others/
+!/others/**
