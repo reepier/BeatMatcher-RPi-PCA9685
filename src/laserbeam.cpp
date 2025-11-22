@@ -4,7 +4,7 @@
 #define FILL this->animations.push_back(new LaserBeamAnimation0(this, black,  " - ", "LB.0", backer, 0, 0, int_vec{}));
 using namespace std;
 
-LaserBeam laserbeam(12, 3, "BEAM", 7, 255);
+LaserBeam laserbeam(19, 3, "BEAM", 7, 255);
 
 /*
 #######                                     

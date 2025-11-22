@@ -13,7 +13,7 @@ class RedLaserGroup;
 #        #  #  #      #      #    #    #       #    # #    # #    # #    # 
 #       #    #  ####  #####  #    #    #  #### #    # #    # #    # #    # 
 #       ######      # #      #####     #     # #####  #    # #    # #####  
-#       #    # #    # #      #   #     #     # #   #  #    # #    # #      
+#       #    # #    # #      #   #     #     q# #   #  #    # #    # #      
 ####### #    #  ####  ###### #    #     #####  #    #  ####   ####  #      */
 
 /* This fixture represents a group individual laser channels that do not necessarily
@@ -80,7 +80,7 @@ class RedLaserBox : public BaseFixture{
 
     // Fixture Specific Color Macro
 };
-extern RedLaserBox laserbox1, laserbox2;
+extern RedLaserBox laserbox1, laserbox2, laserbox3;
 
 
 

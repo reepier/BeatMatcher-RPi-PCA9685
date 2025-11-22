@@ -7,9 +7,11 @@ using namespace std;
 
 RedLaserBox laserbox1(0, 6, "Grada Laser 1", 1);
 RedLaserBox laserbox2(6, 6, "Grada Laser 2", 2);
+RedLaserBox laserbox3(12, 6, "Grada Laser 3", 2);
 
 RedLaserGroup lasergroup1(vector<DMX_channel*>{&laserbox1.lasers[0], &laserbox1.lasers[1], &laserbox1.lasers[2], &laserbox1.lasers[3], &laserbox1.lasers[4], &laserbox1.lasers[5],
-                                               &laserbox2.lasers[0], &laserbox2.lasers[1], &laserbox2.lasers[2], &laserbox2.lasers[3], &laserbox2.lasers[4], &laserbox2.lasers[5]}, 
+                                               &laserbox2.lasers[0], &laserbox2.lasers[1], &laserbox2.lasers[2], &laserbox2.lasers[3], &laserbox2.lasers[4], &laserbox2.lasers[5],
+                                               &laserbox3.lasers[0], &laserbox3.lasers[1], &laserbox3.lasers[2], &laserbox3.lasers[3], &laserbox3.lasers[4], &laserbox3.lasers[5]}, 
                           "RedRayz 1", RED_CTRL_ADR, 6);
 /*RedLaserGroup lasergroup2(vector<DMX_channel*>{}, 
                            "Groupe Laser 2", 0, 2);*/
@@ -34,11 +36,11 @@ void RedLaserGroup::init(){
     FILL
 
     // RANDOM BURST
-    animations.push_back(new RedrayzAnimation1(this, gaussian2,  8000,    2500, "Bulles Très lent",      "RED.2.1.3", backer, 1, 255, int_vec{1}));
-    animations.push_back(new RedrayzAnimation1(this, gaussian,   10000,   3000, "Bulles Très lent (+)",  "RED.2.1.5", backer, 1, 255, int_vec{1}));
-    animations.push_back(new RedrayzAnimation1(this, gaussian,   1500,    800,  "Bulles Lent",           "RED.2.1.2", backer, 1, 255, int_vec{2,3}));
-    animations.push_back(new RedrayzAnimation1(this, gaussian2,  1500,    4000, "Bulles Lent (-)",       "RED.2.1.4", backer, 1, 255, int_vec{2,3}));
-    animations.push_back(new RedrayzAnimation1(this, gaussian,   600,     400,  "Bulles Rapides",        "RED.2.1.1", any, 1, 255, int_vec{1,2,3}));
+    animations.push_back(new RedrayzAnimation1(this, gaussian2,  8000,    1800, "Bulles Très lent",      "RED.2.1.3", backer, 1, 255, int_vec{1}));
+    animations.push_back(new RedrayzAnimation1(this, gaussian,   10000,   2000, "Bulles Très lent (+)",  "RED.2.1.5", backer, 1, 255, int_vec{1}));
+    animations.push_back(new RedrayzAnimation1(this, gaussian,   1500,    500,  "Bulles Lent",           "RED.2.1.2", backer, 1, 255, int_vec{2,3}));
+    animations.push_back(new RedrayzAnimation1(this, gaussian2,  1500,    2500, "Bulles Lent (-)",       "RED.2.1.4", backer, 1, 255, int_vec{2,3}));
+    animations.push_back(new RedrayzAnimation1(this, gaussian,   600,     300,  "Bulles Rapides",        "RED.2.1.1", any, 1, 255, int_vec{1,2,3}));
     FILL
     FILL
 
