@@ -940,7 +940,7 @@ void BaseFixture::dump_animations(const char* fname){
     
     // log Fixture Animation list for QLC fixture object 
     ostringstream filename;
-    filename << "QLC/" << fname;
+    filename << "QLC/temp/" << fname;
     std::ofstream logFile(filename.str());
 
 

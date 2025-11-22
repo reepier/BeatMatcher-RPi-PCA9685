@@ -22,8 +22,10 @@
 
 !/QLC/
 /QLC/**
-!/QLC/*.qxf
 !/QLC/*.qxw
+!/QLC/fixtures/
+!/QLC/fixtures/*.qxf
+
 
 
 !/others/
