@@ -71,7 +71,7 @@ public:
 extern SpotFixture spot_1, spot_2, spot_3, spot_4, spot_5, spot_6; 
 extern SpotFixture spot_7, spot_8, spot_9, spot_10, spot_11, spot_12;
 extern SpotFixture spot_13, spot_14, spot_15, spot_16, spot_17, spot_18, spot_19, spot_20;  // New Shehds spots
-extern SpotFixture spot_21, spot_22, spot_23; 
+extern SpotFixture spot_21, spot_22, spot_23, spot_24, spot_25, spot_26; 
 
 /* /!\ /!\ Bullshit class --> I don't plan on coding animation for individual spots */
 class SpotAnimation : public BaseAnimation{
