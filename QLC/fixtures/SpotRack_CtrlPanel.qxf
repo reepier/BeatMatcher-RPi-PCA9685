@@ -138,6 +138,30 @@
   <Capability Min="21" Max="21" Preset="ColorMacro" Res1="#aaffb8">Light green</Capability>
   <Capability Min="22" Max="255">reserve</Capability>
  </Channel>
+  <Channel Name="param1 : Duration">
+  <Group Byte="0">Speed</Group>
+ </Channel>
+ <Channel Name="param2 : Period">
+  <Group Byte="0">Speed</Group>
+ </Channel>
+ <Channel Name="param3 : Intensity 1">
+  <Group Byte="0">Intensity</Group>
+ </Channel>
+ <Channel Name="param4 : Intensity 2">
+  <Group Byte="0">Intensity</Group>
+ </Channel>
+ <Channel Name="param5 : Ratio">
+  <Group Byte="0">Nothing</Group>
+ </Channel>
+ <Channel Name="param6 :">
+  <Group Byte="0">Nothing</Group>
+ </Channel>
+ <Channel Name="param7 :">
+  <Group Byte="0">Nothing</Group>
+ </Channel>
+ <Channel Name="param8 :">
+  <Group Byte="0">Nothing</Group>
+ </Channel>
  <Mode Name="All CH.">
   <Channel Number="0" ActsOn="0">Dimmer</Channel>
   <Channel Number="1" ActsOn="1">Animation</Channel>

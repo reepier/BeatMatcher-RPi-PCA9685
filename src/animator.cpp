@@ -649,7 +649,7 @@ AnimationManager animator;
 
 void BaseFixture::process_DMX_input(bool data_available, bool trigger, const uint8_t *data){
         
-    // Process Dimmer
+    // Process DIMMER
     this->master = data[this->input_addr-1 + FIX_DIM_CH];
 
     // Processe ANIMATION
@@ -716,7 +716,14 @@ void BaseFixture::process_DMX_input(bool data_available, bool trigger, const uin
     }//TODO clean this if / elseif structure --> it has way to many ramifications
 
     //Process PARAMETERS
-
+    this->param1 = arduino::map( (double)data[this->input_addr-1+FIX_PARM1_CH] , 0.0, 255.0, 0.0, 1.0);
+    this->param2 = arduino::map( (double)data[this->input_addr-1+FIX_PARM2_CH] , 0.0, 255.0, 0.0, 1.0);
+    this->param3 = arduino::map( (double)data[this->input_addr-1+FIX_PARM3_CH] , 0.0, 255.0, 0.0, 1.0);
+    this->param4 = arduino::map( (double)data[this->input_addr-1+FIX_PARM4_CH] , 0.0, 255.0, 0.0, 1.0);
+    this->param5 = arduino::map( (double)data[this->input_addr-1+FIX_PARM5_CH] , 0.0, 255.0, 0.0, 1.0);
+    this->param6 = arduino::map( (double)data[this->input_addr-1+FIX_PARM6_CH] , 0.0, 255.0, 0.0, 1.0);
+    this->param7 = arduino::map( (double)data[this->input_addr-1+FIX_PARM7_CH] , 0.0, 255.0, 0.0, 1.0);
+    this->param8 = arduino::map( (double)data[this->input_addr-1+FIX_PARM8_CH] , 0.0, 255.0, 0.0, 1.0);
 }
 
 // toggles blackout boolean

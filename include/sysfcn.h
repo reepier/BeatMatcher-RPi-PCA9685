@@ -5,13 +5,16 @@
 #include "wiringPi.h"
 #include "config.h"
 
-// linearly interpolates (x;y) between points (x1;y1) and (x2;y2)
-template<typename T>
-T map(T x, T x1, T x2, T y1, T y2){
-    double a = (double)(y2-y1)/(double)(x2-x1);
-    double b = (double)y1 - a*x1;
-    return (T)(a*x+b);
-}
+
+namespace arduino{
+    // linearly interpolates (x;y) between points (x1;y1) and (x2;y2)
+    template<typename T>
+    T map(T x, T x1, T x2, T y1, T y2){
+        double a = (double)(y2-y1)/(double)(x2-x1);
+        double b = (double)y1 - a*x1;
+        return (T)(a*x+b);
+    }
+} using namespace arduino;
 
 template<typename T>
 T rand_min_max(T min, T max){

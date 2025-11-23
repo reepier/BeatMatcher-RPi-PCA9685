@@ -456,7 +456,7 @@ class BaseFixture{
        * param1, param2 : intensity front & back
        * param3, param4 : duration & period
        * param4         : ratio*/ 
-    double param1, param2, param3, param4, param5, param6, param7, param9;
+    double param1, param2, param3, param4, param5, param6, param7, param8;
 
     // Animations catalog
     BaseAnimation * active_animation = nullptr; // animation currently running on this fixture
