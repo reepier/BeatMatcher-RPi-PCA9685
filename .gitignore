@@ -1,6 +1,6 @@
 # .o
 # .txt
-/**/*.log
+/**/beatmatcher.log
 # bin/beatmatcher
 # bin/test
 # **/build
@@ -17,7 +17,7 @@
 !/include/*.h
 
 !/src/
-!/src/**
+!/src/*.cpp
 
 !/QLC/
 /QLC/**
