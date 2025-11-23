@@ -1,13 +1,12 @@
 # .o
 # .txt
-# *.log
+/**/*.log
 # bin/beatmatcher
 # bin/test
 # **/build
 # beatmatcher.log
 
 /*
-
 /**/*
 
 !.gitignore
@@ -15,7 +14,7 @@
 !README.md
 
 !/include/
-!/include/**
+!/include/*.h
 
 !/src/
 !/src/**
