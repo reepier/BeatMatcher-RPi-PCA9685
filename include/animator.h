@@ -398,7 +398,7 @@ class AnimationManager{
     unsigned long t_last_change_ms = millis();   //timestamp of last switch between aniamtions
     ColorPaletteMagazine palette_magasine, palette_magasine_2, test_palette;
     
-    // for external controler
+    // DMX Controler parameter
     uint8_t master = 255;
     color_vec external_palette;
     bool new_external_palette; 
@@ -442,15 +442,21 @@ class BaseFixture{
 
     // DMX related parameters
     uint8_t master = 255;           // Master Dimmer from 0-255
-    int address;                    // DMX address
+    int address;                    // DMX fixture address
     bool b_blackout;
     const int nCH;
 
     // DMX Controler parameters
+    const int input_addr;           // DMX input address
     color_vec external_palette;     // this color palette is defined (or not) by the external controler 
     bool      new_external_palette = false;  //turns true for 1 cycle when new external animation is detected 
     int       external_animation;   // stores external animation commands
-    bool      new_external_animation = false;//turns true for 1 cycle when new external palette is detected
+    bool      new_external_animation = false; //turns true for 1 cycle when new external palette is detected
+      /* external dynamic parameter (range from 0.0 to 1.0)
+       * param1, param2 : intensity front & back
+       * param3, param4 : duration & period
+       * param4         : ratio*/ 
+    double param1, param2, param3, param4, param5, param6, param7, param9;
 
     // Animations catalog
     BaseAnimation * active_animation = nullptr; // animation currently running on this fixture
@@ -459,11 +465,11 @@ class BaseFixture{
     anim_vec animations;
 
     //constructor (adresse [0-511], number of channels, fixture's name)
-    BaseFixture(int addr,int nch, std::string nm, int i, uint8_t mast): address(addr), nCH(nch), name(nm), id(i), master(mast){};
+    BaseFixture(int addr,int nch, std::string nm, int i, uint8_t mast, int in_addr): address(addr), nCH(nch), name(nm), id(i), master(mast), input_addr(in_addr){};
     virtual void init()=0;
 
     //animation activation & management
-    void blackout(bool);
+    // void blackout(bool);
     bool activate_none();
     bool activate_by_index(int), activate_by_index(int, const color_vec&);
     bool activate_random(bool include_black = true), activate_random(const color_vec&, bool include_black = true);
@@ -473,6 +479,8 @@ class BaseFixture{
     bool activate_by_ptr(BaseAnimation*), activate_by_ptr(BaseAnimation*, const color_vec&);
     BaseAnimation* get_rand_animation_by_criteria(AnimationType , bool , int );
 
+    //DMX input
+    virtual void process_DMX_input(bool data_available, bool trig, const uint8_t *data);
     //DMX output
     virtual int get_address() = 0;
     virtual int get_nCH()     = 0;

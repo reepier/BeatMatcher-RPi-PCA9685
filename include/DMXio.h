@@ -79,6 +79,20 @@ void send();
     #define BEAM_COL2_CH     4+OLA_ADR_OFFSET+BEAM_CTRL_ADR
 
 
+// NEW definition
+#define FIX_DIM_CH       1  +OLA_ADR_OFFSET
+#define FIX_ANI_CH       2  +OLA_ADR_OFFSET
+#define FIX_COL1_CH      3  +OLA_ADR_OFFSET
+#define FIX_COL2_CH      4  +OLA_ADR_OFFSET
+#define FIX_PARM1_CH     5  +OLA_ADR_OFFSET
+#define FIX_PARM2_CH     6  +OLA_ADR_OFFSET
+#define FIX_PARM3_CH     7  +OLA_ADR_OFFSET
+#define FIX_PARM4_CH     8  +OLA_ADR_OFFSET
+#define FIX_PARM5_CH     9  +OLA_ADR_OFFSET
+#define FIX_PARM6_CH     10 +OLA_ADR_OFFSET
+#define FIX_PARM7_CH     11 +OLA_ADR_OFFSET
+#define FIX_PARM8_CH     12 +OLA_ADR_OFFSET
+
 
 
 

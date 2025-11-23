@@ -20,7 +20,7 @@ class LaserBeam : public BaseFixture{
     DMX_vec pixel;
 
     //custom constructor (also calls base constructor)
-    LaserBeam(int addr, int ch, std::string nm, int id, uint8_t mast=255) : BaseFixture(addr, ch, nm, id, mast)
+    LaserBeam(int addr, int ch, std::string nm, int id, uint8_t mast, int in_addr) : BaseFixture(addr, ch, nm, id, mast, in_addr)
     {
         this->pixel = this->RGB(black);
     };

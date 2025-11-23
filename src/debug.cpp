@@ -222,8 +222,13 @@ void disp_output_window(){
             
             // if((fix == &spot_rack_1) || fix == &spot_rack_3)  line+=2;
             // else line += 1;
-            line += 1;
+            
+        }else{
+            ostringstream nulbuf;
+            nulbuf << "NULL";
+            mvwprintw(outputw, line, 1,  nulbuf.str().data());
         }
+        line += 1;
 
 
     }

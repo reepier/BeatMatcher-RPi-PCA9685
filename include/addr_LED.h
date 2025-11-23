@@ -82,7 +82,7 @@ class AddressableLED : public BaseFixture{
 
 
     //custom constructor (also calls base constructor)
-    AddressableLED(int uni, int addr, int ch, std::string nm, int id, uint8_t mast=255) : BaseFixture(addr, ch, nm, id, mast){
+    AddressableLED(int uni, int addr, int ch, std::string nm, int id, uint8_t mast, int in_addr) : BaseFixture(addr, ch, nm, id, mast, in_addr){
       this->pixels.resize(NUM_PIX, DMX_vec(3)); // resize the vector : NUM_PIX pixels, each pixel has 3 subpixels (RGB)
     };
 

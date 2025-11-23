@@ -7,7 +7,7 @@ using namespace std;
 // reserve animation for future use --> without it, QLC config would need to be rebuilt for every added animation
 #define FILL animations.push_back(new AddrLEDAnimation0(this, black, " - ",    "PIX.0.0", any, 0, 0, int_vec{}));
 
-AddressableLED addr_led(1, 0, 3*NUM_PIX, "LEDs", 1, 180);
+AddressableLED addr_led(1, 0, 3*NUM_PIX, "LEDs", 1, 255, 20);
 
 /*
 #######                                     

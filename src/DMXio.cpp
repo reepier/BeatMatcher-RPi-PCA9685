@@ -181,73 +181,74 @@ RubiFont                                                    */
                                                                           
                                                                 
 */
+    addr_led.process_DMX_input(new_data_available, trigger, data.GetRaw());
 
-    // PROCESS ADRESSABLE LED DIMMER
-    if (new_data_available){ // process dimmer input as a continuous stream (& not only on trigger)
-        // get & rewrap raw data
-        addr_led.master = data.Get(LED_DIM_CH); // already a 0-255 dmx data, no conversion/rewrap needed
-    }
+    // // PROCESS ADRESSABLE LED DIMMER
+    // if (new_data_available){ // process dimmer input as a continuous stream (& not only on trigger)
+    //     // get & rewrap raw data
+    //     addr_led.master = data.Get(LED_DIM_CH); // already a 0-255 dmx data, no conversion/rewrap needed
+    // }
 
-    //PROCESS ADDRESSABLE LEDs Animation
-    if (trigger){
-        //get & rewrap raw data
-        int led_ani_val = data.Get(LED_ANI_CH);
-        // if input data is not in DEFAULT positions (automatic mode)
-        if ( led_ani_val!=255) { 
-            // update led animation if there is a change
-            if (addr_led.external_animation != led_ani_val){
-                addr_led.external_animation = led_ani_val;
-                addr_led.new_external_animation = true;
-                // log(2, "New led animation : ", fcn::num_to_str(addr_led.external_animation));
-            }else{
+    // //PROCESS ADDRESSABLE LEDs Animation
+    // if (trigger){
+    //     //get & rewrap raw data
+    //     int led_ani_val = data.Get(LED_ANI_CH);
+    //     // if input data is not in DEFAULT positions (automatic mode)
+    //     if ( led_ani_val!=255) { 
+    //         // update led animation if there is a change
+    //         if (addr_led.external_animation != led_ani_val){
+    //             addr_led.external_animation = led_ani_val;
+    //             addr_led.new_external_animation = true;
+    //             // log(2, "New led animation : ", fcn::num_to_str(addr_led.external_animation));
+    //         }else{
                 
-            }
-        // if input data is DEFAULT (0) 
-        }else{
-            if (addr_led.external_animation != 255){  //if not already reset to (255)
-                addr_led.external_animation = 255;    //reset to 255 (auto)
-                addr_led.new_external_animation = true;
-                log(2, "Back to automatic led animation");
-            }else{
+    //         }
+    //     // if input data is DEFAULT (0) 
+    //     }else{
+    //         if (addr_led.external_animation != 255){  //if not already reset to (255)
+    //             addr_led.external_animation = 255;    //reset to 255 (auto)
+    //             addr_led.new_external_animation = true;
+    //             log(2, "Back to automatic led animation");
+    //         }else{
                 
-            }
-        }
-    }else{
+    //         }
+    //     }
+    // }else{
         
-    }
+    // }
 
-    //PROCESS ADDRESSABLE LEDs COLORS
-    if (trigger){
-        // get & rewrap raw data //TODO use "clamp" instead of min(max())
-        int led_col1_val = min(max((uint8_t)0,  data.Get(LED_COL1_CH)) , (uint8_t)(simpleColor::last_color));
-        int led_col2_val = min(max((uint8_t)0,  data.Get(LED_COL2_CH)) , (uint8_t)(simpleColor::last_color));
-        //create output structrue
-        color_vec led_palette;   //start with empty palette
-        // if input data are not in DEFAULT positions (automatic mode)
-        if ( led_col1_val!=0 || led_col2_val!=0 ) {
-            // create a palette based on (non zero) input data
-            if (led_col1_val > 0)  led_palette.push_back((simpleColor)(led_col1_val-1));
-            if (led_col2_val > 0)  led_palette.push_back((simpleColor)(led_col2_val-1));
-            // update led palette if there is a change
-            if (addr_led.external_palette != led_palette){
-                addr_led.new_external_palette = true;
-                addr_led.external_palette = led_palette;
-                // log(2, "New led palette : ", fcn::palette_to_string(addr_led.external_palette));
-            }else{
+    // //PROCESS ADDRESSABLE LEDs COLORS
+    // if (trigger){
+    //     // get & rewrap raw data //TODO use "clamp" instead of min(max())
+    //     int led_col1_val = min(max((uint8_t)0,  data.Get(LED_COL1_CH)) , (uint8_t)(simpleColor::last_color));
+    //     int led_col2_val = min(max((uint8_t)0,  data.Get(LED_COL2_CH)) , (uint8_t)(simpleColor::last_color));
+    //     //create output structrue
+    //     color_vec led_palette;   //start with empty palette
+    //     // if input data are not in DEFAULT positions (automatic mode)
+    //     if ( led_col1_val!=0 || led_col2_val!=0 ) {
+    //         // create a palette based on (non zero) input data
+    //         if (led_col1_val > 0)  led_palette.push_back((simpleColor)(led_col1_val-1));
+    //         if (led_col2_val > 0)  led_palette.push_back((simpleColor)(led_col2_val-1));
+    //         // update led palette if there is a change
+    //         if (addr_led.external_palette != led_palette){
+    //             addr_led.new_external_palette = true;
+    //             addr_led.external_palette = led_palette;
+    //             // log(2, "New led palette : ", fcn::palette_to_string(addr_led.external_palette));
+    //         }else{
                 
-            }
-        }else{
-            if ( !addr_led.external_palette.empty()){  //if not already empty 
-                addr_led.new_external_palette = true;
-                addr_led.external_palette.clear();    //reset to empty palette (meaning main palette or auto palette will apply to leds)
-                log(2, "Back to automatic led palette");
-            }else{
+    //         }
+    //     }else{
+    //         if ( !addr_led.external_palette.empty()){  //if not already empty 
+    //             addr_led.new_external_palette = true;
+    //             addr_led.external_palette.clear();    //reset to empty palette (meaning main palette or auto palette will apply to leds)
+    //             log(2, "Back to automatic led palette");
+    //         }else{
                 
-            }
-        }
-    }else{
+    //         }
+    //     }
+    // }else{
         
-    }//TODO clean this if / elseif structure --> it has way to many ramifications
+    // }//TODO clean this if / elseif structure --> it has way to many ramifications
 
 
 
@@ -261,72 +262,76 @@ RubiFont                                                    */
                                             */
 
     for (SpotRack* spot_rack : vector<SpotRack*>{&spot_rack_1,&spot_rack_2,&spot_rack_3,&spot_rack_4}){  //allows for more fexibility when using more than 1 rack
-        //PROCESS SPOT RACK 1 DIMMER
-        if (new_data_available){ // process dimmer input as a continuous stream (& not only on trigger)
-            // get & rewrap raw data
-            spot_rack->master = data.Get(spot_rack->address + SR_DIM_CH); // already a 0-255 dmx data, no conversion/rewrap needed
-        }
+        
 
-        //PROCESS SPOT RACK 1 Animation
-        if (trigger){
-            //get & rewrap raw data
-            int sr1_ani_val = data.Get(spot_rack->address + SR_ANI_CH);
-            // if input data is not in DEFAULT positions (automatic mode)
-            if ( sr1_ani_val!=255) { 
-                // update Rack animation if there is a change
-                if (spot_rack->external_animation != sr1_ani_val){
-                    spot_rack->external_animation = sr1_ani_val;
-                    spot_rack->new_external_animation = true;
-                    // log(2, "New SR1 animation : ", fcn::num_to_str(spot_rack->external_animation));
-                }else{
-                    
-                }
-            // if input data is DEFAULT (0) 
-            }else{
-                if (spot_rack->external_animation != 255){  //if not already reset to 255
-                    spot_rack->external_animation = 255;    //reset to 255
-                    spot_rack->new_external_animation = true;
-                    log(2, "Back to automatic SR1 animation");  //TODO choose where to put log instructions (cannot be both in DMXio and Animator)
-                }else{
-                    
-                }
-            }
-        }else{
-            
-        }
+        spot_rack->process_DMX_input(new_data_available, trigger, data.GetRaw());
+        
+        // // PROCESS SPOT RACK 1 DIMMER
+        // if (new_data_available){ // process dimmer input as a continuous stream (& not only on trigger)
+        //     // get & rewrap raw data
+        //     spot_rack->master = data.Get(spot_rack->address + SR_DIM_CH); // already a 0-255 dmx data, no conversion/rewrap needed
+        // }
 
-        //PROCESS SPOT RACK 1 COLORS
-        if (trigger){
-            // get & rewrap raw data
-            int sr1_col1_val = min(max((uint8_t)0,  data.Get(spot_rack->address + SR_COL1_CH)) , (uint8_t)(simpleColor::last_color));
-            int sr1_col2_val = min(max((uint8_t)0,  data.Get(spot_rack->address + SR_COL2_CH)) , (uint8_t)(simpleColor::last_color));
-            //create output structrue
-            color_vec sr1_palette;   //start with empty palette
-            // if input data are not in DEFAULT positions (automatic mode)
-            if ( sr1_col1_val!=0 || sr1_col2_val!=0 ) {
-                // create a palette based on (non zero) input data
-                if (sr1_col1_val > 0)  sr1_palette.push_back((simpleColor)(sr1_col1_val-1));
-                if (sr1_col2_val > 0)  sr1_palette.push_back((simpleColor)(sr1_col2_val-1));
-                // update Rack palette if there is a change
-                if (spot_rack->external_palette != sr1_palette){
-                    spot_rack->external_palette = sr1_palette;
-                    spot_rack->new_external_palette = true;
-                    // log(2, "New SR1 palette : ", fcn::palette_to_string(spot_rack->external_palette));
-                }else{
+        // //PROCESS SPOT RACK 1 Animation
+        // if (trigger){
+        //     //get & rewrap raw data
+        //     int sr1_ani_val = data.Get(spot_rack->address + SR_ANI_CH);
+        //     // if input data is not in DEFAULT positions (automatic mode)
+        //     if ( sr1_ani_val!=255) { 
+        //         // update Rack animation if there is a change
+        //         if (spot_rack->external_animation != sr1_ani_val){
+        //             spot_rack->external_animation = sr1_ani_val;
+        //             spot_rack->new_external_animation = true;
+        //             // log(2, "New SR1 animation : ", fcn::num_to_str(spot_rack->external_animation));
+        //         }else{
                     
-                }
-            }else{
-                if ( !spot_rack->external_palette.empty()){  //if not already empty 
-                    spot_rack->external_palette.clear();    //reset to empty palette (meaning main palette or auto palette will apply to leds)
-                    spot_rack->new_external_palette = true;
-                    log(2, "Back to automatic SR1 palette");
-                }else{
+        //         }
+        //     // if input data is DEFAULT (0) 
+        //     }else{
+        //         if (spot_rack->external_animation != 255){  //if not already reset to 255
+        //             spot_rack->external_animation = 255;    //reset to 255
+        //             spot_rack->new_external_animation = true;
+        //             log(2, "Back to automatic SR1 animation");  //TODO choose where to put log instructions (cannot be both in DMXio and Animator)
+        //         }else{
                     
-                }
-            }
-        }else{
+        //         }
+        //     }
+        // }else{
             
-        }
+        // }
+
+        // //PROCESS SPOT RACK 1 COLORS
+        // if (trigger){
+        //     // get & rewrap raw data
+        //     int sr1_col1_val = min(max((uint8_t)0,  data.Get(spot_rack->address + SR_COL1_CH)) , (uint8_t)(simpleColor::last_color));
+        //     int sr1_col2_val = min(max((uint8_t)0,  data.Get(spot_rack->address + SR_COL2_CH)) , (uint8_t)(simpleColor::last_color));
+        //     //create output structrue
+        //     color_vec sr1_palette;   //start with empty palette
+        //     // if input data are not in DEFAULT positions (automatic mode)
+        //     if ( sr1_col1_val!=0 || sr1_col2_val!=0 ) {
+        //         // create a palette based on (non zero) input data
+        //         if (sr1_col1_val > 0)  sr1_palette.push_back((simpleColor)(sr1_col1_val-1));
+        //         if (sr1_col2_val > 0)  sr1_palette.push_back((simpleColor)(sr1_col2_val-1));
+        //         // update Rack palette if there is a change
+        //         if (spot_rack->external_palette != sr1_palette){
+        //             spot_rack->external_palette = sr1_palette;
+        //             spot_rack->new_external_palette = true;
+        //             // log(2, "New SR1 palette : ", fcn::palette_to_string(spot_rack->external_palette));
+        //         }else{
+                    
+        //         }
+        //     }else{
+        //         if ( !spot_rack->external_palette.empty()){  //if not already empty 
+        //             spot_rack->external_palette.clear();    //reset to empty palette (meaning main palette or auto palette will apply to leds)
+        //             spot_rack->new_external_palette = true;
+        //             log(2, "Back to automatic SR1 palette");
+        //         }else{
+                    
+        //         }
+        //     }
+        // }else{
+            
+        // }
     }
 /*
 ▗▄▄▖ ▗▄▄▄▖▗▄▄▄     ▗▄▄▖  ▗▄▖ ▗▖  ▗▖▗▄▄▄▄▖
@@ -337,73 +342,75 @@ RubiFont                                                    */
                                          
                                          */
     
-    //PROCESS RED RAYZ DIMMER
-    if (new_data_available){ // process dimmer input as a continuous stream (& not only on trigger)
-        // get & rewrap raw data
-        lasergroup1.master = data.Get(RED_DIM_CH); // already a 0-255 dmx data, no conversion/rewrap needed
-        // log(1, fcn::num_to_str(lasergroup1.master));
-        // lasergroup1.address = lasergroup1.get_address();
-    }
+    lasergroup1.process_DMX_input(new_data_available, trigger, data.GetRaw());
 
-    //PROCESS RED RAYZ Animation
-    if (trigger){
-        //get & rewrap raw data
-        int red_ani_val = data.Get(RED_ANI_CH);
-        // if input data is not in DEFAULT positions (automatic mode)
-        if ( red_ani_val!=255) { 
-            // update Rack animation if there is a change
-            if (lasergroup1.external_animation != red_ani_val){
-                lasergroup1.external_animation = red_ani_val;
-                lasergroup1.new_external_animation = true;
-            }else{
-                
-            }
-        // if input data is DEFAULT (0) 
-        }else{
-            if (lasergroup1.external_animation != 255){  //if not already reset to 255
-                lasergroup1.external_animation = 255;    //reset to 255
-                lasergroup1.new_external_animation = true;
-                log(2, "Back to automatic RED animation");  //TODO choose where to put log instructions (cannot be both in DMXio and Animator)
-            }else{
-                
-            }
-        }
-    }else{
-        
-    }
+    // //PROCESS RED RAYZ DIMMER
+    // if (new_data_available){ // process dimmer input as a continuous stream (& not only on trigger)
+    //     // get & rewrap raw data
+    //     lasergroup1.master = data.Get(RED_DIM_CH); // already a 0-255 dmx data, no conversion/rewrap needed
+    //     // log(1, fcn::num_to_str(lasergroup1.master));
+    //     // lasergroup1.address = lasergroup1.get_address();
+    // }
 
-    //PROCESS RED RAYZ COLORS // TODO remove ??
-    if (trigger){
-        // get & rewrap raw data
-        int red_col1_val = min(max((uint8_t)0,  data.Get(RED_COL1_CH)) , (uint8_t)(simpleColor::last_color));
-        int red_col2_val = min(max((uint8_t)0,  data.Get(RED_COL2_CH)) , (uint8_t)(simpleColor::last_color));
-        //create output structrue
-        color_vec red_palette;   //start with empty palette
-        // if input data are not in DEFAULT positions (automatic mode)
-        if ( red_col1_val!=0 || red_col2_val!=0 ) {
-            // create a palette based on (non zero) input data
-            if (red_col1_val > 0)  red_palette.push_back((simpleColor)(red_col1_val-1));
-            if (red_col2_val > 0)  red_palette.push_back((simpleColor)(red_col2_val-1));
-            // update Rack palette if there is a change
-            if (lasergroup1.external_palette != red_palette){
-                lasergroup1.external_palette = red_palette;
-                lasergroup1.new_external_palette = true;
-                // log(2, "New SR1 palette : ", fcn::palette_to_string(spot_rack->external_palette));
-            }else{
+    // //PROCESS RED RAYZ Animation
+    // if (trigger){
+    //     //get & rewrap raw data
+    //     int red_ani_val = data.Get(RED_ANI_CH);
+    //     // if input data is not in DEFAULT positions (automatic mode)
+    //     if ( red_ani_val!=255) { 
+    //         // update Rack animation if there is a change
+    //         if (lasergroup1.external_animation != red_ani_val){
+    //             lasergroup1.external_animation = red_ani_val;
+    //             lasergroup1.new_external_animation = true;
+    //         }else{
                 
-            }
-        }else{
-            if ( !lasergroup1.external_palette.empty()){  //if not already empty 
-                lasergroup1.external_palette.clear();    //reset to empty palette (meaning main palette or auto palette will apply to leds)
-                lasergroup1.new_external_palette = true;
-                log(2, "Back to automatic RED palette");
-            }else{
+    //         }
+    //     // if input data is DEFAULT (0) 
+    //     }else{
+    //         if (lasergroup1.external_animation != 255){  //if not already reset to 255
+    //             lasergroup1.external_animation = 255;    //reset to 255
+    //             lasergroup1.new_external_animation = true;
+    //             log(2, "Back to automatic RED animation");  //TODO choose where to put log instructions (cannot be both in DMXio and Animator)
+    //         }else{
                 
-            }
-        }
-    }else{
+    //         }
+    //     }
+    // }else{
         
-    }
+    // }
+
+    // //PROCESS RED RAYZ COLORS // TODO remove ??
+    // if (trigger){
+    //     // get & rewrap raw data
+    //     int red_col1_val = min(max((uint8_t)0,  data.Get(RED_COL1_CH)) , (uint8_t)(simpleColor::last_color));
+    //     int red_col2_val = min(max((uint8_t)0,  data.Get(RED_COL2_CH)) , (uint8_t)(simpleColor::last_color));
+    //     //create output structrue
+    //     color_vec red_palette;   //start with empty palette
+    //     // if input data are not in DEFAULT positions (automatic mode)
+    //     if ( red_col1_val!=0 || red_col2_val!=0 ) {
+    //         // create a palette based on (non zero) input data
+    //         if (red_col1_val > 0)  red_palette.push_back((simpleColor)(red_col1_val-1));
+    //         if (red_col2_val > 0)  red_palette.push_back((simpleColor)(red_col2_val-1));
+    //         // update Rack palette if there is a change
+    //         if (lasergroup1.external_palette != red_palette){
+    //             lasergroup1.external_palette = red_palette;
+    //             lasergroup1.new_external_palette = true;
+    //             // log(2, "New SR1 palette : ", fcn::palette_to_string(spot_rack->external_palette));
+    //         }else{
+                
+    //         }
+    //     }else{
+    //         if ( !lasergroup1.external_palette.empty()){  //if not already empty 
+    //             lasergroup1.external_palette.clear();    //reset to empty palette (meaning main palette or auto palette will apply to leds)
+    //             lasergroup1.new_external_palette = true;
+    //             log(2, "Back to automatic RED palette");
+    //         }else{
+                
+    //         }
+    //     }
+    // }else{
+        
+    // }
 
 /*
 ▗▖    ▗▄▖  ▗▄▄▖▗▄▄▄▖▗▄▄▖ ▗▄▄▖ ▗▄▄▄▖ ▗▄▖ ▗▖  ▗▖
@@ -414,74 +421,75 @@ RubiFont                                                    */
                                               
                                               */
 
+    laserbeam.process_DMX_input(new_data_available, trigger, data.GetRaw());
 
-    //PROCESS Laser Beam DIMMER
-    if (new_data_available){ // process dimmer input as a continuous stream (& not only on trigger)
-        // get & rewrap raw data
-        laserbeam.master = data.Get(BEAM_DIM_CH); // already a 0-255 dmx data, no conversion/rewrap needed
-    }
+    // //PROCESS Laser Beam DIMMER
+    // if (new_data_available){ // process dimmer input as a continuous stream (& not only on trigger)
+    //     // get & rewrap raw data
+    //     laserbeam.master = data.Get(BEAM_DIM_CH); // already a 0-255 dmx data, no conversion/rewrap needed
+    // }
 
-    //PROCESS Laser Beam Animation
-    if (trigger){
-        //get & rewrap raw data
-        int beam_ani_val = data.Get(BEAM_ANI_CH);
-        // if input data is not in DEFAULT positions (automatic mode)
-        if ( beam_ani_val!=255) { 
-            // update Rack animation if there is a change
-            if (laserbeam.external_animation != beam_ani_val){
-                laserbeam.external_animation = beam_ani_val;
-                laserbeam.new_external_animation = true;
-            }else{
+    // //PROCESS Laser Beam Animation
+    // if (trigger){
+    //     //get & rewrap raw data
+    //     int beam_ani_val = data.Get(BEAM_ANI_CH);
+    //     // if input data is not in DEFAULT positions (automatic mode)
+    //     if ( beam_ani_val!=255) { 
+    //         // update Rack animation if there is a change
+    //         if (laserbeam.external_animation != beam_ani_val){
+    //             laserbeam.external_animation = beam_ani_val;
+    //             laserbeam.new_external_animation = true;
+    //         }else{
                 
-            }
-        // if input data is DEFAULT (0) 
-        }else{
-            if (laserbeam.external_animation != 255){  //if not already reset to 255
-                laserbeam.external_animation = 255;    //reset to 255
-                laserbeam.new_external_animation = true;
-                log(2, "Back to automatic BEAM animation");  //TODO choose where to put log instructions (cannot be both in DMXio and Animator)
-            }else{
+    //         }
+    //     // if input data is DEFAULT (0) 
+    //     }else{
+    //         if (laserbeam.external_animation != 255){  //if not already reset to 255
+    //             laserbeam.external_animation = 255;    //reset to 255
+    //             laserbeam.new_external_animation = true;
+    //             log(2, "Back to automatic BEAM animation");  //TODO choose where to put log instructions (cannot be both in DMXio and Animator)
+    //         }else{
                 
-            }
-        }
-    }else{
+    //         }
+    //     }
+    // }else{
         
-    }
+    // }
 
-    //PROCESS Laser Beam COLORS
-    if (trigger){
-        // get & rewrap raw data
-        int beam_col1_val = min(max((uint8_t)0,  data.Get(BEAM_COL1_CH)) , (uint8_t)(simpleColor::last_color));
-        int beam_col2_val = min(max((uint8_t)0,  data.Get(BEAM_COL2_CH)) , (uint8_t)(simpleColor::last_color));
-        //create output structrue
-        color_vec beam_palette;   //start with empty palette
-        // if input data are not in DEFAULT positions (automatic mode)
-        if ( beam_col1_val!=0 || beam_col2_val!=0 ) {
-            // create a palette based on (non zero) input data
-            if (beam_col1_val > 0)  beam_palette.push_back((simpleColor)(beam_col1_val-1));
-            if (beam_col2_val > 0)  beam_palette.push_back((simpleColor)(beam_col2_val-1));
-            // update fixture palette if there is a change
-            if (laserbeam.external_palette != beam_palette){
-                laserbeam.external_palette = beam_palette;
-                laserbeam.new_external_palette = true;
-            }else{
+    // //PROCESS Laser Beam COLORS
+    // if (trigger){
+    //     // get & rewrap raw data
+    //     int beam_col1_val = min(max((uint8_t)0,  data.Get(BEAM_COL1_CH)) , (uint8_t)(simpleColor::last_color));
+    //     int beam_col2_val = min(max((uint8_t)0,  data.Get(BEAM_COL2_CH)) , (uint8_t)(simpleColor::last_color));
+    //     //create output structrue
+    //     color_vec beam_palette;   //start with empty palette
+    //     // if input data are not in DEFAULT positions (automatic mode)
+    //     if ( beam_col1_val!=0 || beam_col2_val!=0 ) {
+    //         // create a palette based on (non zero) input data
+    //         if (beam_col1_val > 0)  beam_palette.push_back((simpleColor)(beam_col1_val-1));
+    //         if (beam_col2_val > 0)  beam_palette.push_back((simpleColor)(beam_col2_val-1));
+    //         // update fixture palette if there is a change
+    //         if (laserbeam.external_palette != beam_palette){
+    //             laserbeam.external_palette = beam_palette;
+    //             laserbeam.new_external_palette = true;
+    //         }else{
                 
-            }
-        }else{
-            if ( !laserbeam.external_palette.empty()){  //if not already empty 
-                laserbeam.external_palette.clear();    //reset to empty palette (meaning main palette or auto palette will apply)
-                laserbeam.new_external_palette = true;
-                log(2, "Back to automatic BEAM palette");
-            }else{
+    //         }
+    //     }else{
+    //         if ( !laserbeam.external_palette.empty()){  //if not already empty 
+    //             laserbeam.external_palette.clear();    //reset to empty palette (meaning main palette or auto palette will apply)
+    //             laserbeam.new_external_palette = true;
+    //             log(2, "Back to automatic BEAM palette");
+    //         }else{
                 
-            }
-        }
-    }else{
+    //         }
+    //     }
+    // }else{
         
-    }
+    // }
 
 
-    //TODO to improve genericity, put all these repeating code blocks in BaseFixture class (with overrides if needed in SpecificFixture class)
+    // //TODO to improve genericity, put all these repeating code blocks in BaseFixture class (with overrides if needed in SpecificFixture class)
 
 
     memorized_buffer = data;    // memorize current buffer for the next function call

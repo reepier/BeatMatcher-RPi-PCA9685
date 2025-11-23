@@ -32,7 +32,7 @@ public:
     uint8_t strobe;
     uint8_t prog;
     
-    SpiderFixture(int addr, int ch, std::string nm, int id, uint8_t mast=255) : BaseFixture(addr, ch, nm, id, mast)
+    SpiderFixture(int addr, int ch, std::string nm, int id, uint8_t mast) : BaseFixture(addr, ch, nm, id, mast)
     {  
         this->tilt.resize(3);
         this->pixels.resize(NLED, DMX_vec(NCOL));

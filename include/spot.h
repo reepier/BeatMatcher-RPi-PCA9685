@@ -46,7 +46,7 @@ public:
     SpotRack * rack;
 
     // Constructor & Initializer
-    SpotFixture(spot_type_t typ, int addr, int nch, std::string nm, int id, uint8_t mast=255) : BaseFixture(addr, nch, nm, id, mast){
+    SpotFixture(spot_type_t typ, int addr, int nch, std::string nm, int id, uint8_t mast=255) : BaseFixture(addr, nch, nm, id, mast, 0){
         this->type = typ;
 
         this->pixel = this->RGBW(black); // resize & initialise RGBWout vector
@@ -97,7 +97,7 @@ public:
     int rack_size;                           // number of spots (derived)
     //std::vector<BaseAnimation *> animations; // vector containing animations
 
-    SpotRack(spot_vec sp, std::string nm, int adr, int i, uint8_t mast=255): BaseFixture(adr, 0, nm, i, mast){
+    SpotRack(spot_vec sp, std::string nm, int addr, int i, uint8_t mast, int in_addr): BaseFixture(addr, 0, nm, i, mast, in_addr){
         // this->id = i;
         this->spots = sp;
         this->rack_size = sp.size();

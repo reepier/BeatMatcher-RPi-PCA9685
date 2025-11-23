@@ -27,7 +27,7 @@ $(test_app) : $(test) $(build_dir) $(objects)
 
 $(app): $(main) $(build_dir) $(objects) 
 	g++ $(flags) src/main.cpp $(objects) $(includePaths) $(libs) -o $(app)
-	rm QLC/Functions
+	rm QLC/temp/*
 
 build/:
 	mkdir build

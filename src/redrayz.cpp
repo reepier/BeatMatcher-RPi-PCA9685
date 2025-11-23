@@ -12,7 +12,7 @@ RedLaserBox laserbox3(12, 6, "Grada Laser 3", 2);
 RedLaserGroup lasergroup1(vector<DMX_channel*>{&laserbox1.lasers[0], &laserbox1.lasers[1], &laserbox1.lasers[2], &laserbox1.lasers[3], &laserbox1.lasers[4], &laserbox1.lasers[5],
                                                &laserbox2.lasers[0], &laserbox2.lasers[1], &laserbox2.lasers[2], &laserbox2.lasers[3], &laserbox2.lasers[4], &laserbox2.lasers[5],
                                                &laserbox3.lasers[0], &laserbox3.lasers[1], &laserbox3.lasers[2], &laserbox3.lasers[3], &laserbox3.lasers[4], &laserbox3.lasers[5]}, 
-                          "RedRayz 1", RED_CTRL_ADR, 6);
+                          "RedRayz 1", RED_CTRL_ADR, 6, 255, 40);
 /*RedLaserGroup lasergroup2(vector<DMX_channel*>{}, 
                            "Groupe Laser 2", 0, 2);*/
 

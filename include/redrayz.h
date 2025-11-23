@@ -28,7 +28,7 @@ class RedLaserGroup : public BaseFixture{
     int group_size;
     
     // Constructor
-    RedLaserGroup(std::vector<DMX_channel*> channels, std::string nm, int addr, int i, uint8_t mast=255) : BaseFixture(addr, channels.size(), nm, i,mast){
+    RedLaserGroup(std::vector<DMX_channel*> channels, std::string nm, int addr, int i, uint8_t mast, int in_addr) : BaseFixture(addr, channels.size(), nm, i,mast, in_addr){
       this->lasers = channels;
       this->group_size = channels.size();
     };
@@ -65,7 +65,7 @@ class RedLaserBox : public BaseFixture{
     DMX_vec lasers;
 
     //custom constructor (also calls base constructor)
-    RedLaserBox(int addr, int nch, std::string nm, int id, uint8_t mast=255) : BaseFixture(addr, nch, nm, id, mast){
+    RedLaserBox(int addr, int nch, std::string nm, int id, uint8_t mast=255) : BaseFixture(addr, nch, nm, id, mast, 0){
         lasers = DMX_vec{10, 20, 30, 40, 50, 60};//(nch, 0);
     };
 

@@ -14,6 +14,7 @@
 #include "sysfcn.h"
 #include "debug.h"
 #include "fixtures.h"
+#include "DMXio.h"
 
 using namespace std;
 
@@ -645,10 +646,83 @@ AnimationManager animator;
 ######  #    #  ####  ######    #       # #    #   #    ####  #    # ###### 
   */
 
-// toggles blackout boolean
-void BaseFixture::blackout(bool b){
-    this->b_blackout = b;
+
+void BaseFixture::process_DMX_input(bool data_available, bool trigger, const uint8_t *data){
+        
+    // Process Dimmer
+    this->master = data[this->input_addr-1 + FIX_DIM_CH];
+
+    // Processe ANIMATION
+    if (trigger){
+        //get & rewrap raw data
+        int fix_animation_val = data[this->input_addr-1 + FIX_ANI_CH];
+        // if input data is not in DEFAULT positions (automatic mode)
+        if ( fix_animation_val!=255) { 
+            // update fixture animation if there is a change
+            if (this->external_animation != fix_animation_val){
+                this->external_animation = fix_animation_val;
+                this->new_external_animation = true;
+                log(2, this->name, ": Activate animation """, this->animations[fix_animation_val]->name, """");
+            }else{
+                /*Do nothing*/
+            }
+        // if input data is DEFAULT (255) 
+        }else{
+            if (this->external_animation != 255){       //if not already reset to (255)
+                this->external_animation = 255;         //reset to 255 (auto)
+                this->new_external_animation = true;
+                log(2, this->name, ": Back to automatic animation");
+            }else{
+                /*Do nothing*/
+            }
+        }
+    }else{
+        /*Do nothing*/
+    }
+
+    // Process COLORS
+    if (trigger){
+        // get & rewrap raw data //TODO use "clamp" instead of min(max())
+        int fix_color1_val = clamp((int)data[this->input_addr-1+FIX_COL1_CH], 0, (int)(simpleColor::last_color));
+        int fix_color2_val = clamp((int)data[this->input_addr-1+FIX_COL2_CH], 0, (int)(simpleColor::last_color));
+        // int fix_color1_val = min(max((uint8_t)0,  data.Get(LED_COL1_CH)) , (uint8_t)(simpleColor::last_color));
+        // int fix_color2_val = min(max((uint8_t)0,  data.Get(LED_COL2_CH)) , (uint8_t)(simpleColor::last_color));
+        //create output structrue
+        color_vec fix_palette;   //start with empty palette
+        // if input data are not in DEFAULT positions (automatic mode)
+        if ( fix_color1_val!=0 || fix_color2_val!=0 ) {
+            // create a palette based on (non zero) input data
+            if (fix_color1_val > 0)  fix_palette.push_back((simpleColor)(fix_color1_val-1));
+            if (fix_color2_val > 0)  fix_palette.push_back((simpleColor)(fix_color2_val-1));
+            // update fixture palette if there is a change
+            if (this->external_palette != fix_palette){
+                this->new_external_palette = true;
+                this->external_palette = fix_palette;
+                log(2, this->name, ": New palette : ", fcn::palette_to_string(this->external_palette));
+            }else{
+                
+            }
+        }else{
+            if ( !this->external_palette.empty()){  //if not already empty 
+                this->new_external_palette = true;
+                this->external_palette.clear();    //reset to empty palette (meaning main palette or auto palette will apply)
+                log(2,this->name, ": Back to automatic palette");
+            }else{
+                
+            }
+        }
+    }else{
+        
+    }//TODO clean this if / elseif structure --> it has way to many ramifications
+
+    //Process PARAMETERS
+
 }
+
+// toggles blackout boolean
+// void BaseFixture::blackout(bool b){
+//     this->b_blackout = b;
+// }
 
 // deactivate fixture (display the "BLACK" animations)
 bool BaseFixture::activate_none(){
