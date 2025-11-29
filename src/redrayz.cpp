@@ -5,9 +5,9 @@ using namespace std;
 
 #define FILL animations.push_back(new RedrayzAnimation0(this, 0, " - ", "RED.0", any, 0, 0, int_vec{}));
 
-RedLaserBox laserbox1(0, 6, "Grada Laser 1", 1);
-RedLaserBox laserbox2(6, 6, "Grada Laser 2", 2);
-RedLaserBox laserbox3(12, 6, "Grada Laser 3", 2);
+RedLaserBox laserbox1(1, 6, "Grada Laser 1", 1);
+RedLaserBox laserbox2(7, 6, "Grada Laser 2", 2);
+RedLaserBox laserbox3(13, 6, "Grada Laser 3", 2);
 
 RedLaserGroup lasergroup1(vector<DMX_channel*>{&laserbox1.lasers[0], &laserbox1.lasers[1], &laserbox1.lasers[2], &laserbox1.lasers[3], &laserbox1.lasers[4], &laserbox1.lasers[5],
                                                &laserbox2.lasers[0], &laserbox2.lasers[1], &laserbox2.lasers[2], &laserbox2.lasers[3], &laserbox2.lasers[4], &laserbox2.lasers[5],

@@ -3,6 +3,12 @@
 // LaserBeam class declaration
 class LaserBeam;
 
+enum laserbeam_type_t{
+    RGB_500_Fat,
+    RGB_1W
+};
+
+
 /*
 #######                                     
 #       # #    # ##### #    # #####  ###### 
@@ -18,11 +24,13 @@ class LaserBeam : public BaseFixture{
   public:
     //channels
     DMX_vec pixel;
+    laserbeam_type_t type;
 
     //custom constructor (also calls base constructor)
-    LaserBeam(int addr, int ch, std::string nm, int id, uint8_t mast, int in_addr) : BaseFixture(addr, ch, nm, id, mast, in_addr)
+    LaserBeam(laserbeam_type_t typ, int addr, int ch, std::string nm, int id, uint8_t mast, int in_addr) : BaseFixture(addr, ch, nm, id, mast, in_addr)
     {
-        this->pixel = this->RGB(black);
+      this->type = typ;  
+      this->pixel = this->RGB(black);
     };
     // custom initializer declaration
     void init() override;

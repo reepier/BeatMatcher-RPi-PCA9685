@@ -16,6 +16,23 @@ namespace arduino{
     }
 } using namespace arduino;
 
+// linearly interpolates (x;y) between 3 points (x1;y1), (x2;y2), (x3;y3). 
+template<typename T>
+T map3(T x, T x1, T x2, T x3, T y1, T y2, T y3){
+    if ( x<=x2 ){
+        return arduino::map(x, x1, x2, y1, y2);
+    }else {
+        return arduino::map(x, x2, x3, y2, y3);
+    }
+}
+
+// linearly interpolates parameter value. 
+template<typename T>
+T map3_param(T x, T y1, T y2, T y3){
+    return map3(x, 0.0, 0.5, 1.0, y1, y2, y3);
+}
+
+
 template<typename T>
 T rand_min_max(T min, T max){
     return rand() % (max-min) + min;

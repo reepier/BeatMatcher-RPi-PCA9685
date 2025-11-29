@@ -119,11 +119,11 @@ namespace fcn{
 
     if ( -alpha <= x  &&  x <= 0  ){
     //   std::cout<<"mark1: " << -alpha << " "<< x << " "<< 0 << " " << endl; 
-        return map(x, -alpha, 0.0, (double)min, (double)max);
+        return arduino::map(x, -alpha, 0.0, (double)min, (double)max);
     }
     else if (0 < x  &&  x <= 1-alpha ){
     //   std::cout<<"mark2: " << 0 << " "<< x << " "<< 1-alpha << " " << endl;
-        return map(x, 0.0, 1.0-alpha, (double)max, (double)min);
+        return arduino::map(x, 0.0, 1.0-alpha, (double)max, (double)min);
     }
     else {
     //   std::cout<<"mark3: " << endl;
@@ -145,8 +145,8 @@ namespace fcn{
     double t_prime = (t+phase/2.0/M_PI*period) / period;
     t_prime = t_prime - (int)t_prime;
 
-    if (t_prime<alpha)  {return (double)map(t_prime, 0.0, alpha, min, max);}
-    else                {return (double)map(t_prime, alpha, 1.0, max, min);}
+    if (t_prime<alpha)  {return (double)arduino::map(t_prime, 0.0, alpha, min, max);}
+    else                {return (double)arduino::map(t_prime, alpha, 1.0, max, min);}
   }
   //square wave
   inline double square_wave(time_ms t, time_ms period, double min, double max, double alpha = 0.5, double phase = 0){
@@ -371,9 +371,6 @@ class ColorPaletteMagazine{
     color_vec get_similar_palette(){
       return this->get_random_palette();
     }
-
-    // TODO do not return the same colorpalette as the one passed as argument
-    //    -> worst case, return a random animation to get out of the color well
 };
 
 
@@ -453,9 +450,12 @@ class BaseFixture{
     int       external_animation;   // stores external animation commands
     bool      new_external_animation = false; //turns true for 1 cycle when new external palette is detected
       /* external dynamic parameter (range from 0.0 to 1.0)
-       * param1, param2 : intensity front & back
-       * param3, param4 : duration & period
-       * param4         : ratio*/ 
+       * param1, param2 : duration & interval
+       * param3         : backgd intensity
+       * param4         : ratio
+       * param5         : shape  (square, exp, bubble, triangle...)
+       * param6         : decomp (pix, barre, group, )
+       * param7         : spatial order (random, seq 1, seq 2...)*/
     double param1, param2, param3, param4, param5, param6, param7, param8;
 
     // Animations catalog
@@ -552,40 +552,6 @@ class BaseAnimation{
     virtual void init(const color_vec&){}; //special init() for AUTOCOLOR feature
      
      
-    /** //TODO :
-     * until now, every animation must be defined with a (very) specific set of (color, shape, time...) arguments. 
-     * Basically every (interesting) parameter of the animation must be defined at construction. This is very time
-     * consuming & inefficient since color are also defined in the color palette...
-     * 
-     * GOAL : use the current color palette (a selection of 1,2 or 3 matching colors) to set the animation colors at initialization.
-     * This way,  the animation declaration only sets the cinematic & dynamic parameters (speed, shape, periods...), which will drastically 
-     * reduce the volume of objects to declare
-     * The main goal here is to simplify the configuraiton process. Indeed the current solution presents drawbacks :
-     * - Show configuration is lengthy (creating new color means adding many lines to every fixture ini fcn)
-     * - Multicolor animations are even more time consuming (more color combinations available)
-     * -  
-     * 
-     * Limits :
-     * The correct color finding algorithm must be found to avoid undiesrable effects :
-     * - Bad color rendering when using complex colors for low intensity (i.e. Gold color for PAR LED background illumination)
-     * 
-     * Functionalities :
-     * - the color definition happens in the Animation::init() function
-     * - the color definition is based on a color palette 
-     * - authorized & unauthorized colors can be defined manually (or not) 
-     * - the color palette will then be defined with the following rules in mind :
-     *    - color order matters : the first color will be used for dynamic/flash/bursts elements while the next for background/fix/slow elements
-     * 
-     * - display the palette (for each fixture ? globally ?) in the output console
-     * 
-     * Options :
-     * - The nummber of color (1, 2 more?) or a range of color number could be set at animation construction (to allow or restrict
-     *  multicolor mode animation per animation)
-     * - Could be an opportunity to upgrade the color palette : instead of just declaring an array of colors, colors could be assigned for $
-     * particular roles (flash, background, both, or else...)   
-     *
-     * 
-     * */
     void update_palette(color_vec colors){
       for (color_vec::iterator new_c = colors.begin(); new_c != colors.end(); new_c++){
         // check if new color is not already stored in color_palette

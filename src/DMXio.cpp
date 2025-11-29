@@ -28,7 +28,7 @@ void send(){
     // construct & send DMX frame for old school fixtures (COTS DMX fixtures)
     balise("Construct & send buffer for classical fixtures");
     for (fix_vec::iterator fx = ll_fxtrs.begin(); fx != ll_fxtrs.end(); fx++){
-        ola_buffer.SetRange((*fx)->get_address(), (*fx)->buffer().data(), (*fx)->get_nCH());
+        ola_buffer.SetRange((*fx)->get_address()+OLA_ADR_OFFSET, (*fx)->buffer().data(), (*fx)->get_nCH());
     }
     ola_output_client.SendDmx(0, ola_buffer);
 

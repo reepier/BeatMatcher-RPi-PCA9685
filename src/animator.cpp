@@ -32,7 +32,6 @@ using namespace std;
 
 void AnimationManager::init(){
     log(4, __FILE__, " ",__func__);
-    //TODO move palette definition to a dedicated funciton (for readabiliyt)
 
 //--------------------------------------------------------------------------------
 // Warehouse color palette
@@ -441,7 +440,6 @@ void AnimationManager::autocolor_update(){
     }
 }
 
-//TODO update to support AUTOCOLOR
 bool AnimationManager::test_animation_update(){
     log(4, __FILE__, " ",__func__);
 
@@ -569,7 +567,6 @@ for (auto fix : fixs){
     bool automatic_main_palette = animator.external_palette.empty();                                    // true if main palette update is automatic
     bool automatic_fix_palette = fix->external_palette.empty() && animator.external_palette.empty();    // true if palette update for this fixture is auto (true or false)
     bool automatic_fix_ani = fix->external_animation==255;                                                // true if animation update for this fixture is auto(true or false)
-    //TODO change 0 behavior --> 0 = BLACK and 255 = AUTO
 
 
 // APPLY UPDATE to fixture :
@@ -682,7 +679,6 @@ void BaseFixture::process_DMX_input(bool data_available, bool trigger, const uin
 
     // Process COLORS
     if (trigger){
-        // get & rewrap raw data //TODO use "clamp" instead of min(max())
         int fix_color1_val = clamp((int)data[this->input_addr-1+FIX_COL1_CH], 0, (int)(simpleColor::last_color));
         int fix_color2_val = clamp((int)data[this->input_addr-1+FIX_COL2_CH], 0, (int)(simpleColor::last_color));
         // int fix_color1_val = min(max((uint8_t)0,  data.Get(LED_COL1_CH)) , (uint8_t)(simpleColor::last_color));
@@ -713,7 +709,7 @@ void BaseFixture::process_DMX_input(bool data_available, bool trigger, const uin
         }
     }else{
         
-    }//TODO clean this if / elseif structure --> it has way to many ramifications
+    }
 
     //Process PARAMETERS
     this->param1 = arduino::map( (double)data[this->input_addr-1+FIX_PARM1_CH] , 0.0, 255.0, 0.0, 1.0);
