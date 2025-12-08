@@ -346,12 +346,13 @@ private :
 
     Shape flash_shape = gaussian; // default setting leads to gaussian flashes (of bubbles)
     strip_subdiv_t unit = bar;
-    int rand_const_ms;
-    int flash_len;
+    int flash_interval;
+    int flash_length;
 
     // Internal variable (updated at every new_frame call)
-    int_vec p_ms;             // range of periods for various sine wvaes
-    std::vector<flash_vec> flashes;     //for each spot, stores previous & next flash data (color & time) --> flashes[spot_ind][prev/next].color/time
+    int_vec p_ms;                     // range of periods for various sine wvaes
+    std::vector<flash_vec> flashes;   //for each spot, stores previous & next flash data (color & time) --> flashes[spot_ind][prev/next].color/time
+    double t_unit;                    // internal, dynamic timescale. This timescale is artificially shrinked/elongated so that the average interval between bursts is 1
 
     // Internal helpful & hidden stuff (for readability)
     const int i_prev = 0, i_next = 1;
@@ -365,8 +366,8 @@ private :
       //set cinematic parameters
       this->flash_shape = fshape;
       this->unit = u;
-      this->rand_const_ms=prand;
-      this->flash_len = flen;
+      this->flash_interval=prand;
+      this->flash_length = flen;
     }
 
 
