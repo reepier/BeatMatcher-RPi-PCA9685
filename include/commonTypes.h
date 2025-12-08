@@ -83,7 +83,7 @@ enum AnimationType{
 
 struct Flash{   // stores : color (simpleColor) and the timestamp (time_ms) of a flash (or any resembling event)
     simpleColor color;
-    time_t time;
+    double time;
 };
 
 // different types of commonly used vectors

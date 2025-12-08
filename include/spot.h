@@ -196,13 +196,13 @@ class SpotRackAnimation0 : public SpotRackAnimation{
 };
  
 /*
-   #          ######                                            
-  ##          #     # #    # #####  #####  #      ######  ####  
- # #          #     # #    # #    # #    # #      #      #      
-   #          ######  #    # #####  #####  #      #####   ####  
-   #   ###    #     # #    # #    # #    # #      #           # 
-   #   ###    #     # #    # #    # #    # #      #      #    # 
- ##### ###    ######   ####  #####  #####  ###### ######  ####  
+   #          ######                          ######                             
+  ##          #     #   ##   #    # #####     #     # #    # #####   ####  ##### 
+ # #          #     #  #  #  ##   # #    #    #     # #    # #    # #        #   
+   #          ######  #    # # #  # #    #    ######  #    # #    #  ####    #   
+   #   ###    #   #   ###### #  # # #    #    #     # #    # #####       #   #   
+   #   ###    #    #  #    # #   ## #    #    #     # #    # #   #  #    #   #   
+ ##### ###    #     # #    # #    # #####     ######   ####  #    #  ####    #   
 */
 // BUBBLES : background color with another color randomly apppearing on a randomly chosen spot
 //TODO : whether in this animation or in a new one, add the possibility to chose a non-random sequence (traditional chaser)
@@ -223,8 +223,9 @@ private :
     double fluct_col = 0.0;
 
     // Internal variable (updated at every new_frame call)
-    std::vector<int> p_ms;             // range of periods for various sine wvaes
-    std::vector<flash_vec> flashes;     //for each spot, stores previous & next flash data (color & time) --> flashes[spot_ind][prev/next].color/time
+    std::vector<int> p_ms;              // range of periods for various sine wvaes
+    std::vector<flash_vec> flashes;     // for each spot, stores previous & next flash data (color & time) --> flashes[spot_ind][prev/next].color/time
+    double t_unit;                      // internal, dynamic timescale. This timescale is artificially shrinked/elongated so that the average interval between bursts is 1 (regardless of the real interval value (set externally and at construction))
 
     // Internal helpful & hidden stuff (for readability)
     const int i_prev = 0, i_next = 1;

@@ -35,13 +35,15 @@ T map3_param(T x, T y1, T y2, T y3){
 
 template<typename T>
 T rand_min_max(T min, T max){
-    return rand() % (max-min) + min;
+    double f = (double)rand() / RAND_MAX;
+    return min + f * (max - min);
 }
 
 template<typename T>
 T min_max(T x, T min, T max){
     return (x<min) ? min : ((x>max)? max : x);
 }
+
 
 // TODO : Move this class elsewhere
 class LoopControler{

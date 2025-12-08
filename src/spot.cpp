@@ -730,12 +730,16 @@ void SpotRackAnimation1::init(){
     // this->spot_flash_color.resize(n_spot);
     this->flashes = vector<flash_vec>(n_spot, flash_vec(2));
 
-    // for (int i_spot=0; i_spot<n_spot; i_spot++){
-    //     flashes[i_spot][i_next].time = frame.t_current_ms + rand_min_max(flash_interval/5, n_spot*flash_interval*2); 
-    //     flashes[i_spot][i_prev].time = 0;
-    //     flashes[i_spot][i_next].color = fcn::random_pick(this->flash_colors);
-    //     flashes[i_spot][i_prev].color = black;
-    // }
+
+    for (int i_spot=0; i_spot<n_spot; i_spot++){
+        flashes[i_spot][i_next].time = rand_min_max(0, n_spot);
+        flashes[i_spot][i_prev].time = -1*rand_min_max(0, n_spot);
+        flashes[i_spot][i_next].color = fcn::random_pick(this->flash_colors);
+        flashes[i_spot][i_prev].color = black;
+    }
+
+    // init internal timescale :
+    this->t_unit = 0.0;
 
 }
 void SpotRackAnimation1::init(const color_vec& palette){
@@ -779,11 +783,14 @@ void SpotRackAnimation1::new_frame(){
     const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)SPOTRACK_BKG_INTENSITY_REF, 255.0);
 
 
-    long t = frame.t_current_ms;       // for readability
+    // time_ms t = frame.t_current_ms;       // for readability
     int n_spot = this->fixture->rack_size;   // for readability
     
+    // update internal timescale ("dt" in inversely proportionnal);
+    this->t_unit += 1000.0/FRATE/current_interval;
+
     // update 5 sinewaves of different period
-    vector<double> s = {sin(2*M_PI*t/p_ms[0]), sin(2*M_PI*t/p_ms[1]), sin(2*M_PI*t/p_ms[2]), sin(2*M_PI*t/p_ms[3]), sin(2*M_PI*t/p_ms[4]) };
+    vector<double> s = {0, 0, 0, 0, 0};
     
     // for each spot "i" of the rack
     for (int i_spot=0; i_spot < n_spot; i_spot++){
@@ -793,12 +800,10 @@ void SpotRackAnimation1::new_frame(){
         auto &current_spot_next_flash = flashes[i_spot][i_next];       // for readability
         auto &current_spot_prev_flash = flashes[i_spot][i_prev];       // for readability
         auto pixel_size = current_spot->pixel.size();
-        time_t &t_next = current_spot_next_flash.time;
-        time_t &t_prev = current_spot_prev_flash.time;
+        double &t_next = current_spot_next_flash.time;
+        double &t_prev = current_spot_prev_flash.time;
         simpleColor &c_next = current_spot_next_flash.color;
         simpleColor &c_prev = current_spot_prev_flash.color;
-
-        // log(4, __FILE__, " ", __LINE__, " ",__func__, " Mark2 , ", fcn::num_to_str(i_spot));
 
         const pixel     ani_backgd_RGBW = current_spot->RGBW(back_color, current_bkg_intensity);
         pixel           frame_backgd_RGBW = current_spot->RGBW(black);
@@ -813,30 +818,29 @@ void SpotRackAnimation1::new_frame(){
         double flash_intensity; // 0 by default
         if (flash_activation){
             // when the flash passes, compute the next flash timestamp and update prev flash
-            if (this->is_first_frame() || t > t_next){
-                
+            if (this->is_first_frame() || t_unit > t_next){
                 t_prev = t_next;
-                t_next = t_next + rand_min_max(0, 2*n_spot*current_interval);
+                t_next = t_next + rand_min_max(0.0, 2.0*n_spot);
                 c_prev = c_next;
                 c_next = fcn::random_pick(this->flash_colors);
-                
             }
 
             // flash_intensity = exp( -pow(2.5/this->flash_len*(t - t_prev), 2)) + exp( -pow(2.5/this->flash_len*(t - t_next), 2));
             switch (this->flash_shape){
                 case square :
-                    flash_intensity = fcn::square(t, t_prev, current_duration, 0.0,1.0) + fcn::square(t, t_next, current_duration, 0.0,1.0);
+                    flash_intensity = fcn::square((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::square((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
                     break;
                 case gaussian :
-                    flash_intensity = fcn::gaussian(t, t_prev, current_duration, 0.0,1.0) + fcn::gaussian(t, t_next, current_duration, 0.0,1.0);
+                    flash_intensity = fcn::gaussian((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::gaussian((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
+                    break;
                 case gaussian2 :
-                    flash_intensity = fcn::gaussian2(t, t_prev, current_duration, 0.0,1.0) + fcn::gaussian2(t, t_next, current_duration, 0.0,1.0);
+                    flash_intensity = fcn::gaussian2((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::gaussian2((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
                     break;
                 case expdecay :
-                    flash_intensity = fcn::exp_decay(t, t_prev, current_duration, 0.0,1.0);
+                    flash_intensity = fcn::exp_decay((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0);
                     break;
                 default :
-                    flash_intensity = fcn::gaussian(t, t_prev, current_duration, 0.0,1.0) + fcn::gaussian(t, t_next, current_duration, 0.0,1.0);
+                    flash_intensity = fcn::gaussian((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::gaussian((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
                     break;
             }
 
@@ -844,7 +848,7 @@ void SpotRackAnimation1::new_frame(){
             flash_intensity = 0.0;
         }
 
-        DMX_vec frame_flash_RGBW = (t-t_prev > t_next-t) ? current_spot->RGBW(c_next) : current_spot->RGBW(c_prev);
+        DMX_vec frame_flash_RGBW = (t_unit-t_prev > t_next-t_unit) ? current_spot->RGBW(c_next) : current_spot->RGBW(c_prev);
         for (auto i_subpix = 0 ; i_subpix<pixel_size; i_subpix++){
                 current_spot->pixel[i_subpix] = min(max( (int)( (1.0-pow(flash_intensity, 0.4)) * frame_backgd_RGBW[i_subpix] + flash_intensity * frame_flash_RGBW[i_subpix]  ),0),255); 
         }
