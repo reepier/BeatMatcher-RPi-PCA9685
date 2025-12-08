@@ -147,28 +147,28 @@
   <Capability Min="21" Max="21" Preset="ColorMacro" Res1="#aaffb8">Light green</Capability>
   <Capability Min="22" Max="255">reserve</Capability>
  </Channel>
-  <Channel Name="param1 : Duration">
+ <Channel Name="param1 : Duration">
   <Group Byte="0">Speed</Group>
  </Channel>
- <Channel Name="param2 : Period">
+ <Channel Name="param2 : Interval">
   <Group Byte="0">Speed</Group>
  </Channel>
- <Channel Name="param3 : Intensity 1">
+ <Channel Name="param3 : Bkg Intensity">
   <Group Byte="0">Intensity</Group>
  </Channel>
- <Channel Name="param4 : Intensity 2">
+ <Channel Name="param4 : Ratio">
   <Group Byte="0">Intensity</Group>
  </Channel>
- <Channel Name="param5 : Ratio">
+ <Channel Name="param5 : Shape">
   <Group Byte="0">Nothing</Group>
  </Channel>
- <Channel Name="param6 :">
+ <Channel Name="param6 : Decomp">
   <Group Byte="0">Nothing</Group>
  </Channel>
- <Channel Name="param7 :">
+ <Channel Name="param7 : Sequencing">
   <Group Byte="0">Nothing</Group>
  </Channel>
- <Channel Name="param8 :">
+ <Channel Name="param8 : reserve">
   <Group Byte="0">Nothing</Group>
  </Channel>
  <Mode Name="All CH.">
@@ -177,13 +177,13 @@
   <Channel Number="2" ActsOn="2">Color 1</Channel>
   <Channel Number="3" ActsOn="3">Color 2</Channel>
   <Channel Number="4" ActsOn="4">param1 : Duration</Channel>
-  <Channel Number="5" ActsOn="5">param2 : Period</Channel>
-  <Channel Number="6" ActsOn="6">param3 : Intensity 1</Channel>
-  <Channel Number="7" ActsOn="7">param4 : Intensity 2</Channel>
-  <Channel Number="8" ActsOn="8">param5 : Ratio</Channel>
-  <Channel Number="9" ActsOn="9">param6 :</Channel>
-  <Channel Number="10" ActsOn="10">param7 :</Channel>
-  <Channel Number="11" ActsOn="11">param8 :</Channel>
+  <Channel Number="5" ActsOn="5">param2 : Interval</Channel>
+  <Channel Number="6" ActsOn="6">param3 : Bkg Intensity</Channel>
+  <Channel Number="7" ActsOn="7">param4 : Ratio</Channel>
+  <Channel Number="8" ActsOn="8">param5 : Shape</Channel>
+  <Channel Number="9" ActsOn="9">param6 : Decomp.</Channel>
+  <Channel Number="10" ActsOn="10">param7 : Sequencing</Channel>
+  <Channel Number="11" ActsOn="11">param8 : reserve</Channel>
  </Mode>
  <Physical>
   <Bulb Type="" Lumens="0" ColourTemperature="0"/>

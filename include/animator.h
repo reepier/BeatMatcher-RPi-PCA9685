@@ -450,12 +450,13 @@ class BaseFixture{
     int       external_animation;   // stores external animation commands
     bool      new_external_animation = false; //turns true for 1 cycle when new external palette is detected
       /* external dynamic parameter (range from 0.0 to 1.0)
-       * param1, param2 : duration & interval
-       * param3         : backgd intensity
-       * param4         : ratio
-       * param5         : shape  (square, exp, bubble, triangle...)
-       * param6         : decomp (pix, barre, group, )
-       * param7         : spatial order (random, seq 1, seq 2...)*/
+       * param1         : Duration
+       * param2         : Interval
+       * param3         : Backgd intensity
+       * param4         : Ratio
+       * param5         : Shape  (square, exp, bubble, triangle...)
+       * param6         : Decomposition (pix, barre, group, )
+       * param7         : Sequencing */
     double param1, param2, param3, param4, param5, param6, param7, param8;
 
     // Animations catalog
