@@ -429,7 +429,6 @@ void RedrayzAnimation2::new_frame(){
     
   }
 
-    log(2, fcn::num_to_str(this->fixture->param4), " : ", fcn::num_to_str(current_ratio), ", ",n_unit, ", ",fcn::num_to_str(n_unit_on));
   }
 
 /*
@@ -449,15 +448,18 @@ void RedrayzAnimation2::new_frame(){
 }
 
 void RedrayzAnimation3::init(const color_vec& palette){
-  //AUTOCOLOR init
-  /* set animation colors based on color palette passed as argument*/
-  /* since the laser boxes can only display red colo, just check wehter palette contains red, and
-      activate flash param if it does*/
-      if (std::find(palette.begin(), palette.end(), red) != palette.end()){
-        this->param_activate_flash = true;
-      }else{
-        this->param_activate_flash = false;
-      }
+    //AUTOCOLOR init
+    switch (palette.size())
+    {
+    case 0:     this->flash_color=black,        this->back_color=black;
+        break;
+    case 1:     this->flash_color=palette[0];   this->back_color=black;
+        break;
+    case 2:     this->flash_color=palette[0],   this->back_color=palette[1];
+        break;
+    default:    this->flash_color=black,        this->back_color=black;
+        break;
+    }
     
   //Standard init
   RedrayzAnimation3::init();
@@ -469,7 +471,7 @@ void RedrayzAnimation3::new_frame(){
   // fade rate (param Duration)
   const int current_fade_rate_ms    = map3_param(this->fixture->param1, 1000.0/FRATE, (double)this->fade_rate, 1000.0);
   // Bakground Intensity 
-  // const int current_bkg_intensity   = map3_param(this->fixture->param3, 0.0, (double)ADDRLED_BKG_INTENSITY_REF, 255.0);
+  const int current_bkg_intensity   = map3_param(this->fixture->param3, 0.0, (double)ADDRLED_BKG_INTENSITY_REF, 255.0);
   // Ratio 
   const double current_ratio        = map3_param(this->fixture->param4, 0.1, 0.7, 1.0);
 
@@ -478,8 +480,6 @@ void RedrayzAnimation3::new_frame(){
   unsigned long t_last_beat_ms = sampler.t_last_new_beat;
   int_vec::size_type n_unit = units_index.size();
 
-//TODO remove activation booleans (param_activate_flash & auto_activate_flash)
-  bool auto_activate_flash = (sampler.state == BEAT) /*&& (t_ms-sampler.t_beat_tracking_start < MAX_CONT_FLASH)*/;
 
   // for each new beat, sort segments in random order
   if (sampler.new_beat)
@@ -491,9 +491,14 @@ void RedrayzAnimation3::new_frame(){
   int n_unit_on = coef * n_unit * current_ratio;
   //chose which segments to turn on
   for (int i = 0; i<n_unit; i++){ //TODO leave one unit on ?
+
+    pixel flash_RGB  = this->fixture->RGB(this->flash_color);
+    pixel backgd_RGB = this->fixture->RGB(this->back_color, current_bkg_intensity);
+
+
       if (i<n_unit_on)
-        *(this->fixture->lasers[units_index[i]]) = 1.0 *this->fixture->master*this->master/255.0;
+        *(this->fixture->lasers[units_index[i]]) = flash_RGB[R] *this->fixture->master/255.0 *this->master/255.0;
       else
-        *(this->fixture->lasers[units_index[i]]) = 0;
+        *(this->fixture->lasers[units_index[i]]) = backgd_RGB[R] *this->fixture->master/255.0 *this->master/255.0;
   }
 }

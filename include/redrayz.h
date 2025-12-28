@@ -273,6 +273,8 @@ Variant of the original beat matching animation :
       // Animation parameters (constant or set by animation constructor)
       bool param_activate_flash;
       int fade_rate = 80;                            // ms flash fade rate (time constant of an exponential decay : intensity = exp(-(t-t0)/fade_rate)
+      simpleColor back_color;
+      simpleColor flash_color;
   
       // Dynamic variables (updated internally at each frame)
       int_vec units_index;
