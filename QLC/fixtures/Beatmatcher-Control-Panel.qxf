@@ -16,8 +16,8 @@
  </Channel>
  <Channel Name="Master Color 1">
   <Group Byte="0">Colour</Group>
-  <Capability Min="0" Max="0" Preset="ColorMacro" >Automatic</Capability>
-  <Capability Min="1" Max="1" Preset="ColorMacro" Res1="#5e5c64">Black</Capability>
+  <Capability Min="0" Max="0" Preset="ColorMacro" Res1="#77767b">Automatic</Capability>
+  <Capability Min="1" Max="1" Preset="ColorMacro" Res1="#000000">Black</Capability>
   <Capability Min="2" Max="2" Preset="ColorMacro" Res1="#ff1f29">Red</Capability>
   <Capability Min="3" Max="3" Preset="ColorMacro" Res1="#ff561f">Sodium</Capability>
   <Capability Min="4" Max="4" Preset="ColorMacro" Res1="#ff7a1f">Orange</Capability>
@@ -42,8 +42,8 @@
  </Channel>
  <Channel Name="Master Color 2">
   <Group Byte="0">Colour</Group>
-  <Capability Min="0" Max="0" Preset="ColorMacro">Automatic</Capability>
-  <Capability Min="1" Max="1" Preset="ColorMacro" Res1="#5e5c64">Black</Capability>
+  <Capability Min="0" Max="0" Preset="ColorMacro" Res1="#77767b">Automatic</Capability>
+  <Capability Min="1" Max="1" Preset="ColorMacro" Res1="#000000">Black</Capability>
   <Capability Min="2" Max="2" Preset="ColorMacro" Res1="#ff1f29">Red</Capability>
   <Capability Min="3" Max="3" Preset="ColorMacro" Res1="#ff561f">Sodium</Capability>
   <Capability Min="4" Max="4" Preset="ColorMacro" Res1="#ff7a1f">Orange</Capability>
