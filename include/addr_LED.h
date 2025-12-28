@@ -7,7 +7,7 @@
 #define MAX_SUBPIX_PER_UNI  510 // maximum number of subpixels arried over 1 universe (1 universe can only carry complete pixels (BC-204 limitation))
 // WS2815 led strip config
   // Config paramters
-  constexpr int NUM_BAR = 18;                       // Total Number of bars
+  constexpr int NUM_BAR = 3;                       // Total Number of bars
   constexpr int NUM_SEG = 3*NUM_BAR;             // Total number of segments (across all bars)
   // Quasi constants
   constexpr int NUM_PIX_BAR = 58;        // number of pixels per bar
@@ -26,10 +26,10 @@
     Num pixel : 680 (MAX)*/
 
 enum strip_subdiv_t{
-  group,// Group of bars
-  bar,  // Led bar
+  pix,   // Individual pixel
   seg,  // Led segment (fraction of a bar)
-  pix   // Individual pixel
+  bar,  // Led bar
+  group// Group of bars
 };
 
 
@@ -57,7 +57,7 @@ inline LED_bar_config bar_config = {/*bar1*/  {0,  58},    //  {start pixel, end
                                   
 typedef std::vector<int_vec> LED_group_config ;
   //groups of bar
-inline LED_group_config group_conf = {{0,1,2}, {3,4,5}, {6,7,8}, {9,10,11}, {12,13,14}, {15,16,17}};
+inline LED_group_config group_conf = {{0,1,2} /*, {3,4,5}, {6,7,8}, {9,10,11}, {12,13,14}, {15,16,17} */  };
 
 // fixture class declaration
 class AddressableLED;
@@ -123,10 +123,10 @@ class AddressableLED : public BaseFixture{
       set_segment_color(seg, this->RGB(color, intensity));
     }
 
-    void set_bar_color(int bar, DMX_vec color){
+    void set_bar_color(int i_bar, DMX_vec color){
       // auto first_pix = this->pixels.begin() + bar*NUM_PIX/NUM_BAR;
-      auto first_pix = this->pixels.begin() + bar_config[bar][0];
-      auto last_pix = this->pixels.begin() + bar_config[bar][1];
+      auto first_pix = this->pixels.begin() + bar_config[i_bar][0];
+      auto last_pix = this->pixels.begin() + bar_config[i_bar][1];
 
       for (auto pix = first_pix; pix != last_pix; pix++){
         (*pix) = color;

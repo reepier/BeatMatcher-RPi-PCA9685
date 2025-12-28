@@ -26,10 +26,15 @@ T map3(T x, T x1, T x2, T x3, T y1, T y2, T y3){
     }
 }
 
-// linearly interpolates parameter value. 
+// linearly interpolates external parameter value between 3 values. 
 template<typename T>
 T map3_param(T x, T y1, T y2, T y3){
     return map3(x, 0.0, 0.5, 1.0, y1, y2, y3);
+}
+// linearly interpolates external parameter value between 3 values. 
+template<typename T>
+T map_param(T x, T y1, T y2){
+    return map(x, 0.0, 1.0, y1, y2);
 }
 
 

@@ -18,7 +18,6 @@ AddressableLED addr_led(1, 0, 3*NUM_PIX, "LEDs", 1, 255, 20);
 #       #  #  #    #   #    # #   #  #      
 #       # #    #   #    ####  #    # ###### */
 
-//TODO WABISABI2 configure intensity vecror, priorities, and animation type 
 
 void AddressableLED::init(){
     // declare animations here
@@ -479,8 +478,16 @@ void AddrLEDAnimation4::new_frame(){
                                                 30000.0);
     // Bakground Intensity 
     const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)ADDRLED_BKG_INTENSITY_REF, 255.0);
-
-
+    // Subdivision 
+    static  strip_subdiv_t prev_subdiv          = this->unit;
+    const   strip_subdiv_t current_subdiv       = (strip_subdiv_t) ( (int)map_param(this->fixture->param6, (double)strip_subdiv_t::pix, (double)strip_subdiv_t::group+1));
+    
+    if (prev_subdiv != current_subdiv) {
+        this->unit = current_subdiv;
+        this->init();
+        prev_subdiv = current_subdiv;
+    }
+    
     // long t = frame.t_current_ms;         // for readability
     int n_unit = this->flashes.size();   // for readability
     
