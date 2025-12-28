@@ -225,6 +225,8 @@ class RedrayzAnimation2 : public RedrayzAnimation{
   public:
     // Animation parameters (constant or set by animation constructor)
     bool param_activate_flash;
+    simpleColor flash_color = black;            // color used for flashes
+    simpleColor back_color = black;             // background color displayed inbetween flashes
     double density = 1.0;               // proportion of LED's flashing (0-100%) 
     
     int fade_rate = 60;                            // ms flash fade rate (time constant of an exponential decay : intensity = exp(-(t-t0)/fade_rate)

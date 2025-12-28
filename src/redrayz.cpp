@@ -36,10 +36,10 @@ void RedLaserGroup::init(){
     FILL
 
     // RANDOM BURST
-    animations.push_back(new RedrayzAnimation1(this, gaussian2,  8000,    1800, "Bulles Très lent",      "RED.2.1.3", backer, 1, 255, int_vec{1}));
+    animations.push_back(new RedrayzAnimation1(this, gaussian,  8000,    1800, "Bulles Très lent",      "RED.2.1.3", backer, 1, 255, int_vec{1}));
     animations.push_back(new RedrayzAnimation1(this, gaussian,   10000,   2000, "Bulles Très lent (+)",  "RED.2.1.5", backer, 1, 255, int_vec{1}));
     animations.push_back(new RedrayzAnimation1(this, gaussian,   1500,    500,  "Bulles Lent",           "RED.2.1.2", backer, 1, 255, int_vec{2,3}));
-    animations.push_back(new RedrayzAnimation1(this, gaussian2,  1500,    2500, "Bulles Lent (-)",       "RED.2.1.4", backer, 1, 255, int_vec{2,3}));
+    animations.push_back(new RedrayzAnimation1(this, gaussian,  1500,    2500, "Bulles Lent (-)",       "RED.2.1.4", backer, 1, 255, int_vec{2,3}));
     animations.push_back(new RedrayzAnimation1(this, gaussian,   600,     300,  "Bulles Rapides",        "RED.2.1.1", any, 1, 255, int_vec{1,2,3}));
     FILL
     FILL
@@ -316,6 +316,8 @@ void RedrayzAnimation1::new_frame(){
           
         t_prev = t_next;
         t_next = t_next + rand_min_max(0.0, 2.0*n_unit);
+        c_prev = c_next;
+        c_next = fcn::random_pick(this->flash_colors);
       }
 
       // Compute pixel intensity
@@ -364,14 +366,18 @@ void RedrayzAnimation2::init(){
 }
 void RedrayzAnimation2::init(const color_vec& palette){
   //AUTOCOLOR settings
-  /* set animation colors based on color palette passed as argument*/
-  /* since the laser boxes can only display red colo, just check wehter palette contains red, and
-      activate flash param if it does*/
-  if (std::find(palette.begin(), palette.end(), red) != palette.end()){
-    this->param_activate_flash = true;
-  }else{
-    this->param_activate_flash = false;
-  }
+    // AUTOCOLOR init
+    switch (palette.size())
+    {
+    case 0:     this->flash_color=black,        this->back_color=black;
+        break;
+    case 1:     this->flash_color=palette[0];   this->back_color=black;
+        break;
+    case 2:     this->flash_color=palette[0],   this->back_color=palette[1];
+        break;
+    default:    this->flash_color=black,        this->back_color=black;
+        break;
+    }
 
   // call standard init
   RedrayzAnimation2::init();
@@ -384,7 +390,7 @@ void RedrayzAnimation2::new_frame(){
     // fade rate (param Duration)
     const int current_fade_rate_ms    = map3_param(this->fixture->param1, 1000.0/FRATE, (double)this->fade_rate, 1000.0);
     // Bakground Intensity 
-    // const int current_bkg_intensity   = map3_param(this->fixture->param3, 0.0, (double)ADDRLED_BKG_INTENSITY_REF, 255.0);
+    const int current_bkg_intensity   = map3_param(this->fixture->param3, 0.0, 50.0, 255.0);
     // Ratio 
     const double current_ratio        = map3_param(this->fixture->param4, 0.1, this->density, 1.0);
 
@@ -395,33 +401,36 @@ void RedrayzAnimation2::new_frame(){
   int_vec::size_type n_unit = units_index.size(); 
   int n_unit_on = current_ratio * n_unit;
 
-  //TODO remove activation booleans (param_activate_flash & auto_activate_flash)
-  // enable / disable based on music status
-    const bool auto_activate_flash = (sampler.state == BEAT) /*&& (t_ms-sampler.t_beat_tracking_start < MAX_CONT_FLASH)*/;
 
   // for each new beat, sort segments in random order
   if (sampler.new_beat){
       units_index = fcn::randomized_vector(units_index);
-      // log(1, fcn::num_to_str(n_unit_on), "/", fcn::num_to_str((int)n_unit), " : ",  fcn::vec_to_str(units_index, ','));
-      // int_vec on_las = int_vec(units_index.begin(), units_index.begin()+n_unit_on);
-      // log(1, fcn::vec_to_str(on_las, ','));
   }
 
   // Compute intensity value based on time elapsed since last beat
-  float coef;
-  if (param_activate_flash && auto_activate_flash)
-    coef = fcn::exp_decay(t_ms, t_last_beat_ms, current_fade_rate_ms, 0.0, 1.0);
-  else
-    coef = 0;
-  
+  double coef = fcn::exp_decay(t_ms, t_last_beat_ms, current_fade_rate_ms, 0.0, 1.0);
+
   // set each laser intensity
-  for (int i=0; i<n_unit; i++){
-    if (i<n_unit_on)
-      *(this->fixture->lasers[units_index[i]]) = coef * this->fixture->master * this->master/255.0;
-    else
-      *(this->fixture->lasers[units_index[i]]) = 0;
+  for (int i_unit=0; i_unit<n_unit; i_unit++){
+
+        pixel backgd_RGB    = this->fixture->RGB(back_color, current_bkg_intensity);
+        pixel flash_RGB     = this->fixture->RGB(flash_color);
+        pixel final_RGB     = this->fixture->RGB(black); //initialization before calculations
+
+    if (i_unit<n_unit_on){
+      for(auto i_subpix = 0; i_subpix<final_RGB.size(); i_subpix++){
+          final_RGB[i_subpix] = coef * flash_RGB[i_subpix] + (1-pow(coef, 0.2)) * backgd_RGB[i_subpix];
+      }
+    }else{
+      final_RGB = backgd_RGB;
+    }
+
+    *(this->fixture->lasers[units_index[i_unit]]) = final_RGB[R] * this->fixture->master/255.0 * this->master/255.0;
+    
   }
-}
+
+    log(2, fcn::num_to_str(this->fixture->param4), " : ", fcn::num_to_str(current_ratio), ", ",n_unit, ", ",fcn::num_to_str(n_unit_on));
+  }
 
 /*
  #####         ######                                    ######                      
