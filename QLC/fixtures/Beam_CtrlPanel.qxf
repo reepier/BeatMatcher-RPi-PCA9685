@@ -20,8 +20,8 @@
   <Capability Min="5" Max="5">Bulles rapide</Capability>
   <Capability Min="6" Max="6"> - </Capability>
   <Capability Min="7" Max="7"> - </Capability>
-  <Capability Min="8" Max="8"> - </Capability>
-  <Capability Min="9" Max="9"> - </Capability>
+  <Capability Min="8" Max="8">Chaser lent</Capability>
+  <Capability Min="9" Max="9">Chaser rapide</Capability>
   <Capability Min="10" Max="10">Décharge lent</Capability>
   <Capability Min="11" Max="11">Décharge rapide</Capability>
   <Capability Min="12" Max="12"> - </Capability>

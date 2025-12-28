@@ -124,28 +124,29 @@ class LaserBeamAnimation1 : public LaserBeamAnimation
     Shape flash_shape = gaussian; // default setting leads to gaussian flashes (of bubbles)
     // int sin_max_p_ms = 15000;
     // int sin_min_p_ms = 5000;
-    int rand_const_ms;
-    int flash_len;
+    int flash_interval;
+    int flash_length;
     // double fluct_int = 0.4;
     // double fluct_col = 0.25;
 
     // Internal variable (updated at every new_frame call)
     flash_vec flashes;     // stores previous & next flash data (color & time) --> flashes[spot_ind][prev/next].color/time
+    double t_unit;                    // internal, dynamic timescale. This timescale is artificially shrinked/elongated so that the average interval between bursts is 1
 
     // Internal helpful & hidden stuff (for readability)
     const int i_prev = 0, i_next = 1;
 
     //CONSTUCTORS
     // AUTOCOLOR constructor
-    LaserBeamAnimation1(LaserBeam *f, Shape fshape, int prand, int flen, std::string d, std::string i, AnimationType t, int prio, int mast, int_vec intens)
+    LaserBeamAnimation1(LaserBeam *f, Shape fshape, int finterv, int flen, std::string d, std::string i, AnimationType t, int prio, int mast, int_vec intens)
     :LaserBeamAnimation(d, i, t, mast, prio, intens){
       //set Base paramters
       this->fixture = f;
       this->autocolor = true;
       //set cinematic parameters
       this->flash_shape = fshape;
-      this->rand_const_ms=prand;
-      this->flash_len = flen;
+      this->flash_interval=finterv;
+      this->flash_length = flen;
     }
 
 
