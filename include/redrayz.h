@@ -150,11 +150,12 @@ class RedrayzAnimation1 : public RedrayzAnimation{
     // Animation parameters (constant or set by animation constructor)
     bool flash_activation = true;
     Shape flash_shape = gaussian; // default setting leads to gaussian flashes (of bubbles)
-    int rand_const_ms;
-    int burst_length;
+    int flash_interval;
+    int flash_length;
 
     // Dynamic variables (updated internally at each frame)
     std::vector<flash_vec> flashes;     //for each spot, stores previous & next flash data (color & time) --> flashes[spot_ind][prev/next].color/time
+    double t_unit;                    // internal, dynamic timescale. This timescale is artificially shrinked/elongated so that the average interval between bursts is 1
 
     // Internal helpful & hidden stuff (for readability)
     const int i_prev = 0, i_next = 1;
@@ -166,8 +167,8 @@ class RedrayzAnimation1 : public RedrayzAnimation{
       this->autocolor = true;
 
       this->flash_shape = fshape;
-      this->burst_length = flen;
-      this->rand_const_ms = prand;
+      this->flash_length = flen;
+      this->flash_interval = prand;
 
       this->update_palette(red);
     }
