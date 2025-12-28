@@ -6,6 +6,14 @@
 class RedLaserBox;
 class RedLaserGroup;
 
+/*
+#######                                     
+#       # #    # ##### #    # #####  ###### 
+#       #  #  #    #   #    # #    # #      
+#####   #   ##     #   #    # #    # #####  
+#       #   ##     #   #    # #####  #      
+#       #  #  #    #   #    # #   #  #      
+#       # #    #   #    ####  #    # ###### */
 
 /* 
 #                                       #####                              
@@ -40,7 +48,10 @@ class RedLaserGroup : public BaseFixture{
     int get_nCH() override { return this->nCH; };
     int get_address() override { return this->address; };
     DMX_vec buffer() override {return DMX_vec(0);};
-    
+  
+    // Fixture Specific Color Macro
+    DMX_vec RGB(simpleColor, int intensity = 255) override;
+
 
     
 };
@@ -84,6 +95,10 @@ extern RedLaserBox laserbox1, laserbox2, laserbox3;
 
 
 
+
+
+
+
 /*
    #                                                 
   # #   #    # # #    #   ##   ##### #  ####  #    # 
@@ -113,16 +128,29 @@ class RedrayzAnimation : public BaseAnimation{
 
  class RedrayzAnimation0 : public RedrayzAnimation{
   public:
-    DMX_vec values;
-
-    RedrayzAnimation0(RedLaserGroup *f, uint8_t val, std::string d, std::string i, AnimationType t, int mast, int prio, int_vec intens)
+    // DMX_vec values;
+    simpleColor color = black;
+    
+    //Base constructor
+    RedrayzAnimation0(RedLaserGroup *f, simpleColor c, std::string d, std::string i, AnimationType t, int mast, int prio, int_vec intens)
     :RedrayzAnimation(d, i, t, mast, prio, intens){
+      //set BAse parameters
       this->fixture = f;
-            
-      this->values = DMX_vec(f->lasers.size(), val);
+      this->color = c;
+      //set cinematic parameters
       this->autocolor = true;
       
-      if (val!= 0) this->update_palette(red);
+      // if (val!= 0) this->update_palette(red);
+    }
+    //  Autocolor constructor
+    RedrayzAnimation0(RedLaserGroup *f, std::string d, std::string i, AnimationType t, int mast, int prio, int_vec intens)
+    :RedrayzAnimation(d, i, t, mast, prio, intens){
+      //set BAse parameters
+      this->fixture = f;
+      //set cinematic parameters
+      this->autocolor = true;
+      
+      // if (val!= 0) this->update_palette(red);
     }
   
     void init() override;
@@ -161,14 +189,14 @@ class RedrayzAnimation1 : public RedrayzAnimation{
     const int i_prev = 0, i_next = 1;
 
     // Constructor
-    RedrayzAnimation1(RedLaserGroup *f, Shape fshape,  time_t flen, time_t prand, std::string d, std::string i, AnimationType t, int prio, int mast, int_vec intens)
+    RedrayzAnimation1(RedLaserGroup *f, Shape fshape,  time_t flen, time_t finterv, std::string d, std::string i, AnimationType t, int prio, int mast, int_vec intens)
     :RedrayzAnimation(d, i, t, mast, prio, intens){
       this->fixture = f;
       this->autocolor = true;
 
       this->flash_shape = fshape;
       this->flash_length = flen;
-      this->flash_interval = prand;
+      this->flash_interval = finterv;
 
       this->update_palette(red);
     }

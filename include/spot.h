@@ -233,13 +233,13 @@ private :
 public :
 
     //AUTOCOLOR Constructor
-    SpotRackAnimation1(SpotRack *f, Shape fshape, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio,int mast, int_vec intens)
+    SpotRackAnimation1(SpotRack *f, Shape fshape, int finterv, int flen, std::string d, std::string i, AnimationType t, uint8_t prio,int mast, int_vec intens)
     : SpotRackAnimation(d, i, t, mast, prio, intens){
         // Base parameters
         this->fixture = f;
         this->autocolor = true;             // animation relying on autocolor must be taggued as such
         // Cinematic Parameters
-        this->flash_interval = prand;
+        this->flash_interval = finterv;
         this->flash_shape = fshape;
         this->flash_length = flen;
     }

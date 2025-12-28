@@ -225,6 +225,8 @@ void AddrLEDAnimation0::init(const color_vec& palette) {
 
 void AddrLEDAnimation0::new_frame() {
     this->fixture->set_allpix_color(this->color);
+
+    //TODO : use param background_intensity to switch between 2 colors
 }
   
 

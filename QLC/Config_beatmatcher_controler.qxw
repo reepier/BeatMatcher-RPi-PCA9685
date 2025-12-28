@@ -2821,6 +2821,40 @@
       <Intensity Adjust="False">100</Intensity>
      </Button>
     </SoloFrame>
+    <Slider Caption="Couleur 1" ID="279" WidgetStyle="Slider" InvertedAppearance="false">
+     <WindowState Visible="True" X="155" Y="45" Width="85" Height="135"/>
+     <Appearance>
+      <FrameStyle>Sunken</FrameStyle>
+      <ForegroundColor>Default</ForegroundColor>
+      <BackgroundColor>Default</BackgroundColor>
+      <BackgroundImage>None</BackgroundImage>
+      <Font>Default</Font>
+     </Appearance>
+     <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
+     <Level LowLimit="0" HighLimit="255" Value="2">
+      <Channel Fixture="6">2</Channel>
+     </Level>
+     <Playback>
+      <Function>4294967295</Function>
+     </Playback>
+    </Slider>
+    <Slider Caption="Couleur 2" ID="280" WidgetStyle="Slider" InvertedAppearance="false">
+     <WindowState Visible="True" X="240" Y="45" Width="85" Height="135"/>
+     <Appearance>
+      <FrameStyle>Sunken</FrameStyle>
+      <ForegroundColor>Default</ForegroundColor>
+      <BackgroundColor>Default</BackgroundColor>
+      <BackgroundImage>None</BackgroundImage>
+      <Font>Default</Font>
+     </Appearance>
+     <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
+     <Level LowLimit="0" HighLimit="255" Value="2">
+      <Channel Fixture="6">3</Channel>
+     </Level>
+     <Playback>
+      <Function>4294967295</Function>
+     </Playback>
+    </Slider>
    </Frame>
    <Frame Caption="PAR#1 : Faisceaux" ID="27">
     <Appearance>
@@ -3506,7 +3540,7 @@
      </Playback>
     </Slider>
     <Slider Caption="Couleur 1" ID="39" WidgetStyle="Slider" InvertedAppearance="false">
-     <WindowState Visible="True" X="160" Y="45" Width="85" Height="135"/>
+     <WindowState Visible="True" X="165" Y="45" Width="85" Height="135"/>
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
@@ -3515,7 +3549,7 @@
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="10">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="7">2</Channel>
      </Level>
      <Playback>
@@ -3532,7 +3566,7 @@
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="2">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="7">3</Channel>
      </Level>
      <Playback>

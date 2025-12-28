@@ -3,7 +3,7 @@ using namespace std;
 #include "redrayz.h"
 #include "DMXio.h"
 
-#define FILL animations.push_back(new RedrayzAnimation0(this, 0, " - ", "RED.0", any, 0, 0, int_vec{}));
+#define FILL animations.push_back(new RedrayzAnimation0(this, black, " - ", "RED.0", any, 0, 0, int_vec{}));
 
 RedLaserBox laserbox1(1, 6, "Grada Laser 1", 1);
 RedLaserBox laserbox2(7, 6, "Grada Laser 2", 2);
@@ -28,9 +28,9 @@ RedLaserGroup lasergroup1(vector<DMX_channel*>{&laserbox1.lasers[0], &laserbox1.
 
 void RedLaserGroup::init(){
     // black, OFF animation
-    animations.push_back(new RedrayzAnimation0(this, 0, " - ", "RED.0", any, 0, 0, int_vec{}));
+    animations.push_back(new RedrayzAnimation0(this, black, " - ", "RED.0", any, 0, 0, int_vec{}));
     // All laser switched on
-    animations.push_back(new RedrayzAnimation0(this, 255, "FULL ON", "RED.1.1", any, 255, 0, int_vec{}));
+    animations.push_back(new RedrayzAnimation0(this, "FULL ON", "RED.1.1", any, 255, 0, int_vec{}));
     // define animations
     FILL
     FILL
@@ -144,6 +144,55 @@ DMX_vec RedLaserBox::buffer(){
 
 
 
+
+
+/**
+######   #####  ######  #     #    #######               
+#     # #     # #     # #  #  #    #        ####  #    # 
+#     # #       #     # #  #  #    #       #    # ##   # 
+######  #  #### ######  #  #  #    #####   #      # #  # 
+#   #   #     # #     # #  #  #    #       #      #  # # 
+#    #  #     # #     # #  #  #    #       #    # #   ## 
+#     #  #####  ######   ## ##     #        ####  #    # 
+*/
+
+DMX_vec RedLaserGroup::RGB(simpleColor c, int intensity){
+    DMX_vec temp;
+    // store in vector temp the color vector of norm 255
+    switch (c){ //TODO : remove ref_int and simply pass base lumo in RGB_norm argument
+        case black      :                   temp = fcn::RGB_norm(DMX_vec{0,0,0});       break;
+        case red        :                   temp = fcn::RGB_norm(DMX_vec{255,0,0});     break;
+        // case green      :                   temp = fcn::RGB_norm(DMX_vec{0,255,0});     break;
+        // case blue       :                   temp = fcn::RGB_norm(DMX_vec{0,0,255});     break;
+        // case yellow     :                   temp = fcn::RGB_norm(DMX_vec{255,230,0});    break;
+        // case orange     :                   temp = fcn::RGB_norm(DMX_vec{255,50,0});    break;
+        // case sodium     :                   temp = fcn::RGB_norm(DMX_vec{255,25,0});    break;
+        // case cyan       :                   temp = fcn::RGB_norm(DMX_vec{0,255,100});   break;
+        // case purple     :                   temp = fcn::RGB_norm(DMX_vec{100,0,255});   break;    
+        // case magenta    :                   temp = fcn::RGB_norm(DMX_vec{180,0,255});   break;
+        // case pink       :                   temp = fcn::RGB_norm(DMX_vec{255,0,40});    break;
+        // case w_white    :                   temp = fcn::RGB_norm(DMX_vec{140,255,6}); break;
+        // case c_white    :                   temp = fcn::RGB_norm(DMX_vec{74,255,36}); break;
+        // case gold       :                   temp = fcn::RGB_norm(DMX_vec{255,100,0});    break;
+        // case light_red      :               temp = fcn::RGB_norm(DMX_vec{255,155,4});   break;
+        // case light_cyan     :               temp = fcn::RGB_norm(DMX_vec{40,255,50});   break;
+        // case light_blue     :               temp = fcn::RGB_norm(DMX_vec{30,255,255});   break;
+        // case light_purple   :               temp = fcn::RGB_norm(DMX_vec{135,255,255});   break;
+        // case light_magenta  :               temp = fcn::RGB_norm(DMX_vec{255,255,206});   break;
+        // case light_pink     :               temp = fcn::RGB_norm(DMX_vec{255,200,60});   break;
+        // case light_green    :               temp = fcn::RGB_norm(DMX_vec{40,255,10});   break;
+        default         :                   temp = fcn::RGB_norm(DMX_vec{0,0,0});       break;
+        }
+
+        /* return a color vector with the same tint as temp but normalized according to a color specific 
+        coefficient (to account for the fixtures's color by color response)*/
+        return fcn::RGB_norm(temp, intensity);
+
+}
+
+
+
+
 /*
   ###          #######                 
  #   #         #       # #    # ###### 
@@ -157,9 +206,15 @@ void RedrayzAnimation0::init(){
   BaseAnimation::init();
 }
 void RedrayzAnimation0::init(const color_vec& palette){
-//TODO turn laser of if palette does not contain red
+    if (this->autocolor){
+        switch (palette.size())
+        {
+        case 0:     this->color = black;        break;
+        // case 1:     this->color = palette[0];   break;
+        default:    this->color = *(palette.end()-1);   break;
+        }
+    }
 
-  /* Pas d'argument couleur défini pour le laser rouge --> il est toujours rouge*/
   // STANDARD init()
   RedrayzAnimation0::init();
 }
@@ -168,7 +223,8 @@ void RedrayzAnimation0::new_frame(){
   BaseAnimation::new_frame();
 
   for (int i=0; i<this->fixture->group_size; i++){
-    *(this->fixture->lasers[i]) = this->values[i] * this->fixture->master/255.0 * this->master/255.0;
+    DMX_vec       DMX_values = this->fixture->RGB(this->color);
+    *(this->fixture->lasers[i]) = DMX_values[R] * this->fixture->master/255.0 * this->master/255.0;
   }
 }
 
