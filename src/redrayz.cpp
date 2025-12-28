@@ -247,11 +247,26 @@ void RedrayzAnimation1::init(){
   for (int i_unit=0; i_unit<n_unit; i_unit++){
         flashes[i_unit][i_next].time = rand_min_max(0.0, (double)n_unit);
         flashes[i_unit][i_prev].time = -1*rand_min_max(0.0, (double)n_unit);
+        flashes[i_unit][i_next].color = fcn::random_pick(this->flash_colors);
+        flashes[i_unit][i_prev].color = black;
   }
 }
 void RedrayzAnimation1::init(const color_vec& palette){
-  /* Pas d'argument couleur défini pour le laser rouge --> il est toujours rouge*/
-  //STANDARD init()
+  // AUTOCOLOR init : assign flash colors & back color based on passed color palette :
+  const int palette_size = palette.size();
+  switch (palette_size)
+  {
+  case 0:
+      this->flash_colors = color_vec{black}, this->back_color = black;            break;
+  case 1:
+      this->flash_colors = color_vec{palette[0]}, this->back_color = black;  break;
+  case 2: 
+      this->flash_colors = color_vec{palette[0]}, this->back_color = palette[1];  break;
+  default:
+      flash_colors = color_vec{fcn::random_pick(palette)},    back_color = fcn::random_pick(palette);     break;
+  }
+
+  //call STANDARD init()
   RedrayzAnimation1::init();
 }
 
@@ -270,7 +285,7 @@ void RedrayzAnimation1::new_frame(){
                                                 1000.0/FRATE,
                                                 30000.0);
     // Bakground Intensity 
-    // const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)ADDRLED_BKG_INTENSITY_REF, 255.0);
+    const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)ADDRLED_BKG_INTENSITY_REF, 255.0);
 
 
   // long t = frame.t_current_ms;                // for readability
@@ -287,6 +302,11 @@ void RedrayzAnimation1::new_frame(){
     auto &current_unit_prev_flash = flashes[i_unit][i_prev];       // for readability
     double &t_next = current_unit_next_flash.time;
     double &t_prev = current_unit_prev_flash.time;
+    simpleColor &c_next = current_unit_next_flash.color;
+    simpleColor &c_prev = current_unit_prev_flash.color;
+
+    const pixel ani_backgd_RGB = fixture->RGB(back_color, current_bkg_intensity);
+
 
     // if flash is actviated, compute the flash --> exp( -(spd.(t-t0))²)
     double flash_intensity; // 0 by default
@@ -315,7 +335,14 @@ void RedrayzAnimation1::new_frame(){
       flash_intensity = 0.0;
     }
 
-    *(this->fixture->lasers[i_unit]) = flash_intensity * this->fixture->master * this->master/255.0;
+    DMX_vec frame_flash_RGB = (t_unit-t_prev > t_next-t_unit) ? fixture->RGB(c_next) : this->fixture->RGB(c_prev);
+    DMX_vec unit_final_RGB(3, 0);
+    unit_final_RGB[R] = clamp( (int)( (1.0-pow(flash_intensity, 0.2)) * ani_backgd_RGB[R] + flash_intensity * frame_flash_RGB[R]  ),0,255); 
+    unit_final_RGB[G] = clamp( (int)( (1.0-pow(flash_intensity, 0.2)) * ani_backgd_RGB[G] + flash_intensity * frame_flash_RGB[G]  ),0,255);
+    unit_final_RGB[B] = clamp( (int)( (1.0-pow(flash_intensity, 0.2)) * ani_backgd_RGB[B] + flash_intensity * frame_flash_RGB[B]  ),0,255);
+
+
+    *(this->fixture->lasers[i_unit]) = unit_final_RGB[R] * this->fixture->master/255.0 * this->master/255.0;
   }
   balise("fausse balise");
 }

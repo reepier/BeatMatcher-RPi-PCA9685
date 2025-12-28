@@ -223,7 +223,7 @@ private :
     double fluct_col = 0.0;
 
     // Internal variable (updated at every new_frame call)
-    std::vector<int> p_ms;              // range of periods for various sine wvaes
+    std::vector<int> p_ms;              // range of periods for various sine wvaes //TODO remove 
     std::vector<flash_vec> flashes;     // for each spot, stores previous & next flash data (color & time) --> flashes[spot_ind][prev/next].color/time
     double t_unit;                      // internal, dynamic timescale. This timescale is artificially shrinked/elongated so that the average interval between bursts is 1 (regardless of the real interval value (set externally and at construction))
 

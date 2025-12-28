@@ -339,9 +339,7 @@ class AddrLEDAnimation4 : public AddrLEDAnimation
 private :
     // animation parameters (constant, set at construction)
     bool flash_activation = true;
-    // DMX_vec back_color;
     simpleColor back_color;
-    // DMX_vec flash_color;
     color_vec flash_colors;
 
     Shape flash_shape = gaussian; // default setting leads to gaussian flashes (of bubbles)

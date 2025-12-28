@@ -178,6 +178,8 @@ class RedrayzAnimation1 : public RedrayzAnimation{
     // Animation parameters (constant or set by animation constructor)
     bool flash_activation = true;
     Shape flash_shape = gaussian; // default setting leads to gaussian flashes (of bubbles)
+    simpleColor back_color;
+    color_vec flash_colors;
     int flash_interval;
     int flash_length;
 
