@@ -9,7 +9,7 @@
  <Engine>
   <InputOutputMap>
    <Universe Name="Beatmatcher Cmd" ID="0">
-    <Output Plugin="ArtNet" Line="2">
+    <Output Plugin="ArtNet" Line="0">
      <PluginParameters outputUni="10"/>
     </Output>
    </Universe>
@@ -758,7 +758,7 @@
      </Appearance>
      <Input Universe="1" Channel="7"/>
      <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="255">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="1">0</Channel>
      </Level>
      <Playback>
@@ -775,7 +775,7 @@
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="16">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="1">2</Channel>
      </Level>
      <Playback>
@@ -792,7 +792,7 @@
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="2">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="1">3</Channel>
      </Level>
      <Playback>
@@ -809,7 +809,7 @@
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="0">
+     <Level LowLimit="0" HighLimit="255" Value="255">
       <Channel Fixture="1">1</Channel>
      </Level>
      <Playback>
@@ -1471,7 +1471,7 @@
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="16">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="3">2</Channel>
      </Level>
      <Playback>
@@ -2419,7 +2419,7 @@
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="3">
+     <Level LowLimit="0" HighLimit="255" Value="41">
       <Channel Fixture="6">1</Channel>
      </Level>
      <Playback>
@@ -2933,7 +2933,7 @@
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="0">
+     <Level LowLimit="0" HighLimit="255" Value="1">
       <Channel Fixture="6">3</Channel>
      </Level>
      <Playback>
@@ -2984,7 +2984,7 @@
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="8">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="2">2</Channel>
      </Level>
      <Playback>
@@ -3001,7 +3001,7 @@
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="2">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="2">3</Channel>
      </Level>
      <Playback>
@@ -3599,7 +3599,7 @@
      <BackgroundImage>None</BackgroundImage>
      <Font>Default</Font>
     </Appearance>
-    <WindowState Visible="True" X="505" Y="460" Width="475" Height="450"/>
+    <WindowState Visible="True" X="500" Y="445" Width="475" Height="620"/>
     <AllowChildren>True</AllowChildren>
     <AllowResize>True</AllowResize>
     <ShowHeader>True</ShowHeader>
@@ -4057,7 +4057,7 @@
     <ShowEnableButton>True</ShowEnableButton>
     <Collapsed>False</Collapsed>
     <Disabled>False</Disabled>
-    <Multipage PagesNum="8" CurrentPage="0"/>
+    <Multipage PagesNum="8" CurrentPage="5"/>
     <Shortcut Page="0" Name="LED Barres">
      <Input Universe="1" Channel="22"/>
     </Shortcut>
@@ -4115,7 +4115,7 @@
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="139">
+      <Level LowLimit="0" HighLimit="255" Value="130">
        <Channel Fixture="2">5</Channel>
       </Level>
       <Playback>
@@ -4225,7 +4225,7 @@
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
-     <WindowState Visible="True" X="25" Y="60" Width="260" Height="220"/>
+     <WindowState Visible="False" X="25" Y="60" Width="260" Height="220"/>
      <AllowChildren>True</AllowChildren>
      <AllowResize>True</AllowResize>
      <ShowHeader>False</ShowHeader>
@@ -4233,7 +4233,7 @@
      <Collapsed>False</Collapsed>
      <Disabled>False</Disabled>
      <Slider Caption="Durat." ID="248" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="True" X="5" Y="5" Width="60" Height="100"/>
+      <WindowState Visible="False" X="5" Y="5" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
@@ -4242,7 +4242,7 @@
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="85">
+      <Level LowLimit="0" HighLimit="255" Value="130">
        <Channel Fixture="1">4</Channel>
       </Level>
       <Playback>
@@ -4250,7 +4250,7 @@
       </Playback>
      </Slider>
      <Slider Caption="Inter." ID="249" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="True" X="65" Y="5" Width="60" Height="100"/>
+      <WindowState Visible="False" X="65" Y="5" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
@@ -4259,7 +4259,7 @@
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="176">
+      <Level LowLimit="0" HighLimit="255" Value="129">
        <Channel Fixture="1">5</Channel>
       </Level>
       <Playback>
@@ -4267,7 +4267,7 @@
       </Playback>
      </Slider>
      <Slider Caption="Inten. Bkgd" ID="250" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="True" X="125" Y="5" Width="60" Height="100"/>
+      <WindowState Visible="False" X="125" Y="5" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
@@ -4276,7 +4276,7 @@
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="66">
+      <Level LowLimit="0" HighLimit="255" Value="20">
        <Channel Fixture="1">6</Channel>
       </Level>
       <Playback>
@@ -4284,7 +4284,7 @@
       </Playback>
      </Slider>
      <Slider Caption="Ratio" ID="251" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="True" X="185" Y="5" Width="60" Height="100"/>
+      <WindowState Visible="False" X="185" Y="5" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
@@ -4293,7 +4293,7 @@
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="154">
+      <Level LowLimit="0" HighLimit="255" Value="207">
        <Channel Fixture="1">7</Channel>
       </Level>
       <Playback>
@@ -4301,7 +4301,7 @@
       </Playback>
      </Slider>
      <Slider Caption="" ID="252" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="True" X="185" Y="105" Width="60" Height="100"/>
+      <WindowState Visible="False" X="185" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
@@ -4316,7 +4316,7 @@
       </Playback>
      </Slider>
      <Slider Caption="Seq." ID="253" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="True" X="125" Y="105" Width="60" Height="100"/>
+      <WindowState Visible="False" X="125" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
@@ -4331,7 +4331,7 @@
       </Playback>
      </Slider>
      <Slider Caption="Group." ID="254" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="True" X="65" Y="105" Width="60" Height="100"/>
+      <WindowState Visible="False" X="65" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
@@ -4348,7 +4348,7 @@
       </Playback>
      </Slider>
      <Slider Caption="Shape" ID="255" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="True" X="5" Y="105" Width="60" Height="100"/>
+      <WindowState Visible="False" X="5" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
@@ -4357,7 +4357,7 @@
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
       <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="0"/>
+      <Level LowLimit="0" HighLimit="255" Value="12"/>
       <Playback>
        <Function>4294967295</Function>
       </Playback>
@@ -4371,7 +4371,7 @@
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
-     <WindowState Visible="False" X="25" Y="60" Width="260" Height="220"/>
+     <WindowState Visible="True" X="25" Y="60" Width="385" Height="215"/>
      <AllowChildren>True</AllowChildren>
      <AllowResize>True</AllowResize>
      <ShowHeader>False</ShowHeader>
@@ -4379,7 +4379,7 @@
      <Collapsed>False</Collapsed>
      <Disabled>False</Disabled>
      <Slider Caption="Durat." ID="258" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="5" Y="5" Width="60" Height="100"/>
+      <WindowState Visible="True" X="5" Y="5" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
@@ -4388,7 +4388,7 @@
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="122">
+      <Level LowLimit="0" HighLimit="255" Value="16">
        <Channel Fixture="6">4</Channel>
       </Level>
       <Playback>
@@ -4396,7 +4396,7 @@
       </Playback>
      </Slider>
      <Slider Caption="Inter." ID="259" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="65" Y="5" Width="60" Height="100"/>
+      <WindowState Visible="True" X="65" Y="5" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
@@ -4405,7 +4405,7 @@
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="125">
+      <Level LowLimit="0" HighLimit="255" Value="17">
        <Channel Fixture="6">5</Channel>
       </Level>
       <Playback>
@@ -4413,7 +4413,7 @@
       </Playback>
      </Slider>
      <Slider Caption="Inten. Bkgd" ID="262" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="125" Y="5" Width="60" Height="100"/>
+      <WindowState Visible="True" X="125" Y="5" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
@@ -4422,7 +4422,7 @@
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="129">
+      <Level LowLimit="0" HighLimit="255" Value="255">
        <Channel Fixture="6">6</Channel>
       </Level>
       <Playback>
@@ -4430,7 +4430,7 @@
       </Playback>
      </Slider>
      <Slider Caption="Ratio" ID="263" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="185" Y="5" Width="60" Height="100"/>
+      <WindowState Visible="True" X="185" Y="5" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
@@ -4447,22 +4447,7 @@
       </Playback>
      </Slider>
      <Slider Caption="" ID="264" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="185" Y="105" Width="60" Height="100"/>
-      <Appearance>
-       <FrameStyle>Sunken</FrameStyle>
-       <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
-      </Appearance>
-      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None">Playback</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="0"/>
-      <Playback>
-       <Function>4294967295</Function>
-      </Playback>
-     </Slider>
-     <Slider Caption="Seq." ID="265" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="125" Y="105" Width="60" Height="100"/>
+      <WindowState Visible="True" X="185" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
@@ -4477,7 +4462,7 @@
       </Playback>
      </Slider>
      <Slider Caption="Group." ID="266" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="65" Y="105" Width="60" Height="100"/>
+      <WindowState Visible="True" X="65" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
@@ -4492,7 +4477,7 @@
       </Playback>
      </Slider>
      <Slider Caption="Shape" ID="267" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="5" Y="105" Width="60" Height="100"/>
+      <WindowState Visible="True" X="5" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
@@ -4502,6 +4487,23 @@
       </Appearance>
       <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="false">Level</SliderMode>
       <Level LowLimit="0" HighLimit="255" Value="0"/>
+      <Playback>
+       <Function>4294967295</Function>
+      </Playback>
+     </Slider>
+     <Slider Caption="Seq" ID="308" WidgetStyle="Slider" InvertedAppearance="false">
+      <WindowState Visible="True" X="315" Y="5" Width="60" Height="200"/>
+      <Appearance>
+       <FrameStyle>Sunken</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>Default</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Default</Font>
+      </Appearance>
+      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="false">Level</SliderMode>
+      <Level LowLimit="0" HighLimit="255" Value="0">
+       <Channel Fixture="6">9</Channel>
+      </Level>
       <Playback>
        <Function>4294967295</Function>
       </Playback>

@@ -374,6 +374,77 @@ class ColorPaletteMagazine{
 };
 
 
+
+/*
+######  #     # #     #  #####                                     
+#     # ##   ##  #   #  #     # #    #   ##    ####  ###### #####  
+#     # # # # #   # #   #       #    #  #  #  #      #      #    # 
+#     # #  #  #    #    #       ###### #    #  ####  #####  #    # 
+#     # #     #   # #   #       #    # ######      # #      #####  
+#     # #     #  #   #  #     # #    # #    # #    # #      #   #  
+######  #     # #     #  #####  #    # #    #  ####  ###### #    */
+
+
+enum class Direction {
+    Forward,
+    Backward,
+    PingPong
+};
+
+
+class DMXChaser {
+private:
+    struct Group {
+        int head;
+        int dir;       // +1 or -1 relative direction
+        int segStart;
+        int segEnd;
+    };
+
+    //input parameters
+    int N;      // total number of fixtures
+    int Ng;     // number of groups
+    int Sg;     // fixtures per group
+    int Ss;     // step size
+    Direction Dir;
+    int Pr;     // parity
+    bool randomMotion = false;
+    std::vector<Group> initialGroups;
+    int step;
+
+    //output parameters
+    std::vector<std::vector<int>> sequence;
+
+
+    int paritySign(int g) ;
+
+    void initializeGroups() ;
+
+public:
+    DMXChaser() : N(0), Ng(0), Sg(0), Ss(0), Dir(Direction::Forward), Pr(0), step(0) {}
+
+    void setup(int totalFixtures, int numGroups, int groupSize, int stepSize,
+               Direction dir, int parity, bool random = false) ;
+
+    std::vector<std::vector<int>> *computeVseq();
+
+
+    // Return number of steps until fixture i lights up after step i_step
+    int steps_until(int fixtureIndex, int i_step);
+
+    // Return number of steps since fixture i was last lit before step i_step
+    int steps_since(int fixtureIndex, int i_step);
+
+    // prints the sequence as a whole (for debugging)
+    void printSequence();
+};
+
+
+
+
+
+
+
 /**-------------------------------------------------------------------------------------------
    #                                                    #     #               
   # #   #    # # #    #   ##   ##### #  ####  #    #    ##   ##  ####  #####  

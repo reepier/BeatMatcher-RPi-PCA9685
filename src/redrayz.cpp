@@ -78,7 +78,8 @@ void RedLaserGroup::init(){
     FILL
     FILL
     FILL
-    FILL
+    // RANDOM BURST
+    animations.push_back(new RedrayzAnimation4(this, square,  1000,    1000, "Chaser Très lent",      "RED.4.1.3", backer, 1, 255, int_vec{1}));
     FILL
     FILL
     FILL
@@ -229,7 +230,6 @@ void RedrayzAnimation0::new_frame(){
 }
 
 
-
 /*
     #           ######                          ######                             
    ##           #     #   ##   #    # #####     #     # #    # #####   ####  ##### 
@@ -237,13 +237,16 @@ void RedrayzAnimation0::new_frame(){
     #           ######  #    # # #  # #    #    ######  #    # #    #  ####    #   
     #   ###     #   #   ###### #  # # #    #    #     # #    # #####       #   #   
     #   ###     #    #  #    # #   ## #    #    #     # #    # #   #  #    #   #   
-  ##### ###     #     # #    # #    # #####     ######   ####  #    #  ####    */
+  ##### ###     #     # #    # #    # #####     ######   ####  #    #  ####    #     */
 
 void RedrayzAnimation1::init(){
   BaseAnimation::init();
 
-  const int n_unit = this->fixture->group_size; //set the nuber of laser pixels to control
-  this->flashes = vector<flash_vec>(n_unit, flash_vec(2));
+  const int n_unit = this->fixture->group_size;             // set the number of laser pixels to control
+  this->flashes = vector<flash_vec>(n_unit, flash_vec(2));  // resize pixel vector
+  this->t_unit = 0.0;                                       // reset artificial time frame
+  
+  // initialize flash vector
   for (int i_unit=0; i_unit<n_unit; i_unit++){
         flashes[i_unit][i_next].time = rand_min_max(0.0, (double)n_unit);
         flashes[i_unit][i_prev].time = -1*rand_min_max(0.0, (double)n_unit);
@@ -310,31 +313,27 @@ void RedrayzAnimation1::new_frame(){
 
     // if flash is actviated, compute the flash --> exp( -(spd.(t-t0))²)
     double flash_intensity; // 0 by default
-    if (flash_activation){ //TODO remove activation booleans
-      // when the flash passes, compute the next flash timestamp and update prev flash
-      if (t_unit > t_next){
-          
-        t_prev = t_next;
-        t_next = t_next + rand_min_max(0.0, 2.0*n_unit);
-        c_prev = c_next;
-        c_next = fcn::random_pick(this->flash_colors);
-      }
+    // when the flash passes, compute the next flash timestamp and update prev flash
+    if (t_unit > t_next){
+        
+      t_prev = t_next;
+      t_next = t_next + rand_min_max(0.0, 2.0*n_unit);
+      c_prev = c_next;
+      c_next = fcn::random_pick(this->flash_colors);
+    }
 
-      // Compute pixel intensity
-      switch (this->flash_shape){
-          case square : flash_intensity = fcn::square((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::square((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
-              break;
-          case gaussian : flash_intensity = fcn::gaussian((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::gaussian((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
-              break;
-          case gaussian2 : flash_intensity = fcn::gaussian2((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::gaussian2((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
-              break;
-          case expdecay : flash_intensity = fcn::exp_decay((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0);
-              break;
-          default : flash_intensity = fcn::gaussian((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::gaussian((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
-              break;
-      }
-    }else{
-      flash_intensity = 0.0;
+    // Compute pixel intensity
+    switch (this->flash_shape){
+        case square : flash_intensity = fcn::square((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::square((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
+            break;
+        case gaussian : flash_intensity = fcn::gaussian((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::gaussian((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
+            break;
+        case gaussian2 : flash_intensity = fcn::gaussian2((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::gaussian2((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
+            break;
+        case expdecay : flash_intensity = fcn::exp_decay((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0);
+            break;
+        default : flash_intensity = fcn::gaussian((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::gaussian((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
+            break;
     }
 
     DMX_vec frame_flash_RGB = (t_unit-t_prev > t_next-t_unit) ? fixture->RGB(c_next) : this->fixture->RGB(c_prev);
@@ -443,7 +442,7 @@ void RedrayzAnimation2::new_frame(){
 
  */
 
- void RedrayzAnimation3::init(){
+void RedrayzAnimation3::init(){
   BaseAnimation::init();
 }
 
@@ -502,3 +501,135 @@ void RedrayzAnimation3::new_frame(){
         *(this->fixture->lasers[units_index[i]]) = backgd_RGB[R] *this->fixture->master/255.0 *this->master/255.0;
   }
 }
+
+/*
+#               #####                                     
+#    #         #     # #    #   ##    ####  ###### #####  
+#    #         #       #    #  #  #  #      #      #    # 
+#    #         #       ###### #    #  ####  #####  #    # 
+####### ###    #       #    # ######      # #      #####  
+     #  ###    #     # #    # #    # #    # #      #   #  
+     #  ###     #####  #    # #    #  ####  ###### #    */
+
+
+
+
+
+void RedrayzAnimation4::init(){
+  BaseAnimation::init();
+
+  const int n_unit = this->fixture->group_size;             // set the number of laser pixels to control
+  this->flashes = vector<flash_vec>(n_unit, flash_vec(2));  // resize pixel vector
+  this->t_unit = 0.0;                                       // reset artificial time frame
+  
+  // init & compute sequence
+  // this->chaser.setup(n_unit, 2, 1, 1, Direction::PingPong, 1, false); // already done at constructor level
+
+  // initialize flash vector
+  int i_step = 0;
+  for (int i_unit=0; i_unit<n_unit; i_unit++){
+        flashes[i_unit][i_next].time = chaser.steps_until(i_unit, i_step);
+        flashes[i_unit][i_prev].time = -1*chaser.steps_since(i_unit, i_step);
+        flashes[i_unit][i_next].color = fcn::random_pick(this->flash_colors);
+        flashes[i_unit][i_prev].color = fcn::random_pick(this->flash_colors);
+  }
+  log(2, "jackshit");
+
+}
+void RedrayzAnimation4::init(const color_vec& palette){
+  // AUTOCOLOR init : assign flash colors & back color based on passed color palette :
+  const int palette_size = palette.size();
+  switch (palette_size)
+  {
+  case 0:
+      this->flash_colors = color_vec{black}, this->back_color = black;            break;
+  case 1:
+      this->flash_colors = color_vec{palette[0]}, this->back_color = black;  break;
+  case 2: 
+      this->flash_colors = color_vec{palette[0]}, this->back_color = palette[1];  break;
+  default:
+      flash_colors = color_vec{fcn::random_pick(palette)},    back_color = fcn::random_pick(palette);     break;
+  }
+
+  //call STANDARD init()
+  RedrayzAnimation4::init();
+}
+
+void RedrayzAnimation4::new_frame(){
+  BaseAnimation::new_frame();
+
+  //update external parameters :
+    // Burst length (param Duration)
+    const int current_duration      = clamp(
+                                                map3_param(this->fixture->param1, (double)this->flash_length/5, (double)this->flash_length, 5*(double)this->flash_length),
+                                                1000.0/FRATE,
+                                                30000.0);
+    // Burst Interval 
+    const int current_interval    = clamp(
+                                                map3_param(this->fixture->param2, (double)this->flash_interval/5, (double)this->flash_interval, 5*(double)this->flash_interval),
+                                                1000.0/FRATE,
+                                                30000.0);
+    // Bakground Intensity 
+    const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)ADDRLED_BKG_INTENSITY_REF, 255.0);
+    // Chaser sequence 
+    const int current_sequence = map_param(this->fixture->param7, 0.0, 255.0); //TODO dummy
+
+
+  // long t = frame.t_current_ms;                // for readability
+  const int n_unit = this->flashes.size();   // for readability
+
+  // update internal timescales ("dt" in inversely proportionnal);
+  this->t_unit += 1000.0/FRATE/current_interval;
+
+  i_step = (int)this->t_unit;
+
+  // for each unit "i" of the module
+  for (int i_unit=0; i_unit < n_unit; i_unit++){
+    auto &current_unit_next_flash = flashes[i_unit][i_next];       // for readability
+    auto &current_unit_prev_flash = flashes[i_unit][i_prev];       // for readability
+    double &t_next = current_unit_next_flash.time;
+    double &t_prev = current_unit_prev_flash.time;
+    simpleColor &c_next = current_unit_next_flash.color;
+    simpleColor &c_prev = current_unit_prev_flash.color;
+
+    const pixel ani_backgd_RGB = fixture->RGB(back_color, current_bkg_intensity);
+
+
+    // // when the flash passes, compute the next flash timestamp and update prev flash
+    if (t_unit > t_next){
+      
+      t_prev = t_next;
+      t_next = t_next + chaser.steps_until(i_unit, i_step);
+      c_prev = c_next;
+      c_next = fcn::random_pick(this->flash_colors);
+
+      log(2, "step:" , i_step , " unit:" , i_unit , " t_prev:" , fcn::num_to_str(t_prev) , " t_next:" , fcn::num_to_str(t_next));
+    }
+
+    // Compute pixel intensity
+    double flash_intensity; // 0 by default
+    switch (this->flash_shape){
+        case square : flash_intensity = fcn::square((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::square((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
+            break;
+        case gaussian : flash_intensity = fcn::gaussian((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::gaussian((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
+            break;
+        case gaussian2 : flash_intensity = fcn::gaussian2((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::gaussian2((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
+            break;
+        case expdecay : flash_intensity = fcn::exp_decay((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0);
+            break;
+        default : flash_intensity = fcn::gaussian((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::gaussian((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
+            break;
+    }
+
+    DMX_vec frame_flash_RGB = (t_unit-t_prev > t_next-t_unit) ? fixture->RGB(c_next) : this->fixture->RGB(c_prev);
+    DMX_vec unit_final_RGB(3, 0);
+    unit_final_RGB[R] = clamp( (int)( (1.0-pow(flash_intensity, 0.2)) * ani_backgd_RGB[R] + flash_intensity * frame_flash_RGB[R]  ),0,255); 
+    unit_final_RGB[G] = clamp( (int)( (1.0-pow(flash_intensity, 0.2)) * ani_backgd_RGB[G] + flash_intensity * frame_flash_RGB[G]  ),0,255);
+    unit_final_RGB[B] = clamp( (int)( (1.0-pow(flash_intensity, 0.2)) * ani_backgd_RGB[B] + flash_intensity * frame_flash_RGB[B]  ),0,255);
+
+
+    *(this->fixture->lasers[i_unit]) = unit_final_RGB[R] * this->fixture->master/255.0 * this->master/255.0;
+  }
+  balise("fausse balise");
+}
+

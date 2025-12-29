@@ -5,11 +5,10 @@
 #include <sstream>
 #include <fstream>
 #include <string>
+#include <iomanip>
+#include <random>
+#include <algorithm>
 
-// #include "LED.h"
-// #include "animator.h"
-// #include "spot.h"
-// #include "spider.h"
 #include "wiringPi.h"
 #include "sysfcn.h"
 #include "debug.h"
@@ -17,6 +16,203 @@
 #include "DMXio.h"
 
 using namespace std;
+
+
+
+/*
+######  #     # #     #  #####                                     
+#     # ##   ##  #   #  #     # #    #   ##    ####  ###### #####  
+#     # # # # #   # #   #       #    #  #  #  #      #      #    # 
+#     # #  #  #    #    #       ###### #    #  ####  #####  #    # 
+#     # #     #   # #   #       #    # ######      # #      #####  
+#     # #     #  #   #  #     # #    # #    # #    # #      #   #  
+######  #     # #     #  #####  #    # #    #  ####  ###### #    */
+
+int DMXChaser::paritySign(int g) {
+    if (Pr == 0) return 1;
+    int block = Pr;
+    return ((g / block) % 2 == 0) ? 1 : -1;
+}
+
+void DMXChaser::initializeGroups() {
+    int baseDir = (Dir == Direction::Backward) ? -1 : 1;
+    int segLength = N / Ng;
+    initialGroups.resize(Ng);
+
+    for (int g = 0; g < Ng; ++g) {
+        int dir = baseDir * paritySign(g);
+        int segStart = g * segLength;
+        int segEnd = segStart + segLength - 1;
+
+        if (dir > 0)
+            initialGroups[g].head = segStart;
+        else
+            initialGroups[g].head = segEnd - Sg + 1;
+
+        initialGroups[g].dir = dir;
+        initialGroups[g].segStart = segStart;
+        initialGroups[g].segEnd = segEnd;
+    }
+
+    step = 0;
+}
+
+
+void DMXChaser::setup(int totalFixtures, int numGroups, int groupSize, int stepSize,
+            Direction dir, int parity, bool random) {
+    N = totalFixtures;
+    Ng = numGroups;
+    Sg = groupSize;
+    Ss = stepSize;
+    Dir = dir;
+    Pr = parity;
+    randomMotion = random;
+
+    initializeGroups();
+
+    computeVseq();
+}
+
+
+vector<vector<int>> *DMXChaser::computeVseq() {
+    struct GroupRuntime { int head; int dir; int segStart; int segEnd; };
+    vector<GroupRuntime> groups(Ng);
+
+    int segLength = N / Ng;
+    int baseDir = (Dir == Direction::Backward) ? -1 : 1;
+
+    // Number of steps per group
+    int NstepSingle = ((segLength - Sg) + Ss - 1) / Ss;
+    int Nsteps = (Dir == Direction::PingPong) ? 2 * NstepSingle : NstepSingle+1;
+
+    vector<vector<int>> Vseq;
+    random_device rd;
+    mt19937 rng(rd());
+
+    // Prepare per-group sequences
+    vector<vector<int>> groupSequences(Ng);
+
+    for (int g = 0; g < Ng; ++g) {
+        int dir = baseDir * paritySign(g);
+        int segStart = g * segLength;
+        int segEnd = segStart + segLength - 1;
+
+        if (!randomMotion) {
+            int head = (dir > 0) ? segStart : segEnd - Sg + 1;
+            groups[g] = {head, dir, segStart, segEnd};
+        } else {
+            // Generate all valid positions in segment
+            vector<int> positions;
+            for (int pos = segStart; pos <= segEnd - Sg + 1; pos += Ss)
+                positions.push_back(pos);
+
+            shuffle(positions.begin(), positions.end(), rng);
+
+            // For PingPong: forward sequence
+            groupSequences[g] = positions;
+
+            if (Dir == Direction::PingPong) {
+                // Append reversed sequence for return trip
+                vector<int> rev = positions;
+                reverse(rev.begin(), rev.end());
+                groupSequences[g].insert(groupSequences[g].end(), rev.begin(), rev.end());
+            }
+        }
+    }
+
+    // Build sequence step by step
+    for (int s = 0; s < Nsteps; ++s) {
+        vector<int> Vstep;
+
+        for (int g = 0; g < Ng; ++g) {
+            int head;
+            if (!randomMotion) {
+                head = groups[g].head;
+            } else {
+                head = groupSequences[g][s % groupSequences[g].size()];
+            }
+
+            for (int i = 0; i < Sg; ++i) {
+                int idx = head + i;
+                if (idx >= 0 && idx < N) Vstep.push_back(idx);
+            }
+        }
+
+        Vseq.push_back(Vstep);
+
+        // Move groups (linear/PingPong)
+        if (!randomMotion) {
+            if (Dir == Direction::PingPong) {
+                bool bounce = false;
+                for (auto &g : groups) {
+                    int nextHead = g.head + g.dir * Ss;
+                    if (nextHead < g.segStart || nextHead > g.segEnd - Sg + 1)
+                        bounce = true;
+                }
+                if (bounce) for (auto &g : groups) g.dir *= -1;
+                for (auto &g : groups) g.head += g.dir * Ss;
+            } else {
+                for (auto &g : groups) g.head += g.dir * Ss;
+            }
+        }
+    }
+
+    this->sequence = Vseq;
+    return &(this->sequence);
+}
+
+
+// Return number of steps until fixture i lights up after step i_step
+int DMXChaser::steps_until(int fixtureIndex, int i_step) {
+    if (sequence.empty()) computeVseq();
+    int Nsteps = sequence.size();
+
+    int start = (i_step + 1) % Nsteps;  // start searching at next step
+    for (int offset = 1; offset <= Nsteps; ++offset) {
+        int s = (i_step + offset) % Nsteps;
+        if (find(sequence[s].begin(), sequence[s].end(), fixtureIndex) != sequence[s].end())
+            return offset;
+    }
+
+    return -1; // should never happen
+}
+
+// Return number of steps since fixture i was last lit before step i_step
+int DMXChaser::steps_since(int fixtureIndex, int i_step) {
+    if (sequence.empty()) computeVseq();
+    int Nsteps = sequence.size();
+    int start = i_step % Nsteps;
+
+    for (int offset = 0; offset < Nsteps; ++offset) {
+        int s = (start - offset + Nsteps) % Nsteps; // wrap backward
+        if (find(sequence[s].begin(), sequence[s].end(), fixtureIndex) != sequence[s].end())
+            return offset; // number of steps since last light-up
+    }
+    return -1; // should never happen
+}
+
+// prints the sequence as a whole (for debugging)
+void DMXChaser::printSequence() {
+    vector<vector<int>> *Vseq = computeVseq();
+    int totalSteps = Vseq->size();
+
+    int stepWidth = to_string(totalSteps - 1).length(); // max digits
+
+    for (int s = 0; s < totalSteps; ++s) {
+        vector<char> strip(N, '.');
+        for (int idx : (*Vseq)[s])
+            strip[idx] = '#';
+
+        // setw(stepWidth) ensures the step number is right-aligned
+        cout << "Step " << setw(stepWidth) << s << ":\t";
+        for (char c : strip) cout << c;
+        cout << "\n";
+    }
+}
+
+
+
+
 
 
 /**
