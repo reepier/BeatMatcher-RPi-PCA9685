@@ -402,6 +402,7 @@ void AddrLEDAnimation2::init(const color_vec& palette){
 void AddrLEDAnimation2::new_frame(){
     BaseAnimation::new_frame();
 
+//update external parameters :
     // fade rate (param Duration)
     const int current_fade_rate_ms    = map3_param(this->fixture->param1, 1000.0/FRATE, (double)this->fade_rate, 1000.0);
     // Bakground Intensity 

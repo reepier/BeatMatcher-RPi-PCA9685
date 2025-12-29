@@ -374,6 +374,95 @@ class ColorPaletteMagazine{
 };
 
 
+
+/*
+######  #     # #     #  #####                                     
+#     # ##   ##  #   #  #     # #    #   ##    ####  ###### #####  
+#     # # # # #   # #   #       #    #  #  #  #      #      #    # 
+#     # #  #  #    #    #       ###### #    #  ####  #####  #    # 
+#     # #     #   # #   #       #    # ######      # #      #####  
+#     # #     #  #   #  #     # #    # #    # #    # #      #   #  
+######  #     # #     #  #####  #    # #    #  ####  ###### #    */
+
+
+enum class Direction {
+    Forward,
+    Backward,
+    PingPong
+};
+
+
+class DMXChaser {
+private:
+    struct Group {
+        int head;
+        int dir;       // +1 or -1 relative direction
+        int segStart;
+        int segEnd;
+    };
+
+    //input parameters
+    int N;      // total number of points
+    int Ng;     // number of groups
+    int Sg;     // points per group
+    int Ss;     // step size
+    Direction Dir;
+    int Pr;     // parity
+    bool randomMotion = false;
+    std::vector<Group> initialGroups;
+    int step;
+
+    //output parameters
+    std::vector<std::vector<int>> sequence;
+
+
+    int paritySign(int g) ;
+
+    void initializeGroups() ;
+
+public:
+    std::string description;
+
+    void setup(int totalFixtures, int numGroups, int groupSize, int stepSize,
+               Direction dir, int parity, bool random = false) ;
+    
+// Constructors
+    // Default Constructor (empty sequence)
+    DMXChaser() : N(0), Ng(0), Sg(0), Ss(0), Dir(Direction::Forward), Pr(0), step(0) {}
+    // Constructor with parameters & auto construction
+    DMXChaser(int n_points, int n_groups, int group_size, int step_size, Direction  direction, int parity, bool rand, std::string descr) {
+      this->setup(n_points, n_groups, group_size, step_size, direction, parity, rand);
+      this->description = descr;
+    }
+    // Constructor with manually defined sequence
+    DMXChaser(int n_points, std::vector<std::vector<int>> seq){
+      // check sequence size & other criterias
+      // TODO later
+
+      // set sequence
+      sequence = seq;
+    }
+
+
+    std::vector<std::vector<int>> *computeVseq();
+
+
+    // Return number of steps until fixture i lights up after step i_step
+    int steps_until(int fixtureIndex, int i_step);
+
+    // Return number of steps since fixture i was last lit before step i_step
+    int steps_since(int fixtureIndex, int i_step);
+
+    // prints the sequence as a whole (for debugging)
+    void printSequence();
+};
+
+
+
+
+
+
+
 /**-------------------------------------------------------------------------------------------
    #                                                    #     #               
   # #   #    # # #    #   ##   ##### #  ####  #    #    ##   ##  ####  #####  
@@ -463,6 +552,9 @@ class BaseFixture{
     BaseAnimation * active_animation = nullptr; // animation currently running on this fixture
     BaseAnimation * saved_animation = nullptr;  // animation stored (for later activation) -> this allow to switch easily between manual and automatic animation settings
 
+
+    // Chase sequences catalog
+    std::vector<DMXChaser*> chasers = {}; // list of chasers that can be activated on the fixture (for now, only used for the strobe animation, but could be generalized later)
     anim_vec animations;
 
     //constructor (adresse [0-511], number of channels, fixture's name)

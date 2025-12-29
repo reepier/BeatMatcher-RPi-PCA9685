@@ -8,17 +8,26 @@
 
 namespace arduino{
     // linearly interpolates (x;y) between points (x1;y1) and (x2;y2)
-    template<typename T>
-    T map(T x, T x1, T x2, T y1, T y2){
+    template<typename T1, typename T2>
+    T2 map(T1 x, T1 x1, T1 x2, T2 y1, T2 y2){
         double a = (double)(y2-y1)/(double)(x2-x1);
         double b = (double)y1 - a*x1;
-        return (T)(a*x+b);
+        return (T2)(a*x+b);
     }
 } using namespace arduino;
 
 // linearly interpolates (x;y) between 3 points (x1;y1), (x2;y2), (x3;y3). 
+template<typename T1, typename T2>
+T2 map3(T1 x, T1 x1, T1 x2, T1 x3, T2 y1, T2 y2, T2 y3){
+    if ( x<=x2 ){
+        return arduino::map(x, x1, x2, y1, y2);
+    }else {
+        return arduino::map(x, x2, x3, y2, y3);
+    }
+}
+
 template<typename T>
-T map3(T x, T x1, T x2, T x3, T y1, T y2, T y3){
+T map3(double x, double x1, double x2, double x3, T y1, T y2, T y3){
     if ( x<=x2 ){
         return arduino::map(x, x1, x2, y1, y2);
     }else {
@@ -28,12 +37,12 @@ T map3(T x, T x1, T x2, T x3, T y1, T y2, T y3){
 
 // linearly interpolates external parameter value between 3 values. 
 template<typename T>
-T map3_param(T x, T y1, T y2, T y3){
+T map3_param(double x, T y1, T y2, T y3){
     return map3(x, 0.0, 0.5, 1.0, y1, y2, y3);
 }
 // linearly interpolates external parameter value between 3 values. 
 template<typename T>
-T map_param(T x, T y1, T y2){
+T map_param(double x, T y1, T y2){
     return map(x, 0.0, 1.0, y1, y2);
 }
 

@@ -176,7 +176,6 @@ Makeover of Bubbles Animation for red ray lasers
 class RedrayzAnimation1 : public RedrayzAnimation{
   public:
     // Animation parameters (constant or set by animation constructor)
-    bool flash_activation = true;
     Shape flash_shape = gaussian; // default setting leads to gaussian flashes (of bubbles)
     simpleColor back_color;
     color_vec flash_colors;
@@ -297,3 +296,53 @@ Variant of the original beat matching animation :
       void new_frame() override;
   };
   
+
+/*
+#               #####                                     
+#    #         #     # #    #   ##    ####  ###### #####  
+#    #         #       #    #  #  #  #      #      #    # 
+#    #         #       ###### #    #  ####  #####  #    # 
+####### ###    #       #    # ######      # #      #####  
+     #  ###    #     # #    # #    # #    # #      #   #  
+     #  ###     #####  #    # #    #  ####  ###### #    */
+
+
+
+class RedrayzAnimation4 : public RedrayzAnimation{
+  public:
+    // Animation parameters (constant or set by animation constructor)
+    simpleColor back_color;
+    color_vec flash_colors;
+    int flash_interval;
+    int flash_length;
+    // DMXChaser chaser;   // contains and compute the chaser sequence (which unit to light up at every step of the animation)
+  
+    // Dynamic variables (updated internally at each frame)
+    std::vector<flash_vec> flashes;     //for each unit, stores previous & next flash data (color & time) --> flashes[spot_ind][prev/next].color/time
+    double t_unit;                    // internal, dynamic timescale. This timescale is artificially shrinked/elongated so that the average interval between bursts is 1
+    int i_step;
+    int current_chaser_i;         // indice of current chaser in fixture's chaser list
+    DMXChaser* current_chaser;    // pointer to current chaser in fixture's chaser list
+
+    // Internal helpful & hidden stuff (for readability)
+    const int i_prev = 0, i_next = 1;
+
+    // Constructor
+    RedrayzAnimation4(RedLaserGroup *f,  time_t flen, time_t finterv, std::string d, std::string i, AnimationType t, int prio, int mast, int_vec intens)
+    :RedrayzAnimation(d, i, t, mast, prio, intens){
+      this->fixture = f;
+      this->autocolor = true;
+
+      this->flash_length = flen;
+      this->flash_interval = finterv;
+
+      // initialize chaser, default chaser at construction is the first one in store. It will be updated in new_frame() with other external params
+      this->current_chaser_i = 0;
+
+      // this->update_palette(red);
+    }
+
+    void init() override;
+    void init(const color_vec&) override;
+    void new_frame() override;
+};

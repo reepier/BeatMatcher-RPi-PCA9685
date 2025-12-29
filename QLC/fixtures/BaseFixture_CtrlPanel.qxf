@@ -120,9 +120,9 @@
   <Channel Number="6" ActsOn="6">param3 : Bkg Intensity</Channel>
   <Channel Number="7" ActsOn="7">param4 : Ratio</Channel>
   <Channel Number="8" ActsOn="8">param5 : Shape</Channel>
-  <Channel Number="9" ActsOn="9">param6 : Decomp.</Channel>
+  <Channel Number="9" ActsOn="9">param6 : Decomp</Channel>
   <Channel Number="10" ActsOn="10">param7 : Sequencing</Channel>
-  <Channel Number="11" ActsOn="11">param8 : reserve</Channel>
+  <Channel Number="11">param8 : reserve</Channel>
  </Mode>
  <Physical>
   <Bulb Type="" Lumens="0" ColourTemperature="0"/>

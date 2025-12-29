@@ -7,7 +7,7 @@
 #define MAX_SUBPIX_PER_UNI  510 // maximum number of subpixels arried over 1 universe (1 universe can only carry complete pixels (BC-204 limitation))
 // WS2815 led strip config
   // Config paramters
-  constexpr int NUM_BAR = 3;                       // Total Number of bars
+  constexpr int NUM_BAR = 6;                       // Total Number of bars
   constexpr int NUM_SEG = 3*NUM_BAR;             // Total number of segments (across all bars)
   // Quasi constants
   constexpr int NUM_PIX_BAR = 58;        // number of pixels per bar
@@ -35,12 +35,12 @@ enum strip_subdiv_t{
 
 // bars configuration
 typedef std::vector<int_vec> LED_bar_config ;
-inline LED_bar_config bar_config = {/*bar1*/  {0,  58},    //  {start pixel, end pixel}
-                                    /*bar2*/  {58, 116},
+inline LED_bar_config bar_config = {/*bar1*/  {0,   58},    //  {start pixel, end pixel}
+                                    /*bar2*/  {58,  116},
                                     /*bar3*/  {116, 174},
                                     /*bar4*/  {174, 232},
-                                    /*bar5*/  {232+1, 290},
-                                    /*bar6*/  {290+1, 348},
+                                    /*bar5*/  {232, 290},
+                                    /*bar6*/  {290, 348},
                                     /*bar7*/  {348, 406},
                                     /*bar8*/  {406, 464},
                                     /*bar9*/  {464, 522},
@@ -57,7 +57,7 @@ inline LED_bar_config bar_config = {/*bar1*/  {0,  58},    //  {start pixel, end
                                   
 typedef std::vector<int_vec> LED_group_config ;
   //groups of bar
-inline LED_group_config group_conf = {{0,1,2} /*, {3,4,5}, {6,7,8}, {9,10,11}, {12,13,14}, {15,16,17} */  };
+inline LED_group_config group_conf = {{0,1,2} , {3,4,5}/*, {6,7,8}, {9,10,11}, {12,13,14}, {15,16,17} */  };
 
 // fixture class declaration
 class AddressableLED;

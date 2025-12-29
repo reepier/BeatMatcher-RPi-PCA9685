@@ -16,7 +16,7 @@ typedef time_t time_ms;
 typedef time_t time_us;
 typedef uint8_t DMX_channel;
 
-enum simpleColor{ //TODO : create a desaturated (lighter) version of each color
+enum simpleColor{
     black=0,
     red,
     sodium,    // very warm orange, very red

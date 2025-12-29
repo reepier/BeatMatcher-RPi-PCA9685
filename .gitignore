@@ -28,4 +28,4 @@
 
 
 !/others/
-!/others/**
+!/others/*.cpp
