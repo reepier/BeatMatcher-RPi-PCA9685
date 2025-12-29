@@ -237,20 +237,6 @@ class AddrLEDAnimation1 : public AddrLEDAnimation{
     //set cinematic params
     this->density = dens;
     this->unit = subdiv;
-    switch (subdiv){
-      case group: units_index.resize(group_conf.size());
-            break;
-      case bar : units_index.resize(NUM_BAR);
-        break;
-      case seg : units_index.resize(NUM_SEG);
-        break;
-      case pix : units_index.resize(NUM_PIX);
-        break;
-      }
-    for(int i=0; i<units_index.size(); i++){
-      units_index[i] = i;
-    }
-
   }
 
     void init() override;
@@ -295,19 +281,6 @@ class AddrLEDAnimation2 : public AddrLEDAnimation{
       this->autocolor=true;
       //set cinematic params
       this->unit = u;
-      switch (u){
-        case group: units_index.resize(group_conf.size());
-          break;
-        case bar : units_index.resize(NUM_BAR);
-          break;
-        case seg : units_index.resize(NUM_SEG);
-          break;
-        case pix : units_index.resize(NUM_PIX);
-          break;
-      }
-      for(int i=0; i<units_index.size(); i++){
-        units_index[i] = i;
-      }
     }
     
     void init() override;

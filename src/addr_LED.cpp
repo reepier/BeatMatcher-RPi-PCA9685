@@ -242,6 +242,21 @@ void AddrLEDAnimation0::new_frame() {
 */
 void AddrLEDAnimation1::init(){
     BaseAnimation::init();
+
+    switch (this->unit){
+      case group: units_index.resize(group_conf.size());
+            break;
+      case bar : units_index.resize(NUM_BAR);
+        break;
+      case seg : units_index.resize(NUM_SEG);
+        break;
+      case pix : units_index.resize(NUM_PIX);
+        break;
+    }
+    for(int i=0; i<units_index.size(); i++){
+      units_index[i] = i;
+    }
+
 }
 void AddrLEDAnimation1::init(const color_vec& palette){
     // AUTOCOLOR init
@@ -270,6 +285,15 @@ void AddrLEDAnimation1::new_frame(){
     const int current_bkg_intensity   = map3_param(this->fixture->param3, 0.0, (double)ADDRLED_BKG_INTENSITY_REF, 255.0);
     // Ratio 
     const double current_ratio        = map3_param(this->fixture->param4, 0.1, this->density, 1.0);
+    // Subdivision 
+    static  strip_subdiv_t prev_subdiv          = this->unit;
+    const   strip_subdiv_t current_subdiv       = (strip_subdiv_t) ( (int)map_param(this->fixture->param6, (double)strip_subdiv_t::pix, (double)strip_subdiv_t::group+1));
+    
+    if (prev_subdiv != current_subdiv) {
+        this->unit = current_subdiv;
+        this->init();
+        prev_subdiv = current_subdiv;
+    }
 
     // local variables for readability
     unsigned long t_ms = frame.t_current_ms;
@@ -341,6 +365,21 @@ void AddrLEDAnimation1::new_frame(){
 */
 void AddrLEDAnimation2::init(){
     BaseAnimation::init();
+
+    switch (this->unit){
+        case group: units_index.resize(group_conf.size());
+            break;
+        case bar : units_index.resize(NUM_BAR);
+            break;
+        case seg : units_index.resize(NUM_SEG);
+            break;
+        case pix : units_index.resize(NUM_PIX);
+            break;
+    }
+    for(int i=0; i<units_index.size(); i++){
+        units_index[i] = i;
+    }
+
 }
 void AddrLEDAnimation2::init(const color_vec& palette){
     //AUTOCOLOR init
@@ -369,6 +408,15 @@ void AddrLEDAnimation2::new_frame(){
     const int current_bkg_intensity   = map3_param(this->fixture->param3, 0.0, (double)ADDRLED_BKG_INTENSITY_REF, 255.0);
     // Ratio 
     const double current_ratio        = map3_param(this->fixture->param4, 0.1, 0.7, 1.0);
+    // Subdivision 
+    static  strip_subdiv_t prev_subdiv          = this->unit;
+    const   strip_subdiv_t current_subdiv       = (strip_subdiv_t) ( (int)map_param(this->fixture->param6, (double)strip_subdiv_t::pix, (double)strip_subdiv_t::group+1));
+    
+    if (prev_subdiv != current_subdiv) {
+        this->unit = current_subdiv;
+        this->init();
+        prev_subdiv = current_subdiv;
+    }
 
     // local variables for readability
     unsigned long t_ms = frame.t_current_ms;
