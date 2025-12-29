@@ -172,14 +172,18 @@
  <Channel Name="param5 : Shape">
   <Group Byte="0">Nothing</Group>
  </Channel>
- <Channel Name="param6 : Decomp">
-  <Group Byte="0">Nothing</Group>
- </Channel>
  <Channel Name="param7 : Sequencing">
   <Group Byte="0">Nothing</Group>
  </Channel>
  <Channel Name="param8 : reserve">
   <Group Byte="0">Nothing</Group>
+ </Channel>
+ <Channel Name="param6 : Subdiv">
+  <Group Byte="0">Nothing</Group>
+  <Capability Min="0" Max="63">Pixels</Capability>
+  <Capability Min="64" Max="127">Segment</Capability>
+  <Capability Min="128" Max="191">Barre</Capability>
+  <Capability Min="192" Max="255">Groupe</Capability>
  </Channel>
  <Mode Name="All CH.">
   <Channel Number="0" ActsOn="0">Dimmer</Channel>
@@ -191,8 +195,9 @@
   <Channel Number="6" ActsOn="6">param3 : Bkg Intensity</Channel>
   <Channel Number="7" ActsOn="7">param4 : Ratio</Channel>
   <Channel Number="8" ActsOn="8">param5 : Shape</Channel>
-  <Channel Number="9" ActsOn="10">param7 : Sequencing</Channel>
-  <Channel Number="10">param8 : reserve</Channel>
+  <Channel Number="9" ActsOn="9">param6 : Subdiv</Channel>
+  <Channel Number="10" ActsOn="11">param7 : Sequencing</Channel>
+  <Channel Number="11">param8 : reserve</Channel>
  </Mode>
  <Physical>
   <Bulb Type="" Lumens="0" ColourTemperature="0"/>
