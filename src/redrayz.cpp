@@ -297,6 +297,12 @@ void RedrayzAnimation1::new_frame(){
   BaseAnimation::new_frame();
 
   //update external parameters :
+    // Shape
+    const vector<Shape> shapes = {gaussian, gaussian2, square, expdecay};
+    const int current_shape_i       = clamp(    map_param(this->fixture->param5,  0, (int)shapes.size()),
+                                                0, (int)shapes.size()-1);
+    const Shape current_shape       = shapes[current_shape_i];
+
     // Burst length (param Duration)
     const int current_duration      = clamp(
                                                 map3_param(this->fixture->param1, (double)this->flash_length/5, (double)this->flash_length, 5*(double)this->flash_length),
@@ -343,7 +349,7 @@ void RedrayzAnimation1::new_frame(){
     }
 
     // Compute pixel intensity
-    switch (this->flash_shape){
+    switch (current_shape){
         case square : flash_intensity = fcn::square((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::square((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
             break;
         case gaussian : flash_intensity = fcn::gaussian((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::gaussian((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
