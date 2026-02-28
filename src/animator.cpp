@@ -908,6 +908,7 @@ void BaseFixture::process_DMX_input(bool data_available, bool trigger, const uin
 
     //Process PARAMETERS
     //TODO only update when trigger ?
+if (trigger){
     this->param1 = arduino::map( (double)data[this->input_addr-1+FIX_PARM1_CH] , 0.0, 255.0, 0.0, 1.0);
     this->param2 = arduino::map( (double)data[this->input_addr-1+FIX_PARM2_CH] , 0.0, 255.0, 0.0, 1.0);
     this->param3 = arduino::map( (double)data[this->input_addr-1+FIX_PARM3_CH] , 0.0, 255.0, 0.0, 1.0);
@@ -916,6 +917,7 @@ void BaseFixture::process_DMX_input(bool data_available, bool trigger, const uin
     this->param6 = arduino::map( (double)data[this->input_addr-1+FIX_PARM6_CH] , 0.0, 255.0, 0.0, 1.0);
     this->param7 = arduino::map( (double)data[this->input_addr-1+FIX_PARM7_CH] , 0.0, 255.0, 0.0, 1.0);
     this->param8 = arduino::map( (double)data[this->input_addr-1+FIX_PARM8_CH] , 0.0, 255.0, 0.0, 1.0);
+}
 }
 
 // toggles blackout boolean
