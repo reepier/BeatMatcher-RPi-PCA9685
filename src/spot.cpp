@@ -718,8 +718,7 @@ void SpotRackAnimation0::init(const color_vec& palette){
         switch (palette.size())
         {
         case 0:     this->color = black;        break;
-        case 1:     this->color = palette[0];   break;
-        default:    this->color = *(palette.end()-1);   break;
+        default:    this->color = *(palette.begin());   break;
         }
     }
 
