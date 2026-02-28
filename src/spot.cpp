@@ -176,14 +176,14 @@ void front_rack_init(){
     FILL
     // Animation type 1.1 : Random BUBBLES
     // SpotRackAnimation1(                                  SpotRack *f,  Shape fshape, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio,int mast, int_vec intens)
-    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  20000,  30000, "Bulles statique",   "SR.1.1.1", backer,  1,   255, int_vec{1}));
-    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  8000,   3000,  "Bulles très lent",  "SR.1.1.2", backer,  1,   255, int_vec{1}));
+    FILL
+    FILL
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  4000,   1500,  "Bulles lent",       "SR.1.1.3", backer,  1,   255, int_vec{1,2}));
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  700,   600,   "Bulles rapide",     "SR.1.1.4", any,     1,   255, int_vec{1,2,3}));
     FILL
     FILL
     // Animation type 1.3 : Random Square
-    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  20000, 30000,  "Chaser aléa. statiq.", "SR.1.3.1",  backer,  1, 255, int_vec{1}));
+    FILL
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  8000,  3000,   "Chaser aléa. lent",    "SR.1.3.3",  backer,  1, 255, int_vec{1,2}));
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  1000,  600,    "Chaser aléa. rapide",  "SR.1.3.4",  any,     1, 255, int_vec{2,3}));
     FILL
@@ -198,13 +198,13 @@ void front_rack_init(){
     FILL
     // Animation type 1.2 : Random strobe
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  800,  1000/FRATE, "Strobe lent",   "SR.1.2.1", any,    1, 255,   int_vec{2}));
-    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  250,  1000/FRATE, "Strobe moyen",  "SR.1.2.2", leader, 1, 255,   int_vec{2,3}));
+    FILL
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  70,   1000/FRATE, "Strobe rapide", "SR.1.2.3", leader, 1, 255,   int_vec{3}));
     FILL
     FILL
     FILL
     // Animation type 4 : Analog BEAT
-    this_rack->animations.push_back(new SpotRackAnimation4(this_rack, 1.0, "Beat analogique", "SR.4.1", any, 1, 255, int_vec{2,3}));
+    FILL
     this_rack->animations.push_back(new SpotRackAnimation4(this_rack, 0.7, "Beat analog. (70%)", "SR.4.2", any, 1, 255, int_vec{2,3}));
     FILL
     FILL
@@ -290,12 +290,12 @@ void rack_15_init(){
     FILL
     // Animation type 1.1 : Random BUBBLES
     // SpotRackAnimation1(                                  SpotRack *f,  Shape fshape, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio,int mast, int_vec intens)
-    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  20000,  30000, "Bulles statique",   "SR.1.1.1", backer,  1,   255, int_vec{1}));
-    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  8000,   3000,  "Bulles très lent",  "SR.1.1.2", backer,  1,   255, int_vec{1}));
+    FILL
+    FILL
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  4000,   1500,  "Bulles lent",       "SR.1.1.3", backer,  1,   255, int_vec{1,2}));
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  1000,   600,   "Bulles rapide",     "SR.1.1.4", any,     1,   255, int_vec{1,2,3}));
     // Animation type 1.3 : Random Square
-    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  20000, 30000,  "Chaser aléa. statiq.", "SR.1.3.1",  backer,  1, 255, int_vec{1}));
+    FILL
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  8000,  3000,   "Chaser aléa. lent",    "SR.1.3.3",  backer,  1, 255, int_vec{1,2}));
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  1000,  600,    "Chaser aléa. rapide",  "SR.1.3.4",  any,     1, 255, int_vec{2,3}));
     FILL
@@ -306,11 +306,11 @@ void rack_15_init(){
     FILL
     // Animation type 1.2 : Random strobe
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  800,  1000/FRATE, "Strobe lent",   "SR.1.2.1", any,    1, 255,   int_vec{2}));
-    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  300,  1000/FRATE, "Strobe moyen",  "SR.1.2.2", leader, 1, 255,   int_vec{2,3}));
+    FILL
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  100,  1000/FRATE, "Strobe rapide", "SR.1.2.3", leader, 1, 255,   int_vec{3}));
     FILL
     // Animation type 4 : Analog BEAT
-    this_rack->animations.push_back(new SpotRackAnimation4(this_rack, 1.0, "Beat analogique", "SR.4.1", any, 1, 255, int_vec{2,3}));
+    FILL
     this_rack->animations.push_back(new SpotRackAnimation4(this_rack, 0.7, "Beat analog. (70%)", "SR.4.2", any, 1, 255, int_vec{2,3}));
     FILL
     FILL
@@ -389,12 +389,12 @@ void rack_40_init(){
     FILL
     // Animation type 1.1 : Random BUBBLES
     // SpotRackAnimation1(                                  SpotRack *f,  Shape fshape, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio,int mast, int_vec intens)
-    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  20000,  30000, "Bulles statique",   "SR.1.1.1", backer,  1,   255, int_vec{1}));
-    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  8000,   3000,  "Bulles très lent",  "SR.1.1.2", backer,  1,   255, int_vec{1}));
+    FILL
+    FILL
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  4000,   1500,  "Bulles lent",       "SR.1.1.3", backer,  1,   255, int_vec{1,2}));
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  1000,   600,   "Bulles rapide",     "SR.1.1.4", any,     1,   255, int_vec{1,2,3}));
     // Animation type 1.3 : Random Square
-    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  20000, 30000,  "Chaser aléa. statiq.", "SR.1.3.1",  backer,  1, 255, int_vec{1}));
+    FILL
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  8000,  3000,   "Chaser aléa. lent",    "SR.1.3.3",  backer,  1, 255, int_vec{1,2}));
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  1000,  600,    "Chaser aléa. rapide",  "SR.1.3.4",  any,     1, 255, int_vec{2,3}));
     FILL
@@ -405,11 +405,11 @@ void rack_40_init(){
     FILL
     // Animation type 1.2 : Random strobe
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  800,  1000/FRATE, "Strobe lent",   "SR.1.2.1", any,    1, 255,   int_vec{2}));
-    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  300,  1000/FRATE, "Strobe moyen",  "SR.1.2.2", leader, 1, 255,   int_vec{2,3}));
+    FILL
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  100,  1000/FRATE, "Strobe rapide", "SR.1.2.3", leader, 1, 255,   int_vec{3}));
     FILL
     // Animation type 4 : Analog BEAT
-    this_rack->animations.push_back(new SpotRackAnimation4(this_rack, 1.0, "Beat analogique", "SR.4.1", any, 1, 255, int_vec{2,3}));
+    FILL
     this_rack->animations.push_back(new SpotRackAnimation4(this_rack, 0.7, "Beat analog. (70%)", "SR.4.2", any, 1, 255, int_vec{2,3}));
     FILL
     FILL
@@ -486,12 +486,12 @@ void shehds_rack_init(){
     FILL
     // Animation type 1.1 : Random BUBBLES
     // SpotRackAnimation1(                                  SpotRack *f,  Shape fshape, int prand, int flen, std::string d, std::string i, AnimationType t, uint8_t prio,int mast, int_vec intens)
-    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  20000,  30000, "Bulles statique",   "SR.1.1.1", backer,  1,   255, int_vec{1}));
-    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  8000,   3000,  "Bulles très lent",  "SR.1.1.2", backer,  1,   255, int_vec{1}));
+    FILL
+    FILL
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  4000,   1500,  "Bulles lent",       "SR.1.1.3", backer,  1,   255, int_vec{1,2}));
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  1000,   600,   "Bulles rapide",     "SR.1.1.4", any,     1,   255, int_vec{1,2,3}));
     // Animation type 1.3 : Random Square
-    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  20000, 30000,  "Chaser aléa. statiq.", "SR.1.3.1",  backer,  1, 255, int_vec{1}));
+    FILL
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  8000,  3000,   "Chaser aléa. lent",    "SR.1.3.3",  backer,  1, 255, int_vec{1,2}));
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  1000,  600,    "Chaser aléa. rapide",  "SR.1.3.4",  any,     1, 255, int_vec{2,3}));
     FILL
@@ -502,11 +502,11 @@ void shehds_rack_init(){
     FILL
     // Animation type 1.2 : Random strobe
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  800,  1000/FRATE, "Strobe lent",   "SR.1.2.1", any,    1, 255,   int_vec{2}));
-    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  300,  1000/FRATE, "Strobe moyen",  "SR.1.2.2", leader, 1, 255,   int_vec{2,3}));
+    FILL
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  100,  1000/FRATE, "Strobe rapide", "SR.1.2.3", leader, 1, 255,   int_vec{3}));
     FILL
     // Animation type 4 : Analog BEAT
-    this_rack->animations.push_back(new SpotRackAnimation4(this_rack, 1.0, "Beat analogique", "SR.4.1", any, 1, 255, int_vec{2,3}));
+    FILL
     this_rack->animations.push_back(new SpotRackAnimation4(this_rack, 0.7, "Beat analog. (70%)", "SR.4.2", any, 1, 255, int_vec{2,3}));
     FILL
     FILL

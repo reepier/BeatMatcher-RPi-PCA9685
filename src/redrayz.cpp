@@ -37,7 +37,7 @@ void RedLaserGroup::init(){
     FILL
 
     // RANDOM BURST
-    animations.push_back(new RedrayzAnimation1(this, gaussian,  8000,    1800, "Bulles Très lent",      "RED.2.1.3", backer, 1, 255, int_vec{1}));
+    FILL
     FILL
     animations.push_back(new RedrayzAnimation1(this, gaussian,   1500,    500,  "Bulles Lent",           "RED.2.1.2", backer, 1, 255, int_vec{2,3}));
     FILL
@@ -45,21 +45,21 @@ void RedLaserGroup::init(){
     FILL
     FILL
 
-    animations.push_back(new RedrayzAnimation1(this, square, 5000,  1000,     "Chaser Très lent",         "RED.2.2.3", backer, 1, 255, int_vec{1,2}));
+    FILL
     FILL
     animations.push_back(new RedrayzAnimation1(this, square, 1500,  500,      "Chaser Lent",              "RED.2.2.2", backer, 1, 255, int_vec{1,2,3}));
     animations.push_back(new RedrayzAnimation1(this, square, 600,   400,      "Chaser Rapide",              "RED.2.2.1", any, 1, 255, int_vec{2,3}));
     FILL
     FILL
 
-    animations.push_back(new RedrayzAnimation1(this, square, 50,   2000,  "Strobe Très lent",   "RED.2.3.4", backer, 1, 255, int_vec{2,3}));
+    FILL
     animations.push_back(new RedrayzAnimation1(this, square, 50,   1000,  "Strobe Lent",        "RED.2.3.3", backer, 1, 255, int_vec{2,3}));
     animations.push_back(new RedrayzAnimation1(this, square, 50,   500,   "Strobe Rapide",      "RED.2.3.2", any,    1, 255, int_vec{3}));
     FILL
     FILL
     FILL
 
-    animations.push_back(new RedrayzAnimation1(this, expdecay, 1500,  1500,  "Décharge très lent",     "RED.2.4.1", backer, 1, 255, int_vec{1,2}));
+    FILL
     FILL
     animations.push_back(new RedrayzAnimation1(this, expdecay, 600,   700,   "Décharge lent",          "RED.2.4.2", any,    1, 255, int_vec{1,2,3}));
     FILL
