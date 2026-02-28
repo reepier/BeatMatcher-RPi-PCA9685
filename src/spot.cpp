@@ -761,7 +761,7 @@ void SpotRackAnimation1::init(){
         flashes[i_spot][i_next].time = rand_min_max(0, n_spot);
         flashes[i_spot][i_prev].time = -1*rand_min_max(0, n_spot);
         flashes[i_spot][i_next].color = fcn::random_pick(this->flash_colors);
-        flashes[i_spot][i_prev].color = black;
+        flashes[i_spot][i_prev].color = fcn::random_pick(this->flash_colors);
     }
 
     // init internal timescale :
@@ -856,7 +856,7 @@ void SpotRackAnimation1::new_frame(){
         double flash_intensity; // 0 by default
         if (flash_activation){
             // when the flash passes, compute the next flash timestamp and update prev flash
-            if (this->is_first_frame() || t_unit > t_next){
+            if (t_unit > t_next){
                 t_prev = t_next;
                 t_next = t_next + rand_min_max(0.0, 2.0*n_spot);
                 c_prev = c_next;
