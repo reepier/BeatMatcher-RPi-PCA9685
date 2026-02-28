@@ -123,12 +123,19 @@ inline double sin2_min_max(auto x, auto min, auto max){
 
 
 
+// replace special caracters ">" and "<"
+inline std::string escape_html(const std::string& input) {
+    std::string result;
+    result.reserve(input.size());  // optional optimization
 
+    for (char c : input) {
+        if (c == '<')
+            result += "&lt;";
+        else if (c == '>')
+            result += "&gt;";
+        else
+            result += c;
+    }
 
-
-
-
-
-inline void crash(){
-    int i = 1/0;
+    return result;
 }

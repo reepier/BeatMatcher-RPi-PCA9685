@@ -1228,28 +1228,46 @@ void BaseFixture::dump_animations(const char* fname){
     logFile << "  <Capability Min=\"255\" Max=\"255\">Automatic</Capability>"<<endl;
     logFile << " </Channel>" << endl;
 
+    
+    if (!this->chasers.empty()){
+        int n_values = this->chasers.size();
+        logFile << " <Channel Name=\"param7 : Sequencing\">"<<endl;
+        logFile << "  <Group Byte=\"0\">Nothing</Group>"<<endl;
+
+        int bin_size = 256/n_values;
+        for (i=0 ; i<n_values; i++){
+            if (i+1<n_values) 
+                logFile << "  <Capability Min=\"" << i*bin_size << "\" Max=\"" << (i+1)*bin_size-1 <<"\">" << escape_html(this->chasers[i]->description.c_str()) <<"</Capability>"<<endl;
+            else
+                logFile << "  <Capability Min=\"" << i*bin_size << "\" Max=\"255\">" << escape_html(this->chasers[i]->description.c_str()) <<"</Capability>"<<endl;
+        }
+        logFile << " </Channel>" << endl;
+    }
+
 
     // log Fixture Animation function for QLC main project (append every fixture)
     ostringstream fcnfilename;
     fcnfilename << "QLC/Functions";
     std::ofstream fcnLogFile(fcnfilename.str(), std::ios::app);
 
-
     for (i=0 ; i<this->animations.size(); i++){
         if( i == 0 || this->animations[i]->description != " - " ){
+            /*Function ID calculation :
+                Animations are indiced from BaseFixture.id*1000 to BaseFixture.id*1000 + BaseFixtrue.animations.size()*/
+            function_id = this->id*1000 + i;
+
             fcnLogFile  <<"  <Function ID=\"" << function_id <<"\" " 
                         <<"Type=\"Scene\" Name=\"" << this->animations[i]->description.c_str() << "\" "
-                        <<"Path=\"" << this->id << " " << this->name.c_str() << "\">" << endl;
+                        <<"Path=\"" << this->id << " " << this->name.c_str() << "/Animations\">" << endl;
             fcnLogFile  <<"   <Speed FadeIn=\"0\" FadeOut=\"0\" Duration=\"0\"/>" <<endl;
             fcnLogFile  <<"   <FixtureVal ID=\""<< this->id <<"\">"<< 1 <<","<< i <<"</FixtureVal>"<<endl;
             fcnLogFile  <<"  </Function>"<<endl;
         }
-        function_id++;
+        // function_id++;
     }
-
-    fcnLogFile  <<"  <Function ID=\"" << function_id++ <<"\" " 
+    fcnLogFile  <<"  <Function ID=\"" << ++function_id <<"\" " 
                 <<"Type=\"Scene\" Name=\"" << "Automatic" << "\" "
-                <<"Path=\"" << this->id << " " << this->name.c_str() << "\">" << endl;
+                <<"Path=\"" << this->id << " " << this->name.c_str() << "/Animations\">" << endl;
     fcnLogFile  <<"   <Speed FadeIn=\"0\" FadeOut=\"0\" Duration=\"0\"/>" <<endl;
     fcnLogFile  <<"   <FixtureVal ID=\""<< this->id <<"\">"<< 1 <<","<< 255 <<"</FixtureVal>"<<endl;
     fcnLogFile  <<"  </Function>"<<endl;
@@ -1257,6 +1275,28 @@ void BaseFixture::dump_animations(const char* fname){
 
 
     // TODO : dump predefined chaser Sequences as Functions
+    //log Fixture Parameter ranges & values to create functions & buttons
+    // Parameter : Chaser Sequence
+    for (i=0 ; i<this->chasers.size(); i++){
+        int n_values = this->chasers.size();
+        int bin_size = 256/n_values;
+            /*Function ID calculation :
+                Fixture's sequence parameter are indiced from BaseFixture.id*1000+200 to BaseFixture.id*1000+500+chasers.size();*/
+            function_id = this->id*1000 + 500 + i;
+            /* Function value calculation 
+                Value = (i+0.5)*bin_size */
+            int function_val = ((double)i+0.5)*bin_size;
+            fcnLogFile  <<"  <Function ID=\"" << function_id <<"\" " 
+                        <<"Type=\"Scene\" Name=\"" << setw(2) << setfill('0') << i << ": " << escape_html(this->chasers[i]->description.c_str()) << "\" "
+                        <<"Path=\"" << this->id << " " << this->name.c_str() << "/Paramétrage/Sequences\">" << endl;
+            fcnLogFile  <<"   <Speed FadeIn=\"0\" FadeOut=\"0\" Duration=\"0\"/>" <<endl;
+            fcnLogFile  <<"   <FixtureVal ID=\""<< this->id <<"\">"<< 10 <<","<< function_val <<"</FixtureVal>"<<endl; // 10 corresponds to channel "Param 7 : Sequencing"
+            fcnLogFile  <<"  </Function>"<<endl;
+        // function_id++;
+    }
+
+
+
 }
 
 

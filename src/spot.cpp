@@ -354,7 +354,6 @@ void rack_15_init(){
     FILL
     FILL
 
-    this_rack->dump_animations(this_rack->name.c_str());
     this_rack->activate_none();
 
     // Define chasers
