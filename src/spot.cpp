@@ -878,7 +878,12 @@ void SpotRackAnimation1::new_frame(){
                     flash_intensity = fcn::gaussian((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::gaussian((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
                     break;
             }
-
+            flash_intensity = clamp(flash_intensity, 0.0, 1.0);
+            // if (i_spot==0)
+                // log(2, fcn::num_to_str((int)(100*flash_intensity)), " : ",string(flash_intensity*50, ' '), 'x');
+            if (flash_intensity>1.0){
+                log(2,"bug : intensity > 100");
+            }
         }else{
             flash_intensity = 0.0;
         }
