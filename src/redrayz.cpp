@@ -299,9 +299,19 @@ void RedrayzAnimation1::new_frame(){
   //update external parameters :
     // Shape
     const vector<Shape> shapes = {gaussian, gaussian2, square, expdecay};
-    const int current_shape_i       = clamp(    map_param(this->fixture->param5,  0, (int)shapes.size()),
+    this->current_param_shape_i       = clamp(    map_param(this->fixture->param5,  0, (int)shapes.size()),
                                                 0, (int)shapes.size()-1);
-    const Shape current_shape       = shapes[current_shape_i];
+    this->current_param_shape       = shapes[current_param_shape_i];
+
+
+    if (this->frame_cpt==1){    // If animation just started 
+      this->current_shape = this->preset_shape; // use preset shape
+      /*do nothing*/
+    }else if(this->previous_param_shape != this->current_param_shape){  //else if external shape changes
+      this->current_shape = this->current_param_shape;                          // use external shape
+    }
+    this->previous_param_shape = this->current_param_shape;               // update param_shape memory
+
 
     // Burst length (param Duration)
     const int current_duration      = clamp(
@@ -349,7 +359,7 @@ void RedrayzAnimation1::new_frame(){
     }
 
     // Compute pixel intensity
-    switch (current_shape){
+    switch (this->current_shape){
         case square : flash_intensity = fcn::square((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::square((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
             break;
         case gaussian : flash_intensity = fcn::gaussian((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::gaussian((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
@@ -590,8 +600,6 @@ void RedrayzAnimation4::new_frame(){
     const int current_shape_i       = clamp(    map_param(this->fixture->param5,  0, (int)shapes.size()),
                                                 0, (int)shapes.size()-1);
     const Shape current_shape       = shapes[current_shape_i];
-    // log(2, "param5:", this->fixture->param5, " current_shape_i:", current_shape_i, " current_shape:", (int)current_shape);
-
     // Step Interval 
     const int current_interval    = clamp(
                                                 map3_param(this->fixture->param2, (double)this->flash_interval/8, (double)this->flash_interval, 5*(double)this->flash_interval),
@@ -605,9 +613,7 @@ void RedrayzAnimation4::new_frame(){
 
     // Bakground Intensity 
     const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)ADDRLED_BKG_INTENSITY_REF, 255.0);
-    
     // Chaser sequence
-    static int previous_chaser_i    = current_chaser_i;
     current_chaser_i                = clamp(
                                               map_param(this->fixture->param7, 0, (int)this->fixture->chasers.size()),
                                               0, 

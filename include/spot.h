@@ -213,19 +213,21 @@ private :
     bool flash_activation = true;
     simpleColor back_color;
     color_vec flash_colors;
-
-    Shape flash_shape = gaussian; // default setting leads to gaussian flashes (of bubbles)
-    int sin_max_p_ms = 15000;
-    int sin_min_p_ms = 5000;
+    Shape preset_shape = gaussian; // default setting leads to gaussian flashes (of bubbles)
+    // int sin_max_p_ms = 15000;
+    // int sin_min_p_ms = 5000;
     int flash_interval;
     int flash_length;
-    double fluct_int = 0.0;//0.4;
-    double fluct_col = 0.0;
+    // double fluct_int = 0.0;//0.4;
+    // double fluct_col = 0.0;
+
 
     // Internal variable (updated at every new_frame call)
-    std::vector<int> p_ms;              // range of periods for various sine wvaes //TODO remove 
+    // std::vector<int> p_ms;              // range of periods for various sine wvaes //TODO remove 
     std::vector<flash_vec> flashes;     // for each spot, stores previous & next flash data (color & time) --> flashes[spot_ind][prev/next].color/time
     double t_unit;                      // internal, dynamic timescale. This timescale is artificially shrinked/elongated so that the average interval between bursts is 1 (regardless of the real interval value (set externally and at construction))
+    int current_param_shape_i;
+    Shape current_param_shape, previous_param_shape, current_shape;
 
     // Internal helpful & hidden stuff (for readability)
     const int i_prev = 0, i_next = 1;
@@ -240,7 +242,7 @@ public :
         this->autocolor = true;             // animation relying on autocolor must be taggued as such
         // Cinematic Parameters
         this->flash_interval = finterv;
-        this->flash_shape = fshape;
+        this->preset_shape = fshape;
         this->flash_length = flen;
     }
     

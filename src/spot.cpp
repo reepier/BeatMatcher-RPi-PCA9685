@@ -753,16 +753,8 @@ void SpotRackAnimation1::init(){
     
     this->fixture->reset_spots();
     
-    // for (auto spot : this->fixture->spots){
-    //     spot->master = this->master;
-    // }
-
-    this->p_ms = vector<int>{rand_min_max(sin_min_p_ms, sin_max_p_ms),rand_min_max(sin_min_p_ms, sin_max_p_ms),rand_min_max(sin_min_p_ms, sin_max_p_ms), rand_min_max(sin_min_p_ms, sin_max_p_ms), rand_min_max(sin_min_p_ms, sin_max_p_ms)};
     
     const int n_spot = this->fixture->spots.size();
-    // this->t_next.resize(n_spot);
-    // this->t_prev.resize(n_spot);
-    // this->spot_flash_color.resize(n_spot);
     this->flashes = vector<flash_vec>(n_spot, flash_vec(2));
 
 
@@ -792,11 +784,15 @@ void SpotRackAnimation1::init(const color_vec& palette){
     default:    this->flash_colors=color_vec{black},        this->back_color=black;
         break;
     }
-    // log(3, this->name, " init with palette ", fcn::palette_to_string(palette));
     //STANDARD init
     SpotRackAnimation1::init();
     
 }
+
+// TODO URGENT BUG
+/** Lorsqu'une animation random Burst ExpDecay/Square est activée, les pixels sont tous initialement à l'état FLASH, et ils ne retombe que lors du premier flash --> 
+ * 
+ */
 
 void SpotRackAnimation1::new_frame(){
     log(4, __FILE__, " ", __LINE__, " ",__func__);
@@ -806,9 +802,19 @@ void SpotRackAnimation1::new_frame(){
 //update external parameters :
     // Shape
     const vector<Shape> shapes = {gaussian, gaussian2, square, expdecay};
-    const int current_shape_i       = clamp(    map_param(this->fixture->param5,  0, (int)shapes.size()),
+    this->current_param_shape_i       = clamp(    map_param(this->fixture->param5,  0, (int)shapes.size()),
                                                 0, (int)shapes.size()-1);
-    const Shape current_shape       = shapes[current_shape_i];
+    this->current_param_shape       = shapes[current_param_shape_i];
+
+
+    if (this->frame_cpt==1){    // If animation just started 
+      this->current_shape = this->preset_shape; // use preset shape
+      /*do nothing*/
+    }else if(this->previous_param_shape != this->current_param_shape){  //else if external shape changes
+      this->current_shape = this->current_param_shape;                          // use external shape
+    }
+    this->previous_param_shape = this->current_param_shape;               // update param_shape memory
+
     // Burst length (param Duration)
     const int current_duration      = clamp(
                                                 map3_param(this->fixture->param1, (double)this->flash_length/5, (double)this->flash_length, 5*(double)this->flash_length),
@@ -846,13 +852,6 @@ void SpotRackAnimation1::new_frame(){
         simpleColor &c_prev = current_spot_prev_flash.color;
 
         const pixel     ani_backgd_RGBW = current_spot->RGBW(back_color, current_bkg_intensity);
-        pixel           frame_backgd_RGBW = current_spot->RGBW(black);
-        // log(1, "Pixel size : ", fcn::num_to_str((int)pixel_size));
-
-            for (auto i_subpix = 0; i_subpix<pixel_size; i_subpix++){
-                frame_backgd_RGBW[i_subpix] = min(max(    (int) (  (1 + fluct_int*s[(i_spot+4)%s.size()]) * ani_backgd_RGBW[i_subpix] * (1 + fluct_col*s[(i_spot+i_subpix)%s.size()]))  ,0),255);
-            }
-        // ------------------------------- limit to 0-255 ---------------- Spot Intensity    *  RGBW pixel intensity                            ;
         
         // if flash is actviated, compute the flash --> exp( -(spd.(t-t0))²)
         double flash_intensity; // 0 by default
@@ -866,7 +865,7 @@ void SpotRackAnimation1::new_frame(){
             }
 
             // flash_intensity = exp( -pow(2.5/this->flash_len*(t - t_prev), 2)) + exp( -pow(2.5/this->flash_len*(t - t_next), 2));
-            switch (current_shape){
+            switch (this->current_shape){
                 case square :
                     flash_intensity = fcn::square((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::square((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
                     break;
@@ -884,18 +883,14 @@ void SpotRackAnimation1::new_frame(){
                     break;
             }
             flash_intensity = clamp(flash_intensity, 0.0, 1.0);
-            // if (i_spot==0)
-                // log(2, fcn::num_to_str((int)(100*flash_intensity)), " : ",string(flash_intensity*50, ' '), 'x');
-            if (flash_intensity>1.0){
-                log(2,"bug : intensity > 100");
-            }
+
         }else{
             flash_intensity = 0.0;
         }
 
         DMX_vec frame_flash_RGBW = (t_unit-t_prev > t_next-t_unit) ? current_spot->RGBW(c_next) : current_spot->RGBW(c_prev);
         for (auto i_subpix = 0 ; i_subpix<pixel_size; i_subpix++){
-                current_spot->pixel[i_subpix] = min(max( (int)( (1.0-pow(flash_intensity, 0.4)) * frame_backgd_RGBW[i_subpix] + flash_intensity * frame_flash_RGBW[i_subpix]  ),0),255); 
+                current_spot->pixel[i_subpix] = min(max( (int)( (1.0-pow(flash_intensity, 0.4)) * ani_backgd_RGBW[i_subpix] + flash_intensity * frame_flash_RGBW[i_subpix]  ),0),255); 
         }
     }
 }

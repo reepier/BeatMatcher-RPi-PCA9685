@@ -176,11 +176,13 @@ Makeover of Bubbles Animation for red ray lasers
 class RedrayzAnimation1 : public RedrayzAnimation{
   public:
     // Animation parameters (constant or set by animation constructor)
-    Shape flash_shape = gaussian; // default setting leads to gaussian flashes (of bubbles)
+    Shape preset_shape = gaussian; // default setting leads to gaussian flashes (of bubbles)
     simpleColor back_color;
     color_vec flash_colors;
     int flash_interval;
     int flash_length;
+    int current_param_shape_i;
+    Shape current_param_shape, previous_param_shape, current_shape;
 
     // Dynamic variables (updated internally at each frame)
     std::vector<flash_vec> flashes;     //for each spot, stores previous & next flash data (color & time) --> flashes[spot_ind][prev/next].color/time
@@ -195,7 +197,7 @@ class RedrayzAnimation1 : public RedrayzAnimation{
       this->fixture = f;
       this->autocolor = true;
 
-      this->flash_shape = fshape;
+      this->preset_shape = fshape;
       this->flash_length = flen;
       this->flash_interval = finterv;
 
@@ -321,7 +323,7 @@ class RedrayzAnimation4 : public RedrayzAnimation{
     std::vector<flash_vec> flashes;     //for each unit, stores previous & next flash data (color & time) --> flashes[spot_ind][prev/next].color/time
     double t_unit;                    // internal, dynamic timescale. This timescale is artificially shrinked/elongated so that the average interval between bursts is 1
     int i_step;
-    int current_chaser_i;         // indice of current chaser in fixture's chaser list
+    int current_chaser_i, previous_chaser_i;         // indice of current chaser in fixture's chaser list
     DMXChaser* current_chaser;    // pointer to current chaser in fixture's chaser list
 
     // Internal helpful & hidden stuff (for readability)
@@ -337,7 +339,7 @@ class RedrayzAnimation4 : public RedrayzAnimation{
       this->flash_interval = finterv;
 
       // initialize chaser, default chaser at construction is the first one in store. It will be updated in new_frame() with other external params
-      this->current_chaser_i = 0;
+      this->current_chaser_i = 0, this->previous_chaser_i = 0;
 
       // this->update_palette(red);
     }
