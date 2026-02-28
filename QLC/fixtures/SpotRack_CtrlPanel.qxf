@@ -52,7 +52,7 @@
   <Capability Min="37" Max="37"> - </Capability>
   <Capability Min="38" Max="38"> - </Capability>
   <Capability Min="39" Max="39"> - </Capability>
-  <Capability Min="40" Max="40"> - </Capability>
+  <Capability Min="40" Max="40">Chaser</Capability>
   <Capability Min="41" Max="41"> - </Capability>
   <Capability Min="42" Max="42"> - </Capability>
   <Capability Min="43" Max="43"> - </Capability>
@@ -158,6 +158,9 @@
  </Channel>
  <Channel Name="param7 : Sequencing">
   <Group Byte="0">Nothing</Group>
+  <Capability Min="0" Max="84">--o&gt;----</Capability>
+  <Capability Min="85" Max="169">----&lt;o--</Capability>
+  <Capability Min="170" Max="255">&gt;--o&gt;----&lt;</Capability>
  </Channel>
  <Channel Name="param8 : reserve">
   <Group Byte="0">Nothing</Group>

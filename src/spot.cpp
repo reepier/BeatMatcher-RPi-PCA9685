@@ -217,7 +217,8 @@ void front_rack_init(){
     FILL
     FILL
     FILL
-    FILL
+    // Animation type 6 : CHASER
+    this_rack->animations.push_back(new SpotRackAnimation6(this_rack, 1000, 1000, "Chaser", "SR.6", leader, 1, 255, int_vec{2,3}));
     FILL
     FILL
     FILL
@@ -251,8 +252,18 @@ void front_rack_init(){
 
     this_rack->activate_none();
 
+
+
+    // Define chasers
+      //                            DMXChaser(      int n_points,           n_groups    group_size  step_size       direction           parity      rand        description)
+    this_rack->chasers.push_back(new DMXChaser(this_rack->spots.size(),         1,          1,          1,      Direction::Forward,       0,        false,      "--o>----"));
+    this_rack->chasers.push_back(new DMXChaser(this_rack->spots.size(),         1,          1,          1,      Direction::Backward,      0,        false,      "----<o--"));
+    this_rack->chasers.push_back(new DMXChaser(this_rack->spots.size(),         1,          1,          1,      Direction::PingPong,      0,        false,      ">--o>----<"));
+
+    this_rack->chasers.push_back(new DMXChaser(this_rack->spots.size(),         1,          1,          1,      Direction::PingPong,      0,        false,      ">--o>----<"));
+
     this_rack->dump_animations(this_rack->name.c_str());
-};
+}
 
 
         /**
@@ -310,7 +321,8 @@ void rack_15_init(){
     FILL
     FILL
     FILL
-    FILL
+    // Animation type 6 : CHASER
+    this_rack->animations.push_back(new SpotRackAnimation6(this_rack, 1000, 1000, "Chaser", "SR.6", leader, 1, 255, int_vec{2,3}));
     FILL
     FILL
     FILL
@@ -344,6 +356,14 @@ void rack_15_init(){
 
     this_rack->dump_animations(this_rack->name.c_str());
     this_rack->activate_none();
+
+    // Define chasers
+    //                              DMXChaser(      int n_points,           n_groups    group_size  step_size       direction           parity      rand        description)
+    this_rack->chasers.push_back(new DMXChaser(this_rack->spots.size(),         1,          1,          1,      Direction::Forward,       0,        false,      "--o>----"));
+    this_rack->chasers.push_back(new DMXChaser(this_rack->spots.size(),         1,          1,          1,      Direction::Backward,      0,        false,      "----<o--"));
+    this_rack->chasers.push_back(new DMXChaser(this_rack->spots.size(),         1,          1,          1,      Direction::PingPong,      0,        false,      ">--o>----<"));
+
+    this_rack->dump_animations(this_rack->name.c_str());
 };
 
 /**
@@ -401,7 +421,8 @@ void rack_40_init(){
     FILL
     FILL
     FILL
-    FILL
+    // Animation type 6 : CHASER
+    this_rack->animations.push_back(new SpotRackAnimation6(this_rack, 1000, 1000, "Chaser", "SR.6", leader, 1, 255, int_vec{2,3}));
     FILL
     FILL
     FILL
@@ -434,6 +455,13 @@ void rack_40_init(){
     FILL
 
     this_rack->activate_none();
+    
+    // Define chasers
+    //                              DMXChaser(      int n_points,           n_groups    group_size  step_size       direction           parity      rand        description)
+    this_rack->chasers.push_back(new DMXChaser(this_rack->spots.size(),         1,          1,          1,      Direction::Forward,       0,        false,      "--o>----"));
+    this_rack->chasers.push_back(new DMXChaser(this_rack->spots.size(),         1,          1,          1,      Direction::Backward,      0,        false,      "----<o--"));
+    this_rack->chasers.push_back(new DMXChaser(this_rack->spots.size(),         1,          1,          1,      Direction::PingPong,      0,        false,      ">--o>----<"));
+
     this_rack->dump_animations(this_rack->name.c_str());
 };
 
@@ -490,7 +518,8 @@ void shehds_rack_init(){
     FILL
     FILL
     FILL
-    FILL
+    // Animation type 6 : CHASER
+    this_rack->animations.push_back(new SpotRackAnimation6(this_rack, 1000, 1000, "Chaser", "SR.6", leader, 1, 255, int_vec{2,3}));
     FILL
     FILL
     FILL
@@ -524,6 +553,13 @@ void shehds_rack_init(){
 
     this_rack->activate_none();
     this_rack->dump_animations(this_rack->name.c_str());
+    
+    // Define chasers
+    //                              DMXChaser(      int n_points,           n_groups    group_size  step_size       direction           parity      rand        description)
+    this_rack->chasers.push_back(new DMXChaser(this_rack->spots.size(),         1,          1,          1,      Direction::Forward,       0,        false,      "--o>----"));
+    this_rack->chasers.push_back(new DMXChaser(this_rack->spots.size(),         1,          1,          1,      Direction::Backward,      0,        false,      "----<o--"));
+    this_rack->chasers.push_back(new DMXChaser(this_rack->spots.size(),         1,          1,          1,      Direction::PingPong,      0,        false,      ">--o>----<"));
+
 }
 
 // Define animation for the global spot rack (including both frontal and background spots);
@@ -1016,5 +1052,156 @@ void SpotRackAnimation5::new_frame(){
         }else{
             current_spot->pixel = backgd_RGB;
         }
+    }
+}
+
+
+/*
+#               #####                                     
+#    #         #     # #    #   ##    ####  ###### #####  
+#    #         #       #    #  #  #  #      #      #    # 
+#    #         #       ###### #    #  ####  #####  #    # 
+####### ###    #       #    # ######      # #      #####  
+     #  ###    #     # #    # #    # #    # #      #   #  
+     #  ###     #####  #    # #    #  ####  ###### #    */
+
+
+
+void SpotRackAnimation6::init(){
+  BaseAnimation::init();
+
+  const int n_unit = this->fixture->spots.size();             // set the number of laser pixels to control
+  this->flashes = vector<flash_vec>(n_unit, flash_vec(2));  // resize pixel vector
+  this->t_unit = 0.0;                                       // reset artificial time frame
+  
+  // initialize flash vector
+  this->current_chaser = this->fixture->chasers[current_chaser_i];
+  this->current_chaser->computeVseq(); //reshuffle random vector at every init (does nothing for a non-random vector)
+
+  int i_step = 0;
+  for (int i_unit=0; i_unit<n_unit; i_unit++){
+        flashes[i_unit][i_next].time = current_chaser->steps_until(i_unit, i_step);
+        flashes[i_unit][i_prev].time = -1*current_chaser->steps_since(i_unit, i_step);
+        flashes[i_unit][i_next].color = fcn::random_pick(this->flash_colors);
+        flashes[i_unit][i_prev].color = fcn::random_pick(this->flash_colors);
+  }
+
+}
+void SpotRackAnimation6::init(const color_vec& palette){
+  // AUTOCOLOR init : assign flash colors & back color based on passed color palette :
+  const int palette_size = palette.size();
+  switch (palette_size)
+  {
+  case 0:
+      this->flash_colors = color_vec{black}, this->back_color = black;            break;
+  case 1:
+      this->flash_colors = color_vec{palette[0]}, this->back_color = black;  break;
+  case 2: 
+      this->flash_colors = color_vec{palette[0]}, this->back_color = palette[1];  break;
+  default:
+      flash_colors = color_vec{fcn::random_pick(palette)},    back_color = fcn::random_pick(palette);     break;
+  }
+
+  //call STANDARD init()
+  SpotRackAnimation6::init();
+}
+
+void SpotRackAnimation6::new_frame(){
+  BaseAnimation::new_frame();
+
+  //update external parameters :
+    // Shape
+    const vector<Shape> shapes = {gaussian, gaussian2, square, expdecay};
+    const int current_shape_i       = clamp(    map_param(this->fixture->param5,  0, (int)shapes.size()),
+                                                0, (int)shapes.size()-1);
+    const Shape current_shape       = shapes[current_shape_i];
+    // log(2, "param5:", this->fixture->param5, " current_shape_i:", current_shape_i, " current_shape:", (int)current_shape);
+
+    // Step Interval 
+    const int current_interval    = clamp(
+                                                map3_param(this->fixture->param2, (double)this->flash_interval/5, (double)this->flash_interval, 5*(double)this->flash_interval),
+                                                1000.0/FRATE,
+                                                30000.0);    // Burst length (param Duration)
+    // Step duration
+    const int current_duration      = clamp(
+                                                map3_param(this->fixture->param1, min((double)current_interval/5, (double)this->flash_length/5), (double)current_interval, 5*(double)current_interval),
+                                                1000.0/FRATE,
+                                                30000.0);
+
+    // Bakground Intensity 
+    const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)ADDRLED_BKG_INTENSITY_REF, 255.0);
+    
+    // Chaser sequence
+    static int previous_chaser_i    = current_chaser_i;
+    current_chaser_i                = clamp(
+                                              map_param(this->fixture->param7, 0, (int)this->fixture->chasers.size()),
+                                              0, 
+                                              (int)this->fixture->chasers.size()-1);    //update
+    // log(2, "Param7:", this->fixture->param7, " previous_chaser_i:", previous_chaser_i, " current_chaser_i:", current_chaser_i);
+    if(current_chaser_i != previous_chaser_i){                          // recall init() if chaser change is required
+      // log(2, this->fixture->name, ": chaser update");
+      previous_chaser_i = current_chaser_i;
+      this->init();
+    }
+    // log(2, "Param1:", this->fixture->param1, " Param7:", this->fixture->param7);
+    
+  // long t = frame.t_current_ms;                // for readability
+  const int n_unit = this->flashes.size();   // for readability
+
+  // update internal timescales ("dt" in inversely proportionnal);
+  this->t_unit += 1000.0/FRATE/current_interval;
+
+  i_step = (int)this->t_unit;
+
+  // for each unit "i" of the module
+  for (int i_unit=0; i_unit < n_unit; i_unit++){
+    auto &current_unit_next_flash = flashes[i_unit][i_next];       // for readability
+    auto &current_unit_prev_flash = flashes[i_unit][i_prev];       // for readability
+    double &t_next = current_unit_next_flash.time;
+    double &t_prev = current_unit_prev_flash.time;
+    simpleColor &c_next = current_unit_next_flash.color;
+    simpleColor &c_prev = current_unit_prev_flash.color;
+    auto current_spot = this->fixture->spots[i_unit];
+    
+    const pixel ani_backgd_RGBW = current_spot->RGBW(back_color, current_bkg_intensity);
+
+
+    // // when the flash passes, compute the next flash timestamp and update prev flash
+    if (t_unit > t_next){
+      
+      t_prev = t_next;
+      t_next = t_next + current_chaser->steps_until(i_unit, i_step);
+      c_prev = c_next;
+      c_next = fcn::random_pick(this->flash_colors);
+
+      // log(2, "step:" , i_step , " unit:" , i_unit , " t_prev:" , fcn::num_to_str(t_prev) , " t_next:" , fcn::num_to_str(t_next));
+    }
+
+    // Compute pixel intensity
+    double flash_intensity; // 0 by default
+    switch (current_shape){
+        case square : flash_intensity = fcn::square((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::square((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
+            break;
+        case gaussian : flash_intensity = fcn::gaussian((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::gaussian((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
+            break;
+        case gaussian2 : flash_intensity = fcn::gaussian2((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::gaussian2((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
+            break;
+        case expdecay : flash_intensity = fcn::exp_decay((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0);
+            break;
+        default : flash_intensity = fcn::gaussian((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::gaussian((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
+            break;
+    }
+    flash_intensity = clamp(flash_intensity, 0.0, 1.0);
+
+        //     if (i_unit==0)
+        // log(2, string(flash_intensity*50, ' '), 'x');
+
+    DMX_vec frame_flash_RGBW = (t_unit-t_prev > t_next-t_unit) ? current_spot->RGBW(c_next) : current_spot->RGBW(c_prev);
+    DMX_vec unit_final_RGBW(4, 0);
+
+    for(int i_subpix = 0; i_subpix < this->fixture->spots[i_unit]->pixel.size() ; i_subpix++){
+        unit_final_RGBW[i_subpix] = clamp( (int)( (1.0-pow(flash_intensity, 0.2)) * ani_backgd_RGBW[i_subpix] + flash_intensity * frame_flash_RGBW[i_subpix]  ),0,255);
+    }
+    current_spot->pixel = unit_final_RGBW;
     }
 }
