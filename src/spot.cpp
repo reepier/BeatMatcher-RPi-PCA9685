@@ -815,13 +815,16 @@ void SpotRackAnimation1::new_frame(){
     this->previous_param_shape = this->current_param_shape;               // update param_shape memory
 
     // Overall Speed : mean interval between two bursts
-    const int current_interval    = clamp(      map3_param(this->fixture->param2, 5*(double)this->flash_interval, (double)this->flash_interval, (double)this->flash_interval/5 ),
+    const int current_interval    = clamp(      map3_param(this->fixture->param2, 5*(double)this->preset_interval, (double)this->preset_interval, (double)this->preset_interval/5 ),
                                                 1000.0/FRATE,
                                                 30000.0);
+    const double speed_ratio = (double)preset_interval/current_interval;  // speed multiplicator --> =1 means using preset speed, > 1 means faster, < 1 means slower
     // Burst length (param Duration)
-    const int current_duration      = clamp(    map3_param(this->fixture->param1, min((double)current_interval/5, (double)this->flash_length/5), (double)current_interval, 5*(double)current_interval),
+    const double speed_adjusted_duration = preset_duration/speed_ratio;
+    const int current_duration      = clamp(    map3_param(this->fixture->param1, speed_adjusted_duration/5, speed_adjusted_duration, 5*speed_adjusted_duration),
                                                 1000.0/FRATE,
                                                 30000.0);
+
     // Bakground Intensity 
     const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)SPOTRACK_BKG_INTENSITY_REF, 255.0);
 
@@ -1120,15 +1123,17 @@ void SpotRackAnimation6::new_frame(){
 
     // Overall Speed 
     const int current_interval    = clamp(
-                                                map3_param(this->fixture->param2, 5*(double)this->flash_interval, (double)this->flash_interval, (double)this->flash_interval/10),
+                                                map3_param(this->fixture->param2, 5*(double)this->preset_interval, (double)this->preset_interval, (double)this->preset_interval/10),
                                                 1000.0/FRATE,
                                                 30000.0);    // Burst length (param Duration)
     bool stop_chaser = false;
     if (this->fixture->param2==0) stop_chaser = true;
+    const double speed_ratio = (double)preset_interval/current_interval;  // speed multiplicator --> =1 means using preset speed, > 1 means faster, < 1 means slower
 
     // Step duration
+    const double speed_adjusted_duration = preset_duration/speed_ratio;
     const int current_duration      = clamp(
-                                                map3_param(this->fixture->param1, min((double)current_interval/5, (double)this->flash_length/5), (double)current_interval, 5*(double)current_interval),
+                                                map3_param(this->fixture->param1, speed_adjusted_duration/5, speed_adjusted_duration, 5*speed_adjusted_duration),
                                                 1000.0/FRATE,
                                                 30000.0);
 

@@ -216,8 +216,8 @@ private :
     Shape preset_shape = gaussian; // default setting leads to gaussian flashes (of bubbles)
     // int sin_max_p_ms = 15000;
     // int sin_min_p_ms = 5000;
-    int flash_interval;
-    int flash_length;
+    int preset_interval;
+    int preset_duration;
     // double fluct_int = 0.0;//0.4;
     // double fluct_col = 0.0;
 
@@ -241,9 +241,9 @@ public :
         this->fixture = f;
         this->autocolor = true;             // animation relying on autocolor must be taggued as such
         // Cinematic Parameters
-        this->flash_interval = finterv;
+        this->preset_interval = finterv;
         this->preset_shape = fshape;
-        this->flash_length = flen;
+        this->preset_duration = flen;
     }
     
     
@@ -357,8 +357,8 @@ class SpotRackAnimation5 : public SpotRackAnimation{
     // Animation parameters (constant or set by animation constructor)
     simpleColor back_color;
     color_vec flash_colors;
-    int flash_interval;
-    int flash_length;
+    int preset_interval;
+    int preset_duration;
     // DMXChaser chaser;   // contains and compute the chaser sequence (which unit to light up at every step of the animation)
   
     // Dynamic variables (updated internally at each frame)
@@ -377,8 +377,8 @@ class SpotRackAnimation5 : public SpotRackAnimation{
       this->fixture = f;
       this->autocolor = true;
 
-      this->flash_length = flen;
-      this->flash_interval = finterv;
+      this->preset_duration = flen;
+      this->preset_interval = finterv;
 
       // initialize chaser, default chaser at construction is the first one in store. It will be updated in new_frame() with other external params
       this->current_chaser_i = 0;
