@@ -179,8 +179,8 @@ class RedrayzAnimation1 : public RedrayzAnimation{
     Shape preset_shape = gaussian; // default setting leads to gaussian flashes (of bubbles)
     simpleColor back_color;
     color_vec flash_colors;
-    int flash_interval;
-    int flash_length;
+    int preset_interval;
+    int preset_duration;
     int current_param_shape_i;
     Shape current_param_shape, previous_param_shape, current_shape;
 
@@ -198,8 +198,8 @@ class RedrayzAnimation1 : public RedrayzAnimation{
       this->autocolor = true;
 
       this->preset_shape = fshape;
-      this->flash_length = flen;
-      this->flash_interval = finterv;
+      this->preset_duration = flen;
+      this->preset_interval = finterv;
 
       this->update_palette(red);
     }
