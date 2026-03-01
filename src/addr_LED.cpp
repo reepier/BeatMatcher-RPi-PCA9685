@@ -314,7 +314,7 @@ void AddrLEDAnimation1::new_frame(){
     // Compute intensity vaue based on time elapsed since last beat
     float coef = exp(-(double)(t_ms - t_last_beat_ms) / current_fade_rate_ms);
     // compute number of units flashing 
-    int n_unit_on = current_ratio * n_unit;
+    int n_unit_on = max((int)(current_ratio * n_unit), 1);
 
     // compute final RGB colors
     if (param_activate_flash && auto_activate_flash)

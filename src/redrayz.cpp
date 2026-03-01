@@ -41,9 +41,9 @@ void RedLaserGroup::init(){
     // RANDOM BURST
     FILL
     FILL
-    animations.push_back(new RedrayzAnimation1(this, gaussian,   1500,    500,  "Bulles Lent",           "RED.2.1.2", backer, 1, 255, int_vec{2,3}));
+    animations.push_back(new RedrayzAnimation1(this, gaussian,   2500,    700,  "Bulles Lent",           "RED.2.1.2", backer, 1, 255, int_vec{2,3}));
     FILL
-    animations.push_back(new RedrayzAnimation1(this, gaussian,   600,     300,  "Bulles Rapides",        "RED.2.1.1", any, 1, 255, int_vec{1,2,3}));
+    animations.push_back(new RedrayzAnimation1(this, gaussian,   800,     500,  "Bulles Rapides",        "RED.2.1.1", any, 1, 255, int_vec{1,2,3}));
     FILL
     FILL
 
@@ -55,8 +55,8 @@ void RedLaserGroup::init(){
     FILL
 
     FILL
-    animations.push_back(new RedrayzAnimation1(this, square, 50,   1000,  "Strobe Lent",        "RED.2.3.3", backer, 1, 255, int_vec{2,3}));
-    animations.push_back(new RedrayzAnimation1(this, square, 50,   500,   "Strobe Rapide",      "RED.2.3.2", any,    1, 255, int_vec{3}));
+    animations.push_back(new RedrayzAnimation1(this, expdecay, 2*1000/FRATE,   500, "Strobe Lent",        "RED.2.3.3", backer, 1, 255, int_vec{2,3}));
+    animations.push_back(new RedrayzAnimation1(this, expdecay, 1000/FRATE,   250, "Strobe Rapide",      "RED.2.3.2", any,    1, 255, int_vec{3}));
     FILL
     FILL
     FILL
@@ -82,7 +82,7 @@ void RedLaserGroup::init(){
     FILL
     FILL
     // RANDOM BURST
-    animations.push_back(new RedrayzAnimation4(this, 1000,    1000, "Chaser",      "RED.4.1.3", backer, 1, 255, int_vec{1}));
+    animations.push_back(new RedrayzAnimation4(this, 500,    500, "Chaser",      "RED.4.1.3", backer, 1, 255, int_vec{1}));
     FILL
     FILL
     FILL
@@ -434,7 +434,7 @@ void RedrayzAnimation2::new_frame(){
   const unsigned long t_ms = frame.t_current_ms;
   const unsigned long t_last_beat_ms = sampler.t_last_new_beat;
   int_vec::size_type n_unit = units_index.size(); 
-  int n_unit_on = current_ratio * n_unit;
+  int n_unit_on = max(1, (int)(current_ratio * n_unit));
 
 
   // for each new beat, sort segments in random order
@@ -448,9 +448,9 @@ void RedrayzAnimation2::new_frame(){
   // set each laser intensity
   for (int i_unit=0; i_unit<n_unit; i_unit++){
 
-        pixel backgd_RGB    = this->fixture->RGB(back_color, current_bkg_intensity);
-        pixel flash_RGB     = this->fixture->RGB(flash_color);
-        pixel final_RGB     = this->fixture->RGB(black); //initialization before calculations
+    pixel backgd_RGB    = this->fixture->RGB(back_color, current_bkg_intensity);
+    pixel flash_RGB     = this->fixture->RGB(flash_color);
+    pixel final_RGB     = this->fixture->RGB(black); //initialization before calculations
 
     if (i_unit<n_unit_on){
       for(auto i_subpix = 0; i_subpix<final_RGB.size(); i_subpix++){
@@ -604,7 +604,7 @@ void RedrayzAnimation4::new_frame(){
     const int current_interval    = clamp(
                                                 map3_param(this->fixture->param2, 5*(double)this->preset_interval, (double)this->preset_interval, (double)this->preset_interval/10),
                                                 1000.0/FRATE,
-                                                30000.0);    // Burst length (param Duration)
+                                                30000.0); 
     bool stop_chaser = false;
     if (this->fixture->param2==0) stop_chaser = true;
     const double speed_ratio = (double)preset_interval/current_interval;  // speed multiplicator --> =1 means using preset speed, > 1 means faster, < 1 means slower
@@ -615,7 +615,6 @@ void RedrayzAnimation4::new_frame(){
                                                 map3_param(this->fixture->param1, speed_adjusted_duration/5, speed_adjusted_duration, 5*speed_adjusted_duration),
                                                 1000.0/FRATE,
                                                 30000.0);
-    log(2, "Speed_ratio:", speed_ratio, "\tIntervalle:", current_interval, "\tDuration:", current_duration );
 
     // Bakground Intensity 
     const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)ADDRLED_BKG_INTENSITY_REF, 255.0);

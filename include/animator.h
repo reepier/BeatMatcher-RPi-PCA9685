@@ -90,15 +90,18 @@ namespace fcn{
       // return min + (max-min)*std::exp( -std::pow((t-t0)/sigma, 2)/2 );
 
       double x = ((int)t-(int)t0)/sigma;
-      return min + (max-min)*std::exp( -std::pow(x, 2)/2 ); 
+      double val = min + (max-min)*std::exp( -std::pow(x, 2)/2 ); 
+      return val;
+
   }
   inline double gaussian(double t, double t0, double period, double min, double max){
     double sigma = period/3.0;
     // return min + (max-min)*std::exp( -std::pow((t-t0)/sigma, 2)/2 );
 
     double x = ((int)t-(int)t0)/sigma;
-    return min + (max-min)*std::exp( -std::pow(x, 2)/2 ); 
-}
+    double val = min + (max-min)*std::exp( -std::pow(x, 2)/2 ); 
+    return val;
+  }
 
   // squared gaussian shape -> exp(-x⁴/4) (longer plateau, steeper slopes)
   inline double gaussian2(time_ms t, time_ms t0, time_ms period, double min, double max){ 
@@ -622,7 +625,7 @@ class BaseAnimation{
     BaseAnimation(std::string d, std::string i, AnimationType typ, uint8_t mast, int prio, int_vec intens) : description(d),  id(i), type(typ), master(mast), priority(prio), intensities(intens) {};
 
     bool is_monochrome(){return (color_palette.size() == 1);};
-    bool is_first_frame(){return frame_cpt==0;};
+    bool is_first_frame(){return frame_cpt==1;};
 
     /*Determines whether or not the animation is compatible with autocolor & a specific color palette
     The criteria shall be simple / generic enough to be applicable to every fixture / animations :

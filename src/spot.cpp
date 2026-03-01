@@ -42,7 +42,7 @@ SpotFixture spot_23(FunGen_RGBW_12x1W, 66,    8,  "Spot 23 (@66)",    23); //
 
 SpotFixture spot_24(FunGen_RGBW_12x1W, 34,    8,  "Spot 24 (@34)",    24); //     
 SpotFixture spot_25(FunGen_RGBW_12x1W, 42,    8,  "Spot 25 (@42)",    25); //     
-SpotFixture spot_26(FunGen_RGBW_12x1W, 66,    8,  "Spot 26 (@66)",    26); // beam
+SpotFixture spot_26(FunGen_RGBW_12x1W, 26,    8,  "Spot 26 (@26)",    26); // beam
 
 // SpotFixture spot_8(130, 8, "Spot 8 (130)");     
 
@@ -137,10 +137,10 @@ DMX_vec SpotFixture::buffer(){
  #####  #       #######    #       #     # #     #  #####  #    #  #####  
 / ----------------------------------------------------------------------- */
 
-SpotRack spot_rack_1(spot_vec{&spot_1, &spot_2, &spot_4,&spot_5, &spot_6, &spot_7, &spot_8, &spot_9, &spot_10, &spot_11, &spot_21,  &spot_22, &spot_26}, "SR 1", 0, 1, 255, 60);
-SpotRack spot_rack_2(spot_vec{}, "SR 2", 0, 2, 255, 80);
-SpotRack spot_rack_3(spot_vec{}, "SR 3", 0, 3, 255, 100);
-SpotRack spot_rack_4(spot_vec{}, "SR 4", 0, 4, 255, 120);
+SpotRack spot_rack_1(spot_vec{&spot_1, &spot_2, &spot_4, &spot_21,  &spot_22, &spot_23}, "SR 1", 0, 2, 255, 60);
+SpotRack spot_rack_2(spot_vec{&spot_5, &spot_6, &spot_7, &spot_8, &spot_9, &spot_10, &spot_11}, "SR 2", 0, 3, 255, 80);
+SpotRack spot_rack_3(spot_vec{}, "SR 3", 0, 4, 255, 100);
+SpotRack spot_rack_4(spot_vec{}, "SR 4", 0, 5, 255, 120);
 
 
 // SpotRack global_rack(spot_vec{&spot_1,&spot_2,&spot_3,&spot_4,&spot_5,&spot_6,&spot_7,&spot_8,&spot_9,&spot_10,&spot_11,&spot_12}, "Global Rack", 1);
@@ -197,9 +197,9 @@ void front_rack_init(){
     FILL
     FILL
     // Animation type 1.2 : Random strobe
-    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  800,  1000/FRATE, "Strobe lent",   "SR.1.2.1", any,    1, 255,   int_vec{2}));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, expdecay,  800,  2*1000/FRATE, "Strobe lent",   "SR.1.2.1", any,    1, 255,   int_vec{2}));
     FILL
-    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  70,   1000/FRATE, "Strobe rapide", "SR.1.2.3", leader, 1, 255,   int_vec{3}));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, expdecay,  120,   1000/FRATE, "Strobe rapide", "SR.1.2.3", leader, 1, 255,   int_vec{3}));
     FILL
     FILL
     FILL
@@ -825,7 +825,7 @@ void SpotRackAnimation1::new_frame(){
                                                 1000.0/FRATE,
                                                 30000.0);
 
-    // Bakground Intensity 
+                                                // Bakground Intensity 
     const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)SPOTRACK_BKG_INTENSITY_REF, 255.0);
 
 
@@ -1212,5 +1212,5 @@ void SpotRackAnimation6::new_frame(){
         unit_final_RGBW[i_subpix] = clamp( (int)( (1.0-pow(flash_intensity, 0.2)) * ani_backgd_RGBW[i_subpix] + flash_intensity * frame_flash_RGBW[i_subpix]  ),0,255);
     }
     current_spot->pixel = unit_final_RGBW;
-    }
+  }
 }

@@ -154,6 +154,8 @@ int main(int argc, char* argv[]){
         balise("Record & process sample...");   
         sampler.update();
 
+
+        // TODO remove OLD functtions
         // Run animator
         balise("Run animator...");
         if(!b_ANI_TEST && !b_EXT_CONTROL){    // if nominal case
@@ -163,12 +165,11 @@ int main(int argc, char* argv[]){
             // // animator.show_update();
             //animator.nov30_maximum_update();
             animator.autocolor_update();
-        }
-        else if (!b_EXT_CONTROL && b_ANI_TEST && frame.cpt == 0){   // else activate once and for all the animations to test
-            balise("Run animator test fcn");
-            if(!animator.test_animation_update()){
-                // return -1;
-            }
+        // }else if (!b_EXT_CONTROL && b_ANI_TEST && frame.cpt == 0){   // else activate once and for all the animations to test
+        //     balise("Run animator test fcn");
+        //     if(!animator.test_animation_update()){
+        //         // return -1;
+        //     }
         }else if(b_EXT_CONTROL){
             animator.controled_update();
         }

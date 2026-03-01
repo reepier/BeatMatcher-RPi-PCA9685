@@ -184,72 +184,6 @@ RubiFont                                                    */
 */
     addr_led.process_DMX_input(new_data_available, trigger, data.GetRaw());
 
-    // // PROCESS ADRESSABLE LED DIMMER
-    // if (new_data_available){ // process dimmer input as a continuous stream (& not only on trigger)
-    //     // get & rewrap raw data
-    //     addr_led.master = data.Get(LED_DIM_CH); // already a 0-255 dmx data, no conversion/rewrap needed
-    // }
-
-    // //PROCESS ADDRESSABLE LEDs Animation
-    // if (trigger){
-    //     //get & rewrap raw data
-    //     int led_ani_val = data.Get(LED_ANI_CH);
-    //     // if input data is not in DEFAULT positions (automatic mode)
-    //     if ( led_ani_val!=255) { 
-    //         // update led animation if there is a change
-    //         if (addr_led.external_animation != led_ani_val){
-    //             addr_led.external_animation = led_ani_val;
-    //             addr_led.new_external_animation = true;
-    //             // log(2, "New led animation : ", fcn::num_to_str(addr_led.external_animation));
-    //         }else{
-                
-    //         }
-    //     // if input data is DEFAULT (0) 
-    //     }else{
-    //         if (addr_led.external_animation != 255){  //if not already reset to (255)
-    //             addr_led.external_animation = 255;    //reset to 255 (auto)
-    //             addr_led.new_external_animation = true;
-    //             log(2, "Back to automatic led animation");
-    //         }else{
-                
-    //         }
-    //     }
-    // }else{
-        
-    // }
-
-    // //PROCESS ADDRESSABLE LEDs COLORS
-    // if (trigger){
-    //     // get & rewrap raw data //TODO use "clamp" instead of min(max())
-    //     int led_col1_val = min(max((uint8_t)0,  data.Get(LED_COL1_CH)) , (uint8_t)(simpleColor::last_color));
-    //     int led_col2_val = min(max((uint8_t)0,  data.Get(LED_COL2_CH)) , (uint8_t)(simpleColor::last_color));
-    //     //create output structrue
-    //     color_vec led_palette;   //start with empty palette
-    //     // if input data are not in DEFAULT positions (automatic mode)
-    //     if ( led_col1_val!=0 || led_col2_val!=0 ) {
-    //         // create a palette based on (non zero) input data
-    //         if (led_col1_val > 0)  led_palette.push_back((simpleColor)(led_col1_val-1));
-    //         if (led_col2_val > 0)  led_palette.push_back((simpleColor)(led_col2_val-1));
-    //         // update led palette if there is a change
-    //         if (addr_led.external_palette != led_palette){
-    //             addr_led.new_external_palette = true;
-    //             addr_led.external_palette = led_palette;
-    //             // log(2, "New led palette : ", fcn::palette_to_string(addr_led.external_palette));
-    //         }else{
-                
-    //         }
-    //     }else{
-    //         if ( !addr_led.external_palette.empty()){  //if not already empty 
-    //             addr_led.new_external_palette = true;
-    //             addr_led.external_palette.clear();    //reset to empty palette (meaning main palette or auto palette will apply to leds)
-    //             log(2, "Back to automatic led palette");
-    //         }else{
-                
-    //         }
-    //     }
-    // }else{
-        
-    // }//TODO clean this if / elseif structure --> it has way to many ramifications
 
 
 
@@ -266,7 +200,7 @@ RubiFont                                                    */
         spot_rack->process_DMX_input(new_data_available, trigger, data.GetRaw());
 
     lasergroup1.process_DMX_input(new_data_available, trigger, data.GetRaw());
-lasergroup2.process_DMX_input(new_data_available, trigger, data.GetRaw());
+    lasergroup2.process_DMX_input(new_data_available, trigger, data.GetRaw());
     laserbeam.process_DMX_input(new_data_available, trigger, data.GetRaw());
 
 

@@ -635,32 +635,32 @@ void AnimationManager::autocolor_update(){
     }
 }
 
-bool AnimationManager::test_animation_update(){
-    log(4, __FILE__, " ",__func__);
+// bool AnimationManager::test_animation_update(){
+//     log(4, __FILE__, " ",__func__);
 
-    bool success = false;
-    balise(fcn::num_to_str((int)cli_anim_id.size()).data());
+//     bool success = false;
+//     balise(fcn::num_to_str((int)cli_anim_id.size()).data());
     
-    for(vector<string>::iterator anim_id_it = cli_anim_id.begin(); anim_id_it != cli_anim_id.end(); anim_id_it++){
-        string s_anim_id = (*anim_id_it);
-        balise(s_anim_id.data());
+//     for(vector<string>::iterator anim_id_it = cli_anim_id.begin(); anim_id_it != cli_anim_id.end(); anim_id_it++){
+//         string s_anim_id = (*anim_id_it);
+//         balise(s_anim_id.data());
 
-        for (auto fix : fixtures){
-            balise(fix->name);
-            success = fix->activate_by_ID(s_anim_id);
-            if (success) {
-                log(1, "Testing animation ", s_anim_id);
-                break;
-            }
-        }
+//         for (auto fix : fixtures){
+//             balise(fix->name);
+//             success = fix->activate_by_ID(s_anim_id);
+//             if (success) {
+//                 log(1, "Testing animation ", s_anim_id);
+//                 break;
+//             }
+//         }
 
-        if (!success){
-            cout << "Animation ID prefix unknown..." << endl;
-            success = false;
-        }
-    }
-    return success;
-}
+//         if (!success){
+//             cout << "Animation ID prefix unknown..." << endl;
+//             success = false;
+//         }
+//     }
+//     return success;
+// }
 
 
 /*####  #     #    #    #          #     # ####### ######  ####### 
@@ -744,7 +744,7 @@ bool AnimationManager::controled_update(){
                 backer_fix->saved_animation = backer_fix->animations[0]; // black!
             }
         }
-        log(1, "Leader is : ", leader_fix->name, "\t+ ", fcn::num_to_str(n_backer), " backers");
+        // log(1, "Leader is : ", leader_fix->name, "\t+ ", fcn::num_to_str(n_backer), " backers");
     }
 
 
@@ -854,7 +854,7 @@ void BaseFixture::process_DMX_input(bool data_available, bool trigger, const uin
             if (this->external_animation != fix_animation_val){
                 this->external_animation = fix_animation_val;
                 this->new_external_animation = true;
-                log(2, this->name, ": Activate animation """, this->animations[fix_animation_val]->name, """");
+                log(2, this->name, ": Activate animation """, this->animations[clamp(fix_animation_val, 0, (int)this->animations.size()-1) ]->name, """"); //TODO URGENT : protect against segfault > fix_animation_val>animations.size()
             }else{
                 /*Do nothing*/
             }
@@ -876,8 +876,6 @@ void BaseFixture::process_DMX_input(bool data_available, bool trigger, const uin
     if (trigger){
         int fix_color1_val = clamp((int)data[this->input_address-1+FIX_COL1_CH], 0, (int)(simpleColor::last_color));
         int fix_color2_val = clamp((int)data[this->input_address-1+FIX_COL2_CH], 0, (int)(simpleColor::last_color));
-        // int fix_color1_val = min(max((uint8_t)0,  data.Get(LED_COL1_CH)) , (uint8_t)(simpleColor::last_color));
-        // int fix_color2_val = min(max((uint8_t)0,  data.Get(LED_COL2_CH)) , (uint8_t)(simpleColor::last_color));
         //create output structrue
         color_vec fix_palette;   //start with empty palette
         // if input data are not in DEFAULT positions (automatic mode)
@@ -908,7 +906,7 @@ void BaseFixture::process_DMX_input(bool data_available, bool trigger, const uin
 
     //Process PARAMETERS
     //TODO only update when trigger ?
-if (trigger){
+    if (trigger){
     this->param1 = arduino::map( (double)data[this->input_address-1+FIX_PARM1_CH] , 0.0, 255.0, 0.0, 1.0);
     this->param2 = arduino::map( (double)data[this->input_address-1+FIX_PARM2_CH] , 0.0, 255.0, 0.0, 1.0);
     this->param3 = arduino::map( (double)data[this->input_address-1+FIX_PARM3_CH] , 0.0, 255.0, 0.0, 1.0);
@@ -917,7 +915,7 @@ if (trigger){
     this->param6 = arduino::map( (double)data[this->input_address-1+FIX_PARM6_CH] , 0.0, 255.0, 0.0, 1.0);
     this->param7 = arduino::map( (double)data[this->input_address-1+FIX_PARM7_CH] , 0.0, 255.0, 0.0, 1.0);
     this->param8 = arduino::map( (double)data[this->input_address-1+FIX_PARM8_CH] , 0.0, 255.0, 0.0, 1.0);
-}
+    }
 }
 
 // toggles blackout boolean
@@ -1245,8 +1243,8 @@ void BaseFixture::dump_animations(const char* fname){
         }
         logFile << " </Channel>" << endl;
     }
-
-
+    
+    
     // log Fixture Animation function for QLC main project (append every fixture)
     ostringstream fcnfilename;
     fcnfilename << "QLC/Functions";
