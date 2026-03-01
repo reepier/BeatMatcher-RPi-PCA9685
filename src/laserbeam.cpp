@@ -4,7 +4,7 @@
 #define FILL this->animations.push_back(new LaserBeamAnimation0(this, black,  " - ", "LB.0", backer, 0, 0, int_vec{}));
 using namespace std;
 
-LaserBeam laserbeam(RGB_500_Fat,    19, 3, "BEAM", 7, 255, 140);
+LaserBeam laserbeam(RGB_500_Fat,2,    19, 6, "BEAM", 7, 255, 140);
 // LaserBeam laserbeam(RGB_1W,         19, 3, "BEAM", 7, 255, 140);
 
 /*
@@ -44,7 +44,7 @@ void LaserBeam::init(){
     FILL
     FILL
 
-    this->animations.push_back(new LaserBeamAnimation2(this, "Beat",    "LB.2", leader, 255, 1, int_vec{3}));
+    this->animations.push_back(new LaserBeamAnimation2(this, 0.5, "Beat",    "LB.2", leader, 255, 1, int_vec{3}));
     FILL
     FILL
     FILL
@@ -94,9 +94,17 @@ void LaserBeam::init(){
 }
 
 DMX_vec LaserBeam::buffer(){
-    return DMX_vec{ (uint8_t)(255 - (this->pixel[R] *this->master/255.0 *animator.master/255.0)),
-                    (uint8_t)(255 - (this->pixel[G] *this->master/255.0 *animator.master/255.0)),
-                    (uint8_t)(255 - (this->pixel[B] *this->master/255.0 *animator.master/255.0))};
+    DMX_vec data(this->nCH);
+
+    double final_master = animator.master/255.0 * this->master/255.0;
+
+    int i_data=0;
+    for (int i_pix=0; i_pix<this->pixels.size(); i_pix++){
+        for (int j_subpix=0; j_subpix<this->pixels[i_pix].size(); j_subpix++){
+            data[i_data++] = 255 - final_master * this->pixels[i_pix][j_subpix]; 
+        }
+    }
+    return data;
 }
 
 /**
@@ -223,7 +231,9 @@ void LaserBeamAnimation0::init(const color_vec& palette) {
 }
 
 void LaserBeamAnimation0::new_frame() {
-    this->fixture->pixel = this->fixture->RGB(this->color, -1);
+    for(pixel_vec::iterator pix = this->fixture->pixels.begin(); pix!=this->fixture->pixels.end(); pix++){
+        *(pix) = this->fixture->RGB(this->color, -1);
+    }
 }
 
 
@@ -242,12 +252,16 @@ void LaserBeamAnimation1::init(){
 
     BaseAnimation::init();
 
-    this->flashes = flash_vec(2);
+    const int n_unit = this->fixture->pixels.size();             // set the number of laser pixels to control
+    this->flashes = vector<flash_vec>(n_unit, flash_vec(2));  // resize pixel vector
 
-        flashes[i_next].time = rand_min_max(0.0, 1.0); 
-        flashes[i_prev].time = -1*rand_min_max(0.0, 1.0);
-        flashes[i_next].color = fcn::random_pick(this->flash_colors);
-        flashes[i_prev].color = black;
+    // initialize flash vector
+    for (int i_unit=0; i_unit<n_unit; i_unit++){
+        flashes[i_unit][i_next].time = rand_min_max(0.0, (double)n_unit);
+        flashes[i_unit][i_prev].time = -1*rand_min_max(0.0, (double)n_unit);
+        flashes[i_unit][i_next].color = fcn::random_pick(this->flash_colors);
+        flashes[i_unit][i_prev].color = black;
+    }
 }
 void LaserBeamAnimation1::init(const color_vec& palette){
     // AUTOCOLOR init : assign flash colors & back color based on passed color palette :
@@ -269,86 +283,97 @@ void LaserBeamAnimation1::init(const color_vec& palette){
 }
 
 void LaserBeamAnimation1::new_frame(){
-    log(4, __FILE__, " ", __LINE__, " ",__func__);
-
     BaseAnimation::new_frame();
 
 //update external parameters :
+    // Shape
+    const vector<Shape> shapes = {gaussian, gaussian2, square, expdecay};
+    this->current_param_shape_i       = clamp(  map_param(this->fixture->param5,  0, (int)shapes.size()),
+                                                0,
+                                                (int)shapes.size()-1);
+    this->current_param_shape       = shapes[current_param_shape_i];
+
+    if (this->frame_cpt==1){    // If animation just started 
+      this->current_shape = this->preset_shape; // use preset shape
+      /*do nothing*/
+    }else if(this->previous_param_shape != this->current_param_shape){  //else if external shape changes
+      this->current_shape = this->current_param_shape;                          // use external shape
+    }
+    this->previous_param_shape = this->current_param_shape;               // update param_shape memory
+
+    // Overall Speed : mean interval between two bursts
+    const int current_interval    = clamp(      map3_param(this->fixture->param2, 5*(double)this->preset_interval, (double)this->preset_interval, (double)this->preset_interval/5 ),
+                                                1000.0/FRATE,
+                                                30000.0);
+    const double speed_ratio = (double)preset_interval/current_interval;  // speed multiplicator --> =1 means using preset speed, > 1 means faster, < 1 means slower
     // Burst length (param Duration)
-    const int current_duration      = clamp(
-                                                map3_param(this->fixture->param1, (double)this->flash_length/5, (double)this->flash_length, 5*(double)this->flash_length),
+    // speed_ratio multiplicator maintains constant luminosity when speeding up animtion (buy reducing burst duration by as much as overall speed increased)
+    const double speed_adjusted_duration = preset_duration/speed_ratio;
+    const int current_duration      = clamp(    map3_param(this->fixture->param1, speed_adjusted_duration/5, speed_adjusted_duration, 5*speed_adjusted_duration),
                                                 1000.0/FRATE,
                                                 30000.0);
-    // Burst Interval 
-    const int current_interval    = clamp(
-                                                map3_param(this->fixture->param2, (double)this->flash_interval/5, (double)this->flash_interval, 5*(double)this->flash_interval),
-                                                1000.0/FRATE,
-                                                30000.0);
+
     // Bakground Intensity 
-    const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, 50.0, 255.0);
+    const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)ADDRLED_BKG_INTENSITY_REF, 255.0);
 
 
-    // long t = frame.t_current_ms;         // for readability
-    // int n_unit = this->flashes.size();   // for readability
+    int n_unit = this->flashes.size();   // for readability
     
     // update internal timescale ("dt" in inversely proportionnal);
     this->t_unit += 1000.0/FRATE/current_interval;
 
-
+  // for each laser "i" of the module
+  for (int i_unit=0; i_unit < n_unit; i_unit++){
         // auto current_spot = this->fixture->spots[i_unit];           // for readability
-        auto &next_flash = flashes[i_next];       // for readability
-        auto &prev_flash = flashes[i_prev];       // for readability
-        double &t_next = next_flash.time;
-        double &t_prev = prev_flash.time;
-        simpleColor &c_next = next_flash.color;
-        simpleColor &c_prev = prev_flash.color;
+        auto &current_unit_next_flash = flashes[i_unit][i_next];       // for readability
+        auto &current_unit_prev_flash = flashes[i_unit][i_prev];       // for readability
+        double &t_next = current_unit_next_flash.time;
+        double &t_prev = current_unit_prev_flash.time;
+        simpleColor &c_next = current_unit_next_flash.color;
+        simpleColor &c_prev = current_unit_prev_flash.color;
 
         // log(4, __FILE__, " ", __LINE__, " ",__func__, " Mark2 , ", fcn::num_to_str(i_spot));
 
         const pixel ani_backgd_RGB = fixture->RGB(back_color, current_bkg_intensity);
         
         // if flash is actviated, compute the flash --> exp( -(spd.(t-t0))²)
-            double flash_intensity; // 0 by default
-            if (flash_activation){
-                // when the flash passes, compute the next flash timestamp and update prev flash
-                if (t_unit > t_next){
-                    
-                    t_prev = t_next;
-                    t_next = t_next + rand_min_max(0.0, 2.0);
-                    c_prev = c_next;
-                    c_next = fcn::random_pick(this->flash_colors);
-                    
-                }
-                
-                switch (this->flash_shape){
-                    case square : flash_intensity = fcn::square((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::square((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
-                        break;
-                    case gaussian : flash_intensity = fcn::gaussian((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::gaussian((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
-                        break;
-                    case gaussian2 : flash_intensity = fcn::gaussian2((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::gaussian2((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
-                        break;
-                    case expdecay : flash_intensity = fcn::exp_decay((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0);
-                        break;
-                    default : flash_intensity = fcn::gaussian((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::gaussian((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
-                        break;
-                }
+        double flash_intensity; // 0 by default
+        // when the flash passes, compute the next flash timestamp and update prev flash
+        if (t_unit > t_next){
+            
+            t_prev = t_next;
+            t_next = t_next + rand_min_max(0.0, 2.0);
+            c_prev = c_next;
+            c_next = fcn::random_pick(this->flash_colors);
+            
+        }
+        
+        switch (this->preset_shape){
+            case square : flash_intensity = fcn::square((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::square((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
+                break;
+            case gaussian : flash_intensity = fcn::gaussian((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::gaussian((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
+                break;
+            case gaussian2 : flash_intensity = fcn::gaussian2((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::gaussian2((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
+                break;
+            case expdecay : flash_intensity = fcn::exp_decay((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0);
+                break;
+            default : flash_intensity = fcn::gaussian((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::gaussian((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
+                break;
+        }
 
-            }else{
-                flash_intensity = 0.0;
-            }
+        DMX_vec frame_flash_RGB = (t_unit-t_prev > t_next-t_unit) ? fixture->RGB(c_next, -1) : this->fixture->RGB(c_prev, -1);
+        DMX_vec final_RGB(3, 0);
+        final_RGB[R] = min(max( (int)( (1.0-pow(flash_intensity, 0.2)) * ani_backgd_RGB[R] + flash_intensity * frame_flash_RGB[R]  ),0),255); 
+        final_RGB[G] = min(max( (int)( (1.0-pow(flash_intensity, 0.2)) * ani_backgd_RGB[G] + flash_intensity * frame_flash_RGB[G]  ),0),255);
+        final_RGB[B] = min(max( (int)( (1.0-pow(flash_intensity, 0.2)) * ani_backgd_RGB[B] + flash_intensity * frame_flash_RGB[B]  ),0),255);
 
-            DMX_vec frame_flash_RGB = (t_unit-t_prev > t_next-t_unit) ? fixture->RGB(c_next, -1) : this->fixture->RGB(c_prev, -1);
-            DMX_vec final_RGB(3, 0);
-            final_RGB[R] = min(max( (int)( (1.0-pow(flash_intensity, 0.2)) * ani_backgd_RGB[R] + flash_intensity * frame_flash_RGB[R]  ),0),255); 
-            final_RGB[G] = min(max( (int)( (1.0-pow(flash_intensity, 0.2)) * ani_backgd_RGB[G] + flash_intensity * frame_flash_RGB[G]  ),0),255);
-            final_RGB[B] = min(max( (int)( (1.0-pow(flash_intensity, 0.2)) * ani_backgd_RGB[B] + flash_intensity * frame_flash_RGB[B]  ),0),255);
+        //masterization
+        for (auto subpix : final_RGB){
+            subpix = subpix * this->master/255.0;
+        }
 
-            //masterization
-            for (auto subpix : final_RGB){
-                subpix = subpix * this->master/255.0;
-            }
-
-            this->fixture->pixel = final_RGB;
+        this->fixture->pixels[i_unit] = final_RGB;
+    }
 }
 
 /*
@@ -386,48 +411,49 @@ void LaserBeamAnimation2::new_frame(){
     BaseAnimation::new_frame();
 
     //update external parameters :
-        // fade rate (param Duration)
-        const int current_fade_rate_ms    = map3_param(this->fixture->param1, 1000.0/FRATE, (double)this->fade_rate, 1000.0);
-        // Bakground Intensity 
-        const int current_bkg_intensity   = map3_param(this->fixture->param3, 0.0, 50.0, 255.0);
+    // flash duration (param Duration)
+    const int current_fade_rate_ms    = map3_param(this->fixture->param1, 1000.0/FRATE, (double)this->preset_duration, 1000.0);
+    // Bakground Intensity 
+    const int current_bkg_intensity   = map3_param(this->fixture->param3, 0.0, 50.0, 255.0);
+    // Ratio 
+    const double current_ratio        = clamp(  map3_param(this->fixture->param4, 0.0, this->preset_density, 1.5),
+                                                0.0,
+                                                1.0);
 
     // local variables for readability
     unsigned long t_ms = frame.t_current_ms;
     unsigned long t_last_beat_ms = sampler.t_last_new_beat;
+    int_vec::size_type n_unit = units_index.size(); 
+    int n_unit_on = max(1, (int)(current_ratio * n_unit));
+
+      // for each new beat, sort segments in random order
+    if (sampler.new_beat){
+        units_index = fcn::randomized_vector(units_index);
+    }
 
     // enable / disable based on music status
     bool auto_activate_flash = (sampler.state == BEAT) /*&& (t_ms-sampler.t_beat_tracking_start < MAX_CONT_FLASH)*/;
     
+    // Compute intensity value based on time elapsed since last beat
+    double coef = fcn::exp_decay(t_ms, t_last_beat_ms, current_fade_rate_ms, 0.0, 1.0);
 
-    // precompute pixel values
-    pixel backgd_RGB = this->fixture->RGB(back_color, current_bkg_intensity);
-    pixel flash_RGB = this->fixture->RGB(flash_color, -1);
-    pixel final_mix_RGB = this->fixture->RGB(black);
+    // set each laser intensity
+    for (int i_unit=0; i_unit<n_unit; i_unit++){
 
-    // Compute intensity vaue based on time elapsed since last beat
-    float coef = exp(-(double)(t_ms - t_last_beat_ms) / current_fade_rate_ms);
-    // compute final RGB colors
-    if (param_activate_flash && auto_activate_flash)
-    {
-         
-        final_mix_RGB[R] = (1-pow(coef, 0.2)) * backgd_RGB[R] + coef * flash_RGB[R];
-        final_mix_RGB[G] = (1-pow(coef, 0.2)) * backgd_RGB[G] + coef * flash_RGB[G];
-        final_mix_RGB[B] = (1-pow(coef, 0.2)) * backgd_RGB[B] + coef * flash_RGB[B];
+        pixel backgd_RGB    = this->fixture->RGB(back_color, current_bkg_intensity);
+        pixel flash_RGB     = this->fixture->RGB(flash_color);
+        pixel final_RGB     = this->fixture->RGB(black); //initialization before calculations
+
+        if (i_unit<n_unit_on){
+            for(auto i_subpix = 0; i_subpix<final_RGB.size(); i_subpix++){
+                final_RGB[i_subpix] = coef * flash_RGB[i_subpix] + (1-pow(coef, 0.2)) * backgd_RGB[i_subpix];
+                final_RGB[i_subpix] = final_RGB[i_subpix] * this->master/255.0;
+            }
+        }else{
+            final_RGB = backgd_RGB;
+        }
+
+        this->fixture->pixels[units_index[i_unit]] = final_RGB;
+        
     }
-    else
-    {
-        final_mix_RGB[R] = backgd_RGB[R];
-        final_mix_RGB[G] = backgd_RGB[G];
-        final_mix_RGB[B] = backgd_RGB[B];
-    }
-
-    // masterization (animation->master)
-    for (auto subpix : final_mix_RGB){
-        subpix = subpix * this->master/255.0;
-    }
-
-    
-    // set each units color
-    this->fixture->pixel = final_mix_RGB;
-
 }

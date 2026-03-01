@@ -23,14 +23,14 @@ enum laserbeam_type_t{
 class LaserBeam : public BaseFixture{
   public:
     //channels
-    DMX_vec pixel;
+    std::vector<DMX_vec> pixels;
     laserbeam_type_t type;
 
     //custom constructor (also calls base constructor)
-    LaserBeam(laserbeam_type_t typ, int addr, int ch, std::string nm, int id, uint8_t mast, int in_addr) : BaseFixture(addr, ch, nm, id, mast, in_addr)
+    LaserBeam(laserbeam_type_t typ, int n_laser, int addr, int ch, std::string nm, int id, uint8_t mast, int in_addr) : BaseFixture(addr, ch, nm, id, mast, in_addr)
     {
       this->type = typ;  
-      this->pixel = this->RGB(black);
+      this->pixels = std::vector<DMX_vec>(n_laser, this->RGB(black));
     };
     // custom initializer declaration
     void init() override;
@@ -114,24 +114,20 @@ class LaserBeamAnimation0 : public LaserBeamAnimation{
 class LaserBeamAnimation1 : public LaserBeamAnimation
 {
   public :
-    // animation parameters (constant, set at construction)
-    bool flash_activation = true;
-    // DMX_vec back_color;
+    // Animation parameters (constant or set by animation constructor)
+    // bool flash_activation = true;
     simpleColor back_color;
-    // DMX_vec flash_color;
     color_vec flash_colors;
 
-    Shape flash_shape = gaussian; // default setting leads to gaussian flashes (of bubbles)
-    // int sin_max_p_ms = 15000;
-    // int sin_min_p_ms = 5000;
-    int flash_interval;
-    int flash_length;
-    // double fluct_int = 0.4;
-    // double fluct_col = 0.25;
+    Shape preset_shape = gaussian; // default setting leads to gaussian flashes (of bubbles)
+    int preset_interval;
+    int preset_duration;
 
     // Internal variable (updated at every new_frame call)
-    flash_vec flashes;     // stores previous & next flash data (color & time) --> flashes[spot_ind][prev/next].color/time
+    std::vector<flash_vec> flashes;     // stores previous & next flash data (color & time) --> flashes[spot_ind][prev/next].color/time
     double t_unit;                    // internal, dynamic timescale. This timescale is artificially shrinked/elongated so that the average interval between bursts is 1
+    int current_param_shape_i;
+    Shape current_param_shape, previous_param_shape, current_shape;
 
     // Internal helpful & hidden stuff (for readability)
     const int i_prev = 0, i_next = 1;
@@ -144,9 +140,9 @@ class LaserBeamAnimation1 : public LaserBeamAnimation
       this->fixture = f;
       this->autocolor = true;
       //set cinematic parameters
-      this->flash_shape = fshape;
-      this->flash_interval=finterv;
-      this->flash_length = flen;
+      this->preset_shape = fshape;
+      this->preset_interval=finterv;
+      this->preset_duration = flen;
     }
 
 
@@ -176,18 +172,25 @@ class LaserBeamAnimation2 : public LaserBeamAnimation{
     bool param_activate_flash = true;;
     simpleColor flash_color = black;            // flash color
     simpleColor back_color = black;             // background color
+    double preset_density = 1.0;               // proportion of LED's flashing (0-100%) 
     
-    int fade_rate = 60;                            // ms flash fade rate (time constant of an exponential decay : intensity = exp(-(t-t0)/fade_rate)
+    int preset_duration = 60;                            // ms flash fade rate (time constant of an exponential decay : intensity = exp(-(t-t0)/fade_rate)
   
-      // Dynamic variables (updated internally at each frame)
-  
+    // Dynamic variables (updated internally at each frame)
+    int_vec units_index;
+
     //AUTOCOLOR constructor 
-    LaserBeamAnimation2(LaserBeam* f, std::string d, std::string i, AnimationType t, uint8_t mast, int prio, int_vec intens)
+    LaserBeamAnimation2(LaserBeam* f, double dens, std::string d, std::string i, AnimationType t, uint8_t mast, int prio, int_vec intens)
     :LaserBeamAnimation(d, i, t, mast, prio, intens){
-        //set Base params 
+      //set Base params 
       this->fixture = f;
       this->autocolor=true;
       //set cinematic params
+      this->preset_density = dens;
+      units_index.resize(this->fixture->pixels.size());
+      for(int i=0; i<units_index.size(); i++){
+        units_index[i] = i;
+      }
     }
   
       void init() override;
