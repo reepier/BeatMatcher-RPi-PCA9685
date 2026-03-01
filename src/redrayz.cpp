@@ -298,10 +298,10 @@ void RedrayzAnimation1::new_frame(){
   //update external parameters :
     // Shape
     const vector<Shape> shapes = {gaussian, gaussian2, square, expdecay};
-    this->current_param_shape_i       = clamp(    map_param(this->fixture->param5,  0, (int)shapes.size()),
-                                                0, (int)shapes.size()-1);
+    this->current_param_shape_i       = clamp(  map_param(this->fixture->param5,  0, (int)shapes.size()),
+                                                0,
+                                                (int)shapes.size()-1);
     this->current_param_shape       = shapes[current_param_shape_i];
-
 
     if (this->frame_cpt==1){    // If animation just started 
       this->current_shape = this->preset_shape; // use preset shape
@@ -311,15 +311,12 @@ void RedrayzAnimation1::new_frame(){
     }
     this->previous_param_shape = this->current_param_shape;               // update param_shape memory
 
-
-    // Burst length (param Duration)
-    const int current_duration      = clamp(
-                                                map3_param(this->fixture->param1, (double)this->flash_length/5, (double)this->flash_length, 5*(double)this->flash_length),
+    // Overall Speed : mean interval between two bursts
+    const int current_interval    = clamp(      map3_param(this->fixture->param2, 5*(double)this->flash_interval, (double)this->flash_interval, (double)this->flash_interval/5 ),
                                                 1000.0/FRATE,
                                                 30000.0);
-    // Burst Interval 
-    const int current_interval    = clamp(
-                                                map3_param(this->fixture->param2, (double)this->flash_interval/5, (double)this->flash_interval, 5*(double)this->flash_interval),
+    // Burst length (param Duration)
+    const int current_duration      = clamp(    map3_param(this->fixture->param1, min((double)current_interval/5, (double)this->flash_length/5), (double)current_interval, 5*(double)current_interval),
                                                 1000.0/FRATE,
                                                 30000.0);
     // Bakground Intensity 
@@ -599,11 +596,14 @@ void RedrayzAnimation4::new_frame(){
     const int current_shape_i       = clamp(    map_param(this->fixture->param5,  0, (int)shapes.size()),
                                                 0, (int)shapes.size()-1);
     const Shape current_shape       = shapes[current_shape_i];
-    // Step Interval 
+    // Overall Speed 
     const int current_interval    = clamp(
-                                                map3_param(this->fixture->param2, (double)this->flash_interval/8, (double)this->flash_interval, 5*(double)this->flash_interval),
+                                                map3_param(this->fixture->param2, 5*(double)this->flash_interval, (double)this->flash_interval, (double)this->flash_interval/10),
                                                 1000.0/FRATE,
                                                 30000.0);    // Burst length (param Duration)
+    bool stop_chaser = false;
+    if (this->fixture->param2==0) stop_chaser = true;
+    
     // Step duration
     const int current_duration      = clamp(
                                                 map3_param(this->fixture->param1, min((double)current_interval/5, (double)this->flash_length/5), (double)current_interval, 5*(double)current_interval),
@@ -629,7 +629,7 @@ void RedrayzAnimation4::new_frame(){
   const int n_unit = this->flashes.size();   // for readability
 
   // update internal timescales ("dt" in inversely proportionnal);
-  this->t_unit += 1000.0/FRATE/current_interval;
+  this->t_unit += 1000.0/FRATE/current_interval*(!stop_chaser);
 
   i_step = (int)this->t_unit;
 

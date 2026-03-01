@@ -814,14 +814,12 @@ void SpotRackAnimation1::new_frame(){
     }
     this->previous_param_shape = this->current_param_shape;               // update param_shape memory
 
-    // Burst length (param Duration)
-    const int current_duration      = clamp(
-                                                map3_param(this->fixture->param1, (double)this->flash_length/5, (double)this->flash_length, 5*(double)this->flash_length),
+    // Overall Speed : mean interval between two bursts
+    const int current_interval    = clamp(      map3_param(this->fixture->param2, 5*(double)this->flash_interval, (double)this->flash_interval, (double)this->flash_interval/5 ),
                                                 1000.0/FRATE,
                                                 30000.0);
-    // Burst Interval 
-    const int current_interval    = clamp(
-                                                map3_param(this->fixture->param2, (double)this->flash_interval/5, (double)this->flash_interval, 5*(double)this->flash_interval),
+    // Burst length (param Duration)
+    const int current_duration      = clamp(    map3_param(this->fixture->param1, min((double)current_interval/5, (double)this->flash_length/5), (double)current_interval, 5*(double)current_interval),
                                                 1000.0/FRATE,
                                                 30000.0);
     // Bakground Intensity 
@@ -1120,11 +1118,14 @@ void SpotRackAnimation6::new_frame(){
     const Shape current_shape       = shapes[current_shape_i];
     // log(2, "param5:", this->fixture->param5, " current_shape_i:", current_shape_i, " current_shape:", (int)current_shape);
 
-    // Step Interval 
+    // Overall Speed 
     const int current_interval    = clamp(
-                                                map3_param(this->fixture->param2, (double)this->flash_interval/5, (double)this->flash_interval, 5*(double)this->flash_interval),
+                                                map3_param(this->fixture->param2, 5*(double)this->flash_interval, (double)this->flash_interval, (double)this->flash_interval/10),
                                                 1000.0/FRATE,
                                                 30000.0);    // Burst length (param Duration)
+    bool stop_chaser = false;
+    if (this->fixture->param2==0) stop_chaser = true;
+
     // Step duration
     const int current_duration      = clamp(
                                                 map3_param(this->fixture->param1, min((double)current_interval/5, (double)this->flash_length/5), (double)current_interval, 5*(double)current_interval),
@@ -1152,7 +1153,7 @@ void SpotRackAnimation6::new_frame(){
   const int n_unit = this->flashes.size();   // for readability
 
   // update internal timescales ("dt" in inversely proportionnal);
-  this->t_unit += 1000.0/FRATE/current_interval;
+  this->t_unit += 1000.0/FRATE/current_interval*(!stop_chaser);
 
   i_step = (int)this->t_unit;
 
