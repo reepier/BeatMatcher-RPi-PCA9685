@@ -9,13 +9,15 @@ RedLaserBox laserbox1(1, 6, "Grada Laser 1", 1);
 RedLaserBox laserbox2(7, 6, "Grada Laser 2", 2);
 RedLaserBox laserbox3(13, 6, "Grada Laser 3", 2);
 
-RedLaserGroup lasergroup1(vector<DMX_channel*>{&laserbox2.lasers[0], &laserbox2.lasers[1], &laserbox2.lasers[2], &laserbox2.lasers[3], &laserbox2.lasers[4], &laserbox2.lasers[5],
-                                                &laserbox1.lasers[0], &laserbox1.lasers[1], &laserbox1.lasers[2], &laserbox1.lasers[3], &laserbox1.lasers[4], &laserbox1.lasers[5]
+RedLaserGroup lasergroup1(vector<DMX_channel*>{ &laserbox2.lasers[1], &laserbox2.lasers[3], &laserbox2.lasers[4], 
+                                                /*&laserbox1.lasers[0], */&laserbox1.lasers[1],  &laserbox1.lasers[3], &laserbox1.lasers[5]
                                               // ,&laserbox3.lasers[0], &laserbox3.lasers[1], &laserbox3.lasers[2], &laserbox3.lasers[3], &laserbox3.lasers[4], &laserbox3.lasers[5]
                                               }, 
-                          "RedRayz 1", RED_CTRL_ADR, 6, 255, 40);
-/*RedLaserGroup lasergroup2(vector<DMX_channel*>{}, 
-                           "Groupe Laser 2", 0, 2);*/
+                          "RedRayz 1", UNUSED, 6, 255, 40);
+RedLaserGroup lasergroup2(vector<DMX_channel*>{ &laserbox2.lasers[0],&laserbox2.lasers[2],&laserbox2.lasers[5],
+                                                &laserbox1.lasers[2], &laserbox1.lasers[4]
+                                              }, 
+                           "RedRayz 2", UNUSED, 8, 255, 160);
 
 
 /*
@@ -123,7 +125,7 @@ void RedLaserGroup::init(){
     this->activate_none();
 
 
-
+if (this->id == 6){
   // define chasers
   //                            DMXChaser(int n_points,     n_groups, group_size, step_size,  direction,          parity,   rand        description)
     this->chasers.push_back(new DMXChaser(this->group_size,     1,        1,          1,    Direction::Forward,     0,      false,    "   --o>--------    ")); //  
@@ -139,7 +141,7 @@ void RedLaserGroup::init(){
     /** TODO  fix issues :
      * - PingPong does not work
       */
-
+}
     this->dump_animations("RedRayz");
 
     }
@@ -244,7 +246,7 @@ void RedrayzAnimation0::new_frame(){
 
   for (int i=0; i<this->fixture->group_size; i++){
     DMX_vec       DMX_values = this->fixture->RGB(this->color);
-    *(this->fixture->lasers[i]) = DMX_values[R] * this->fixture->master/255.0 * this->master/255.0;
+    *(this->fixture->pixels[i]) = DMX_values[R] * this->fixture->master/255.0 * this->master/255.0;
   }
 }
 
@@ -323,12 +325,10 @@ void RedrayzAnimation1::new_frame(){
                                                 1000.0/FRATE,
                                                 30000.0);
 
-    log(2, "Speed_ratio:", speed_ratio, "\tIntervalle:", current_interval, "\tDuration:", current_duration );
     // Bakground Intensity 
     const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)ADDRLED_BKG_INTENSITY_REF, 255.0);
 
 
-  // long t = frame.t_current_ms;                // for readability
   const int n_unit = this->flashes.size();   // for readability
 
   // update internal timescale ("dt" in inversely proportionnal);
@@ -337,7 +337,6 @@ void RedrayzAnimation1::new_frame(){
   // for each laser "i" of the module
   for (int i_unit=0; i_unit < n_unit; i_unit++){
     // auto current_spot = this->fixture->spots[i_unit];           // for readability
-    auto &current_unit_flashes = flashes[i_unit];                  // for readability
     auto &current_unit_next_flash = flashes[i_unit][i_next];       // for readability
     auto &current_unit_prev_flash = flashes[i_unit][i_prev];       // for readability
     double &t_next = current_unit_next_flash.time;
@@ -380,7 +379,7 @@ void RedrayzAnimation1::new_frame(){
     unit_final_RGB[B] = clamp( (int)( (1.0-pow(flash_intensity, 0.2)) * ani_backgd_RGB[B] + flash_intensity * frame_flash_RGB[B]  ),0,255);
 
 
-    *(this->fixture->lasers[i_unit]) = unit_final_RGB[R] * this->fixture->master/255.0 * this->master/255.0;
+    *(this->fixture->pixels[i_unit]) = unit_final_RGB[R] * this->fixture->master/255.0 * this->master/255.0;
   }
   balise("fausse balise");
 }
@@ -461,7 +460,7 @@ void RedrayzAnimation2::new_frame(){
       final_RGB = backgd_RGB;
     }
 
-    *(this->fixture->lasers[units_index[i_unit]]) = final_RGB[R] * this->fixture->master/255.0 * this->master/255.0;
+    *(this->fixture->pixels[units_index[i_unit]]) = final_RGB[R] * this->fixture->master/255.0 * this->master/255.0;
     
   }
 
@@ -534,9 +533,9 @@ void RedrayzAnimation3::new_frame(){
 
 
       if (i<n_unit_on)
-        *(this->fixture->lasers[units_index[i]]) = flash_RGB[R] *this->fixture->master/255.0 *this->master/255.0;
+        *(this->fixture->pixels[units_index[i]]) = flash_RGB[R] *this->fixture->master/255.0 *this->master/255.0;
       else
-        *(this->fixture->lasers[units_index[i]]) = backgd_RGB[R] *this->fixture->master/255.0 *this->master/255.0;
+        *(this->fixture->pixels[units_index[i]]) = backgd_RGB[R] *this->fixture->master/255.0 *this->master/255.0;
   }
 }
 
@@ -686,7 +685,7 @@ void RedrayzAnimation4::new_frame(){
     unit_final_RGB[B] = clamp( (int)( (1.0-pow(flash_intensity, 0.2)) * ani_backgd_RGB[B] + flash_intensity * frame_flash_RGB[B]  ),0,255);
 
 
-    *(this->fixture->lasers[i_unit]) = unit_final_RGB[R] * this->fixture->master/255.0 * this->master/255.0;
+    *(this->fixture->pixels[i_unit]) = unit_final_RGB[R] * this->fixture->master/255.0 * this->master/255.0;
   }
   balise("fausse balise");
 }

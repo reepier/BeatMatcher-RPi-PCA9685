@@ -524,7 +524,7 @@ class BaseFixture{
     // Generic attributes
     std::string name;                   // 
     std::string description;            // textual description
-    int id;                             // unique id to differentiate between vseveral fixtres of the same type (i.e. COTS PAR spots & racks)
+    int id;                             // Given by QLC !! unique id to differentiate between several fixtres of the same type (i.e. COTS PAR spots & racks)
 
     // DMX related parameters
     uint8_t master = 255;           // Master Dimmer from 0-255
@@ -533,7 +533,7 @@ class BaseFixture{
     const int nCH;
 
     // DMX Controler parameters
-    const int input_addr;           // DMX input address
+    const int input_address;           // DMX input address
     color_vec external_palette;     // this color palette is defined (or not) by the external controler 
     bool      new_external_palette = false;  //turns true for 1 cycle when new external animation is detected 
     int       external_animation;   // stores external animation commands
@@ -558,7 +558,7 @@ class BaseFixture{
     anim_vec animations;
 
     //constructor (adresse [0-511], number of channels, fixture's name)
-    BaseFixture(int addr,int nch, std::string nm, int i, uint8_t mast, int in_addr): address(addr), nCH(nch), name(nm), id(i), master(mast), input_addr(in_addr){};
+    BaseFixture(int addr,int nch, std::string nm, int i, uint8_t mast, int in_addr): address(addr), nCH(nch), name(nm), id(i), master(mast), input_address(in_addr){};
     virtual void init()=0;
 
     //animation activation & management

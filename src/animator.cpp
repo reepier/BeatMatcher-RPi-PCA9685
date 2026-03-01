@@ -682,12 +682,12 @@ bool AnimationManager::controled_update(){
      external setting goes back to "automatic" */
 
     // Define fixtures installed & controled by this function
-    fix_vec fixs = {&addr_led, &spot_rack_1, &spot_rack_2, &spot_rack_3, &spot_rack_4, &lasergroup1, /* &lasergroup2,*/ &laserbeam};
+    fix_vec fixs = {&addr_led, &spot_rack_1, &spot_rack_2, &spot_rack_3, &spot_rack_4, &lasergroup1, &lasergroup2, &laserbeam};
     // define potential leaders & their respective priorities
-    fix_vec leader_fixs =   {&addr_led, &spot_rack_1,   /*&spot_rack_2,  */&lasergroup1/*,    &laserbeam*/};
+    fix_vec leader_fixs =   {&addr_led, &spot_rack_1,   /*&spot_rack_2,  */&lasergroup1, &lasergroup2/*,    &laserbeam*/};
     int_vec leader_prios =  {};
     // define potential backers & their respective priorities
-    fix_vec backer_fixs =   {&addr_led, &spot_rack_1,   &spot_rack_2,   &lasergroup1/*,   &laserbeam*/};
+    fix_vec backer_fixs =   {&addr_led, &spot_rack_1,   &spot_rack_2,   &lasergroup1, &lasergroup2/*,   &laserbeam*/};
 
     // update automatic palette when required
     static color_vec auto_palette;              // contains current automatic palette (persistent)
@@ -842,12 +842,12 @@ AnimationManager animator;
 void BaseFixture::process_DMX_input(bool data_available, bool trigger, const uint8_t *data){
         
     // Process DIMMER
-    this->master = data[this->input_addr-1 + FIX_DIM_CH];
+    this->master = data[this->input_address-1 + FIX_DIM_CH];
 
     // Processe ANIMATION
     if (trigger){
         //get & rewrap raw data
-        int fix_animation_val = data[this->input_addr-1 + FIX_ANI_CH];
+        int fix_animation_val = data[this->input_address-1 + FIX_ANI_CH];
         // if input data is not in DEFAULT positions (automatic mode)
         if ( fix_animation_val!=255) { 
             // update fixture animation if there is a change
@@ -874,8 +874,8 @@ void BaseFixture::process_DMX_input(bool data_available, bool trigger, const uin
 
     // Process COLORS
     if (trigger){
-        int fix_color1_val = clamp((int)data[this->input_addr-1+FIX_COL1_CH], 0, (int)(simpleColor::last_color));
-        int fix_color2_val = clamp((int)data[this->input_addr-1+FIX_COL2_CH], 0, (int)(simpleColor::last_color));
+        int fix_color1_val = clamp((int)data[this->input_address-1+FIX_COL1_CH], 0, (int)(simpleColor::last_color));
+        int fix_color2_val = clamp((int)data[this->input_address-1+FIX_COL2_CH], 0, (int)(simpleColor::last_color));
         // int fix_color1_val = min(max((uint8_t)0,  data.Get(LED_COL1_CH)) , (uint8_t)(simpleColor::last_color));
         // int fix_color2_val = min(max((uint8_t)0,  data.Get(LED_COL2_CH)) , (uint8_t)(simpleColor::last_color));
         //create output structrue
@@ -909,14 +909,14 @@ void BaseFixture::process_DMX_input(bool data_available, bool trigger, const uin
     //Process PARAMETERS
     //TODO only update when trigger ?
 if (trigger){
-    this->param1 = arduino::map( (double)data[this->input_addr-1+FIX_PARM1_CH] , 0.0, 255.0, 0.0, 1.0);
-    this->param2 = arduino::map( (double)data[this->input_addr-1+FIX_PARM2_CH] , 0.0, 255.0, 0.0, 1.0);
-    this->param3 = arduino::map( (double)data[this->input_addr-1+FIX_PARM3_CH] , 0.0, 255.0, 0.0, 1.0);
-    this->param4 = arduino::map( (double)data[this->input_addr-1+FIX_PARM4_CH] , 0.0, 255.0, 0.0, 1.0);
-    this->param5 = arduino::map( (double)data[this->input_addr-1+FIX_PARM5_CH] , 0.0, 255.0, 0.0, 1.0);
-    this->param6 = arduino::map( (double)data[this->input_addr-1+FIX_PARM6_CH] , 0.0, 255.0, 0.0, 1.0);
-    this->param7 = arduino::map( (double)data[this->input_addr-1+FIX_PARM7_CH] , 0.0, 255.0, 0.0, 1.0);
-    this->param8 = arduino::map( (double)data[this->input_addr-1+FIX_PARM8_CH] , 0.0, 255.0, 0.0, 1.0);
+    this->param1 = arduino::map( (double)data[this->input_address-1+FIX_PARM1_CH] , 0.0, 255.0, 0.0, 1.0);
+    this->param2 = arduino::map( (double)data[this->input_address-1+FIX_PARM2_CH] , 0.0, 255.0, 0.0, 1.0);
+    this->param3 = arduino::map( (double)data[this->input_address-1+FIX_PARM3_CH] , 0.0, 255.0, 0.0, 1.0);
+    this->param4 = arduino::map( (double)data[this->input_address-1+FIX_PARM4_CH] , 0.0, 255.0, 0.0, 1.0);
+    this->param5 = arduino::map( (double)data[this->input_address-1+FIX_PARM5_CH] , 0.0, 255.0, 0.0, 1.0);
+    this->param6 = arduino::map( (double)data[this->input_address-1+FIX_PARM6_CH] , 0.0, 255.0, 0.0, 1.0);
+    this->param7 = arduino::map( (double)data[this->input_address-1+FIX_PARM7_CH] , 0.0, 255.0, 0.0, 1.0);
+    this->param8 = arduino::map( (double)data[this->input_address-1+FIX_PARM8_CH] , 0.0, 255.0, 0.0, 1.0);
 }
 }
 

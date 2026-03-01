@@ -47,11 +47,11 @@ void init_display(){
     // noecho();
     // refresh();
     // curs_set(0);
-    musicw      = newwin(10,90, 0,0);
-    animw       = newwin(5,90,10,0);
-    outputw     = newwin(10,90,15,0);
-    generalw    = newwin(3,90,25,0);
-    consolew    = newwin(20,90,28,0);
+    musicw      = newwin(9,90, 0,0);
+    animw       = newwin(4,90,9,0);
+    outputw     = newwin(10,90,13,0);
+    generalw    = newwin(3,90,23,0);
+    consolew    = newwin(22,90,26,0);
     spectrumw   = newwin(spectrumw_height,spectrumw_width,0,90);
 
 

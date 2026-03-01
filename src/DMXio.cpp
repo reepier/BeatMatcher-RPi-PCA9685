@@ -266,6 +266,7 @@ RubiFont                                                    */
         spot_rack->process_DMX_input(new_data_available, trigger, data.GetRaw());
 
     lasergroup1.process_DMX_input(new_data_available, trigger, data.GetRaw());
+lasergroup2.process_DMX_input(new_data_available, trigger, data.GetRaw());
     laserbeam.process_DMX_input(new_data_available, trigger, data.GetRaw());
 
 

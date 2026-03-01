@@ -32,12 +32,12 @@ class RedLaserGroup;
 class RedLaserGroup : public BaseFixture{
   public :
     // Channels
-    std::vector<DMX_channel*> lasers; // each element from this vector points to a RedLaserBox::output_channel element.
+    std::vector<DMX_channel*> pixels; // each element from this vector points to a RedLaserBox::output_channel element.
     int group_size;
     
     // Constructor
     RedLaserGroup(std::vector<DMX_channel*> channels, std::string nm, int addr, int i, uint8_t mast, int in_addr) : BaseFixture(addr, channels.size(), nm, i,mast, in_addr){
-      this->lasers = channels;
+      this->pixels = channels;
       this->group_size = channels.size();
     };
 
@@ -55,7 +55,7 @@ class RedLaserGroup : public BaseFixture{
 
     
 };
-extern RedLaserGroup lasergroup1/*, lasergroup2*/;
+extern RedLaserGroup lasergroup1, lasergroup2;
 
 
 /*
@@ -315,8 +315,8 @@ class RedrayzAnimation4 : public RedrayzAnimation{
     // Animation parameters (constant or set by animation constructor)
     simpleColor back_color;
     color_vec flash_colors;
-    int flash_interval;
-    int flash_length;
+    int preset_interval;
+    int preset_duration;
     // DMXChaser chaser;   // contains and compute the chaser sequence (which unit to light up at every step of the animation)
   
     // Dynamic variables (updated internally at each frame)
@@ -335,8 +335,8 @@ class RedrayzAnimation4 : public RedrayzAnimation{
       this->fixture = f;
       this->autocolor = true;
 
-      this->flash_length = flen;
-      this->flash_interval = finterv;
+      this->preset_duration = flen;
+      this->preset_interval = finterv;
 
       // initialize chaser, default chaser at construction is the first one in store. It will be updated in new_frame() with other external params
       this->current_chaser_i = 0, this->previous_chaser_i = 0;

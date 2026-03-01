@@ -105,3 +105,5 @@ class BaseAnimation;
 
 typedef std::vector<BaseFixture*> fix_vec;
 typedef std::vector<BaseAnimation*> anim_vec;
+
+#define UNUSED 0 //alias for unused argument
