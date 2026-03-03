@@ -317,8 +317,8 @@ private :
 
     Shape flash_shape = gaussian; // default setting leads to gaussian flashes (of bubbles)
     strip_subdiv_t unit = bar;
-    int flash_interval;
-    int flash_length;
+    int preset_interval;
+    int preset_duration;
 
     // Internal variable (updated at every new_frame call)
     int_vec p_ms;                     // range of periods for various sine wvaes
@@ -337,8 +337,8 @@ private :
       //set cinematic parameters
       this->flash_shape = fshape;
       this->unit = u;
-      this->flash_interval=prand;
-      this->flash_length = flen;
+      this->preset_interval=prand;
+      this->preset_duration = flen;
     }
 
 
@@ -346,6 +346,54 @@ private :
     void init(const color_vec&) override;
     void new_frame();
 };
+
+/*
+#######         #####                                     
+#              #     # #    #   ##    ####  ###### #####  
+#              #       #    #  #  #  #      #      #    # 
+######         #       ###### #    #  ####  #####  #    # 
+      # ###    #       #    # ######      # #      #####  
+#     # ###    #     # #    # #    # #    # #      #   #  
+ #####  ###     #####  #    # #    #  ####  ###### #    */
+
+ class AddrLEDAnimation5 : public AddrLEDAnimation{
+  public:
+    // Animation parameters (constant or set by animation constructor)
+    simpleColor back_color;
+    color_vec flash_colors;
+    int preset_interval;
+    int preset_duration;
+  
+    // Dynamic variables (updated internally at each frame)
+    std::vector<flash_vec> flashes;     //for each unit, stores previous & next flash data (color & time) --> flashes[spot_ind][prev/next].color/time
+    double t_unit;                    // internal, dynamic timescale. This timescale is artificially shrinked/elongated so that the average interval between bursts is 1
+    int i_step;
+    int current_chaser_i;         // indice of current chaser in fixture's chaser list
+    DMXChaser* current_chaser;    // pointer to current chaser in fixture's chaser list
+
+    // Internal helpful & hidden stuff (for readability)
+    const int i_prev = 0, i_next = 1;
+
+    // Constructor
+    AddrLEDAnimation5(AddressableLED *f,  time_t flen, time_t finterv, std::string d, std::string i, AnimationType t, int prio, int mast, int_vec intens)
+    :AddrLEDAnimation(d, i, t, mast, prio, intens){
+      this->fixture = f;
+      this->autocolor = true;
+
+      this->preset_duration = flen;
+      this->preset_interval = finterv;
+
+      // initialize chaser, default chaser at construction is the first one in store. It will be updated in new_frame() with other external params
+      this->current_chaser_i = 0;
+
+      // this->update_palette(red);
+    }
+
+    void init() override;
+    void init(const color_vec&) override;
+    void new_frame() override;
+};
+
 
 /** LED driver configuration :
  *    3 SERIES CONFIGURATION (use driver output channel 1,2,3)

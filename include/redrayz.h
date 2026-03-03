@@ -230,7 +230,7 @@ class RedrayzAnimation2 : public RedrayzAnimation{
     simpleColor back_color = black;             // background color displayed inbetween flashes
     double density = 1.0;               // proportion of LED's flashing (0-100%) 
     
-    int fade_rate = 60;                            // ms flash fade rate (time constant of an exponential decay : intensity = exp(-(t-t0)/fade_rate)
+    int preset_duration = 60;                            // ms flash fade rate (time constant of an exponential decay : intensity = exp(-(t-t0)/fade_rate)
   
     // Dynamic variables (updated internally at each frame)
     int_vec units_index;
@@ -273,7 +273,7 @@ Variant of the original beat matching animation :
     public:
       // Animation parameters (constant or set by animation constructor)
       bool param_activate_flash;
-      int fade_rate = 80;                            // ms flash fade rate (time constant of an exponential decay : intensity = exp(-(t-t0)/fade_rate)
+      int preset_duration = 80;                            // ms flash fade rate (time constant of an exponential decay : intensity = exp(-(t-t0)/fade_rate)
       simpleColor back_color;
       simpleColor flash_color;
   

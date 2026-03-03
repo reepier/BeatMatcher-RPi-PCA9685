@@ -259,8 +259,7 @@ void front_rack_init(){
     this_rack->chasers.push_back(new DMXChaser(this_rack->spots.size(),         1,          1,          1,      Direction::Forward,       0,        false,      "--o>----"));
     this_rack->chasers.push_back(new DMXChaser(this_rack->spots.size(),         1,          1,          1,      Direction::Backward,      0,        false,      "----<o--"));
     this_rack->chasers.push_back(new DMXChaser(this_rack->spots.size(),         1,          1,          1,      Direction::PingPong,      0,        false,      ">--o>----<"));
-
-    this_rack->chasers.push_back(new DMXChaser(this_rack->spots.size(),         1,          1,          1,      Direction::PingPong,      0,        false,      ">--o>----<"));
+    this_rack->chasers.push_back(new DMXChaser(this_rack->spots.size(),         1,          1,          1,      Direction::Forward,       0,        true,       " --rand-- "));
 
     this_rack->dump_animations(this_rack->name.c_str());
 }
@@ -283,7 +282,6 @@ void rack_15_init(){
 
     // Animation 1 : Backgrnd color + random soft flashes
     this_rack->animations.push_back(new SpotRackAnimation0(this_rack, black, " - ", "SR.0", backer,0, 0, int_vec{1,2,3}));
-
     // Animation type 0 : Fixed color
     this_rack->animations.push_back(new SpotRackAnimation0(this_rack, "Couleur", "SR.0.1", any, 0, 255, int_vec{1,2,3}));
     FILL
@@ -293,25 +291,35 @@ void rack_15_init(){
     FILL
     FILL
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  4000,   1500,  "Bulles lent",       "SR.1.1.3", backer,  1,   255, int_vec{1,2}));
-    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  1000,   600,   "Bulles rapide",     "SR.1.1.4", any,     1,   255, int_vec{1,2,3}));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  700,   600,   "Bulles rapide",     "SR.1.1.4", any,     1,   255, int_vec{1,2,3}));
+    FILL
+    FILL
     // Animation type 1.3 : Random Square
     FILL
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  8000,  3000,   "Chaser aléa. lent",    "SR.1.3.3",  backer,  1, 255, int_vec{1,2}));
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  1000,  600,    "Chaser aléa. rapide",  "SR.1.3.4",  any,     1, 255, int_vec{2,3}));
+    FILL
+    FILL
     FILL
     // Animation type 1.4 : Flash expo (Décharge)
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, expdecay,  1300,  400, "Décharge aléa. lent",   "SR.1.2.1", any, 1, 255, int_vec{1,2,3}));
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, expdecay,  1000,  100,  "Décharge aléa. rapide", "SR.1.2.2", any, 1, 255, int_vec{1,2,3}));
     FILL
     FILL
-    // Animation type 1.2 : Random strobe
-    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  800,  1000/FRATE, "Strobe lent",   "SR.1.2.1", any,    1, 255,   int_vec{2}));
     FILL
-    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  100,  1000/FRATE, "Strobe rapide", "SR.1.2.3", leader, 1, 255,   int_vec{3}));
+    FILL
+    // Animation type 1.2 : Random strobe
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, expdecay,  800,  2*1000/FRATE, "Strobe lent",   "SR.1.2.1", any,    1, 255,   int_vec{2}));
+    FILL
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, expdecay,  120,   1000/FRATE, "Strobe rapide", "SR.1.2.3", leader, 1, 255,   int_vec{3}));
+    FILL
+    FILL
     FILL
     // Animation type 4 : Analog BEAT
     FILL
     this_rack->animations.push_back(new SpotRackAnimation4(this_rack, 0.7, "Beat analog. (70%)", "SR.4.2", any, 1, 255, int_vec{2,3}));
+    FILL
+    FILL
     FILL
     FILL
     // Animation type 5 : Digital BEAT
@@ -361,6 +369,7 @@ void rack_15_init(){
     this_rack->chasers.push_back(new DMXChaser(this_rack->spots.size(),         1,          1,          1,      Direction::Forward,       0,        false,      "--o>----"));
     this_rack->chasers.push_back(new DMXChaser(this_rack->spots.size(),         1,          1,          1,      Direction::Backward,      0,        false,      "----<o--"));
     this_rack->chasers.push_back(new DMXChaser(this_rack->spots.size(),         1,          1,          1,      Direction::PingPong,      0,        false,      ">--o>----<"));
+    this_rack->chasers.push_back(new DMXChaser(this_rack->spots.size(),         1,          1,          1,      Direction::Forward,       0,        true,       " --rand-- "));
 
     this_rack->dump_animations(this_rack->name.c_str());
 };
@@ -382,7 +391,6 @@ void rack_40_init(){
     
     // Animation 1 : Backgrnd color + random soft flashes
     this_rack->animations.push_back(new SpotRackAnimation0(this_rack, black, " - ", "SR.0", backer,0, 0, int_vec{1,2,3}));
-
     // Animation type 0 : Fixed color
     this_rack->animations.push_back(new SpotRackAnimation0(this_rack, "Couleur", "SR.0.1", any, 0, 255, int_vec{1,2,3}));
     FILL
@@ -392,25 +400,35 @@ void rack_40_init(){
     FILL
     FILL
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  4000,   1500,  "Bulles lent",       "SR.1.1.3", backer,  1,   255, int_vec{1,2}));
-    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  1000,   600,   "Bulles rapide",     "SR.1.1.4", any,     1,   255, int_vec{1,2,3}));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  700,   600,   "Bulles rapide",     "SR.1.1.4", any,     1,   255, int_vec{1,2,3}));
+    FILL
+    FILL
     // Animation type 1.3 : Random Square
     FILL
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  8000,  3000,   "Chaser aléa. lent",    "SR.1.3.3",  backer,  1, 255, int_vec{1,2}));
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  1000,  600,    "Chaser aléa. rapide",  "SR.1.3.4",  any,     1, 255, int_vec{2,3}));
+    FILL
+    FILL
     FILL
     // Animation type 1.4 : Flash expo (Décharge)
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, expdecay,  1300,  400, "Décharge aléa. lent",   "SR.1.2.1", any, 1, 255, int_vec{1,2,3}));
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, expdecay,  1000,  100,  "Décharge aléa. rapide", "SR.1.2.2", any, 1, 255, int_vec{1,2,3}));
     FILL
     FILL
-    // Animation type 1.2 : Random strobe
-    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  800,  1000/FRATE, "Strobe lent",   "SR.1.2.1", any,    1, 255,   int_vec{2}));
     FILL
-    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  100,  1000/FRATE, "Strobe rapide", "SR.1.2.3", leader, 1, 255,   int_vec{3}));
+    FILL
+    // Animation type 1.2 : Random strobe
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, expdecay,  800,  2*1000/FRATE, "Strobe lent",   "SR.1.2.1", any,    1, 255,   int_vec{2}));
+    FILL
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, expdecay,  120,   1000/FRATE, "Strobe rapide", "SR.1.2.3", leader, 1, 255,   int_vec{3}));
+    FILL
+    FILL
     FILL
     // Animation type 4 : Analog BEAT
     FILL
     this_rack->animations.push_back(new SpotRackAnimation4(this_rack, 0.7, "Beat analog. (70%)", "SR.4.2", any, 1, 255, int_vec{2,3}));
+    FILL
+    FILL
     FILL
     FILL
     // Animation type 5 : Digital BEAT
@@ -489,25 +507,35 @@ void shehds_rack_init(){
     FILL
     FILL
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  4000,   1500,  "Bulles lent",       "SR.1.1.3", backer,  1,   255, int_vec{1,2}));
-    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  1000,   600,   "Bulles rapide",     "SR.1.1.4", any,     1,   255, int_vec{1,2,3}));
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, gaussian,  700,   600,   "Bulles rapide",     "SR.1.1.4", any,     1,   255, int_vec{1,2,3}));
+    FILL
+    FILL
     // Animation type 1.3 : Random Square
     FILL
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  8000,  3000,   "Chaser aléa. lent",    "SR.1.3.3",  backer,  1, 255, int_vec{1,2}));
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  1000,  600,    "Chaser aléa. rapide",  "SR.1.3.4",  any,     1, 255, int_vec{2,3}));
+    FILL
+    FILL
     FILL
     // Animation type 1.4 : Flash expo (Décharge)
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, expdecay,  1300,  400, "Décharge aléa. lent",   "SR.1.2.1", any, 1, 255, int_vec{1,2,3}));
     this_rack->animations.push_back(new SpotRackAnimation1(this_rack, expdecay,  1000,  100,  "Décharge aléa. rapide", "SR.1.2.2", any, 1, 255, int_vec{1,2,3}));
     FILL
     FILL
-    // Animation type 1.2 : Random strobe
-    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  800,  1000/FRATE, "Strobe lent",   "SR.1.2.1", any,    1, 255,   int_vec{2}));
     FILL
-    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, square,  100,  1000/FRATE, "Strobe rapide", "SR.1.2.3", leader, 1, 255,   int_vec{3}));
+    FILL
+    // Animation type 1.2 : Random strobe
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, expdecay,  800,  2*1000/FRATE, "Strobe lent",   "SR.1.2.1", any,    1, 255,   int_vec{2}));
+    FILL
+    this_rack->animations.push_back(new SpotRackAnimation1(this_rack, expdecay,  120,   1000/FRATE, "Strobe rapide", "SR.1.2.3", leader, 1, 255,   int_vec{3}));
+    FILL
+    FILL
     FILL
     // Animation type 4 : Analog BEAT
     FILL
     this_rack->animations.push_back(new SpotRackAnimation4(this_rack, 0.7, "Beat analog. (70%)", "SR.4.2", any, 1, 255, int_vec{2,3}));
+    FILL
+    FILL
     FILL
     FILL
     // Animation type 5 : Digital BEAT
@@ -728,8 +756,13 @@ void SpotRackAnimation0::init(const color_vec& palette){
 void SpotRackAnimation0::new_frame() {
     BaseAnimation::new_frame();
 
+    // Col1 Intensity 
+    int current_c1_intensity = map3_param(this->fixture->param8, 0.0, 255.0, 255.0);
+    if (this->fixture->param8==1.0) current_c1_intensity = -1; // -1 means maxxing out fixture's RGB values
+    log(2, "current_c1_intensity:", current_c1_intensity);
+
     for (auto spot : this->fixture->spots){
-        spot->pixel = spot->RGBW(this->color);
+        spot->pixel = spot->RGBW(this->color, current_c1_intensity);
     }
 };
 
@@ -788,10 +821,6 @@ void SpotRackAnimation1::init(const color_vec& palette){
     
 }
 
-// TODO URGENT BUG
-/** Lorsqu'une animation random Burst ExpDecay/Square est activée, les pixels sont tous initialement à l'état FLASH, et ils ne retombe que lors du premier flash --> 
- * 
- */
 
 void SpotRackAnimation1::new_frame(){
     log(4, __FILE__, " ", __LINE__, " ",__func__);
@@ -825,8 +854,11 @@ void SpotRackAnimation1::new_frame(){
                                                 1000.0/FRATE,
                                                 30000.0);
 
-                                                // Bakground Intensity 
-    const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)SPOTRACK_BKG_INTENSITY_REF, 255.0);
+    // Col1 Intensity 
+    int current_c1_intensity = map3_param(this->fixture->param8, 0.0, 255.0, 255.0);
+    if (this->fixture->param8==1.0) current_c1_intensity = -1; // -1 means maxxing out fixture's RGB values
+    // Col2 Intensity 
+    const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)RED_BKG_INTENSITY_REF, 255.0);
 
 
     // time_ms t = frame.t_current_ms;       // for readability
@@ -836,7 +868,7 @@ void SpotRackAnimation1::new_frame(){
     this->t_unit += 1000.0/FRATE/current_interval;
 
     // update 5 sinewaves of different period
-    vector<double> s = {0, 0, 0, 0, 0};
+    // vector<double> s = {0, 0, 0, 0, 0};
     
     // for each spot "i" of the rack
     for (int i_spot=0; i_spot < n_spot; i_spot++){
@@ -864,7 +896,6 @@ void SpotRackAnimation1::new_frame(){
                 c_next = fcn::random_pick(this->flash_colors);
             }
 
-            // flash_intensity = exp( -pow(2.5/this->flash_len*(t - t_prev), 2)) + exp( -pow(2.5/this->flash_len*(t - t_next), 2));
             switch (this->current_shape){
                 case square :
                     flash_intensity = fcn::square((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::square((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
@@ -888,7 +919,7 @@ void SpotRackAnimation1::new_frame(){
             flash_intensity = 0.0;
         }
 
-        DMX_vec frame_flash_RGBW = (t_unit-t_prev > t_next-t_unit) ? current_spot->RGBW(c_next) : current_spot->RGBW(c_prev);
+        DMX_vec frame_flash_RGBW = (t_unit-t_prev > t_next-t_unit) ? current_spot->RGBW(c_next, current_c1_intensity) : current_spot->RGBW(c_prev, current_c1_intensity);
         for (auto i_subpix = 0 ; i_subpix<pixel_size; i_subpix++){
                 current_spot->pixel[i_subpix] = min(max( (int)( (1.0-pow(flash_intensity, 0.4)) * ani_backgd_RGBW[i_subpix] + flash_intensity * frame_flash_RGBW[i_subpix]  ),0),255); 
         }
@@ -936,8 +967,11 @@ void SpotRackAnimation4::new_frame(){
 //update external parameters :
     // fade rate (param Duration)
     const int current_fade_rate_ms    = map3_param(this->fixture->param1, 1000.0/FRATE, (double)this->fade_rate, 1000.0);
-    // Bakground Intensity 
-    const int current_bkg_intensity   = map3_param(this->fixture->param3, 0.0, (double)SPOTRACK_BKG_INTENSITY_REF, 255.0);
+    // Col1 Intensity 
+    int current_c1_intensity = map3_param(this->fixture->param8, 0.0, 255.0, 255.0);
+    if (this->fixture->param8==1.0) current_c1_intensity = -1; // -1 means maxxing out fixture's RGB values
+    // Col2 Intensity 
+    const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)RED_BKG_INTENSITY_REF, 255.0);
     // Ratio 
     const double current_ratio        = map3_param(this->fixture->param4, 0.1, this->density, 1.0);
 
@@ -963,7 +997,7 @@ void SpotRackAnimation4::new_frame(){
         auto current_spot = this->fixture->spots[units_index[i]];
 
         pixel backgd_RGB    = current_spot->RGBW(back_color, current_bkg_intensity);
-        pixel flash_RGB     = current_spot->RGBW(flash_color);
+        pixel flash_RGB     = current_spot->RGBW(flash_color, current_c1_intensity);
         pixel final_RGB     = current_spot->RGBW(black); //initialization before calculations
         
         if (param_activate_flash && auto_activate_flash && i<n_unit_on){
@@ -1017,8 +1051,11 @@ void SpotRackAnimation5::new_frame(){
 //update external parameters :
     // fade rate (param Duration)
     const int current_fade_rate_ms = map3(this->fixture->param1, 0.0, 0.5, 1.0, 1000.0/FRATE, (double)this->fade_rate, 1000.0);
-    // Bakground Intensity 
-    const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)SPOTRACK_BKG_INTENSITY_REF, 255.0);
+    // Col1 Intensity 
+    int current_c1_intensity = map3_param(this->fixture->param8, 0.0, 255.0, 255.0);
+    if (this->fixture->param8==1.0) current_c1_intensity = -1; // -1 means maxxing out fixture's RGB values
+    // Col2 Intensity 
+    const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)RED_BKG_INTENSITY_REF, 255.0);
     // Ratio 
     const double current_ratio = map3_param(this->fixture->param4, 0.1, 0.7, 1.0);
 
@@ -1029,12 +1066,10 @@ void SpotRackAnimation5::new_frame(){
     const int_vec::size_type n_unit = units_index.size();
     
 
-    // bool auto_activate_flash = (sampler.state == BEAT) /*&& (t_ms-sampler.t_beat_tracking_start < MAX_CONT_FLASH)*/;
 
     // for each new beat, sort segments in random order
     if (sampler.new_beat){
         units_index = fcn::randomized_vector(units_index);
-        // log(2, "BEAT");
     }
 
     // compute intensity value
@@ -1042,13 +1077,12 @@ void SpotRackAnimation5::new_frame(){
     //derive number of segments to turn on
     int n_unit_on = coef * n_unit * current_ratio;
     n_unit_on = max(1, n_unit_on);    // keep at least one random spot on between beats
-    // log(3, "N spot ON : ", fcn::num_to_str(n_unit_on));
 
     //chose which segments to turn on
     for (int i=0; i<n_unit; i++){
         SpotFixture *current_spot = this->fixture->spots[units_index[i]];   //for readability
 
-        pixel flash_RGB  = current_spot->RGBW(this->flash_color);
+        pixel flash_RGB  = current_spot->RGBW(this->flash_color, current_c1_intensity);
         pixel backgd_RGB = current_spot->RGBW(this->back_color, current_bkg_intensity);
         
         if (i<n_unit_on){
@@ -1119,7 +1153,6 @@ void SpotRackAnimation6::new_frame(){
     const int current_shape_i       = clamp(    map_param(this->fixture->param5,  0, (int)shapes.size()),
                                                 0, (int)shapes.size()-1);
     const Shape current_shape       = shapes[current_shape_i];
-    // log(2, "param5:", this->fixture->param5, " current_shape_i:", current_shape_i, " current_shape:", (int)current_shape);
 
     // Overall Speed 
     const int current_interval    = clamp(
@@ -1137,8 +1170,11 @@ void SpotRackAnimation6::new_frame(){
                                                 1000.0/FRATE,
                                                 30000.0);
 
-    // Bakground Intensity 
-    const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)ADDRLED_BKG_INTENSITY_REF, 255.0);
+    // Col1 Intensity 
+    int current_c1_intensity = map3_param(this->fixture->param8, 0.0, 255.0, 255.0);
+    if (this->fixture->param8==1.0) current_c1_intensity = -1; // -1 means maxxing out fixture's RGB values
+    // Col2 Intensity 
+    const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)RED_BKG_INTENSITY_REF, 255.0);
     
     // Chaser sequence
     static int previous_chaser_i    = current_chaser_i;
@@ -1152,7 +1188,6 @@ void SpotRackAnimation6::new_frame(){
       previous_chaser_i = current_chaser_i;
       this->init();
     }
-    // log(2, "Param1:", this->fixture->param1, " Param7:", this->fixture->param7);
     
   // long t = frame.t_current_ms;                // for readability
   const int n_unit = this->flashes.size();   // for readability
@@ -1183,7 +1218,6 @@ void SpotRackAnimation6::new_frame(){
       c_prev = c_next;
       c_next = fcn::random_pick(this->flash_colors);
 
-      // log(2, "step:" , i_step , " unit:" , i_unit , " t_prev:" , fcn::num_to_str(t_prev) , " t_next:" , fcn::num_to_str(t_next));
     }
 
     // Compute pixel intensity
@@ -1202,10 +1236,8 @@ void SpotRackAnimation6::new_frame(){
     }
     flash_intensity = clamp(flash_intensity, 0.0, 1.0);
 
-        //     if (i_unit==0)
-        // log(2, string(flash_intensity*50, ' '), 'x');
 
-    DMX_vec frame_flash_RGBW = (t_unit-t_prev > t_next-t_unit) ? current_spot->RGBW(c_next) : current_spot->RGBW(c_prev);
+    DMX_vec frame_flash_RGBW = (t_unit-t_prev > t_next-t_unit) ? current_spot->RGBW(c_next, current_c1_intensity) : current_spot->RGBW(c_prev, current_c1_intensity);
     DMX_vec unit_final_RGBW(4, 0);
 
     for(int i_subpix = 0; i_subpix < this->fixture->spots[i_unit]->pixel.size() ; i_subpix++){

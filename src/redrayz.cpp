@@ -10,7 +10,7 @@ RedLaserBox laserbox2(7, 6, "Grada Laser 2", 2);
 RedLaserBox laserbox3(13, 6, "Grada Laser 3", 2);
 
 RedLaserGroup lasergroup1(vector<DMX_channel*>{ &laserbox2.lasers[1], &laserbox2.lasers[3], &laserbox2.lasers[4], 
-                                                /*&laserbox1.lasers[0], */&laserbox1.lasers[1],  &laserbox1.lasers[3], &laserbox1.lasers[5]
+                                                &laserbox1.lasers[0], &laserbox1.lasers[1],  &laserbox1.lasers[3], &laserbox1.lasers[5]
                                               // ,&laserbox3.lasers[0], &laserbox3.lasers[1], &laserbox3.lasers[2], &laserbox3.lasers[3], &laserbox3.lasers[4], &laserbox3.lasers[5]
                                               }, 
                           "RedRayz 1", UNUSED, 6, 255, 40);
@@ -325,9 +325,11 @@ void RedrayzAnimation1::new_frame(){
                                                 1000.0/FRATE,
                                                 30000.0);
 
-    // Bakground Intensity 
-    const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)ADDRLED_BKG_INTENSITY_REF, 255.0);
-
+    // Col1 Intensity 
+    const int current_c1_intensity = map3_param(this->fixture->param8, 0.0, 255.0, 255.0);
+    // Col2 Intensity 
+    const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)RED_BKG_INTENSITY_REF, 255.0);
+    // log(2, "current_c1_intensity:", current_c1_intensity, "\tcurrent_bkg_intensity:", current_bkg_intensity);
 
   const int n_unit = this->flashes.size();   // for readability
 
@@ -372,7 +374,7 @@ void RedrayzAnimation1::new_frame(){
             break;
     }
 
-    DMX_vec frame_flash_RGB = (t_unit-t_prev > t_next-t_unit) ? fixture->RGB(c_next) : this->fixture->RGB(c_prev);
+    DMX_vec frame_flash_RGB = (t_unit-t_prev > t_next-t_unit) ? fixture->RGB(c_next, current_c1_intensity) : this->fixture->RGB(c_prev, current_c1_intensity);
     DMX_vec unit_final_RGB(3, 0);
     unit_final_RGB[R] = clamp( (int)( (1.0-pow(flash_intensity, 0.2)) * ani_backgd_RGB[R] + flash_intensity * frame_flash_RGB[R]  ),0,255); 
     unit_final_RGB[G] = clamp( (int)( (1.0-pow(flash_intensity, 0.2)) * ani_backgd_RGB[G] + flash_intensity * frame_flash_RGB[G]  ),0,255);
@@ -423,9 +425,11 @@ void RedrayzAnimation2::new_frame(){
 
   //update external parameters :
     // fade rate (param Duration)
-    const int current_fade_rate_ms    = map3_param(this->fixture->param1, 1000.0/FRATE, (double)this->fade_rate, 1000.0);
-    // Bakground Intensity 
-    const int current_bkg_intensity   = map3_param(this->fixture->param3, 0.0, 50.0, 255.0);
+    const int current_fade_rate_ms    = map3_param(this->fixture->param1, 1000.0/FRATE, (double)this->preset_duration, 1000.0);
+    // Col1 Intensity 
+    const int current_c1_intensity = map3_param(this->fixture->param8, 0.0, 255.0, 255.0);
+    // Col2 Intensity 
+    const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)RED_BKG_INTENSITY_REF, 255.0);
     // Ratio 
     const double current_ratio        = map3_param(this->fixture->param4, 0.1, this->density, 1.0);
 
@@ -449,7 +453,7 @@ void RedrayzAnimation2::new_frame(){
   for (int i_unit=0; i_unit<n_unit; i_unit++){
 
     pixel backgd_RGB    = this->fixture->RGB(back_color, current_bkg_intensity);
-    pixel flash_RGB     = this->fixture->RGB(flash_color);
+    pixel flash_RGB     = this->fixture->RGB(flash_color, current_c1_intensity);
     pixel final_RGB     = this->fixture->RGB(black); //initialization before calculations
 
     if (i_unit<n_unit_on){
@@ -505,9 +509,11 @@ void RedrayzAnimation3::new_frame(){
   
 //update external parameters :
   // fade rate (param Duration)
-  const int current_fade_rate_ms    = map3_param(this->fixture->param1, 1000.0/FRATE, (double)this->fade_rate, 1000.0);
-  // Bakground Intensity 
-  const int current_bkg_intensity   = map3_param(this->fixture->param3, 0.0, (double)ADDRLED_BKG_INTENSITY_REF, 255.0);
+  const int current_fade_rate_ms    = map3_param(this->fixture->param1, 1000.0/FRATE, (double)this->preset_duration, 1000.0);
+  // Col1 Intensity 
+  const int current_c1_intensity = map3_param(this->fixture->param8, 0.0, 255.0, 255.0);
+  // Col2 Intensity 
+  const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)RED_BKG_INTENSITY_REF, 255.0);
   // Ratio 
   const double current_ratio        = map3_param(this->fixture->param4, 0.1, 0.7, 1.0);
 
@@ -528,7 +534,7 @@ void RedrayzAnimation3::new_frame(){
   //chose which segments to turn on
   for (int i = 0; i<n_unit; i++){ //TODO leave one unit on ?
 
-    pixel flash_RGB  = this->fixture->RGB(this->flash_color);
+    pixel flash_RGB  = this->fixture->RGB(this->flash_color, current_c1_intensity);
     pixel backgd_RGB = this->fixture->RGB(this->back_color, current_bkg_intensity);
 
 
@@ -616,8 +622,10 @@ void RedrayzAnimation4::new_frame(){
                                                 1000.0/FRATE,
                                                 30000.0);
 
-    // Bakground Intensity 
-    const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)ADDRLED_BKG_INTENSITY_REF, 255.0);
+    // Col1 Intensity 
+    const int current_c1_intensity = map3_param(this->fixture->param8, 0.0, 255.0, 255.0);
+    // Col2 Intensity 
+    const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)RED_BKG_INTENSITY_REF, 255.0);
     // Chaser sequence
     current_chaser_i                = clamp(
                                               map_param(this->fixture->param7, 0, (int)this->fixture->chasers.size()),
@@ -677,7 +685,7 @@ void RedrayzAnimation4::new_frame(){
             break;
     }
 
-    DMX_vec frame_flash_RGB = (t_unit-t_prev > t_next-t_unit) ? fixture->RGB(c_next) : this->fixture->RGB(c_prev);
+    DMX_vec frame_flash_RGB = (t_unit-t_prev > t_next-t_unit) ? fixture->RGB(c_next, current_c1_intensity) : this->fixture->RGB(c_prev, current_c1_intensity);
     DMX_vec unit_final_RGB(3, 0);
     unit_final_RGB[R] = clamp( (int)( (1.0-pow(flash_intensity, 0.2)) * ani_backgd_RGB[R] + flash_intensity * frame_flash_RGB[R]  ),0,255); 
     unit_final_RGB[G] = clamp( (int)( (1.0-pow(flash_intensity, 0.2)) * ani_backgd_RGB[G] + flash_intensity * frame_flash_RGB[G]  ),0,255);

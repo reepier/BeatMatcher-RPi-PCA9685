@@ -52,6 +52,9 @@ extern std::vector<std::string> cli_anim_id;
 
 #define     ADDRLED_BKG_INTENSITY_REF   50
 
+#define     RED_BKG_INTENSITY_REF   25
+
+
 #define     SHOW_INTENSITY 0        // ranges from 1 to 3 (0 for all)
 
 // -- CONFIG MAXIMUM --------------------------------------------------

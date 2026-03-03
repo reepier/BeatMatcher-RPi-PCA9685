@@ -231,8 +231,12 @@ void LaserBeamAnimation0::init(const color_vec& palette) {
 }
 
 void LaserBeamAnimation0::new_frame() {
+    // Col1 Intensity 
+    int current_c1_intensity = map3_param(this->fixture->param8, 0.0, 255.0, 255.0);
+    if (this->fixture->param8==1.0) current_c1_intensity = -1; // -1 means maxxing out fixture's RGB values
+
     for(pixel_vec::iterator pix = this->fixture->pixels.begin(); pix!=this->fixture->pixels.end(); pix++){
-        *(pix) = this->fixture->RGB(this->color, -1);
+        *(pix) = this->fixture->RGB(this->color, current_c1_intensity);
     }
 }
 
@@ -313,8 +317,11 @@ void LaserBeamAnimation1::new_frame(){
                                                 1000.0/FRATE,
                                                 30000.0);
 
-    // Bakground Intensity 
-    const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)ADDRLED_BKG_INTENSITY_REF, 255.0);
+    // Col1 Intensity 
+    int current_c1_intensity = map3_param(this->fixture->param8, 0.0, 255.0, 255.0);
+    if (this->fixture->param8==1.0) current_c1_intensity = -1; // -1 means maxxing out fixture's RGB values
+    // Col2 Intensity 
+    const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)RED_BKG_INTENSITY_REF, 255.0);
 
 
     int n_unit = this->flashes.size();   // for readability
@@ -361,7 +368,7 @@ void LaserBeamAnimation1::new_frame(){
                 break;
         }
 
-        DMX_vec frame_flash_RGB = (t_unit-t_prev > t_next-t_unit) ? fixture->RGB(c_next, -1) : this->fixture->RGB(c_prev, -1);
+        DMX_vec frame_flash_RGB = (t_unit-t_prev > t_next-t_unit) ? fixture->RGB(c_next, current_c1_intensity) : this->fixture->RGB(c_prev, current_c1_intensity);
         DMX_vec final_RGB(3, 0);
         final_RGB[R] = min(max( (int)( (1.0-pow(flash_intensity, 0.2)) * ani_backgd_RGB[R] + flash_intensity * frame_flash_RGB[R]  ),0),255); 
         final_RGB[G] = min(max( (int)( (1.0-pow(flash_intensity, 0.2)) * ani_backgd_RGB[G] + flash_intensity * frame_flash_RGB[G]  ),0),255);
@@ -413,8 +420,11 @@ void LaserBeamAnimation2::new_frame(){
     //update external parameters :
     // flash duration (param Duration)
     const int current_fade_rate_ms    = map3_param(this->fixture->param1, 1000.0/FRATE, (double)this->preset_duration, 1000.0);
-    // Bakground Intensity 
-    const int current_bkg_intensity   = map3_param(this->fixture->param3, 0.0, 50.0, 255.0);
+    // Col1 Intensity 
+    int current_c1_intensity = map3_param(this->fixture->param8, 0.0, 255.0, 255.0);
+    if (this->fixture->param8==1.0) current_c1_intensity = -1; // -1 means maxxing out fixture's RGB values
+    // Col2 Intensity 
+    const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)RED_BKG_INTENSITY_REF, 255.0);
     // Ratio 
     const double current_ratio        = clamp(  map3_param(this->fixture->param4, 0.0, this->preset_density, 1.5),
                                                 0.0,
@@ -441,7 +451,7 @@ void LaserBeamAnimation2::new_frame(){
     for (int i_unit=0; i_unit<n_unit; i_unit++){
 
         pixel backgd_RGB    = this->fixture->RGB(back_color, current_bkg_intensity);
-        pixel flash_RGB     = this->fixture->RGB(flash_color);
+        pixel flash_RGB     = this->fixture->RGB(flash_color, current_c1_intensity);
         pixel final_RGB     = this->fixture->RGB(black); //initialization before calculations
 
         if (i_unit<n_unit_on){

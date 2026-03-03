@@ -544,11 +544,12 @@ class BaseFixture{
       /* external dynamic parameter (range from 0.0 to 1.0)
        * param1         : Duration
        * param2         : Interval
-       * param3         : Backgd intensity
+       * param3         : Color 2 intensity
        * param4         : Ratio
        * param5         : Shape  (square, exp, bubble, triangle...)
        * param6         : Decomposition (pix, barre, group, )
-       * param7         : Sequencing */
+       * param7         : Sequencing 
+       * param8         : Color 1 intensity*/
     double param1, param2, param3, param4, param5, param6, param7, param8;
 
     // Animations catalog

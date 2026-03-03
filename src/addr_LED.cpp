@@ -88,7 +88,8 @@ void AddressableLED::init(){
     FILL
     FILL
     FILL
-    FILL
+    // Animation type 6 : CHASER
+    animations.push_back(new AddrLEDAnimation5(this, 1000, 1000, "Chaser", "SR.6", leader, 1, 255, int_vec{2,3}));
     FILL
     FILL
     FILL
@@ -125,6 +126,12 @@ void AddressableLED::init(){
     FILL
 
     this->activate_none();
+
+    //                  DMXChaser(      int n_points,   n_groups    group_size     step_size       direction           parity      rand        description)
+    this->chasers.push_back(new DMXChaser(NUM_BAR,         1,           1,              1,      Direction::Forward,       0,        false,      "--o>----"));
+    this->chasers.push_back(new DMXChaser(NUM_BAR,         1,           1,              1,      Direction::Backward,       0,        false,      "----<o--"));
+    this->chasers.push_back(new DMXChaser(NUM_BAR,         1,           1,              1,      Direction::PingPong,       0,        false,      ">-o>---<"));
+
     this->dump_animations("AddressableLED");
 }
 
@@ -133,7 +140,7 @@ DMX_vec AddressableLED::buffer(){
     DMX_vec data(NUM_SUBPIX);
     
     double final_master =  this->active_animation!=nullptr ? 
-                                    animator.master/255.0 * this->master/255.0 * this->active_animation->master/255.0
+                                    /*animator.master/255.0 * */this->master/255.0 * this->active_animation->master/255.0
                                     : animator.master/255.0;  // from 0.0 to 1.0
 
     int i_data = 0;
@@ -222,9 +229,12 @@ void AddrLEDAnimation0::init(const color_vec& palette) {
 }
 
 void AddrLEDAnimation0::new_frame() {
-    this->fixture->set_allpix_color(this->color);
+    // Col1 Intensity 
+    int current_c1_intensity = map3_param(this->fixture->param8, 0.0, 255.0, 255.0);
+    if (this->fixture->param8==1.0) current_c1_intensity = -1; // -1 means maxxing out fixture's RGB values
 
-    //TODO : use param background_intensity to switch between 2 colors
+    this->fixture->set_allpix_color(this->color, current_c1_intensity);
+
 }
   
 
@@ -280,8 +290,11 @@ void AddrLEDAnimation1::new_frame(){
 //update external parameters :
     // fade rate (param Duration)
     const int current_fade_rate_ms    = map3_param(this->fixture->param1, 1000.0/FRATE, (double)this->fade_rate, 1000.0);
-    // Bakground Intensity 
-    const int current_bkg_intensity   = map3_param(this->fixture->param3, 0.0, (double)ADDRLED_BKG_INTENSITY_REF, 255.0);
+    // Col1 Intensity 
+    int current_c1_intensity = map3_param(this->fixture->param8, 0.0, 255.0, 255.0);
+    if (this->fixture->param8==1.0) current_c1_intensity = -1; // -1 means maxxing out fixture's RGB values
+    // Col2 Intensity 
+    const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)RED_BKG_INTENSITY_REF, 255.0);
     // Ratio 
     const double current_ratio        = map3_param(this->fixture->param4, 0.1, this->density, 1.0);
     // Subdivision 
@@ -308,7 +321,7 @@ void AddrLEDAnimation1::new_frame(){
 
     // precompute pixel values
     pixel backgd_RGB = this->fixture->RGB(back_color, current_bkg_intensity);
-    pixel flash_RGB = this->fixture->RGB(flash_color);
+    pixel flash_RGB = this->fixture->RGB(flash_color, current_c1_intensity);
     pixel final_mix_RGB(3);
 
     // Compute intensity vaue based on time elapsed since last beat
@@ -404,8 +417,11 @@ void AddrLEDAnimation2::new_frame(){
 //update external parameters :
     // fade rate (param Duration)
     const int current_fade_rate_ms    = map3_param(this->fixture->param1, 1000.0/FRATE, (double)this->fade_rate, 1000.0);
-    // Bakground Intensity 
-    const int current_bkg_intensity   = map3_param(this->fixture->param3, 0.0, (double)ADDRLED_BKG_INTENSITY_REF, 255.0);
+    // Col1 Intensity 
+    int current_c1_intensity = map3_param(this->fixture->param8, 0.0, 255.0, 255.0);
+    if (this->fixture->param8==1.0) current_c1_intensity = -1; // -1 means maxxing out fixture's RGB values
+    // Col2 Intensity 
+    const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)RED_BKG_INTENSITY_REF, 255.0);
     // Ratio 
     const double current_ratio        = map3_param(this->fixture->param4, 0.1, 0.7, 1.0);
     // Subdivision 
@@ -422,7 +438,7 @@ void AddrLEDAnimation2::new_frame(){
     unsigned long t_ms = frame.t_current_ms;
     unsigned long t_last_beat_ms = sampler.t_last_new_beat;
     int_vec::size_type n_unit = units_index.size();
-    pixel flash_RGB = this->fixture->RGB(this->flash_color);
+    pixel flash_RGB = this->fixture->RGB(this->flash_color, current_c1_intensity);
     pixel backgd_RGB = this->fixture->RGB(this->back_color, current_bkg_intensity);
 
     bool auto_activate_flash = (sampler.state == BEAT) /*&& (t_ms-sampler.t_beat_tracking_start < MAX_CONT_FLASH)*/; //TODO useless ?
@@ -514,18 +530,22 @@ void AddrLEDAnimation4::new_frame(){
     BaseAnimation::new_frame();
 
 //update external parameters :
+    // Overall Speed : mean interval between two bursts
+    const int current_interval    = clamp(      map3_param(this->fixture->param2, 5*(double)this->preset_interval, (double)this->preset_interval, (double)this->preset_interval/5 ),
+                                                1000.0/FRATE,
+                                                30000.0);
+    const double speed_ratio = (double)preset_interval/current_interval;  // speed multiplicator --> =1 means using preset speed, > 1 means faster, < 1 means slower
     // Burst length (param Duration)
-    const int current_duration      = clamp(
-                                                map3_param(this->fixture->param1, (double)this->flash_length/5, (double)this->flash_length, 5*(double)this->flash_length),
+    const double speed_adjusted_duration = preset_duration/speed_ratio;
+    const int current_duration      = clamp(    map3_param(this->fixture->param1, speed_adjusted_duration/5, speed_adjusted_duration, 5*speed_adjusted_duration),
                                                 1000.0/FRATE,
                                                 30000.0);
-    // Burst Interval 
-    const int current_interval    = clamp(
-                                                map3_param(this->fixture->param2, (double)this->flash_interval/5, (double)this->flash_interval, 5*(double)this->flash_interval),
-                                                1000.0/FRATE,
-                                                30000.0);
-    // Bakground Intensity 
-    const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)ADDRLED_BKG_INTENSITY_REF, 255.0);
+
+    // Col1 Intensity 
+    int current_c1_intensity = map3_param(this->fixture->param8, 0.0, 255.0, 255.0);
+    if (this->fixture->param8==1.0) current_c1_intensity = -1; // -1 means maxxing out fixture's RGB values
+    // Col2 Intensity 
+    const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)RED_BKG_INTENSITY_REF, 255.0);
     // Subdivision 
     static  strip_subdiv_t prev_subdiv          = this->unit;
     const   strip_subdiv_t current_subdiv       = (strip_subdiv_t) ( (int)map_param(this->fixture->param6, (double)strip_subdiv_t::pix, (double)strip_subdiv_t::group+1));
@@ -589,12 +609,13 @@ void AddrLEDAnimation4::new_frame(){
                         flash_intensity = fcn::gaussian((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::gaussian((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
                         break;
                 }
+                flash_intensity = clamp(flash_intensity, 0.0, 1.0);
 
             }else{
                 flash_intensity = 0.0;
             }
 
-            DMX_vec frame_flash_RGB = (t_unit-t_prev > t_next-t_unit) ? fixture->RGB(c_next) : this->fixture->RGB(c_prev);
+            DMX_vec frame_flash_RGB = (t_unit-t_prev > t_next-t_unit) ? fixture->RGB(c_next, current_c1_intensity) : this->fixture->RGB(c_prev, current_c1_intensity);
             DMX_vec unit_final_RGB(3, 0);
             unit_final_RGB[R] = min(max( (int)( (1.0-pow(flash_intensity, 0.2)) * ani_backgd_RGB[R] + flash_intensity * frame_flash_RGB[R]  ),0),255); 
             unit_final_RGB[G] = min(max( (int)( (1.0-pow(flash_intensity, 0.2)) * ani_backgd_RGB[G] + flash_intensity * frame_flash_RGB[G]  ),0),255);
@@ -614,3 +635,159 @@ void AddrLEDAnimation4::new_frame(){
 }
 
 
+/*
+#######         #####                                     
+#              #     # #    #   ##    ####  ###### #####  
+#              #       #    #  #  #  #      #      #    # 
+######         #       ###### #    #  ####  #####  #    # 
+      # ###    #       #    # ######      # #      #####  
+#     # ###    #     # #    # #    # #    # #      #   #  
+ #####  ###     #####  #    # #    #  ####  ###### #    */
+
+
+void AddrLEDAnimation5::init(){
+  BaseAnimation::init();
+
+  const int n_unit = NUM_BAR;             // set the number of laser pixels to control
+  this->flashes = vector<flash_vec>(n_unit, flash_vec(2));  // resize pixel vector
+  this->t_unit = 0.0;                                       // reset artificial time frame
+  
+  // initialize flash vector
+  this->current_chaser = this->fixture->chasers[current_chaser_i];
+  this->current_chaser->computeVseq(); //reshuffle random vector at every init (does nothing for a non-random vector)
+
+  int i_step = 0;
+  for (int i_unit=0; i_unit<n_unit; i_unit++){
+        flashes[i_unit][i_next].time = current_chaser->steps_until(i_unit, i_step);
+        flashes[i_unit][i_prev].time = -1*current_chaser->steps_since(i_unit, i_step);
+        flashes[i_unit][i_next].color = fcn::random_pick(this->flash_colors);
+        flashes[i_unit][i_prev].color = fcn::random_pick(this->flash_colors);
+  }
+
+}
+void AddrLEDAnimation5::init(const color_vec& palette){
+  // AUTOCOLOR init : assign flash colors & back color based on passed color palette :
+  const int palette_size = palette.size();
+  switch (palette_size)
+  {
+  case 0:
+      this->flash_colors = color_vec{black}, this->back_color = black;            break;
+  case 1:
+      this->flash_colors = color_vec{palette[0]}, this->back_color = black;  break;
+  case 2: 
+      this->flash_colors = color_vec{palette[0]}, this->back_color = palette[1];  break;
+  default:
+      flash_colors = color_vec{fcn::random_pick(palette)},    back_color = fcn::random_pick(palette);     break;
+  }
+
+  //call STANDARD init()
+  AddrLEDAnimation5::init();
+}
+
+void AddrLEDAnimation5::new_frame(){
+  BaseAnimation::new_frame();
+
+  //update external parameters :
+    // Shape
+    const vector<Shape> shapes = {gaussian, gaussian2, square, expdecay};
+    const int current_shape_i       = clamp(    map_param(this->fixture->param5,  0, (int)shapes.size()),
+                                                0, (int)shapes.size()-1);
+    const Shape current_shape       = shapes[current_shape_i];
+    // log(2, "param5:", this->fixture->param5, " current_shape_i:", current_shape_i, " current_shape:", (int)current_shape);
+
+    // Overall Speed 
+    const int current_interval    = clamp(
+                                                map3_param(this->fixture->param2, 5*(double)this->preset_interval, (double)this->preset_interval, (double)this->preset_interval/10),
+                                                1000.0/FRATE,
+                                                30000.0);    // Burst length (param Duration)
+    bool stop_chaser = false;
+    if (this->fixture->param2==0) stop_chaser = true;
+    const double speed_ratio = (double)preset_interval/current_interval;  // speed multiplicator --> =1 means using preset speed, > 1 means faster, < 1 means slower
+
+    // Step duration
+    const double speed_adjusted_duration = preset_duration/speed_ratio;
+    const int current_duration      = clamp(
+                                                map3_param(this->fixture->param1, speed_adjusted_duration/5, speed_adjusted_duration, 5*speed_adjusted_duration),
+                                                1000.0/FRATE,
+                                                30000.0);
+
+    // Col1 Intensity 
+    int current_c1_intensity = map3_param(this->fixture->param8, 0.0, 255.0, 255.0);
+    if (this->fixture->param8==1.0) current_c1_intensity = -1; // -1 means maxxing out fixture's RGB values
+    // Col2 Intensity 
+    const int current_bkg_intensity = map3_param(this->fixture->param3, 0.0, (double)RED_BKG_INTENSITY_REF, 255.0);
+    
+    // Chaser sequence
+    static int previous_chaser_i    = current_chaser_i;
+    current_chaser_i                = clamp(
+                                              map_param(this->fixture->param7, 0, (int)this->fixture->chasers.size()),
+                                              0, 
+                                              (int)this->fixture->chasers.size()-1);    //update
+    // log(2, "Param7:", this->fixture->param7, " previous_chaser_i:", previous_chaser_i, " current_chaser_i:", current_chaser_i);
+    if(current_chaser_i != previous_chaser_i){                          // recall init() if chaser change is required
+      // log(2, this->fixture->name, ": chaser update");
+      previous_chaser_i = current_chaser_i;
+      this->init();
+    }
+    // log(2, "Param1:", this->fixture->param1, " Param7:", this->fixture->param7);
+    
+  // long t = frame.t_current_ms;                // for readability
+  const int n_unit = this->flashes.size();   // for readability
+
+  // update internal timescales ("dt" in inversely proportionnal);
+  this->t_unit += 1000.0/FRATE/current_interval*(!stop_chaser);
+
+  i_step = (int)this->t_unit;
+
+  // for each unit "i" of the module
+  for (int i_unit=0; i_unit < n_unit; i_unit++){
+    auto &current_unit_next_flash = flashes[i_unit][i_next];       // for readability
+    auto &current_unit_prev_flash = flashes[i_unit][i_prev];       // for readability
+    double &t_next = current_unit_next_flash.time;
+    double &t_prev = current_unit_prev_flash.time;
+    simpleColor &c_next = current_unit_next_flash.color;
+    simpleColor &c_prev = current_unit_prev_flash.color;
+    // auto current_spot = this->fixture->spots[i_unit];
+    
+    const pixel ani_backgd_RGB = this->fixture->RGB(back_color, current_bkg_intensity);
+
+
+    // // when the flash passes, compute the next flash timestamp and update prev flash
+    if (t_unit > t_next){
+      
+      t_prev = t_next;
+      t_next = t_next + current_chaser->steps_until(i_unit, i_step);
+      c_prev = c_next;
+      c_next = fcn::random_pick(this->flash_colors);
+
+      // log(2, "step:" , i_step , " unit:" , i_unit , " t_prev:" , fcn::num_to_str(t_prev) , " t_next:" , fcn::num_to_str(t_next));
+    }
+
+    // Compute pixel intensity
+    double flash_intensity; // 0 by default
+    switch (current_shape){
+        case square : flash_intensity = fcn::square((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::square((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
+            break;
+        case gaussian : flash_intensity = fcn::gaussian((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::gaussian((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
+            break;
+        case gaussian2 : flash_intensity = fcn::gaussian2((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::gaussian2((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
+            break;
+        case expdecay : flash_intensity = fcn::exp_decay((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0);
+            break;
+        default : flash_intensity = fcn::gaussian((t_unit-t_prev)*current_interval, 0, current_duration, 0.0,1.0) + fcn::gaussian((t_next-t_unit)*current_interval, 0, current_duration, 0.0,1.0);
+            break;
+    }
+    flash_intensity = clamp(flash_intensity, 0.0, 1.0);
+
+        //     if (i_unit==0)
+        // log(2, string(flash_intensity*50, ' '), 'x');
+
+    DMX_vec frame_flash_RGB = (t_unit-t_prev > t_next-t_unit) ? this->fixture->RGB(c_next, current_c1_intensity) : this->fixture->RGB(c_prev, current_c1_intensity);
+    DMX_vec unit_final_RGB = this->fixture->RGB(black); // initialisation
+
+    for(int i_subpix = 0; i_subpix <unit_final_RGB.size() ; i_subpix++){
+        unit_final_RGB[i_subpix] = clamp( (int)( (1.0-pow(flash_intensity, 0.2)) * ani_backgd_RGB[i_subpix] + flash_intensity * frame_flash_RGB[i_subpix]  ),0,255);
+    }
+    this->fixture->set_bar_color(i_unit, unit_final_RGB);
+  }
+}
