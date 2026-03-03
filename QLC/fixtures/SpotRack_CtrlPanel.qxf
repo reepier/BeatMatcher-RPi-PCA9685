@@ -16,13 +16,13 @@
   <Capability Min="1" Max="1">Couleur</Capability>
   <Capability Min="2" Max="2"> - </Capability>
   <Capability Min="3" Max="3"> - </Capability>
-  <Capability Min="4" Max="4">Bulles statique</Capability>
-  <Capability Min="5" Max="5">Bulles très lent</Capability>
+  <Capability Min="4" Max="4"> - </Capability>
+  <Capability Min="5" Max="5"> - </Capability>
   <Capability Min="6" Max="6">Bulles lent</Capability>
   <Capability Min="7" Max="7">Bulles rapide</Capability>
   <Capability Min="8" Max="8"> - </Capability>
   <Capability Min="9" Max="9"> - </Capability>
-  <Capability Min="10" Max="10">Chaser aléa. statiq.</Capability>
+  <Capability Min="10" Max="10"> - </Capability>
   <Capability Min="11" Max="11">Chaser aléa. lent</Capability>
   <Capability Min="12" Max="12">Chaser aléa. rapide</Capability>
   <Capability Min="13" Max="13"> - </Capability>
@@ -35,12 +35,12 @@
   <Capability Min="20" Max="20"> - </Capability>
   <Capability Min="21" Max="21"> - </Capability>
   <Capability Min="22" Max="22">Strobe lent</Capability>
-  <Capability Min="23" Max="23">Strobe moyen</Capability>
+  <Capability Min="23" Max="23"> - </Capability>
   <Capability Min="24" Max="24">Strobe rapide</Capability>
   <Capability Min="25" Max="25"> - </Capability>
   <Capability Min="26" Max="26"> - </Capability>
   <Capability Min="27" Max="27"> - </Capability>
-  <Capability Min="28" Max="28">Beat analogique</Capability>
+  <Capability Min="28" Max="28"> - </Capability>
   <Capability Min="29" Max="29">Beat analog. (70%)</Capability>
   <Capability Min="30" Max="30"> - </Capability>
   <Capability Min="31" Max="31"> - </Capability>
@@ -158,9 +158,10 @@
  </Channel>
  <Channel Name="param7 : Sequencing">
   <Group Byte="0">Nothing</Group>
-  <Capability Min="0" Max="84">--o&gt;----</Capability>
-  <Capability Min="85" Max="169">----&lt;o--</Capability>
-  <Capability Min="170" Max="255">&gt;--o&gt;----&lt;</Capability>
+  <Capability Min="0" Max="63">--o&gt;----</Capability>
+  <Capability Min="64" Max="127">----&lt;o--</Capability>
+  <Capability Min="128" Max="191">&gt;--o&gt;----&lt;</Capability>
+  <Capability Min="192" Max="255"> --rand-- </Capability>
  </Channel>
  <Channel Name="param8 : reserve">
   <Group Byte="0">Nothing</Group>

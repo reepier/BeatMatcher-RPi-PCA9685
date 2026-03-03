@@ -27,7 +27,7 @@ $(test_app) : $(test) $(build_dir) $(objects)
 
 $(app): $(main) $(build_dir) $(objects) 
 	g++ $(flags) src/main.cpp $(objects) $(includePaths) $(libs) -o $(app)
-	rm QLC/temp/*
+	rm -f QLC/temp/* QLC/Functions
 
 build/:
 	mkdir build
@@ -77,7 +77,7 @@ get_qlc:
 	cp $(qlc_fix_path)/Beam_CtrlPanel.qxf				QLC/fixtures
 
 clean:
-	rm -f build/*.o bin/* *.log */*.log QLC/*
+	rm -f build/*.o bin/* *.log **/*.log QLC/temp/* QLC/Functions
 
 
 debug:

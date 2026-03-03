@@ -9,8 +9,8 @@
  <Engine>
   <InputOutputMap>
    <Universe Name="Beatmatcher Cmd" ID="0">
-    <Output Plugin="ArtNet" Line="0">
-     <PluginParameters outputUni="10"/>
+    <Output Plugin="ArtNet" Line="1">
+     <PluginParameters outputIP="192.168.0.255" outputUni="10"/>
     </Output>
    </Universe>
    <Universe Name="Interface APC" ID="1">
@@ -195,6 +195,9 @@
    <FixtureVal ID="6">1,1</FixtureVal>
    <FixtureVal ID="3">1,1</FixtureVal>
    <FixtureVal ID="4">1,1</FixtureVal>
+   <FixtureVal ID="8">1,1</FixtureVal>
+   <FixtureVal ID="7">1,1</FixtureVal>
+   <FixtureVal ID="5">1,1</FixtureVal>
   </Function>
   <Function ID="19" Type="Scene" Name="01 Gaussian" Path="3 SR 2/Paramétrage/Shapes">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
@@ -226,6 +229,9 @@
    <FixtureVal ID="6">1,19</FixtureVal>
    <FixtureVal ID="3">1,24</FixtureVal>
    <FixtureVal ID="4">1,24</FixtureVal>
+   <FixtureVal ID="5">1,24</FixtureVal>
+   <FixtureVal ID="8">1,19</FixtureVal>
+   <FixtureVal ID="7">1,17</FixtureVal>
   </Function>
   <Function ID="26" Type="Scene" Name="Strobe Lent" Path="ALL">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
@@ -233,6 +239,9 @@
    <FixtureVal ID="6">1,18</FixtureVal>
    <FixtureVal ID="3">1,22</FixtureVal>
    <FixtureVal ID="4">1,22</FixtureVal>
+   <FixtureVal ID="8">1,18</FixtureVal>
+   <FixtureVal ID="5">1,22</FixtureVal>
+   <FixtureVal ID="7">1,16</FixtureVal>
   </Function>
   <Function ID="27" Type="Scene" Name="Beat" Path="ALL">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
@@ -240,6 +249,9 @@
    <FixtureVal ID="6">1,32</FixtureVal>
    <FixtureVal ID="3">1,29</FixtureVal>
    <FixtureVal ID="4">1,29</FixtureVal>
+   <FixtureVal ID="8">1,32</FixtureVal>
+   <FixtureVal ID="7">1,22</FixtureVal>
+   <FixtureVal ID="5">1,29</FixtureVal>
   </Function>
   <Function ID="28" Type="Scene" Name="Bulles lentes" Path="ALL">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
@@ -247,6 +259,9 @@
    <FixtureVal ID="6">1,6</FixtureVal>
    <FixtureVal ID="3">1,6</FixtureVal>
    <FixtureVal ID="4">1,6</FixtureVal>
+   <FixtureVal ID="8">1,6</FixtureVal>
+   <FixtureVal ID="7">1,4</FixtureVal>
+   <FixtureVal ID="5">1,6</FixtureVal>
   </Function>
   <Function ID="29" Type="Scene" Name="Blackout" Path="ALL">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
@@ -254,6 +269,9 @@
    <FixtureVal ID="6">1,0</FixtureVal>
    <FixtureVal ID="3">1,0</FixtureVal>
    <FixtureVal ID="4">1,0</FixtureVal>
+   <FixtureVal ID="8">1,0</FixtureVal>
+   <FixtureVal ID="5">1,0</FixtureVal>
+   <FixtureVal ID="7">1,0</FixtureVal>
   </Function>
   <Function ID="30" Type="Scene" Name="04 Exponential" Path="3 SR 2/Paramétrage/Shapes">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
@@ -274,6 +292,16 @@
   <Function ID="34" Type="Scene" Name="04 Exponential" Path="8 RedRayz 2/Paramétrage/Shapes">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="8">8,255</FixtureVal>
+  </Function>
+  <Function ID="35" Type="Scene" Name="Bulles rapides" Path="ALL">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="2">1,7</FixtureVal>
+   <FixtureVal ID="6">1,8</FixtureVal>
+   <FixtureVal ID="3">1,7</FixtureVal>
+   <FixtureVal ID="4">1,7</FixtureVal>
+   <FixtureVal ID="8">1,8</FixtureVal>
+   <FixtureVal ID="7">1,5</FixtureVal>
+   <FixtureVal ID="5">1,7</FixtureVal>
   </Function>
   <Function ID="1000" Type="Scene" Name=" - " Path="1 LEDs/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
@@ -395,9 +423,25 @@
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="1">1,45</FixtureVal>
   </Function>
-  <Function ID="1046" Type="Scene" Name="Automatic" Path="1 LEDs/Animations">
+  <Function ID="1055" Type="Scene" Name="Chaser" Path="1 LEDs/Animations">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">1,55</FixtureVal>
+  </Function>
+  <Function ID="1056" Type="Scene" Name="Automatic" Path="1 LEDs/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="1">1,255</FixtureVal>
+  </Function>
+  <Function ID="1500" Type="Scene" Name="00: --o&gt;----" Path="1 LEDs/Paramétrage/Sequences">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">10,42</FixtureVal>
+  </Function>
+  <Function ID="1501" Type="Scene" Name="01: ----&lt;o--" Path="1 LEDs/Paramétrage/Sequences">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">10,127</FixtureVal>
+  </Function>
+  <Function ID="1502" Type="Scene" Name="02: &gt;-o&gt;---&lt;" Path="1 LEDs/Paramétrage/Sequences">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="1">10,212</FixtureVal>
   </Function>
   <Function ID="2000" Type="Scene" Name=" - " Path="2 SR 1/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
@@ -407,14 +451,6 @@
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,1</FixtureVal>
   </Function>
-  <Function ID="2004" Type="Scene" Name="Bulles statique" Path="2 SR 1/Animations">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,4</FixtureVal>
-  </Function>
-  <Function ID="2005" Type="Scene" Name="Bulles très lent" Path="2 SR 1/Animations">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,5</FixtureVal>
-  </Function>
   <Function ID="2006" Type="Scene" Name="Bulles lent" Path="2 SR 1/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,6</FixtureVal>
@@ -422,10 +458,6 @@
   <Function ID="2007" Type="Scene" Name="Bulles rapide" Path="2 SR 1/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,7</FixtureVal>
-  </Function>
-  <Function ID="2010" Type="Scene" Name="Chaser aléa. statiq." Path="2 SR 1/Animations">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,10</FixtureVal>
   </Function>
   <Function ID="2011" Type="Scene" Name="Chaser aléa. lent" Path="2 SR 1/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
@@ -447,17 +479,9 @@
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,22</FixtureVal>
   </Function>
-  <Function ID="2023" Type="Scene" Name="Strobe moyen" Path="2 SR 1/Animations">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,23</FixtureVal>
-  </Function>
   <Function ID="2024" Type="Scene" Name="Strobe rapide" Path="2 SR 1/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="2">1,24</FixtureVal>
-  </Function>
-  <Function ID="2028" Type="Scene" Name="Beat analogique" Path="2 SR 1/Animations">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">1,28</FixtureVal>
   </Function>
   <Function ID="2029" Type="Scene" Name="Beat analog. (70%)" Path="2 SR 1/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
@@ -477,15 +501,19 @@
   </Function>
   <Function ID="2500" Type="Scene" Name="00: --o&gt;----" Path="2 SR 1/Paramétrage/Sequences">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">10,42</FixtureVal>
+   <FixtureVal ID="2">10,32</FixtureVal>
   </Function>
   <Function ID="2501" Type="Scene" Name="01: ----&lt;o--" Path="2 SR 1/Paramétrage/Sequences">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">10,127</FixtureVal>
+   <FixtureVal ID="2">10,96</FixtureVal>
   </Function>
   <Function ID="2502" Type="Scene" Name="02: &gt;--o&gt;----&lt;" Path="2 SR 1/Paramétrage/Sequences">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="2">10,212</FixtureVal>
+   <FixtureVal ID="2">10,160</FixtureVal>
+  </Function>
+  <Function ID="2503" Type="Scene" Name="03:  --rand-- " Path="2 SR 1/Paramétrage/Sequences">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="2">10,224</FixtureVal>
   </Function>
   <Function ID="3000" Type="Scene" Name=" - " Path="3 SR 2/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
@@ -495,14 +523,6 @@
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="3">1,1</FixtureVal>
   </Function>
-  <Function ID="3004" Type="Scene" Name="Bulles statique" Path="3 SR 2/Animations">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,4</FixtureVal>
-  </Function>
-  <Function ID="3005" Type="Scene" Name="Bulles très lent" Path="3 SR 2/Animations">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,5</FixtureVal>
-  </Function>
   <Function ID="3006" Type="Scene" Name="Bulles lent" Path="3 SR 2/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="3">1,6</FixtureVal>
@@ -511,69 +531,61 @@
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="3">1,7</FixtureVal>
   </Function>
-  <Function ID="3008" Type="Scene" Name="Chaser aléa. statiq." Path="3 SR 2/Animations">
+  <Function ID="3011" Type="Scene" Name="Chaser aléa. lent" Path="3 SR 2/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,8</FixtureVal>
+   <FixtureVal ID="3">1,11</FixtureVal>
   </Function>
-  <Function ID="3009" Type="Scene" Name="Chaser aléa. lent" Path="3 SR 2/Animations">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,9</FixtureVal>
-  </Function>
-  <Function ID="3010" Type="Scene" Name="Chaser aléa. rapide" Path="3 SR 2/Animations">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,10</FixtureVal>
-  </Function>
-  <Function ID="3012" Type="Scene" Name="Décharge aléa. lent" Path="3 SR 2/Animations">
+  <Function ID="3012" Type="Scene" Name="Chaser aléa. rapide" Path="3 SR 2/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="3">1,12</FixtureVal>
   </Function>
-  <Function ID="3013" Type="Scene" Name="Décharge aléa. rapide" Path="3 SR 2/Animations">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,13</FixtureVal>
-  </Function>
-  <Function ID="3016" Type="Scene" Name="Strobe lent" Path="3 SR 2/Animations">
+  <Function ID="3016" Type="Scene" Name="Décharge aléa. lent" Path="3 SR 2/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="3">1,16</FixtureVal>
   </Function>
-  <Function ID="3017" Type="Scene" Name="Strobe moyen" Path="3 SR 2/Animations">
+  <Function ID="3017" Type="Scene" Name="Décharge aléa. rapide" Path="3 SR 2/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="3">1,17</FixtureVal>
   </Function>
-  <Function ID="3018" Type="Scene" Name="Strobe rapide" Path="3 SR 2/Animations">
+  <Function ID="3022" Type="Scene" Name="Strobe lent" Path="3 SR 2/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,18</FixtureVal>
+   <FixtureVal ID="3">1,22</FixtureVal>
   </Function>
-  <Function ID="3020" Type="Scene" Name="Beat analogique" Path="3 SR 2/Animations">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,20</FixtureVal>
-  </Function>
-  <Function ID="3021" Type="Scene" Name="Beat analog. (70%)" Path="3 SR 2/Animations">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,21</FixtureVal>
-  </Function>
-  <Function ID="3024" Type="Scene" Name="Beat digital" Path="3 SR 2/Animations">
+  <Function ID="3024" Type="Scene" Name="Strobe rapide" Path="3 SR 2/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="3">1,24</FixtureVal>
   </Function>
-  <Function ID="3030" Type="Scene" Name="Chaser" Path="3 SR 2/Animations">
+  <Function ID="3029" Type="Scene" Name="Beat analog. (70%)" Path="3 SR 2/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">1,30</FixtureVal>
+   <FixtureVal ID="3">1,29</FixtureVal>
   </Function>
-  <Function ID="3031" Type="Scene" Name="Automatic" Path="3 SR 2/Animations">
+  <Function ID="3034" Type="Scene" Name="Beat digital" Path="3 SR 2/Animations">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,34</FixtureVal>
+  </Function>
+  <Function ID="3040" Type="Scene" Name="Chaser" Path="3 SR 2/Animations">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">1,40</FixtureVal>
+  </Function>
+  <Function ID="3041" Type="Scene" Name="Automatic" Path="3 SR 2/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="3">1,255</FixtureVal>
   </Function>
   <Function ID="3500" Type="Scene" Name="00: --o&gt;----" Path="3 SR 2/Paramétrage/Sequences">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">10,42</FixtureVal>
+   <FixtureVal ID="3">10,32</FixtureVal>
   </Function>
   <Function ID="3501" Type="Scene" Name="01: ----&lt;o--" Path="3 SR 2/Paramétrage/Sequences">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">10,127</FixtureVal>
+   <FixtureVal ID="3">10,96</FixtureVal>
   </Function>
   <Function ID="3502" Type="Scene" Name="02: &gt;--o&gt;----&lt;" Path="3 SR 2/Paramétrage/Sequences">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="3">10,212</FixtureVal>
+   <FixtureVal ID="3">10,160</FixtureVal>
+  </Function>
+  <Function ID="3503" Type="Scene" Name="03:  --rand-- " Path="3 SR 2/Paramétrage/Sequences">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="3">10,224</FixtureVal>
   </Function>
   <Function ID="4000" Type="Scene" Name=" - " Path="4 SR 3/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
@@ -583,14 +595,6 @@
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,1</FixtureVal>
   </Function>
-  <Function ID="4004" Type="Scene" Name="Bulles statique" Path="4 SR 3/Animations">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="4">1,4</FixtureVal>
-  </Function>
-  <Function ID="4005" Type="Scene" Name="Bulles très lent" Path="4 SR 3/Animations">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="4">1,5</FixtureVal>
-  </Function>
   <Function ID="4006" Type="Scene" Name="Bulles lent" Path="4 SR 3/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,6</FixtureVal>
@@ -599,55 +603,43 @@
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,7</FixtureVal>
   </Function>
-  <Function ID="4008" Type="Scene" Name="Chaser aléa. statiq." Path="4 SR 3/Animations">
+  <Function ID="4011" Type="Scene" Name="Chaser aléa. lent" Path="4 SR 3/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="4">1,8</FixtureVal>
+   <FixtureVal ID="4">1,11</FixtureVal>
   </Function>
-  <Function ID="4009" Type="Scene" Name="Chaser aléa. lent" Path="4 SR 3/Animations">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="4">1,9</FixtureVal>
-  </Function>
-  <Function ID="4010" Type="Scene" Name="Chaser aléa. rapide" Path="4 SR 3/Animations">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="4">1,10</FixtureVal>
-  </Function>
-  <Function ID="4012" Type="Scene" Name="Décharge aléa. lent" Path="4 SR 3/Animations">
+  <Function ID="4012" Type="Scene" Name="Chaser aléa. rapide" Path="4 SR 3/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,12</FixtureVal>
   </Function>
-  <Function ID="4013" Type="Scene" Name="Décharge aléa. rapide" Path="4 SR 3/Animations">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="4">1,13</FixtureVal>
-  </Function>
-  <Function ID="4016" Type="Scene" Name="Strobe lent" Path="4 SR 3/Animations">
+  <Function ID="4016" Type="Scene" Name="Décharge aléa. lent" Path="4 SR 3/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,16</FixtureVal>
   </Function>
-  <Function ID="4017" Type="Scene" Name="Strobe moyen" Path="4 SR 3/Animations">
+  <Function ID="4017" Type="Scene" Name="Décharge aléa. rapide" Path="4 SR 3/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,17</FixtureVal>
   </Function>
-  <Function ID="4018" Type="Scene" Name="Strobe rapide" Path="4 SR 3/Animations">
+  <Function ID="4022" Type="Scene" Name="Strobe lent" Path="4 SR 3/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="4">1,18</FixtureVal>
+   <FixtureVal ID="4">1,22</FixtureVal>
   </Function>
-  <Function ID="4020" Type="Scene" Name="Beat analogique" Path="4 SR 3/Animations">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="4">1,20</FixtureVal>
-  </Function>
-  <Function ID="4021" Type="Scene" Name="Beat analog. (70%)" Path="4 SR 3/Animations">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="4">1,21</FixtureVal>
-  </Function>
-  <Function ID="4024" Type="Scene" Name="Beat digital" Path="4 SR 3/Animations">
+  <Function ID="4024" Type="Scene" Name="Strobe rapide" Path="4 SR 3/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,24</FixtureVal>
   </Function>
-  <Function ID="4030" Type="Scene" Name="Chaser" Path="4 SR 3/Animations">
+  <Function ID="4029" Type="Scene" Name="Beat analog. (70%)" Path="4 SR 3/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="4">1,30</FixtureVal>
+   <FixtureVal ID="4">1,29</FixtureVal>
   </Function>
-  <Function ID="4031" Type="Scene" Name="Automatic" Path="4 SR 3/Animations">
+  <Function ID="4034" Type="Scene" Name="Beat digital" Path="4 SR 3/Animations">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="4">1,34</FixtureVal>
+  </Function>
+  <Function ID="4040" Type="Scene" Name="Chaser" Path="4 SR 3/Animations">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="4">1,40</FixtureVal>
+  </Function>
+  <Function ID="4041" Type="Scene" Name="Automatic" Path="4 SR 3/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="4">1,255</FixtureVal>
   </Function>
@@ -659,14 +651,6 @@
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="5">1,1</FixtureVal>
   </Function>
-  <Function ID="5004" Type="Scene" Name="Bulles statique" Path="5 SR 4/Animations">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,4</FixtureVal>
-  </Function>
-  <Function ID="5005" Type="Scene" Name="Bulles très lent" Path="5 SR 4/Animations">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,5</FixtureVal>
-  </Function>
   <Function ID="5006" Type="Scene" Name="Bulles lent" Path="5 SR 4/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="5">1,6</FixtureVal>
@@ -675,55 +659,43 @@
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="5">1,7</FixtureVal>
   </Function>
-  <Function ID="5008" Type="Scene" Name="Chaser aléa. statiq." Path="5 SR 4/Animations">
+  <Function ID="5011" Type="Scene" Name="Chaser aléa. lent" Path="5 SR 4/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,8</FixtureVal>
+   <FixtureVal ID="5">1,11</FixtureVal>
   </Function>
-  <Function ID="5009" Type="Scene" Name="Chaser aléa. lent" Path="5 SR 4/Animations">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,9</FixtureVal>
-  </Function>
-  <Function ID="5010" Type="Scene" Name="Chaser aléa. rapide" Path="5 SR 4/Animations">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,10</FixtureVal>
-  </Function>
-  <Function ID="5012" Type="Scene" Name="Décharge aléa. lent" Path="5 SR 4/Animations">
+  <Function ID="5012" Type="Scene" Name="Chaser aléa. rapide" Path="5 SR 4/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="5">1,12</FixtureVal>
   </Function>
-  <Function ID="5013" Type="Scene" Name="Décharge aléa. rapide" Path="5 SR 4/Animations">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,13</FixtureVal>
-  </Function>
-  <Function ID="5016" Type="Scene" Name="Strobe lent" Path="5 SR 4/Animations">
+  <Function ID="5016" Type="Scene" Name="Décharge aléa. lent" Path="5 SR 4/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="5">1,16</FixtureVal>
   </Function>
-  <Function ID="5017" Type="Scene" Name="Strobe moyen" Path="5 SR 4/Animations">
+  <Function ID="5017" Type="Scene" Name="Décharge aléa. rapide" Path="5 SR 4/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="5">1,17</FixtureVal>
   </Function>
-  <Function ID="5018" Type="Scene" Name="Strobe rapide" Path="5 SR 4/Animations">
+  <Function ID="5022" Type="Scene" Name="Strobe lent" Path="5 SR 4/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,18</FixtureVal>
+   <FixtureVal ID="5">1,22</FixtureVal>
   </Function>
-  <Function ID="5020" Type="Scene" Name="Beat analogique" Path="5 SR 4/Animations">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,20</FixtureVal>
-  </Function>
-  <Function ID="5021" Type="Scene" Name="Beat analog. (70%)" Path="5 SR 4/Animations">
-   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,21</FixtureVal>
-  </Function>
-  <Function ID="5024" Type="Scene" Name="Beat digital" Path="5 SR 4/Animations">
+  <Function ID="5024" Type="Scene" Name="Strobe rapide" Path="5 SR 4/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="5">1,24</FixtureVal>
   </Function>
-  <Function ID="5030" Type="Scene" Name="Chaser" Path="5 SR 4/Animations">
+  <Function ID="5029" Type="Scene" Name="Beat analog. (70%)" Path="5 SR 4/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
-   <FixtureVal ID="5">1,30</FixtureVal>
+   <FixtureVal ID="5">1,29</FixtureVal>
   </Function>
-  <Function ID="5031" Type="Scene" Name="Automatic" Path="5 SR 4/Animations">
+  <Function ID="5034" Type="Scene" Name="Beat digital" Path="5 SR 4/Animations">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="5">1,34</FixtureVal>
+  </Function>
+  <Function ID="5040" Type="Scene" Name="Chaser" Path="5 SR 4/Animations">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <FixtureVal ID="5">1,40</FixtureVal>
+  </Function>
+  <Function ID="5041" Type="Scene" Name="Automatic" Path="5 SR 4/Animations">
    <Speed FadeIn="0" FadeOut="0" Duration="0"/>
    <FixtureVal ID="5">1,255</FixtureVal>
   </Function>
@@ -941,486 +913,28 @@
     <BackgroundImage>None</BackgroundImage>
     <Font>Default</Font>
    </Appearance>
-   <Frame Caption="Barres LED" ID="12">
-    <Appearance>
-     <FrameStyle>Sunken</FrameStyle>
-     <ForegroundColor>Default</ForegroundColor>
-     <BackgroundColor>4282202182</BackgroundColor>
-     <BackgroundImage>None</BackgroundImage>
-     <Font>Default</Font>
-    </Appearance>
-    <WindowState Visible="True" X="1275" Y="905" Width="435" Height="410"/>
-    <AllowChildren>True</AllowChildren>
-    <AllowResize>True</AllowResize>
-    <ShowHeader>True</ShowHeader>
-    <ShowEnableButton>True</ShowEnableButton>
-    <Collapsed>False</Collapsed>
-    <Disabled>False</Disabled>
-    <Slider Caption="Dim." ID="261" WidgetStyle="Slider" InvertedAppearance="false">
-     <WindowState Visible="True" X="15" Y="40" Width="50" Height="135"/>
-     <Appearance>
-      <FrameStyle>Sunken</FrameStyle>
-      <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>Default</BackgroundColor>
-      <BackgroundImage>None</BackgroundImage>
-      <Font>Default</Font>
-     </Appearance>
-     <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="255">
-      <Channel Fixture="1">0</Channel>
-     </Level>
-     <Playback>
-      <Function>4294967295</Function>
-     </Playback>
-    </Slider>
-    <Slider Caption="Col1" ID="269" WidgetStyle="Slider" InvertedAppearance="false">
-     <WindowState Visible="True" X="70" Y="40" Width="65" Height="135"/>
-     <Appearance>
-      <FrameStyle>Sunken</FrameStyle>
-      <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>Default</BackgroundColor>
-      <BackgroundImage>None</BackgroundImage>
-      <Font>Default</Font>
-     </Appearance>
-     <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="0">
-      <Channel Fixture="1">2</Channel>
-     </Level>
-     <Playback>
-      <Function>4294967295</Function>
-     </Playback>
-    </Slider>
-    <Slider Caption="Col2" ID="3" WidgetStyle="Slider" InvertedAppearance="false">
-     <WindowState Visible="True" X="135" Y="40" Width="65" Height="135"/>
-     <Appearance>
-      <FrameStyle>Sunken</FrameStyle>
-      <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>Default</BackgroundColor>
-      <BackgroundImage>None</BackgroundImage>
-      <Font>Default</Font>
-     </Appearance>
-     <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="0">
-      <Channel Fixture="1">3</Channel>
-     </Level>
-     <Playback>
-      <Function>4294967295</Function>
-     </Playback>
-    </Slider>
-    <SoloFrame Caption="Animations" ID="175">
-     <Appearance>
-      <FrameStyle>Sunken</FrameStyle>
-      <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>Default</BackgroundColor>
-      <BackgroundImage>None</BackgroundImage>
-      <Font>Default</Font>
-     </Appearance>
-     <WindowState Visible="True" X="15" Y="180" Width="405" Height="220"/>
-     <AllowChildren>True</AllowChildren>
-     <AllowResize>True</AllowResize>
-     <ShowHeader>False</ShowHeader>
-     <ShowEnableButton>False</ShowEnableButton>
-     <Mixing>False</Mixing>
-     <Collapsed>False</Collapsed>
-     <Disabled>False</Disabled>
-     <Button Caption="Rapide" ID="146" Icon="">
-      <WindowState Visible="True" X="85" Y="15" Width="70" Height="30"/>
-      <Appearance>
-       <FrameStyle>None</FrameStyle>
-       <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>4288266737</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Default</Font>
-      </Appearance>
-      <Function ID="4294967295"/>
-      <Action>Toggle</Action>
-      <Intensity Adjust="False">100</Intensity>
-     </Button>
-     <Button Caption="Lent" ID="147" Icon="">
-      <WindowState Visible="True" X="15" Y="15" Width="70" Height="30"/>
-      <Appearance>
-       <FrameStyle>None</FrameStyle>
-       <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>4288266737</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Default</Font>
-      </Appearance>
-      <Function ID="4294967295"/>
-      <Action>Toggle</Action>
-      <Intensity Adjust="False">100</Intensity>
-     </Button>
-     <Button Caption="OFF" ID="149" Icon="">
-      <WindowState Visible="True" X="45" Y="180" Width="40" Height="30"/>
-      <Appearance>
-       <FrameStyle>None</FrameStyle>
-       <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>4282202182</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Default</Font>
-      </Appearance>
-      <Function ID="1000"/>
-      <Action>Toggle</Action>
-      <Intensity Adjust="False">100</Intensity>
-     </Button>
-     <Button Caption="Rapide" ID="154" Icon="">
-      <WindowState Visible="True" X="85" Y="45" Width="70" Height="30"/>
-      <Appearance>
-       <FrameStyle>None</FrameStyle>
-       <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>4287623332</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Default</Font>
-      </Appearance>
-      <Function ID="4294967295"/>
-      <Action>Toggle</Action>
-      <Intensity Adjust="False">100</Intensity>
-     </Button>
-     <Button Caption="Lent" ID="155" Icon="">
-      <WindowState Visible="True" X="15" Y="45" Width="70" Height="30"/>
-      <Appearance>
-       <FrameStyle>None</FrameStyle>
-       <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>4287623332</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Default</Font>
-      </Appearance>
-      <Function ID="4294967295"/>
-      <Action>Toggle</Action>
-      <Intensity Adjust="False">100</Intensity>
-     </Button>
-     <Button Caption="Lent" ID="156" Icon="">
-      <WindowState Visible="True" X="15" Y="75" Width="70" Height="30"/>
-      <Appearance>
-       <FrameStyle>None</FrameStyle>
-       <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>4294570091</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Default</Font>
-      </Appearance>
-      <Function ID="4294967295"/>
-      <Action>Toggle</Action>
-      <Intensity Adjust="False">100</Intensity>
-     </Button>
-     <Button Caption="Rapide" ID="157" Icon="">
-      <WindowState Visible="True" X="85" Y="75" Width="70" Height="30"/>
-      <Appearance>
-       <FrameStyle>None</FrameStyle>
-       <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>4294570091</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Default</Font>
-      </Appearance>
-      <Function ID="4294967295"/>
-      <Action>Toggle</Action>
-      <Intensity Adjust="False">100</Intensity>
-     </Button>
-     <Button Caption="Analog." ID="159" Icon="">
-      <WindowState Visible="True" X="85" Y="140" Width="70" Height="30"/>
-      <Appearance>
-       <FrameStyle>None</FrameStyle>
-       <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Default</Font>
-      </Appearance>
-      <Function ID="4294967295"/>
-      <Action>Toggle</Action>
-      <Intensity Adjust="False">100</Intensity>
-     </Button>
-     <Button Caption="Lent" ID="161" Icon="">
-      <WindowState Visible="True" X="15" Y="105" Width="70" Height="30"/>
-      <Appearance>
-       <FrameStyle>None</FrameStyle>
-       <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>4292643549</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Default</Font>
-      </Appearance>
-      <Function ID="4294967295"/>
-      <Action>Toggle</Action>
-      <Intensity Adjust="False">100</Intensity>
-     </Button>
-     <Button Caption="Rapide" ID="162" Icon="">
-      <WindowState Visible="True" X="85" Y="105" Width="70" Height="30"/>
-      <Appearance>
-       <FrameStyle>None</FrameStyle>
-       <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>4292643549</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Default</Font>
-      </Appearance>
-      <Function ID="4294967295"/>
-      <Action>Toggle</Action>
-      <Intensity Adjust="False">100</Intensity>
-     </Button>
-     <Button Caption="ON" ID="130" Icon="">
-      <WindowState Visible="True" X="85" Y="180" Width="35" Height="30"/>
-      <Appearance>
-       <FrameStyle>None</FrameStyle>
-       <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>4294336849</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Default</Font>
-      </Appearance>
-      <Function ID="4294967295"/>
-      <Action>Toggle</Action>
-      <Intensity Adjust="False">100</Intensity>
-     </Button>
-     <Button Caption="Digital" ID="350" Icon="">
-      <WindowState Visible="True" X="15" Y="140" Width="70" Height="30"/>
-      <Appearance>
-       <FrameStyle>None</FrameStyle>
-       <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Default</Font>
-      </Appearance>
-      <Function ID="4294967295"/>
-      <Action>Toggle</Action>
-      <Intensity Adjust="False">100</Intensity>
-     </Button>
-     <Label Caption="Bulles" ID="351">
-      <WindowState Visible="True" X="160" Y="20" Width="65" Height="20"/>
-      <Appearance>
-       <FrameStyle>None</FrameStyle>
-       <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>4288266737</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
-      </Appearance>
-     </Label>
-     <Label Caption="Carré" ID="355">
-      <WindowState Visible="True" X="160" Y="50" Width="60" Height="20"/>
-      <Appearance>
-       <FrameStyle>None</FrameStyle>
-       <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>4287623332</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
-      </Appearance>
-     </Label>
-     <Label Caption="Flash" ID="363">
-      <WindowState Visible="True" X="160" Y="80" Width="60" Height="20"/>
-      <Appearance>
-       <FrameStyle>None</FrameStyle>
-       <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>4294570091</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
-      </Appearance>
-     </Label>
-     <Label Caption="Strobe" ID="364">
-      <WindowState Visible="True" X="160" Y="110" Width="60" Height="20"/>
-      <Appearance>
-       <FrameStyle>None</FrameStyle>
-       <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>4292643549</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
-      </Appearance>
-     </Label>
-     <SoloFrame Caption="" ID="373">
-      <Appearance>
-       <FrameStyle>Sunken</FrameStyle>
-       <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>4282202182</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Default</Font>
-      </Appearance>
-      <WindowState Visible="True" X="240" Y="25" Width="145" Height="75"/>
-      <AllowChildren>True</AllowChildren>
-      <AllowResize>True</AllowResize>
-      <ShowHeader>False</ShowHeader>
-      <ShowEnableButton>False</ShowEnableButton>
-      <Mixing>False</Mixing>
-      <Collapsed>False</Collapsed>
-      <Disabled>False</Disabled>
-      <Label Caption="TODO" ID="380">
-       <WindowState Visible="True" X="30" Y="15" Width="75" Height="30"/>
-       <Appearance>
-        <FrameStyle>None</FrameStyle>
-        <ForegroundColor>Default</ForegroundColor>
-        <BackgroundColor>4282202182</BackgroundColor>
-        <BackgroundImage>None</BackgroundImage>
-        <Font>Default</Font>
-       </Appearance>
-      </Label>
-     </SoloFrame>
-     <Button Caption="Chaser" ID="374" Icon="">
-      <WindowState Visible="True" X="295" Y="115" Width="70" Height="30"/>
-      <Appearance>
-       <FrameStyle>None</FrameStyle>
-       <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>4282202182</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Default</Font>
-      </Appearance>
-      <Function ID="4294967295"/>
-      <Action>Toggle</Action>
-      <Intensity Adjust="False">100</Intensity>
-     </Button>
-    </SoloFrame>
-    <SoloFrame Caption="" ID="312">
-     <Appearance>
-      <FrameStyle>Sunken</FrameStyle>
-      <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>Default</BackgroundColor>
-      <BackgroundImage>None</BackgroundImage>
-      <Font>Default</Font>
-     </Appearance>
-     <WindowState Visible="True" X="215" Y="50" Width="100" Height="115"/>
-     <AllowChildren>False</AllowChildren>
-     <AllowResize>True</AllowResize>
-     <ShowHeader>False</ShowHeader>
-     <ShowEnableButton>False</ShowEnableButton>
-     <Mixing>False</Mixing>
-     <Collapsed>False</Collapsed>
-     <Disabled>False</Disabled>
-     <Button Caption="Pixel" ID="313" Icon="">
-      <WindowState Visible="True" X="5" Y="5" Width="85" Height="25"/>
-      <Appearance>
-       <FrameStyle>None</FrameStyle>
-       <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Default</Font>
-      </Appearance>
-      <Function ID="0"/>
-      <Action>Toggle</Action>
-      <Intensity Adjust="False">100</Intensity>
-     </Button>
-     <Button Caption="Segment" ID="314" Icon="">
-      <WindowState Visible="True" X="5" Y="30" Width="85" Height="25"/>
-      <Appearance>
-       <FrameStyle>None</FrameStyle>
-       <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Default</Font>
-      </Appearance>
-      <Function ID="1"/>
-      <Action>Toggle</Action>
-      <Intensity Adjust="False">100</Intensity>
-     </Button>
-     <Button Caption="Barre" ID="315" Icon="">
-      <WindowState Visible="True" X="5" Y="55" Width="85" Height="25"/>
-      <Appearance>
-       <FrameStyle>None</FrameStyle>
-       <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Default</Font>
-      </Appearance>
-      <Function ID="5"/>
-      <Action>Toggle</Action>
-      <Intensity Adjust="False">100</Intensity>
-     </Button>
-     <Button Caption="Groupe" ID="316" Icon="">
-      <WindowState Visible="True" X="5" Y="80" Width="85" Height="25"/>
-      <Appearance>
-       <FrameStyle>None</FrameStyle>
-       <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Default</Font>
-      </Appearance>
-      <Function ID="11"/>
-      <Action>Toggle</Action>
-      <Intensity Adjust="False">100</Intensity>
-     </Button>
-    </SoloFrame>
-    <SoloFrame Caption="" ID="118">
-     <Appearance>
-      <FrameStyle>Sunken</FrameStyle>
-      <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>Default</BackgroundColor>
-      <BackgroundImage>None</BackgroundImage>
-      <Font>Default</Font>
-     </Appearance>
-     <WindowState Visible="True" X="320" Y="50" Width="100" Height="115"/>
-     <AllowChildren>True</AllowChildren>
-     <AllowResize>True</AllowResize>
-     <ShowHeader>False</ShowHeader>
-     <ShowEnableButton>False</ShowEnableButton>
-     <Mixing>False</Mixing>
-     <Collapsed>False</Collapsed>
-     <Disabled>False</Disabled>
-     <Button Caption="Gaussian" ID="18" Icon="">
-      <WindowState Visible="True" X="5" Y="5" Width="85" Height="30"/>
-      <Appearance>
-       <FrameStyle>None</FrameStyle>
-       <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>4282202182</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Default</Font>
-      </Appearance>
-      <Function ID="4294967295"/>
-      <Action>Toggle</Action>
-      <Intensity Adjust="False">100</Intensity>
-     </Button>
-     <Button Caption="Square" ID="43" Icon="">
-      <WindowState Visible="True" X="5" Y="55" Width="85" Height="25"/>
-      <Appearance>
-       <FrameStyle>None</FrameStyle>
-       <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>4282202182</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Default</Font>
-      </Appearance>
-      <Function ID="4294967295"/>
-      <Action>Toggle</Action>
-      <Intensity Adjust="False">100</Intensity>
-     </Button>
-     <Button Caption="Expon." ID="74" Icon="">
-      <WindowState Visible="True" X="5" Y="80" Width="85" Height="25"/>
-      <Appearance>
-       <FrameStyle>None</FrameStyle>
-       <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>4282202182</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Default</Font>
-      </Appearance>
-      <Function ID="4294967295"/>
-      <Action>Toggle</Action>
-      <Intensity Adjust="False">100</Intensity>
-     </Button>
-     <Button Caption="Gaussian2" ID="89" Icon="">
-      <WindowState Visible="True" X="5" Y="30" Width="85" Height="25"/>
-      <Appearance>
-       <FrameStyle>None</FrameStyle>
-       <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>4282202182</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Default</Font>
-      </Appearance>
-      <Function ID="4294967295"/>
-      <Action>Toggle</Action>
-      <Intensity Adjust="False">100</Intensity>
-     </Button>
-    </SoloFrame>
-   </Frame>
    <Frame Caption="PAR#2 : DJ Contre" ID="9">
     <Appearance>
      <FrameStyle>Sunken</FrameStyle>
      <ForegroundColor>Default</ForegroundColor>
-     <BackgroundColor>4284374116</BackgroundColor>
+     <BackgroundColor>4290822076</BackgroundColor>
      <BackgroundImage>None</BackgroundImage>
      <Font>Default</Font>
     </Appearance>
     <WindowState Visible="True" X="310" Y="465" Width="420" Height="415"/>
     <AllowChildren>True</AllowChildren>
-    <AllowResize>True</AllowResize>
-    <ShowHeader>True</ShowHeader>
-    <ShowEnableButton>True</ShowEnableButton>
+    <AllowResize>False</AllowResize>
+    <ShowHeader>False</ShowHeader>
+    <ShowEnableButton>False</ShowEnableButton>
     <Collapsed>False</Collapsed>
     <Disabled>False</Disabled>
     <SoloFrame Caption="Animations" ID="331">
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
-      <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>4284374116</BackgroundColor>
+      <ForegroundColor>4278190080</ForegroundColor>
+      <BackgroundColor>4288321942</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
-      <Font>Default</Font>
+      <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
      </Appearance>
      <WindowState Visible="True" X="15" Y="185" Width="340" Height="215"/>
      <AllowChildren>True</AllowChildren>
@@ -1442,6 +956,7 @@
       <Function ID="3007"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
+      <Input Universe="1" Channel="129" LowerValue="2" UpperValue="42"/>
      </Button>
      <Button Caption="OFF" ID="200" Icon="">
       <WindowState Visible="True" X="175" Y="175" Width="40" Height="30"/>
@@ -1455,7 +970,6 @@
       <Function ID="3000"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
-      <Input Universe="1" Channel="4276"/>
      </Button>
      <Button Caption="Rapide" ID="201" Icon="">
       <WindowState Visible="True" X="85" Y="45" Width="70" Height="30"/>
@@ -1466,7 +980,7 @@
        <BackgroundImage>None</BackgroundImage>
        <Font>Default</Font>
       </Appearance>
-      <Function ID="3010"/>
+      <Function ID="4294967295"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
      </Button>
@@ -1479,7 +993,7 @@
        <BackgroundImage>None</BackgroundImage>
        <Font>Default</Font>
       </Appearance>
-      <Function ID="3009"/>
+      <Function ID="4294967295"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
      </Button>
@@ -1492,7 +1006,7 @@
        <BackgroundImage>None</BackgroundImage>
        <Font>Default</Font>
       </Appearance>
-      <Function ID="3021"/>
+      <Function ID="4294967295"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
       <Input Universe="1" Channel="137" LowerValue="2" UpperValue="42"/>
@@ -1506,7 +1020,7 @@
        <BackgroundImage>None</BackgroundImage>
        <Font>Default</Font>
       </Appearance>
-      <Function ID="3018"/>
+      <Function ID="4294967295"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
       <Input Universe="1" Channel="153" LowerValue="2" UpperValue="42"/>
@@ -1577,7 +1091,7 @@
       <Function ID="3006"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
-      <Input Universe="1" Channel="129" LowerValue="2" UpperValue="42"/>
+      <Input Universe="1" Channel="4276"/>
      </Button>
      <Button Caption="Digital" ID="317" Icon="">
       <WindowState Visible="True" X="15" Y="150" Width="70" Height="30"/>
@@ -1591,7 +1105,6 @@
       <Function ID="3024"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
-      <Input Universe="1" Channel="142" LowerValue="2" UpperValue="42"/>
      </Button>
      <Button Caption="Lent" ID="318" Icon="">
       <WindowState Visible="True" X="15" Y="75" Width="70" Height="30"/>
@@ -1615,7 +1128,7 @@
        <BackgroundImage>None</BackgroundImage>
        <Font>Default</Font>
       </Appearance>
-      <Function ID="3013"/>
+      <Function ID="4294967295"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
      </Button>
@@ -1638,11 +1151,11 @@
       <Appearance>
        <FrameStyle>None</FrameStyle>
        <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>4294950511</BackgroundColor>
+       <BackgroundColor>4290085722</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Default</Font>
       </Appearance>
-      <Function ID="3030"/>
+      <Function ID="4294967295"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
      </Button>
@@ -1650,7 +1163,7 @@
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>4291668879</BackgroundColor>
+       <BackgroundColor>4290085722</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Default</Font>
       </Appearance>
@@ -1704,13 +1217,13 @@
      </SoloFrame>
     </SoloFrame>
     <Slider Caption="Dim." ID="5" WidgetStyle="Slider" InvertedAppearance="false">
-     <WindowState Visible="True" X="20" Y="40" Width="55" Height="130"/>
+     <WindowState Visible="True" X="20" Y="45" Width="55" Height="125"/>
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
-      <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>Default</BackgroundColor>
+      <ForegroundColor>4278190080</ForegroundColor>
+      <BackgroundColor>4288321942</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
-      <Font>Default</Font>
+      <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
      </Appearance>
      <Input Universe="1" Channel="4103"/>
      <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
@@ -1722,16 +1235,16 @@
      </Playback>
     </Slider>
     <Slider Caption="Col1" ID="6" WidgetStyle="Slider" InvertedAppearance="false">
-     <WindowState Visible="True" X="90" Y="40" Width="65" Height="130"/>
+     <WindowState Visible="True" X="90" Y="45" Width="65" Height="125"/>
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
-      <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>Default</BackgroundColor>
+      <ForegroundColor>4278190080</ForegroundColor>
+      <BackgroundColor>4288321942</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
-      <Font>Default</Font>
+      <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="17">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="3">2</Channel>
      </Level>
      <Playback>
@@ -1739,16 +1252,16 @@
      </Playback>
     </Slider>
     <Slider Caption="Col2" ID="7" WidgetStyle="Slider" InvertedAppearance="false">
-     <WindowState Visible="True" X="155" Y="40" Width="65" Height="130"/>
+     <WindowState Visible="True" X="155" Y="45" Width="65" Height="125"/>
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
-      <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>Default</BackgroundColor>
+      <ForegroundColor>4278190080</ForegroundColor>
+      <BackgroundColor>4288321942</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
-      <Font>Default</Font>
+      <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="2">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="3">3</Channel>
      </Level>
      <Playback>
@@ -1756,17 +1269,17 @@
      </Playback>
     </Slider>
     <Slider Caption="Speed" ID="282" WidgetStyle="Knob" InvertedAppearance="false">
-     <WindowState Visible="True" X="350" Y="50" Width="60" Height="100"/>
+     <WindowState Visible="True" X="340" Y="60" Width="60" Height="100"/>
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
-      <ForegroundColor>4294967295</ForegroundColor>
-      <BackgroundColor>4284374116</BackgroundColor>
+      <ForegroundColor>4278190080</ForegroundColor>
+      <BackgroundColor>4288321942</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
      </Appearance>
      <Input Universe="1" Channel="49"/>
      <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="122">
+     <Level LowLimit="0" HighLimit="255" Value="130">
       <Channel Fixture="3">5</Channel>
      </Level>
      <Playback>
@@ -1777,7 +1290,7 @@
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>4284374116</BackgroundColor>
+      <BackgroundColor>4288321942</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
@@ -1842,30 +1355,40 @@
       <Intensity Adjust="False">100</Intensity>
      </Button>
     </SoloFrame>
+    <Label Caption="DJ CONTRE" ID="103">
+     <WindowState Visible="True" X="20" Y="10" Width="370" Height="25"/>
+     <Appearance>
+      <FrameStyle>None</FrameStyle>
+      <ForegroundColor>Default</ForegroundColor>
+      <BackgroundColor>4292795866</BackgroundColor>
+      <BackgroundImage>None</BackgroundImage>
+      <Font>Ubuntu,13,-1,5,75,0,0,0,0,0</Font>
+     </Appearance>
+    </Label>
    </Frame>
    <Frame Caption="PAR#3 : DJ Face" ID="15">
     <Appearance>
-     <FrameStyle>Sunken</FrameStyle>
+     <FrameStyle>Raised</FrameStyle>
      <ForegroundColor>Default</ForegroundColor>
-     <BackgroundColor>Default</BackgroundColor>
+     <BackgroundColor>4290822076</BackgroundColor>
      <BackgroundImage>None</BackgroundImage>
      <Font>Default</Font>
     </Appearance>
-    <WindowState Visible="True" X="735" Y="465" Width="390" Height="425"/>
+    <WindowState Visible="True" X="745" Y="465" Width="385" Height="415"/>
     <AllowChildren>True</AllowChildren>
-    <AllowResize>True</AllowResize>
-    <ShowHeader>True</ShowHeader>
-    <ShowEnableButton>True</ShowEnableButton>
+    <AllowResize>False</AllowResize>
+    <ShowHeader>False</ShowHeader>
+    <ShowEnableButton>False</ShowEnableButton>
     <Collapsed>False</Collapsed>
     <Disabled>False</Disabled>
     <Slider Caption="Dim." ID="10" WidgetStyle="Slider" InvertedAppearance="false">
-     <WindowState Visible="True" X="10" Y="40" Width="55" Height="130"/>
+     <WindowState Visible="True" X="15" Y="50" Width="55" Height="125"/>
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
-      <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>Default</BackgroundColor>
+      <ForegroundColor>4278190080</ForegroundColor>
+      <BackgroundColor>4288321942</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
-      <Font>Default</Font>
+      <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
      </Appearance>
      <Input Universe="1" Channel="8199"/>
      <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
@@ -1877,13 +1400,13 @@
      </Playback>
     </Slider>
     <Slider Caption="Col1" ID="11" WidgetStyle="Slider" InvertedAppearance="false">
-     <WindowState Visible="True" X="70" Y="40" Width="65" Height="130"/>
+     <WindowState Visible="True" X="75" Y="50" Width="65" Height="125"/>
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
-      <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>Default</BackgroundColor>
+      <ForegroundColor>4278190080</ForegroundColor>
+      <BackgroundColor>4288321942</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
-      <Font>Default</Font>
+      <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
      <Level LowLimit="0" HighLimit="255" Value="0">
@@ -1894,13 +1417,13 @@
      </Playback>
     </Slider>
     <Slider Caption="Col2" ID="13" WidgetStyle="Slider" InvertedAppearance="false">
-     <WindowState Visible="True" X="135" Y="40" Width="65" Height="130"/>
+     <WindowState Visible="True" X="140" Y="50" Width="65" Height="125"/>
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
-      <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>Default</BackgroundColor>
+      <ForegroundColor>4278190080</ForegroundColor>
+      <BackgroundColor>4288321942</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
-      <Font>Default</Font>
+      <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
      <Level LowLimit="0" HighLimit="255" Value="0">
@@ -1913,10 +1436,10 @@
     <SoloFrame Caption="Animations" ID="238">
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
-      <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>Default</BackgroundColor>
+      <ForegroundColor>4278190080</ForegroundColor>
+      <BackgroundColor>4288321942</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
-      <Font>Default</Font>
+      <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
      </Appearance>
      <WindowState Visible="True" X="15" Y="185" Width="345" Height="215"/>
      <AllowChildren>True</AllowChildren>
@@ -1938,6 +1461,7 @@
       <Function ID="4007"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
+      <Input Universe="1" Channel="130" LowerValue="2" UpperValue="42"/>
      </Button>
      <Button Caption="Lent" ID="17" Icon="">
       <WindowState Visible="True" X="15" Y="15" Width="70" Height="30"/>
@@ -1951,7 +1475,7 @@
       <Function ID="4006"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
-      <Input Universe="1" Channel="130" LowerValue="2" UpperValue="42"/>
+      <Input Universe="1" Channel="8372"/>
      </Button>
      <Button Caption="OFF" ID="19" Icon="">
       <WindowState Visible="True" X="165" Y="180" Width="40" Height="30"/>
@@ -1965,7 +1489,6 @@
       <Function ID="4000"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
-      <Input Universe="1" Channel="8372"/>
      </Button>
      <Button Caption="Lent" ID="186" Icon="">
       <WindowState Visible="True" X="15" Y="45" Width="70" Height="30"/>
@@ -1976,7 +1499,7 @@
        <BackgroundImage>None</BackgroundImage>
        <Font>Default</Font>
       </Appearance>
-      <Function ID="4009"/>
+      <Function ID="4294967295"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
      </Button>
@@ -1989,7 +1512,7 @@
        <BackgroundImage>None</BackgroundImage>
        <Font>Default</Font>
       </Appearance>
-      <Function ID="4010"/>
+      <Function ID="4294967295"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
      </Button>
@@ -2015,7 +1538,7 @@
        <BackgroundImage>None</BackgroundImage>
        <Font>Default</Font>
       </Appearance>
-      <Function ID="4013"/>
+      <Function ID="4294967295"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
      </Button>
@@ -2036,13 +1559,13 @@
      <Button Caption="Rapide" ID="225" Icon="">
       <WindowState Visible="True" X="85" Y="105" Width="70" Height="30"/>
       <Appearance>
-       <FrameStyle>None</FrameStyle>
+       <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>Default</ForegroundColor>
        <BackgroundColor>4292643549</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Default</Font>
       </Appearance>
-      <Function ID="4018"/>
+      <Function ID="4294967295"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
       <Input Universe="1" Channel="154" LowerValue="2" UpperValue="42"/>
@@ -2056,7 +1579,7 @@
        <BackgroundImage>None</BackgroundImage>
        <Font>Default</Font>
       </Appearance>
-      <Function ID="4021"/>
+      <Function ID="4294967295"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
       <Input Universe="1" Channel="138" LowerValue="2" UpperValue="42"/>
@@ -2133,11 +1656,11 @@
       <Appearance>
        <FrameStyle>None</FrameStyle>
        <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>4294950511</BackgroundColor>
+       <BackgroundColor>4290085722</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Default</Font>
       </Appearance>
-      <Function ID="4030"/>
+      <Function ID="4294967295"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
      </Button>
@@ -2145,7 +1668,7 @@
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>4291668879</BackgroundColor>
+       <BackgroundColor>4290085722</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Default</Font>
       </Appearance>
@@ -2199,17 +1722,17 @@
      </SoloFrame>
     </SoloFrame>
     <Slider Caption="Speed" ID="291" WidgetStyle="Knob" InvertedAppearance="false">
-     <WindowState Visible="True" X="315" Y="55" Width="60" Height="100"/>
+     <WindowState Visible="True" X="315" Y="60" Width="60" Height="100"/>
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
-      <ForegroundColor>4294967295</ForegroundColor>
-      <BackgroundColor>4284374116</BackgroundColor>
+      <ForegroundColor>4278190080</ForegroundColor>
+      <BackgroundColor>4288321942</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
      </Appearance>
      <Input Universe="1" Channel="50"/>
      <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="172">
+     <Level LowLimit="0" HighLimit="255" Value="130">
       <Channel Fixture="4">5</Channel>
      </Level>
      <Playback>
@@ -2220,11 +1743,11 @@
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>4284374116</BackgroundColor>
+      <BackgroundColor>4288321942</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
-     <WindowState Visible="True" X="205" Y="40" Width="100" Height="135"/>
+     <WindowState Visible="True" X="210" Y="45" Width="100" Height="135"/>
      <AllowChildren>True</AllowChildren>
      <AllowResize>True</AllowResize>
      <ShowHeader>False</ShowHeader>
@@ -2285,20 +1808,30 @@
       <Intensity Adjust="False">100</Intensity>
      </Button>
     </SoloFrame>
+    <Label Caption="DJ FACE" ID="104">
+     <WindowState Visible="True" X="10" Y="10" Width="355" Height="25"/>
+     <Appearance>
+      <FrameStyle>None</FrameStyle>
+      <ForegroundColor>Default</ForegroundColor>
+      <BackgroundColor>4292795866</BackgroundColor>
+      <BackgroundImage>None</BackgroundImage>
+      <Font>Ubuntu,13,-1,5,75,0,0,0,0,0</Font>
+     </Appearance>
+    </Label>
    </Frame>
    <Frame Caption="Rayons ROUGES #1" ID="21">
     <Appearance>
      <FrameStyle>Sunken</FrameStyle>
      <ForegroundColor>4292877092</ForegroundColor>
-     <BackgroundColor>4292877092</BackgroundColor>
+     <BackgroundColor>4289010989</BackgroundColor>
      <BackgroundImage>None</BackgroundImage>
      <Font>Default</Font>
     </Appearance>
     <WindowState Visible="True" X="475" Y="15" Width="425" Height="425"/>
     <AllowChildren>True</AllowChildren>
     <AllowResize>True</AllowResize>
-    <ShowHeader>True</ShowHeader>
-    <ShowEnableButton>True</ShowEnableButton>
+    <ShowHeader>False</ShowHeader>
+    <ShowEnableButton>False</ShowEnableButton>
     <Collapsed>False</Collapsed>
     <Disabled>False</Disabled>
     <Slider Caption="Dim." ID="22" WidgetStyle="Slider" InvertedAppearance="false">
@@ -2306,7 +1839,7 @@
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>4284374116</BackgroundColor>
+      <BackgroundColor>4290780200</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
@@ -2323,7 +1856,7 @@
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>4284374116</BackgroundColor>
+      <BackgroundColor>4290780200</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
@@ -2347,6 +1880,7 @@
       <Function ID="6008"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
+      <Input Universe="1" Channel="133" LowerValue="2" UpperValue="42"/>
      </Button>
      <Button Caption="OFF" ID="75" Icon="">
       <WindowState Visible="True" X="170" Y="170" Width="40" Height="30"/>
@@ -2360,7 +1894,6 @@
       <Function ID="6000"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
-      <Input Universe="1" Channel="20660"/>
      </Button>
      <Button Caption="Rapide" ID="80" Icon="">
       <WindowState Visible="True" X="85" Y="45" Width="70" Height="30"/>
@@ -2442,7 +1975,7 @@
       <Function ID="6006"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
-      <Input Universe="1" Channel="133" LowerValue="2" UpperValue="42"/>
+      <Input Universe="1" Channel="20660"/>
      </Button>
      <Button Caption="Digital" ID="137" Icon="">
       <WindowState Visible="True" X="15" Y="150" Width="70" Height="30"/>
@@ -2502,7 +2035,7 @@
       <Appearance>
        <FrameStyle>None</FrameStyle>
        <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>4294950511</BackgroundColor>
+       <BackgroundColor>4290085722</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Default</Font>
       </Appearance>
@@ -2514,7 +2047,7 @@
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>4291668879</BackgroundColor>
+       <BackgroundColor>4290085722</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Default</Font>
       </Appearance>
@@ -2677,7 +2210,7 @@
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>4284374116</BackgroundColor>
+      <BackgroundColor>4290780200</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
@@ -2694,12 +2227,12 @@
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>4284374116</BackgroundColor>
+      <BackgroundColor>4290780200</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="2">
+     <Level LowLimit="0" HighLimit="255" Value="1">
       <Channel Fixture="6">3</Channel>
      </Level>
      <Playback>
@@ -2710,13 +2243,13 @@
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>4284374116</BackgroundColor>
+      <BackgroundColor>4290780200</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
      <WindowState Visible="True" X="215" Y="45" Width="100" Height="140"/>
      <AllowChildren>True</AllowChildren>
-     <AllowResize>True</AllowResize>
+     <AllowResize>False</AllowResize>
      <ShowHeader>False</ShowHeader>
      <ShowEnableButton>False</ShowEnableButton>
      <Mixing>False</Mixing>
@@ -2780,19 +2313,29 @@
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>4294967295</ForegroundColor>
-      <BackgroundColor>4284374116</BackgroundColor>
+      <BackgroundColor>4290780200</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
      </Appearance>
      <Input Universe="1" Channel="53"/>
      <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="4">
+     <Level LowLimit="0" HighLimit="255" Value="134">
       <Channel Fixture="6">5</Channel>
      </Level>
      <Playback>
       <Function>4294967295</Function>
      </Playback>
     </Slider>
+    <Label Caption="Rayons ROUGES #1" ID="93">
+     <WindowState Visible="True" X="20" Y="10" Width="385" Height="25"/>
+     <Appearance>
+      <FrameStyle>None</FrameStyle>
+      <ForegroundColor>Default</ForegroundColor>
+      <BackgroundColor>4293735227</BackgroundColor>
+      <BackgroundImage>None</BackgroundImage>
+      <Font>Ubuntu,13,-1,5,75,0,0,0,0,0</Font>
+     </Appearance>
+    </Label>
    </Frame>
    <Frame Caption="PAR#1 : Faisceaux" ID="27">
     <Appearance>
@@ -2802,19 +2345,19 @@
      <BackgroundImage>None</BackgroundImage>
      <Font>Ubuntu,9,-1,5,75,0,0,0,0,0</Font>
     </Appearance>
-    <WindowState Visible="True" X="35" Y="20" Width="405" Height="420"/>
+    <WindowState Visible="True" X="35" Y="20" Width="410" Height="425"/>
     <AllowChildren>True</AllowChildren>
-    <AllowResize>True</AllowResize>
-    <ShowHeader>True</ShowHeader>
-    <ShowEnableButton>True</ShowEnableButton>
+    <AllowResize>False</AllowResize>
+    <ShowHeader>False</ShowHeader>
+    <ShowEnableButton>False</ShowEnableButton>
     <Collapsed>False</Collapsed>
     <Disabled>False</Disabled>
     <Slider Caption="Dim." ID="2" WidgetStyle="Slider" InvertedAppearance="false">
-     <WindowState Visible="True" X="20" Y="45" Width="50" Height="130"/>
+     <WindowState Visible="True" X="25" Y="45" Width="50" Height="130"/>
      <Appearance>
-      <FrameStyle>Sunken</FrameStyle>
+      <FrameStyle>Raised</FrameStyle>
       <ForegroundColor>4278190080</ForegroundColor>
-      <BackgroundColor>Default</BackgroundColor>
+      <BackgroundColor>4288321942</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
@@ -2828,16 +2371,16 @@
      </Playback>
     </Slider>
     <Slider Caption="Col1" ID="24" WidgetStyle="Slider" InvertedAppearance="false">
-     <WindowState Visible="True" X="80" Y="45" Width="65" Height="130"/>
+     <WindowState Visible="True" X="85" Y="45" Width="65" Height="130"/>
      <Appearance>
-      <FrameStyle>Sunken</FrameStyle>
+      <FrameStyle>Raised</FrameStyle>
       <ForegroundColor>4278190080</ForegroundColor>
-      <BackgroundColor>Default</BackgroundColor>
+      <BackgroundColor>4288321942</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="17">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="2">2</Channel>
      </Level>
      <Playback>
@@ -2845,16 +2388,16 @@
      </Playback>
     </Slider>
     <Slider Caption="Col2" ID="25" WidgetStyle="Slider" InvertedAppearance="false">
-     <WindowState Visible="True" X="145" Y="45" Width="65" Height="130"/>
+     <WindowState Visible="True" X="150" Y="45" Width="65" Height="130"/>
      <Appearance>
-      <FrameStyle>Sunken</FrameStyle>
+      <FrameStyle>Raised</FrameStyle>
       <ForegroundColor>4278190080</ForegroundColor>
-      <BackgroundColor>Default</BackgroundColor>
+      <BackgroundColor>4288321942</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="1">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="2">3</Channel>
      </Level>
      <Playback>
@@ -2863,13 +2406,13 @@
     </Slider>
     <SoloFrame Caption="Animations" ID="83">
      <Appearance>
-      <FrameStyle>Sunken</FrameStyle>
-      <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>Default</BackgroundColor>
+      <FrameStyle>Raised</FrameStyle>
+      <ForegroundColor>4278190080</ForegroundColor>
+      <BackgroundColor>4288321942</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
-      <Font>Default</Font>
+      <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
      </Appearance>
-     <WindowState Visible="True" X="15" Y="190" Width="345" Height="215"/>
+     <WindowState Visible="True" X="20" Y="190" Width="345" Height="215"/>
      <AllowChildren>True</AllowChildren>
      <AllowResize>True</AllowResize>
      <ShowHeader>False</ShowHeader>
@@ -2889,6 +2432,7 @@
       <Function ID="2007"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
+      <Input Universe="1" Channel="132" LowerValue="2" UpperValue="42"/>
      </Button>
      <Button Caption="Lent" ID="85" Icon="">
       <WindowState Visible="True" X="10" Y="10" Width="70" Height="30"/>
@@ -2902,7 +2446,7 @@
       <Function ID="2006"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
-      <Input Universe="1" Channel="132" LowerValue="2" UpperValue="42"/>
+      <Input Universe="1" Channel="16564"/>
      </Button>
      <Button Caption="OFF" ID="90" Icon="">
       <WindowState Visible="True" X="25" Y="175" Width="40" Height="30"/>
@@ -2916,7 +2460,6 @@
       <Function ID="2000"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
-      <Input Universe="1" Channel="16564"/>
      </Button>
      <Button Caption="Lent" ID="95" Icon="">
       <WindowState Visible="True" X="10" Y="40" Width="70" Height="30"/>
@@ -3053,7 +2596,7 @@
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>4291668879</BackgroundColor>
+       <BackgroundColor>4290085722</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Default</Font>
       </Appearance>
@@ -3110,7 +2653,7 @@
       <Appearance>
        <FrameStyle>None</FrameStyle>
        <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>4294950511</BackgroundColor>
+       <BackgroundColor>4290085722</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Default</Font>
       </Appearance>
@@ -3161,13 +2704,13 @@
     </SoloFrame>
     <SoloFrame Caption="" ID="91">
      <Appearance>
-      <FrameStyle>Sunken</FrameStyle>
+      <FrameStyle>Raised</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>Default</BackgroundColor>
+      <BackgroundColor>4288321942</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
-     <WindowState Visible="True" X="220" Y="45" Width="100" Height="130"/>
+     <WindowState Visible="True" X="225" Y="45" Width="100" Height="130"/>
      <AllowChildren>True</AllowChildren>
      <AllowResize>True</AllowResize>
      <ShowHeader>False</ShowHeader>
@@ -3229,35 +2772,45 @@
      </Button>
     </SoloFrame>
     <Slider Caption="Speed" ID="240" WidgetStyle="Knob" InvertedAppearance="false">
-     <WindowState Visible="True" X="330" Y="60" Width="60" Height="100"/>
+     <WindowState Visible="True" X="335" Y="60" Width="60" Height="100"/>
      <Appearance>
-      <FrameStyle>Sunken</FrameStyle>
-      <ForegroundColor>4294967295</ForegroundColor>
-      <BackgroundColor>4284374116</BackgroundColor>
+      <FrameStyle>Raised</FrameStyle>
+      <ForegroundColor>4278190080</ForegroundColor>
+      <BackgroundColor>4288321942</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
      </Appearance>
      <Input Universe="1" Channel="52"/>
      <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="134">
+     <Level LowLimit="0" HighLimit="255" Value="128">
       <Channel Fixture="2">5</Channel>
      </Level>
      <Playback>
       <Function>4294967295</Function>
      </Playback>
     </Slider>
+    <Label Caption="PAR Faisceaux" ID="71">
+     <WindowState Visible="True" X="10" Y="10" Width="385" Height="25"/>
+     <Appearance>
+      <FrameStyle>None</FrameStyle>
+      <ForegroundColor>Default</ForegroundColor>
+      <BackgroundColor>4292795866</BackgroundColor>
+      <BackgroundImage>None</BackgroundImage>
+      <Font>Ubuntu,13,-1,5,75,0,0,0,0,0</Font>
+     </Appearance>
+    </Label>
    </Frame>
    <Frame Caption="Main Control" ID="35">
     <Appearance>
      <FrameStyle>Sunken</FrameStyle>
      <ForegroundColor>Default</ForegroundColor>
-     <BackgroundColor>Default</BackgroundColor>
+     <BackgroundColor>4278190080</BackgroundColor>
      <BackgroundImage>None</BackgroundImage>
      <Font>Default</Font>
     </Appearance>
-    <WindowState Visible="True" X="1495" Y="510" Width="255" Height="340"/>
+    <WindowState Visible="True" X="1495" Y="495" Width="250" Height="300"/>
     <AllowChildren>True</AllowChildren>
-    <AllowResize>True</AllowResize>
+    <AllowResize>False</AllowResize>
     <ShowHeader>True</ShowHeader>
     <ShowEnableButton>False</ShowEnableButton>
     <Collapsed>False</Collapsed>
@@ -3266,20 +2819,20 @@
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>Default</BackgroundColor>
+      <BackgroundColor>4278190080</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
-     <WindowState Visible="True" X="15" Y="185" Width="105" Height="130"/>
+     <WindowState Visible="True" X="15" Y="185" Width="105" Height="100"/>
      <AllowChildren>True</AllowChildren>
      <AllowResize>True</AllowResize>
-     <ShowHeader>True</ShowHeader>
+     <ShowHeader>False</ShowHeader>
      <ShowEnableButton>False</ShowEnableButton>
      <Mixing>False</Mixing>
      <Collapsed>False</Collapsed>
      <Disabled>False</Disabled>
      <Button Caption="AUTO Beat" ID="29" Icon="">
-      <WindowState Visible="True" X="5" Y="80" Width="95" Height="40"/>
+      <WindowState Visible="True" X="5" Y="50" Width="95" Height="40"/>
       <Appearance>
        <FrameStyle>None</FrameStyle>
        <ForegroundColor>Default</ForegroundColor>
@@ -3292,7 +2845,7 @@
       <Intensity Adjust="False">100</Intensity>
      </Button>
      <Button Caption="BEAT !" ID="30" Icon="">
-      <WindowState Visible="True" X="5" Y="40" Width="95" Height="40"/>
+      <WindowState Visible="True" X="5" Y="5" Width="95" Height="40"/>
       <Appearance>
        <FrameStyle>None</FrameStyle>
        <ForegroundColor>Default</ForegroundColor>
@@ -3309,20 +2862,20 @@
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>Default</BackgroundColor>
+      <BackgroundColor>4278190080</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
-     <WindowState Visible="True" X="125" Y="185" Width="105" Height="130"/>
+     <WindowState Visible="True" X="125" Y="185" Width="105" Height="100"/>
      <AllowChildren>True</AllowChildren>
      <AllowResize>True</AllowResize>
-     <ShowHeader>True</ShowHeader>
+     <ShowHeader>False</ShowHeader>
      <ShowEnableButton>False</ShowEnableButton>
      <Mixing>False</Mixing>
      <Collapsed>False</Collapsed>
      <Disabled>False</Disabled>
      <Button Caption="Trigger!" ID="1" Icon="">
-      <WindowState Visible="True" X="5" Y="40" Width="90" Height="40"/>
+      <WindowState Visible="True" X="5" Y="5" Width="90" Height="40"/>
       <Appearance>
        <FrameStyle>None</FrameStyle>
        <ForegroundColor>Default</ForegroundColor>
@@ -3335,7 +2888,7 @@
       <Intensity Adjust="False">100</Intensity>
      </Button>
      <Button Caption="Trigger OFF" ID="0" Icon="">
-      <WindowState Visible="True" X="5" Y="80" Width="90" Height="40"/>
+      <WindowState Visible="True" X="5" Y="50" Width="90" Height="40"/>
       <Appearance>
        <FrameStyle>None</FrameStyle>
        <ForegroundColor>Default</ForegroundColor>
@@ -3353,7 +2906,7 @@
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>Default</BackgroundColor>
+      <BackgroundColor>4278190080</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
@@ -3371,7 +2924,7 @@
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>Default</BackgroundColor>
+      <BackgroundColor>4278190080</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
@@ -3388,12 +2941,12 @@
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>Default</BackgroundColor>
+      <BackgroundColor>4278190080</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="1">
+     <Level LowLimit="0" HighLimit="255" Value="10">
       <Channel Fixture="0">3</Channel>
      </Level>
      <Playback>
@@ -3401,33 +2954,33 @@
      </Playback>
     </Slider>
    </Frame>
-   <Frame Caption="Rayons RGB" ID="42">
+   <Frame Caption="BEAM RGB" ID="42">
     <Appearance>
      <FrameStyle>Sunken</FrameStyle>
      <ForegroundColor>Default</ForegroundColor>
-     <BackgroundColor>4281697508</BackgroundColor>
+     <BackgroundColor>4279918516</BackgroundColor>
      <BackgroundImage>None</BackgroundImage>
      <Font>Default</Font>
     </Appearance>
     <WindowState Visible="True" X="1380" Y="15" Width="300" Height="420"/>
     <AllowChildren>True</AllowChildren>
-    <AllowResize>True</AllowResize>
-    <ShowHeader>True</ShowHeader>
-    <ShowEnableButton>True</ShowEnableButton>
+    <AllowResize>False</AllowResize>
+    <ShowHeader>False</ShowHeader>
+    <ShowEnableButton>False</ShowEnableButton>
     <Collapsed>False</Collapsed>
     <Disabled>False</Disabled>
     <Slider Caption="Dim." ID="38" WidgetStyle="Slider" InvertedAppearance="false">
      <WindowState Visible="True" X="15" Y="45" Width="55" Height="135"/>
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
-      <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>4284374116</BackgroundColor>
+      <ForegroundColor>4294967295</ForegroundColor>
+      <BackgroundColor>4280054232</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
-      <Font>Default</Font>
+      <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
      </Appearance>
      <Input Universe="1" Channel="28679"/>
      <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="0">
+     <Level LowLimit="0" HighLimit="255" Value="255">
       <Channel Fixture="7">0</Channel>
      </Level>
      <Playback>
@@ -3438,13 +2991,13 @@
      <WindowState Visible="True" X="75" Y="45" Width="65" Height="135"/>
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
-      <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>4284374116</BackgroundColor>
+      <ForegroundColor>4294967295</ForegroundColor>
+      <BackgroundColor>4280054232</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
-      <Font>Default</Font>
+      <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="9">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="7">2</Channel>
      </Level>
      <Playback>
@@ -3455,13 +3008,13 @@
      <WindowState Visible="True" X="140" Y="45" Width="65" Height="135"/>
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
-      <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>4284374116</BackgroundColor>
+      <ForegroundColor>4294967295</ForegroundColor>
+      <BackgroundColor>4280054232</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
-      <Font>Default</Font>
+      <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="17">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="7">3</Channel>
      </Level>
      <Playback>
@@ -3472,7 +3025,7 @@
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>4284374116</BackgroundColor>
+      <BackgroundColor>4280054232</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
@@ -3496,6 +3049,7 @@
       <Function ID="7005"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
+      <Input Universe="1" Channel="135" LowerValue="2" UpperValue="42"/>
      </Button>
      <Button Caption="Lent" ID="189" Icon="">
       <WindowState Visible="True" X="15" Y="15" Width="70" Height="30"/>
@@ -3509,7 +3063,7 @@
       <Function ID="7004"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
-      <Input Universe="1" Channel="135" LowerValue="2" UpperValue="42"/>
+      <Input Universe="1" Channel="28852"/>
      </Button>
      <Button Caption="OFF" ID="191" Icon="">
       <WindowState Visible="True" X="50" Y="180" Width="40" Height="30"/>
@@ -3523,7 +3077,6 @@
       <Function ID="7000"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
-      <Input Universe="1" Channel="28852"/>
      </Button>
      <Button Caption="Lent" ID="195" Icon="">
       <WindowState Visible="True" X="15" Y="45" Width="70" Height="30"/>
@@ -3679,13 +3232,13 @@
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>4294967295</ForegroundColor>
-      <BackgroundColor>4284374116</BackgroundColor>
+      <BackgroundColor>4280054232</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
      </Appearance>
      <Input Universe="1" Channel="55"/>
      <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="108">
+     <Level LowLimit="0" HighLimit="255" Value="136">
       <Channel Fixture="7">5</Channel>
      </Level>
      <Playback>
@@ -3701,31 +3254,31 @@
      <BackgroundImage>None</BackgroundImage>
      <Font>Default</Font>
     </Appearance>
-    <WindowState Visible="True" X="1180" Y="520" Width="300" Height="290"/>
+    <WindowState Visible="True" X="1165" Y="505" Width="285" Height="280"/>
     <AllowChildren>True</AllowChildren>
-    <AllowResize>True</AllowResize>
+    <AllowResize>False</AllowResize>
     <ShowHeader>True</ShowHeader>
     <ShowEnableButton>False</ShowEnableButton>
     <Collapsed>False</Collapsed>
     <Disabled>False</Disabled>
-    <Multipage PagesNum="8" CurrentPage="3"/>
+    <Multipage PagesNum="8" CurrentPage="7"/>
     <Shortcut Page="0" Name="LED Barres"/>
-    <Shortcut Page="1" Name="Spot 1 : ">
-     <Input Universe="1" Channel="16407"/>
+    <Shortcut Page="1" Name="S1 : Faiscx">
+     <Input Universe="1" Channel="16402"/>
     </Shortcut>
-    <Shortcut Page="2" Name="Spot 2 :">
+    <Shortcut Page="2" Name="S2 : Contre">
      <Input Universe="1" Channel="4114"/>
     </Shortcut>
-    <Shortcut Page="3" Name="Spot 3 :">
-     <Input Universe="1" Channel="8213"/>
+    <Shortcut Page="3" Name="S3 : Face">
+     <Input Universe="1" Channel="8210"/>
     </Shortcut>
-    <Shortcut Page="4" Name="Spot 4 :">
-     <Input Universe="1" Channel="19"/>
+    <Shortcut Page="4" Name="S4 : Gauche">
+     <Input Universe="1" Channel="18"/>
     </Shortcut>
-    <Shortcut Page="5" Name="RED Rayz 1:">
+    <Shortcut Page="5" Name="RED 1:">
      <Input Universe="1" Channel="20502"/>
     </Shortcut>
-    <Shortcut Page="6" Name="RED Rayz 2:">
+    <Shortcut Page="6" Name="RED 2:">
      <Input Universe="1" Channel="24593"/>
     </Shortcut>
     <Shortcut Page="7" Name="BEAM :">
@@ -3740,7 +3293,7 @@
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
-     <WindowState Visible="False" X="10" Y="45" Width="260" Height="220"/>
+     <WindowState Visible="False" X="10" Y="45" Width="255" Height="215"/>
      <AllowChildren>True</AllowChildren>
      <AllowResize>True</AllowResize>
      <ShowHeader>False</ShowHeader>
@@ -3751,32 +3304,32 @@
       <WindowState Visible="False" X="5" Y="5" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
-       <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>4284653802</BackgroundColor>
+       <ForegroundColor>4280557361</ForegroundColor>
+       <BackgroundColor>4292795866</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <Input Universe="1" Channel="4112"/>
+      <Input Universe="1" Channel="16400"/>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="120">
+      <Level LowLimit="0" HighLimit="255" Value="122">
        <Channel Fixture="2">4</Channel>
       </Level>
       <Playback>
        <Function>4294967295</Function>
       </Playback>
      </Slider>
-     <Slider Caption="Inten. Bkgd" ID="241" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="125" Y="5" Width="60" Height="100"/>
+     <Slider Caption="Col2" ID="241" WidgetStyle="Knob" InvertedAppearance="false">
+      <WindowState Visible="False" X="185" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
-       <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>4283949961</BackgroundColor>
+       <ForegroundColor>4280557361</ForegroundColor>
+       <BackgroundColor>4292795866</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <Input Universe="1" Channel="4114"/>
+      <Input Universe="1" Channel="16407"/>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="48">
+      <Level LowLimit="0" HighLimit="255" Value="0">
        <Channel Fixture="2">6</Channel>
       </Level>
       <Playback>
@@ -3784,69 +3337,37 @@
       </Playback>
      </Slider>
      <Slider Caption="Ratio" ID="242" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="185" Y="5" Width="60" Height="100"/>
+      <WindowState Visible="False" X="125" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
-       <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>4281586042</BackgroundColor>
+       <ForegroundColor>4280557361</ForegroundColor>
+       <BackgroundColor>4292795866</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <Input Universe="1" Channel="4115"/>
+      <Input Universe="1" Channel="16406"/>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="132">
+      <Level LowLimit="0" HighLimit="255" Value="124">
        <Channel Fixture="2">7</Channel>
       </Level>
       <Playback>
        <Function>4294967295</Function>
       </Playback>
      </Slider>
-     <Slider Caption="" ID="243" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="185" Y="105" Width="60" Height="100"/>
-      <Appearance>
-       <FrameStyle>Sunken</FrameStyle>
-       <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
-      </Appearance>
-      <Input Universe="1" Channel="4119"/>
-      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None">Playback</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="0"/>
-      <Playback>
-       <Function>4294967295</Function>
-      </Playback>
-     </Slider>
      <Slider Caption="Seq." ID="244" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="125" Y="105" Width="60" Height="100"/>
-      <Appearance>
-       <FrameStyle>Sunken</FrameStyle>
-       <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
-      </Appearance>
-      <Input Universe="1" Channel="4118"/>
-      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="138">
-       <Channel Fixture="2">10</Channel>
-      </Level>
-      <Playback>
-       <Function>4294967295</Function>
-      </Playback>
-     </Slider>
-     <Slider Caption="Group." ID="245" WidgetStyle="Knob" InvertedAppearance="false">
       <WindowState Visible="False" X="65" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
-       <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
+       <ForegroundColor>4280557361</ForegroundColor>
+       <BackgroundColor>4292795866</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <Input Universe="1" Channel="4117"/>
-      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None">Playback</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="0"/>
+      <Input Universe="1" Channel="16405"/>
+      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="false">Level</SliderMode>
+      <Level LowLimit="0" HighLimit="255" Value="136">
+       <Channel Fixture="2">10</Channel>
+      </Level>
       <Playback>
        <Function>4294967295</Function>
       </Playback>
@@ -3855,15 +3376,33 @@
       <WindowState Visible="False" X="5" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
-       <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
+       <ForegroundColor>4280557361</ForegroundColor>
+       <BackgroundColor>4292795866</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <Input Universe="1" Channel="4116"/>
+      <Input Universe="1" Channel="16404"/>
       <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="122">
+      <Level LowLimit="0" HighLimit="255" Value="255">
        <Channel Fixture="2">8</Channel>
+      </Level>
+      <Playback>
+       <Function>4294967295</Function>
+      </Playback>
+     </Slider>
+     <Slider Caption="Col1" ID="46" WidgetStyle="Knob" InvertedAppearance="false">
+      <WindowState Visible="False" X="185" Y="5" Width="60" Height="100"/>
+      <Appearance>
+       <FrameStyle>Sunken</FrameStyle>
+       <ForegroundColor>4280557361</ForegroundColor>
+       <BackgroundColor>4292795866</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
+      </Appearance>
+      <Input Universe="1" Channel="16403"/>
+      <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
+      <Level LowLimit="0" HighLimit="255" Value="56">
+       <Channel Fixture="2">11</Channel>
       </Level>
       <Playback>
        <Function>4294967295</Function>
@@ -3878,7 +3417,7 @@
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
-     <WindowState Visible="False" X="10" Y="45" Width="260" Height="220"/>
+     <WindowState Visible="False" X="10" Y="45" Width="255" Height="220"/>
      <AllowChildren>True</AllowChildren>
      <AllowResize>True</AllowResize>
      <ShowHeader>False</ShowHeader>
@@ -3896,32 +3435,15 @@
       </Appearance>
       <Input Universe="1" Channel="16"/>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="126">
+      <Level LowLimit="0" HighLimit="255" Value="103">
        <Channel Fixture="1">4</Channel>
       </Level>
       <Playback>
        <Function>4294967295</Function>
       </Playback>
      </Slider>
-     <Slider Caption="Inter." ID="249" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="65" Y="5" Width="60" Height="100"/>
-      <Appearance>
-       <FrameStyle>Sunken</FrameStyle>
-       <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>4281697508</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
-      </Appearance>
-      <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="129">
-       <Channel Fixture="1">5</Channel>
-      </Level>
-      <Playback>
-       <Function>4294967295</Function>
-      </Playback>
-     </Slider>
-     <Slider Caption="Inten. Bkgd" ID="250" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="125" Y="5" Width="60" Height="100"/>
+     <Slider Caption="Col2" ID="250" WidgetStyle="Knob" InvertedAppearance="false">
+      <WindowState Visible="False" X="185" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
@@ -3930,7 +3452,7 @@
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="123">
+      <Level LowLimit="0" HighLimit="255" Value="219">
        <Channel Fixture="1">6</Channel>
       </Level>
       <Playback>
@@ -3938,7 +3460,7 @@
       </Playback>
      </Slider>
      <Slider Caption="Ratio" ID="251" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="185" Y="5" Width="60" Height="100"/>
+      <WindowState Visible="False" X="125" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
@@ -3947,56 +3469,24 @@
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="129">
+      <Level LowLimit="0" HighLimit="255" Value="120">
        <Channel Fixture="1">7</Channel>
       </Level>
       <Playback>
        <Function>4294967295</Function>
       </Playback>
      </Slider>
-     <Slider Caption="" ID="252" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="185" Y="105" Width="60" Height="100"/>
-      <Appearance>
-       <FrameStyle>Sunken</FrameStyle>
-       <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
-      </Appearance>
-      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None">Playback</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="0"/>
-      <Playback>
-       <Function>4294967295</Function>
-      </Playback>
-     </Slider>
      <Slider Caption="Seq." ID="253" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="125" Y="105" Width="60" Height="100"/>
-      <Appearance>
-       <FrameStyle>Sunken</FrameStyle>
-       <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
-      </Appearance>
-      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None">Playback</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="0"/>
-      <Playback>
-       <Function>4294967295</Function>
-      </Playback>
-     </Slider>
-     <Slider Caption="Group." ID="254" WidgetStyle="Knob" InvertedAppearance="false">
       <WindowState Visible="False" X="65" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>4294336849</BackgroundColor>
+       <BackgroundColor>Default</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="150">
-       <Channel Fixture="1">9</Channel>
-      </Level>
+      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None">Playback</SliderMode>
+      <Level LowLimit="0" HighLimit="255" Value="0"/>
       <Playback>
        <Function>4294967295</Function>
       </Playback>
@@ -4011,7 +3501,24 @@
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
       <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="12"/>
+      <Level LowLimit="0" HighLimit="255" Value="0"/>
+      <Playback>
+       <Function>4294967295</Function>
+      </Playback>
+     </Slider>
+     <Slider Caption="Col1" ID="45" WidgetStyle="Knob" InvertedAppearance="false">
+      <WindowState Visible="False" X="185" Y="5" Width="60" Height="100"/>
+      <Appearance>
+       <FrameStyle>Sunken</FrameStyle>
+       <ForegroundColor>4294967295</ForegroundColor>
+       <BackgroundColor>4283949961</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
+      </Appearance>
+      <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
+      <Level LowLimit="0" HighLimit="255" Value="255">
+       <Channel Fixture="1">11</Channel>
+      </Level>
       <Playback>
        <Function>4294967295</Function>
       </Playback>
@@ -4021,11 +3528,11 @@
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>4292877092</BackgroundColor>
+      <BackgroundColor>4289010989</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
-     <WindowState Visible="False" X="10" Y="45" Width="260" Height="215"/>
+     <WindowState Visible="False" X="10" Y="45" Width="255" Height="215"/>
      <AllowChildren>True</AllowChildren>
      <AllowResize>True</AllowResize>
      <ShowHeader>False</ShowHeader>
@@ -4037,29 +3544,29 @@
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>4284653802</BackgroundColor>
+       <BackgroundColor>4292877092</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <Input Universe="1" Channel="24592"/>
+      <Input Universe="1" Channel="20496"/>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="102">
+      <Level LowLimit="0" HighLimit="255" Value="126">
        <Channel Fixture="6">4</Channel>
       </Level>
       <Playback>
        <Function>4294967295</Function>
       </Playback>
      </Slider>
-     <Slider Caption="Inten. Bkgd" ID="262" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="125" Y="5" Width="60" Height="100"/>
+     <Slider Caption="Col2" ID="262" WidgetStyle="Knob" InvertedAppearance="false">
+      <WindowState Visible="False" X="185" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>4283949961</BackgroundColor>
+       <BackgroundColor>4292877092</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <Input Universe="1" Channel="24594"/>
+      <Input Universe="1" Channel="20503"/>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
       <Level LowLimit="0" HighLimit="255" Value="0">
        <Channel Fixture="6">6</Channel>
@@ -4069,51 +3576,19 @@
       </Playback>
      </Slider>
      <Slider Caption="Ratio" ID="263" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="185" Y="5" Width="60" Height="100"/>
+      <WindowState Visible="False" X="125" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>4281586042</BackgroundColor>
+       <BackgroundColor>4292877092</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <Input Universe="1" Channel="24595"/>
+      <Input Universe="1" Channel="20502"/>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="128">
+      <Level LowLimit="0" HighLimit="255" Value="130">
        <Channel Fixture="6">7</Channel>
       </Level>
-      <Playback>
-       <Function>4294967295</Function>
-      </Playback>
-     </Slider>
-     <Slider Caption="" ID="264" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="185" Y="105" Width="60" Height="100"/>
-      <Appearance>
-       <FrameStyle>Sunken</FrameStyle>
-       <ForegroundColor>4288321942</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
-      </Appearance>
-      <Input Universe="1" Channel="24599"/>
-      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None">Playback</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="0"/>
-      <Playback>
-       <Function>4294967295</Function>
-      </Playback>
-     </Slider>
-     <Slider Caption="" ID="266" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="65" Y="105" Width="60" Height="100"/>
-      <Appearance>
-       <FrameStyle>Sunken</FrameStyle>
-       <ForegroundColor>4288321942</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
-      </Appearance>
-      <Input Universe="1" Channel="24597"/>
-      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None">Playback</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="0"/>
       <Playback>
        <Function>4294967295</Function>
       </Playback>
@@ -4123,13 +3598,13 @@
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4288321942</ForegroundColor>
-       <BackgroundColor>4294336849</BackgroundColor>
+       <BackgroundColor>4292877092</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <Input Universe="1" Channel="24596"/>
+      <Input Universe="1" Channel="20500"/>
       <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="255">
+      <Level LowLimit="0" HighLimit="255" Value="126">
        <Channel Fixture="6">8</Channel>
       </Level>
       <Playback>
@@ -4137,18 +3612,36 @@
       </Playback>
      </Slider>
      <Slider Caption="Seq" ID="308" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="125" Y="105" Width="60" Height="100"/>
+      <WindowState Visible="False" X="65" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4293914607</ForegroundColor>
-       <BackgroundColor>4294336849</BackgroundColor>
+       <BackgroundColor>4292877092</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <Input Universe="1" Channel="24598"/>
+      <Input Universe="1" Channel="20501"/>
       <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="134">
+      <Level LowLimit="0" HighLimit="255" Value="128">
        <Channel Fixture="6">10</Channel>
+      </Level>
+      <Playback>
+       <Function>4294967295</Function>
+      </Playback>
+     </Slider>
+     <Slider Caption="Col1" ID="50" WidgetStyle="Knob" InvertedAppearance="false">
+      <WindowState Visible="False" X="185" Y="5" Width="60" Height="100"/>
+      <Appearance>
+       <FrameStyle>Sunken</FrameStyle>
+       <ForegroundColor>4294967295</ForegroundColor>
+       <BackgroundColor>4292877092</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
+      </Appearance>
+      <Input Universe="1" Channel="20499"/>
+      <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
+      <Level LowLimit="0" HighLimit="255" Value="122">
+       <Channel Fixture="6">11</Channel>
       </Level>
       <Playback>
        <Function>4294967295</Function>
@@ -4159,11 +3652,11 @@
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>4281697508</BackgroundColor>
+      <BackgroundColor>4279918516</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
-     <WindowState Visible="False" X="10" Y="45" Width="265" Height="215"/>
+     <WindowState Visible="True" X="10" Y="45" Width="255" Height="215"/>
      <AllowChildren>True</AllowChildren>
      <AllowResize>True</AllowResize>
      <ShowHeader>False</ShowHeader>
@@ -4171,35 +3664,35 @@
      <Collapsed>False</Collapsed>
      <Disabled>False</Disabled>
      <Slider Caption="Durat." ID="270" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="5" Y="5" Width="60" Height="100"/>
+      <WindowState Visible="True" X="5" Y="5" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>4284653802</BackgroundColor>
+       <BackgroundColor>4280054232</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
       <Input Universe="1" Channel="28688"/>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="130">
+      <Level LowLimit="0" HighLimit="255" Value="168">
        <Channel Fixture="7">4</Channel>
       </Level>
       <Playback>
        <Function>4294967295</Function>
       </Playback>
      </Slider>
-     <Slider Caption="Inten. Bkgd" ID="272" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="125" Y="5" Width="60" Height="100"/>
+     <Slider Caption="Col2" ID="272" WidgetStyle="Knob" InvertedAppearance="false">
+      <WindowState Visible="True" X="185" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>4283949961</BackgroundColor>
+       <BackgroundColor>4280054232</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <Input Universe="1" Channel="28690"/>
+      <Input Universe="1" Channel="28695"/>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="128">
+      <Level LowLimit="0" HighLimit="255" Value="126">
        <Channel Fixture="7">6</Channel>
       </Level>
       <Playback>
@@ -4207,86 +3700,72 @@
       </Playback>
      </Slider>
      <Slider Caption="Ratio" ID="273" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="185" Y="5" Width="60" Height="100"/>
+      <WindowState Visible="True" X="125" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>4283949961</BackgroundColor>
+       <BackgroundColor>4280054232</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <Input Universe="1" Channel="28691"/>
+      <Input Universe="1" Channel="28694"/>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="252">
+      <Level LowLimit="0" HighLimit="255" Value="124">
        <Channel Fixture="7">7</Channel>
       </Level>
       <Playback>
        <Function>4294967295</Function>
       </Playback>
      </Slider>
-     <Slider Caption="" ID="274" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="185" Y="105" Width="60" Height="100"/>
-      <Appearance>
-       <FrameStyle>Sunken</FrameStyle>
-       <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
-      </Appearance>
-      <Input Universe="1" Channel="28695"/>
-      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None">Playback</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="0"/>
-      <Playback>
-       <Function>4294967295</Function>
-      </Playback>
-     </Slider>
      <Slider Caption="Seq." ID="275" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="125" Y="105" Width="60" Height="100"/>
+      <WindowState Visible="True" X="65" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
+       <BackgroundColor>4280054232</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <Input Universe="1" Channel="28694"/>
+      <Input Universe="1" Channel="28693"/>
       <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="130">
+      <Level LowLimit="0" HighLimit="255" Value="124">
        <Channel Fixture="7">9</Channel>
       </Level>
       <Playback>
        <Function>4294967295</Function>
       </Playback>
      </Slider>
-     <Slider Caption="Group." ID="276" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="65" Y="105" Width="60" Height="100"/>
-      <Appearance>
-       <FrameStyle>Sunken</FrameStyle>
-       <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
-      </Appearance>
-      <Input Universe="1" Channel="28693"/>
-      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="126"/>
-      <Playback>
-       <Function>4294967295</Function>
-      </Playback>
-     </Slider>
      <Slider Caption="Shape" ID="277" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="5" Y="105" Width="60" Height="100"/>
+      <WindowState Visible="True" X="5" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
+       <BackgroundColor>4280054232</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
       <Input Universe="1" Channel="28692"/>
       <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="178">
+      <Level LowLimit="0" HighLimit="255" Value="126">
        <Channel Fixture="7">8</Channel>
+      </Level>
+      <Playback>
+       <Function>4294967295</Function>
+      </Playback>
+     </Slider>
+     <Slider Caption="Col1" ID="62" WidgetStyle="Knob" InvertedAppearance="false">
+      <WindowState Visible="True" X="185" Y="5" Width="60" Height="100"/>
+      <Appearance>
+       <FrameStyle>Sunken</FrameStyle>
+       <ForegroundColor>4294967295</ForegroundColor>
+       <BackgroundColor>4280054232</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
+      </Appearance>
+      <Input Universe="1" Channel="28691"/>
+      <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
+      <Level LowLimit="0" HighLimit="255" Value="255">
+       <Channel Fixture="7">11</Channel>
       </Level>
       <Playback>
        <Function>4294967295</Function>
@@ -4301,7 +3780,7 @@
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
-     <WindowState Visible="False" X="10" Y="45" Width="260" Height="220"/>
+     <WindowState Visible="False" X="10" Y="45" Width="255" Height="215"/>
      <AllowChildren>True</AllowChildren>
      <AllowResize>True</AllowResize>
      <ShowHeader>False</ShowHeader>
@@ -4313,11 +3792,11 @@
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>4284653802</BackgroundColor>
+       <BackgroundColor>4286019195</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <Input Universe="1" Channel="8208"/>
+      <Input Universe="1" Channel="4112"/>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
       <Level LowLimit="0" HighLimit="255" Value="126">
        <Channel Fixture="3">4</Channel>
@@ -4326,18 +3805,18 @@
        <Function>4294967295</Function>
       </Playback>
      </Slider>
-     <Slider Caption="Inten. Bkgd" ID="283" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="125" Y="5" Width="60" Height="100"/>
+     <Slider Caption="Col2" ID="283" WidgetStyle="Knob" InvertedAppearance="false">
+      <WindowState Visible="False" X="185" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>4283949961</BackgroundColor>
+       <BackgroundColor>4286019195</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <Input Universe="1" Channel="8210"/>
+      <Input Universe="1" Channel="4119"/>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="120">
+      <Level LowLimit="0" HighLimit="255" Value="110">
        <Channel Fixture="3">6</Channel>
       </Level>
       <Playback>
@@ -4345,65 +3824,33 @@
       </Playback>
      </Slider>
      <Slider Caption="Ratio" ID="284" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="185" Y="5" Width="60" Height="100"/>
+      <WindowState Visible="False" X="125" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>4281586042</BackgroundColor>
+       <BackgroundColor>4286019195</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <Input Universe="1" Channel="8211"/>
+      <Input Universe="1" Channel="4118"/>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="122">
+      <Level LowLimit="0" HighLimit="255" Value="96">
        <Channel Fixture="3">7</Channel>
       </Level>
       <Playback>
        <Function>4294967295</Function>
       </Playback>
      </Slider>
-     <Slider Caption="" ID="285" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="185" Y="105" Width="60" Height="100"/>
-      <Appearance>
-       <FrameStyle>Sunken</FrameStyle>
-       <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
-      </Appearance>
-      <Input Universe="1" Channel="8215"/>
-      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None">Playback</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="0"/>
-      <Playback>
-       <Function>4294967295</Function>
-      </Playback>
-     </Slider>
      <Slider Caption="Seq." ID="286" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="125" Y="105" Width="60" Height="100"/>
-      <Appearance>
-       <FrameStyle>Sunken</FrameStyle>
-       <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
-      </Appearance>
-      <Input Universe="1" Channel="8214"/>
-      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None">Playback</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="0"/>
-      <Playback>
-       <Function>4294967295</Function>
-      </Playback>
-     </Slider>
-     <Slider Caption="Group." ID="287" WidgetStyle="Knob" InvertedAppearance="false">
       <WindowState Visible="False" X="65" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
+       <BackgroundColor>4286019195</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <Input Universe="1" Channel="8213"/>
+      <Input Universe="1" Channel="4117"/>
       <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None">Playback</SliderMode>
       <Level LowLimit="0" HighLimit="255" Value="0"/>
       <Playback>
@@ -4415,14 +3862,32 @@
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
+       <BackgroundColor>4286019195</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <Input Universe="1" Channel="8212"/>
+      <Input Universe="1" Channel="4116"/>
       <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="false">Level</SliderMode>
       <Level LowLimit="0" HighLimit="255" Value="124">
        <Channel Fixture="3">8</Channel>
+      </Level>
+      <Playback>
+       <Function>4294967295</Function>
+      </Playback>
+     </Slider>
+     <Slider Caption="Col1" ID="47" WidgetStyle="Knob" InvertedAppearance="false">
+      <WindowState Visible="False" X="185" Y="5" Width="60" Height="100"/>
+      <Appearance>
+       <FrameStyle>Sunken</FrameStyle>
+       <ForegroundColor>4294967295</ForegroundColor>
+       <BackgroundColor>4286019195</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
+      </Appearance>
+      <Input Universe="1" Channel="4115"/>
+      <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
+      <Level LowLimit="0" HighLimit="255" Value="126">
+       <Channel Fixture="3">11</Channel>
       </Level>
       <Playback>
        <Function>4294967295</Function>
@@ -4437,7 +3902,7 @@
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
-     <WindowState Visible="True" X="10" Y="45" Width="260" Height="220"/>
+     <WindowState Visible="False" X="10" Y="45" Width="255" Height="215"/>
      <AllowChildren>True</AllowChildren>
      <AllowResize>True</AllowResize>
      <ShowHeader>False</ShowHeader>
@@ -4445,35 +3910,35 @@
      <Collapsed>False</Collapsed>
      <Disabled>False</Disabled>
      <Slider Caption="Durat." ID="290" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="True" X="5" Y="5" Width="60" Height="100"/>
+      <WindowState Visible="False" X="5" Y="5" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>4284653802</BackgroundColor>
+       <BackgroundColor>4286019195</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <Input Universe="1" Channel="12304"/>
+      <Input Universe="1" Channel="8208"/>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="66">
+      <Level LowLimit="0" HighLimit="255" Value="140">
        <Channel Fixture="4">4</Channel>
       </Level>
       <Playback>
        <Function>4294967295</Function>
       </Playback>
      </Slider>
-     <Slider Caption="Inten. Bkgd" ID="292" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="True" X="125" Y="5" Width="60" Height="100"/>
+     <Slider Caption="Col2" ID="292" WidgetStyle="Knob" InvertedAppearance="false">
+      <WindowState Visible="False" X="185" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>4283949961</BackgroundColor>
+       <BackgroundColor>4286019195</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <Input Universe="1" Channel="12306"/>
+      <Input Universe="1" Channel="8214"/>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="114">
+      <Level LowLimit="0" HighLimit="255" Value="196">
        <Channel Fixture="4">6</Channel>
       </Level>
       <Playback>
@@ -4481,65 +3946,33 @@
       </Playback>
      </Slider>
      <Slider Caption="Ratio" ID="293" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="True" X="185" Y="5" Width="60" Height="100"/>
+      <WindowState Visible="False" X="125" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>4281586042</BackgroundColor>
+       <BackgroundColor>4286019195</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <Input Universe="1" Channel="12307"/>
+      <Input Universe="1" Channel="8214"/>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="110">
+      <Level LowLimit="0" HighLimit="255" Value="196">
        <Channel Fixture="4">7</Channel>
       </Level>
       <Playback>
        <Function>4294967295</Function>
       </Playback>
      </Slider>
-     <Slider Caption="" ID="294" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="True" X="185" Y="105" Width="60" Height="100"/>
-      <Appearance>
-       <FrameStyle>Sunken</FrameStyle>
-       <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
-      </Appearance>
-      <Input Universe="1" Channel="12311"/>
-      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None">Playback</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="0"/>
-      <Playback>
-       <Function>4294967295</Function>
-      </Playback>
-     </Slider>
      <Slider Caption="Seq." ID="295" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="True" X="125" Y="105" Width="60" Height="100"/>
+      <WindowState Visible="False" X="65" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
+       <BackgroundColor>4286019195</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <Input Universe="1" Channel="12310"/>
-      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None">Playback</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="0"/>
-      <Playback>
-       <Function>4294967295</Function>
-      </Playback>
-     </Slider>
-     <Slider Caption="Group." ID="296" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="True" X="65" Y="105" Width="60" Height="100"/>
-      <Appearance>
-       <FrameStyle>Sunken</FrameStyle>
-       <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
-      </Appearance>
-      <Input Universe="1" Channel="12309"/>
+      <Input Universe="1" Channel="8213"/>
       <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None">Playback</SliderMode>
       <Level LowLimit="0" HighLimit="255" Value="0"/>
       <Playback>
@@ -4547,17 +3980,35 @@
       </Playback>
      </Slider>
      <Slider Caption="Shape" ID="297" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="True" X="5" Y="105" Width="60" Height="100"/>
+      <WindowState Visible="False" X="5" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
+       <BackgroundColor>4286019195</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <Input Universe="1" Channel="12308"/>
+      <Input Universe="1" Channel="8212"/>
       <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="128"/>
+      <Level LowLimit="0" HighLimit="255" Value="142"/>
+      <Playback>
+       <Function>4294967295</Function>
+      </Playback>
+     </Slider>
+     <Slider Caption="Col1" ID="48" WidgetStyle="Knob" InvertedAppearance="false">
+      <WindowState Visible="False" X="185" Y="5" Width="60" Height="100"/>
+      <Appearance>
+       <FrameStyle>Sunken</FrameStyle>
+       <ForegroundColor>4294967295</ForegroundColor>
+       <BackgroundColor>4286019195</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
+      </Appearance>
+      <Input Universe="1" Channel="8211"/>
+      <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
+      <Level LowLimit="0" HighLimit="255" Value="66">
+       <Channel Fixture="4">6</Channel>
+      </Level>
       <Playback>
        <Function>4294967295</Function>
       </Playback>
@@ -4571,7 +4022,7 @@
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
-     <WindowState Visible="False" X="10" Y="45" Width="260" Height="220"/>
+     <WindowState Visible="False" X="10" Y="45" Width="255" Height="215"/>
      <AllowChildren>True</AllowChildren>
      <AllowResize>True</AllowResize>
      <ShowHeader>False</ShowHeader>
@@ -4583,11 +4034,11 @@
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>4284653802</BackgroundColor>
+       <BackgroundColor>4284374116</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <Input Universe="1" Channel="16400"/>
+      <Input Universe="1" Channel="16"/>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
       <Level LowLimit="0" HighLimit="255" Value="124">
        <Channel Fixture="5">4</Channel>
@@ -4596,36 +4047,18 @@
        <Function>4294967295</Function>
       </Playback>
      </Slider>
-     <Slider Caption="Inter." ID="300" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="65" Y="5" Width="60" Height="100"/>
+     <Slider Caption="Col2" ID="301" WidgetStyle="Knob" InvertedAppearance="false">
+      <WindowState Visible="False" X="185" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>4281697508</BackgroundColor>
+       <BackgroundColor>4284374116</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <Input Universe="1" Channel="16401"/>
+      <Input Universe="1" Channel="23"/>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="124">
-       <Channel Fixture="5">5</Channel>
-      </Level>
-      <Playback>
-       <Function>4294967295</Function>
-      </Playback>
-     </Slider>
-     <Slider Caption="Inten. Bkgd" ID="301" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="125" Y="5" Width="60" Height="100"/>
-      <Appearance>
-       <FrameStyle>Sunken</FrameStyle>
-       <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>4283949961</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
-      </Appearance>
-      <Input Universe="1" Channel="16402"/>
-      <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="122">
+      <Level LowLimit="0" HighLimit="255" Value="126">
        <Channel Fixture="5">6</Channel>
       </Level>
       <Playback>
@@ -4633,65 +4066,33 @@
       </Playback>
      </Slider>
      <Slider Caption="Ratio" ID="302" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="185" Y="5" Width="60" Height="100"/>
+      <WindowState Visible="False" X="125" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>4281586042</BackgroundColor>
+       <BackgroundColor>4284374116</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <Input Universe="1" Channel="16403"/>
+      <Input Universe="1" Channel="22"/>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="122">
+      <Level LowLimit="0" HighLimit="255" Value="128">
        <Channel Fixture="5">7</Channel>
       </Level>
       <Playback>
        <Function>4294967295</Function>
       </Playback>
      </Slider>
-     <Slider Caption="" ID="303" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="185" Y="105" Width="60" Height="100"/>
-      <Appearance>
-       <FrameStyle>Sunken</FrameStyle>
-       <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
-      </Appearance>
-      <Input Universe="1" Channel="16407"/>
-      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None">Playback</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="0"/>
-      <Playback>
-       <Function>4294967295</Function>
-      </Playback>
-     </Slider>
      <Slider Caption="Seq." ID="304" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="125" Y="105" Width="60" Height="100"/>
-      <Appearance>
-       <FrameStyle>Sunken</FrameStyle>
-       <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
-      </Appearance>
-      <Input Universe="1" Channel="16406"/>
-      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None">Playback</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="0"/>
-      <Playback>
-       <Function>4294967295</Function>
-      </Playback>
-     </Slider>
-     <Slider Caption="Group." ID="305" WidgetStyle="Knob" InvertedAppearance="false">
       <WindowState Visible="False" X="65" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
+       <BackgroundColor>4284374116</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <Input Universe="1" Channel="16405"/>
+      <Input Universe="1" Channel="21"/>
       <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None">Playback</SliderMode>
       <Level LowLimit="0" HighLimit="255" Value="0"/>
       <Playback>
@@ -4703,13 +4104,31 @@
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
+       <BackgroundColor>4284374116</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <Input Universe="1" Channel="16404"/>
+      <Input Universe="1" Channel="20"/>
       <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="124"/>
+      <Level LowLimit="0" HighLimit="255" Value="132"/>
+      <Playback>
+       <Function>4294967295</Function>
+      </Playback>
+     </Slider>
+     <Slider Caption="Col1" ID="49" WidgetStyle="Knob" InvertedAppearance="false">
+      <WindowState Visible="False" X="185" Y="5" Width="60" Height="100"/>
+      <Appearance>
+       <FrameStyle>Sunken</FrameStyle>
+       <ForegroundColor>4294967295</ForegroundColor>
+       <BackgroundColor>4284374116</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
+      </Appearance>
+      <Input Universe="1" Channel="19"/>
+      <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
+      <Level LowLimit="0" HighLimit="255" Value="128">
+       <Channel Fixture="5">11</Channel>
+      </Level>
       <Playback>
        <Function>4294967295</Function>
       </Playback>
@@ -4719,11 +4138,11 @@
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>4292877092</BackgroundColor>
+      <BackgroundColor>4289010989</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
-     <WindowState Visible="False" X="10" Y="45" Width="260" Height="215"/>
+     <WindowState Visible="False" X="10" Y="45" Width="255" Height="215"/>
      <AllowChildren>True</AllowChildren>
      <AllowResize>True</AllowResize>
      <ShowHeader>False</ShowHeader>
@@ -4735,31 +4154,31 @@
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>4284653802</BackgroundColor>
+       <BackgroundColor>4292877092</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
       <Input Universe="1" Channel="24592"/>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="160">
+      <Level LowLimit="0" HighLimit="255" Value="42">
        <Channel Fixture="8">4</Channel>
       </Level>
       <Playback>
        <Function>4294967295</Function>
       </Playback>
      </Slider>
-     <Slider Caption="Inten. Bkgd" ID="58" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="125" Y="5" Width="60" Height="100"/>
+     <Slider Caption="Col2" ID="58" WidgetStyle="Knob" InvertedAppearance="false">
+      <WindowState Visible="False" X="185" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>4283949961</BackgroundColor>
+       <BackgroundColor>4292877092</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <Input Universe="1" Channel="24594"/>
+      <Input Universe="1" Channel="24599"/>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="0">
+      <Level LowLimit="0" HighLimit="255" Value="124">
        <Channel Fixture="8">6</Channel>
       </Level>
       <Playback>
@@ -4767,51 +4186,19 @@
       </Playback>
      </Slider>
      <Slider Caption="Ratio" ID="59" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="185" Y="5" Width="60" Height="100"/>
+      <WindowState Visible="False" X="125" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4294967295</ForegroundColor>
-       <BackgroundColor>4281586042</BackgroundColor>
+       <BackgroundColor>4292877092</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <Input Universe="1" Channel="24595"/>
+      <Input Universe="1" Channel="24598"/>
       <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="134">
+      <Level LowLimit="0" HighLimit="255" Value="130">
        <Channel Fixture="8">7</Channel>
       </Level>
-      <Playback>
-       <Function>4294967295</Function>
-      </Playback>
-     </Slider>
-     <Slider Caption="" ID="60" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="185" Y="105" Width="60" Height="100"/>
-      <Appearance>
-       <FrameStyle>Sunken</FrameStyle>
-       <ForegroundColor>4288321942</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
-      </Appearance>
-      <Input Universe="1" Channel="24599"/>
-      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None">Playback</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="0"/>
-      <Playback>
-       <Function>4294967295</Function>
-      </Playback>
-     </Slider>
-     <Slider Caption="" ID="61" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="65" Y="105" Width="60" Height="100"/>
-      <Appearance>
-       <FrameStyle>Sunken</FrameStyle>
-       <ForegroundColor>4288321942</ForegroundColor>
-       <BackgroundColor>Default</BackgroundColor>
-       <BackgroundImage>None</BackgroundImage>
-       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
-      </Appearance>
-      <Input Universe="1" Channel="24597"/>
-      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None">Playback</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="0"/>
       <Playback>
        <Function>4294967295</Function>
       </Playback>
@@ -4821,13 +4208,13 @@
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4288321942</ForegroundColor>
-       <BackgroundColor>4294336849</BackgroundColor>
+       <BackgroundColor>4292877092</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
       <Input Universe="1" Channel="24596"/>
       <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="255">
+      <Level LowLimit="0" HighLimit="255" Value="122">
        <Channel Fixture="8">8</Channel>
       </Level>
       <Playback>
@@ -4835,18 +4222,36 @@
       </Playback>
      </Slider>
      <Slider Caption="Seq" ID="64" WidgetStyle="Knob" InvertedAppearance="false">
-      <WindowState Visible="False" X="125" Y="105" Width="60" Height="100"/>
+      <WindowState Visible="False" X="65" Y="105" Width="60" Height="100"/>
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>4293914607</ForegroundColor>
-       <BackgroundColor>4294336849</BackgroundColor>
+       <BackgroundColor>4292877092</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
       </Appearance>
-      <Input Universe="1" Channel="24598"/>
+      <Input Universe="1" Channel="24597"/>
       <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-      <Level LowLimit="0" HighLimit="255" Value="134">
+      <Level LowLimit="0" HighLimit="255" Value="126">
        <Channel Fixture="8">10</Channel>
+      </Level>
+      <Playback>
+       <Function>4294967295</Function>
+      </Playback>
+     </Slider>
+     <Slider Caption="Col1" ID="61" WidgetStyle="Knob" InvertedAppearance="false">
+      <WindowState Visible="False" X="185" Y="5" Width="60" Height="100"/>
+      <Appearance>
+       <FrameStyle>Sunken</FrameStyle>
+       <ForegroundColor>4294967295</ForegroundColor>
+       <BackgroundColor>4292877092</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
+      </Appearance>
+      <Input Universe="1" Channel="24595"/>
+      <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
+      <Level LowLimit="0" HighLimit="255" Value="128">
+       <Channel Fixture="8">11</Channel>
       </Level>
       <Playback>
        <Function>4294967295</Function>
@@ -4862,7 +4267,7 @@
      <BackgroundImage>None</BackgroundImage>
      <Font>Default</Font>
     </Appearance>
-    <WindowState Visible="True" X="270" Y="990" Width="645" Height="115"/>
+    <WindowState Visible="True" X="200" Y="1025" Width="645" Height="115"/>
     <AllowChildren>True</AllowChildren>
     <AllowResize>True</AllowResize>
     <ShowHeader>True</ShowHeader>
@@ -4884,7 +4289,7 @@
      <Intensity Adjust="False">100</Intensity>
      <Input Universe="1" Channel="209"/>
     </Button>
-    <Button Caption="Bulles" ID="127" Icon="">
+    <Button Caption="Bulles lentes" ID="127" Icon="">
      <WindowState Visible="True" X="420" Y="50" Width="105" Height="45"/>
      <Appearance>
       <FrameStyle>None</FrameStyle>
@@ -4893,7 +4298,7 @@
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
-     <Function ID="28"/>
+     <Function ID="35"/>
      <Action>Flash</Action>
      <Intensity Adjust="False">100</Intensity>
      <Input Universe="1" Channel="214"/>
@@ -4963,19 +4368,19 @@
      <BackgroundImage>None</BackgroundImage>
      <Font>Default</Font>
     </Appearance>
-    <WindowState Visible="True" X="20" Y="465" Width="275" Height="420"/>
+    <WindowState Visible="True" X="20" Y="465" Width="270" Height="415"/>
     <AllowChildren>True</AllowChildren>
-    <AllowResize>True</AllowResize>
-    <ShowHeader>True</ShowHeader>
-    <ShowEnableButton>True</ShowEnableButton>
+    <AllowResize>False</AllowResize>
+    <ShowHeader>False</ShowHeader>
+    <ShowEnableButton>False</ShowEnableButton>
     <Collapsed>False</Collapsed>
     <Disabled>False</Disabled>
     <Slider Caption="Dim." ID="8" WidgetStyle="Slider" InvertedAppearance="false">
-     <WindowState Visible="True" X="20" Y="40" Width="55" Height="130"/>
+     <WindowState Visible="True" X="20" Y="45" Width="55" Height="130"/>
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>Default</BackgroundColor>
+      <BackgroundColor>4280557361</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
@@ -4989,11 +4394,11 @@
      </Playback>
     </Slider>
     <Slider Caption="Col1" ID="14" WidgetStyle="Slider" InvertedAppearance="false">
-     <WindowState Visible="True" X="80" Y="40" Width="65" Height="130"/>
+     <WindowState Visible="True" X="80" Y="45" Width="65" Height="130"/>
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>Default</BackgroundColor>
+      <BackgroundColor>4280557361</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
@@ -5006,11 +4411,11 @@
      </Playback>
     </Slider>
     <Slider Caption="Col2" ID="23" WidgetStyle="Slider" InvertedAppearance="false">
-     <WindowState Visible="True" X="145" Y="40" Width="65" Height="130"/>
+     <WindowState Visible="True" X="145" Y="45" Width="65" Height="130"/>
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>Default</BackgroundColor>
+      <BackgroundColor>4280557361</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
@@ -5026,11 +4431,11 @@
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>Default</BackgroundColor>
+      <BackgroundColor>4280557361</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
-     <WindowState Visible="True" X="20" Y="190" Width="235" Height="215"/>
+     <WindowState Visible="True" X="20" Y="185" Width="235" Height="215"/>
      <AllowChildren>True</AllowChildren>
      <AllowResize>True</AllowResize>
      <ShowHeader>False</ShowHeader>
@@ -5050,6 +4455,7 @@
       <Function ID="5007"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
+      <Input Universe="1" Channel="128" LowerValue="2" UpperValue="42"/>
      </Button>
      <Button Caption="Lent" ID="41" Icon="">
       <WindowState Visible="True" X="10" Y="10" Width="70" Height="30"/>
@@ -5063,7 +4469,7 @@
       <Function ID="5006"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
-      <Input Universe="1" Channel="128" LowerValue="2" UpperValue="42"/>
+      <Input Universe="1" Channel="180"/>
      </Button>
      <Button Caption="OFF" ID="100" Icon="">
       <WindowState Visible="True" X="35" Y="175" Width="40" Height="30"/>
@@ -5077,7 +4483,6 @@
       <Function ID="5000"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
-      <Input Universe="1" Channel="180"/>
      </Button>
      <Button Caption="Lent" ID="136" Icon="">
       <WindowState Visible="True" X="10" Y="40" Width="70" Height="30"/>
@@ -5088,7 +4493,7 @@
        <BackgroundImage>None</BackgroundImage>
        <Font>Default</Font>
       </Appearance>
-      <Function ID="5009"/>
+      <Function ID="4294967295"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
      </Button>
@@ -5101,7 +4506,7 @@
        <BackgroundImage>None</BackgroundImage>
        <Font>Default</Font>
       </Appearance>
-      <Function ID="3010"/>
+      <Function ID="4294967295"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
      </Button>
@@ -5127,7 +4532,7 @@
        <BackgroundImage>None</BackgroundImage>
        <Font>Default</Font>
       </Appearance>
-      <Function ID="5013"/>
+      <Function ID="4294967295"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
      </Button>
@@ -5154,7 +4559,7 @@
        <BackgroundImage>None</BackgroundImage>
        <Font>Default</Font>
       </Appearance>
-      <Function ID="5018"/>
+      <Function ID="4294967295"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
       <Input Universe="1" Channel="152" LowerValue="2" UpperValue="42"/>
@@ -5168,7 +4573,7 @@
        <BackgroundImage>None</BackgroundImage>
        <Font>Default</Font>
       </Appearance>
-      <Function ID="5021"/>
+      <Function ID="4294967295"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
       <Input Universe="1" Channel="136" LowerValue="2" UpperValue="42"/>
@@ -5246,49 +4651,43 @@
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>4294967295</ForegroundColor>
-      <BackgroundColor>4282202182</BackgroundColor>
+      <BackgroundColor>4280557361</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
      </Appearance>
      <Input Universe="1" Channel="48"/>
      <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="130">
+     <Level LowLimit="0" HighLimit="255" Value="128">
       <Channel Fixture="5">5</Channel>
      </Level>
      <Playback>
       <Function>4294967295</Function>
      </Playback>
     </Slider>
-   </Frame>
-   <Frame Caption="Main Control" ID="51">
-    <Appearance>
-     <FrameStyle>Sunken</FrameStyle>
-     <ForegroundColor>Default</ForegroundColor>
-     <BackgroundColor>Default</BackgroundColor>
-     <BackgroundImage>None</BackgroundImage>
-     <Font>Default</Font>
-    </Appearance>
-    <WindowState Visible="True" X="965" Y="985" Width="240" Height="240"/>
-    <AllowChildren>True</AllowChildren>
-    <AllowResize>True</AllowResize>
-    <ShowHeader>True</ShowHeader>
-    <ShowEnableButton>False</ShowEnableButton>
-    <Collapsed>False</Collapsed>
-    <Disabled>False</Disabled>
+    <Label Caption="Zone GAUCHE" ID="105">
+     <WindowState Visible="True" X="50" Y="10" Width="170" Height="25"/>
+     <Appearance>
+      <FrameStyle>None</FrameStyle>
+      <ForegroundColor>4294967295</ForegroundColor>
+      <BackgroundColor>4280557361</BackgroundColor>
+      <BackgroundImage>None</BackgroundImage>
+      <Font>Ubuntu,13,-1,5,75,0,0,0,0,0</Font>
+     </Appearance>
+    </Label>
    </Frame>
    <Frame Caption="Rayons ROUGES #2" ID="388">
     <Appearance>
      <FrameStyle>Sunken</FrameStyle>
      <ForegroundColor>4292877092</ForegroundColor>
-     <BackgroundColor>4292877092</BackgroundColor>
+     <BackgroundColor>4289010989</BackgroundColor>
      <BackgroundImage>None</BackgroundImage>
      <Font>Default</Font>
     </Appearance>
     <WindowState Visible="True" X="910" Y="15" Width="425" Height="425"/>
     <AllowChildren>True</AllowChildren>
-    <AllowResize>True</AllowResize>
-    <ShowHeader>True</ShowHeader>
-    <ShowEnableButton>True</ShowEnableButton>
+    <AllowResize>False</AllowResize>
+    <ShowHeader>False</ShowHeader>
+    <ShowEnableButton>False</ShowEnableButton>
     <Collapsed>False</Collapsed>
     <Disabled>False</Disabled>
     <Slider Caption="Dim." ID="235" WidgetStyle="Slider" InvertedAppearance="false">
@@ -5296,7 +4695,7 @@
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>4284374116</BackgroundColor>
+      <BackgroundColor>4290780200</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
@@ -5313,7 +4712,7 @@
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>4284374116</BackgroundColor>
+      <BackgroundColor>4290780200</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
@@ -5337,6 +4736,7 @@
       <Function ID="8008"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
+      <Input Universe="1" Channel="134" LowerValue="2" UpperValue="42"/>
      </Button>
      <Button Caption="OFF" ID="322" Icon="">
       <WindowState Visible="True" X="170" Y="170" Width="40" Height="30"/>
@@ -5350,7 +4750,6 @@
       <Function ID="8000"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
-      <Input Universe="1" Channel="24756"/>
      </Button>
      <Button Caption="Rapide" ID="323" Icon="">
       <WindowState Visible="True" X="85" Y="45" Width="70" Height="30"/>
@@ -5415,7 +4814,7 @@
        <BackgroundImage>None</BackgroundImage>
        <Font>Default</Font>
       </Appearance>
-      <Function ID="8025"/>
+      <Function ID="8018"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
       <Input Universe="1" Channel="150" LowerValue="2" UpperValue="42"/>
@@ -5432,7 +4831,7 @@
       <Function ID="8006"/>
       <Action>Toggle</Action>
       <Intensity Adjust="False">100</Intensity>
-      <Input Universe="1" Channel="134" LowerValue="2" UpperValue="42"/>
+      <Input Universe="1" Channel="24756"/>
      </Button>
      <Button Caption="Digital" ID="329" Icon="">
       <WindowState Visible="True" X="15" Y="150" Width="70" Height="30"/>
@@ -5492,7 +4891,7 @@
       <Appearance>
        <FrameStyle>None</FrameStyle>
        <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>4284374116</BackgroundColor>
+       <BackgroundColor>4282202182</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Default</Font>
       </Appearance>
@@ -5504,7 +4903,7 @@
       <Appearance>
        <FrameStyle>Sunken</FrameStyle>
        <ForegroundColor>Default</ForegroundColor>
-       <BackgroundColor>4284374116</BackgroundColor>
+       <BackgroundColor>4282202182</BackgroundColor>
        <BackgroundImage>None</BackgroundImage>
        <Font>Default</Font>
       </Appearance>
@@ -5667,7 +5066,7 @@
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>4284374116</BackgroundColor>
+      <BackgroundColor>4290780200</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
@@ -5684,12 +5083,12 @@
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>4284374116</BackgroundColor>
+      <BackgroundColor>4290780200</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="2">
+     <Level LowLimit="0" HighLimit="255" Value="1">
       <Channel Fixture="8">3</Channel>
      </Level>
      <Playback>
@@ -5700,7 +5099,7 @@
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>4284374116</BackgroundColor>
+      <BackgroundColor>4290780200</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
@@ -5770,20 +5169,544 @@
      <Appearance>
       <FrameStyle>Sunken</FrameStyle>
       <ForegroundColor>4294967295</ForegroundColor>
-      <BackgroundColor>4284374116</BackgroundColor>
+      <BackgroundColor>4290780200</BackgroundColor>
       <BackgroundImage>None</BackgroundImage>
       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
      </Appearance>
      <Input Universe="1" Channel="54"/>
      <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="255">
+     <Level LowLimit="0" HighLimit="255" Value="122">
       <Channel Fixture="8">5</Channel>
      </Level>
      <Playback>
       <Function>4294967295</Function>
      </Playback>
     </Slider>
+    <Label Caption="Rayons ROUGES #2" ID="101">
+     <WindowState Visible="True" X="15" Y="10" Width="385" Height="25"/>
+     <Appearance>
+      <FrameStyle>None</FrameStyle>
+      <ForegroundColor>Default</ForegroundColor>
+      <BackgroundColor>4293735227</BackgroundColor>
+      <BackgroundImage>None</BackgroundImage>
+      <Font>Ubuntu,13,-1,5,75,0,0,0,0,0</Font>
+     </Appearance>
+    </Label>
    </Frame>
+   <Frame Caption="Barres LED" ID="12">
+    <Appearance>
+     <FrameStyle>Sunken</FrameStyle>
+     <ForegroundColor>Default</ForegroundColor>
+     <BackgroundColor>4282202182</BackgroundColor>
+     <BackgroundImage>None</BackgroundImage>
+     <Font>Default</Font>
+    </Appearance>
+    <WindowState Visible="True" X="1165" Y="455" Width="555" Height="410"/>
+    <AllowChildren>True</AllowChildren>
+    <AllowResize>False</AllowResize>
+    <ShowHeader>True</ShowHeader>
+    <ShowEnableButton>False</ShowEnableButton>
+    <Collapsed>True</Collapsed>
+    <Disabled>False</Disabled>
+    <Slider Caption="Dim." ID="261" WidgetStyle="Slider" InvertedAppearance="false">
+     <WindowState Visible="True" X="15" Y="40" Width="50" Height="135"/>
+     <Appearance>
+      <FrameStyle>Sunken</FrameStyle>
+      <ForegroundColor>Default</ForegroundColor>
+      <BackgroundColor>Default</BackgroundColor>
+      <BackgroundImage>None</BackgroundImage>
+      <Font>Default</Font>
+     </Appearance>
+     <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
+     <Level LowLimit="0" HighLimit="255" Value="255">
+      <Channel Fixture="1">0</Channel>
+     </Level>
+     <Playback>
+      <Function>4294967295</Function>
+     </Playback>
+    </Slider>
+    <Slider Caption="Col1" ID="269" WidgetStyle="Slider" InvertedAppearance="false">
+     <WindowState Visible="True" X="70" Y="40" Width="65" Height="135"/>
+     <Appearance>
+      <FrameStyle>Sunken</FrameStyle>
+      <ForegroundColor>Default</ForegroundColor>
+      <BackgroundColor>Default</BackgroundColor>
+      <BackgroundImage>None</BackgroundImage>
+      <Font>Default</Font>
+     </Appearance>
+     <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
+     <Level LowLimit="0" HighLimit="255" Value="6">
+      <Channel Fixture="1">2</Channel>
+     </Level>
+     <Playback>
+      <Function>4294967295</Function>
+     </Playback>
+    </Slider>
+    <Slider Caption="Col2" ID="3" WidgetStyle="Slider" InvertedAppearance="false">
+     <WindowState Visible="True" X="135" Y="40" Width="65" Height="135"/>
+     <Appearance>
+      <FrameStyle>Sunken</FrameStyle>
+      <ForegroundColor>Default</ForegroundColor>
+      <BackgroundColor>Default</BackgroundColor>
+      <BackgroundImage>None</BackgroundImage>
+      <Font>Default</Font>
+     </Appearance>
+     <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="Preset" Monitor="false">Level</SliderMode>
+     <Level LowLimit="0" HighLimit="255" Value="3">
+      <Channel Fixture="1">3</Channel>
+     </Level>
+     <Playback>
+      <Function>4294967295</Function>
+     </Playback>
+    </Slider>
+    <SoloFrame Caption="Animations" ID="175">
+     <Appearance>
+      <FrameStyle>Sunken</FrameStyle>
+      <ForegroundColor>Default</ForegroundColor>
+      <BackgroundColor>Default</BackgroundColor>
+      <BackgroundImage>None</BackgroundImage>
+      <Font>Default</Font>
+     </Appearance>
+     <WindowState Visible="True" X="20" Y="180" Width="405" Height="220"/>
+     <AllowChildren>True</AllowChildren>
+     <AllowResize>True</AllowResize>
+     <ShowHeader>False</ShowHeader>
+     <ShowEnableButton>False</ShowEnableButton>
+     <Mixing>False</Mixing>
+     <Collapsed>False</Collapsed>
+     <Disabled>False</Disabled>
+     <Button Caption="Rapide" ID="146" Icon="">
+      <WindowState Visible="True" X="85" Y="15" Width="70" Height="30"/>
+      <Appearance>
+       <FrameStyle>None</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>4288266737</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Default</Font>
+      </Appearance>
+      <Function ID="1019"/>
+      <Action>Toggle</Action>
+      <Intensity Adjust="False">100</Intensity>
+     </Button>
+     <Button Caption="Lent" ID="147" Icon="">
+      <WindowState Visible="True" X="15" Y="15" Width="70" Height="30"/>
+      <Appearance>
+       <FrameStyle>None</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>4288266737</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Default</Font>
+      </Appearance>
+      <Function ID="1018"/>
+      <Action>Toggle</Action>
+      <Intensity Adjust="False">100</Intensity>
+     </Button>
+     <Button Caption="OFF" ID="149" Icon="">
+      <WindowState Visible="True" X="45" Y="180" Width="40" Height="30"/>
+      <Appearance>
+       <FrameStyle>None</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>4282202182</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Default</Font>
+      </Appearance>
+      <Function ID="1000"/>
+      <Action>Toggle</Action>
+      <Intensity Adjust="False">100</Intensity>
+     </Button>
+     <Button Caption="Rapide" ID="154" Icon="">
+      <WindowState Visible="True" X="85" Y="45" Width="70" Height="30"/>
+      <Appearance>
+       <FrameStyle>None</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>4287623332</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Default</Font>
+      </Appearance>
+      <Function ID="1033"/>
+      <Action>Toggle</Action>
+      <Intensity Adjust="False">100</Intensity>
+     </Button>
+     <Button Caption="Lent" ID="155" Icon="">
+      <WindowState Visible="True" X="15" Y="45" Width="70" Height="30"/>
+      <Appearance>
+       <FrameStyle>None</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>4287623332</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Default</Font>
+      </Appearance>
+      <Function ID="1032"/>
+      <Action>Toggle</Action>
+      <Intensity Adjust="False">100</Intensity>
+     </Button>
+     <Button Caption="Lent" ID="156" Icon="">
+      <WindowState Visible="True" X="15" Y="75" Width="70" Height="30"/>
+      <Appearance>
+       <FrameStyle>None</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>4294570091</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Default</Font>
+      </Appearance>
+      <Function ID="1036"/>
+      <Action>Toggle</Action>
+      <Intensity Adjust="False">100</Intensity>
+     </Button>
+     <Button Caption="Rapide" ID="157" Icon="">
+      <WindowState Visible="True" X="85" Y="75" Width="70" Height="30"/>
+      <Appearance>
+       <FrameStyle>None</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>4294570091</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Default</Font>
+      </Appearance>
+      <Function ID="1037"/>
+      <Action>Toggle</Action>
+      <Intensity Adjust="False">100</Intensity>
+     </Button>
+     <Button Caption="Analog." ID="159" Icon="">
+      <WindowState Visible="True" X="85" Y="140" Width="70" Height="30"/>
+      <Appearance>
+       <FrameStyle>None</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>Default</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Default</Font>
+      </Appearance>
+      <Function ID="1006"/>
+      <Action>Toggle</Action>
+      <Intensity Adjust="False">100</Intensity>
+     </Button>
+     <Button Caption="Lent" ID="161" Icon="">
+      <WindowState Visible="True" X="15" Y="105" Width="70" Height="30"/>
+      <Appearance>
+       <FrameStyle>None</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>4292643549</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Default</Font>
+      </Appearance>
+      <Function ID="1042"/>
+      <Action>Toggle</Action>
+      <Intensity Adjust="False">100</Intensity>
+     </Button>
+     <Button Caption="Rapide" ID="162" Icon="">
+      <WindowState Visible="True" X="85" Y="105" Width="70" Height="30"/>
+      <Appearance>
+       <FrameStyle>None</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>4292643549</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Default</Font>
+      </Appearance>
+      <Function ID="1044"/>
+      <Action>Toggle</Action>
+      <Intensity Adjust="False">100</Intensity>
+     </Button>
+     <Button Caption="ON" ID="130" Icon="">
+      <WindowState Visible="True" X="85" Y="180" Width="35" Height="30"/>
+      <Appearance>
+       <FrameStyle>None</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>4294336849</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Default</Font>
+      </Appearance>
+      <Function ID="1001"/>
+      <Action>Toggle</Action>
+      <Intensity Adjust="False">100</Intensity>
+     </Button>
+     <Button Caption="Digital" ID="350" Icon="">
+      <WindowState Visible="True" X="15" Y="140" Width="70" Height="30"/>
+      <Appearance>
+       <FrameStyle>None</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>Default</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Default</Font>
+      </Appearance>
+      <Function ID="1011"/>
+      <Action>Toggle</Action>
+      <Intensity Adjust="False">100</Intensity>
+     </Button>
+     <Label Caption="Bulles" ID="351">
+      <WindowState Visible="True" X="160" Y="20" Width="65" Height="20"/>
+      <Appearance>
+       <FrameStyle>None</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>4288266737</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
+      </Appearance>
+     </Label>
+     <Label Caption="Carré" ID="355">
+      <WindowState Visible="True" X="160" Y="50" Width="60" Height="20"/>
+      <Appearance>
+       <FrameStyle>None</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>4287623332</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
+      </Appearance>
+     </Label>
+     <Label Caption="Flash" ID="363">
+      <WindowState Visible="True" X="160" Y="80" Width="60" Height="20"/>
+      <Appearance>
+       <FrameStyle>None</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>4294570091</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
+      </Appearance>
+     </Label>
+     <Label Caption="Strobe" ID="364">
+      <WindowState Visible="True" X="160" Y="110" Width="60" Height="20"/>
+      <Appearance>
+       <FrameStyle>None</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>4292643549</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
+      </Appearance>
+     </Label>
+     <SoloFrame Caption="" ID="373">
+      <Appearance>
+       <FrameStyle>Sunken</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>4291668879</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Default</Font>
+      </Appearance>
+      <WindowState Visible="True" X="240" Y="25" Width="95" Height="105"/>
+      <AllowChildren>True</AllowChildren>
+      <AllowResize>True</AllowResize>
+      <ShowHeader>False</ShowHeader>
+      <ShowEnableButton>False</ShowEnableButton>
+      <Mixing>False</Mixing>
+      <Collapsed>False</Collapsed>
+      <Disabled>False</Disabled>
+      <Button Caption="--o&gt;----" ID="31" Icon="">
+       <WindowState Visible="True" X="10" Y="5" Width="70" Height="30"/>
+       <Appearance>
+        <FrameStyle>None</FrameStyle>
+        <ForegroundColor>Default</ForegroundColor>
+        <BackgroundColor>Default</BackgroundColor>
+        <BackgroundImage>None</BackgroundImage>
+        <Font>Default</Font>
+       </Appearance>
+       <Function ID="1500"/>
+       <Action>Toggle</Action>
+       <Intensity Adjust="False">100</Intensity>
+      </Button>
+      <Button Caption="----&lt;o--" ID="32" Icon="">
+       <WindowState Visible="True" X="10" Y="35" Width="70" Height="30"/>
+       <Appearance>
+        <FrameStyle>None</FrameStyle>
+        <ForegroundColor>Default</ForegroundColor>
+        <BackgroundColor>Default</BackgroundColor>
+        <BackgroundImage>None</BackgroundImage>
+        <Font>Default</Font>
+       </Appearance>
+       <Function ID="1501"/>
+       <Action>Toggle</Action>
+       <Intensity Adjust="False">100</Intensity>
+      </Button>
+      <Button Caption="&gt;--o----&lt;" ID="33" Icon="">
+       <WindowState Visible="True" X="10" Y="65" Width="70" Height="30"/>
+       <Appearance>
+        <FrameStyle>None</FrameStyle>
+        <ForegroundColor>Default</ForegroundColor>
+        <BackgroundColor>Default</BackgroundColor>
+        <BackgroundImage>None</BackgroundImage>
+        <Font>Default</Font>
+       </Appearance>
+       <Function ID="1502"/>
+       <Action>Toggle</Action>
+       <Intensity Adjust="False">100</Intensity>
+      </Button>
+     </SoloFrame>
+     <Button Caption="Chaser" ID="374" Icon="">
+      <WindowState Visible="True" X="255" Y="140" Width="70" Height="30"/>
+      <Appearance>
+       <FrameStyle>None</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>4291668879</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Default</Font>
+      </Appearance>
+      <Function ID="1055"/>
+      <Action>Toggle</Action>
+      <Intensity Adjust="False">100</Intensity>
+     </Button>
+    </SoloFrame>
+    <SoloFrame Caption="" ID="312">
+     <Appearance>
+      <FrameStyle>Sunken</FrameStyle>
+      <ForegroundColor>Default</ForegroundColor>
+      <BackgroundColor>Default</BackgroundColor>
+      <BackgroundImage>None</BackgroundImage>
+      <Font>Default</Font>
+     </Appearance>
+     <WindowState Visible="True" X="215" Y="50" Width="100" Height="115"/>
+     <AllowChildren>False</AllowChildren>
+     <AllowResize>True</AllowResize>
+     <ShowHeader>False</ShowHeader>
+     <ShowEnableButton>False</ShowEnableButton>
+     <Mixing>False</Mixing>
+     <Collapsed>False</Collapsed>
+     <Disabled>False</Disabled>
+     <Button Caption="Pixel" ID="313" Icon="">
+      <WindowState Visible="True" X="5" Y="5" Width="85" Height="25"/>
+      <Appearance>
+       <FrameStyle>None</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>Default</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Default</Font>
+      </Appearance>
+      <Function ID="0"/>
+      <Action>Toggle</Action>
+      <Intensity Adjust="False">100</Intensity>
+     </Button>
+     <Button Caption="Segment" ID="314" Icon="">
+      <WindowState Visible="True" X="5" Y="30" Width="85" Height="25"/>
+      <Appearance>
+       <FrameStyle>None</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>Default</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Default</Font>
+      </Appearance>
+      <Function ID="1"/>
+      <Action>Toggle</Action>
+      <Intensity Adjust="False">100</Intensity>
+     </Button>
+     <Button Caption="Barre" ID="315" Icon="">
+      <WindowState Visible="True" X="5" Y="55" Width="85" Height="25"/>
+      <Appearance>
+       <FrameStyle>None</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>Default</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Default</Font>
+      </Appearance>
+      <Function ID="5"/>
+      <Action>Toggle</Action>
+      <Intensity Adjust="False">100</Intensity>
+     </Button>
+     <Button Caption="Groupe" ID="316" Icon="">
+      <WindowState Visible="True" X="5" Y="80" Width="85" Height="25"/>
+      <Appearance>
+       <FrameStyle>None</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>Default</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Default</Font>
+      </Appearance>
+      <Function ID="11"/>
+      <Action>Toggle</Action>
+      <Intensity Adjust="False">100</Intensity>
+     </Button>
+    </SoloFrame>
+    <SoloFrame Caption="" ID="118">
+     <Appearance>
+      <FrameStyle>Sunken</FrameStyle>
+      <ForegroundColor>Default</ForegroundColor>
+      <BackgroundColor>Default</BackgroundColor>
+      <BackgroundImage>None</BackgroundImage>
+      <Font>Default</Font>
+     </Appearance>
+     <WindowState Visible="True" X="320" Y="50" Width="100" Height="115"/>
+     <AllowChildren>True</AllowChildren>
+     <AllowResize>True</AllowResize>
+     <ShowHeader>False</ShowHeader>
+     <ShowEnableButton>False</ShowEnableButton>
+     <Mixing>False</Mixing>
+     <Collapsed>False</Collapsed>
+     <Disabled>False</Disabled>
+     <Button Caption="Gaussian" ID="18" Icon="">
+      <WindowState Visible="True" X="5" Y="5" Width="85" Height="30"/>
+      <Appearance>
+       <FrameStyle>None</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>4282202182</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Default</Font>
+      </Appearance>
+      <Function ID="4294967295"/>
+      <Action>Toggle</Action>
+      <Intensity Adjust="False">100</Intensity>
+     </Button>
+     <Button Caption="Square" ID="43" Icon="">
+      <WindowState Visible="True" X="5" Y="55" Width="85" Height="25"/>
+      <Appearance>
+       <FrameStyle>None</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>4282202182</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Default</Font>
+      </Appearance>
+      <Function ID="4294967295"/>
+      <Action>Toggle</Action>
+      <Intensity Adjust="False">100</Intensity>
+     </Button>
+     <Button Caption="Expon." ID="74" Icon="">
+      <WindowState Visible="True" X="5" Y="80" Width="85" Height="25"/>
+      <Appearance>
+       <FrameStyle>None</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>4282202182</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Default</Font>
+      </Appearance>
+      <Function ID="4294967295"/>
+      <Action>Toggle</Action>
+      <Intensity Adjust="False">100</Intensity>
+     </Button>
+     <Button Caption="Gaussian2" ID="89" Icon="">
+      <WindowState Visible="True" X="5" Y="30" Width="85" Height="25"/>
+      <Appearance>
+       <FrameStyle>None</FrameStyle>
+       <ForegroundColor>Default</ForegroundColor>
+       <BackgroundColor>4282202182</BackgroundColor>
+       <BackgroundImage>None</BackgroundImage>
+       <Font>Default</Font>
+      </Appearance>
+      <Function ID="4294967295"/>
+      <Action>Toggle</Action>
+      <Intensity Adjust="False">100</Intensity>
+     </Button>
+    </SoloFrame>
+    <Slider Caption="Speed" ID="249" WidgetStyle="Knob" InvertedAppearance="false">
+     <WindowState Visible="True" X="445" Y="55" Width="60" Height="100"/>
+     <Appearance>
+      <FrameStyle>Sunken</FrameStyle>
+      <ForegroundColor>4294967295</ForegroundColor>
+      <BackgroundColor>4282202182</BackgroundColor>
+      <BackgroundImage>None</BackgroundImage>
+      <Font>Ubuntu,11,-1,5,75,0,0,0,0,0</Font>
+     </Appearance>
+     <SliderMode ValueDisplayStyle="Percentage" ClickAndGoType="None" Monitor="false">Level</SliderMode>
+     <Level LowLimit="0" HighLimit="255" Value="68">
+      <Channel Fixture="1">5</Channel>
+     </Level>
+     <Playback>
+      <Function>4294967295</Function>
+     </Playback>
+    </Slider>
+   </Frame>
+   <Label Caption="BEAM RGB" ID="102">
+    <WindowState Visible="True" X="1405" Y="25" Width="255" Height="25"/>
+    <Appearance>
+     <FrameStyle>None</FrameStyle>
+     <ForegroundColor>Default</ForegroundColor>
+     <BackgroundColor>4281697508</BackgroundColor>
+     <BackgroundImage>None</BackgroundImage>
+     <Font>Ubuntu,13,-1,5,75,0,0,0,0,0</Font>
+    </Appearance>
+   </Label>
   </Frame>
   <Properties>
    <Size Width="1920" Height="1440"/>
