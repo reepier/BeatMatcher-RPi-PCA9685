@@ -11,38 +11,38 @@
 using namespace std;
 
 // Original Fun Generation spots
-SpotFixture spot_1(FunGen_RGBW_12x1W, 74,    8,  "Spot 1 (@74)",    1);  // beam
-SpotFixture spot_2(FunGen_RGBW_12x1W, 82,    8,  "Spot 2 (@82)",    2);  // beam
-SpotFixture spot_3(FunGen_RGBW_12x1W, 90,    8,  "Spot 3 (@90)",    3);  // 
-SpotFixture spot_4(FunGen_RGBW_12x1W, 98,    8,  "Spot 4 (@98)",    4);  // beam
-SpotFixture spot_5(FunGen_RGBW_12x1W, 106,   8,  "Spot 5 (@106)",   5);  // beam
-SpotFixture spot_6(FunGen_RGBW_12x1W, 114,   8,  "Spot 6 (@114)",   6);  // beam
+SpotFixture spot_1(FunGen_RGBW_12x1W, 74,    8,  "Spot 1 (@74)",    1);  // FAISCEAUX
+SpotFixture spot_2(FunGen_RGBW_12x1W, 82,    8,  "Spot 2 (@82)",    2);  // FAISCEAUX
+// SpotFixture spot_3(FunGen_RGBW_12x1W, 90,    8,  "Spot 3 (@90)",    3);  // perdu ?
+SpotFixture spot_4(FunGen_RGBW_12x1W, 98,    8,  "Spot 4 (@98)",    4);  // FAISCEAUX
+SpotFixture spot_5(FunGen_RGBW_12x1W, 106,   8,  "Spot 5 (@106)",   5);  // FAISCEAUX
+SpotFixture spot_6(FunGen_RGBW_12x1W, 114,   8,  "Spot 6 (@114)",   6);  // FAISCEAUX
 
-SpotFixture spot_7(FunGen_RGBW_12x1W,   122, 8,   "Spot 7 (@122)",    7);  // glycine
-SpotFixture spot_8(FunGen_RGBW_12x1W,   130, 8,   "Spot 8 (@130)",    8);  // glycine
-SpotFixture spot_9(FunGen_RGBW_12x1W,   138, 8,   "Spot 9 (@138)",    9);  // glycine
-SpotFixture spot_10(FunGen_RGBW_12x1W,  146, 8,   "Spot 10 (@146)",   10); // Régie
-SpotFixture spot_11(FunGen_RGBW_12x1W,  154, 8,   "Spot 11 (@154)",   11); // Régie
-SpotFixture spot_12(FunGen_RGBW_12x1W,  162, 8,   "Spot 12 (@162)",   12); // 
+SpotFixture spot_7(FunGen_RGBW_12x1W,   122, 8,   "Spot 7 (@122)",    7);  // ZONE GAUCHE
+SpotFixture spot_8(FunGen_RGBW_12x1W,   130, 8,   "Spot 8 (@130)",    8);  // ZONE GAUCHE
+SpotFixture spot_9(FunGen_RGBW_12x1W,   138, 8,   "Spot 9 (@138)",    9);  // DJ CONTRE
+SpotFixture spot_10(FunGen_RGBW_12x1W,  146, 8,   "Spot 10 (@146)",   10); // DJ CONTRE
+SpotFixture spot_11(FunGen_RGBW_12x1W,  154, 8,   "Spot 11 (@154)",   11); // DJ CONTRE
+SpotFixture spot_12(FunGen_RGBW_12x1W,  162, 8,   "Spot 12 (@162)",   12); // DJ CONTRE
 
 // New Shehds spots
-SpotFixture spot_13(Shehds_RGBWAU_7x18W, 170, 10, "Spot 13 (@170) : SHEHDS RGBWAU", 13);
-SpotFixture spot_14(Shehds_RGBWAU_7x18W, 180, 10, "Spot 14 (@180) : SHEHDS RGBWAU", 14);
-SpotFixture spot_15(Shehds_RGBWAU_7x18W, 190, 10, "Spot 15 (@190) : SHEHDS RGBWAU", 15);
-SpotFixture spot_16(Shehds_RGBWAU_7x18W, 200, 10, "Spot 16 (@200) : SHEHDS RGBWAU", 16);
-SpotFixture spot_17(Shehds_RGBWAU_7x18W, 210, 10, "Spot 17 (@210) : SHEHDS RGBWAU", 17);
-SpotFixture spot_18(Shehds_RGBWAU_7x18W, 220, 10, "Spot 18 (@220) : SHEHDS RGBWAU", 18);
-SpotFixture spot_19(Shehds_RGBWAU_7x18W, 230, 10, "Spot 19 (@230) : SHEHDS RGBWAU", 19);
-SpotFixture spot_20(Shehds_RGBWAU_7x18W, 240, 10, "Spot 20 (@240) : SHEHDS RGBWAU", 20);
+SpotFixture spot_13(Shehds_RGBWAU_7x18W, 170, 10, "Spot 13 (@170) : SHEHDS RGBWAU", 13); // pelles a merde SHEHDS
+SpotFixture spot_14(Shehds_RGBWAU_7x18W, 180, 10, "Spot 14 (@180) : SHEHDS RGBWAU", 14); // pelles a merde SHEHDS
+SpotFixture spot_15(Shehds_RGBWAU_7x18W, 190, 10, "Spot 15 (@190) : SHEHDS RGBWAU", 15); // pelles a merde SHEHDS
+SpotFixture spot_16(Shehds_RGBWAU_7x18W, 200, 10, "Spot 16 (@200) : SHEHDS RGBWAU", 16); // pelles a merde SHEHDS
+SpotFixture spot_17(Shehds_RGBWAU_7x18W, 210, 10, "Spot 17 (@210) : SHEHDS RGBWAU", 17); // pelles a merde SHEHDS
+SpotFixture spot_18(Shehds_RGBWAU_7x18W, 220, 10, "Spot 18 (@220) : SHEHDS RGBWAU", 18); // pelles a merde SHEHDS
+SpotFixture spot_19(Shehds_RGBWAU_7x18W, 230, 10, "Spot 19 (@230) : SHEHDS RGBWAU", 19); // pelles a merde SHEHDS
+SpotFixture spot_20(Shehds_RGBWAU_7x18W, 240, 10, "Spot 20 (@240) : SHEHDS RGBWAU", 20); // pelles a merde SHEHDS
 
 // NEw FunGeneration spots 
-SpotFixture spot_21(FunGen_RGBW_12x1W, 50,    8,  "Spot 21 (@50)",    21); // beam   
-SpotFixture spot_22(FunGen_RGBW_12x1W, 58,    8,  "Spot 22 (@58)",    22); // beam
-SpotFixture spot_23(FunGen_RGBW_12x1W, 66,    8,  "Spot 23 (@66)",    23); // 
+SpotFixture spot_21(FunGen_RGBW_12x1W, 50,    8,  "Spot 21 (@50)",    21); // DJ FACE  
+SpotFixture spot_22(FunGen_RGBW_12x1W, 58,    8,  "Spot 22 (@58)",    22); // DJ FACE
+SpotFixture spot_23(FunGen_RGBW_12x1W, 66,    8,  "Spot 23 (@66)",    23); // DJ FACE
 
-SpotFixture spot_24(FunGen_RGBW_12x1W, 34,    8,  "Spot 24 (@34)",    24); //     
-SpotFixture spot_25(FunGen_RGBW_12x1W, 42,    8,  "Spot 25 (@42)",    25); //     
-SpotFixture spot_26(FunGen_RGBW_12x1W, 26,    8,  "Spot 26 (@26)",    26); // beam
+SpotFixture spot_24(FunGen_RGBW_12x1W, 34,    8,  "Spot 24 (@34)",    24); // Pelles à merde FunGen    
+SpotFixture spot_25(FunGen_RGBW_12x1W, 42,    8,  "Spot 25 (@42)",    25); // Pelles à merde FunGen    
+SpotFixture spot_26(FunGen_RGBW_12x1W, 26,    8,  "Spot 26 (@26)",    26); // Pelles à merde FunGen
 
 // SpotFixture spot_8(130, 8, "Spot 8 (130)");     
 
@@ -137,13 +137,12 @@ DMX_vec SpotFixture::buffer(){
  #####  #       #######    #       #     # #     #  #####  #    #  #####  
 / ----------------------------------------------------------------------- */
 
-SpotRack spot_rack_1(spot_vec{&spot_1, &spot_2, &spot_4, &spot_21,  &spot_22, &spot_23}, "SR 1", 0, 2, 255, 60);
-SpotRack spot_rack_2(spot_vec{&spot_5, &spot_6, &spot_7, &spot_8, &spot_9, &spot_10, &spot_11}, "SR 2", 0, 3, 255, 80);
-SpotRack spot_rack_3(spot_vec{}, "SR 3", 0, 4, 255, 100);
-SpotRack spot_rack_4(spot_vec{}, "SR 4", 0, 5, 255, 120);
+SpotRack spot_rack_1(spot_vec{&spot_1, &spot_2, &spot_4, &spot_5, &spot_6}, "Faisceaux", 0, 2, 255, 60);
+SpotRack spot_rack_2(spot_vec{&spot_9, &spot_10, &spot_11, &spot_12}, "DJ Contre", 0, 3, 255, 80);
+SpotRack spot_rack_3(spot_vec{&spot_21, &spot_22, &spot_23}, "DJ Face", 0, 4, 255, 100);
+SpotRack spot_rack_4(spot_vec{&spot_7, &spot_8}, "ZGauche", 0, 5, 255, 120);
 
 
-// SpotRack global_rack(spot_vec{&spot_1,&spot_2,&spot_3,&spot_4,&spot_5,&spot_6,&spot_7,&spot_8,&spot_9,&spot_10,&spot_11,&spot_12}, "Global Rack", 1);
 
 /*
 ### #     # ### #######        #######               
@@ -579,13 +578,14 @@ void shehds_rack_init(){
     FILL
 
     this_rack->activate_none();
-    this_rack->dump_animations(this_rack->name.c_str());
     
     // Define chasers
     //                              DMXChaser(      int n_points,           n_groups    group_size  step_size       direction           parity      rand        description)
     this_rack->chasers.push_back(new DMXChaser(this_rack->spots.size(),         1,          1,          1,      Direction::Forward,       0,        false,      "--o>----"));
     this_rack->chasers.push_back(new DMXChaser(this_rack->spots.size(),         1,          1,          1,      Direction::Backward,      0,        false,      "----<o--"));
     this_rack->chasers.push_back(new DMXChaser(this_rack->spots.size(),         1,          1,          1,      Direction::PingPong,      0,        false,      ">--o>----<"));
+
+    this_rack->dump_animations(this_rack->name.c_str());
 
 }
 
@@ -759,7 +759,7 @@ void SpotRackAnimation0::new_frame() {
     // Col1 Intensity 
     int current_c1_intensity = map3_param(this->fixture->param8, 0.0, 255.0, 255.0);
     if (this->fixture->param8==1.0) current_c1_intensity = -1; // -1 means maxxing out fixture's RGB values
-    log(2, "current_c1_intensity:", current_c1_intensity);
+    // log(2, "current_c1_intensity:", current_c1_intensity);
 
     for (auto spot : this->fixture->spots){
         spot->pixel = spot->RGBW(this->color, current_c1_intensity);

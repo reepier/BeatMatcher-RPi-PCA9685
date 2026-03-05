@@ -44,7 +44,7 @@ For 0M3RT4 & W4BI S4B1
 using namespace std;
     
 
-fix_vec ll_fxtrs = {    &spot_1, &spot_2, &spot_3, &spot_4, &spot_5, &spot_6, 
+fix_vec ll_fxtrs = {    &spot_1, &spot_2, /*&spot_3,*/ &spot_4, &spot_5, &spot_6, 
                         &spot_7, &spot_8, &spot_9, &spot_10, &spot_11, &spot_12, 
                         &spot_13, &spot_14, &spot_15, &spot_16, &spot_17, &spot_18, &spot_19, &spot_20, 
                         &spot_21, &spot_22, &spot_23, &spot_24, &spot_25, &spot_26,
